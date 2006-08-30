@@ -16,7 +16,9 @@ const publishableLibNames = getPublishableLibNames(workspaceJson);
 
 publishableLibNames.forEach((plugin) => console.log(`Update ${plugin}...`));
 
-execSync(`yarn nx run-many --target build --projects ${publishableLibNames}`);
+execSync(
+  `pnpm exec nx run-many --target build --projects ${publishableLibNames}`
+);
 
 removeSync(tmpProjPath('node_modules/@nxext'));
 
