@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "https://json-schema.org/draft-07/schema",
+  "title": "Stencil builder",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "projectType": {
+      "description": "ProjectType",
+      "type": "string"
+    },
+    "dev": {
+      "description": "Dev otion",
+      "type": "boolean"
+    },
+    "watch": {
+      "description": "Watch otion",
+      "type": "boolean"
+    },
+    "serve": {
+      "description": "Serve otion",
+      "type": "boolean"
+    }
+  },
+  "required": []
+}

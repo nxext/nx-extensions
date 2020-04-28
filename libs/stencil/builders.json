@@ -1,0 +1,10 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
+  "builders": {
+    "build": {
+      "implementation": "./src/builders/stencil/builder",
+      "schema": "./src/builders/stencil/schema.json",
+      "description": "stencil builder"
+    }
+  }
+}

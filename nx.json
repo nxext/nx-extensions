@@ -1,0 +1,22 @@
+{
+  "npmScope": "nxext",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "stencil": {
+      "tags": []
+    },
+    "stencil-e2e": {
+      "tags": [],
+      "implicitDependencies": ["stencil"]
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "nxext",
+  "version": "0.0.5",
+  "license": "MIT",
+  "scripts": {
+    "nx": "nx",
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx workspace-lint && nx lint",
+    "e2e": "nx e2e stencil-e2e",
+    "affected:apps": "nx affected:apps",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:e2e": "nx affected:e2e",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx affected:lint",
+    "affected:dep-graph": "nx affected:dep-graph",
+    "affected": "nx affected",
+    "format": "nx format:write",
+    "format:write": "nx format:write",
+    "format:check": "nx format:check",
+    "update": "nx migrate latest",
+    "workspace-schematic": "nx workspace-schematic",
+    "dep-graph": "nx dep-graph",
+    "help": "nx help"
+  },
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@nrwl/eslint-plugin-nx": "9.2.3",
+    "@nrwl/jest": "9.2.3",
+    "@nrwl/nx-plugin": "9.2.3",
+    "@nrwl/workspace": "9.2.3",
+    "@stencil/core": "1.12.6",
+    "@types/jest": "25.2.1",
+    "@types/node": "~8.9.4",
+    "@typescript-eslint/eslint-plugin": "2.26.0",
+    "@typescript-eslint/parser": "2.26.0",
+    "dotenv": "6.2.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.11.0",
+    "husky": "^4.2.5",
+    "jest": "25.4.0",
+    "path": "^0.12.7",
+    "prettier": "2.0.5",
+    "ts-jest": "25.4.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~6.1.1",
+    "typescript": "3.8.3",
+    "workbox-build": "4.3.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged --pattern '{apps,libs}/**/*.{jsx,ts,tsx,html,js,json,css,scss,styl,pcss,md}'"
+    }
+  }
+}

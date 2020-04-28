@@ -1,0 +1,35 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "stencil",
+  "version": "0.0.1",
+  "schematics": {
+    "core": {
+      "factory": "./src/schematics/core/core",
+      "schema": "./src/schematics/core/schema.json",
+      "description": "Core features for collections",
+      "hidden": true
+    },
+    "application": {
+      "factory": "./src/schematics/application/schematic",
+      "schema": "./src/schematics/application/schema.json",
+      "description": "Generate Stencil application",
+      "aliases": ["app"]
+    },
+    "ionic-pwa": {
+      "factory": "./src/schematics/ionic-pwa/schematic",
+      "schema": "./src/schematics/ionic-pwa/schema.json",
+      "description": "Generate Stencil ionic pwa",
+      "aliases": ["pwa"]
+    },
+    "library": {
+      "factory": "./src/schematics/library/schematic",
+      "schema": "./src/schematics/library/schema.json",
+      "description": "Generate Stencil Library",
+      "aliases": ["lib", "collection"]
+    },
+    "ng-add": {
+      "factory": "./src/schematics/ng-add/schematic",
+      "description": "Add @nxext/stencil"
+    }
+  }
+}
