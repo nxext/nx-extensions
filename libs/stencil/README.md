@@ -1,7 +1,25 @@
-# stencil
+# @nxext/stencil --- Stencil Plugin for Nx (!!!Experimental!!!)
 
-This library was generated with [Nx](https://nx.dev).
+## Features
+- Generate Ionic/Pwa project
+- Generate Stencil app project
+- Generate library project
 
-## Running unit tests
+## Usage
 
-Run `ng test stencil` to execute the unit tests via [Jest](https://jestjs.io).
+Add this plugin to an Nx workspace:
+```
+ng add @nxext/stencil
+```
+
+Generate your projects:
+```
+ng g @nxext/stencil:app my-app
+ng g @nxext/stencil:pwa my-app
+ng g @nxext/stencil:lib my-lib
+```
+
+Run your project:
+```
+ng build my-app --dev --watch --serve
+```
