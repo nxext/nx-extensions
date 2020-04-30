@@ -1,68 +1,89 @@
 import {
   BuilderContext,
   BuilderOutput,
-  createBuilder,
+  createBuilder
 } from '@angular-devkit/architect';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { StencilBuilderOptions } from './schema';
-import { run, createNodeLogger, createNodeSystem } from '@stencil/core/cli';
+import {
+  Config,
+  ConfigFlags,
+  createNodeLogger,
+  createNodeSystem,
+  Logger,
+  parseFlags,
+  runTask,
+  TaskCommand
+} from '@stencil/core/cli';
 import { projectRootDir } from '@nrwl/workspace';
 
 function createStencilCompilerOptions(
-  options: StencilBuilderOptions,
-  context: BuilderContext
-) {
-  const projectDir = projectRootDir(options.projectType);
-  const runOptions = [
-    '',
-    '',
-    'build',
-    '--config',
-    `${projectDir}/${context.target.project}/stencil.config.ts`,
+  taskCommand: TaskCommand,
+  options: StencilBuilderOptions
+): ConfigFlags {
+  const runOptions: string[] = [
+    taskCommand
   ];
-
-  if (options.dev) {
-    runOptions.push('--dev');
+  if(options.port) {
+    runOptions.push(`--port ${options.port}`);
   }
 
-  if (options.watch) {
-    runOptions.push('--watch');
-  }
+  Object.keys(options).forEach(optionKey => {
+    if(typeof options[optionKey] === "boolean" && options[optionKey]) {
+      runOptions.push(`--${optionKey}`)
+    }
+  });
 
-  if (options.serve) {
-    runOptions.push('--serve');
-  }
-
-  return runOptions;
+  return parseFlags(runOptions);
 }
 
-function createStencilProcess(
+function getCompilerExecutingPath() {
+  return require.resolve('@stencil/core/compiler');
+}
+
+async function createStencilProcess(
   options: StencilBuilderOptions,
   context: BuilderContext
-): Observable<any> {
-  process.argv = createStencilCompilerOptions(options, context);
-  return new Observable<any>((obs) => {
-    run({
-      process: process,
-      logger: createNodeLogger(process),
-      sys: createNodeSystem(process),
-    })
-      .then((sucess) => obs.next(sucess))
-      .catch((err) => obs.error(err));
-  });
+): Promise<void> {
+  const taskCommand: TaskCommand = 'build';
+
+  const flags = createStencilCompilerOptions(taskCommand, options);
+  const logger: Logger = createNodeLogger(process);
+  const sys = createNodeSystem(process);
+
+  context.logger.info(JSON.stringify(flags));
+
+  if (flags.ci) {
+    logger.colors = false;
+  }
+
+  if (sys.getCompilerExecutingPath == null) {
+    sys.getCompilerExecutingPath = getCompilerExecutingPath;
+  }
+
+  const projectDir = projectRootDir(options.projectType);
+  const { loadConfig } = await import('@stencil/core/compiler');
+  const config: Config = (await loadConfig({
+    config: {
+      flags
+    },
+    configPath: `${projectDir}/${context.target.project}/stencil.config.ts`,
+    logger,
+    sys
+  })).config;
+
+  return await runTask(process, config, config.flags.task);
 }
 
 export function runBuilder(
   options: StencilBuilderOptions,
   context: BuilderContext
 ): Observable<BuilderOutput> {
-  return createStencilProcess(options, context).pipe(
-    map((loaded) => {
-      const builder: BuilderOutput = { success: true } as BuilderOutput;
-      return builder;
-    })
-  );
+  return new Observable<BuilderOutput>((obs) => {
+    createStencilProcess(options, context)
+      .then(() => obs.next({ success: true }))
+      .catch((err) => obs.error(err));
+  });
 }
 
 export default createBuilder(runBuilder);

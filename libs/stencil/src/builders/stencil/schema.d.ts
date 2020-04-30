@@ -3,7 +3,14 @@ import { ProjectType } from '@nrwl/workspace';
 
 export interface StencilBuilderOptions extends JsonObject {
   projectType?: ProjectType;
-  watch?: boolean;
+
+  // Stencil compiler Options
+  ci?: boolean;
+  debug?: boolean;
   dev?: boolean;
+  docs?: boolean;
+  port?: number;
   serve?: boolean;
+  verbose?: boolean;
+  watch?: boolean;
 }

@@ -12,7 +12,7 @@ import { testProject } from '../utils/testing';
 describe('e2e', () => {
   describe('generate with style', () => {
     describe('stencil lib', () => {
-      for (var style of ['css', 'scss', 'less', 'styl', 'pcss']) {
+      for (const style of ['css', 'scss', 'less', 'styl', 'pcss']) {
         it(`should create lib with ${style}`, async (done) => {
           const plugin = uniq('lib');
 
@@ -61,10 +61,10 @@ describe('e2e', () => {
           const plugin = uniq('lib');
           ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
           await runNxCommandAsync(
-            `generate @nxext/stencil:lib ${plugin} --style=css`
+            `generate @nxext/stencil:lib ${plugin} --style=${style}`
           );
 
-          const result = await runNxCommandAsync(`build ${plugin}`);
+          const result = await runNxCommandAsync(`build ${plugin} --dev`);
           expect(result.stdout).toContain('build finished');
 
           done();
