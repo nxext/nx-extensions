@@ -51,8 +51,6 @@ async function createStencilProcess(
   const logger: Logger = createNodeLogger(process);
   const sys = createNodeSystem(process);
 
-  context.logger.info(JSON.stringify(flags));
-
   if (flags.ci) {
     logger.colors = false;
   }
