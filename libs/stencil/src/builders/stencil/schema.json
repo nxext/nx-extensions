@@ -6,19 +6,33 @@
   "type": "object",
   "properties": {
     "projectType": {
-      "description": "ProjectType",
       "type": "string"
     },
+    "ci": {
+      "type": "boolean"
+    },
+    "debug": {
+      "type": "boolean"
+    },
     "dev": {
-      "description": "Dev otion",
+      "type": "boolean"
+    },
+    "docs": {
+      "type": "boolean"
+    },
+    "es5": {
+      "type": "boolean"
+    },
+    "port": {
+      "type": "number"
+    },
+    "serve": {
+      "type": "boolean"
+    },
+    "verbose": {
       "type": "boolean"
     },
     "watch": {
-      "description": "Watch otion",
-      "type": "boolean"
-    },
-    "serve": {
-      "description": "Serve otion",
       "type": "boolean"
     }
   },

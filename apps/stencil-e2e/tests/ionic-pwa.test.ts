@@ -5,13 +5,13 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { SUPPORTED_STYLE_LIBRARIES } from '../../../libs/stencil/src/utils/testing';
 import { testProject } from '../utils/testing';
+import { SUPPORTED_STYLE_LIBRARIES } from '../../../libs/stencil/src/utils/testing';
 
 describe('e2e-pwa', () => {
   describe('stencil pwa', () => {
     for (var style of ['css', 'scss', 'less', 'styl', 'pcss']) {
-      it(`should create pwa with ${style}`, async (done) => {
+      xit(`should create pwa with ${style}`, async (done) => {
         const plugin = uniq('pwa');
 
         ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
@@ -57,10 +57,10 @@ describe('e2e-pwa', () => {
           const plugin = uniq('pwa');
           ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
           await runNxCommandAsync(
-            `generate @nxext/stencil:pwa ${plugin} --style=css`
+            `generate @nxext/stencil:pwa ${plugin} --style=${style}`
           );
 
-          const result = await runNxCommandAsync(`build ${plugin}`);
+          const result = await runNxCommandAsync(`build ${plugin} --dev`);
           expect(result.stdout).toContain('build finished');
 
           done();

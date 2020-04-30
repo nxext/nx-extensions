@@ -87,7 +87,7 @@ export const STYLE_PLUGIN_DEPENDENCIES: {
     dependencies: {},
     devDependencies: {
       '@stencil/postcss': STENCIL_STYLE_PLUGIN_VERSION['pcss'],
-      autoprefixer: autoprefixerVersion,
+      'autoprefixer': autoprefixerVersion,
       '@types/autoprefixer': autoprefixerTypesVersion
     }
   }

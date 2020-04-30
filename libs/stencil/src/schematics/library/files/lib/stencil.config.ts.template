@@ -7,7 +7,7 @@ import { less } from '@stencil/less';
 <% } %>
 <% if (style == 'pcss') { %>
 import { postcss } from '@stencil/postcss';
-import * as autoprefixer from 'autoprefixer';
+import autoprefixer from 'autoprefixer'
 <% } %>
 <% if (style == 'styl') { %>
 import { stylus } from '@stencil/stylus';

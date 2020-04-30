@@ -61,10 +61,10 @@ describe('e2e', () => {
           const plugin = uniq('app2');
           ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
           await runNxCommandAsync(
-            `generate @nxext/stencil:app ${plugin} --style=css`
+            `generate @nxext/stencil:app ${plugin} --style=${style}`
           );
 
-          const result = await runNxCommandAsync(`build ${plugin}`);
+          const result = await runNxCommandAsync(`build ${plugin} --dev`);
           expect(result.stdout).toContain('build finished');
 
           done();

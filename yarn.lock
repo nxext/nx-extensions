@@ -709,10 +709,10 @@
   dependencies:
     type-detect "4.0.8"
 
-"@stencil/core@1.12.6":
-  version "1.12.6"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-1.12.6.tgz#77b5bf6d288f97a70d4ea352645f991e82616020"
-  integrity sha512-fOHG9x92wxlQOlp9YRouLlejFShtfvZEx4LFjNi7bqTX/nHTetdv3Ir+J+SanebjBuJgKiAmLIwXviQ0Geq23w==
+"@stencil/core@1.12.7":
+  version "1.12.7"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-1.12.7.tgz#ce2da841c824b22caa085a325724db67cc49a0cb"
+  integrity sha512-Ob+xncjuHebjSHqOGh9acXx0Jw2rSTzGP1XiYNKYQnoFtcvKpGqLhr2ibWqS1Z40aEwgI/OvYYldfWsp/C+0mw==
   dependencies:
     typescript "3.8.3"
 
