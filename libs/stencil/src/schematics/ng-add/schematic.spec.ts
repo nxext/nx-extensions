@@ -3,8 +3,6 @@ import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { join } from 'path';
 import { readJsonInTree } from '@nrwl/workspace';
-import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
 import { CoreSchema } from '../core/schema';
 
 describe('stencil schematic', () => {

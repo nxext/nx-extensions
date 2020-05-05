@@ -56,7 +56,7 @@ describe('e2e', () => {
     });
 
     describe('stencil lib builder', () => {
-      SUPPORTED_STYLE_LIBRARIES.forEach(style => {
+      SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
         it(`should build app with ${style}`, async (done) => {
           const plugin = uniq('lib');
           ensureNxProject('@nxext/stencil', 'dist/libs/stencil');

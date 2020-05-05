@@ -2,7 +2,10 @@ import {
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
   autoprefixerVersion,
-  autoprefixerTypesVersion, ionicVersion, nxextVersion, stencilVersion
+  autoprefixerTypesVersion,
+  ionicVersion,
+  nxextVersion,
+  stencilVersion,
 } from './versions';
 
 export type SupportedStyles = 'css' | 'scss' | 'styl' | 'less' | 'postcss';
@@ -10,7 +13,7 @@ export type SupportedStyles = 'css' | 'scss' | 'styl' | 'less' | 'postcss';
 export enum AppType {
   Application = 'application',
   Library = 'library',
-  Pwa = 'pwa'
+  Pwa = 'pwa',
 }
 
 export interface PackageDependencies {
@@ -24,7 +27,7 @@ export interface DependencyEntries {
 
 const stencilDependencies = {
   '@nxext/stencil': nxextVersion,
-  '@stencil/core': stencilVersion
+  '@stencil/core': stencilVersion,
 };
 
 export const PROJECT_TYPE_DEPENDENCIES: {
@@ -34,28 +37,28 @@ export const PROJECT_TYPE_DEPENDENCIES: {
     dependencies: {},
     devDependencies: {
       ...stencilDependencies,
-      '@stencil/router': stencilRouterVersion
-    }
+      '@stencil/router': stencilRouterVersion,
+    },
   },
   pwa: {
     dependencies: {},
     devDependencies: {
       ...stencilDependencies,
-      '@ionic/core': ionicVersion
-    }
+      '@ionic/core': ionicVersion,
+    },
   },
   library: {
     dependencies: {},
     devDependencies: {
-      ...stencilDependencies
-    }
+      ...stencilDependencies,
+    },
   },
   init: {
     dependencies: {},
     devDependencies: {
-      ...stencilDependencies
-    }
-  }
+      ...stencilDependencies,
+    },
+  },
 };
 
 export const STYLE_PLUGIN_DEPENDENCIES: {
@@ -63,32 +66,32 @@ export const STYLE_PLUGIN_DEPENDENCIES: {
 } = {
   css: {
     dependencies: {},
-    devDependencies: {}
+    devDependencies: {},
   },
   less: {
     dependencies: {},
     devDependencies: {
-      '@stencil/less': STENCIL_STYLE_PLUGIN_VERSION['less']
-    }
+      '@stencil/less': STENCIL_STYLE_PLUGIN_VERSION['less'],
+    },
   },
   scss: {
     dependencies: {},
     devDependencies: {
-      '@stencil/sass': STENCIL_STYLE_PLUGIN_VERSION['scss']
-    }
+      '@stencil/sass': STENCIL_STYLE_PLUGIN_VERSION['scss'],
+    },
   },
   styl: {
     dependencies: {},
     devDependencies: {
-      '@stencil/stylus': STENCIL_STYLE_PLUGIN_VERSION['styl']
-    }
+      '@stencil/stylus': STENCIL_STYLE_PLUGIN_VERSION['styl'],
+    },
   },
   pcss: {
     dependencies: {},
     devDependencies: {
       '@stencil/postcss': STENCIL_STYLE_PLUGIN_VERSION['pcss'],
-      'autoprefixer': autoprefixerVersion,
-      '@types/autoprefixer': autoprefixerTypesVersion
-    }
-  }
+      autoprefixer: autoprefixerVersion,
+      '@types/autoprefixer': autoprefixerTypesVersion,
+    },
+  },
 };

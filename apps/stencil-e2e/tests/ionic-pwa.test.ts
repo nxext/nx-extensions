@@ -52,7 +52,7 @@ describe('e2e-pwa', () => {
     });
 
     describe('stencil app builder', () => {
-      SUPPORTED_STYLE_LIBRARIES.forEach(style => {
+      SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
         it(`should bould pwa app with ${style}`, async (done) => {
           const plugin = uniq('pwa');
           ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
