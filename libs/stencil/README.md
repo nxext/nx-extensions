@@ -1,4 +1,4 @@
-# @nxext/stencil --- Stencil Plugin for Nx (!!!Experimental!!!)
+# @nxext/stencil --- Stencil Plugin for Nx (Alpha)
 
 ## Features
 
