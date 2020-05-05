@@ -1,5 +1,13 @@
 import { AppType } from './../../utils/typings';
-import { apply, applyTemplates, chain, mergeWith, move, Rule, url } from '@angular-devkit/schematics';
+import {
+  apply,
+  applyTemplates,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  url,
+} from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
@@ -8,7 +16,7 @@ import {
   projectRootDir,
   ProjectType,
   toFileName,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { ApplicationNormalizedSchema } from './schema';
 import core from '../core/core';
@@ -20,9 +28,7 @@ import { calculateStyle } from '../../utils/functions';
  */
 const projectType = ProjectType.Application;
 
-function normalizeOptions(
-  options: CoreSchema
-): ApplicationNormalizedSchema {
+function normalizeOptions(options: CoreSchema): ApplicationNormalizedSchema {
   const name = toFileName(options.name);
   const projectDirectory = options.directory
     ? `${toFileName(options.directory)}/${name}`
@@ -44,7 +50,7 @@ function normalizeOptions(
     projectDirectory,
     parsedTags,
     style,
-    appType
+    appType,
   };
 }
 
@@ -54,15 +60,15 @@ function addFiles(options: ApplicationNormalizedSchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot)
+        offsetFromRoot: offsetFromRoot(options.projectRoot),
       }),
       move(options.projectRoot),
-      formatFiles({ skipFormat: false })
+      formatFiles({ skipFormat: false }),
     ])
   );
 }
 
-export default function(options: CoreSchema): Rule {
+export default function (options: CoreSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
     core(normalizedOptions),
@@ -72,19 +78,19 @@ export default function(options: CoreSchema): Rule {
           name: normalizedOptions.projectName,
           root: normalizedOptions.projectRoot,
           sourceRoot: `${normalizedOptions.projectRoot}/src`,
-          projectType
+          projectType,
         })
         .targets.add({
-        name: 'build',
-        builder: '@nxext/stencil:build',
-        options: {
-          projectType
-        }
-      });
+          name: 'build',
+          builder: '@nxext/stencil:build',
+          options: {
+            projectType,
+          },
+        });
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags
+      tags: normalizedOptions.parsedTags,
     }),
-    addFiles(normalizedOptions)
+    addFiles(normalizedOptions),
   ]);
 }

@@ -29,17 +29,25 @@ describe('stencil schematic', () => {
 
   it('should add Stencil dependencies', async () => {
     const result = await testRunner
-      .runSchematicAsync('app', { name: 'test', appType: AppType.Application }, appTree)
+      .runSchematicAsync(
+        'app',
+        { name: 'test', appType: AppType.Application },
+        appTree
+      )
       .toPromise();
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach(style => {
+  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
     it(`should add Stencil ${style} dependencies to application`, async () => {
       const result = await testRunner
-        .runSchematicAsync('app', { name: 'test', style: style, appType: AppType.Application }, appTree)
+        .runSchematicAsync(
+          'app',
+          { name: 'test', style: style, appType: AppType.Application },
+          appTree
+        )
         .toPromise();
       const packageJson = readJsonInTree(result, 'package.json');
       expect(packageJson.devDependencies['@stencil/core']).toBeDefined();

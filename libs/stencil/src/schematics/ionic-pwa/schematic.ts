@@ -1,4 +1,12 @@
-import { apply, applyTemplates, chain, mergeWith, move, Rule, url } from '@angular-devkit/schematics';
+import {
+  apply,
+  applyTemplates,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  url,
+} from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
@@ -7,7 +15,7 @@ import {
   projectRootDir,
   ProjectType,
   toFileName,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { PWASchema } from './schema';
 import core from '../core/core';
@@ -82,6 +90,6 @@ export default function (options: CoreSchema): Rule {
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
       tags: normalizedOptions.parsedTags,
     }),
-    addFiles(normalizedOptions)
+    addFiles(normalizedOptions),
   ]);
 }
