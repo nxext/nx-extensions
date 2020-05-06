@@ -2,6 +2,20 @@
   "name": "nxext",
   "version": "0.0.10",
   "license": "MIT",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "stenciljs",
+    "pwa",
+    "web components"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/DominikPieper/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/DominikPieper/nx-extensions/issues"
+  },
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
@@ -23,7 +37,8 @@
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "commit": "git-cz"
   },
   "private": true,
   "dependencies": {},
@@ -37,6 +52,8 @@
     "@types/node": "~8.9.4",
     "@typescript-eslint/eslint-plugin": "2.26.0",
     "@typescript-eslint/parser": "2.26.0",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "3.2.0",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.11.0",
@@ -53,6 +70,11 @@
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged --pattern '{apps,libs}/**/*.{jsx,ts,tsx,html,js,json,css,scss,styl,pcss,md}'"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
