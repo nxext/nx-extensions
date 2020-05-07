@@ -28,6 +28,15 @@ nx g @nxext/stencil:pwa my-app
 nx g @nxext/stencil:lib my-lib
 ```
 
+each generator is able to generate your template with different style variants. Supported are:
+```
+--style=css (default)
+--style=scss
+--style=less
+--style=styl
+--style=pcss
+```
+
 Build your project:
 
 ```
