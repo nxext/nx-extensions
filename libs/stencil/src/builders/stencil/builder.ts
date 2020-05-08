@@ -8,7 +8,7 @@ import { StencilBuilderOptions } from './schema';
 import {
   TaskCommand
 } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess } from '../../utils/stencilCompiler';
+import { createStencilConfig, createStencilProcess } from '../core/stencilCompiler';
 
 export function runBuilder(
   options: StencilBuilderOptions,

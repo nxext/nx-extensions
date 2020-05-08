@@ -7,12 +7,13 @@ import {
   parseFlags, runTask,
   TaskCommand
 } from '@stencil/core/cli';
-import { StencilBuilderOptions } from '../builders/stencil/schema';
+import { StencilBuilderOptions } from '../stencil/schema';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { from, Observable } from 'rxjs';
 import { projectRootDir } from '@nrwl/workspace';
 import { loadConfig } from '@stencil/core/compiler';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { setupNodeProcess } from '../../utils/stencil';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -53,6 +54,8 @@ export function createStencilConfig(
     logger.colors = false;
   }
 
+  setupNodeProcess(process, logger);
+
   const projectDir = projectRootDir(options.projectType);
   return from(
     loadConfig({
@@ -63,7 +66,10 @@ export function createStencilConfig(
       logger,
       sys,
     })
-  ).pipe(map((loadConfigResults) => loadConfigResults.config));
+  ).pipe(
+    tap((validated) => logger.printDiagnostics(validated.diagnostics)),
+    map((validated) => validated.config)
+  );
 }
 
 export function createStencilProcess() {
