@@ -13,7 +13,11 @@ jest.mock('@stencil/core/cli', () => ({
       ci: false,
     } as ConfigFlags;
   }),
-  createNodeLogger: jest.fn(),
+  createNodeLogger: jest.fn(() => {
+    return {
+      printDiagnostics: jest.fn()
+    }
+  }),
   createNodeSystem: jest.fn(() => {
     return {
       getCompilerExecutingPath: jest.fn(),
