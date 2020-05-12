@@ -23,6 +23,12 @@
       "description": "A directory where the project is placed",
       "alias": "d"
     },
+    "e2eTestRunner": {
+      "type": "string",
+      "enum": ["puppeteer", "none"],
+      "description": "Test runner to use for end to end (e2e) tests",
+      "default": "puppeteer"
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

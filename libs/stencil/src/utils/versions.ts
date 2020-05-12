@@ -6,6 +6,9 @@ export const ionicVersion = '^5.0.7';
 export const autoprefixerVersion = '^9.7.6';
 export const autoprefixerTypesVersion = '^9.7.2';
 
+export const puppeteer = "^2.1.1";
+export const puppeteerType = "^2.0.1";
+
 export const STENCIL_STYLE_PLUGIN_VERSION: {
   [style: string]: string;
 } = {

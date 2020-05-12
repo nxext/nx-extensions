@@ -7,4 +7,6 @@ export interface CoreSchema {
   style?: SupportedStyles;
   skipFormat?: boolean;
   appType?: AppType;
+  e2eTestRunner?: string;
+  projectRoot?: string;
 }

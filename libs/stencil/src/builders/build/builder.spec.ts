@@ -10,17 +10,17 @@ jest.mock('@stencil/core/cli', () => ({
   runTask: jest.fn(() => Promise.resolve()),
   parseFlags: jest.fn(() => {
     return {
-      ci: false,
+      ci: false
     } as ConfigFlags;
   }),
   createNodeLogger: jest.fn(() => {
     return {
       printDiagnostics: jest.fn()
-    }
+    };
   }),
   createNodeSystem: jest.fn(() => {
     return {
-      getCompilerExecutingPath: jest.fn(),
+      getCompilerExecutingPath: jest.fn()
     };
   }),
   run: jest.fn(() => Promise.resolve())
@@ -30,11 +30,11 @@ jest.mock('@stencil/core/compiler', () => ({
     Promise.resolve({
       config: {
         flags: {
-          task: 'build',
-        },
-      },
+          task: 'build'
+        }
+      }
     })
-  ),
+  )
 }));
 
 export async function createArchitect() {
@@ -57,7 +57,7 @@ export async function mockContext() {
   return context;
 }
 
-describe('Command Runner Builder', () => {
+describe('Command Runner Build', () => {
   let architect: Architect;
   let context: MockBuilderContext;
 
@@ -73,7 +73,7 @@ describe('Command Runner Builder', () => {
 
   it('can run', async () => {
     const options = {
-      projectType: ProjectType.Application,
+      projectType: ProjectType.Application
     };
 
     const runned = await architect.scheduleBuilder(
@@ -89,7 +89,7 @@ describe('Command Runner Builder', () => {
   it('can run with dev flag', async () => {
     const options = {
       projectType: ProjectType.Application,
-      dev: true,
+      dev: true
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',
@@ -104,7 +104,7 @@ describe('Command Runner Builder', () => {
   it('can run with ci flag', async () => {
     const options = {
       projectType: ProjectType.Application,
-      ci: true,
+      ci: true
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',
@@ -119,7 +119,7 @@ describe('Command Runner Builder', () => {
   it('can run with debug flag', async () => {
     const options = {
       projectType: ProjectType.Application,
-      debug: true,
+      debug: true
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',
@@ -134,7 +134,7 @@ describe('Command Runner Builder', () => {
   it('can run with docs flag', async () => {
     const options = {
       projectType: ProjectType.Application,
-      docs: true,
+      docs: true
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',
@@ -149,7 +149,7 @@ describe('Command Runner Builder', () => {
   it('can run with custom port', async () => {
     const options = {
       projectType: ProjectType.Application,
-      port: 1234,
+      port: 1234
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',
@@ -164,7 +164,7 @@ describe('Command Runner Builder', () => {
   it('can run with serve flag', async () => {
     const options = {
       projectType: ProjectType.Application,
-      serve: true,
+      serve: true
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',
@@ -179,7 +179,7 @@ describe('Command Runner Builder', () => {
   it('can run with verbose flag', async () => {
     const options = {
       projectType: ProjectType.Application,
-      verbose: true,
+      verbose: true
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',
@@ -194,7 +194,7 @@ describe('Command Runner Builder', () => {
   it('can run with watch flag', async () => {
     const options = {
       projectType: ProjectType.Application,
-      watch: true,
+      watch: true
     };
     const runned = await architect.scheduleBuilder(
       '@nxext/stencil:build',

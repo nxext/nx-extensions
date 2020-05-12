@@ -1,7 +1,7 @@
 import { JsonObject } from '@angular-devkit/core';
 import { ProjectType } from '@nrwl/workspace';
 
-export interface StencilBuilderOptions extends JsonObject {
+export interface StencilBuildOptions extends JsonObject {
   projectType?: ProjectType;
 
   // Stencil compiler Options

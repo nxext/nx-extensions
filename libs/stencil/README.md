@@ -54,3 +54,16 @@ Supported flags are:
 - --serve
 - --verbose
 - --watch
+
+Support for tests. For unit tests run:
+```
+nx test my-app
+```
+Supported flags are:
+
+- --watch
+
+For e2e test:
+```
+nx e2e my-app
+```
