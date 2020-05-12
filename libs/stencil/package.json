@@ -23,6 +23,6 @@
   "builders": "./builders.json",
   "peerDependencies": {
     "@nrwl/workspace": "*",
-    "@stencil/core": "^1.12.7"
+    "@stencil/core": "^1.13.0"
   }
 }

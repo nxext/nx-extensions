@@ -23,6 +23,7 @@ jest.mock('@stencil/core/cli', () => ({
       getCompilerExecutingPath: jest.fn(),
     };
   }),
+  run: jest.fn(() => Promise.resolve())
 }));
 jest.mock('@stencil/core/compiler', () => ({
   loadConfig: jest.fn(() =>
