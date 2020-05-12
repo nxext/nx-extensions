@@ -5,7 +5,7 @@ import {
   autoprefixerTypesVersion,
   ionicVersion,
   nxextVersion,
-  stencilVersion,
+  stencilVersion, puppeteerType, puppeteer
 } from './versions';
 
 export type SupportedStyles = 'css' | 'scss' | 'styl' | 'less' | 'postcss';
@@ -29,6 +29,10 @@ const stencilDependencies = {
   '@nxext/stencil': nxextVersion,
   '@stencil/core': stencilVersion,
 };
+const testDependencies = {
+  '@types/puppeteer': puppeteerType,
+  'puppeteer': puppeteer,
+}
 
 export const PROJECT_TYPE_DEPENDENCIES: {
   [AppType: string]: PackageDependencies;
@@ -59,6 +63,12 @@ export const PROJECT_TYPE_DEPENDENCIES: {
       ...stencilDependencies,
     },
   },
+  e2e: {
+    dependencies: {},
+    devDependencies: {
+      ...testDependencies,
+    },
+  }
 };
 
 export const STYLE_PLUGIN_DEPENDENCIES: {

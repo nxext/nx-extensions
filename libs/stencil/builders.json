@@ -2,9 +2,19 @@
   "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
   "builders": {
     "build": {
-      "implementation": "./src/builders/stencil/builder",
-      "schema": "./src/builders/stencil/schema.json",
-      "description": "stencil builder"
+      "implementation": "./src/builders/build/builder",
+      "schema": "./src/builders/build/schema.json",
+      "description": "stencil build"
+    },
+    "test": {
+      "implementation": "./src/builders/test/builder",
+      "schema": "./src/builders/test/schema.json",
+      "description": "stencil test"
+    },
+    "e2e": {
+      "implementation": "./src/builders/e2e/builder",
+      "schema": "./src/builders/e2e/schema.json",
+      "description": "stencil e2e"
     }
   }
 }
