@@ -29,6 +29,7 @@ nx g @nxext/stencil:lib my-lib
 ```
 
 each generator is able to generate your template with different style variants. Supported are:
+
 ```
 --style=css (default)
 --style=scss
@@ -55,15 +56,26 @@ Supported flags are:
 - --verbose
 - --watch
 
+You can define the path for the stencil.config.ts file like this:
+
+```
+nx build pwa --configPath=apps/pwa/components/stencil.config.ts
+```
+
+- --configPath relative from workspace root
+
 Support for tests. For unit tests run:
+
 ```
 nx test my-app
 ```
+
 Supported flags are:
 
 - --watch
 
 For e2e test:
+
 ```
 nx e2e my-app
 ```
