@@ -5,20 +5,25 @@ import {
   mergeWith,
   move,
   Rule,
-  url
+  SchematicContext,
+  Tree,
+  url,
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
   names,
+  NxJson,
   offsetFromRoot,
   projectRootDir,
   ProjectType,
+  readJsonInTree,
   toFileName,
-  updateWorkspace
+  updateJsonInTree,
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { LibrarySchema } from './schema';
-import core from '../core/core';
+import core, { addBuilderToTarget } from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/functions';
@@ -49,7 +54,7 @@ function normalizeOptions(options: CoreSchema): LibrarySchema {
     projectDirectory,
     parsedTags,
     style,
-    appType
+    appType,
   } as LibrarySchema;
 }
 
@@ -59,51 +64,50 @@ function addFiles(options: LibrarySchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot)
+        offsetFromRoot: offsetFromRoot(options.projectRoot),
       }),
       move(options.projectRoot),
-      formatFiles({ skipFormat: false })
+      formatFiles({ skipFormat: options.skipFormat }),
     ])
   );
 }
 
-export default function(options: CoreSchema): Rule {
+function updateTsConfig(options: LibrarySchema): Rule {
+  return chain([
+    (host: Tree, context: SchematicContext) => {
+      const nxJson = readJsonInTree<NxJson>(host, 'nx.json');
+      return updateJsonInTree('tsconfig.json', (json) => {
+        const c = json.compilerOptions;
+        delete c.paths[options.name];
+        c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [
+          `libs/${options.projectDirectory}`,
+        ];
+        return json;
+      })(host, context);
+    },
+  ]);
+}
+
+export default function (options: CoreSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
     core(normalizedOptions),
     updateWorkspace((workspace) => {
-      const targetCollection = workspace.projects
-        .add({
-          name: normalizedOptions.projectName,
-          root: normalizedOptions.projectRoot,
-          sourceRoot: `${normalizedOptions.projectRoot}/src`,
-          projectType
-        }).targets;
-      targetCollection.add({
-        name: 'build',
-        builder: '@nxext/stencil:build',
-        options: {
-          projectType
-        }
-      });
-      targetCollection.add({
-        name: 'test',
-        builder: '@nxext/stencil:test',
-        options: {
-          projectType
-        }
-      });
-      targetCollection.add({
-        name: 'e2e',
-        builder: '@nxext/stencil:e2e',
-        options: {
-          projectType
-        }
-      });
+      const targetCollection = workspace.projects.add({
+        name: normalizedOptions.projectName,
+        root: normalizedOptions.projectRoot,
+        sourceRoot: `${normalizedOptions.projectRoot}/src`,
+        projectType,
+      }).targets;
+      addBuilderToTarget(targetCollection, 'build', projectType);
+      addBuilderToTarget(targetCollection, 'test', projectType);
+      addBuilderToTarget(targetCollection, 'e2e', projectType);
+      addBuilderToTarget(targetCollection, 'serve', projectType);
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags
+      tags: normalizedOptions.parsedTags,
     }),
-    addFiles(normalizedOptions)
+    addFiles(normalizedOptions),
+    updateTsConfig(normalizedOptions),
   ]);
 }

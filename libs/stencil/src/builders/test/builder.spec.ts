@@ -1,7 +1,4 @@
-import { Architect } from '@angular-devkit/architect';
-import { TestingArchitectHost } from '@angular-devkit/architect/testing';
-import { schema } from '@angular-devkit/core';
-import { join } from 'path';
+import { Architect, BuilderOutput } from '@angular-devkit/architect';
 import { ProjectType } from '@nrwl/workspace';
 import { MockBuilderContext } from '@nrwl/workspace/testing';
 import { ConfigFlags } from '@stencil/core/cli';
@@ -61,15 +58,29 @@ export async function mockContext() {
   await context.addBuilderFromPackage(join(__dirname, '../../..'));
   return context;
 }
+import { mockContext } from '../../utils/testing';
+import * as stencilUtils from '../utils';
+import { Observable, of } from 'rxjs';
+import { Config } from '@stencil/core/cli';
+import { switchMap } from 'rxjs/operators';
 
 describe('Command Runner Test', () => {
   let architect: Architect;
   let context: MockBuilderContext;
 
   beforeEach(async () => {
-    [architect] = await createArchitect();
-    context = await mockContext();
-    context.target.project = 'test';
+    [architect, context] = await mockContext();
+    jest
+      .spyOn(stencilUtils, 'createStencilConfig')
+      .mockImplementation(
+        (taskCommand, options, context, createStencilCompilerOptions) => of({})
+      );
+    jest.spyOn(stencilUtils, 'createStencilProcess').mockImplementation(
+      () =>
+        function (source: Observable<Config>): Observable<BuilderOutput> {
+          return source.pipe(switchMap((config) => of({ success: true })));
+        }
+    );
   });
 
   afterEach(() => {
