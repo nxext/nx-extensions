@@ -11,8 +11,7 @@ import {
   createStencilConfig,
   createStencilProcess,
   parseRunParameters,
-} from '../compiler-utils/stencil-runtime';
-import { inspect } from 'util';
+} from '../utils';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -28,7 +27,7 @@ function createStencilCompilerOptions(
   return parseFlags(runOptions);
 }
 
-function runBuilder(
+export function runBuilder(
   options: StencilBuildOptions,
   context: BuilderContext
 ): Observable<BuilderOutput> {

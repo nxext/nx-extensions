@@ -1,0 +1,11 @@
+{
+  "migrations": [
+    {
+      "version": "9.3.0-beta.1",
+      "description": "Update prettier to v2",
+      "factory": "./src/migrations/update-9-3-0/update-9-3-0",
+      "package": "@nrwl/workspace",
+      "name": "update-9-3-0"
+    }
+  ]
+}
