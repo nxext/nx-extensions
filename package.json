@@ -61,6 +61,7 @@
     "jest": "^25.5.4",
     "path": "^0.12.7",
     "prettier": "2.0.5",
+    "pretty-quick": "^2.0.1",
     "ts-jest": "25.5.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.2",
