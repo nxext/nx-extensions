@@ -8,6 +8,9 @@
     "projectType": {
       "type": "string"
     },
+    "configPath": {
+      "type": "string"
+    },
     "watch": {
       "type": "boolean"
     }
