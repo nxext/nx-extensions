@@ -1,13 +1,13 @@
-export const nxextVersion = '*';
-export const stencilVersion = '^1.13.0';
+export const nxextVersion = '0.0.14';
+export const stencilVersion = '^1.14.0';
 export const stencilRouterVersion = '^1.0.1';
 export const ionicVersion = '^5.0.7';
 
 export const autoprefixerVersion = '^9.7.6';
 export const autoprefixerTypesVersion = '^9.7.2';
 
-export const puppeteer = "^2.1.1";
-export const puppeteerType = "^2.0.1";
+export const puppeteer = '^2.1.1';
+export const puppeteerType = '^2.0.1';
 
 export const STENCIL_STYLE_PLUGIN_VERSION: {
   [style: string]: string;
