@@ -6,8 +6,6 @@ import {
   move,
   Rule,
   url,
-  externalSchematic,
-  noop
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
@@ -17,7 +15,7 @@ import {
   projectRootDir,
   ProjectType,
   toFileName,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { PWASchema } from './schema';
 import { CoreSchema } from '../core/schema';
@@ -48,7 +46,7 @@ function normalizeOptions(options: CoreSchema): PWASchema {
     projectDirectory,
     parsedTags,
     style,
-    appType
+    appType,
   } as PWASchema;
 }
 
@@ -58,50 +56,49 @@ function addFiles(options: PWASchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot)
+        offsetFromRoot: offsetFromRoot(options.projectRoot),
       }),
       move(options.projectRoot),
-      formatFiles({ skipFormat: false })
+      formatFiles({ skipFormat: false }),
     ])
   );
 }
 
-export default function(options: CoreSchema): Rule {
+export default function (options: CoreSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
     core(normalizedOptions),
     updateWorkspace((workspace) => {
-      const targetCollection = workspace.projects
-        .add({
-          name: normalizedOptions.projectName,
-          root: normalizedOptions.projectRoot,
-          sourceRoot: `${normalizedOptions.projectRoot}/src`,
-          projectType
-        }).targets;
+      const targetCollection = workspace.projects.add({
+        name: normalizedOptions.projectName,
+        root: normalizedOptions.projectRoot,
+        sourceRoot: `${normalizedOptions.projectRoot}/src`,
+        projectType,
+      }).targets;
       targetCollection.add({
         name: 'build',
         builder: '@nxext/stencil:build',
         options: {
-          projectType
-        }
+          projectType,
+        },
       });
       targetCollection.add({
         name: 'test',
         builder: '@nxext/stencil:test',
         options: {
-          projectType
-        }
+          projectType,
+        },
       });
       targetCollection.add({
         name: 'e2e',
         builder: '@nxext/stencil:e2e',
         options: {
-          projectType
-        }
+          projectType,
+        },
       });
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags
+      tags: normalizedOptions.parsedTags,
     }),
     addFiles(normalizedOptions),
   ]);

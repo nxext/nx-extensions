@@ -1,16 +1,18 @@
 import {
   BuilderContext,
   BuilderOutput,
-  createBuilder
+  createBuilder,
 } from '@angular-devkit/architect';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { StencilBuildOptions } from './schema';
+import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {
-  ConfigFlags,
-  parseFlags,
-  TaskCommand
-} from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess, parseRunParameters } from '../compiler-utils/stencil-runtime';
+  createStencilConfig,
+  createStencilProcess,
+  parseRunParameters,
+} from '../compiler-utils/stencil-runtime';
+import { inspect } from 'util';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -26,14 +28,17 @@ function createStencilCompilerOptions(
   return parseFlags(runOptions);
 }
 
-export function runBuilder(
+function runBuilder(
   options: StencilBuildOptions,
   context: BuilderContext
 ): Observable<BuilderOutput> {
   const taskCommand: TaskCommand = 'build';
-  return createStencilConfig(taskCommand, options, context, createStencilCompilerOptions).pipe(
-    createStencilProcess()
-  );
+  return createStencilConfig(
+    taskCommand,
+    options,
+    context,
+    createStencilCompilerOptions
+  ).pipe(createStencilProcess());
 }
 
 export default createBuilder(runBuilder);
