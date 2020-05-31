@@ -15,15 +15,15 @@ jest.mock('@stencil/core/cli', () => ({
   }),
   createNodeLogger: jest.fn(() => {
     return {
-      printDiagnostics: jest.fn()
-    }
+      printDiagnostics: jest.fn(),
+    };
   }),
   createNodeSystem: jest.fn(() => {
     return {
       getCompilerExecutingPath: jest.fn(),
     };
   }),
-  run: jest.fn(() => Promise.resolve())
+  run: jest.fn(() => Promise.resolve()),
 }));
 jest.mock('@stencil/core/compiler', () => ({
   loadConfig: jest.fn(() =>
@@ -37,9 +37,9 @@ jest.mock('@stencil/core/compiler', () => ({
   ),
 }));
 jest.mock('fs', () => ({
-  accessSync: jest.fn((x, y) => {
-    return true
-  })
+  accessSync: jest.fn(() => {
+    return true;
+  }),
 }));
 
 export async function createArchitect() {
