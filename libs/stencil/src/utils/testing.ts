@@ -1,8 +1,4 @@
-import * as stencilUtils from '../builders/utils';
-import { Observable, of } from 'rxjs';
-import { Config } from '@stencil/core/cli';
-import { Architect, BuilderOutput } from '@angular-devkit/architect';
-import { switchMap } from 'rxjs/operators';
+import { Architect } from '@angular-devkit/architect';
 import { schema } from '@angular-devkit/core';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { join } from 'path';

@@ -10,10 +10,10 @@ import {
 } from '@stencil/core/cli';
 import { StencilBuildOptions } from '../build/schema';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { copyFile, projectRootDir, ProjectType } from '@nrwl/workspace';
 import { loadConfig } from '@stencil/core/compiler';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
 import { StencilE2EOptions } from '../e2e/schema';
 import { writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
@@ -157,17 +157,9 @@ export function createStencilConfig(
 export function createStencilProcess() {
   return function (source: Observable<Config>): Observable<BuilderOutput> {
     return source.pipe(
-      switchMap(
-        (config) =>
-          new Observable<BuilderOutput>((obs) => {
-            runTask(process, config, config.flags.task)
-              .then(() => {
-                obs.next({ success: true });
-                obs.complete();
-              })
-              .catch((err) => obs.error(err));
-          })
-      )
+      switchMap((config) => runTask(process, config, config.flags.task)),
+      map(() => ({ success: true })),
+      catchError((err) => of({ success: false, error: err }))
     );
   };
 }
