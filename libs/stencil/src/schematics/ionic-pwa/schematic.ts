@@ -23,7 +23,7 @@ import { PWASchema } from './schema';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/functions';
-import core, { addBuilderToTarget } from '../core/core';
+import core from '../core/core';
 
 const projectType = ProjectType.Application;
 

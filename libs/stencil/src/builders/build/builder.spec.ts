@@ -15,9 +15,7 @@ describe('Command Runner Build', () => {
     [architect, context] = await mockContext();
     jest
       .spyOn(stencilUtils, 'createStencilConfig')
-      .mockImplementation(
-        (taskCommand, options, context, createStencilCompilerOptions) => of({})
-      );
+      .mockImplementation(() => of({}));
     jest.spyOn(stencilUtils, 'createStencilProcess').mockImplementation(
       () =>
         function (source: Observable<Config>): Observable<BuilderOutput> {

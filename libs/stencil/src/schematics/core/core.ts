@@ -4,8 +4,6 @@ import {
   addPackageWithInit,
   ProjectType,
 } from '@nrwl/workspace';
-import { chain, noop, Rule } from '@angular-devkit/schematics';
-import { addDepsToPackageJson } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
 import {
   AppType,
@@ -33,25 +31,22 @@ function addStyledModuleDependencies<T extends CoreSchema>(options: T): Rule {
     : noop();
 }
 
-function addE2eDependencies<T extends CoreSchema>(): Rule {
-  const styleDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
+function addE2eDependencies<T extends CoreSchema>(options: T): Rule {
+  const testDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
 
-  return styleDependencies
+  return testDependencies
     ? addDepsToPackageJson(
-        styleDependencies.dependencies,
-        styleDependencies.devDependencies
+        testDependencies.dependencies,
+        testDependencies.devDependencies
       )
     : noop();
   if (options.e2eTestRunner === 'puppeteer') {
-    return styleDependencies
+    return testDependencies
       ? addDepsToPackageJson(
-          styleDependencies.dependencies,
-          styleDependencies.devDependencies
+          testDependencies.dependencies,
+          testDependencies.devDependencies
         )
       : noop();
-  }
-  if (options.e2eTestRunner === 'cypress') {
-    return addPackageWithInit('@nrwl/cypress');
   }
 
   return noop();
@@ -77,6 +72,6 @@ export default function <T extends CoreSchema>(options: T): Rule {
     addStyledModuleDependencies(options),
     addPackageWithInit('@nrwl/jest'),
     addE2eDependencies(options),
-    setDefaultCollection('@nxext/stencil')
+    setDefaultCollection('@nxext/stencil'),
   ]);
 }
