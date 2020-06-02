@@ -86,7 +86,9 @@ export function createStencilConfig(
   ) => ConfigFlags
 ): Observable<Config> {
   const projectDir: string = projectRootDir(options.projectType);
-  const configFilePath = `${projectDir}/${context.target.project}/stencil.config.ts`;
+  const configFilePath =
+    options?.configPath ||
+    `${projectDir}/${context.target.project}/stencil.config.ts`;
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const logger: Logger = createNodeLogger(process);
