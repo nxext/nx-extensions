@@ -5,6 +5,8 @@ import {
   mergeWith,
   move,
   Rule,
+  SchematicContext,
+  Tree,
   url,
 } from '@angular-devkit/schematics';
 import {
@@ -62,6 +64,13 @@ function addFiles(options: PWASchema): Rule {
       formatFiles({ skipFormat: false }),
     ])
   );
+}
+
+function changeStencilConfig(options: PWASchema): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    //const content: Buffer | null = tree.read("apps/pwa/src/stencil.config.ts");
+    //_context.logger.info(content.toString());
+  };
 }
 
 export default function (options: CoreSchema): Rule {

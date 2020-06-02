@@ -23,6 +23,10 @@
       "description": "A directory where the project is placed",
       "alias": "d"
     },
+    "skipFormat": {
+      "type": "boolean",
+      "default": false
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",
