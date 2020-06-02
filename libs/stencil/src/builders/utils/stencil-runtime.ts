@@ -24,6 +24,58 @@ function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
 }
 
+type ConfigAndPathCollection = {
+  config: Config;
+  distDir: string;
+  projectRoot: string;
+  projectName: string;
+};
+
+function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
+  const pkgJson = `${values.projectRoot}/package.json`;
+  if (fileExists(pkgJson)) {
+    copyFile(pkgJson, values.distDir);
+  } else {
+    const libPackageJson = {
+      name: values.projectName,
+      main: 'dist/index.js',
+      module: 'dist/index.mjs',
+      es2015: 'dist/esm/index.mjs',
+      es2017: 'dist/esm/index.mjs',
+      types: 'dist/types/index.d.ts',
+      collection: 'dist/collection/collection-manifest.json',
+      'collection:main': 'dist/collection/index.js',
+      unpkg: `dist/${values.projectName}/${values.projectName}.js`,
+      files: ['dist/', 'loader/'],
+    };
+
+    writeJsonFile(`${values.distDir}/package.json`, libPackageJson);
+  }
+}
+
+function calculateOutputTargetPathVariables(
+  values: ConfigAndPathCollection,
+  pathVariables: string[]
+) {
+  return values.config.outputTargets.map((outputTarget) => {
+    pathVariables.forEach((pathVar) => {
+      if (
+        outputTarget[pathVar] != null &&
+        !(outputTarget[pathVar] as string).endsWith('src')
+      ) {
+        outputTarget = Object.assign(outputTarget, {
+          [pathVar]: (outputTarget[pathVar] as string).replace(
+            values.projectRoot,
+            values.distDir
+          ),
+        });
+      }
+    });
+
+    return outputTarget;
+  });
+}
+
 export function createStencilConfig(
   taskCommand: TaskCommand,
   options: StencilBuildOptions | StencilTestOptions,
@@ -70,36 +122,18 @@ export function createStencilConfig(
         distDir: distDir,
         projectRoot: projectRoot,
         projectName: projectName,
-      };
+      } as ConfigAndPathCollection;
     }),
-    tap((values) => {
+    tap((values: ConfigAndPathCollection) => {
       ensureDirExist(values.distDir);
 
       if (options.projectType == ProjectType.Library) {
-        const pkgJson = `${values.projectRoot}/package.json`;
-        if (fileExists(pkgJson)) {
-          copyFile(pkgJson, values.distDir);
-        } else {
-          const libPackageJson = {
-            name: values.projectName,
-            main: 'dist/index.js',
-            module: 'dist/index.mjs',
-            es2015: 'dist/esm/index.mjs',
-            es2017: 'dist/esm/index.mjs',
-            types: 'dist/types/index.d.ts',
-            collection: 'dist/collection/collection-manifest.json',
-            'collection:main': 'dist/collection/index.js',
-            unpkg: `dist/${values.projectName}/${values.projectName}.js`,
-            files: ['dist/', 'loader/'],
-          };
-
-          writeJsonFile(`${values.distDir}/package.json`, libPackageJson);
-        }
+        copyOrCreatePackageJson(values);
       }
 
       return values.config;
     }),
-    map((value) => {
+    map((values: ConfigAndPathCollection) => {
       const pathVariables = [
         'dir',
         'appDir',
@@ -119,34 +153,25 @@ export function createStencilConfig(
         'esmIndexFile',
         'componentDts',
       ];
-      const outputTargets: OutputTarget[] = value.config.outputTargets.map(
-        (outputTarget) => {
-          pathVariables.forEach((pathVar) => {
-            if (
-              outputTarget[pathVar] != null &&
-              !(outputTarget[pathVar] as string).endsWith('src')
-            ) {
-              outputTarget = Object.assign(outputTarget, {
-                [pathVar]: (outputTarget[pathVar] as string).replace(
-                  value.projectRoot,
-                  value.distDir
-                ),
-              });
-            }
-          });
-
-          return outputTarget;
-        }
+      const outputTargets: OutputTarget[] = calculateOutputTargetPathVariables(
+        values,
+        pathVariables
       );
-
-      const devServerConfig = Object.assign(value.config.devServer, {
-        root: value.config.devServer.root.replace(
-          value.projectRoot,
-          value.distDir
+      const devServerConfig = Object.assign(values.config.devServer, {
+        root: values.config.devServer.root.replace(
+          values.projectRoot,
+          values.distDir
         ),
       });
+
+      values.config.packageJsonFilePath = values.config.packageJsonFilePath.replace(
+        values.projectRoot,
+        values.distDir
+      );
+      values.config.rootDir = values.distDir;
+
       return Object.assign(
-        value.config,
+        values.config,
         { outputTargets: outputTargets },
         { devServer: devServerConfig }
       );
