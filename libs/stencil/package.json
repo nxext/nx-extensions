@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "0.0.14-1",
+  "version": "0.0.14-3",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -21,8 +21,13 @@
   "main": "src/index.js",
   "schematics": "./collection.json",
   "builders": "./builders.json",
+  "dependencies": {
+    "@nrwl/jest": "^9.3.0",
+    "@nrwl/cypress": "^9.3.0",
+    "@nrwl/workspace": "^9.3.0"
+  },
   "peerDependencies": {
-    "@nrwl/workspace": "*",
+    "@angular-devkit/schematics": "^9.0.0",
     "@stencil/core": "^1.13.0"
   }
 }

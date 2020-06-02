@@ -1,5 +1,9 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics';
-import { addDepsToPackageJson } from '@nrwl/workspace';
+import {
+  addDepsToPackageJson,
+  addPackageWithInit,
+  ProjectType,
+} from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
 import {
   AppType,
@@ -27,22 +31,47 @@ function addStyledModuleDependencies<T extends CoreSchema>(options: T): Rule {
     : noop();
 }
 
-function addE2eDependencies<T extends CoreSchema>(): Rule {
-  const styleDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
+function addE2eDependencies<T extends CoreSchema>(options: T): Rule {
+  const testDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
 
-  return styleDependencies
+  return testDependencies
     ? addDepsToPackageJson(
-        styleDependencies.dependencies,
-        styleDependencies.devDependencies
+        testDependencies.dependencies,
+        testDependencies.devDependencies
       )
     : noop();
+  if (options.e2eTestRunner === 'puppeteer') {
+    return testDependencies
+      ? addDepsToPackageJson(
+          testDependencies.dependencies,
+          testDependencies.devDependencies
+        )
+      : noop();
+  }
+
+  return noop();
 }
 
-export default function <T extends CoreSchema>(options: T) {
+export function addBuilderToTarget(
+  targetCollection,
+  builder: string,
+  projectType: ProjectType
+) {
+  targetCollection.add({
+    name: builder,
+    builder: `@nxext/stencil:${builder}`,
+    options: {
+      projectType,
+    },
+  });
+}
+
+export default function <T extends CoreSchema>(options: T): Rule {
   return chain([
     addDependencies(options.appType),
     addStyledModuleDependencies(options),
-    addE2eDependencies(),
+    addPackageWithInit('@nrwl/jest'),
+    addE2eDependencies(options),
     setDefaultCollection('@nxext/stencil'),
   ]);
 }

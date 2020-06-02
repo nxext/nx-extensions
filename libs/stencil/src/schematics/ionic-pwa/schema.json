@@ -29,6 +29,10 @@
       "description": "Test runner to use for end to end (e2e) tests",
       "default": "puppeteer"
     },
+    "skipFormat": {
+      "type": "boolean",
+      "default": false
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

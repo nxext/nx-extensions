@@ -1,6 +1,6 @@
 {
   "name": "nxext",
-  "version": "0.0.14-1",
+  "version": "0.0.14-3",
   "license": "MIT",
   "keywords": [
     "nx",
@@ -43,12 +43,12 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "@nrwl/eslint-plugin-nx": "9.2.4",
-    "@nrwl/jest": "9.2.4",
-    "@nrwl/nx-plugin": "9.2.4",
-    "@nrwl/workspace": "9.2.4",
+    "@nrwl/eslint-plugin-nx": "9.3.0",
+    "@nrwl/jest": "9.3.0",
+    "@nrwl/nx-plugin": "9.3.0",
+    "@nrwl/workspace": "9.3.0",
     "@stencil/core": "1.13.0",
-    "@types/jest": "25.2.1",
+    "@types/jest": "25.2.3",
     "@types/node": "~8.9.4",
     "@typescript-eslint/eslint-plugin": "2.32.0",
     "@typescript-eslint/parser": "2.32.0",
