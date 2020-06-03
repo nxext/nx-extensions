@@ -1,6 +1,5 @@
 import { ProjectType } from '@nrwl/workspace';
 import {
-  checkFilesExist,
   ensureNxProject,
   readJson,
   runNxCommandAsync,
@@ -12,7 +11,7 @@ import { testProject } from '../utils/testing';
 describe('e2e', () => {
   describe('generate with style', () => {
     describe('stencil app', () => {
-      for (var style of ['css', 'scss', 'less', 'styl', 'pcss']) {
+      SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
         it(`should create app with ${style}`, async (done) => {
           const plugin = uniq('app2');
 
@@ -25,19 +24,19 @@ describe('e2e', () => {
 
           done();
         });
-      }
+      });
     });
 
     describe('--directory', () => {
       it('should create src in the specified directory', async (done) => {
         const plugin = uniq('app1');
+        const style = 'css';
         ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
         await runNxCommandAsync(
-          `generate @nxext/stencil:application ${plugin} --directory subdir --style=css`
+          `generate @nxext/stencil:application ${plugin} --directory subdir --style=${style}`
         );
-        expect(() =>
-          checkFilesExist(`apps/subdir/${plugin}/stencil.config.ts`)
-        ).not.toThrow();
+
+        testProject(plugin, style, ProjectType.Application, 'subdir');
         done();
       });
     });

@@ -62,6 +62,8 @@ You can define the path for the stencil.config.ts file like this:
 nx build pwa --configPath=apps/pwa/components/stencil.config.ts
 ```
 
+The configPath is set in the workspace.json/angular.json for each builder. The default used path can be change there.
+
 - --configPath relative from workspace root
 
 Support for tests. For unit tests run:

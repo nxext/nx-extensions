@@ -18,7 +18,7 @@ import {
   toFileName,
   updateWorkspace,
 } from '@nrwl/workspace';
-import { ApplicationNormalizedSchema } from './schema';
+import { ApplicationSchema } from './schema';
 import core, { addBuilderToTarget } from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { calculateStyle } from '../../utils/functions';
@@ -28,12 +28,11 @@ import { calculateStyle } from '../../utils/functions';
  */
 const projectType = ProjectType.Application;
 
-function normalizeOptions(options: CoreSchema): ApplicationNormalizedSchema {
-  const name = toFileName(options.name);
+function normalizeOptions(options: CoreSchema): ApplicationSchema {
+  const projectName = toFileName(options.name);
   const projectDirectory = options.directory
-    ? `${toFileName(options.directory)}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
+    ? `${toFileName(options.directory)}/${projectName}`
+    : projectName;
   const projectRoot = `${projectRootDir(projectType)}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
@@ -54,7 +53,7 @@ function normalizeOptions(options: CoreSchema): ApplicationNormalizedSchema {
   };
 }
 
-function addFiles(options: ApplicationNormalizedSchema): Rule {
+function addFiles(options: ApplicationSchema): Rule {
   return mergeWith(
     apply(url(`./files/app`), [
       applyTemplates({
@@ -79,10 +78,30 @@ export default function (options: CoreSchema): Rule {
         sourceRoot: `${normalizedOptions.projectRoot}/src`,
         projectType,
       }).targets;
-      addBuilderToTarget(targetCollection, 'build', projectType);
-      addBuilderToTarget(targetCollection, 'test', projectType);
-      addBuilderToTarget(targetCollection, 'e2e', projectType);
-      addBuilderToTarget(targetCollection, 'serve', projectType);
+      addBuilderToTarget(
+        targetCollection,
+        'build',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'test',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'e2e',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'serve',
+        projectType,
+        normalizedOptions
+      );
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
       tags: normalizedOptions.parsedTags,

@@ -1,7 +1,7 @@
 import { AppType, SupportedStyles } from './../../utils/typings';
 import { CoreSchema } from '../core/schema';
 
-export interface ApplicationNormalizedSchema extends CoreSchema {
+export interface ApplicationSchema extends CoreSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;

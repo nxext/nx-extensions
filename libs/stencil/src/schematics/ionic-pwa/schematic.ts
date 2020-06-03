@@ -23,7 +23,7 @@ import { PWASchema } from './schema';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/functions';
-import core from '../core/core';
+import core, { addBuilderToTarget } from '../core/core';
 
 const projectType = ProjectType.Application;
 
@@ -84,27 +84,30 @@ export default function (options: CoreSchema): Rule {
         sourceRoot: `${normalizedOptions.projectRoot}/src`,
         projectType,
       }).targets;
-      targetCollection.add({
-        name: 'build',
-        builder: '@nxext/stencil:build',
-        options: {
-          projectType,
-        },
-      });
-      targetCollection.add({
-        name: 'test',
-        builder: '@nxext/stencil:test',
-        options: {
-          projectType,
-        },
-      });
-      targetCollection.add({
-        name: 'e2e',
-        builder: '@nxext/stencil:e2e',
-        options: {
-          projectType,
-        },
-      });
+      addBuilderToTarget(
+        targetCollection,
+        'build',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'test',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'e2e',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'serve',
+        projectType,
+        normalizedOptions
+      );
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
       tags: normalizedOptions.parsedTags,
