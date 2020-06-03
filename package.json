@@ -1,6 +1,6 @@
 {
   "name": "nxext",
-  "version": "0.0.14-3",
+  "version": "0.0.14-4",
   "license": "MIT",
   "keywords": [
     "nx",
@@ -41,7 +41,9 @@
     "commit": "git-cz"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@nrwl/nx-cloud": "^9.3.2"
+  },
   "devDependencies": {
     "@nrwl/eslint-plugin-nx": "9.3.0",
     "@nrwl/jest": "9.3.0",
