@@ -1,0 +1,31 @@
+name: Nx Affected CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: git fetch --no-tags --prune --depth=5 origin master
+      - run: yarn install --frozen-lockfile
+      - run: yarn affected:build --base=origin/master
+      - run: yarn affected:lint --base=origin/master
+      - run: yarn affected:test --base=origin/master
+      - run: yarn affected:e2e --base=origin/master
