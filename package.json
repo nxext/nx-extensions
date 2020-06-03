@@ -41,9 +41,7 @@
     "commit": "git-cz"
   },
   "private": true,
-  "dependencies": {
-    "@nrwl/nx-cloud": "^9.3.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@nrwl/eslint-plugin-nx": "9.3.0",
     "@nrwl/jest": "9.3.0",
