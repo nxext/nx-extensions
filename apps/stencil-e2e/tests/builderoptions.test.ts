@@ -1,4 +1,5 @@
 import {
+  checkFilesExist,
   ensureNxProject,
   renameFile,
   runNxCommandAsync,
@@ -42,6 +43,18 @@ describe('e2e', () => {
       );
       expect(result.stdout).toContain('build finished');
 
+      done();
+    });
+
+    it('should build with --directory', async (done) => {
+      const plugin = uniq('app');
+      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      await runNxCommandAsync(
+        `generate @nxext/stencil:application ${plugin} --directory subdir --style=css`
+      );
+
+      const result = await runNxCommandAsync(`build ${plugin}`);
+      expect(result.stdout).toContain('build finished');
       done();
     });
   });

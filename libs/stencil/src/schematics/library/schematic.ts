@@ -99,10 +99,30 @@ export default function (options: CoreSchema): Rule {
         sourceRoot: `${normalizedOptions.projectRoot}/src`,
         projectType,
       }).targets;
-      addBuilderToTarget(targetCollection, 'build', projectType);
-      addBuilderToTarget(targetCollection, 'test', projectType);
-      addBuilderToTarget(targetCollection, 'e2e', projectType);
-      addBuilderToTarget(targetCollection, 'serve', projectType);
+      addBuilderToTarget(
+        targetCollection,
+        'build',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'test',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'e2e',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'serve',
+        projectType,
+        normalizedOptions
+      );
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
       tags: normalizedOptions.parsedTags,
