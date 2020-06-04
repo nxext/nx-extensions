@@ -50,6 +50,11 @@
                 "input": "./libs/stencil",
                 "glob": "builders.json",
                 "output": "."
+              },
+              {
+                "input": "./libs/stencil",
+                "glob": "migrations.json",
+                "output": "."
               }
             ]
           }

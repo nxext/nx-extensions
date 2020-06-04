@@ -85,10 +85,12 @@ export function createStencilConfig(
     options: StencilBuildOptions
   ) => ConfigFlags
 ): Observable<Config> {
-  const projectDir: string = projectRootDir(options.projectType);
-  const configFilePath =
-    options?.configPath ||
-    `${projectDir}/${context.target.project}/stencil.config.ts`;
+  if (!options?.configPath) {
+    throw new Error(
+      'ConfigPath not set. Please use --configPath or update your project builder in workspace.json/angular.json accordingly!'
+    );
+  }
+  const configFilePath = options?.configPath;
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const logger: Logger = createNodeLogger(process);
