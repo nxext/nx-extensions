@@ -1,0 +1,9 @@
+{
+  "schematics": {
+    "update-0-0-14": {
+      "version": "0.0.14",
+      "description": "update-0-0-14",
+      "factory": "./src/migrations/update-0-0-14/update-0-0-14"
+    }
+  }
+}
