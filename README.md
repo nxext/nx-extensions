@@ -13,6 +13,7 @@
 - [License](#license)
 
 ## Install and usage
+
 See the plugin [documentation](libs/stencil/README.md)
 
 ## Maintainers
