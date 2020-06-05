@@ -47,24 +47,20 @@ nx build my-app
 Run commands are passed to the [stencil compiler](https://stenciljs.com/docs/cli).
 Supported flags are:
 
-- --ci
-- --debug
-- --dev
-- --docs
-- --port=1234
-- --serve
-- --verbose
-- --watch
+| Parameter    | Type   | Default                                                                                  | Description                  |
+| ------------ | ------ | ---------------------------------------------------------------------------------------- | ---------------------------- |
+| --ci         | bool   | false                                                                                    |                              |
+| --debug      | bool   | false                                                                                    |                              |
+| --dev        | bool   | false                                                                                    |                              |
+| --docs       | bool   | false                                                                                    |                              |
+| --port=1234  | number |                                                                                          |                              |
+| --serve      | bool   | false                                                                                    |                              |
+| --verbose    | bool   | false                                                                                    |                              |
+| --watch      | bool   | false                                                                                    |                              |
+| --configPath | string | "libs/**_projectname_**/stencil.config.ts" or "apps/**_projectname_**/stencil.config.ts" | relative from workspace root |
 
 You can define the path for the stencil.config.ts file like this:
-
-```
-nx build pwa --configPath=apps/pwa/components/stencil.config.ts
-```
-
 The configPath is set in the workspace.json/angular.json for each builder. The default used path can be change there.
-
-- --configPath relative from workspace root
 
 Support for tests. For unit tests run:
 

@@ -47,16 +47,27 @@ export function testProject(
         );
       }).not.toThrow();
     }
+
+    const workspaceJson = readJson('workspace.json');
+    expect(
+      workspaceJson.projects[projectName].architect.build.options.configPath
+    ).toBe(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`);
+    expect(
+      workspaceJson.projects[projectName].architect.test.options.configPath
+    ).toBe(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`);
+    expect(
+      workspaceJson.projects[projectName].architect.e2e.options.configPath
+    ).toBe(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`);
   } else {
     if (projectType == ProjectType.Application) {
       // prettier-ignore
       expect(() => {
         checkFilesExist(
-          `${projectRootDir(projectType)}/${projectName}/src/global/app.${style}`,
+          `${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/global/app.${style}`,
           `${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/global/app.ts`
         ),
           checkFilesExist(
-            `${projectRootDir(projectType)}/${projectName}/stencil.config.ts`,
+            `${projectRootDir(projectType)}/${subDirectory}/${projectName}/stencil.config.ts`,
             `${projectRootDir(projectType)}/${subDirectory}/${projectName}/tsconfig.json`,
             `${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-home/app-home.e2e.ts`,
             `${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-home/app-home.tsx`,
@@ -87,16 +98,28 @@ export function testProject(
         );
       }).not.toThrow();
     }
-  }
 
-  const workspaceJson = readJson('workspace.json');
-  expect(
-    workspaceJson.projects[projectName].architect.build.options.configPath
-  ).toBe(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`);
-  expect(
-    workspaceJson.projects[projectName].architect.test.options.configPath
-  ).toBe(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`);
-  expect(
-    workspaceJson.projects[projectName].architect.e2e.options.configPath
-  ).toBe(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`);
+    const workspaceJson = readJson('workspace.json');
+    expect(
+      workspaceJson.projects[projectName].architect.build.options.configPath
+    ).toBe(
+      `${projectRootDir(
+        projectType
+      )}/${subDirectory}/${projectName}/stencil.config.ts`
+    );
+    expect(
+      workspaceJson.projects[projectName].architect.test.options.configPath
+    ).toBe(
+      `${projectRootDir(
+        projectType
+      )}/${subDirectory}/${projectName}/stencil.config.ts`
+    );
+    expect(
+      workspaceJson.projects[projectName].architect.e2e.options.configPath
+    ).toBe(
+      `${projectRootDir(
+        projectType
+      )}/${subDirectory}/${projectName}/stencil.config.ts`
+    );
+  }
 }

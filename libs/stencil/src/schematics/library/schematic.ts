@@ -117,12 +117,6 @@ export default function (options: CoreSchema): Rule {
         projectType,
         normalizedOptions
       );
-      addBuilderToTarget(
-        targetCollection,
-        'serve',
-        projectType,
-        normalizedOptions
-      );
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
       tags: normalizedOptions.parsedTags,

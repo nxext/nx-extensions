@@ -11,7 +11,7 @@ import {
 import { StencilBuildOptions } from '../build/schema';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { from, Observable, of } from 'rxjs';
-import { copyFile, projectRootDir, ProjectType } from '@nrwl/workspace';
+import { copyFile, ProjectType } from '@nrwl/workspace';
 import { loadConfig } from '@stencil/core/compiler';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
@@ -76,7 +76,7 @@ function calculateOutputTargetPathVariables(
   });
 }
 
-export function createStencilConfig(
+async function initializeStencilConfig(
   taskCommand: TaskCommand,
   options: StencilBuildOptions | StencilTestOptions,
   context: BuilderContext,
@@ -84,15 +84,13 @@ export function createStencilConfig(
     taskCommand: TaskCommand,
     options: StencilBuildOptions
   ) => ConfigFlags
-): Observable<Config> {
-  const projectDir: string = projectRootDir(options.projectType);
-  const configFilePath =
-    options?.configPath ||
-    `${projectDir}/${context.target.project}/stencil.config.ts`;
+) {
+  const configFilePath = options?.configPath;
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const logger: Logger = createNodeLogger(process);
   const sys: CompilerSystem = createNodeSystem(process);
+  const metadata = await context.getProjectMetadata(context.target);
 
   if (sys.getCompilerExecutingPath == null) {
     sys.getCompilerExecutingPath = getCompilerExecutingPath;
@@ -102,30 +100,51 @@ export function createStencilConfig(
     logger.colors = false;
   }
 
-  return from(
-    loadConfig({
-      config: {
-        flags,
-      },
-      configPath: configFilePath,
-      logger,
-      sys,
-    })
-  ).pipe(
-    map((loadConfigResults) => {
-      const { workspaceRoot } = context;
-      const projectTypeDir = projectRootDir(options.projectType);
-      const projectName = context.target.project;
-      const distDir = `${workspaceRoot}/dist/${projectTypeDir}/${projectName}`;
-      const projectRoot = `${workspaceRoot}/${projectTypeDir}/${projectName}`;
+  const loadConfigResults = await loadConfig({
+    config: {
+      flags,
+    },
+    configPath: configFilePath,
+    logger,
+    sys,
+  });
 
-      return {
-        config: loadConfigResults.config,
-        distDir: distDir,
-        projectRoot: projectRoot,
-        projectName: projectName,
-      } as ConfigAndPathCollection;
-    }),
+  const { workspaceRoot } = context;
+  const projectName = context.target.project;
+  const distDir = `${workspaceRoot}/dist/${metadata.root}`;
+  const projectRoot = `${workspaceRoot}/${metadata.root}`;
+
+  return {
+    projectName: projectName,
+    config: loadConfigResults.config,
+    projectRoot: projectRoot,
+    distDir: distDir,
+  } as ConfigAndPathCollection;
+}
+
+export function createStencilConfig(
+  taskCommand: TaskCommand,
+  options: StencilBuildOptions | StencilTestOptions,
+  context: BuilderContext,
+  createStencilCompilerOptions: (
+    taskCommand: TaskCommand,
+    options: StencilBuildOptions
+  ) => ConfigFlags
+): Observable<Config> {
+  if (!options?.configPath) {
+    throw new Error(
+      'ConfigPath not set. Please use --configPath or update your project builder in workspace.json/angular.json accordingly!'
+    );
+  }
+
+  return from(
+    initializeStencilConfig(
+      taskCommand,
+      options,
+      context,
+      createStencilCompilerOptions
+    )
+  ).pipe(
     tap((values: ConfigAndPathCollection) => {
       ensureDirExist(values.distDir);
 
