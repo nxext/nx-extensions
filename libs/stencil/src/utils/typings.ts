@@ -1,13 +1,13 @@
 import {
-  STENCIL_STYLE_PLUGIN_VERSION,
-  stencilRouterVersion,
-  autoprefixerVersion,
   autoprefixerTypesVersion,
+  autoprefixerVersion,
   ionicVersion,
   nxextVersion,
-  stencilVersion,
-  puppeteerType,
   puppeteer,
+  puppeteerType,
+  STENCIL_STYLE_PLUGIN_VERSION,
+  stencilRouterVersion,
+  stencilVersion,
 } from './versions';
 
 export type SupportedStyles = 'css' | 'scss' | 'styl' | 'less' | 'postcss';
