@@ -4,6 +4,7 @@ import { readJsonInTree } from '@nrwl/workspace';
 import { AppType } from '../../utils/typings';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { join } from 'path';
+import { runSchematic } from '../../utils/testing';
 
 describe('core', () => {
   let tree: Tree;
@@ -19,13 +20,11 @@ describe('core', () => {
   });
 
   it('should add stencil dependencies', async () => {
-    const result = await testRunner
-      .runSchematicAsync(
-        'core',
-        { name: 'test', appType: AppType.Library },
-        tree
-      )
-      .toPromise();
+    const result = await runSchematic(
+      'core',
+      { name: 'test', appType: AppType.Library },
+      tree
+    );
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();

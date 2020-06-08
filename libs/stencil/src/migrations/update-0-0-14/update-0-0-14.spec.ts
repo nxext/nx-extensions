@@ -1,29 +1,16 @@
 import { Tree } from '@angular-devkit/schematics';
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { readJsonInTree } from '@nrwl/workspace';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import * as path from 'path';
 import library from '@nrwl/workspace/src/schematics/library/library';
+import { runMigration, runSchematic } from '../../utils/testing';
 
 describe('update-0-0-14', () => {
   let initialTree: Tree;
-  let schematicRunner: SchematicTestRunner;
 
   beforeEach(async () => {
     initialTree = createEmptyWorkspace(Tree.empty());
 
-    schematicRunner = new SchematicTestRunner(
-      '@nxext/stencil',
-      path.join(__dirname, '../../../migrations.json')
-    );
-
-    const stencilRunner = new SchematicTestRunner(
-      '@nxext/stencil',
-      path.join(__dirname, '../../../collection.json')
-    );
-    initialTree = await stencilRunner
-      .runSchematicAsync('lib', { name: 'library' }, initialTree)
-      .toPromise();
+    initialTree = await runSchematic('lib', { name: 'library' }, initialTree);
 
     const workspaceJson = readJsonInTree(initialTree, '/workspace.json');
     workspaceJson.projects.library.architect = {
@@ -57,9 +44,7 @@ describe('update-0-0-14', () => {
   });
 
   it(`should update builder config path`, async () => {
-    const result = await schematicRunner
-      .runSchematicAsync('update-0-0-14', {}, initialTree)
-      .toPromise();
+    const result = await runMigration('update-0-0-14', {}, initialTree);
 
     const { projects } = readJsonInTree(result, '/workspace.json');
     expect(projects.library.architect).toEqual({
