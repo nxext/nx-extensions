@@ -1,7 +1,6 @@
 import { Tree } from '@angular-devkit/schematics';
 import { readJsonInTree } from '@nrwl/workspace';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import library from '@nrwl/workspace/src/schematics/library/library';
 import { runMigration, runSchematic } from '../../utils/testing';
 
 describe('update-0-0-14', () => {

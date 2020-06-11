@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="x-ua-compatible" content="IE=Edge">
 
-  <script type="module" src="/build/app.esm.js"></script>
-  <script nomodule src="/build/app.js"></script>
+  <script type="module" src="/build/<%= projectName %>.esm.js"></script>
+  <script nomodule src="/build/<%= projectName %>.js"></script>
   <link href="/build/app.css" rel="stylesheet">
 
   <link rel="apple-touch-icon" href="/assets/icon/icon.png">

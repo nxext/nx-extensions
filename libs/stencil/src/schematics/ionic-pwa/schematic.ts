@@ -5,8 +5,6 @@ import {
   mergeWith,
   move,
   Rule,
-  SchematicContext,
-  Tree,
   url,
 } from '@angular-devkit/schematics';
 import {
@@ -22,7 +20,7 @@ import {
 import { PWASchema } from './schema';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
-import { calculateStyle } from '../../utils/functions';
+import { calculateStyle } from '../../utils/utils';
 import core, { addBuilderToTarget } from '../core/core';
 
 const projectType = ProjectType.Application;
@@ -66,13 +64,6 @@ function addFiles(options: PWASchema): Rule {
   );
 }
 
-function changeStencilConfig(options: PWASchema): Rule {
-  return (tree: Tree, _context: SchematicContext) => {
-    //const content: Buffer | null = tree.read("apps/pwa/src/stencil.config.ts");
-    //_context.logger.info(content.toString());
-  };
-}
-
 export default function (options: CoreSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
@@ -99,6 +90,12 @@ export default function (options: CoreSchema): Rule {
       addBuilderToTarget(
         targetCollection,
         'e2e',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'serve',
         projectType,
         normalizedOptions
       );

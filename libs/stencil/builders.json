@@ -15,6 +15,11 @@
       "implementation": "./src/builders/e2e/builder",
       "schema": "./src/builders/e2e/schema.json",
       "description": "stencil e2e"
+    },
+    "serve": {
+      "implementation": "./src/builders/serve/builder",
+      "schema": "./src/builders/serve/schema.json",
+      "description": "serve builder"
     }
   }
 }

@@ -18,12 +18,12 @@ export const SUPPORTED_STYLE_LIBRARIES = [
 ];
 
 const testRunner = new SchematicTestRunner(
-  '@nrwl/storybook',
+  '@nxext/stencil',
   join(__dirname, '../../collection.json')
 );
 
 const migrationRunner = new SchematicTestRunner(
-  '@nrwl/storybook/migrations',
+  '@nxext/stencil',
   join(__dirname, '../../migrations.json')
 );
 
@@ -65,56 +65,11 @@ export async function createTestUILib(libName: string): Promise<Tree> {
   let appTree = Tree.empty();
   appTree = createEmptyWorkspace(appTree);
   appTree = await callRule(
-    externalSchematic('@nrwl/angular', 'library', {
+    externalSchematic('@nxext/stencil', 'library', {
       name: libName,
     }),
     appTree
   );
-  appTree = await callRule(
-    externalSchematic('@nrwl/angular', 'component', {
-      name: 'test-button',
-      project: libName,
-    }),
-    appTree
-  );
-  appTree.overwrite(
-    `libs/${libName}/src/lib/test-button/test-button.component.ts`,
-    `
-import { Component, OnInit, Input } from '@angular/core';
-import { tmpdir } from 'os';
-import { mkdtempSync } from 'fs';
 
-export type ButtonStyle = 'default' | 'primary' | 'accent';
-
-@Component({
-  selector: 'proj-test-button',
-  templateUrl: './test-button.component.html',
-  styleUrls: ['./test-button.component.css']
-})
-export class TestButtonComponent implements OnInit {
-  @Input('buttonType') type = 'button';
-  @Input() style: ButtonStyle = 'default';
-  @Input() age: number;
-  @Input() isOn = false;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
-`
-  );
-  appTree.overwrite(
-    `libs/${libName}/src/lib/test-button/test-button.component.html`,
-    `<button [attr.type]="type" [ngClass]="style"></button>`
-  );
-  appTree = await callRule(
-    externalSchematic('@nrwl/angular', 'component', {
-      name: 'test-other',
-      project: libName,
-    }),
-    appTree
-  );
   return appTree;
 }

@@ -4,8 +4,8 @@ import {
   createBuilder,
 } from '@angular-devkit/architect';
 import { Observable } from 'rxjs';
-import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
+import { StencilBuildOptions } from '../build/schema';
 import {
   createStencilConfig,
   createStencilProcess,
@@ -21,8 +21,6 @@ function createStencilCompilerOptions(
   if (options.port) {
     runOptions.push(`--port ${options.port}`);
   }
-  runOptions.push('--serve');
-  runOptions.push('--warch');
   runOptions = parseRunParameters(runOptions, options);
 
   return parseFlags(runOptions);
