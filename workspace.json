@@ -55,6 +55,16 @@
                 "input": "./libs/stencil",
                 "glob": "migrations.json",
                 "output": "."
+              },
+              {
+                "input": "./libs/stencil",
+                "glob": "**/files/lib/.storybook/**",
+                "output": "/"
+              },
+              {
+                "input": "./libs/stencil",
+                "glob": "**/files/root/.storybook/**",
+                "output": "/"
               }
             ]
           }

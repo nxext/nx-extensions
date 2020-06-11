@@ -77,3 +77,21 @@ For e2e test:
 ```
 nx e2e my-app
 ```
+
+Serve with:
+
+```
+nx serve my-app
+```
+
+Supported flags are:
+
+| Parameter    | Type   | Default                                                                                  | Description                  |
+| ------------ | ------ | ---------------------------------------------------------------------------------------- | ---------------------------- |
+| --ci         | bool   | false                                                                                    |                              |
+| --debug      | bool   | false                                                                                    |                              |
+| --dev        | bool   | false                                                                                    |                              |
+| --docs       | bool   | false                                                                                    |                              |
+| --port=1234  | number |                                                                                          |                              |
+| --verbose    | bool   | false                                                                                    |                              |
+| --configPath | string | "libs/**_projectname_**/stencil.config.ts" or "apps/**_projectname_**/stencil.config.ts" | relative from workspace root |

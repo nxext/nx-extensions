@@ -1,6 +1,6 @@
 {
   "name": "nxext",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "license": "MIT",
   "keywords": [
     "nx",
@@ -47,6 +47,7 @@
     "@nrwl/jest": "9.3.0",
     "@nrwl/nx-plugin": "9.3.0",
     "@nrwl/workspace": "9.3.0",
+    "@nrwl/storybook": "9.3.0",
     "@stencil/core": "1.13.0",
     "@types/jest": "25.2.3",
     "@types/node": "~8.9.4",

@@ -3,6 +3,7 @@ import {
   addDepsToPackageJson,
   addPackageWithInit,
   ProjectType,
+  updateJsonInTree,
 } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
 import {
@@ -71,9 +72,25 @@ export function addBuilderToTarget(
   });
 }
 
+const moveToDevDependencies = updateJsonInTree(
+  'package.json',
+  (packageJson) => {
+    packageJson.dependencies = packageJson.dependencies || {};
+    packageJson.devDependencies = packageJson.devDependencies || {};
+
+    if (packageJson.dependencies['@nxext/stencil']) {
+      packageJson.devDependencies['@nxext/stencil'] =
+        packageJson.dependencies['@nxext/stencil'];
+      delete packageJson.dependencies['@nxext/stencil'];
+    }
+    return packageJson;
+  }
+);
+
 export default function <T extends CoreSchema>(options: T): Rule {
   return chain([
     addDependencies(options.appType),
+    moveToDevDependencies,
     addStyledModuleDependencies(options),
     addPackageWithInit('@nrwl/jest'),
     addE2eDependencies(options),

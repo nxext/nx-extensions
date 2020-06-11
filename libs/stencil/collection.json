@@ -13,23 +13,39 @@
       "factory": "./src/schematics/application/schematic",
       "schema": "./src/schematics/application/schema.json",
       "description": "Generate Stencil application",
-      "aliases": ["app"]
+      "aliases": ["app"],
+      "hidden": false
     },
     "ionic-pwa": {
       "factory": "./src/schematics/ionic-pwa/schematic",
       "schema": "./src/schematics/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
-      "aliases": ["pwa"]
+      "aliases": ["pwa"],
+      "hidden": false
     },
     "library": {
       "factory": "./src/schematics/library/schematic",
       "schema": "./src/schematics/library/schema.json",
       "description": "Generate Stencil Library",
-      "aliases": ["lib", "collection"]
+      "aliases": ["lib", "collection"],
+      "hidden": false
     },
     "ng-add": {
       "factory": "./src/schematics/ng-add/schematic",
-      "description": "Add @nxext/stencil"
+      "description": "Add @nxext/stencil",
+      "hidden": false
+    },
+    "storybook-init": {
+      "factory": "./src/schematics/storybook/init/init",
+      "schema": "./src/schematics/storybook/configuration/schema.json",
+      "description": "Add storybook configuration to the workspace",
+      "hidden": true
+    },
+    "storybook-configuration": {
+      "factory": "./src/schematics/storybook/configuration/configuration",
+      "schema": "./src/schematics/storybook/configuration/schema.json",
+      "description": "Add storybook configuration to a ui library",
+      "hidden": false
     }
   }
 }
