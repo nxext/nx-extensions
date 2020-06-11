@@ -32,7 +32,7 @@ function isConfigPathSet(project, builder: string) {
 function updateBuilderConfigPath(workspaceJson) {
   Object.keys(workspaceJson.projects).map((k) => {
     const project = workspaceJson.projects[k];
-    ['build', 'test', 'e2e', 'serve'].forEach((builderCommand) => {
+    ['build', 'test', 'e2e'].forEach((builderCommand) => {
       if (
         isStencilProjectBuilder(project, builderCommand) &&
         !isConfigPathSet(project, builderCommand)

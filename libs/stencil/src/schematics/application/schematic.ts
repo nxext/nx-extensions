@@ -21,7 +21,7 @@ import {
 import { ApplicationSchema } from './schema';
 import core, { addBuilderToTarget } from '../core/core';
 import { CoreSchema } from '../core/schema';
-import { calculateStyle } from '../../utils/functions';
+import { calculateStyle } from '../../utils/utils';
 
 /**
  * Depending on your needs, you can change this to either `Library` or `Application`
@@ -93,6 +93,12 @@ export default function (options: CoreSchema): Rule {
       addBuilderToTarget(
         targetCollection,
         'e2e',
+        projectType,
+        normalizedOptions
+      );
+      addBuilderToTarget(
+        targetCollection,
+        'serve',
         projectType,
         normalizedOptions
       );
