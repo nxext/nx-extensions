@@ -19,6 +19,7 @@ import { StencilE2EOptions } from '../e2e/schema';
 import { writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist, fileExists } from './fileutils';
+import { normalize } from '@angular-devkit/core';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
@@ -32,24 +33,24 @@ type ConfigAndPathCollection = {
 };
 
 function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
-  const pkgJson = `${values.projectRoot}/package.json`;
+  const pkgJson = normalize(`${values.projectRoot}/package.json`);
   if (fileExists(pkgJson)) {
     copyFile(pkgJson, values.distDir);
   } else {
     const libPackageJson = {
       name: values.projectName,
-      main: 'dist/index.js',
-      module: 'dist/index.mjs',
-      es2015: 'dist/esm/index.mjs',
-      es2017: 'dist/esm/index.mjs',
-      types: 'dist/types/index.d.ts',
-      collection: 'dist/collection/collection-manifest.json',
-      'collection:main': 'dist/collection/index.js',
-      unpkg: `dist/${values.projectName}/${values.projectName}.js`,
-      files: ['dist/', 'loader/'],
+      main: normalize('dist/index.js'),
+      module: normalize('dist/index.mjs'),
+      es2015: normalize('dist/esm/index.mjs'),
+      es2017: normalize('dist/esm/index.mjs'),
+      types: normalize('dist/types/index.d.ts'),
+      collection: normalize('dist/collection/collection-manifest.json'),
+      'collection:main': normalize('dist/collection/index.js'),
+      unpkg: normalize(`dist/${values.projectName}/${values.projectName}.js`),
+      files: [normalize('dist/'), normalize('loader/')],
     };
 
-    writeJsonFile(`${values.distDir}/package.json`, libPackageJson);
+    writeJsonFile(normalize(`${values.distDir}/package.json`), libPackageJson);
   }
 }
 
@@ -111,8 +112,8 @@ async function initializeStencilConfig(
 
   const { workspaceRoot } = context;
   const projectName = context.target.project;
-  const distDir = `${workspaceRoot}/dist/${metadata.root}`;
-  const projectRoot = `${workspaceRoot}/${metadata.root}`;
+  const distDir = normalize(`${workspaceRoot}/dist/${metadata.root}`);
+  const projectRoot = normalize(`${workspaceRoot}/${metadata.root}`);
 
   return {
     projectName: projectName,
@@ -179,17 +180,16 @@ export function createStencilConfig(
         pathVariables
       );
       const devServerConfig = Object.assign(values.config.devServer, {
-        root: values.config.devServer.root.replace(
-          values.projectRoot,
-          values.distDir
+        root: normalize(values.config.devServer.root).replace(
+          normalize(values.projectRoot),
+          normalize(values.distDir)
         ),
       });
 
-      values.config.packageJsonFilePath = values.config.packageJsonFilePath.replace(
-        values.projectRoot,
-        values.distDir
-      );
-      values.config.rootDir = values.distDir;
+      values.config.packageJsonFilePath = normalize(
+        values.config.packageJsonFilePath
+      ).replace(normalize(values.projectRoot), normalize(values.distDir));
+      values.config.rootDir = normalize(values.distDir);
 
       return Object.assign(
         values.config,
