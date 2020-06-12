@@ -77,6 +77,12 @@ export default function (options: CoreSchema): Rule {
         root: normalizedOptions.projectRoot,
         sourceRoot: `${normalizedOptions.projectRoot}/src`,
         projectType,
+        schematics: {
+          '@nxext/stencil:component': {
+            style: options.style,
+            storybook: false,
+          },
+        },
       }).targets;
       addBuilderToTarget(
         targetCollection,
