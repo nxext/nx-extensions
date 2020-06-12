@@ -6,23 +6,13 @@ import {
 } from '@angular-devkit/schematics';
 import { formatFiles, updateWorkspaceInTree } from '@nrwl/workspace';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
+import { isStencilProjectBuilder } from '../utils/migration-utils';
 
 function displayInformation(host: Tree, context: SchematicContext) {
   context.logger.info(stripIndents`
     The configPath is mandatory now. If your configPath doesn't match <projectRoot>/stencil.config.ts please update
     your project builder in workspace.json/angular.json accordingly!
   `);
-}
-
-function isStencilProjectBuilder(project, builderCommand: string): boolean {
-  const buildArchitect =
-    project.architect && project.architect[builderCommand]
-      ? project.architect[builderCommand]
-      : null;
-  return (
-    buildArchitect &&
-    buildArchitect.builder === `@nxext/stencil:${builderCommand}`
-  );
 }
 
 function isConfigPathSet(project, builder: string) {

@@ -1,15 +1,12 @@
 import { Tree } from '@angular-devkit/schematics';
 import { readJsonInTree } from '@nrwl/workspace';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import { runMigration, runSchematic } from '../../utils/testing';
+import { createTestUILib, runMigration } from '../../utils/testing';
 
 describe('update-0-0-14', () => {
   let initialTree: Tree;
 
   beforeEach(async () => {
-    initialTree = createEmptyWorkspace(Tree.empty());
-
-    initialTree = await runSchematic('lib', { name: 'library' }, initialTree);
+    initialTree = await createTestUILib('library');
 
     const workspaceJson = readJsonInTree(initialTree, '/workspace.json');
     workspaceJson.projects.library.architect = {
