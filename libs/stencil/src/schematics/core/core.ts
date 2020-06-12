@@ -4,6 +4,8 @@ import {
   addPackageWithInit,
   ProjectType,
   updateJsonInTree,
+  updateWorkspace,
+  updateWorkspaceInTree,
 } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
 import {
