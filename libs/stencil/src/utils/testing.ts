@@ -8,6 +8,7 @@ import {
 } from '@nrwl/workspace/testing';
 import { externalSchematic, Rule, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
+import { SupportedStyles } from './typings';
 
 export const SUPPORTED_STYLE_LIBRARIES = [
   'css',
@@ -61,12 +62,15 @@ export function runMigration(migrationName: string, options: any, tree: Tree) {
     .toPromise();
 }
 
-export async function createTestUILib(libName: string): Promise<Tree> {
-  let appTree = Tree.empty();
-  appTree = createEmptyWorkspace(appTree);
+export async function createTestUILib(
+  libName: string,
+  style?: SupportedStyles
+): Promise<Tree> {
+  let appTree = createEmptyWorkspace(Tree.empty());
   appTree = await callRule(
     externalSchematic('@nxext/stencil', 'library', {
       name: libName,
+      style: style,
     }),
     appTree
   );
