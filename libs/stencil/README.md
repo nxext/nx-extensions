@@ -1,5 +1,16 @@
 # @nxext/stencil
 
+## Table of Contents
+
+- [Features](#features)
+- [Usage](#usage)
+- [Project schematics](#project-schematics)
+- [Build](#build)
+- [Test](#test)
+- [Watch](#watch)
+- [Serve](#serve)
+- [Storybook](#storybook)
+
 ## Features
 
 - Generate Ionic/Pwa project
@@ -20,6 +31,8 @@ or
 npm install @nxext/stencil --save
 ```
 
+## Project schematics
+
 Generate your projects:
 
 ```
@@ -37,6 +50,22 @@ each generator is able to generate your template with different style variants. 
 --style=styl
 --style=pcss
 ```
+
+You can generate components with:
+
+```
+nx g @nxext/stencil:component my-comp
+```
+
+or
+
+```
+nx g @nxext/stencil:c my-comp
+```
+
+If [Storybook](#storybook) is configured a `<my-comp>.stories.ts` is generated.
+
+## Build
 
 Build your project:
 
@@ -64,9 +93,13 @@ The configPath is set in the workspace.json/angular.json for each builder. The d
 
 Support for tests. For unit tests run:
 
+## Test
+
 ```
 nx test my-app
 ```
+
+## Watch
 
 Supported flags are:
 
@@ -78,6 +111,8 @@ For e2e test:
 nx e2e my-app
 ```
 
+## Serve
+
 Serve with:
 
 ```
@@ -86,12 +121,28 @@ nx serve my-app
 
 Supported flags are:
 
-| Parameter    | Type   | Default                                                                                  | Description                  |
-| ------------ | ------ | ---------------------------------------------------------------------------------------- | ---------------------------- |
-| --ci         | bool   | false                                                                                    |                              |
-| --debug      | bool   | false                                                                                    |                              |
-| --dev        | bool   | false                                                                                    |                              |
-| --docs       | bool   | false                                                                                    |                              |
-| --port=1234  | number |                                                                                          |                              |
-| --verbose    | bool   | false                                                                                    |                              |
-| --configPath | string | "libs/**_projectname_**/stencil.config.ts" or "apps/**_projectname_**/stencil.config.ts" | relative from workspace root |
+| Parameter    | Type    | Default                                                                                  | Description                  |
+| ------------ | ------- | ---------------------------------------------------------------------------------------- | ---------------------------- |
+| --debug      | bool    | false                                                                                    |                              |
+| --dev        | bool    | false                                                                                    |                              |
+| --docs       | bool    | false                                                                                    |                              |
+| --port=1234  | number  |                                                                                          |                              |
+| --verbose    | bool    | false                                                                                    |                              |
+| --configPath | string  | "libs/**_projectname_**/stencil.config.ts" or "apps/**_projectname_**/stencil.config.ts" | relative from workspace root |
+| --open       | boolean | true                                                                                     |                              |
+
+## Storybook
+
+You can generate Storybook configuration for an individual project with this command:
+
+```
+nx g @nxext/stencil:storybook-configuration my-lib
+```
+
+To run the generated Storybook use:
+
+```
+nx storybook my-lib
+```
+
+_The Storybook startup needs an successful `nx build` cause of the generated loaders to work_
