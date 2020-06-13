@@ -11,16 +11,23 @@ import {
   createStencilProcess,
   parseRunParameters,
 } from '../utils';
+import { StencilServeOptions } from './schema';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
-  options: StencilBuildOptions
+  options: StencilServeOptions
 ): ConfigFlags {
   let runOptions: string[] = [taskCommand];
 
   if (options.port) {
     runOptions.push(`--port ${options.port}`);
   }
+  if (!options.open) {
+    runOptions.push('--no-open');
+  }
+  runOptions.push('--serve');
+  runOptions.push('--watch');
+
   runOptions = parseRunParameters(runOptions, options);
 
   return parseFlags(runOptions);

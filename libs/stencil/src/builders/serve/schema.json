@@ -31,6 +31,10 @@
     },
     "watch": {
       "type": "boolean"
+    },
+    "open": {
+      "type": "boolean",
+      "default": true
     }
   },
   "required": []

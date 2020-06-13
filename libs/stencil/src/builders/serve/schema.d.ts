@@ -1,7 +1,7 @@
 import { JsonObject } from '@angular-devkit/core';
 import { ProjectType } from '@nrwl/workspace';
 
-export interface ServeBuilderSchema extends JsonObject {
+export interface StencilServeOptions extends JsonObject {
   projectType?: ProjectType;
   configPath?: string;
 
@@ -10,4 +10,5 @@ export interface ServeBuilderSchema extends JsonObject {
   docs?: boolean;
   port?: number;
   verbose?: boolean;
+  open?: boolean;
 }

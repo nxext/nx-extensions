@@ -5,6 +5,7 @@ import {
   noop,
   Rule,
   SchematicContext,
+  SchematicsException,
   Tree,
   url,
 } from '@angular-devkit/schematics';
@@ -24,6 +25,13 @@ export interface ComponentSchema {
 function createComponentInProject(options: ComponentSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.debug('adding component to lib');
+
+    if (!/[-]/.test(options.name)) {
+      throw new SchematicsException(stripIndents`
+      "${options.name}" tag must contain a dash (-) to work as a valid web component. Please refer to
+      https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name for more info.
+      `);
+    }
 
     const componentFileName = toFileName(options.name);
     const className = toClassName(options.name);
