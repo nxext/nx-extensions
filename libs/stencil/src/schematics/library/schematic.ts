@@ -78,9 +78,15 @@ function updateTsConfig(options: LibrarySchema): Rule {
       const nxJson = readJsonInTree<NxJson>(host, 'nx.json');
       return updateJsonInTree('tsconfig.json', (json) => {
         const c = json.compilerOptions;
-        delete c.paths[options.name];
+        delete c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`];
         c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [
-          `libs/${options.projectDirectory}`,
+          `libs/${options.projectDirectory}/src/index.ts`,
+        ];
+        delete c.paths[
+          `@${nxJson.npmScope}/${options.projectDirectory}/loader`
+        ];
+        c.paths[`@${nxJson.npmScope}/${options.projectDirectory}/loader`] = [
+          `dist/libs/${options.projectDirectory}/loader`,
         ];
         return json;
       })(host, context);
