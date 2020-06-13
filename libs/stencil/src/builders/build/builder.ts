@@ -21,8 +21,6 @@ function createStencilCompilerOptions(
   if (options.port) {
     runOptions.push(`--port ${options.port}`);
   }
-  runOptions.push('--serve');
-  runOptions.push('--warch');
   runOptions = parseRunParameters(runOptions, options);
 
   return parseFlags(runOptions);

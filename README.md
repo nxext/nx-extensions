@@ -2,7 +2,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-[StencilJS](https://stenciljs.com) plugin for NX (Alpha)
+[StencilJS](https://stenciljs.com) plugin for NX
 
 ## Table of Contents
 
