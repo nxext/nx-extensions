@@ -1,37 +1,18 @@
 import { Tree } from '@angular-devkit/schematics';
 
-import {
-  addDepsToPackageJson,
-  getProjectConfig,
-  readJsonInTree,
-} from '@nrwl/workspace';
-import {
-  callRule,
-  createTestUILib,
-  runSchematic,
-} from '../../../utils/testing';
-import { storybookVersion } from '../../../utils/versions';
+import { getProjectConfig, readJsonInTree } from '@nrwl/workspace';
+import { createTestUILib, runSchematic } from '../../../utils/testing';
 
 describe('init', () => {
   let appTree: Tree;
 
   beforeEach(async () => {
     appTree = Tree.empty();
-    appTree = await createTestUILib('test-ui-lib');
+    appTree = await createTestUILib('test-ui-lib', 'scss');
   });
 
   describe('dependencies for package.json', () => {
     it('should add related dependencies', async () => {
-      const existing = 'existing';
-      const existingVersion = '1.0.0';
-      await callRule(
-        addDepsToPackageJson(
-          { '@nrwl/storybook': storybookVersion, [existing]: existingVersion },
-          { [existing]: existingVersion },
-          false
-        ),
-        appTree
-      );
       const tree = await runSchematic(
         'storybook-init',
         { name: 'test-ui-lib' },
@@ -42,8 +23,6 @@ describe('init', () => {
       // general deps
       expect(packageJson.devDependencies['@nrwl/storybook']).toBeDefined();
       expect(packageJson.dependencies['@nrwl/storybook']).toBeUndefined();
-      expect(packageJson.dependencies[existing]).toBeDefined();
-      expect(packageJson.devDependencies[existing]).toBeDefined();
       expect(
         packageJson.devDependencies['@storybook/addon-knobs']
       ).toBeDefined();
@@ -72,7 +51,7 @@ describe('init', () => {
     );
 
     expect(tree.exists('libs/test-ui-lib/.storybook/addons.js')).toBeTruthy();
-    expect(tree.exists('libs/test-ui-lib/.storybook/config.js')).toBeTruthy();
+    expect(tree.exists('libs/test-ui-lib/.storybook/config.ts')).toBeTruthy();
     expect(
       tree.exists('libs/test-ui-lib/.storybook/tsconfig.json')
     ).toBeTruthy();
@@ -121,5 +100,22 @@ describe('init', () => {
       'libs/test-ui-lib/tsconfig.json'
     );
     expect(tsconfigLibJson.exclude.includes('**/*.stories.ts')).toBeTruthy();
+  });
+
+  it('should update component defaults', async () => {
+    const tree = await runSchematic(
+      'storybook-init',
+      { name: 'test-ui-lib' },
+      appTree
+    );
+    const workspaceJson = readJsonInTree(tree, 'workspace.json');
+    expect(
+      workspaceJson.projects['test-ui-lib'].schematics[
+        '@nxext/stencil:component'
+      ]
+    ).toEqual({
+      style: 'scss',
+      storybook: true,
+    });
   });
 });

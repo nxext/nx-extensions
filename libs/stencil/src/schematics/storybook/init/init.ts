@@ -15,6 +15,7 @@ import {
   offsetFromRoot,
   updateJsonInTree,
   updateWorkspace,
+  updateWorkspaceInTree,
 } from '@nrwl/workspace';
 import {
   applyWithSkipExisting,
@@ -35,6 +36,7 @@ export default function (schema: StorybookConfigureSchema) {
     createLibStorybookDir(schema.name, schema.js),
     configureTsConfig(schema.name),
     addStorybookTask(schema.name),
+    changeStorybookComponentOption(schema.name),
   ]);
 }
 
@@ -191,5 +193,19 @@ function addStorybookTask(projectName: string): Rule {
         },
       },
     });
+  });
+}
+
+function changeStorybookComponentOption(projectName: string): Rule {
+  return updateWorkspaceInTree((json, context) => {
+    const projectConfig = json.projects[projectName];
+    const componentOptions =
+      projectConfig.schematics['@nxext/stencil:component'];
+    json.projects[projectName].schematics['@nxext/stencil:component'] = {
+      ...componentOptions,
+      storybook: true,
+    };
+
+    return json;
   });
 }
