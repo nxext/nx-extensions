@@ -4,8 +4,6 @@ import {
   addPackageWithInit,
   ProjectType,
   updateJsonInTree,
-  updateWorkspace,
-  updateWorkspaceInTree,
 } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
 import {
@@ -94,7 +92,7 @@ export default function <T extends CoreSchema>(options: T): Rule {
     addDependencies(options.appType),
     moveToDevDependencies,
     addStyledModuleDependencies(options),
-    addPackageWithInit('@nrwl/jest'),
+    addPackageWithInit(`@nrwl/jest`),
     addE2eDependencies(options),
     setDefaultCollection('@nxext/stencil'),
   ]);

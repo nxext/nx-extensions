@@ -8,12 +8,7 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
-import {
-  getProjectConfig,
-  toFileName,
-  toClassName,
-  updateWorkspace,
-} from '@nrwl/workspace';
+import { getProjectConfig, toFileName, toClassName } from '@nrwl/workspace';
 import { applyWithSkipExisting } from '../../utils/utils';
 import { join, normalize } from '@angular-devkit/core';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
@@ -23,6 +18,7 @@ export interface ComponentSchema {
   project: string;
   directory?: string;
   storybook: boolean;
+  style?: string;
 }
 
 function createComponentInProject(options: ComponentSchema): Rule {
@@ -46,12 +42,17 @@ function createComponentInProject(options: ComponentSchema): Rule {
       `);
     }
 
+    options = {
+      ...options,
+      ...componentOptions,
+    };
+
     return chain([
       applyWithSkipExisting(url('./files/src'), [
         applyTemplates({
           componentFileName: componentFileName,
           className: className,
-          ...componentOptions,
+          style: options.style,
         }),
         move(
           join(
