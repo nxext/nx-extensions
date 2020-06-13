@@ -60,13 +60,11 @@ describe('component schematic', () => {
 
   it('should generate files with storybook enabled', async () => {
     tree = await runSchematic(
-      'component',
-      {
-        ...options,
-        storybook: true,
-      },
+      'storybook-configuration',
+      { name: projectName, configureCypress: false },
       tree
     );
+    tree = await runSchematic('component', options, tree);
 
     expect(
       tree.exists(
