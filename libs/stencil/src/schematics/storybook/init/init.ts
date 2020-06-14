@@ -118,6 +118,7 @@ function createLibStorybookDir(projectName: string, js: boolean): Rule {
       applyWithSkipExisting(url('./files/lib'), [
         applyTemplates({
           offsetFromRoot: offsetFromRoot(projectConfig.root),
+          projectName,
         }),
         move(projectConfig.root),
         js ? toJS() : noop(),
