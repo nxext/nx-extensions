@@ -1,6 +1,6 @@
 import { configure, addDecorator } from '@storybook/html';
 import { withKnobs } from '@storybook/addon-knobs';
-import { defineCustomElements } from '<%= offsetFromRoot %>../dist/libs/library/loader';
+import { defineCustomElements } from '<%= offsetFromRoot %>../dist/libs/<%= projectName %>/loader';
 
 defineCustomElements();
 
