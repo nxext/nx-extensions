@@ -16,9 +16,9 @@ import { loadConfig } from '@stencil/core/compiler';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
 import { StencilE2EOptions } from '../e2e/schema';
-import { writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
+import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
-import { ensureDirExist, fileExists } from './fileutils';
+import { ensureDirExist } from './fileutils';
 import { normalize } from '@angular-devkit/core';
 
 function getCompilerExecutingPath() {
