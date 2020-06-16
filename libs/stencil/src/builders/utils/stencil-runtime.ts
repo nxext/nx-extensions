@@ -19,7 +19,7 @@ import { StencilE2EOptions } from '../e2e/schema';
 import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist } from './fileutils';
-import { normalize } from '@angular-devkit/core';
+import { normalize, getSystemPath } from '@angular-devkit/core';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
@@ -35,7 +35,7 @@ type ConfigAndPathCollection = {
 function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
   const pkgJson = normalize(`${values.projectRoot}/package.json`);
   if (fileExists(pkgJson)) {
-    copyFile(pkgJson, values.distDir);
+    copyFile(getSystemPath(pkgJson), values.distDir);
   } else {
     const libPackageJson = {
       name: values.projectName,
@@ -50,7 +50,10 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
       files: [normalize('dist/'), normalize('loader/')],
     };
 
-    writeJsonFile(normalize(`${values.distDir}/package.json`), libPackageJson);
+    writeJsonFile(
+      getSystemPath(normalize(`${values.distDir}/package.json`)),
+      libPackageJson
+    );
   }
 }
 

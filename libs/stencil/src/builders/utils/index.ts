@@ -1,4 +1,4 @@
-export { fileExists, ensureDirExist } from './fileutils';
+export { ensureDirExist } from './fileutils';
 export {
   parseRunParameters,
   createStencilProcess,
