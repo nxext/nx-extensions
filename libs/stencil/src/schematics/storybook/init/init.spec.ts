@@ -3,7 +3,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { getProjectConfig, readJsonInTree } from '@nrwl/workspace';
 import { createTestUILib, runSchematic } from '../../../utils/testing';
 
-fdescribe('init', () => {
+describe('init', () => {
   let appTree: Tree;
 
   beforeEach(async () => {
