@@ -43,11 +43,11 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "@nrwl/eslint-plugin-nx": "9.3.0",
-    "@nrwl/jest": "9.3.0",
-    "@nrwl/nx-plugin": "9.3.0",
-    "@nrwl/workspace": "9.3.0",
-    "@nrwl/storybook": "9.3.0",
+    "@nrwl/eslint-plugin-nx": "9.4.2",
+    "@nrwl/jest": "9.4.2",
+    "@nrwl/nx-plugin": "9.4.2",
+    "@nrwl/workspace": "9.4.2",
+    "@nrwl/storybook": "9.4.2",
     "@stencil/core": "1.13.0",
     "@types/jest": "25.2.3",
     "@types/node": "~8.9.4",
@@ -67,7 +67,8 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.1.2",
     "typescript": "3.8.3",
-    "workbox-build": "4.3.1"
+    "workbox-build": "4.3.1",
+    "eslint-plugin-cypress": "^2.10.3"
   },
   "husky": {
     "hooks": {

@@ -11,12 +11,11 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "config": "libs/stencil/.eslintrc",
             "tsConfig": [
               "libs/stencil/tsconfig.lib.json",
               "libs/stencil/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/stencil/**"]
+            "exclude": ["**/node_modules/**", "!libs/stencil/**/*"]
           }
         },
         "test": {

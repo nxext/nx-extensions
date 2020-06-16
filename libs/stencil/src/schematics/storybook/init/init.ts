@@ -17,12 +17,8 @@ import {
   updateWorkspace,
   updateWorkspaceInTree,
 } from '@nrwl/workspace';
-import {
-  applyWithSkipExisting,
-  getNxVersionFromWorkspace,
-  parseJsonAtPath,
-} from '../../../utils/utils';
-import { storybookVersion } from '../../../utils/versions';
+import { applyWithSkipExisting, parseJsonAtPath } from '../../../utils/utils';
+import { nxVersion, storybookVersion } from '../../../utils/versions';
 import { toJS } from '@nrwl/workspace/src/utils/rules/to-js';
 import { join, normalize } from '@angular-devkit/core';
 import { StorybookConfigureSchema } from '../configuration/schema';
@@ -46,7 +42,7 @@ function checkDependenciesInstalled(): Rule {
     const dependencies = {};
 
     // base deps
-    devDependencies['@nrwl/storybook'] = getNxVersionFromWorkspace();
+    devDependencies['@nrwl/storybook'] = nxVersion;
     devDependencies['@storybook/addon-knobs'] = storybookVersion;
     devDependencies['@storybook/html'] = storybookVersion;
 

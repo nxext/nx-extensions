@@ -11,6 +11,8 @@ export const puppeteerType = '^2.0.1';
 
 export const storybookVersion = '5.3.9';
 
+export const nxVersion = '9.4.2';
+
 export const STENCIL_STYLE_PLUGIN_VERSION: {
   [style: string]: string;
 } = {
