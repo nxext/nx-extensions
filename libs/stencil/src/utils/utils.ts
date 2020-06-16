@@ -10,11 +10,10 @@ import {
   Tree,
 } from '@angular-devkit/schematics';
 import {
-  JsonParseMode,
   JsonAstObject,
+  JsonParseMode,
   parseJsonAst,
 } from '@angular-devkit/core';
-import { readPackageJson } from '@nrwl/workspace/src/core/file-utils';
 
 export function calculateStyle(
   style: SupportedStyles | undefined
@@ -61,9 +60,4 @@ export function parseJsonAtPath(tree: Tree, path: string): JsonAstObject {
   }
 
   return json;
-}
-
-export function getNxVersionFromWorkspace(): string {
-  const packageJSON = readPackageJson();
-  return packageJSON.devDependencies['@nrwl/workspace'];
 }
