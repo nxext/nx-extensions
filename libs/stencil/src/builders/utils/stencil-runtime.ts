@@ -19,7 +19,7 @@ import { StencilE2EOptions } from '../e2e/schema';
 import { writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist, fileExists } from './fileutils';
-import { normalize } from '@angular-devkit/core';
+import { normalize, getSystemPath, join } from '@angular-devkit/core';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
@@ -30,12 +30,12 @@ type ConfigAndPathCollection = {
   distDir: string;
   projectRoot: string;
   projectName: string;
+  pkgJson: string;
 };
 
 function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
-  const pkgJson = normalize(`${values.projectRoot}/package.json`);
-  if (fileExists(pkgJson)) {
-    copyFile(pkgJson, values.distDir);
+  if (fileExists(values.pkgJson)) {
+    copyFile(values.pkgJson, values.distDir);
   } else {
     const libPackageJson = {
       name: values.projectName,
@@ -50,7 +50,10 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
       files: [normalize('dist/'), normalize('loader/')],
     };
 
-    writeJsonFile(normalize(`${values.distDir}/package.json`), libPackageJson);
+    writeJsonFile(
+      getSystemPath(join(normalize(values.distDir), `package.json`)),
+      libPackageJson
+    );
   }
 }
 
@@ -118,8 +121,9 @@ async function initializeStencilConfig(
   return {
     projectName: projectName,
     config: loadConfigResults.config,
-    projectRoot: projectRoot,
-    distDir: distDir,
+    projectRoot: getSystemPath(projectRoot),
+    distDir: getSystemPath(distDir),
+    pkgJson: getSystemPath(join(projectRoot, `package.json`)),
   } as ConfigAndPathCollection;
 }
 
@@ -180,16 +184,25 @@ export function createStencilConfig(
         pathVariables
       );
       const devServerConfig = Object.assign(values.config.devServer, {
-        root: normalize(values.config.devServer.root).replace(
-          normalize(values.projectRoot),
-          normalize(values.distDir)
+        root: getSystemPath(
+          normalize(
+            normalize(values.config.devServer.root).replace(
+              normalize(values.projectRoot),
+              normalize(values.distDir)
+            )
+          )
         ),
       });
 
-      values.config.packageJsonFilePath = normalize(
-        values.config.packageJsonFilePath
-      ).replace(normalize(values.projectRoot), normalize(values.distDir));
-      values.config.rootDir = normalize(values.distDir);
+      values.config.packageJsonFilePath = getSystemPath(
+        normalize(
+          normalize(values.config.packageJsonFilePath).replace(
+            normalize(values.projectRoot),
+            normalize(values.distDir)
+          )
+        )
+      );
+      values.config.rootDir = getSystemPath(normalize(values.distDir));
 
       return Object.assign(
         values.config,
