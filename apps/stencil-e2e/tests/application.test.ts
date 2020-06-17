@@ -5,25 +5,22 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { SUPPORTED_STYLE_LIBRARIES } from '../../../libs/stencil/src/utils/testing';
 import { testProject } from '../utils/testing';
 
 describe('e2e', () => {
   describe('generate with style', () => {
     describe('stencil app', () => {
-      SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
-        it(`should create app with ${style}`, async (done) => {
-          const plugin = uniq('app2');
+      it(`should create app`, async (done) => {
+        const plugin = uniq('app2');
 
-          ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
-          await runNxCommandAsync(
-            `generate @nxext/stencil:app ${plugin} --style=${style}`
-          );
+        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        await runNxCommandAsync(
+          `generate @nxext/stencil:app ${plugin} --style='css'`
+        );
 
-          testProject(plugin, style, ProjectType.Application);
+        testProject(plugin, 'css', ProjectType.Application);
 
-          done();
-        });
+        done();
       });
     });
 
@@ -55,19 +52,17 @@ describe('e2e', () => {
     });
 
     describe('stencil app builder', () => {
-      SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
-        it(`should build app with ${style}`, async (done) => {
-          const plugin = uniq('app2');
-          ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
-          await runNxCommandAsync(
-            `generate @nxext/stencil:app ${plugin} --style=${style}`
-          );
+      it(`should build app with scss`, async (done) => {
+        const plugin = uniq('app2');
+        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        await runNxCommandAsync(
+          `generate @nxext/stencil:app ${plugin} --style='scss'`
+        );
 
-          const result = await runNxCommandAsync(`build ${plugin} --dev`);
-          expect(result.stdout).toContain('build finished');
+        const result = await runNxCommandAsync(`build ${plugin} --dev`);
+        expect(result.stdout).toContain('build finished');
 
-          done();
-        });
+        done();
       });
     });
   });

@@ -6,26 +6,23 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { SUPPORTED_STYLE_LIBRARIES } from '../../../libs/stencil/src/utils/testing';
 import { testProject } from '../utils/testing';
 
 describe('e2e', () => {
-  describe('generate with style', () => {
+  describe('generate', () => {
     describe('stencil lib', () => {
-      for (const style of ['css', 'scss', 'less', 'styl', 'pcss']) {
-        it(`should create lib with ${style}`, async (done) => {
-          const plugin = uniq('lib');
+      it(`should create lib with css`, async (done) => {
+        const plugin = uniq('lib');
 
-          ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
-          await runNxCommandAsync(
-            `generate @nxext/stencil:lib ${plugin} --style=${style}`
-          );
+        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        await runNxCommandAsync(
+          `generate @nxext/stencil:lib ${plugin} --style='css'`
+        );
 
-          testProject(plugin, style, ProjectType.Library);
+        testProject(plugin, 'css', ProjectType.Library);
 
-          done();
-        });
-      }
+        done();
+      });
     });
 
     describe('--directory', () => {
@@ -56,19 +53,17 @@ describe('e2e', () => {
     });
 
     describe('stencil lib builder', () => {
-      SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
-        it(`should build app with ${style}`, async (done) => {
-          const plugin = uniq('lib');
-          ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
-          await runNxCommandAsync(
-            `generate @nxext/stencil:lib ${plugin} --style=${style}`
-          );
+      it(`should build app with scss`, async (done) => {
+        const plugin = uniq('lib');
+        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        await runNxCommandAsync(
+          `generate @nxext/stencil:lib ${plugin} --style='scss'`
+        );
 
-          const result = await runNxCommandAsync(`build ${plugin} --dev`);
-          expect(result.stdout).toContain('build finished');
+        const result = await runNxCommandAsync(`build ${plugin} --dev`);
+        expect(result.stdout).toContain('build finished');
 
-          done();
-        });
+        done();
       });
     });
   });
