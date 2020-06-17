@@ -29,8 +29,7 @@
         "cacheableOperations": [
           "build",
           "test",
-          "lint",
-          "e2e"
+          "lint"
         ],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
