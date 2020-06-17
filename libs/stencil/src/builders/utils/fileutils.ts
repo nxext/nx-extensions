@@ -1,24 +1,18 @@
-import { statSync } from 'fs';
 import { createDirectory } from '@nrwl/workspace';
-
-function dirExist(dir: string): boolean {
-  try {
-    return statSync(dir).isDirectory();
-  } catch (err) {
-    return false;
-  }
-}
-
-export function fileExists(filePath: string): boolean {
-  try {
-    return statSync(filePath).isFile();
-  } catch (err) {
-    return false;
-  }
-}
+import { directoryExists } from '@nrwl/workspace/src/utils/fileutils';
+import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils';
+import { getSystemPath, Path } from '@angular-devkit/core';
 
 export function ensureDirExist(dir: string) {
-  if (!dirExist(dir)) {
+  if (!directoryExists(dir)) {
     createDirectory(dir);
   }
+}
+
+export function writeJsonToFile(path: Path, json: any) {
+  writeJsonFile(getSystemPath(path), json);
+}
+
+export function fileExist(path: Path) {
+  return fileExists(getSystemPath(path));
 }
