@@ -1,0 +1,136 @@
+name: @nxext/stencil CI
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+      - name: Get origin master
+        run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+      - uses: actions/cache@v1
+        id: workspace-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+  lint:
+    runs-on: ubuntu-latest
+
+    needs: [setup]
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+      - name: Get origin master
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+      - uses: actions/cache@v1
+        id: workspace-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
+      - name: Run On Master
+        if: github.event_name == 'push'
+        run: yarn affected:lint --base=$GITHUB_REF~1 --head=$GITHUB_SHA --parallel
+      - name: Run on PR
+        if: github.event_name == 'pull_request'
+        run: yarn affected:lint --base=origin/master --head=HEAD --parallel
+
+  build:
+    runs-on: ubuntu-latest
+
+    needs: [setup]
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+      - name: Get origin master
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+      - uses: actions/cache@v1
+        id: workspace-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
+      - name: Run On Master
+        if: github.event_name == 'push'
+        run: yarn affected:build --base=$GITHUB_REF~1 --head=$GITHUB_SHA --parallel
+      - name: Run on PR
+        if: github.event_name == 'pull_request'
+        run: yarn affected:build --base=origin/master --head=HEAD --parallel
+
+  test:
+    runs-on: ubuntu-latest
+
+    needs: [setup]
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
+      - name: Get origin master
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+      - uses: actions/cache@v1
+        id: workspace-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
+      - name: Run On Master
+        if: github.event_name == 'push'
+        run: yarn affected:test --base=$GITHUB_REF~1 --head=$GITHUB_SHA --parallel
+      - name: Run on PR
+        if: github.event_name == 'pull_request'
+        run: yarn affected:test --base=origin/master --head=HEAD --parallel
