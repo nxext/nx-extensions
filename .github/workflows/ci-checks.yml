@@ -163,9 +163,9 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Run On Master
-        if: github.event_name == 'push'
-        run: yarn e2e --base=$GITHUB_REF~1 --head=$GITHUB_SHA --parallel
+      #- name: Run On Master
+      #  if: github.event_name == 'push'
+      #  run: yarn e2e --base=$GITHUB_REF~1 --head=$GITHUB_SHA
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn e2e --base=origin/master --head=HEAD --parallel
+        run: yarn e2e --base=origin/master --head=HEAD
