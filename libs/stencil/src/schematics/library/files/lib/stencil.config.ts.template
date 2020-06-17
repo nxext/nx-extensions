@@ -19,13 +19,15 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader'
+      esmLoaderPath: '../loader',
+      dir: '../../dist/libs/<%= projectName %>/dist',
     },
     {
       type: 'docs-readme'
     },
     {
       type: 'www',
+      dir: '../../dist/libs/<%= projectName %>/www',
       serviceWorker: null // disable service workers
     }
   ],
