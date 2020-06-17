@@ -1,4 +1,4 @@
-name: @nxext/stencil CI
+name: nxext stencil CI
 on:
   pull_request:
     branches: [master]
