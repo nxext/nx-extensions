@@ -63,7 +63,7 @@ jobs:
         run: yarn affected:lint --base=$GITHUB_REF~1 --head=$GITHUB_SHA --parallel
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn affected:lint --base=origin/master --head=HEAD --parallel
+        run: yarn lint stencil --base=origin/master --head=HEAD --parallel
 
   build:
     runs-on: windows-2019
@@ -98,7 +98,7 @@ jobs:
         run: yarn affected:build --base=$GITHUB_REF~1 --head=$GITHUB_SHA --parallel
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn build --base=origin/master --head=HEAD --parallel
+        run: yarn build stencil --base=origin/master --head=HEAD --parallel
 
   test:
     runs-on: windows-2019
@@ -133,7 +133,7 @@ jobs:
         run: yarn affected:test --base=$GITHUB_REF~1 --head=$GITHUB_SHA --parallel
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn test --base=origin/master --head=HEAD --parallel
+        run: yarn test stencil --base=origin/master --head=HEAD --parallel
 
   e2e:
     runs-on: windows-2019
