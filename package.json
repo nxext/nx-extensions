@@ -1,6 +1,6 @@
 {
   "name": "nxext",
-  "version": "0.1.2-2",
+  "version": "0.1.2",
   "license": "MIT",
   "keywords": [
     "nx",
@@ -45,9 +45,10 @@
   "devDependencies": {
     "@nrwl/eslint-plugin-nx": "9.4.2",
     "@nrwl/jest": "9.4.2",
+    "@nrwl/nx-cloud": "^9.3.5",
     "@nrwl/nx-plugin": "9.4.2",
-    "@nrwl/workspace": "9.4.2",
     "@nrwl/storybook": "9.4.2",
+    "@nrwl/workspace": "9.4.2",
     "@stencil/core": "1.13.0",
     "@types/jest": "25.2.3",
     "@types/node": "~8.9.4",
@@ -58,6 +59,7 @@
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-cypress": "^2.10.3",
     "husky": "^4.2.5",
     "jest": "^25.5.4",
     "path": "^0.12.7",
@@ -67,8 +69,7 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.1.2",
     "typescript": "3.8.3",
-    "workbox-build": "4.3.1",
-    "eslint-plugin-cypress": "^2.10.3"
+    "workbox-build": "4.3.1"
   },
   "husky": {
     "hooks": {

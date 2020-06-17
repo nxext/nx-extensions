@@ -16,7 +16,24 @@
     },
     "stencil-e2e": {
       "tags": [],
-      "implicitDependencies": ["stencil"]
+      "implicitDependencies": [
+        "stencil"
+      ]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "accessToken": "NDcwMzQ0MzctYjkzZi00OGEwLWEyZDgtZTgyZGQ5ODkzNjRifHJlYWQ=",
+        "cacheableOperations": [
+          "build",
+          "test",
+          "lint"
+        ],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
     }
   }
 }
