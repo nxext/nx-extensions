@@ -16,10 +16,9 @@ import { loadConfig } from '@stencil/core/compiler';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
 import { StencilE2EOptions } from '../e2e/schema';
-import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
-import { ensureDirExist } from './fileutils';
-import { normalize, getSystemPath } from '@angular-devkit/core';
+import { ensureDirExist, writeJsonToFile, fileExist } from './fileutils';
+import { normalize } from '@angular-devkit/core';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
@@ -34,24 +33,24 @@ type ConfigAndPathCollection = {
 
 function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
   const pkgJson = normalize(`${values.projectRoot}/package.json`);
-  if (fileExists(pkgJson)) {
-    copyFile(getSystemPath(pkgJson), values.distDir);
+  if (fileExist(pkgJson)) {
+    copyFile(pkgJson, values.distDir);
   } else {
     const libPackageJson = {
       name: values.projectName,
-      main: normalize('dist/index.js'),
-      module: normalize('dist/index.mjs'),
-      es2015: normalize('dist/esm/index.mjs'),
-      es2017: normalize('dist/esm/index.mjs'),
-      types: normalize('dist/types/index.d.ts'),
-      collection: normalize('dist/collection/collection-manifest.json'),
-      'collection:main': normalize('dist/collection/index.js'),
-      unpkg: normalize(`dist/${values.projectName}/${values.projectName}.js`),
-      files: [normalize('dist/'), normalize('loader/')],
+      main: 'dist/index.js',
+      module: 'dist/index.mjs',
+      es2015: 'dist/esm/index.mjs',
+      es2017: 'dist/esm/index.mjs',
+      types: 'dist/types/index.d.ts',
+      collection: 'dist/collection/collection-manifest.json',
+      'collection:main': 'dist/collection/index.js',
+      unpkg: `dist/${values.projectName}/${values.projectName}.js`,
+      files: ['dist/', 'loader/'],
     };
 
-    writeJsonFile(
-      getSystemPath(normalize(`${values.distDir}/package.json`)),
+    writeJsonToFile(
+      normalize(`${values.distDir}/package.json`),
       libPackageJson
     );
   }
