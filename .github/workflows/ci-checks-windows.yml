@@ -1,4 +1,4 @@
-name: nxext stencil CI
+name: nxext stencil windows CI
 on:
   pull_request:
     branches: [master]
@@ -7,7 +7,7 @@ on:
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         node-version: [12.x]
@@ -32,7 +32,7 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
   lint:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     needs: [setup]
     strategy:
@@ -66,7 +66,7 @@ jobs:
         run: yarn affected:lint --base=origin/master --head=HEAD --parallel
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     needs: [setup]
 
@@ -101,7 +101,7 @@ jobs:
         run: yarn affected:build --base=origin/master --head=HEAD --parallel
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     needs: [setup]
 
@@ -136,7 +136,7 @@ jobs:
         run: yarn affected:test --base=origin/master --head=HEAD --parallel
 
   e2e:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     needs: [setup]
 
