@@ -1,10 +1,12 @@
 import {
   checkFilesExist,
   ensureNxProject,
+  exists,
   renameFile,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { projectRootDir } from '@nrwl/workspace';
 
 describe('e2e', () => {
   describe('stencil builder', () => {
