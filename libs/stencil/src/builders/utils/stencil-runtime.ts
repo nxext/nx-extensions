@@ -19,7 +19,7 @@ import { StencilE2EOptions } from '../e2e/schema';
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist } from './fileutils';
-import { normalize, getSystemPath, join } from '@angular-devkit/core';
+import { normalize, getSystemPath, join, Path } from '@angular-devkit/core';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
@@ -27,8 +27,8 @@ function getCompilerExecutingPath() {
 
 type ConfigAndPathCollection = {
   config: Config;
-  distDir: string;
-  projectRoot: string;
+  distDir: Path;
+  projectRoot: Path;
   projectName: string;
   pkgJson: string;
 };
@@ -39,19 +39,19 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
   } else {
     const libPackageJson = {
       name: values.projectName,
-      main: normalize('dist/index.js'),
-      module: normalize('dist/index.mjs'),
-      es2015: normalize('dist/esm/index.mjs'),
-      es2017: normalize('dist/esm/index.mjs'),
-      types: normalize('dist/types/index.d.ts'),
-      collection: normalize('dist/collection/collection-manifest.json'),
-      'collection:main': normalize('dist/collection/index.js'),
-      unpkg: normalize(`dist/${values.projectName}/${values.projectName}.js`),
-      files: [normalize('dist/'), normalize('loader/')],
+      main: 'dist/index.js',
+      module: 'dist/index.mjs',
+      es2015: 'dist/esm/index.mjs',
+      es2017: 'dist/esm/index.mjs',
+      types: 'dist/types/index.d.ts',
+      collection: 'dist/collection/collection-manifest.json',
+      'collection:main': 'dist/collection/index.js',
+      unpkg: `dist/${values.projectName}/${values.projectName}.js`,
+      files: ['dist/', 'loader/'],
     };
 
     writeJsonFile(
-      getSystemPath(join(normalize(values.distDir), `package.json`)),
+      getSystemPath(join(values.distDir, `package.json`)),
       libPackageJson
     );
   }
@@ -187,8 +187,8 @@ export function createStencilConfig(
         root: getSystemPath(
           normalize(
             normalize(values.config.devServer.root).replace(
-              normalize(values.projectRoot),
-              normalize(values.distDir)
+              values.projectRoot,
+              values.distDir
             )
           )
         ),
@@ -197,12 +197,12 @@ export function createStencilConfig(
       values.config.packageJsonFilePath = getSystemPath(
         normalize(
           normalize(values.config.packageJsonFilePath).replace(
-            normalize(values.projectRoot),
-            normalize(values.distDir)
+            values.projectRoot,
+            values.distDir
           )
         )
       );
-      values.config.rootDir = getSystemPath(normalize(values.distDir));
+      values.config.rootDir = getSystemPath(values.distDir);
 
       return Object.assign(
         values.config,
