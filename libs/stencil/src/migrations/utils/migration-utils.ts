@@ -1,11 +1,11 @@
 export function isStencilProjectBuilder(
-  project,
+  project: any,
   builderCommand: string
 ): boolean {
   const buildArchitect =
     project.architect && project.architect[builderCommand]
       ? project.architect[builderCommand]
-      : null;
+      : {};
   return (
     buildArchitect &&
     buildArchitect.builder === `@nxext/stencil:${builderCommand}`
