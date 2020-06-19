@@ -165,7 +165,7 @@ jobs:
             ${{ runner.os }}-${{ matrix.node-version }}-workspace-
       - name: Run On Master
         if: github.event_name == 'push'
-        run: yarn affected:e2e --base=$GITHUB_REF~1 --head=$GITHUB_SHA
+        run: yarn e2e --base=origin/master --head=HEAD
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn affected:e2e --base=origin/master --head=HEAD
+        run: yarn e2e --base=origin/master --head=HEAD
