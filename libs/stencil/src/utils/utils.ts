@@ -14,6 +14,7 @@ import {
   JsonParseMode,
   parseJsonAst,
 } from '@angular-devkit/core';
+import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 
 export function calculateStyle(
   style: SupportedStyles | undefined

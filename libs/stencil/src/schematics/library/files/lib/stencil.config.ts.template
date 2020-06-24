@@ -1,17 +1,4 @@
 import { Config } from '@stencil/core';
-<% if (style == 'scss') { %>
-import { sass } from '@stencil/sass';
-<% } %>
-<% if (style == 'less') { %>
-import { less } from '@stencil/less';
-<% } %>
-<% if (style == 'pcss') { %>
-import { postcss } from '@stencil/postcss';
-import autoprefixer from 'autoprefixer'
-<% } %>
-<% if (style == 'styl') { %>
-import { stylus } from '@stencil/stylus';
-<% } %>
 
 export const config: Config = {
   namespace: '<%= projectName %>',
