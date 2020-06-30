@@ -27,14 +27,11 @@ import { LibrarySchema } from './schema';
 import core, { addBuilderToTarget } from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
-import { calculateStyle } from '../../utils/utils';
+import { calculateStyle, getLibsDir } from '../../utils/utils';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 
-/**
- * Depending on your needs, you can change this to either `Library` or `Application`
- */
 const projectType = ProjectType.Library;
 
 function normalizeOptions(options: CoreSchema): LibrarySchema {
@@ -84,13 +81,13 @@ function updateTsConfig(options: LibrarySchema): Rule {
         const c = json.compilerOptions;
         delete c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`];
         c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [
-          `libs/${options.projectDirectory}/src/index.ts`,
+          `${getLibsDir()}/${options.projectDirectory}/src/index.ts`,
         ];
         delete c.paths[
           `@${nxJson.npmScope}/${options.projectDirectory}/loader`
         ];
         c.paths[`@${nxJson.npmScope}/${options.projectDirectory}/loader`] = [
-          `dist/libs/${options.projectDirectory}/loader`,
+          `dist/${getLibsDir()}/${options.projectDirectory}/loader`,
         ];
         return json;
       })(host, context);
@@ -103,7 +100,7 @@ function updateStencilConfig(options: LibrarySchema): Rule {
     const srcDir = options.directory
       ? `${options.directory}/${options.name}`
       : options.name;
-    const stencilConfigPath = `libs/${srcDir}/stencil.config.ts`;
+    const stencilConfigPath = `${getLibsDir()}/${srcDir}/stencil.config.ts`;
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath

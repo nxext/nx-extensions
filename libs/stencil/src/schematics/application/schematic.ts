@@ -23,9 +23,6 @@ import core, { addBuilderToTarget } from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { calculateStyle } from '../../utils/utils';
 
-/**
- * Depending on your needs, you can change this to either `Library` or `Application`
- */
 const projectType = ProjectType.Application;
 
 function normalizeOptions(options: CoreSchema): ApplicationSchema {
