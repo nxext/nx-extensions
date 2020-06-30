@@ -4,12 +4,12 @@ import { join } from 'path';
 import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { AddOutputtargetSchematicSchema } from './add-outputtarget';
-import { log } from 'util';
+import { toFileName } from '@nrwl/workspace';
 
 describe('schematics:add-outputtarget', () => {
   let tree: Tree;
   const projectName = uniq('testproject');
-  const options = { projectName: projectName };
+  const options = { projectName: projectName, publishable: false };
   const reactOptions: AddOutputtargetSchematicSchema = {
     ...options,
     outputType: 'react',
@@ -56,19 +56,22 @@ describe('schematics:add-outputtarget', () => {
       expect(indexFile.toString()).toMatch(
         `export * from './generated/components';`
       );
-
-      //log(tree.read(`libs/${projectName}/stencil.config.ts`).toString());
     });
   });
 
-  /*describe('using angular', () => {
-    it('should run successfully', async () => {
-      await expect(testRunner.runSchematicAsync(
-        'add-outputtarget',
-        angularOptions,
-        tree
-        ).toPromise()
-      ).resolves.not.toThrowError();
+  describe('using angular', () => {
+    it('should generate default angular library', async () => {
+      tree = await testRunner
+        .runSchematicAsync('add-outputtarget', angularOptions, tree)
+        .toPromise();
+
+      expect(
+        tree.exists(
+          `libs/${projectName}-angular/src/lib/${toFileName(
+            projectName + '-angular'
+          )}.module.ts`
+        )
+      ).toBeTruthy();
     });
-  });*/
+  });
 });

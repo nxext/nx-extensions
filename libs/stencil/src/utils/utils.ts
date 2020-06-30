@@ -14,7 +14,6 @@ import {
   JsonParseMode,
   parseJsonAst,
 } from '@angular-devkit/core';
-import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 
 export function calculateStyle(
   style: SupportedStyles | undefined
@@ -61,4 +60,12 @@ export function parseJsonAtPath(tree: Tree, path: string): JsonAstObject {
   }
 
   return json;
+}
+
+export function getLibsDir(): string {
+  return 'libs';
+}
+
+export function getAppsDir(): string {
+  return 'apps';
 }

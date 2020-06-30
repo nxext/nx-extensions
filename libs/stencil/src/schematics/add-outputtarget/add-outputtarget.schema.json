@@ -18,6 +18,11 @@
       "enum": ["angular", "react"],
       "description": "Select what kind of library you want to generate.",
       "x-prompt": "Which framework do you use?"
+    },
+    "publishable": {
+      "type": "boolean",
+      "description": "",
+      "default": false
     }
   },
   "required": ["projectName", "outputType"]
