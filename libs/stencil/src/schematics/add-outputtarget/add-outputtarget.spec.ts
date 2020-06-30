@@ -60,7 +60,7 @@ describe('schematics:add-outputtarget', () => {
   });
 
   describe('using angular', () => {
-    it('should generate default angular library', async () => {
+    xit('should generate default angular library', async () => {
       tree = await testRunner
         .runSchematicAsync('add-outputtarget', angularOptions, tree)
         .toPromise();
