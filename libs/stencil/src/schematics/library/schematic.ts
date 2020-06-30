@@ -12,6 +12,7 @@ import {
 import {
   addProjectToNxJsonInTree,
   formatFiles,
+  insert,
   names,
   NxJson,
   offsetFromRoot,
@@ -27,6 +28,9 @@ import core, { addBuilderToTarget } from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
+import { readTsSourceFileFromTree } from '../../utils/ast-utils';
+import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
+import * as ts from 'typescript';
 
 /**
  * Depending on your needs, you can change this to either `Library` or `Application`
@@ -94,6 +98,73 @@ function updateTsConfig(options: LibrarySchema): Rule {
   ]);
 }
 
+function updateStencilConfig(options: LibrarySchema): Rule {
+  return (tree: Tree) => {
+    const srcDir = options.directory
+      ? `${options.directory}/${options.name}`
+      : options.name;
+    const stencilConfigPath = `libs/${srcDir}/stencil.config.ts`;
+    const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
+      tree,
+      stencilConfigPath
+    );
+
+    const changes = [];
+    if (options.style === 'scss') {
+      changes.push(
+        insertImport(
+          stencilConfigSource,
+          stencilConfigPath,
+          'sass',
+          '@stencil/sass'
+        )
+      );
+    }
+    if (options.style === 'less') {
+      changes.push(
+        insertImport(
+          stencilConfigSource,
+          stencilConfigPath,
+          'less',
+          '@stencil/less'
+        )
+      );
+    }
+    if (options.style === 'postcss') {
+      changes.push(
+        insertImport(
+          stencilConfigSource,
+          stencilConfigPath,
+          'postcss',
+          '@stencil/postcss'
+        )
+      );
+      changes.push(
+        insertImport(
+          stencilConfigSource,
+          stencilConfigPath,
+          'autoprefixer',
+          'autoprefixer'
+        )
+      );
+    }
+    if (options.style === 'styl') {
+      changes.push(
+        insertImport(
+          stencilConfigSource,
+          stencilConfigPath,
+          'stylus',
+          '@stencil/stylus'
+        )
+      );
+    }
+
+    insert(tree, stencilConfigPath, changes);
+
+    return tree;
+  };
+}
+
 export default function (options: CoreSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
@@ -141,5 +212,6 @@ export default function (options: CoreSchema): Rule {
     }),
     addFiles(normalizedOptions),
     updateTsConfig(normalizedOptions),
+    updateStencilConfig(normalizedOptions),
   ]);
 }

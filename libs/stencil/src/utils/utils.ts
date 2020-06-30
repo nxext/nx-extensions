@@ -61,3 +61,11 @@ export function parseJsonAtPath(tree: Tree, path: string): JsonAstObject {
 
   return json;
 }
+
+export function getLibsDir(): string {
+  return 'libs';
+}
+
+export function getAppsDir(): string {
+  return 'apps';
+}
