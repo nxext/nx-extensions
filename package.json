@@ -11,10 +11,10 @@
   ],
   "repository": {
     "type": "github",
-    "url": "https://github.com/DominikPieper/nx-extensions"
+    "url": "https://github.com/nxext/nx-extensions"
   },
   "bugs": {
-    "url": "https://github.com/DominikPieper/nx-extensions/issues"
+    "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "scripts": {
     "nx": "nx",
