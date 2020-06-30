@@ -12,6 +12,7 @@ import {
 import {
   addProjectToNxJsonInTree,
   formatFiles,
+  insert,
   names,
   NxJson,
   offsetFromRoot,
@@ -28,7 +29,7 @@ import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
-import { insert, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
+import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 
 /**
@@ -98,8 +99,11 @@ function updateTsConfig(options: LibrarySchema): Rule {
 }
 
 function updateStencilConfig(options: LibrarySchema): Rule {
-  return (tree, context) => {
-    const stencilConfigPath = `libs/${options.projectName}/stencil.config.ts`;
+  return (tree: Tree) => {
+    const srcDir = options.directory
+      ? `${options.directory}/${options.name}`
+      : options.name;
+    const stencilConfigPath = `libs/${srcDir}/stencil.config.ts`;
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath
