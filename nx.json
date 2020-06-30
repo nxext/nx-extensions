@@ -1,5 +1,9 @@
 {
   "npmScope": "nxext",
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
+  },
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {
