@@ -16,9 +16,6 @@
   "bugs": {
     "url": "https://github.com/DominikPieper/nx-extensions/issues"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
   "scripts": {
     "nx": "nx",
     "start": "nx serve",

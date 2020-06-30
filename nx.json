@@ -1,5 +1,8 @@
 {
   "npmScope": "nxext",
+  "affected": {
+    "defaultBase": "master"
+  },
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {
@@ -35,5 +38,9 @@
         "showUsageWarnings": true
       }
     }
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
   }
 }
