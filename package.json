@@ -16,6 +16,9 @@
   "bugs": {
     "url": "https://github.com/DominikPieper/nx-extensions/issues"
   },
+  "affected": {
+    "defaultBase": "master"
+  },
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
@@ -43,12 +46,12 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "@nrwl/eslint-plugin-nx": "9.4.5",
-    "@nrwl/jest": "9.4.5",
+    "@nrwl/eslint-plugin-nx": "9.5.0",
+    "@nrwl/jest": "9.5.0",
     "@nrwl/nx-cloud": "^9.3.5",
-    "@nrwl/nx-plugin": "9.4.5",
-    "@nrwl/storybook": "9.4.5",
-    "@nrwl/workspace": "9.4.5",
+    "@nrwl/nx-plugin": "9.5.0",
+    "@nrwl/storybook": "9.5.0",
+    "@nrwl/workspace": "9.5.0",
     "@stencil/core": "1.13.0",
     "@types/jest": "25.2.3",
     "@types/node": "~8.9.4",
