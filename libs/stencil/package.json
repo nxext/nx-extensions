@@ -28,6 +28,8 @@
   "peerDependencies": {
     "@angular-devkit/schematics": "^9.0.0",
     "@nrwl/storybook": "^9.3.0",
+    "@nrwl/react": "^9.3.0",
+    "@nrwl/angular": "^9.3.0",
     "@stencil/core": "^1.13.0"
   },
   "ng-update": {

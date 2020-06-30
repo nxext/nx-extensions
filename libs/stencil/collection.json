@@ -53,6 +53,12 @@
       "description": "Add a component to a ui library",
       "aliases": ["c"],
       "hidden": false
+    },
+    "add-outputtarget": {
+      "factory": "./src/schematics/add-outputtarget/add-outputtarget",
+      "schema": "./src/schematics/add-outputtarget/add-outputtarget.schema.json",
+      "description": "Add react/angular libraries for the component library",
+      "hidden": false
     }
   }
 }
