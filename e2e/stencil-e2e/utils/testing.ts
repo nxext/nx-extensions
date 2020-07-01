@@ -13,22 +13,22 @@ export function testProject(
       // prettier-ignore
       expect(() => {
         checkFilesExist(
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/global/app.${style}`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/global/app.ts`)
+          normalize(`libs/${projectName}/src/global/app.${style}`),
+          normalize(`libs/${projectName}/src/global/app.ts`)
         ),
           checkFilesExist(
-            normalize(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/tsconfig.json`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-home/app-home.e2e.ts`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-home/app-home.tsx`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-home/app-home.${style}`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-profile/app-profile.tsx`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-profile/app-profile.spec.ts`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-profile/app-profile.${style}`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-root/app-root.e2e.ts`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-root/app-root.tsx`),
-            normalize(`${projectRootDir(projectType)}/${projectName}/src/components/app-root/app-root.${style}`)
+            normalize(`libs/${projectName}/stencil.config.ts`),
+            normalize(`libs/${projectName}/tsconfig.json`),
+            normalize(`libs/${projectName}/src/components/app-home/app-home.e2e.ts`),
+            normalize(`libs/${projectName}/src/components/app-home/app-home.tsx`),
+            normalize(`libs/${projectName}/src/components/app-home/app-home.${style}`),
+            normalize(`libs/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
+            normalize(`libs/${projectName}/src/components/app-profile/app-profile.tsx`),
+            normalize(`libs/${projectName}/src/components/app-profile/app-profile.spec.ts`),
+            normalize(`libs/${projectName}/src/components/app-profile/app-profile.${style}`),
+            normalize(`libs/${projectName}/src/components/app-root/app-root.e2e.ts`),
+            normalize(`libs/${projectName}/src/components/app-root/app-root.tsx`),
+            normalize(`libs/${projectName}/src/components/app-root/app-root.${style}`)
           );
       }).not.toThrow();
     }
@@ -37,14 +37,14 @@ export function testProject(
       // prettier-ignore
       expect(() => {
         checkFilesExist(
-          normalize(`${projectRootDir(projectType)}/${projectName}/stencil.config.ts`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/tsconfig.json`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/components/my-component/my-component.e2e.ts`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/components/my-component/my-component.spec.ts`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/components/my-component/my-component.tsx`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/components/my-component/my-component.${style}`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/utils/utils.spec.ts`),
-          normalize(`${projectRootDir(projectType)}/${projectName}/src/utils/utils.ts`)
+          normalize(`libs/${projectName}/stencil.config.ts`),
+          normalize(`libs/${projectName}/tsconfig.json`),
+          normalize(`libs/${projectName}/src/components/my-component/my-component.e2e.ts`),
+          normalize(`libs/${projectName}/src/components/my-component/my-component.spec.ts`),
+          normalize(`libs/${projectName}/src/components/my-component/my-component.tsx`),
+          normalize(`libs/${projectName}/src/components/my-component/my-component.${style}`),
+          normalize(`libs/${projectName}/src/utils/utils.spec.ts`),
+          normalize(`libs/${projectName}/src/utils/utils.ts`)
         );
       }).not.toThrow();
     }
@@ -54,21 +54,21 @@ export function testProject(
       workspaceJson.projects[projectName].architect.build.options.configPath
     ).toBe(
       normalize(
-        `${projectRootDir(projectType)}/${projectName}/stencil.config.ts`
+        `libs/${projectName}/stencil.config.ts`
       )
     );
     expect(
       workspaceJson.projects[projectName].architect.test.options.configPath
     ).toBe(
       normalize(
-        `${projectRootDir(projectType)}/${projectName}/stencil.config.ts`
+        `libs/${projectName}/stencil.config.ts`
       )
     );
     expect(
       workspaceJson.projects[projectName].architect.e2e.options.configPath
     ).toBe(
       normalize(
-        `${projectRootDir(projectType)}/${projectName}/stencil.config.ts`
+        `libs/${projectName}/stencil.config.ts`
       )
     );
   } else {
@@ -76,22 +76,22 @@ export function testProject(
       // prettier-ignore
       expect(() => {
         checkFilesExist(
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/global/app.${style}`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/global/app.ts`)
+          normalize(`libs/${subDirectory}/${projectName}/src/global/app.${style}`),
+          normalize(`libs/${subDirectory}/${projectName}/src/global/app.ts`)
         ),
           checkFilesExist(
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/stencil.config.ts`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/tsconfig.json`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-home/app-home.e2e.ts`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-home/app-home.tsx`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-home/app-home.${style}`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-profile/app-profile.tsx`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-profile/app-profile.spec.ts`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-profile/app-profile.${style}`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-root/app-root.e2e.ts`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-root/app-root.tsx`),
-            normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/app-root/app-root.${style}`)
+            normalize(`libs/${subDirectory}/${projectName}/stencil.config.ts`),
+            normalize(`libs/${subDirectory}/${projectName}/tsconfig.json`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-home/app-home.e2e.ts`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-home/app-home.tsx`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-home/app-home.${style}`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.tsx`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.spec.ts`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.${style}`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-root/app-root.e2e.ts`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-root/app-root.tsx`),
+            normalize(`libs/${subDirectory}/${projectName}/src/components/app-root/app-root.${style}`)
           );
       }).not.toThrow();
     }
@@ -100,14 +100,14 @@ export function testProject(
       // prettier-ignore
       expect(() => {
         checkFilesExist(
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/stencil.config.ts`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/tsconfig.json`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/my-component/my-component.e2e.ts`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/my-component/my-component.spec.ts`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/my-component/my-component.tsx`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/components/my-component/my-component.${style}`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/utils/utils.spec.ts`),
-          normalize(`${projectRootDir(projectType)}/${subDirectory}/${projectName}/src/utils/utils.ts`)
+          normalize(`libs/${subDirectory}/${projectName}/stencil.config.ts`),
+          normalize(`libs/${subDirectory}/${projectName}/tsconfig.json`),
+          normalize(`libs/${subDirectory}/${projectName}/src/components/my-component/my-component.e2e.ts`),
+          normalize(`libs/${subDirectory}/${projectName}/src/components/my-component/my-component.spec.ts`),
+          normalize(`libs/${subDirectory}/${projectName}/src/components/my-component/my-component.tsx`),
+          normalize(`libs/${subDirectory}/${projectName}/src/components/my-component/my-component.${style}`),
+          normalize(`libs/${subDirectory}/${projectName}/src/utils/utils.spec.ts`),
+          normalize(`libs/${subDirectory}/${projectName}/src/utils/utils.ts`)
         );
       }).not.toThrow();
     }
