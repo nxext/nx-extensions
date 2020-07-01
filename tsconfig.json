@@ -17,7 +17,7 @@
     "baseUrl": ".",
     //"strict": true,
     "paths": {
-      "@nxext/stencil": ["libs/stencil/src/index.ts"]
+      "@nxext/stencil": ["packages/stencil/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

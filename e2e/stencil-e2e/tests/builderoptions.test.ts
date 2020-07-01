@@ -12,7 +12,7 @@ describe('e2e', () => {
   describe('stencil builder', () => {
     it(`should build with custom stencil config naming`, async (done) => {
       const plugin = uniq('library');
-      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
 
       await runNxCommandAsync(
         `generate @nxext/stencil:lib ${plugin} --style=scss`
@@ -34,7 +34,7 @@ describe('e2e', () => {
 
     it(`should build with custom configPath`, async (done) => {
       const plugin = uniq('library');
-      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
 
       await runNxCommandAsync(
         `generate @nxext/stencil:lib ${plugin} --style=scss`
@@ -50,7 +50,7 @@ describe('e2e', () => {
 
     it('should build with --directory', async (done) => {
       const plugin = uniq('app');
-      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
         `generate @nxext/stencil:application ${plugin} --directory subdir --style=css`
       );
