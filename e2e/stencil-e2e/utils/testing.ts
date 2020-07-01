@@ -13,22 +13,22 @@ export function testProject(
       // prettier-ignore
       expect(() => {
         checkFilesExist(
-          normalize(`libs/${projectName}/src/global/app.${style}`),
-          normalize(`libs/${projectName}/src/global/app.ts`)
+          normalize(`apps/${projectName}/src/global/app.${style}`),
+          normalize(`apps/${projectName}/src/global/app.ts`)
         ),
           checkFilesExist(
-            normalize(`libs/${projectName}/stencil.config.ts`),
-            normalize(`libs/${projectName}/tsconfig.json`),
-            normalize(`libs/${projectName}/src/components/app-home/app-home.e2e.ts`),
-            normalize(`libs/${projectName}/src/components/app-home/app-home.tsx`),
-            normalize(`libs/${projectName}/src/components/app-home/app-home.${style}`),
-            normalize(`libs/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
-            normalize(`libs/${projectName}/src/components/app-profile/app-profile.tsx`),
-            normalize(`libs/${projectName}/src/components/app-profile/app-profile.spec.ts`),
-            normalize(`libs/${projectName}/src/components/app-profile/app-profile.${style}`),
-            normalize(`libs/${projectName}/src/components/app-root/app-root.e2e.ts`),
-            normalize(`libs/${projectName}/src/components/app-root/app-root.tsx`),
-            normalize(`libs/${projectName}/src/components/app-root/app-root.${style}`)
+            normalize(`apps/${projectName}/stencil.config.ts`),
+            normalize(`apps/${projectName}/tsconfig.json`),
+            normalize(`apps/${projectName}/src/components/app-home/app-home.e2e.ts`),
+            normalize(`apps/${projectName}/src/components/app-home/app-home.tsx`),
+            normalize(`apps/${projectName}/src/components/app-home/app-home.${style}`),
+            normalize(`apps/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
+            normalize(`apps/${projectName}/src/components/app-profile/app-profile.tsx`),
+            normalize(`apps/${projectName}/src/components/app-profile/app-profile.spec.ts`),
+            normalize(`apps/${projectName}/src/components/app-profile/app-profile.${style}`),
+            normalize(`apps/${projectName}/src/components/app-root/app-root.e2e.ts`),
+            normalize(`apps/${projectName}/src/components/app-root/app-root.tsx`),
+            normalize(`apps/${projectName}/src/components/app-root/app-root.${style}`)
           );
       }).not.toThrow();
     }
