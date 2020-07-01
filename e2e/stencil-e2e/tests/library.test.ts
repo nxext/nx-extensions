@@ -14,7 +14,7 @@ describe('e2e', () => {
       it(`should create lib with css`, async (done) => {
         const plugin = uniq('lib');
 
-        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
         await runNxCommandAsync(
           `generate @nxext/stencil:lib ${plugin} --style='css'`
         );
@@ -28,7 +28,7 @@ describe('e2e', () => {
     describe('--directory', () => {
       it('should create src in the specified directory', async (done) => {
         const plugin = uniq('lib');
-        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
         await runNxCommandAsync(
           `generate @nxext/stencil:lib ${plugin} --directory subdir --style=css`
         );
@@ -42,7 +42,7 @@ describe('e2e', () => {
     describe('--tags', () => {
       it('should add tags to nx.json', async (done) => {
         const plugin = uniq('lib');
-        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
         await runNxCommandAsync(
           `generate @nxext/stencil:lib ${plugin} --tags e2etag,e2ePackage --style=css`
         );
@@ -55,7 +55,7 @@ describe('e2e', () => {
     describe('stencil lib builder', () => {
       it(`should build app with scss`, async (done) => {
         const plugin = uniq('lib');
-        ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+        ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
         await runNxCommandAsync(
           `generate @nxext/stencil:lib ${plugin} --style='scss'`
         );

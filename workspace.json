@@ -2,8 +2,8 @@
   "version": 1,
   "projects": {
     "stencil": {
-      "root": "libs/stencil",
-      "sourceRoot": "libs/stencil/src",
+      "root": "packages/stencil",
+      "sourceRoot": "packages/stencil/src",
       "projectType": "library",
       "schematics": {},
       "architect": {
@@ -12,61 +12,61 @@
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "libs/stencil/tsconfig.lib.json",
-              "libs/stencil/tsconfig.spec.json"
+              "packages/stencil/tsconfig.lib.json",
+              "packages/stencil/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/stencil/**/*"]
+            "exclude": ["**/node_modules/**", "!packages/stencil/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/stencil/jest.config.js",
-            "tsConfig": "libs/stencil/tsconfig.spec.json",
+            "jestConfig": "packages/stencil/jest.config.js",
+            "tsConfig": "packages/stencil/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
         "build": {
           "builder": "@nrwl/node:package",
           "options": {
-            "outputPath": "dist/libs/stencil",
-            "tsConfig": "libs/stencil/tsconfig.lib.json",
-            "packageJson": "libs/stencil/package.json",
-            "main": "libs/stencil/src/index.ts",
+            "outputPath": "dist/packages/stencil",
+            "tsConfig": "packages/stencil/tsconfig.lib.json",
+            "packageJson": "packages/stencil/package.json",
+            "main": "packages/stencil/src/index.ts",
             "assets": [
-              "libs/stencil/*.md",
+              "packages/stencil/*.md",
               {
-                "input": "./libs/stencil/src",
+                "input": "./packages/stencil/src",
                 "glob": "**/*.!(ts)",
                 "output": "./src"
               },
               {
-                "input": "./libs/stencil",
+                "input": "./packages/stencil",
                 "glob": "collection.json",
                 "output": "."
               },
               {
-                "input": "./libs/stencil",
+                "input": "./packages/stencil",
                 "glob": "builders.json",
                 "output": "."
               },
               {
-                "input": "./libs/stencil",
+                "input": "./packages/stencil",
                 "glob": "migrations.json",
                 "output": "."
               },
               {
-                "input": "./libs/stencil",
+                "input": "./packages/stencil",
                 "glob": "**/files/lib/.storybook/**",
                 "output": "/"
               },
               {
-                "input": "./libs/stencil",
+                "input": "./packages/stencil",
                 "glob": "**/files/root/.storybook/**",
                 "output": "/"
               },
               {
-                "input": "./libs/stencil",
+                "input": "./packages/stencil",
                 "glob": "migrations.json",
                 "output": "."
               }
@@ -77,17 +77,17 @@
     },
     "stencil-e2e": {
       "projectType": "application",
-      "root": "apps/stencil-e2e",
-      "sourceRoot": "apps/stencil-e2e/src",
+      "root": "e2e/stencil-e2e",
+      "sourceRoot": "e2e/stencil-e2e/src",
       "architect": {
         "e2e": {
           "builder": "@nrwl/nx-plugin:e2e",
           "options": {
             "target": "stencil:build",
             "npmPackageName": "@nxext/stencil",
-            "pluginOutputPath": "dist/libs/stencil",
-            "jestConfig": "apps/stencil-e2e/jest.config.js",
-            "tsSpecConfig": "apps/stencil-e2e/tsconfig.spec.json"
+            "pluginOutputPath": "dist/packages/stencil",
+            "jestConfig": "e2e/stencil-e2e/jest.config.js",
+            "tsSpecConfig": "e2e/stencil-e2e/tsconfig.spec.json"
           }
         }
       }

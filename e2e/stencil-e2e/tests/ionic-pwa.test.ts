@@ -12,7 +12,7 @@ describe('e2e-pwa', () => {
     it(`should create pwa with css`, async (done) => {
       const plugin = uniq('pwa');
 
-      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
         `generate @nxext/stencil:pwa ${plugin} --style='css'`
       );
@@ -26,7 +26,7 @@ describe('e2e-pwa', () => {
   describe('--directory', () => {
     it('should create src in the specified directory', async (done) => {
       const plugin = uniq('pwa');
-      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
         `generate @nxext/stencil:pwa ${plugin} --directory subdir --style=css`
       );
@@ -40,22 +40,16 @@ describe('e2e-pwa', () => {
   describe('--tags', () => {
     it('should add tags to nx.json', async (done) => {
       const plugin = uniq('pwa');
-      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
         `generate @nxext/stencil:pwa ${plugin} --tags e2etag,e2ePackage --style=css`
       );
 
       expect(() => {
         checkFilesExist(
-          `${projectRootDir(
-            ProjectType.Application
-          )}/${plugin}/src/components/app-root/app-root.e2e.ts`,
-          `${projectRootDir(
-            ProjectType.Application
-          )}/${plugin}/src/components/app-profile/app-profile.e2e.ts`,
-          `${projectRootDir(
-            ProjectType.Application
-          )}/${plugin}/src/components/app-home/app-home.e2e.ts`
+          `apps/${plugin}/src/components/app-root/app-root.e2e.ts`,
+          `apps/${plugin}/src/components/app-profile/app-profile.e2e.ts`,
+          `apps/${plugin}/src/components/app-home/app-home.e2e.ts`
         );
       }).not.toThrow();
 
@@ -66,7 +60,7 @@ describe('e2e-pwa', () => {
   describe('stencil app builder', () => {
     it(`should bould pwa app with scss`, async (done) => {
       const plugin = uniq('pwa');
-      ensureNxProject('@nxext/stencil', 'dist/libs/stencil');
+      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
         `generate @nxext/stencil:pwa ${plugin} --style='scss'`
       );

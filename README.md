@@ -14,7 +14,7 @@
 
 ## Install and usage
 
-See the plugin [documentation](libs/stencil/README.md)
+See the plugin [documentation](packages/stencil/README.md)
 
 ## Maintainers
 
