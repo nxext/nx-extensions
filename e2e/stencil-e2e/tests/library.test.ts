@@ -33,7 +33,7 @@ describe('e2e', () => {
           `generate @nxext/stencil:lib ${plugin} --directory subdir --style=css`
         );
         expect(() =>
-          checkFilesExist(`packages/subdir/${plugin}/stencil.config.ts`)
+          checkFilesExist(`libs/subdir/${plugin}/stencil.config.ts`)
         ).not.toThrow();
         done();
       });
