@@ -82,22 +82,22 @@ export function testProject(
       // prettier-ignore
       expect(() => {
         checkFilesExist(
-          normalize(`libs/${subDirectory}/${projectName}/src/global/app.${style}`),
-          normalize(`libs/${subDirectory}/${projectName}/src/global/app.ts`)
+          normalize(`apps/${subDirectory}/${projectName}/src/global/app.${style}`),
+          normalize(`apps/${subDirectory}/${projectName}/src/global/app.ts`)
         ),
           checkFilesExist(
-            normalize(`libs/${subDirectory}/${projectName}/stencil.config.ts`),
-            normalize(`libs/${subDirectory}/${projectName}/tsconfig.json`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-home/app-home.e2e.ts`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-home/app-home.tsx`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-home/app-home.${style}`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.tsx`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.spec.ts`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-profile/app-profile.${style}`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-root/app-root.e2e.ts`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-root/app-root.tsx`),
-            normalize(`libs/${subDirectory}/${projectName}/src/components/app-root/app-root.${style}`)
+            normalize(`apps/${subDirectory}/${projectName}/stencil.config.ts`),
+            normalize(`apps/${subDirectory}/${projectName}/tsconfig.json`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-home/app-home.e2e.ts`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-home/app-home.tsx`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-home/app-home.${style}`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-profile/app-profile.e2e.ts`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-profile/app-profile.tsx`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-profile/app-profile.spec.ts`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-profile/app-profile.${style}`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-root/app-root.e2e.ts`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-root/app-root.tsx`),
+            normalize(`apps/${subDirectory}/${projectName}/src/components/app-root/app-root.${style}`)
           );
       }).not.toThrow();
     }

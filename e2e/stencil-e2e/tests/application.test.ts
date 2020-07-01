@@ -14,9 +14,7 @@ describe('e2e', () => {
         const plugin = uniq('app2');
 
         ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-        await runNxCommandAsync(
-          `generate @nxext/stencil:app ${plugin} --style='css'`
-        );
+        await runNxCommandAsync(`generate @nxext/stencil:app ${plugin} --style='css'`);
 
         testProject(plugin, 'css', ProjectType.Application);
 
