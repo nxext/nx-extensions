@@ -47,15 +47,9 @@ describe('e2e-pwa', () => {
 
       expect(() => {
         checkFilesExist(
-          `${projectRootDir(
-            ProjectType.Application
-          )}/${plugin}/src/components/app-root/app-root.e2e.ts`,
-          `${projectRootDir(
-            ProjectType.Application
-          )}/${plugin}/src/components/app-profile/app-profile.e2e.ts`,
-          `${projectRootDir(
-            ProjectType.Application
-          )}/${plugin}/src/components/app-home/app-home.e2e.ts`
+          `apps/${plugin}/src/components/app-root/app-root.e2e.ts`,
+          `apps/${plugin}/src/components/app-profile/app-profile.e2e.ts`,
+          `apps/${plugin}/src/components/app-home/app-home.e2e.ts`
         );
       }).not.toThrow();
 

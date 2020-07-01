@@ -54,21 +54,27 @@ export function testProject(
       workspaceJson.projects[projectName].architect.build.options.configPath
     ).toBe(
       normalize(
-        `libs/${projectName}/stencil.config.ts`
+        `${projectRootDir(
+          projectType
+        )}/${projectName}/stencil.config.ts`
       )
     );
     expect(
       workspaceJson.projects[projectName].architect.test.options.configPath
     ).toBe(
       normalize(
-        `libs/${projectName}/stencil.config.ts`
+        `${projectRootDir(
+          projectType
+        )}/${projectName}/stencil.config.ts`
       )
     );
     expect(
       workspaceJson.projects[projectName].architect.e2e.options.configPath
     ).toBe(
       normalize(
-        `libs/${projectName}/stencil.config.ts`
+        `${projectRootDir(
+          projectType
+        )}/${projectName}/stencil.config.ts`
       )
     );
   } else {
