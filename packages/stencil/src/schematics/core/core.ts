@@ -56,22 +56,6 @@ function addE2eDependencies<T extends CoreSchema>(options: T): Rule {
   return noop();
 }
 
-export function addBuilderToTarget(
-  targetCollection,
-  builder: string,
-  projectType: ProjectType,
-  options: LibrarySchema | PWASchema | ApplicationSchema
-) {
-  targetCollection.add({
-    name: builder,
-    builder: `@nxext/stencil:${builder}`,
-    options: {
-      projectType,
-      configPath: `${options.projectRoot}/stencil.config.ts`,
-    },
-  });
-}
-
 const moveToDevDependencies = updateJsonInTree(
   'package.json',
   (packageJson) => {

@@ -1,12 +1,4 @@
-import {
-  apply,
-  applyTemplates,
-  chain,
-  mergeWith,
-  move,
-  Rule,
-  url,
-} from '@angular-devkit/schematics';
+import { apply, applyTemplates, chain, mergeWith, move, Rule, url } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
@@ -15,13 +7,13 @@ import {
   projectRootDir,
   ProjectType,
   toFileName,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
 import { PWASchema } from './schema';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
-import { calculateStyle } from '../../utils/utils';
-import core, { addBuilderToTarget } from '../core/core';
+import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
+import core from '../core/core';
 
 const projectType = ProjectType.Application;
 
@@ -81,27 +73,8 @@ export default function (options: CoreSchema): Rule {
           },
         },
       }).targets;
-      addBuilderToTarget(
+      addDefaultBuilders(
         targetCollection,
-        'build',
-        projectType,
-        normalizedOptions
-      );
-      addBuilderToTarget(
-        targetCollection,
-        'test',
-        projectType,
-        normalizedOptions
-      );
-      addBuilderToTarget(
-        targetCollection,
-        'e2e',
-        projectType,
-        normalizedOptions
-      );
-      addBuilderToTarget(
-        targetCollection,
-        'serve',
         projectType,
         normalizedOptions
       );
