@@ -1,4 +1,4 @@
-export const nxextVersion = '1.0.0.beta0';
+export const nxextVersion = '1.0.0-beta0';
 export const stencilVersion = '^1.14.0';
 export const stencilRouterVersion = '^1.0.1';
 export const ionicVersion = '^5.1.1';
