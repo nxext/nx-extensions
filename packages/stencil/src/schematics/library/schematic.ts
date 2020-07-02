@@ -7,7 +7,7 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  url,
+  url
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
@@ -21,13 +21,13 @@ import {
   readJsonInTree,
   toFileName,
   updateJsonInTree,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
 import { LibrarySchema } from './schema';
-import core, { addBuilderToTarget } from '../core/core';
+import core from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
-import { calculateStyle, getLibsDir } from '../../utils/utils';
+import { addDefaultBuilders, calculateStyle, getLibsDir } from '../../utils/utils';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
@@ -179,27 +179,8 @@ export default function (options: CoreSchema): Rule {
           },
         },
       }).targets;
-      addBuilderToTarget(
+      addDefaultBuilders(
         targetCollection,
-        'build',
-        projectType,
-        normalizedOptions
-      );
-      addBuilderToTarget(
-        targetCollection,
-        'test',
-        projectType,
-        normalizedOptions
-      );
-      addBuilderToTarget(
-        targetCollection,
-        'e2e',
-        projectType,
-        normalizedOptions
-      );
-      addBuilderToTarget(
-        targetCollection,
-        'serve',
         projectType,
         normalizedOptions
       );
