@@ -1,20 +1,8 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics';
-import {
-  addDepsToPackageJson,
-  addPackageWithInit,
-  ProjectType,
-  updateJsonInTree,
-} from '@nrwl/workspace';
+import { addDepsToPackageJson, addPackageWithInit, updateJsonInTree } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
-import {
-  AppType,
-  PROJECT_TYPE_DEPENDENCIES,
-  STYLE_PLUGIN_DEPENDENCIES,
-} from '../../utils/typings';
+import { AppType, PROJECT_TYPE_DEPENDENCIES, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { CoreSchema } from './schema';
-import { LibrarySchema } from '../library/schema';
-import { PWASchema } from '../ionic-pwa/schema';
-import { ApplicationSchema } from '../application/schema';
 
 function addDependencies(appType: AppType): Rule {
   const projectDependency = PROJECT_TYPE_DEPENDENCIES[appType];
@@ -54,22 +42,6 @@ function addE2eDependencies<T extends CoreSchema>(options: T): Rule {
   }
 
   return noop();
-}
-
-export function addBuilderToTarget(
-  targetCollection,
-  builder: string,
-  projectType: ProjectType,
-  options: LibrarySchema | PWASchema | ApplicationSchema
-) {
-  targetCollection.add({
-    name: builder,
-    builder: `@nxext/stencil:${builder}`,
-    options: {
-      projectType,
-      configPath: `${options.projectRoot}/stencil.config.ts`,
-    },
-  });
 }
 
 const moveToDevDependencies = updateJsonInTree(

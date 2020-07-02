@@ -14,6 +14,10 @@ import {
   JsonParseMode,
   parseJsonAst,
 } from '@angular-devkit/core';
+import { ProjectType } from '@nrwl/workspace';
+import { LibrarySchema } from '../schematics/library/schema';
+import { PWASchema } from '../schematics/ionic-pwa/schema';
+import { ApplicationSchema } from '../schematics/application/schema';
 
 export function calculateStyle(
   style: SupportedStyles | undefined
@@ -43,6 +47,57 @@ export function applyWithSkipExisting(source: Source, rules: Rule[]): Rule {
 
     return rule(tree, _context);
   };
+}
+
+export function addAllDefaultBuilders(
+  targetCollection,
+  projectType: ProjectType,
+  options: LibrarySchema | PWASchema | ApplicationSchema
+) {
+  addBuilderToTarget(
+    targetCollection,
+    'build',
+    projectType,
+    options
+  );
+  addBuilderToTarget(
+    targetCollection,
+    'test',
+    projectType,
+    options
+  );
+  addBuilderToTarget(
+    targetCollection,
+    'e2e',
+    projectType,
+    options
+  );
+  targetCollection.add({
+    name: 'serve',
+    builder: `@nxext/stencil:build`,
+    options: {
+      projectType,
+      configPath: `${options.projectRoot}/stencil.config.ts`,
+      watch: true,
+      serve: true,
+    },
+  });
+}
+
+export function addBuilderToTarget(
+  targetCollection,
+  builder: string,
+  projectType: ProjectType,
+  options: LibrarySchema | PWASchema | ApplicationSchema
+) {
+  targetCollection.add({
+    name: builder,
+    builder: `@nxext/stencil:${builder}`,
+    options: {
+      projectType,
+      configPath: `${options.projectRoot}/stencil.config.ts`,
+    },
+  });
 }
 
 export function parseJsonAtPath(tree: Tree, path: string): JsonAstObject {
