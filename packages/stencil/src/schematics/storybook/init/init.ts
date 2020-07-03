@@ -37,7 +37,7 @@ export default function (schema: StorybookConfigureSchema) {
 }
 
 function checkDependenciesInstalled(): Rule {
-  return (host: Tree, context: SchematicContext): Rule => {
+  return (): Rule => {
     const devDependencies = {};
     const dependencies = {};
 
@@ -194,7 +194,7 @@ function addStorybookTask(projectName: string): Rule {
 }
 
 function changeStorybookComponentOption(projectName: string): Rule {
-  return updateWorkspaceInTree((json, context) => {
+  return updateWorkspaceInTree((json) => {
     const projectConfig = json.projects[projectName];
     const componentOptions =
       projectConfig.schematics['@nxext/stencil:component'];

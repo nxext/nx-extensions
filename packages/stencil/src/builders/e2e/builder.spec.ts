@@ -1,6 +1,5 @@
 import { Architect, BuilderOutput } from '@angular-devkit/architect';
 import { ProjectType } from '@nrwl/workspace';
-import { MockBuilderContext } from '@nrwl/workspace/testing';
 import { mockContext } from '../../utils/testing';
 import * as stencilUtils from '../utils';
 import { Observable, of } from 'rxjs';
@@ -9,17 +8,16 @@ import { switchMap } from 'rxjs/operators';
 
 describe('Command Runner Test', () => {
   let architect: Architect;
-  let context: MockBuilderContext;
 
   beforeEach(async () => {
-    [architect, context] = await mockContext();
+    [architect] = await mockContext();
     jest
       .spyOn(stencilUtils, 'createStencilConfig')
       .mockImplementation(() => of({}));
     jest.spyOn(stencilUtils, 'createStencilProcess').mockImplementation(
       () =>
         function (source: Observable<Config>): Observable<BuilderOutput> {
-          return source.pipe(switchMap((config) => of({ success: true })));
+          return source.pipe(switchMap(() => of({ success: true })));
         }
     );
   });

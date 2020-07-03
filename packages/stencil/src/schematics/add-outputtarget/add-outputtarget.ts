@@ -3,7 +3,6 @@ import {
   externalSchematic,
   noop,
   Rule,
-  SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
 import { Schema as ReactLibrarySchema } from '@nrwl/react/src/schematics/library/schema';
@@ -97,7 +96,7 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
         '@stencil/angular-output-target': angularOutputTargetVersion,
       }
     ),
-    (tree: Tree, context: SchematicContext) => {
+    (tree: Tree) => {
       const angularModuleFilename = toFileName(
         `${options.projectName}-angular`
       );
@@ -141,7 +140,7 @@ function addToOutputTargetToConfig(
   projectName: string,
   outputType: OutputTargetType
 ): Rule {
-  return (tree, context) => {
+  return (tree: Tree) => {
     const stencilProjectConfig = getProjectConfig(tree, projectName);
 
     const stencilConfigPath = `${stencilProjectConfig.root}/stencil.config.ts`;
