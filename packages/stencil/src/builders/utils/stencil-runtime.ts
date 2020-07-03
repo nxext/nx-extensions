@@ -19,7 +19,7 @@ import { StencilE2EOptions } from '../e2e/schema';
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist } from './fileutils';
-import { normalize, getSystemPath, join, Path } from '@angular-devkit/core';
+import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
