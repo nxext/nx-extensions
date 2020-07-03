@@ -7,7 +7,6 @@ import {
   SUPPORTED_STYLE_LIBRARIES,
 } from '../../utils/testing';
 import { SupportedStyles } from '../../utils/typings';
-import { uniq } from '@nrwl/nx-plugin/testing';
 
 describe('update-0-1-0', () => {
   let initialTree: Tree;

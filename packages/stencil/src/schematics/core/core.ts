@@ -2,7 +2,6 @@ import { chain, noop, Rule } from '@angular-devkit/schematics';
 import {
   addDepsToPackageJson,
   addPackageWithInit,
-  ProjectType,
   updateJsonInTree,
 } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
@@ -12,9 +11,6 @@ import {
   STYLE_PLUGIN_DEPENDENCIES,
 } from '../../utils/typings';
 import { CoreSchema } from './schema';
-import { LibrarySchema } from '../library/schema';
-import { PWASchema } from '../ionic-pwa/schema';
-import { ApplicationSchema } from '../application/schema';
 
 function addDependencies(appType: AppType): Rule {
   const projectDependency = PROJECT_TYPE_DEPENDENCIES[appType];

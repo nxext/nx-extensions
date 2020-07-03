@@ -1,6 +1,9 @@
 import { createDirectory } from '@nrwl/workspace';
-import { directoryExists } from '@nrwl/workspace/src/utils/fileutils';
-import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils';
+import {
+  directoryExists,
+  fileExists,
+  writeJsonFile,
+} from '@nrwl/workspace/src/utils/fileutils';
 import { getSystemPath, Path } from '@angular-devkit/core';
 
 export function ensureDirExist(dir: string) {

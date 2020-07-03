@@ -54,24 +54,9 @@ export function addDefaultBuilders(
   projectType: ProjectType,
   options: LibrarySchema | PWASchema | ApplicationSchema
 ) {
-  addBuilderToTarget(
-    targetCollection,
-    'build',
-    projectType,
-    options
-  );
-  addBuilderToTarget(
-    targetCollection,
-    'test',
-    projectType,
-    options
-  );
-  addBuilderToTarget(
-    targetCollection,
-    'e2e',
-    projectType,
-    options
-  );
+  addBuilderToTarget(targetCollection, 'build', projectType, options);
+  addBuilderToTarget(targetCollection, 'test', projectType, options);
+  addBuilderToTarget(targetCollection, 'e2e', projectType, options);
   targetCollection.add({
     name: 'serve',
     builder: `@nxext/stencil:build`,
@@ -79,7 +64,7 @@ export function addDefaultBuilders(
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
       serve: true,
-      watch: true
+      watch: true,
     },
   });
 }

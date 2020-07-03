@@ -9,7 +9,7 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
-import { getProjectConfig, toFileName, toClassName } from '@nrwl/workspace';
+import { getProjectConfig, toClassName, toFileName } from '@nrwl/workspace';
 import { applyWithSkipExisting } from '../../utils/utils';
 import { join, normalize } from '@angular-devkit/core';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
