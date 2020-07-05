@@ -67,8 +67,9 @@ function calculateOutputTargetPathVariables(
         outputTarget[pathVar] != null &&
         !(outputTarget[pathVar] as string).endsWith('src')
       ) {
+        const origPath = getSystemPath(normalize((outputTarget[pathVar] as string)));
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: (outputTarget[pathVar] as string).replace(
+          [pathVar]: origPath.replace(
             values.projectRoot,
             values.distDir
           ),
@@ -114,9 +115,9 @@ async function initializeStencilConfig(
   });
 
   const { workspaceRoot } = context;
-  const projectName = context.target.project;
-  const distDir = normalize(`${workspaceRoot}/dist/${metadata.root}`);
-  const projectRoot = normalize(`${workspaceRoot}/${metadata.root}`);
+  const projectName: string = context.target.project;
+  const distDir: Path = normalize(`${workspaceRoot}/dist/${metadata.root}`);
+  const projectRoot: Path = normalize(`${workspaceRoot}/${metadata.root}`);
 
   return {
     projectName: projectName,
@@ -137,6 +138,7 @@ export function createStencilConfig(
   ) => ConfigFlags
 ): Observable<Config> {
   if (!options?.configPath) {
+    // remove later
     throw new Error(
       'ConfigPath not set. Please use --configPath or update your project builder in workspace.json/angular.json accordingly!'
     );
