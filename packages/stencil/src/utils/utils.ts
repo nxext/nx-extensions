@@ -18,6 +18,7 @@ import { ProjectType } from '@nrwl/workspace';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../schematics/ionic-pwa/schema';
 import { ApplicationSchema } from '../schematics/application/schema';
+import ignore from 'ignore';
 
 export function calculateStyle(
   style: SupportedStyles | undefined
@@ -83,6 +84,25 @@ export function addBuilderToTarget(
       configPath: `${options.projectRoot}/stencil.config.ts`,
     },
   });
+}
+
+export function addToGitignore(path: string): Rule {
+  return (tree: Tree) => {
+    if (!tree.exists('.gitignore')) {
+      return;
+    }
+
+    const ig = ignore();
+    ig.add(tree.read('.gitignore').toString('utf-8'));
+
+    if (!ig.ignores(path)) {
+      const content = `${tree
+        .read('.gitignore')!
+        .toString('utf-8')
+        .trimRight()}\n${path}\n`;
+      tree.overwrite('.gitignore', content);
+    }
+  };
 }
 
 export function parseJsonAtPath(tree: Tree, path: string): JsonAstObject {

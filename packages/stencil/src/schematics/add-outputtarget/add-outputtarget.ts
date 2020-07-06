@@ -19,7 +19,7 @@ import {
   insertImport,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { formatFiles, getNpmScope, toFileName } from '@nrwl/workspace';
-import { getLibsDir } from '../../utils/utils';
+import { addToGitignore, getLibsDir } from '../../utils/utils';
 import {
   angularOutputTargetVersion,
   reactOutputTargetVersion,
@@ -45,9 +45,10 @@ export default function (options: AddOutputtargetSchematicSchema): Rule {
 }
 
 function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
+  const reactProjectName = `${options.projectName}-react`;
   return chain([
     externalSchematic('@nrwl/react', 'library', {
-      name: `${options.projectName}-react`,
+      name: reactProjectName,
       style: 'css',
       publishable: options.publishable,
     } as ReactLibrarySchema),
@@ -59,33 +60,35 @@ function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
     ),
     (tree) => {
       tree.delete(
-        `${getLibsDir()}/${options.projectName}-react/src/lib/${
+        `${getLibsDir()}/${reactProjectName}/src/lib/${
           options.projectName
         }-react.tsx`
       );
       tree.delete(
-        `${getLibsDir()}/${options.projectName}-react/src/lib/${
+        `${getLibsDir()}/${reactProjectName}/src/lib/${
           options.projectName
         }-react.spec.tsx`
       );
       tree.delete(
-        `${getLibsDir()}/${options.projectName}-react/src/lib/${
+        `${getLibsDir()}/${reactProjectName}/src/lib/${
           options.projectName
         }-react.css`
       );
 
       tree.overwrite(
-        `${getLibsDir()}/${options.projectName}-react/src/index.ts`,
+        `${getLibsDir()}/${reactProjectName}/src/index.ts`,
         `export * from './generated/components';`
       );
     },
+    addToGitignore(`${getLibsDir()}/${reactProjectName}/**/generated`),
   ]);
 }
 
 function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
+  const angularProjectName = `${options.projectName}-angular`;
   return chain([
     externalSchematic('@nrwl/angular', 'library', {
-      name: `${options.projectName}-angular`,
+      name: angularProjectName,
       style: 'css',
       entryFile: 'index',
       skipPackageJson: !options.publishable,
@@ -97,12 +100,8 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
       }
     ),
     (tree: Tree) => {
-      const angularModuleFilename = toFileName(
-        `${options.projectName}-angular`
-      );
-      const angularModulePath = `${getLibsDir()}/${
-        options.projectName
-      }-angular/src/lib/${angularModuleFilename}.module.ts`;
+      const angularModuleFilename = toFileName(angularProjectName);
+      const angularModulePath = `${getLibsDir()}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
       const angularModuleSource = readTsSourceFileFromTree(
         tree,
         angularModulePath
@@ -133,6 +132,7 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
         ),
       ]);
     },
+    addToGitignore(`${getLibsDir()}/${angularProjectName}/**/generated`),
   ]);
 }
 
