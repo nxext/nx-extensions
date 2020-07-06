@@ -115,9 +115,9 @@ async function initializeStencilConfig(
   });
 
   const { workspaceRoot } = context;
-  const projectName = context.target.project;
-  const distDir = normalize(`${workspaceRoot}/dist/${metadata.root}`);
-  const projectRoot = normalize(`${workspaceRoot}/${metadata.root}`);
+  const projectName: string = context.target.project;
+  const distDir: Path = normalize(`${workspaceRoot}/dist/${metadata.root}`);
+  const projectRoot: Path = normalize(`${workspaceRoot}/${metadata.root}`);
 
   return {
     projectName: projectName,
@@ -158,7 +158,6 @@ export function createStencilConfig(
         copyOrCreatePackageJson(values);
       }
 
-      log(JSON.stringify(values));
       return values.config;
     }),
     map((values: ConfigAndPathCollection) => {
