@@ -4,7 +4,7 @@ import {
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 import { testProject } from '../utils/testing';
 
@@ -29,8 +29,12 @@ describe('e2e', () => {
       it(`should generate react lib`, async (done) => {
         const plugin = uniq('lib');
         ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-        await runNxCommandAsync(`generate @nxext/stencil:lib ${plugin} --style='css'`);
-        await runNxCommandAsync(`generate @nxext/stencil:add-outputtarget ${plugin} --outputType='react'`);
+        await runNxCommandAsync(
+          `generate @nxext/stencil:lib ${plugin} --style='css'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/stencil:add-outputtarget ${plugin} --outputType='react'`
+        );
 
         expect(() =>
           checkFilesExist(`libs/${plugin}-react/src/index.ts`)
@@ -42,8 +46,12 @@ describe('e2e', () => {
       it(`should generate angular lib`, async (done) => {
         const plugin = uniq('lib');
         ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-        await runNxCommandAsync(`generate @nxext/stencil:lib ${plugin} --style='css'`);
-        await runNxCommandAsync(`generate @nxext/stencil:add-outputtarget ${plugin} --outputType='angular'`);
+        await runNxCommandAsync(
+          `generate @nxext/stencil:lib ${plugin} --style='css'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/stencil:add-outputtarget ${plugin} --outputType='angular'`
+        );
 
         expect(() =>
           checkFilesExist(

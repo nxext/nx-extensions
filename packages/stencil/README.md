@@ -154,6 +154,7 @@ nx storybook my-lib
 _The Storybook startup needs an successful `nx build` cause of the generated loaders to work_
 
 ## React and Angular
+
 You're able to generate angular/react libraries for yout stencil libraries using stencils outputtargets:
 
 ```
