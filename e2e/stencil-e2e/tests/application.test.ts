@@ -1,11 +1,13 @@
 import { ProjectType } from '@nrwl/workspace';
 import {
+  checkFilesExist,
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq,
+  uniq
 } from '@nrwl/nx-plugin/testing';
 import { testProject } from '../utils/testing';
+import { normalize } from '@angular-devkit/core';
 
 describe('e2e', () => {
   describe('generate with style', () => {
@@ -61,6 +63,12 @@ describe('e2e', () => {
 
         const result = await runNxCommandAsync(`build ${plugin} --dev`);
         expect(result.stdout).toContain('build finished');
+        expect(() => {
+          checkFilesExist(
+            normalize(`dist/apps/${plugin}/www/index.html`),
+            normalize(`dist/apps/${plugin}/www/host.config.json`)
+          )
+        }).not.toThrow();
 
         done();
       });
