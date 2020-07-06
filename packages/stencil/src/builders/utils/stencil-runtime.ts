@@ -138,6 +138,7 @@ export function createStencilConfig(
   ) => ConfigFlags
 ): Observable<Config> {
   if (!options?.configPath) {
+    // remove later
     throw new Error(
       'ConfigPath not set. Please use --configPath or update your project builder in workspace.json/angular.json accordingly!'
     );
