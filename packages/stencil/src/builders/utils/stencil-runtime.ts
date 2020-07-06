@@ -20,7 +20,6 @@ import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist } from './fileutils';
 import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
-import { log } from 'util';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
@@ -68,8 +67,9 @@ function calculateOutputTargetPathVariables(
         outputTarget[pathVar] != null &&
         !(outputTarget[pathVar] as string).endsWith('src')
       ) {
+        const origPath = getSystemPath(normalize((outputTarget[pathVar] as string)));
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: (outputTarget[pathVar] as string).replace(
+          [pathVar]: origPath.replace(
             values.projectRoot,
             values.distDir
           ),
