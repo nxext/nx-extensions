@@ -20,6 +20,7 @@ import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist } from './fileutils';
 import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
+import { log } from 'util';
 
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
@@ -157,6 +158,7 @@ export function createStencilConfig(
         copyOrCreatePackageJson(values);
       }
 
+      log(JSON.stringify(values));
       return values.config;
     }),
     map((values: ConfigAndPathCollection) => {
