@@ -33,7 +33,7 @@ describe('e2e', () => {
           `generate @nxext/stencil:lib ${plugin} --style='css'`
         );
         await runNxCommandAsync(
-          `generate @nxext/stencil:add-outputtarget ${plugin} --outputType='react'`
+          `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=react`
         );
 
         expect(() =>
@@ -50,7 +50,7 @@ describe('e2e', () => {
           `generate @nxext/stencil:lib ${plugin} --style='css'`
         );
         await runNxCommandAsync(
-          `generate @nxext/stencil:add-outputtarget ${plugin} --outputType='angular'`
+          `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
         );
 
         expect(() =>
