@@ -37,6 +37,9 @@
     },
     "watch": {
       "type": "boolean"
+    },
+    "prerender": {
+      "type": "boolean"
     }
   },
   "required": []

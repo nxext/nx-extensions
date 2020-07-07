@@ -160,4 +160,19 @@ describe('Command Runner Build', () => {
 
     expect(output.success).toBe(true);
   });
+
+  it('can run with prerender flag', async () => {
+    const options = {
+      projectType: ProjectType.Application,
+      prerender: true,
+    };
+    const runned = await architect.scheduleBuilder(
+      '@nxext/stencil:build',
+      options
+    );
+    const output = await runned.result;
+    await runned.stop();
+
+    expect(output.success).toBe(true);
+  });
 });
