@@ -14,4 +14,5 @@ export interface StencilBuildOptions extends JsonObject {
   serve?: boolean;
   verbose?: boolean;
   watch?: boolean;
+  prerender?: boolean;
 }
