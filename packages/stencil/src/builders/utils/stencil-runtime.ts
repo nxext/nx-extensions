@@ -67,11 +67,12 @@ function calculateOutputTargetPathVariables(
         outputTarget[pathVar] != null &&
         !(outputTarget[pathVar] as string).endsWith('src')
       ) {
-        const origPath = getSystemPath(
-          normalize(outputTarget[pathVar] as string)
-        );
+        const origPath = getSystemPath(normalize((outputTarget[pathVar] as string)));
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(values.projectRoot, values.distDir),
+          [pathVar]: origPath.replace(
+            values.projectRoot,
+            values.distDir
+          ),
         });
       }
     });
@@ -203,6 +204,9 @@ export function createStencilConfig(
           )
         )
       );
+      if(values.config.flags.task === 'build') {
+        values.config.rootDir = getSystemPath(values.distDir);
+      }
 
       return Object.assign(
         values.config,
