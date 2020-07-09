@@ -204,7 +204,9 @@ export function createStencilConfig(
           )
         )
       );
-      values.config.rootDir = getSystemPath(values.distDir);
+      if(values.config.flags.task === 'build') {
+        values.config.rootDir = getSystemPath(values.distDir);
+      }
 
       return Object.assign(
         values.config,
