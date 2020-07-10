@@ -20,7 +20,7 @@ describe('<%= componentFileName %>', () => {
 
   it('renders with values', async () => {
     const {root} = await newSpecPage({
-      components: [<<%= className %>],
+      components: [<%= className %>],
       html: `<<%= componentFileName %> first="Stencil" last="'Don't call me a framework' JS"></<%= componentFileName %>>`
     });
     expect(root).toEqualHtml(`
