@@ -1,3 +1,9 @@
+---
+**NOTE**
+
+Don't update to stencil 1.16 or higher yet. Due to compiler api changes it doesn't work yet. I'm working on a fix
+---
+
 # @nxext/stencil
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
