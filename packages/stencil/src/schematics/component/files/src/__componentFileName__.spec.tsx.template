@@ -5,7 +5,7 @@ describe('<%= componentFileName %>', () => {
   it('renders', async () => {
     const {root} = await newSpecPage({
       components: [<%= className %>],
-      html: '<%= componentFileName %>></<%= componentFileName %>>'
+      html: '<<%= componentFileName %>></<%= componentFileName %>>'
     });
     expect(root).toEqualHtml(`
       <<%= componentFileName %>>
