@@ -39,5 +39,8 @@
         "showUsageWarnings": true
       }
     }
+  },
+  "affected": {
+    "defaultBase": "master"
   }
 }

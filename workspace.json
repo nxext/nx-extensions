@@ -22,7 +22,6 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "packages/stencil/jest.config.js",
-            "tsConfig": "packages/stencil/tsconfig.spec.json",
             "passWithNoTests": true
           }
         },
