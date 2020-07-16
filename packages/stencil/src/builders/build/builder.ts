@@ -1,7 +1,7 @@
 import {
   BuilderContext,
   BuilderOutput,
-  createBuilder
+  createBuilder,
 } from '@angular-devkit/architect';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {
   createStencilConfig,
   createStencilProcess,
-  parseRunParameters
+  parseRunParameters,
 } from '../utils';
 
 function createStencilCompilerOptions(
@@ -37,9 +37,7 @@ export function runBuilder(
     options,
     context,
     createStencilCompilerOptions
-  ).pipe(
-    createStencilProcess()
-  );
+  ).pipe(createStencilProcess());
 }
 
 export default createBuilder(runBuilder);
