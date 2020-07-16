@@ -4,7 +4,7 @@ import {
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 import { testProject } from '../utils/testing';
 import { normalize } from '@angular-devkit/core';
@@ -67,7 +67,7 @@ describe('e2e', () => {
           checkFilesExist(
             normalize(`dist/apps/${plugin}/www/index.html`),
             normalize(`dist/apps/${plugin}/www/host.config.json`)
-          )
+          );
         }).not.toThrow();
 
         done();

@@ -2,17 +2,16 @@ import {
   CompilerSystem,
   Config,
   ConfigFlags,
-  createNodeLogger,
-  createNodeSystem,
   Logger,
   runTask,
   TaskCommand,
 } from '@stencil/core/cli';
+import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
+import { loadConfig } from '@stencil/core/compiler';
 import { StencilBuildOptions } from '../build/schema';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { from, Observable, of } from 'rxjs';
 import { copyFile, ProjectType } from '@nrwl/workspace';
-import { loadConfig } from '@stencil/core/compiler';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
 import { StencilE2EOptions } from '../e2e/schema';
@@ -21,6 +20,14 @@ import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist } from './fileutils';
 import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
 
+const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
+  await sys.dynamicImport(sys.getCompilerExecutingPath());
+
+  return (globalThis as any).stencil;
+};
+
+type CoreCompiler = typeof import('@stencil/core/compiler');
+
 function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
 }
@@ -28,6 +35,7 @@ function getCompilerExecutingPath() {
 type ConfigAndPathCollection = {
   config: Config;
   distDir: Path;
+  coreCompiler: CoreCompiler;
   projectRoot: Path;
   projectName: string;
   pkgJson: string;
@@ -67,12 +75,11 @@ function calculateOutputTargetPathVariables(
         outputTarget[pathVar] != null &&
         !(outputTarget[pathVar] as string).endsWith('src')
       ) {
-        const origPath = getSystemPath(normalize((outputTarget[pathVar] as string)));
+        const origPath = getSystemPath(
+          normalize(outputTarget[pathVar] as string)
+        );
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(
-            values.projectRoot,
-            values.distDir
-          ),
+          [pathVar]: origPath.replace(values.projectRoot, values.distDir),
         });
       }
     });
@@ -90,11 +97,11 @@ async function initializeStencilConfig(
     options: StencilBuildOptions
   ) => ConfigFlags
 ) {
-  const configFilePath = options?.configPath;
+  const configFilePath = options.configPath;
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
-  const logger: Logger = createNodeLogger(process);
-  const sys: CompilerSystem = createNodeSystem(process);
+  const logger: Logger = createNodeLogger({ process });
+  const sys: CompilerSystem = createNodeSys({ process });
   const metadata = await context.getProjectMetadata(context.target);
 
   if (sys.getCompilerExecutingPath == null) {
@@ -102,17 +109,20 @@ async function initializeStencilConfig(
   }
 
   if (flags.ci) {
-    logger.colors = false;
+    logger.enableColors(false);
   }
 
   const loadConfigResults = await loadConfig({
     config: {
       flags,
     },
-    configPath: configFilePath,
+    configPath: getSystemPath(
+      join(normalize(context.workspaceRoot), configFilePath)
+    ),
     logger,
     sys,
   });
+  const coreCompiler = await loadCoreCompiler(sys);
 
   const { workspaceRoot } = context;
   const projectName: string = context.target.project;
@@ -123,9 +133,15 @@ async function initializeStencilConfig(
     projectName: projectName,
     config: loadConfigResults.config,
     projectRoot: getSystemPath(projectRoot),
+    coreCompiler: coreCompiler,
     distDir: getSystemPath(distDir),
     pkgJson: getSystemPath(join(projectRoot, `package.json`)),
   } as ConfigAndPathCollection;
+}
+
+interface ConfigAndCoreCompiler {
+  config: Config;
+  coreCompiler: CoreCompiler;
 }
 
 export function createStencilConfig(
@@ -136,7 +152,7 @@ export function createStencilConfig(
     taskCommand: TaskCommand,
     options: StencilBuildOptions
   ) => ConfigFlags
-): Observable<Config> {
+): Observable<ConfigAndCoreCompiler> {
   if (!options?.configPath) {
     // remove later
     throw new Error(
@@ -204,23 +220,32 @@ export function createStencilConfig(
           )
         )
       );
-      if(values.config.flags.task === 'build') {
+      if (values.config.flags.task === 'build') {
         values.config.rootDir = getSystemPath(values.distDir);
       }
 
-      return Object.assign(
+      const config = Object.assign(
         values.config,
         { outputTargets: outputTargets },
         { devServer: devServerConfig }
       );
+
+      return {
+        config: config,
+        coreCompiler: values.coreCompiler,
+      };
     })
   );
 }
 
 export function createStencilProcess() {
-  return function (source: Observable<Config>): Observable<BuilderOutput> {
+  return function (
+    source: Observable<ConfigAndCoreCompiler>
+  ): Observable<BuilderOutput> {
     return source.pipe(
-      switchMap((config) => runTask(process, config, config.flags.task)),
+      switchMap((values) =>
+        runTask(values.coreCompiler, values.config, values.config.flags.task)
+      ),
       map(() => ({ success: true })),
       catchError((err) => of({ success: false, error: err }))
     );

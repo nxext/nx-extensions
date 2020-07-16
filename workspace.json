@@ -69,6 +69,11 @@
                 "input": "./packages/stencil",
                 "glob": "migrations.json",
                 "output": "."
+              },
+              {
+                "input": "./packages/stencil",
+                "glob": "migrations.json",
+                "output": "."
               }
             ]
           }
