@@ -3,7 +3,7 @@ import { ProjectType } from '@nrwl/workspace';
 
 export interface StencilBuildOptions extends JsonObject {
   projectType?: ProjectType;
-  configPath?: string;
+  configPath: string;
 
   // Stencil compiler Options
   ci?: boolean;

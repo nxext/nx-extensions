@@ -51,7 +51,7 @@
     "@nrwl/react": "9.4.5",
     "@nrwl/storybook": "9.4.5",
     "@nrwl/workspace": "9.4.5",
-    "@stencil/core": "1.13.0",
+    "@stencil/core": "1.16.3",
     "@types/jest": "25.2.3",
     "@types/node": "~8.9.4",
     "@typescript-eslint/eslint-plugin": "2.32.0",

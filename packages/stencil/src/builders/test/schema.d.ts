@@ -3,6 +3,6 @@ import { ProjectType } from '@nrwl/workspace';
 
 export interface StencilTestOptions extends JsonObject {
   projectType?: ProjectType;
-  configPath?: string;
+  configPath: string;
   watch?: boolean;
 }

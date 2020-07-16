@@ -2314,12 +2314,12 @@
   dependencies:
     type-detect "4.0.8"
 
-"@stencil/core@1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-1.13.0.tgz#908c1a62e3676e261acf3b3db2a37e48d0879a5a"
-  integrity sha512-++kIXaEgmwm/vq+9QAVHPuLLddCKVdJyI8OfHxknkpu5udxZMYA/vaN/K9i+2NIiTLbGpvHNk9E+RyYzKxS0XQ==
+"@stencil/core@1.16.3":
+  version "1.16.3"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-1.16.3.tgz#d45e638f0b2d45ef144026cfcfe47ffb1a679e88"
+  integrity sha512-58AwSCktkDKXc45U0Q+AXvWtmEAZs37DOt9SC2LEypYL6YnVHGiL2lekbvA5R3JYzPFVasg+vmDHVouqSr/zMA==
   dependencies:
-    typescript "3.8.3"
+    typescript "3.9.6"
 
 "@svgr/babel-plugin-add-jsx-attribute@^5.4.0":
   version "5.4.0"
@@ -12285,6 +12285,11 @@ typescript@3.8.3:
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
   integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
+
+typescript@3.9.6:
+  version "3.9.6"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.6.tgz#8f3e0198a34c3ae17091b35571d3afd31999365a"
+  integrity sha512-Pspx3oKAPJtjNwE92YS05HQoY7z2SFyOpHo9MqJor3BXAGNaPUs83CuVp9VISFkSjyRfiTpmKuAYGJB7S7hOxw==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
