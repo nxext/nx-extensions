@@ -19,6 +19,22 @@
       "version": "1.0.0-beta0",
       "description": "update-1-0-0-beta0",
       "factory": "./src/migrations/update-1-0-0-beta0/update-1-0-0-beta0"
+    },
+    "update-1.1.0": {
+      "version": "1.1.0",
+      "description": "update-1.1.0",
+      "factory": "./src/migrations/update-1-1-0/update-1-1-0"
+    }
+  },
+  "packageJsonUpdates": {
+    "1.1.0": {
+      "version": "1.1.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "1.16.3",
+          "alwaysAddToPackageJson": false
+        }
+      }
     }
   }
 }
