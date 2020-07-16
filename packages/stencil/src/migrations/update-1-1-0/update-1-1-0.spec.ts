@@ -23,7 +23,7 @@ describe('update-1.1.0', () => {
           '@stencil/core': '1.15.0',
         },
       })
-    )
+    );
   });
 
   it(`should update dependencies`, async () => {

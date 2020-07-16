@@ -4,7 +4,7 @@ import {
   ConfigFlags,
   Logger,
   runTask,
-  TaskCommand
+  TaskCommand,
 } from '@stencil/core/cli';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
@@ -55,7 +55,7 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
       collection: 'dist/collection/collection-manifest.json',
       'collection:main': 'dist/collection/index.js',
       unpkg: `dist/${values.projectName}/${values.projectName}.js`,
-      files: ['dist/', 'loader/']
+      files: ['dist/', 'loader/'],
     };
 
     writeJsonFile(
@@ -79,7 +79,7 @@ function calculateOutputTargetPathVariables(
           normalize(outputTarget[pathVar] as string)
         );
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(values.projectRoot, values.distDir)
+          [pathVar]: origPath.replace(values.projectRoot, values.distDir),
         });
       }
     });
@@ -114,13 +114,13 @@ async function initializeStencilConfig(
 
   const loadConfigResults = await loadConfig({
     config: {
-      flags
+      flags,
     },
     configPath: getSystemPath(
       join(normalize(context.workspaceRoot), configFilePath)
     ),
     logger,
-    sys
+    sys,
   });
   const coreCompiler = await loadCoreCompiler(sys);
 
@@ -135,14 +135,14 @@ async function initializeStencilConfig(
     projectRoot: getSystemPath(projectRoot),
     coreCompiler: coreCompiler,
     distDir: getSystemPath(distDir),
-    pkgJson: getSystemPath(join(projectRoot, `package.json`))
+    pkgJson: getSystemPath(join(projectRoot, `package.json`)),
   } as ConfigAndPathCollection;
 }
 
 interface ConfigAndCoreCompiler {
-  config: Config,
-  coreCompiler: CoreCompiler
-};
+  config: Config;
+  coreCompiler: CoreCompiler;
+}
 
 export function createStencilConfig(
   taskCommand: TaskCommand,
@@ -195,7 +195,7 @@ export function createStencilConfig(
         'cjsDir',
         'cjsIndexFile',
         'esmIndexFile',
-        'componentDts'
+        'componentDts',
       ];
       const outputTargets: OutputTarget[] = calculateOutputTargetPathVariables(
         values,
@@ -209,7 +209,7 @@ export function createStencilConfig(
               values.distDir
             )
           )
-        )
+        ),
       });
 
       values.config.packageJsonFilePath = getSystemPath(
@@ -232,14 +232,16 @@ export function createStencilConfig(
 
       return {
         config: config,
-        coreCompiler: values.coreCompiler
+        coreCompiler: values.coreCompiler,
       };
     })
   );
 }
 
 export function createStencilProcess() {
-  return function(source: Observable<ConfigAndCoreCompiler>): Observable<BuilderOutput> {
+  return function (
+    source: Observable<ConfigAndCoreCompiler>
+  ): Observable<BuilderOutput> {
     return source.pipe(
       switchMap((values) =>
         runTask(values.coreCompiler, values.config, values.config.flags.task)
