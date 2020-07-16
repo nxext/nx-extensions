@@ -3,7 +3,6 @@ import { ProjectType } from '@nrwl/workspace';
 import { mockContext } from '../../utils/testing';
 import * as stencilUtils from '../utils';
 import { Observable, of } from 'rxjs';
-import { Config } from '@stencil/core/cli';
 import { switchMap } from 'rxjs/operators';
 
 describe('Command Runner Build', () => {
@@ -13,10 +12,10 @@ describe('Command Runner Build', () => {
     [architect] = await mockContext();
     jest
       .spyOn(stencilUtils, 'createStencilConfig')
-      .mockImplementation(() => of({}));
+      .mockImplementation(() => of({} as any));
     jest.spyOn(stencilUtils, 'createStencilProcess').mockImplementation(
       () =>
-        function (source: Observable<Config>): Observable<BuilderOutput> {
+        function (source: Observable<any>): Observable<BuilderOutput> {
           return source.pipe(switchMap(() => of({ success: true })));
         }
     );
