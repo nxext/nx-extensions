@@ -10,9 +10,9 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
-    "tsconfig.json": "*",
     "tslint.json": "*",
-    "nx.json": "*"
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
   },
   "projects": {
     "stencil": {
@@ -20,9 +20,7 @@
     },
     "stencil-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "stencil"
-      ]
+      "implicitDependencies": ["stencil"]
     }
   },
   "tasksRunnerOptions": {
@@ -30,14 +28,13 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "accessToken": "",
-        "cacheableOperations": [
-          "build",
-          "test",
-          "lint"
-        ],
+        "cacheableOperations": ["build", "test", "lint"],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }
     }
+  },
+  "affected": {
+    "defaultBase": "master"
   }
 }
