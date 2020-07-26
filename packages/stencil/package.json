@@ -22,8 +22,8 @@
   "schematics": "./collection.json",
   "builders": "./builders.json",
   "dependencies": {
-    "@nrwl/jest": "^9.3.0",
-    "@nrwl/workspace": "^9.3.0"
+    "@nrwl/jest": "^10.0.0",
+    "@nrwl/workspace": "^10.0.0"
   },
   "peerDependencies": {
     "@angular-devkit/schematics": "^10.0.0",

@@ -90,7 +90,6 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
     externalSchematic('@nrwl/angular', 'library', {
       name: angularProjectName,
       style: 'css',
-      entryFile: 'index',
       skipPackageJson: !options.publishable,
     }),
     addDepsToPackageJson(
@@ -108,7 +107,7 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
       );
       const packageName = `@${getNpmScope(tree)}/${options.projectName}`;
 
-      insert(tree, angularModulePath, [
+      /*insert(tree, angularModulePath, [
         insertImport(
           angularModuleSource,
           angularModulePath,
@@ -130,7 +129,7 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
           angularModulePath,
           'DECLARATIONS'
         ),
-      ]);
+      ]);*/
     },
     addToGitignore(`${getLibsDir()}/${angularProjectName}/**/generated`),
   ]);
