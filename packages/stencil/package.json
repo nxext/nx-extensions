@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
