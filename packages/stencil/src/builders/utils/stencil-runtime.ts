@@ -205,7 +205,7 @@ export function createStencilConfig(
         root: getSystemPath(
           normalize(
             normalize(values.config.devServer.root).replace(
-              values.projectRoot,
+              normalize(values.projectRoot),
               values.distDir
             )
           )
