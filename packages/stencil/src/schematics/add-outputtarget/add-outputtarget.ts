@@ -24,7 +24,6 @@ import {
   angularOutputTargetVersion,
   reactOutputTargetVersion,
 } from '../../utils/versions';
-import { addImportToModule } from '@nrwl/angular/src/utils/ast-utils';
 import { getDistDir, getRelativePath } from '../../utils/fileutils';
 
 type OutputTargetType = 'angular' | 'react';
