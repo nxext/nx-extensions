@@ -77,7 +77,7 @@ function updateTsConfig(options: LibrarySchema): Rule {
   return chain([
     (host: Tree, context: SchematicContext) => {
       const nxJson = readJsonInTree<NxJson>(host, 'nx.json');
-      return updateJsonInTree('tsconfig.json', (json) => {
+      return updateJsonInTree('tsconfig.base.json', (json) => {
         const c = json.compilerOptions;
         delete c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`];
         c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [

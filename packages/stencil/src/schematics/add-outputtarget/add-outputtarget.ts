@@ -24,7 +24,6 @@ import {
   angularOutputTargetVersion,
   reactOutputTargetVersion,
 } from '../../utils/versions';
-import { addImportToModule } from '@nrwl/angular/src/utils/ast-utils';
 import { getDistDir, getRelativePath } from '../../utils/fileutils';
 
 type OutputTargetType = 'angular' | 'react';
@@ -90,7 +89,6 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
     externalSchematic('@nrwl/angular', 'library', {
       name: angularProjectName,
       style: 'css',
-      entryFile: 'index',
       skipPackageJson: !options.publishable,
     }),
     addDepsToPackageJson(
@@ -119,17 +117,7 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
           angularModuleSource,
           angularModulePath,
           'defineCustomElements(window);'
-        ),
-        ...addGlobal(
-          angularModuleSource,
-          angularModulePath,
-          'const DECLARATIONS = [];'
-        ),
-        ...addImportToModule(
-          angularModuleSource,
-          angularModulePath,
-          'DECLARATIONS'
-        ),
+        )
       ]);
     },
     addToGitignore(`${getLibsDir()}/${angularProjectName}/**/generated`),

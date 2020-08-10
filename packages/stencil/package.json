@@ -22,15 +22,15 @@
   "schematics": "./collection.json",
   "builders": "./builders.json",
   "dependencies": {
-    "@nrwl/jest": "^9.3.0",
-    "@nrwl/workspace": "^9.3.0"
+    "@nrwl/jest": "^10.0.0",
+    "@nrwl/workspace": "^10.0.0"
   },
   "peerDependencies": {
-    "@angular-devkit/schematics": "^9.0.0",
-    "@nrwl/storybook": "^9.3.0",
-    "@nrwl/react": "^9.3.0",
-    "@nrwl/angular": "^9.3.0",
-    "@stencil/core": "^1.13.0"
+    "@angular-devkit/schematics": "^10.0.0",
+    "@nrwl/storybook": "^10.0.0",
+    "@nrwl/react": "^10.0.0",
+    "@nrwl/angular": "^10.0.0",
+    "@stencil/core": "^1.16.3"
   },
   "ng-update": {
     "migrations": "./migrations.json"
