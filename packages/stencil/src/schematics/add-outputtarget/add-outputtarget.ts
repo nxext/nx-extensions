@@ -107,7 +107,7 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
       );
       const packageName = `@${getNpmScope(tree)}/${options.projectName}`;
 
-      /*insert(tree, angularModulePath, [
+      insert(tree, angularModulePath, [
         insertImport(
           angularModuleSource,
           angularModulePath,
@@ -118,18 +118,8 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
           angularModuleSource,
           angularModulePath,
           'defineCustomElements(window);'
-        ),
-        ...addGlobal(
-          angularModuleSource,
-          angularModulePath,
-          'const DECLARATIONS = [];'
-        ),
-        ...addImportToModule(
-          angularModuleSource,
-          angularModulePath,
-          'DECLARATIONS'
-        ),
-      ]);*/
+        )
+      ]);
     },
     addToGitignore(`${getLibsDir()}/${angularProjectName}/**/generated`),
   ]);
