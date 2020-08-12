@@ -16,7 +16,6 @@ import {
   names,
   NxJson,
   offsetFromRoot,
-  projectRootDir,
   ProjectType,
   readJsonInTree,
   toFileName,
@@ -27,20 +26,20 @@ import { LibrarySchema } from './schema';
 import core from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
-import { addDefaultBuilders, calculateStyle, getLibsDir } from '../../utils/utils';
+import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
-import { insertImport } from '@nrwl/workspace/src/utils/ast-utils';
+import { insertImport, libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 
 const projectType = ProjectType.Library;
 
-function normalizeOptions(options: CoreSchema): LibrarySchema {
+function normalizeOptions(options: CoreSchema, host: Tree): LibrarySchema {
   const name = toFileName(options.name);
   const projectDirectory = options.directory
     ? `${toFileName(options.directory)}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${projectRootDir(projectType)}/${projectDirectory}`;
+  const projectRoot = `${libsDir(host)}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -74,25 +73,27 @@ function addFiles(options: LibrarySchema): Rule {
 }
 
 function updateTsConfig(options: LibrarySchema): Rule {
-  return chain([
-    (host: Tree, context: SchematicContext) => {
-      const nxJson = readJsonInTree<NxJson>(host, 'nx.json');
-      return updateJsonInTree('tsconfig.base.json', (json) => {
-        const c = json.compilerOptions;
-        delete c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`];
-        c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [
-          `${getLibsDir()}/${options.projectDirectory}/src/index.ts`,
-        ];
-        delete c.paths[
-          `@${nxJson.npmScope}/${options.projectDirectory}/loader`
-        ];
-        c.paths[`@${nxJson.npmScope}/${options.projectDirectory}/loader`] = [
-          `dist/${getLibsDir()}/${options.projectDirectory}/loader`,
-        ];
-        return json;
-      })(host, context);
-    },
-  ]);
+  return (host: Tree) => {
+    return chain([
+      (host: Tree, context: SchematicContext) => {
+        const nxJson = readJsonInTree<NxJson>(host, 'nx.json');
+        return updateJsonInTree('tsconfig.base.json', (json) => {
+          const c = json.compilerOptions;
+          delete c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`];
+          c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [
+            `${libsDir(host)}/${options.projectDirectory}/src/index.ts`,
+          ];
+          delete c.paths[
+            `@${nxJson.npmScope}/${options.projectDirectory}/loader`
+            ];
+          c.paths[`@${nxJson.npmScope}/${options.projectDirectory}/loader`] = [
+            `dist/${libsDir(host)}/${options.projectDirectory}/loader`,
+          ];
+          return json;
+        })(host, context);
+      },
+    ]);
+  };
 }
 
 function updateStencilConfig(options: LibrarySchema): Rule {
@@ -100,7 +101,7 @@ function updateStencilConfig(options: LibrarySchema): Rule {
     const srcDir = options.directory
       ? `${options.directory}/${options.name}`
       : options.name;
-    const stencilConfigPath = `${getLibsDir()}/${srcDir}/stencil.config.ts`;
+    const stencilConfigPath = `${libsDir(tree)}/${srcDir}/stencil.config.ts`;
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath
@@ -163,33 +164,35 @@ function updateStencilConfig(options: LibrarySchema): Rule {
 }
 
 export default function (options: CoreSchema): Rule {
-  const normalizedOptions = normalizeOptions(options);
-  return chain([
-    core(normalizedOptions),
-    updateWorkspace((workspace) => {
-      const targetCollection = workspace.projects.add({
-        name: normalizedOptions.projectName,
-        root: normalizedOptions.projectRoot,
-        sourceRoot: `${normalizedOptions.projectRoot}/src`,
-        projectType,
-        schematics: {
-          '@nxext/stencil:component': {
-            style: options.style,
-            storybook: false,
+  return (host: Tree) => {
+    const normalizedOptions = normalizeOptions(options, host);
+    return chain([
+      core(normalizedOptions),
+      updateWorkspace((workspace) => {
+        const targetCollection = workspace.projects.add({
+          name: normalizedOptions.projectName,
+          root: normalizedOptions.projectRoot,
+          sourceRoot: `${normalizedOptions.projectRoot}/src`,
+          projectType,
+          schematics: {
+            '@nxext/stencil:component': {
+              style: options.style,
+              storybook: false,
+            },
           },
-        },
-      }).targets;
-      addDefaultBuilders(
-        targetCollection,
-        projectType,
-        normalizedOptions
-      );
-    }),
-    addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags,
-    }),
-    addFiles(normalizedOptions),
-    updateTsConfig(normalizedOptions),
-    updateStencilConfig(normalizedOptions),
-  ]);
+        }).targets;
+        addDefaultBuilders(
+          targetCollection,
+          projectType,
+          normalizedOptions
+        );
+      }),
+      addProjectToNxJsonInTree(normalizedOptions.projectName, {
+        tags: normalizedOptions.parsedTags,
+      }),
+      addFiles(normalizedOptions),
+      updateTsConfig(normalizedOptions),
+      updateStencilConfig(normalizedOptions),
+    ]);
+  };
 }

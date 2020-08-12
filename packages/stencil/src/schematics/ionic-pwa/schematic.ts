@@ -1,10 +1,19 @@
-import { apply, applyTemplates, chain, mergeWith, move, Rule, url } from '@angular-devkit/schematics';
+import {
+  apply,
+  applyTemplates,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  SchematicContext,
+  Tree,
+  url
+} from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
   names,
   offsetFromRoot,
-  projectRootDir,
   ProjectType,
   toFileName,
   updateWorkspace
@@ -14,16 +23,17 @@ import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
 import core from '../core/core';
+import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 
 const projectType = ProjectType.Application;
 
-function normalizeOptions(options: CoreSchema): PWASchema {
+function normalizeOptions(options: CoreSchema, host: Tree): PWASchema {
   const name = toFileName(options.name);
   const projectDirectory = options.directory
     ? `${toFileName(options.directory)}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${projectRootDir(projectType)}/${projectDirectory}`;
+  const projectRoot = `${appsDir(host)}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -57,31 +67,33 @@ function addFiles(options: PWASchema): Rule {
 }
 
 export default function (options: CoreSchema): Rule {
-  const normalizedOptions = normalizeOptions(options);
-  return chain([
-    core(normalizedOptions),
-    updateWorkspace((workspace) => {
-      const targetCollection = workspace.projects.add({
-        name: normalizedOptions.projectName,
-        root: normalizedOptions.projectRoot,
-        sourceRoot: `${normalizedOptions.projectRoot}/src`,
-        projectType,
-        schematics: {
-          '@nxext/stencil:component': {
-            style: options.style,
-            storybook: false,
+  return (host: Tree) => {
+    const normalizedOptions = normalizeOptions(options, host);
+    return chain([
+      core(normalizedOptions),
+      updateWorkspace((workspace) => {
+        const targetCollection = workspace.projects.add({
+          name: normalizedOptions.projectName,
+          root: normalizedOptions.projectRoot,
+          sourceRoot: `${normalizedOptions.projectRoot}/src`,
+          projectType,
+          schematics: {
+            '@nxext/stencil:component': {
+              style: options.style,
+              storybook: false,
+            },
           },
-        },
-      }).targets;
-      addDefaultBuilders(
-        targetCollection,
-        projectType,
-        normalizedOptions
-      );
-    }),
-    addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags,
-    }),
-    addFiles(normalizedOptions),
-  ]);
+        }).targets;
+        addDefaultBuilders(
+          targetCollection,
+          projectType,
+          normalizedOptions
+        );
+      }),
+      addProjectToNxJsonInTree(normalizedOptions.projectName, {
+        tags: normalizedOptions.parsedTags,
+      }),
+      addFiles(normalizedOptions),
+    ]);
+  };
 }
