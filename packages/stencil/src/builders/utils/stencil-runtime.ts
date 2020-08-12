@@ -19,6 +19,7 @@ import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExist } from './fileutils';
 import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
+import { log } from 'util';
 
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
   await sys.dynamicImport(sys.getCompilerExecutingPath());
@@ -247,7 +248,9 @@ export function createStencilProcess() {
         runTask(values.coreCompiler, values.config, values.config.flags.task)
       ),
       map(() => ({ success: true })),
-      catchError((err) => of({ success: false, error: err }))
+      catchError((err) => {
+        log(err);
+        return of({ success: false, error: 'Error asd' })})
     );
   };
 }

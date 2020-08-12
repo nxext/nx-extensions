@@ -3,7 +3,7 @@ import {
   externalSchematic,
   noop,
   Rule,
-  Tree,
+  Tree
 } from '@angular-devkit/schematics';
 import { Schema as ReactLibrarySchema } from '@nrwl/react/src/schematics/library/schema';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
@@ -16,13 +16,13 @@ import {
   getProjectConfig,
   insert,
   InsertChange,
-  insertImport,
+  insertImport, libsDir
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { formatFiles, getNpmScope, toFileName } from '@nrwl/workspace';
-import { addToGitignore, getLibsDir } from '../../utils/utils';
+import { addToGitignore } from '../../utils/utils';
 import {
   angularOutputTargetVersion,
-  reactOutputTargetVersion,
+  reactOutputTargetVersion
 } from '../../utils/versions';
 import { getDistDir, getRelativePath } from '../../utils/fileutils';
 
@@ -34,94 +34,98 @@ export interface AddOutputtargetSchematicSchema {
   publishable: boolean;
 }
 
-export default function (options: AddOutputtargetSchematicSchema): Rule {
+export default function(options: AddOutputtargetSchematicSchema): Rule {
   return chain([
     options.outputType === 'react' ? prepareReactLibrary(options) : noop(),
     options.outputType === 'angular' ? prepareAngularLibrary(options) : noop(),
     addToOutputTargetToConfig(options.projectName, options.outputType),
-    formatFiles(),
+    formatFiles()
   ]);
 }
 
 function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
-  const reactProjectName = `${options.projectName}-react`;
-  return chain([
-    externalSchematic('@nrwl/react', 'library', {
-      name: reactProjectName,
-      style: 'css',
-      publishable: options.publishable,
-    } as ReactLibrarySchema),
-    addDepsToPackageJson(
-      {},
-      {
-        '@stencil/react-output-target': reactOutputTargetVersion,
-      }
-    ),
-    (tree) => {
-      tree.delete(
-        `${getLibsDir()}/${reactProjectName}/src/lib/${
-          options.projectName
-        }-react.tsx`
-      );
-      tree.delete(
-        `${getLibsDir()}/${reactProjectName}/src/lib/${
-          options.projectName
-        }-react.spec.tsx`
-      );
-      tree.delete(
-        `${getLibsDir()}/${reactProjectName}/src/lib/${
-          options.projectName
-        }-react.css`
-      );
+  return (host: Tree) => {
+    const reactProjectName = `${options.projectName}-react`;
+    return chain([
+      externalSchematic('@nrwl/react', 'library', {
+        name: reactProjectName,
+        style: 'css',
+        publishable: options.publishable
+      } as ReactLibrarySchema),
+      addDepsToPackageJson(
+        {},
+        {
+          '@stencil/react-output-target': reactOutputTargetVersion
+        }
+      ),
+      (tree) => {
+        tree.delete(
+          `${libsDir(host)}/${reactProjectName}/src/lib/${
+            options.projectName
+          }-react.tsx`
+        );
+        tree.delete(
+          `${libsDir(host)}/${reactProjectName}/src/lib/${
+            options.projectName
+          }-react.spec.tsx`
+        );
+        tree.delete(
+          `${libsDir(host)}/${reactProjectName}/src/lib/${
+            options.projectName
+          }-react.css`
+        );
 
-      tree.overwrite(
-        `${getLibsDir()}/${reactProjectName}/src/index.ts`,
-        `export * from './generated/components';`
-      );
-    },
-    addToGitignore(`${getLibsDir()}/${reactProjectName}/**/generated`),
-  ]);
+        tree.overwrite(
+          `${libsDir(host)}/${reactProjectName}/src/index.ts`,
+          `export * from './generated/components';`
+        );
+      },
+      addToGitignore(`${libsDir(host)}/${reactProjectName}/**/generated`)
+    ]);
+  };
 }
 
 function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
-  const angularProjectName = `${options.projectName}-angular`;
-  return chain([
-    externalSchematic('@nrwl/angular', 'library', {
-      name: angularProjectName,
-      style: 'css',
-      skipPackageJson: !options.publishable,
-    }),
-    addDepsToPackageJson(
-      {},
-      {
-        '@stencil/angular-output-target': angularOutputTargetVersion,
-      }
-    ),
-    (tree: Tree) => {
-      const angularModuleFilename = toFileName(angularProjectName);
-      const angularModulePath = `${getLibsDir()}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
-      const angularModuleSource = readTsSourceFileFromTree(
-        tree,
-        angularModulePath
-      );
-      const packageName = `@${getNpmScope(tree)}/${options.projectName}`;
+  return (host: Tree) => {
+    const angularProjectName = `${options.projectName}-angular`;
+    return chain([
+      externalSchematic('@nrwl/angular', 'library', {
+        name: angularProjectName,
+        style: 'css',
+        skipPackageJson: !options.publishable
+      }),
+      addDepsToPackageJson(
+        {},
+        {
+          '@stencil/angular-output-target': angularOutputTargetVersion
+        }
+      ),
+      (tree: Tree) => {
+        const angularModuleFilename = toFileName(angularProjectName);
+        const angularModulePath = `${libsDir(host)}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
+        const angularModuleSource = readTsSourceFileFromTree(
+          tree,
+          angularModulePath
+        );
+        const packageName = `@${getNpmScope(tree)}/${options.projectName}`;
 
-      insert(tree, angularModulePath, [
-        insertImport(
-          angularModuleSource,
-          angularModulePath,
-          'defineCustomElements',
-          `${packageName}/loader`
-        ),
-        ...addGlobal(
-          angularModuleSource,
-          angularModulePath,
-          'defineCustomElements(window);'
-        )
-      ]);
-    },
-    addToGitignore(`${getLibsDir()}/${angularProjectName}/**/generated`),
-  ]);
+        insert(tree, angularModulePath, [
+          insertImport(
+            angularModuleSource,
+            angularModulePath,
+            'defineCustomElements',
+            `${packageName}/loader`
+          ),
+          ...addGlobal(
+            angularModuleSource,
+            angularModulePath,
+            'defineCustomElements(window);'
+          )
+        ]);
+      },
+      addToGitignore(`${libsDir(host)}/${angularProjectName}/**/generated`)
+    ]);
+  };
 }
 
 function addToOutputTargetToConfig(
@@ -162,7 +166,7 @@ function addToOutputTargetToConfig(
           })
           `,
           stencilConfigPath
-        ),
+        )
       ]);
     }
 
@@ -198,7 +202,7 @@ function addToOutputTargetToConfig(
             }),
           `,
           stencilConfigPath
-        ),
+        )
       ]);
     }
 
