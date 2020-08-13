@@ -1,5 +1,5 @@
 export const nxextVersion = '10.0.0';
-export const stencilVersion = '1.17.3';
+export const stencilVersion = '2.0.0-1';
 export const stencilRouterVersion = '^1.0.1';
 export const ionicVersion = '^5.1.1';
 
