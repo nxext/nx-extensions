@@ -14,7 +14,7 @@ describe('e2e-pwa', () => {
 
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --style='css'`
+        `generate @nxext/stencil:ionic-app ${plugin} --style='css' --appTemplate='Tabs'`
       );
 
       testProject(plugin, 'css', ProjectType.Application);
@@ -28,7 +28,7 @@ describe('e2e-pwa', () => {
       const plugin = uniq('ionic-app');
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --directory subdir --style=css`
+        `generate @nxext/stencil:ionic-app ${plugin} --directory subdir --style=css --appTemplate='Tabs'`
       );
       expect(() =>
         checkFilesExist(`apps/subdir/${plugin}/stencil.config.ts`)
@@ -42,7 +42,7 @@ describe('e2e-pwa', () => {
       const plugin = uniq('ionic-app');
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --style='scss'`
+        `generate @nxext/stencil:ionic-app ${plugin} --style='scss' --appTemplate='Tabs'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
@@ -55,7 +55,7 @@ describe('e2e-pwa', () => {
       const plugin = uniq('ionic-app');
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --tags e2etag,e2ePackage --style=css`
+        `generate @nxext/stencil:ionic-app ${plugin} --tags e2etag,e2ePackage --style=css --appTemplate='Tabs'`
       );
 
       expect(() => {
