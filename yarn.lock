@@ -1977,12 +1977,12 @@
     "@schematics/angular" "~10.0.0"
     jasmine-marbles "~0.6.0"
 
-"@nrwl/cli@10.0.11":
-  version "10.0.11"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-10.0.11.tgz#f0cca05c05c0a9be5b089ff6d88f52b8ecfb73ca"
-  integrity sha512-c30tar3OlYMBpfzILzVEqOfGYjQuYmNbIB1bNO5afo0c3ocAlo/akIVB79g1g8+9Fh0nAscQd54+Z4/lC/fzzQ==
+"@nrwl/cli@10.0.12":
+  version "10.0.12"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-10.0.12.tgz#3b48602981cb459921572bbe28012e5baf1371fe"
+  integrity sha512-7FBRjOxAXAn0r2Z9MuJj/PZA8GhTt9knWANWGubGzJh6Izr1jexgpaXMtvVcJUt8G/XFBAn2sBhWyyFZ8HqG5A==
   dependencies:
-    "@nrwl/tao" "10.0.11"
+    "@nrwl/tao" "10.0.12"
     chalk "2.4.2"
     tmp "0.0.33"
     yargs "^11.0.0"
@@ -2107,10 +2107,10 @@
     tsconfig-paths-webpack-plugin "3.2.0"
     webpack-node-externals "1.7.2"
 
-"@nrwl/tao@10.0.11":
-  version "10.0.11"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-10.0.11.tgz#0bad10642c09ed9d250bf9ade5c311546b160f6d"
-  integrity sha512-1M4Kyjn6n8bnbcypkwz4qObzuALEp0UppLYmzepFe4oH3memg/JpBvkVrxDGFp/0wNbt/aKBrUItd9ZayCrFtA==
+"@nrwl/tao@10.0.12":
+  version "10.0.12"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-10.0.12.tgz#3e0dce225505530cfa2c650ca84216bc83890a36"
+  integrity sha512-L73NxtkAj9HXdfUpX7x+HkrldooInML9fPybiBP0LCgCLotpkKF0cC+Fans4S3qb+S/9ntHkjcYx0DlElxC2+w==
   dependencies:
     "@angular-devkit/architect" "~0.1000.0"
     "@angular-devkit/core" "~10.0.0"
@@ -2208,14 +2208,14 @@
     webpack-subresource-integrity "1.1.0-rc.5"
     worker-plugin "3.2.0"
 
-"@nrwl/workspace@10.0.11":
-  version "10.0.11"
-  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-10.0.11.tgz#264e99d63bde8181657bd3800c0a945f8fd8c50b"
-  integrity sha512-0cWa9NPLeH6yGFWyP4G0PSb3Euc8aG03zF4lZtgPSFfblMs+zXmySS5htLWAqhvYIpc2a32lPxdmcDWSBqIPvw==
+"@nrwl/workspace@10.0.12":
+  version "10.0.12"
+  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-10.0.12.tgz#91c21d27df2736c149d4437400f30b6f58de8869"
+  integrity sha512-5K9DsTT8BqDzBTXlT68YSo8KbSKm8ZxItu7hztH0tS017N4ZT4NZ3gc3t5ppMqNTJK1LCVSxFU7+dMYvvof5ig==
   dependencies:
     "@angular-devkit/core" "~10.0.0"
     "@angular-devkit/schematics" "~10.0.0"
-    "@nrwl/cli" "10.0.11"
+    "@nrwl/cli" "10.0.12"
     axios "0.19.2"
     chalk "2.4.2"
     cosmiconfig "4.0.0"

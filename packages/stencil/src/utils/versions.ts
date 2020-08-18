@@ -11,7 +11,7 @@ export const puppeteerType = '^2.0.1';
 
 export const storybookVersion = '5.3.9';
 
-export const nxVersion = '9.4.2';
+export const nxVersion = '^10.0.0';
 
 export const reactOutputTargetVersion = '^0.0.7';
 export const angularOutputTargetVersion = '^0.0.3';
