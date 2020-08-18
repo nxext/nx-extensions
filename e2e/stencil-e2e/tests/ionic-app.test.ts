@@ -1,11 +1,22 @@
-import { projectRootDir, ProjectType } from '@nrwl/workspace';
+import { ProjectType } from '@nrwl/workspace';
 import {
   checkFilesExist,
-  ensureNxProject,
-  runNxCommandAsync,
-  uniq,
+  ensureNxProject, readFile, readJson,
+  runNxCommandAsync, runYarnInstall, tmpProjPath,
+  uniq, updateFile
 } from '@nrwl/nx-plugin/testing';
 import { testProject } from '../utils/testing';
+
+function addPackageBeforeTest(pkg) {
+  const packageJsonPath = tmpProjPath('package.json');
+  const packageJsonFile = readJson(packageJsonPath);
+  packageJsonFile.devDependencies = {
+    ...packageJsonFile.devDependencies,
+    ...pkg
+  };
+  updateFile(packageJsonPath, JSON.stringify(packageJsonFile));
+  runYarnInstall();
+}
 
 describe('e2e-pwa', () => {
   describe('stencil ionic app', () => {
@@ -13,9 +24,14 @@ describe('e2e-pwa', () => {
       const plugin = uniq('ionic-app');
 
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+
+      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
+
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --style='css' --appTemplate='Tabs'`
       );
+
+
 
       testProject(plugin, 'css', ProjectType.Application);
 
@@ -27,6 +43,8 @@ describe('e2e-pwa', () => {
     it('should create src in the specified directory', async (done) => {
       const plugin = uniq('ionic-app');
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
+
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --directory subdir --style=css --appTemplate='Tabs'`
       );
@@ -41,6 +59,8 @@ describe('e2e-pwa', () => {
     it(`should build ionic app app with scss`, async (done) => {
       const plugin = uniq('ionic-app');
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
+
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --style='scss' --appTemplate='Tabs'`
       );
@@ -54,6 +74,8 @@ describe('e2e-pwa', () => {
     it('should add capacitor project', async (done) => {
       const plugin = uniq('ionic-app');
       ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
+
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --tags e2etag,e2ePackage --style=css --appTemplate='Tabs'`
       );
