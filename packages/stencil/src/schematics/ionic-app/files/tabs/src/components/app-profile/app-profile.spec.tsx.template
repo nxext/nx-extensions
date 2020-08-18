@@ -1,0 +1,11 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { AppProfile } from './app-profile';
+
+describe('app-profile', () => {
+  it('renders', async () => {
+    const {root} = await newSpecPage({
+      components: [AppProfile],
+      html: '<app-profile></app-profile>'
+    });
+  });
+});

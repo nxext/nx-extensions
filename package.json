@@ -43,11 +43,11 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
+    "@nrwl/angular": "10.0.11",
     "@nrwl/eslint-plugin-nx": "10.0.11",
     "@nrwl/jest": "10.0.11",
     "@nrwl/nx-cloud": "^10.0.0",
     "@nrwl/nx-plugin": "10.0.11",
-    "@nrwl/angular": "10.0.11",
     "@nrwl/react": "10.0.11",
     "@nrwl/storybook": "10.0.11",
     "@nrwl/workspace": "10.0.12",

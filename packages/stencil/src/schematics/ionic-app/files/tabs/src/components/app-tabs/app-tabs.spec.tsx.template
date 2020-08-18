@@ -1,0 +1,11 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { AppTabs } from './app-tabs';
+
+describe('app-tabs', () => {
+  it('renders', async () => {
+    const {root} = await newSpecPage({
+      components: [AppTabs],
+      html: '<app-tabs></app-tabs>'
+    });
+  });
+});

@@ -29,6 +29,11 @@
       "version": "10.0.0",
       "description": "update-10-0-0",
       "factory": "./src/migrations/update-10-0-0/update-10-0-0"
+    },
+    "update-10-1-0": {
+      "version": "10.1.0",
+      "description": "update-10-1-0",
+      "factory": "./src/migrations/update-10-1-0/update-10-1-0"
     }
   },
   "packageJsonUpdates": {
