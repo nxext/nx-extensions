@@ -2231,6 +2231,11 @@
     yargs "^11.0.0"
     yargs-parser "10.0.0"
 
+"@nxtend/capacitor@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@nxtend/capacitor/-/capacitor-1.0.0.tgz#519406b6056a2732e3e6077f81c1be02cd723e42"
+  integrity sha512-RVVD9PMMVEDUFocQWckdZ+n25w2ZOLQQnAJpcvxVjV/f/spmAID15l1Lf/siFoPp9Iz8WnNG6nKlzVGs0JULdw==
+
 "@rollup/plugin-babel@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.0.2.tgz#d9351b9545b0c586a193fc99830d4b1a25317ed5"

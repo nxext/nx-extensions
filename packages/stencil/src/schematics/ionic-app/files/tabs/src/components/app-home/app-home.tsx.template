@@ -1,0 +1,22 @@
+import { Component, h } from '@stencil/core';
+
+@Component({
+  tag: 'app-home',
+  styleUrl: 'app-home.css'
+})
+export class AppHome {
+
+  render() {
+    return [
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Home</ion-title>
+        </ion-toolbar>
+      </ion-header>,
+
+      <ion-content>
+        <h1>Welcome to your StencilJs mobile app!</h1>
+      </ion-content>
+    ];
+  }
+}
