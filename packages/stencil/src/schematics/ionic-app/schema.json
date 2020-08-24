@@ -16,7 +16,7 @@
     "appTemplate": {
       "type": "string",
       "enum": ["Tabs"],
-      "x-prompt": "Which starter app do you want to use?"
+      "default": "Tabs"
     },
     "tags": {
       "type": "string",
@@ -68,5 +68,5 @@
       }
     }
   },
-  "required": ["name", "appTemplate"]
+  "required": ["name"]
 }

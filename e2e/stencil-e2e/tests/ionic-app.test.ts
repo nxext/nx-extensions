@@ -1,18 +1,11 @@
 import {
   checkFilesExist,
   ensureNxProject,
-  runNxCommandAsync, runYarnInstall, tmpProjPath,
+  runNxCommandAsync,
   uniq
 } from '@nrwl/nx-plugin/testing';
-import { readFileSync, writeFileSync } from 'fs';
 import { normalize } from 'path';
-
-function addPackageBeforeTest(pkgName, pkgVersion) {
-  const packageJson = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
-  packageJson.devDependencies[pkgName] = pkgVersion;
-  writeFileSync(tmpProjPath('package.json'), JSON.stringify(packageJson, null, 2));
-  runYarnInstall();
-}
+import { addPackageBeforeTest } from '../utils/testing';
 
 describe('e2e-ionic-app', () => {
   let plugin: string;
@@ -26,7 +19,7 @@ describe('e2e-ionic-app', () => {
   describe('stencil ionic app', () => {
     it(`should create ionic app with css`, async (done) => {
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --style='css' --appTemplate='Tabs'`
+        `generate @nxext/stencil:ionic-app ${plugin} --style='css'`
       );
 
       expect(() => {
@@ -53,7 +46,7 @@ describe('e2e-ionic-app', () => {
   describe('--directory', () => {
     it('should create src in the specified directory', async (done) => {
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --directory subdir --style=css --appTemplate='Tabs'`
+        `generate @nxext/stencil:ionic-app ${plugin} --directory subdir --style=css`
       );
       expect(() =>
         checkFilesExist(`apps/subdir/${plugin}/stencil.config.ts`)
@@ -63,9 +56,9 @@ describe('e2e-ionic-app', () => {
   });
 
   describe('stencil ionic app builder', () => {
-    it(`should build ionic app app with scss`, async (done) => {
+    it(`should build ionic app`, async (done) => {
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --style='scss' --appTemplate='Tabs'`
+        `generate @nxext/stencil:ionic-app ${plugin} --style='css'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
@@ -76,7 +69,7 @@ describe('e2e-ionic-app', () => {
 
     it('should add capacitor project', async (done) => {
       await runNxCommandAsync(
-        `generate @nxext/stencil:ionic-app ${plugin} --tags e2etag,e2ePackage --style=css --appTemplate='Tabs'`
+        `generate @nxext/stencil:ionic-app ${plugin} --tags e2etag,e2ePackage --style=css`
       );
 
       expect(() => {
