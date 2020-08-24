@@ -1,4 +1,4 @@
-import { projectRootDir, ProjectType } from '@nrwl/workspace';
+import { ProjectType } from '@nrwl/workspace';
 import {
   checkFilesExist,
   ensureNxProject,
