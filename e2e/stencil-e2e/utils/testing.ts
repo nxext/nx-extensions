@@ -1,6 +1,7 @@
 import { projectRootDir, ProjectType } from '@nrwl/workspace';
-import { checkFilesExist, readJson } from '@nrwl/nx-plugin/testing';
+import { checkFilesExist, readJson, runYarnInstall, tmpProjPath } from '@nrwl/nx-plugin/testing';
 import { normalize } from '@angular-devkit/core';
+import { readFileSync, writeFileSync } from 'fs';
 
 export function testProject(
   projectName: string,
@@ -147,4 +148,11 @@ export function testProject(
       )
     );
   }
+}
+
+export function addPackageBeforeTest(pkgName, pkgVersion) {
+    const packageJson = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
+    packageJson.devDependencies[pkgName] = pkgVersion;
+    writeFileSync(tmpProjPath('package.json'), JSON.stringify(packageJson, null, 2));
+    runYarnInstall();
 }
