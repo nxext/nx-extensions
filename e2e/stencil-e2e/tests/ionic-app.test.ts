@@ -1,39 +1,50 @@
-import { ProjectType } from '@nrwl/workspace';
 import {
   checkFilesExist,
-  ensureNxProject, readFile, readJson,
+  ensureNxProject,
   runNxCommandAsync, runYarnInstall, tmpProjPath,
-  uniq, updateFile
+  uniq
 } from '@nrwl/nx-plugin/testing';
-import { testProject } from '../utils/testing';
+import { readFileSync, writeFileSync } from 'fs';
+import { normalize } from 'path';
 
-function addPackageBeforeTest(pkg) {
-  const packageJsonPath = tmpProjPath('package.json');
-  const packageJsonFile = readJson(packageJsonPath);
-  packageJsonFile.devDependencies = {
-    ...packageJsonFile.devDependencies,
-    ...pkg
-  };
-  updateFile(packageJsonPath, JSON.stringify(packageJsonFile));
+function addPackageBeforeTest(pkgName, pkgVersion) {
+  const packageJson = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
+  packageJson.devDependencies[pkgName] = pkgVersion;
+  writeFileSync(tmpProjPath('package.json'), JSON.stringify(packageJson, null, 2));
   runYarnInstall();
 }
 
-describe('e2e-pwa', () => {
+describe('e2e-ionic-app', () => {
+  let plugin: string;
+
+  beforeEach(() => {
+    plugin = uniq('ionic-app');
+    ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+    addPackageBeforeTest("@nxtend/capacitor", "^1.0.0");
+  });
+
   describe('stencil ionic app', () => {
     it(`should create ionic app with css`, async (done) => {
-      const plugin = uniq('ionic-app');
-
-      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-
-      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
-
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --style='css' --appTemplate='Tabs'`
       );
 
-
-
-      testProject(plugin, 'css', ProjectType.Application);
+      expect(() => {
+          checkFilesExist(
+            normalize(`apps/${plugin}/stencil.config.ts`),
+            normalize(`apps/${plugin}/tsconfig.json`),
+            normalize(`apps/${plugin}/src/components/app-home/app-home.e2e.ts`),
+            normalize(`apps/${plugin}/src/components/app-home/app-home.tsx`),
+            normalize(`apps/${plugin}/src/components/app-home/app-home.css`),
+            normalize(`apps/${plugin}/src/components/app-profile/app-profile.e2e.ts`),
+            normalize(`apps/${plugin}/src/components/app-profile/app-profile.tsx`),
+            normalize(`apps/${plugin}/src/components/app-profile/app-profile.spec.ts`),
+            normalize(`apps/${plugin}/src/components/app-profile/app-profile.css`),
+            normalize(`apps/${plugin}/src/components/app-root/app-root.e2e.ts`),
+            normalize(`apps/${plugin}/src/components/app-root/app-root.tsx`),
+            normalize(`apps/${plugin}/src/components/app-root/app-root.css`)
+          );
+      }).not.toThrow();
 
       done();
     });
@@ -41,10 +52,6 @@ describe('e2e-pwa', () => {
 
   describe('--directory', () => {
     it('should create src in the specified directory', async (done) => {
-      const plugin = uniq('ionic-app');
-      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
-
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --directory subdir --style=css --appTemplate='Tabs'`
       );
@@ -57,10 +64,6 @@ describe('e2e-pwa', () => {
 
   describe('stencil ionic app builder', () => {
     it(`should build ionic app app with scss`, async (done) => {
-      const plugin = uniq('ionic-app');
-      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
-
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --style='scss' --appTemplate='Tabs'`
       );
@@ -72,10 +75,6 @@ describe('e2e-pwa', () => {
     });
 
     it('should add capacitor project', async (done) => {
-      const plugin = uniq('ionic-app');
-      ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-      addPackageBeforeTest({"@nxtend/capacitor": "^1.0.0"});
-
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --tags e2etag,e2ePackage --style=css --appTemplate='Tabs'`
       );
