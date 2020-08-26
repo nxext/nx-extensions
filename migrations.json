@@ -1,32 +1,25 @@
 {
   "migrations": [
     {
-      "version": "10.0.0-beta.0",
-      "description": "Add default branch to nx.json",
-      "factory": "./src/migrations/update-10-0-0/update-10-0-0",
+      "version": "10.1.0-beta.0",
+      "description": "Migrate .eslintrc files to use tsconfig with a wildcard",
+      "factory": "./src/migrations/update-10-1-0/migrate-eslintrc-tsconfig-wildcard",
       "package": "@nrwl/workspace",
-      "name": "add-default-branch-to-nx-json"
+      "name": "migrate-eslintrc-tsconfig-wildcard"
     },
     {
-      "version": "10.0.0-beta.0",
-      "description": "Migrate tsconfigs to solution style tsconfigs",
-      "factory": "./src/migrations/update-10-0-0/solution-tsconfigs",
-      "package": "@nrwl/workspace",
-      "name": "solution-tsconfigs"
-    },
-    {
-      "version": "10.0.1-beta.0",
-      "description": "Migrate .eslintrc files to reference new tsconfig",
-      "factory": "./src/migrations/update-10-0-1/migrate-eslintrc",
-      "package": "@nrwl/workspace",
-      "name": "migrate-eslintrc-tsconfig"
-    },
-    {
-      "version": "10.0.0-beta.2",
-      "description": "update jest configs to include setup env files",
-      "factory": "./src/migrations/update-10-0-0/update-jest-configs",
+      "version": "10.1.0-beta.4",
+      "description": "Update jest to v26",
+      "factory": "./src/migrations/update-10-1-0/update-10-1-0",
       "package": "@nrwl/jest",
-      "name": "update-10.0.0"
+      "name": "update-10.1.0"
+    },
+    {
+      "version": "10.1.0-beta.1",
+      "description": "Removes rootDir from node libs' tsconfig",
+      "factory": "./src/migrations/update-10-1-0/remove-root-dir",
+      "package": "@nrwl/node",
+      "name": "remove-root-dir"
     }
   ]
 }
