@@ -36,6 +36,9 @@
     "format:check": "nx format:check",
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
+    "create-playground": "ts-node tools/scripts/create-playground.ts",
+    "update-playground": "ts-node tools/scripts/update-playground.ts",
+    "setup-local-plugins": "ts-node tools/scripts/setup-local-plugins.ts",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "commit": "git-cz"
