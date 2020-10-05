@@ -54,6 +54,7 @@
     "@nrwl/react": "10.2.1",
     "@nrwl/storybook": "10.2.1",
     "@nrwl/workspace": "10.2.1",
+    "@nxtend/capacitor": "1.1.0",
     "@stencil/core": "2.0.3",
     "@types/jest": "26.0.8",
     "@types/node": "~8.9.4",

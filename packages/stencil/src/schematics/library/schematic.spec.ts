@@ -1,8 +1,8 @@
 import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import { getProjectConfig, readJsonInTree } from '@nrwl/workspace';
+import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
+import { fileListForAppType, runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
 import { CoreSchema } from '../core/schema';
 
 describe('schematic:library', () => {
@@ -17,6 +17,30 @@ describe('schematic:library', () => {
     await expect(
       runSchematic('lib', options, tree)
     ).resolves.not.toThrowError();
+  });
+
+  it('should create files', async () => {
+    const appName = 'test';
+    const result = await runSchematic(
+      'lib',
+      { name: appName, appType: AppType.Library },
+      tree
+    );
+
+    const fileList = fileListForAppType(appName, 'css', ProjectType.Library);
+    fileList.forEach(file => expect(result.exists(file)))
+  });
+
+  it('should create files in specified dir', async () => {
+    const appName = 'testlib';
+    const result = await runSchematic(
+      'lib',
+      { name: appName, appType: AppType.Library, subdir: 'subdir'},
+      tree
+    );
+
+    const fileList = fileListForAppType(appName, 'css', ProjectType.Library, 'subdir');
+    fileList.forEach(file => expect(result.exists(file)))
   });
 
   it('should add Stencil Library dependencies', async () => {
