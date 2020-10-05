@@ -1,9 +1,9 @@
 import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 
-import { getProjectConfig, readJsonInTree } from '@nrwl/workspace';
+import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
+import { fileListForAppType, runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
 import { CoreSchema } from '../core/schema';
 
 describe('schematic:application', () => {
@@ -29,6 +29,30 @@ describe('schematic:application', () => {
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
+  });
+
+  it('should create files', async () => {
+    const appName = 'testapp';
+    const result = await runSchematic(
+      'app',
+      { name: appName, appType: AppType.Application },
+      tree
+    );
+
+    const fileList = fileListForAppType(appName, 'css', ProjectType.Application);
+    fileList.forEach(file => expect(result.exists(file)))
+  });
+
+  it('should create files in specified dir', async () => {
+    const appName = 'testapp';
+    const result = await runSchematic(
+      'app',
+      { name: appName, appType: AppType.Application, subdir: 'subdir'},
+      tree
+    );
+
+    const fileList = fileListForAppType(appName, 'css', ProjectType.Application, 'subdir');
+    fileList.forEach(file => expect(result.exists(file)))
   });
 
   SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
