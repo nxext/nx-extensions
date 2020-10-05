@@ -4,7 +4,7 @@ import {
   ConfigFlags,
   Logger,
   runTask,
-  TaskCommand,
+  TaskCommand
 } from '@stencil/core/cli';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
@@ -15,9 +15,9 @@ import { copyFile, ProjectType } from '@nrwl/workspace';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
 import { StencilE2EOptions } from '../e2e/schema';
-import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
+import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
-import { ensureDirExist } from './fileutils';
+import { ensureDirExists, deleteFile, getRelativePath } from '../../utils/fileutils';
 import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
 import { log } from 'util';
 
@@ -56,7 +56,7 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
       collection: 'dist/collection/collection-manifest.json',
       'collection:main': 'dist/collection/index.js',
       unpkg: `dist/${values.projectName}/${values.projectName}.js`,
-      files: ['dist/', 'loader/'],
+      files: ['dist/', 'loader/']
     };
 
     writeJsonFile(
@@ -80,7 +80,7 @@ function calculateOutputTargetPathVariables(
           normalize(outputTarget[pathVar] as string)
         );
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(values.projectRoot, values.distDir),
+          [pathVar]: origPath.replace(values.projectRoot, values.distDir)
         });
       }
     });
@@ -115,13 +115,13 @@ async function initializeStencilConfig(
 
   const loadConfigResults = await loadConfig({
     config: {
-      flags,
+      flags
     },
     configPath: getSystemPath(
       join(normalize(context.workspaceRoot), configFilePath)
     ),
     logger,
-    sys,
+    sys
   });
   const coreCompiler = await loadCoreCompiler(sys);
 
@@ -136,13 +136,79 @@ async function initializeStencilConfig(
     projectRoot: getSystemPath(projectRoot),
     coreCompiler: coreCompiler,
     distDir: getSystemPath(distDir),
-    pkgJson: getSystemPath(join(projectRoot, `package.json`)),
+    pkgJson: getSystemPath(join(projectRoot, `package.json`))
   } as ConfigAndPathCollection;
 }
 
 interface ConfigAndCoreCompiler {
   config: Config;
   coreCompiler: CoreCompiler;
+}
+
+function prepareDistDirAndPkgJson(options) {
+  return function(
+    source: Observable<ConfigAndPathCollection>
+  ): Observable<ConfigAndPathCollection> {
+    return source.pipe(
+      tap((values: ConfigAndPathCollection) => {
+        ensureDirExists(values.distDir);
+
+        if (options.projectType == ProjectType.Library) {
+          copyOrCreatePackageJson(values);
+        }
+      })
+    );
+  };
+}
+
+function prepareE2eTesting() {
+  return function(
+    source: Observable<ConfigAndPathCollection>
+  ): Observable<ConfigAndPathCollection> {
+    return source.pipe(tap((values: ConfigAndPathCollection) => {
+      if (values.config.flags.e2e) {
+        const libPackageJson = {
+          name: values.projectName,
+          main: `${getRelativePath(values.projectRoot, values.distDir)}/dist/index.js`,
+          module: `${getRelativePath(values.projectRoot, values.distDir)}/dist/index.mjs`,
+          es2015: `${getRelativePath(values.projectRoot, values.distDir)}/dist/esm/index.mjs`,
+          es2017: `${getRelativePath(values.projectRoot, values.distDir)}/dist/esm/index.mjs`,
+          types: `${getRelativePath(values.projectRoot, values.distDir)}/dist/types/index.d.ts`,
+          collection: `${getRelativePath(values.projectRoot, values.distDir)}/dist/collection/collection-manifest.json`,
+          'collection:main': `${getRelativePath(values.projectRoot, values.distDir)}/dist/collection/index.js`,
+          unpkg: `${getRelativePath(values.projectRoot, values.distDir)}/dist/${values.projectName}/${values.projectName}.js`,
+          files: [`${getRelativePath(values.projectRoot, values.distDir)}/dist/`, `${getRelativePath(values.projectRoot, values.distDir)}/loader/`]
+        };
+
+        writeJsonFile(
+          getSystemPath(join(values.projectRoot, `package.e2e.json`)),
+          libPackageJson
+        );
+      }
+    }));
+  };
+}
+
+function cleanupE2eTesting() {
+  return function(
+    source: Observable<ConfigAndPathCollection>
+  ): Observable<ConfigAndPathCollection> {
+    return source.pipe(
+      tap((values: ConfigAndPathCollection) => {
+        if (values.config.flags.e2e) {
+          const pkgJsonPath = getSystemPath(join(values.projectRoot, `package.e2e.json`));
+          if (fileExists(pkgJsonPath)) {
+            deleteFile(pkgJsonPath);
+          }
+        }
+      }),
+      map((values: ConfigAndPathCollection) => {
+        values.config.packageJsonFilePath = getSystemPath(normalize(join(values.projectRoot, `package.e2e.json`)));
+
+        return values;
+      })
+    );
+  };
 }
 
 export function createStencilConfig(
@@ -169,15 +235,8 @@ export function createStencilConfig(
       createStencilCompilerOptions
     )
   ).pipe(
-    tap((values: ConfigAndPathCollection) => {
-      ensureDirExist(values.distDir);
-
-      if (options.projectType == ProjectType.Library) {
-        copyOrCreatePackageJson(values);
-      }
-
-      return values.config;
-    }),
+    prepareDistDirAndPkgJson(options),
+    prepareE2eTesting(),
     map((values: ConfigAndPathCollection) => {
       const pathVariables = [
         'dir',
@@ -196,7 +255,7 @@ export function createStencilConfig(
         'cjsDir',
         'cjsIndexFile',
         'esmIndexFile',
-        'componentDts',
+        'componentDts'
       ];
       const outputTargets: OutputTarget[] = calculateOutputTargetPathVariables(
         values,
@@ -210,17 +269,20 @@ export function createStencilConfig(
               values.distDir
             )
           )
-        ),
+        )
       });
 
-      values.config.packageJsonFilePath = getSystemPath(
-        normalize(
-          normalize(values.config.packageJsonFilePath).replace(
-            values.projectRoot,
-            values.distDir
+      if(!values.config.flags.e2e) {
+        values.config.packageJsonFilePath = getSystemPath(
+          normalize(
+            normalize(values.config.packageJsonFilePath).replace(
+              values.projectRoot,
+              values.distDir
+            )
           )
-        )
-      );
+        );
+      }
+
       if (values.config.flags.task === 'build') {
         values.config.rootDir = getSystemPath(values.distDir);
       }
@@ -233,24 +295,29 @@ export function createStencilConfig(
 
       return {
         config: config,
-        coreCompiler: values.coreCompiler,
+        coreCompiler: values.coreCompiler
       };
     })
   );
 }
 
 export function createStencilProcess() {
-  return function (
+  return function(
     source: Observable<ConfigAndCoreCompiler>
   ): Observable<BuilderOutput> {
     return source.pipe(
       switchMap((values) =>
-        runTask(values.coreCompiler, values.config, values.config.flags.task)
+        from(runTask(values.coreCompiler, values.config, values.config.flags.task))
+          .pipe(
+            map(() => values),
+            cleanupE2eTesting()
+          )
       ),
       map(() => ({ success: true })),
       catchError((err) => {
         log(err);
-        return of({ success: false, error: 'Error asd' })})
+        return of({ success: false, error: err });
+      })
     );
   };
 }
