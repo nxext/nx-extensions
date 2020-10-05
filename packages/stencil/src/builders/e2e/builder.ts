@@ -28,6 +28,7 @@ export function runBuilder(
   context: BuilderContext
 ): Observable<BuilderOutput> {
   const taskCommand: TaskCommand = 'test';
+
   return createStencilConfig(
     taskCommand,
     options,
