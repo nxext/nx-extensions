@@ -6,25 +6,9 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { testProject } from '../utils/testing';
 
 describe('e2e', () => {
   describe('generate', () => {
-    describe('stencil lib', () => {
-      it(`should create lib with css`, async (done) => {
-        const plugin = uniq('lib');
-
-        ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-        await runNxCommandAsync(
-          `generate @nxext/stencil:lib ${plugin} --style='css'`
-        );
-
-        testProject(plugin, 'css', ProjectType.Library);
-
-        done();
-      });
-    });
-
     describe('outputtarget', () => {
       it(`should generate react lib`, async (done) => {
         const plugin = uniq('lib');
