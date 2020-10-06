@@ -31,7 +31,8 @@
     "@nrwl/react": "^10.0.0",
     "@nrwl/angular": "^10.0.0",
     "@nxtend/capacitor": "^1.0.0",
-    "@stencil/core": "^1.17.3"
+    "@stencil/core": "^1.17.3",
+    "ignore": "^5.1.8"
   },
   "ng-update": {
     "migrations": "./migrations.json"

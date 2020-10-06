@@ -13,8 +13,9 @@ export const storybookVersion = '5.3.9';
 
 export const nxVersion = '^10.0.0';
 
-export const reactOutputTargetVersion = '^0.0.7';
-export const angularOutputTargetVersion = '^0.0.3';
+export const reactOutputTargetVersion = '^0.0.9';
+export const angularOutputTargetVersion = '^0.0.5';
+export const vueOutputTargetVersion = '^0.1.8';
 
 export const STENCIL_STYLE_PLUGIN_VERSION: {
   [style: string]: string;
