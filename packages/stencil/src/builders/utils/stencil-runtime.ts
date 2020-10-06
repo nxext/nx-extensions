@@ -48,14 +48,14 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
   } else {
     const libPackageJson = {
       name: values.projectName,
-      main: 'dist/index.js',
-      module: 'dist/index.mjs',
-      es2015: 'dist/esm/index.mjs',
-      es2017: 'dist/esm/index.mjs',
-      types: 'dist/types/index.d.ts',
-      collection: 'dist/collection/collection-manifest.json',
-      'collection:main': 'dist/collection/index.js',
-      unpkg: `dist/${values.projectName}/${values.projectName}.js`,
+      main: './dist/index.cjs.js',
+      module: './dist/index.js',
+      es2015: './dist/esm/index.mjs',
+      es2017: './dist/esm/index.mjs',
+      types: './dist/types/index.d.ts',
+      collection: './dist/collection/collection-manifest.json',
+      'collection:main': './dist/collection/index.js',
+      unpkg: `./dist/${values.projectName}/${values.projectName}.js`,
       files: ['dist/', 'loader/']
     };
 

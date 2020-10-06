@@ -3,7 +3,7 @@ import {
   externalSchematic,
   noop,
   Rule,
-  Tree
+  Tree,
 } from '@angular-devkit/schematics';
 import { Schema as ReactLibrarySchema } from '@nrwl/react/src/schematics/library/schema';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
@@ -16,17 +16,20 @@ import {
   getProjectConfig,
   insert,
   InsertChange,
-  insertImport, libsDir
+  insertImport,
+  libsDir,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { formatFiles, getNpmScope, toFileName } from '@nrwl/workspace';
 import { addToGitignore } from '../../utils/utils';
 import {
   angularOutputTargetVersion,
-  reactOutputTargetVersion
+  reactOutputTargetVersion,
+  vueOutputTargetVersion,
 } from '../../utils/versions';
 import { getDistDir, getRelativePath } from '../../utils/fileutils';
+import { VuexSchematicSchema } from '@nx-plus/vue/src/schematics/vuex/schema';
 
-type OutputTargetType = 'angular' | 'react';
+type OutputTargetType = 'angular' | 'react' | 'vue';
 
 export interface AddOutputtargetSchematicSchema {
   projectName: string;
@@ -34,13 +37,49 @@ export interface AddOutputtargetSchematicSchema {
   publishable: boolean;
 }
 
-export default function(options: AddOutputtargetSchematicSchema): Rule {
+export default function (options: AddOutputtargetSchematicSchema): Rule {
   return chain([
     options.outputType === 'react' ? prepareReactLibrary(options) : noop(),
     options.outputType === 'angular' ? prepareAngularLibrary(options) : noop(),
+    options.outputType === 'vue' ? prepareVueLibrary(options) : noop(),
     addToOutputTargetToConfig(options.projectName, options.outputType),
-    formatFiles()
+    formatFiles(),
   ]);
+}
+
+function prepareVueLibrary(options: AddOutputtargetSchematicSchema) {
+  return (host: Tree) => {
+    const vueProjectName = `${options.projectName}-vue`;
+    return chain([
+      externalSchematic('@nx-plus/vue', 'library', {
+        name: vueProjectName,
+      }),
+      addDepsToPackageJson(
+        {},
+        {
+          '@stencil/vue-output-target': vueOutputTargetVersion,
+        }
+      ),
+      (tree) => {
+        tree.delete(
+          `${libsDir(host)}/${vueProjectName}/tests/unit/example.spec.ts`
+        );
+        tree.delete(
+          `${libsDir(host)}/${vueProjectName}/src/lib/HelloWorld.vue`
+        );
+        tree.delete(
+          `${libsDir(host)}/${vueProjectName}/src/index.ts`
+        );
+        tree.delete(
+          `${libsDir(host)}/${vueProjectName}/src/shims-tsx.d.ts`
+        );
+        tree.delete(
+          `${libsDir(host)}/${vueProjectName}/src/shims-vue.d.ts`
+        );
+      },
+      addToGitignore(`${libsDir(host)}/${vueProjectName}/**/generated`),
+    ]);
+  };
 }
 
 function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
@@ -50,12 +89,12 @@ function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
       externalSchematic('@nrwl/react', 'library', {
         name: reactProjectName,
         style: 'css',
-        publishable: options.publishable
+        publishable: options.publishable,
       } as ReactLibrarySchema),
       addDepsToPackageJson(
         {},
         {
-          '@stencil/react-output-target': reactOutputTargetVersion
+          '@stencil/react-output-target': reactOutputTargetVersion,
         }
       ),
       (tree) => {
@@ -80,7 +119,7 @@ function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
           `export * from './generated/components';`
         );
       },
-      addToGitignore(`${libsDir(host)}/${reactProjectName}/**/generated`)
+      addToGitignore(`${libsDir(host)}/${reactProjectName}/**/generated`),
     ]);
   };
 }
@@ -92,17 +131,19 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
       externalSchematic('@nrwl/angular', 'library', {
         name: angularProjectName,
         style: 'css',
-        skipPackageJson: !options.publishable
+        skipPackageJson: !options.publishable,
       }),
       addDepsToPackageJson(
         {},
         {
-          '@stencil/angular-output-target': angularOutputTargetVersion
+          '@stencil/angular-output-target': angularOutputTargetVersion,
         }
       ),
       (tree: Tree) => {
         const angularModuleFilename = toFileName(angularProjectName);
-        const angularModulePath = `${libsDir(host)}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
+        const angularModulePath = `${libsDir(
+          host
+        )}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
         const angularModuleSource = readTsSourceFileFromTree(
           tree,
           angularModulePath
@@ -120,10 +161,10 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
             angularModuleSource,
             angularModulePath,
             'defineCustomElements(window);'
-          )
+          ),
         ]);
       },
-      addToGitignore(`${libsDir(host)}/${angularProjectName}/**/generated`)
+      addToGitignore(`${libsDir(host)}/${angularProjectName}/**/generated`),
     ]);
   };
 }
@@ -166,7 +207,40 @@ function addToOutputTargetToConfig(
           })
           `,
           stencilConfigPath
-        )
+        ),
+      ]);
+    }
+
+    if (outputType === 'vue') {
+      const reactProjectConfig = getProjectConfig(tree, `${projectName}-vue`);
+      const realtivePath = getRelativePath(
+        getDistDir(stencilProjectConfig.root),
+        reactProjectConfig.root
+      );
+
+      insert(tree, stencilConfigPath, [
+        insertImport(
+          stencilConfigSource,
+          stencilConfigPath,
+          'vueOutputTarget, ComponentModelConfig',
+          '@stencil/vue-output-target'
+        ),
+        ...addGlobal(
+          stencilConfigSource,
+          stencilConfigPath,
+          'const vueComponentModels: ComponentModelConfig[] = [];'
+        ),
+        ...addToOutputTargets(
+          stencilConfigSource,
+          `
+          vueOutputTarget({
+            componentCorePackage: '${packageName}',
+            proxiesFile: '${realtivePath}/src/generated/components.ts',
+            componentModels: vueComponentModels,
+          })
+          `,
+          stencilConfigPath
+        ),
       ]);
     }
 
@@ -184,13 +258,13 @@ function addToOutputTargetToConfig(
         insertImport(
           stencilConfigSource,
           stencilConfigPath,
-          'angularOutputTarget',
+          'angularOutputTarget, ValueAccessorConfig',
           '@stencil/angular-output-target'
         ),
         ...addGlobal(
           stencilConfigSource,
           stencilConfigPath,
-          'const angularValueAccessorBindings = [];'
+          'const angularValueAccessorBindings: ValueAccessorConfig[] = [];'
         ),
         ...addToOutputTargets(
           stencilConfigSource,
@@ -202,7 +276,7 @@ function addToOutputTargetToConfig(
             }),
           `,
           stencilConfigPath
-        )
+        ),
       ]);
     }
 
