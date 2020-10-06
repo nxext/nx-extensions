@@ -1,9 +1,31 @@
 {
   "name": "@nxext/svelte",
-  "version": "10.0.0",
+  "version": "10.0.1",
+  "license": "MIT",
+  "author": "Dominik Pieper",
+  "description": "Nx plugin for Svelte",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "stenciljs",
+    "pwa",
+    "web components"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/DominikPieper/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/DominikPieper/nx-extensions/issues"
+  },
   "main": "src/index.js",
   "schematics": "./collection.json",
   "builders": "./builders.json",
+  "peerDependencies": {
+    "@angular-devkit/schematics": "^10.0.0",
+    "svelte": "^3.29.0",
+    "svelte-preprocess": "^4.4.2"
+  },
   "dependencies": {
     "@nrwl/jest": "^10.0.0",
     "@nrwl/workspace": "^10.0.0",
