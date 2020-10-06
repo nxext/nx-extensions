@@ -4,7 +4,6 @@ import {
   createBuilder,
 } from '@angular-devkit/architect';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {

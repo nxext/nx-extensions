@@ -25,7 +25,6 @@ import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
 import core from '../core/core';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
-import { normalize } from '@angular-devkit/core';
 
 const projectType = ProjectType.Application;
 

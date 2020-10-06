@@ -1,0 +1,19 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "svelte",
+  "version": "0.0.1",
+  "schematics": {
+    "application": {
+      "factory": "./src/schematics/application/schematic",
+      "schema": "./src/schematics/application/schema.json",
+      "description": "Svelte application schematic",
+      "aliases": ["app"]
+    },
+    "component": {
+      "factory": "./src/schematics/component/schematic",
+      "schema": "./src/schematics/component/schema.json",
+      "description": "Add component",
+      "aliases": ["c"]
+    }
+  }
+}

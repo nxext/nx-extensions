@@ -15,7 +15,8 @@ describe('e2e-ionic-app', () => {
   });
 
   describe('stencil ionic app builder', () => {
-    it(`should build ionic app`, async (done) => {
+    // Disabled until the capacitor plugin works on windows
+    xit(`should build ionic app`, async (done) => {
       await runNxCommandAsync(
         `generate @nxext/stencil:ionic-app ${plugin} --style='css'`
       );

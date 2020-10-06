@@ -96,6 +96,75 @@
           }
         }
       }
+    },
+    "svelte": {
+      "root": "packages/svelte",
+      "sourceRoot": "packages/svelte/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "packages/svelte/tsconfig.lib.json",
+              "packages/svelte/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!packages/svelte/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "packages/svelte/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/packages/svelte",
+            "tsConfig": "packages/svelte/tsconfig.lib.json",
+            "packageJson": "packages/svelte/package.json",
+            "main": "packages/svelte/src/index.ts",
+            "assets": [
+              "packages/svelte/*.md",
+              {
+                "input": "./packages/svelte/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/svelte",
+                "glob": "collection.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/svelte",
+                "glob": "builders.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "svelte-e2e": {
+      "projectType": "application",
+      "root": "e2e/svelte-e2e",
+      "sourceRoot": "e2e/svelte-e2e/src",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "svelte:build",
+            "npmPackageName": "@nxext/svelte",
+            "pluginOutputPath": "dist/packages/svelte",
+            "jestConfig": "e2e/svelte-e2e/jest.config.js"
+          }
+        }
+      }
     }
   },
   "cli": {

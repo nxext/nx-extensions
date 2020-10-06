@@ -15,9 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    //"strict": true,
     "paths": {
-      "@nxext/stencil": ["packages/stencil/src/index.ts"]
+      "@nxext/stencil": ["packages/stencil/src/index.ts"],
+      "@nxext/svelte": ["packages/svelte/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

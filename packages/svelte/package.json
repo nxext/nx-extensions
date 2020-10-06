@@ -1,0 +1,20 @@
+{
+  "name": "@nxext/svelte",
+  "version": "10.0.0",
+  "main": "src/index.js",
+  "schematics": "./collection.json",
+  "builders": "./builders.json",
+  "dependencies": {
+    "@nrwl/jest": "^10.0.0",
+    "@nrwl/workspace": "^10.0.0",
+    "rollup": "^2.28.2",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^6.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "@rollup/plugin-typescript": "^6.0.0",
+    "@rollup/plugin-node-resolve": "7.1.1",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-serve": "^1.0.4"
+  }
+}
