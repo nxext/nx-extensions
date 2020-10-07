@@ -8,6 +8,7 @@ import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildab
 import { normalizeAssetCopyCommands } from './normalize';
 import { toClassName } from '@nrwl/workspace';
 
+/* eslint-disable */
 const resolve = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
 const typescript = require('@rollup/plugin-typescript');
@@ -16,6 +17,7 @@ const svelte = require('rollup-plugin-svelte');
 const copy = require('rollup-plugin-copy');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
+/* eslint-enable */
 
 export function createRollupOptions(
   options: NormalizedSvelteBuildOptions,
