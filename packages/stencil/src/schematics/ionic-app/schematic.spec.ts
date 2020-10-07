@@ -88,9 +88,7 @@ describe('schematic:ionic-app', () => {
       `apps/${appName}/src/components/app-root/app-root.tsx`,
       `apps/${appName}/src/components/app-profile/app-profile.tsx`,
       `apps/${appName}/src/components/app-home/app-home.tsx`,
-      `apps/${appName}/src/components/app-tabs/app-tabs.tsx`,
-
-      `apps/${appName}-cap/capacitor.config.json`
+      `apps/${appName}/src/components/app-tabs/app-tabs.tsx`
     ];
     fileList.forEach(file => expect(result.exists(file)))
   });
