@@ -1,7 +1,7 @@
 # @nxext/svelte
 
-[![License](https://img.shields.io/npm/l/@nxext/stencil.svg?style=flat-square)]()
-[![NPM Version](https://badge.fury.io/js/%40nxext%2Fstencil.svg)](https://www.npmjs.com/@nxext/stencil)
+[![License](https://img.shields.io/npm/l/@nxext/svelte.svg?style=flat-square)]()
+[![NPM Version](https://badge.fury.io/js/%40nxext%2Fsvelte.svg)](https://www.npmjs.com/@nxext/svelte)
 [![nxext windows CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%%20windows%20CI/badge.svg)]()
 [![nxext macos CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%%20macos%20CI/badge.svg)]()
 
@@ -10,12 +10,7 @@
 - [Usage](#usage)
 - [Project schematics](#project-schematics)
 - [Build](#build)
-- [Test](#test)
-- [Watch](#watch)
 - [Serve](#serve)
-- [Storybook](#storybook)
-- [React and Angular](#react-and-angular)
-- [Capacitor App](#capacitor-app)
 
 ## Usage
 
@@ -59,12 +54,14 @@ Build your project:
 nx build my-app
 ```
 
-Run commands are passed to the [stencil compiler](https://stenciljs.com/docs/cli).
 Supported flags are:
 
 | Parameter | Type | Default | Description |
 | ------------ | ------ | ---------------------------------------------------------------------------------------- | ---------------------------- | | |
-| --debug | bool | false | |
+| --dev | bool | false | Is dev build |
+| --watch | bool | false | Start watchmode |
+| --serve | bool | false | Serve on dev webserver |
+| --open | bool | false | Open in browser |
 
 ## Serve
 
@@ -76,6 +73,7 @@ nx serve my-app
 
 Supported flags are:
 
-| Parameter | Type    | Default | Description |
-| --------- | ------- | ------- | ----------- |
-| --open    | boolean | false   |             |
+| Parameter | Type    | Default | Description  |
+| --------- | ------- | ------- | ------------ |
+| --dev     | bool    | false   | Is dev build |
+| --open    | boolean | false   |              |
