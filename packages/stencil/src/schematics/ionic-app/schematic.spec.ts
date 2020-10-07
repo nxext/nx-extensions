@@ -26,7 +26,7 @@ describe('schematic:ionic-app', () => {
     expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
   });
 
-  it('should create files', async () => {
+  xit('should create files', async () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
@@ -51,7 +51,7 @@ describe('schematic:ionic-app', () => {
     fileList.forEach(file => expect(result.exists(file)))
   });
 
-  it('should create files in subdir', async () => {
+  xit('should create files in subdir', async () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
@@ -76,7 +76,7 @@ describe('schematic:ionic-app', () => {
     fileList.forEach(file => expect(result.exists(file)))
   });
 
-  it('should add capacitor project', async () => {
+  xit('should add capacitor project', async () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
