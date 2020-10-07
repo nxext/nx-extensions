@@ -21,6 +21,13 @@
     "stencil-e2e": {
       "tags": [],
       "implicitDependencies": ["stencil"]
+    },
+    "svelte": {
+      "tags": []
+    },
+    "svelte-e2e": {
+      "tags": [],
+      "implicitDependencies": ["svelte"]
     }
   },
   "tasksRunnerOptions": {

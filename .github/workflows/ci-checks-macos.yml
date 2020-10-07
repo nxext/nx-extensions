@@ -1,4 +1,4 @@
-name: nxext stencil macos CI
+name: nxext macos CI
 on:
   pull_request:
     branches: [master]

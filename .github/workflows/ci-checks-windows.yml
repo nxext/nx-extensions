@@ -1,4 +1,4 @@
-name: nxext stencil windows CI
+name: nxext windows CI
 on:
   pull_request:
     branches: [master]

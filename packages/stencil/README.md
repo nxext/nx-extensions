@@ -2,8 +2,8 @@
 
 [![License](https://img.shields.io/npm/l/@nxext/stencil.svg?style=flat-square)]()
 [![NPM Version](https://badge.fury.io/js/%40nxext%2Fstencil.svg)](https://www.npmjs.com/@nxext/stencil)
-[![@nxext/stencil windows CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%20stencil%20windows%20CI/badge.svg)]()
-[![nxext stencil linux CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%20stencil%20linux%20CI/badge.svg)]()
+[![nxext windows CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%%20windows%20CI/badge.svg)]()
+[![nxext macos CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%%20macos%20CI/badge.svg)]()
 
 ## Table of Contents
 
@@ -171,4 +171,5 @@ You're able to generate a StencilJs and Capacitor based mobile app.
 ```
 nx g @nxext/stencil:ionic-app myapp
 ```
- After that build it and follow the given instructions to add capacitors platform platforms. (look [here](https://nxtend.dev/docs/capacitor/getting-started) for the nx capacitor plugin documentation.)
+
+After that build it and follow the given instructions to add capacitors platform platforms. (look [here](https://nxtend.dev/docs/capacitor/getting-started) for the nx capacitor plugin documentation.)
