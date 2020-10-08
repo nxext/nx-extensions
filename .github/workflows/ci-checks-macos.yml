@@ -6,13 +6,25 @@ on:
     branches: [main]
 
 jobs:
-  setup:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  super-lint:
+    # Name the Job
+    name: Lint code base
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
     steps:
-        - uses: mansagroup/nrwl-nx-action@v1
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Runs the Super-Linter action
+      - name: Nx build
+        uses: mansagroup/nrwl-nx-action@v1
         with:
           targets: build,lint,test
           affected: 'true' # Defaults to true, therefore optional
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN
