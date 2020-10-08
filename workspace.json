@@ -8,14 +8,16 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@nrwl/linter:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "packages/stencil/tsconfig.lib.json",
-              "packages/stencil/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!packages/stencil/**/*"]
+            "lintFilePatterns": [
+              "packages/stencil/**/*.ts",
+              "packages/stencil/**/*.spec.ts",
+              "packages/stencil/**/*.spec.tsx",
+              "packages/stencil/**/*.spec.js",
+              "packages/stencil/**/*.spec.jsx",
+              "packages/stencil/**/*.d.ts"
+            ]
           }
         },
         "test": {
@@ -104,14 +106,16 @@
       "schematics": {},
       "architect": {
         "lint": {
-          "builder": "@nrwl/linter:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "packages/svelte/tsconfig.lib.json",
-              "packages/svelte/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!packages/svelte/**/*"]
+            "lintFilePatterns": [
+              "packages/svelte/**/*.ts",
+              "packages/svelte/**/*.spec.ts",
+              "packages/svelte/**/*.spec.tsx",
+              "packages/svelte/**/*.spec.js",
+              "packages/svelte/**/*.spec.jsx",
+              "packages/svelte/**/*.d.ts"
+            ]
           }
         },
         "test": {
