@@ -165,6 +165,25 @@
           }
         }
       }
+    },
+    "docs": {
+      "projectType": "application",
+      "root": "packages/docs",
+      "sourceRoot": "packages/docs/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/packages/docs"
+          }
+        },
+        "serve": {
+          "builder": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -4,6 +4,7 @@
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",
+  "homepage": "https://nxext.dev/",
   "keywords": [
     "nx",
     "nx-plugin",
@@ -13,10 +14,10 @@
   ],
   "repository": {
     "type": "github",
-    "url": "https://github.com/DominikPieper/nx-extensions"
+    "url": "https://github.com/nxext/nx-extensions"
   },
   "bugs": {
-    "url": "https://github.com/DominikPieper/nx-extensions/issues"
+    "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "main": "src/index.js",
   "schematics": "./collection.json",

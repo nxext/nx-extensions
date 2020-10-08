@@ -44,11 +44,18 @@
     "commit": "git-cz"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@docusaurus/core": "^2.0.0-alpha.61",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.61",
+    "@nx-plus/docusaurus": "^10.0.0",
+    "clsx": "^1.1.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
   "devDependencies": {
-    "@nrwl/angular": "10.3.0",
-    "@nrwl/eslint-plugin-nx": "10.3.0",
-    "@nrwl/jest": "10.3.0",
+    "@nrwl/angular": "10.2.1",
+    "@nrwl/eslint-plugin-nx": "10.2.1",
+    "@nrwl/jest": "10.2.1",
     "@nrwl/nx-cloud": "^10.1.6",
     "@nrwl/nx-plugin": "10.2.1",
     "@nrwl/react": "10.2.1",
@@ -85,6 +92,7 @@
     "svelte": "^3.29.0",
     "svelte-check": "^1.0.55",
     "svelte-preprocess": "^4.4.2",
+    "terser-webpack-plugin": "^4.1.0",
     "ts-jest": "26.4.0",
     "ts-node": "~9.0.0",
     "tslint": "~6.1.3",
