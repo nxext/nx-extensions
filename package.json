@@ -44,7 +44,14 @@
     "commit": "git-cz"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@nx-plus/docusaurus": "^10.0.0",
+    "@docusaurus/core": "^2.0.0-alpha.61",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.61",
+    "clsx": "^1.1.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
   "devDependencies": {
     "@nrwl/angular": "10.3.0",
     "@nrwl/eslint-plugin-nx": "10.3.0",

@@ -28,6 +28,9 @@
     "svelte-e2e": {
       "tags": [],
       "implicitDependencies": ["svelte"]
+    },
+    "docs": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
