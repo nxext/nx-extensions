@@ -1,9 +1,9 @@
 name: nxext macos CI
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   setup:
@@ -19,9 +19,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 3
-      - name: Get origin master
+      - name: Get origin main
         run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
       - uses: actions/cache@v1
         id: workspace-cache
         with:
@@ -47,10 +47,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 3
-      - name: Get origin master
+      - name: Get origin main
         if: github.event_name == 'pull_request'
         run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
       - uses: actions/cache@v1
         id: workspace-cache
         with:
@@ -58,12 +58,12 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Run On Master
+      - name: Run On main
         if: github.event_name == 'push'
         run: yarn affected:lint --parallel
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn affected:lint --base=origin/master --head=HEAD --parallel
+        run: yarn affected:lint --base=origin/main --head=HEAD --parallel
   test:
     runs-on: macos-latest
 
@@ -81,10 +81,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 3
-      - name: Get origin master
+      - name: Get origin main
         if: github.event_name == 'pull_request'
         run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
       - uses: actions/cache@v1
         id: workspace-cache
         with:
@@ -92,12 +92,12 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Run On Master
+      - name: Run On main
         if: github.event_name == 'push'
         run: yarn affected:test --parallel
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn affected:test --base=origin/master --head=HEAD --parallel
+        run: yarn affected:test --base=origin/main --head=HEAD --parallel
 
   e2e:
     runs-on: macos-latest
@@ -116,10 +116,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 3
-      - name: Get origin master
+      - name: Get origin main
         if: github.event_name == 'pull_request'
         run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
       - uses: actions/cache@v1
         id: workspace-cache
         with:
@@ -127,9 +127,9 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Run On Master
+      - name: Run On main
         if: github.event_name == 'push'
         run: yarn e2e
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn e2e --base=origin/master --head=HEAD
+        run: yarn e2e --base=origin/main --head=HEAD
