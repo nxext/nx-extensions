@@ -61,9 +61,15 @@ jobs:
       - name: Run On main
         if: github.event_name == 'push'
         run: yarn affected:lint --parallel
+        env:
+          NX_BRANCH: ${{ github.event.number }}
+          NX_RUN_GROUP: ${{ github.run_id }}
       - name: Run on PR
         if: github.event_name == 'pull_request'
         run: yarn affected:lint --base=origin/main --head=HEAD --parallel
+        env:
+          NX_BRANCH: ${{ github.event.number }}
+          NX_RUN_GROUP: ${{ github.run_id }}
 
   test:
     runs-on: windows-latest
@@ -96,9 +102,15 @@ jobs:
       - name: Run On main
         if: github.event_name == 'push'
         run: yarn affected:test --parallel
+        env:
+          NX_BRANCH: ${{ github.event.number }}
+          NX_RUN_GROUP: ${{ github.run_id }}
       - name: Run on PR
         if: github.event_name == 'pull_request'
         run: yarn affected:test --base=origin/main --head=HEAD --parallel
+        env:
+          NX_BRANCH: ${{ github.event.number }}
+          NX_RUN_GROUP: ${{ github.run_id }}
 
   e2e:
     runs-on: windows-latest
@@ -131,6 +143,12 @@ jobs:
       - name: Run On main
         if: github.event_name == 'push'
         run: yarn e2e --base=origin/main --head=HEAD
+        env:
+          NX_BRANCH: ${{ github.event.number }}
+          NX_RUN_GROUP: ${{ github.run_id }}
       - name: Run on PR
         if: github.event_name == 'pull_request'
         run: yarn e2e --base=origin/main --head=HEAD
+        env:
+          NX_BRANCH: ${{ github.event.number }}
+          NX_RUN_GROUP: ${{ github.run_id }}
