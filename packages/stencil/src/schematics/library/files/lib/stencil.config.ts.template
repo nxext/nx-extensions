@@ -7,14 +7,14 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
-      dir: '../../dist/libs/<%= projectName %>/dist',
+      dir: '<%= offsetFromRoot %>dist/libs/<%= projectName %>/dist',
     },
     {
       type: 'docs-readme'
     },
     {
       type: 'www',
-      dir: '../../dist/libs/<%= projectName %>/www',
+      dir: '<%= offsetFromRoot %>dist/libs/<%= projectName %>/www',
       serviceWorker: null // disable service workers
     }
   ],

@@ -15,11 +15,13 @@ export interface ComponentSchema {
   name: string;
   project: string;
   directory?: string;
+  unitTestRunner: 'jest' | 'none';
 }
 
 function createComponentInProject(options: ComponentSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const fileName = toClassName(options.name);
+    const testFileName = toFileName(options.name);
     const projectConfig = getProjectConfig(tree, options.project);
 
     const projectDirectory = options.directory
@@ -30,6 +32,7 @@ function createComponentInProject(options: ComponentSchema): Rule {
       applyWithSkipExisting(url('./files/src'), [
         applyTemplates({
           fileName: fileName,
+          testFileName: testFileName
         }),
         move(join(normalize(projectConfig.sourceRoot), projectDirectory)),
       ]),

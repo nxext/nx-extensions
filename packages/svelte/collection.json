@@ -4,16 +4,26 @@
   "version": "0.0.1",
   "schematics": {
     "application": {
-      "factory": "./src/schematics/application/schematic",
+      "factory": "./src/schematics/application/application",
       "schema": "./src/schematics/application/schema.json",
       "description": "Svelte application schematic",
-      "aliases": ["app"]
+      "aliases": [
+        "app"
+      ]
     },
     "component": {
-      "factory": "./src/schematics/component/schematic",
+      "factory": "./src/schematics/component/component",
       "schema": "./src/schematics/component/schema.json",
       "description": "Add component",
-      "aliases": ["c"]
+      "aliases": [
+        "c"
+      ]
+    },
+    "init": {
+      "factory": "./src/schematics/init/init",
+      "schema": "./src/schematics/init/schema.json",
+      "description": "init schematic",
+      "hidden": true
     }
   }
 }

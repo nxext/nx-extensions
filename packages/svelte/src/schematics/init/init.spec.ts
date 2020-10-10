@@ -1,16 +1,20 @@
 import { Tree } from '@angular-devkit/schematics';
+import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
+import { join } from 'path';
 
-import { SvelteSchematicSchema } from './schema';
-import { Linter, readJsonInTree } from '@nrwl/workspace';
+import { Schema } from './schema';
 import { runSchematic } from '../utils/testing';
+import { readJsonInTree } from '@nrwl/workspace';
 
-describe('svelte app schematic', () => {
+describe('init schematic', () => {
   let appTree: Tree;
-  const options: SvelteSchematicSchema = {
-    name: 'test',
-    linter: Linter.EsLint
-  };
+  const options: Schema = { unitTestRunner: 'jest', skipFormat: true };
+
+  const testRunner = new SchematicTestRunner(
+    '@nxext/init',
+    join(__dirname, '../../../collection.json')
+  );
 
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty());
@@ -18,12 +22,12 @@ describe('svelte app schematic', () => {
 
   it('should run successfully', async () => {
     await expect(
-      runSchematic('app', options, appTree)
+      runSchematic('init', options, appTree)
     ).resolves.not.toThrowError();
   });
 
   it('should add Svelte dependencies', async () => {
-    const result = await runSchematic('app', options, appTree);
+    const result = await runSchematic('init', options, appTree);
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['svelte']).toBeDefined();
     expect(packageJson.devDependencies['svelte-preprocess']).toBeDefined();
