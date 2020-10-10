@@ -6,7 +6,7 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 describe('svelte e2e', () => {
-  it('should create svelte', async (done) => {
+  it('should create svelte application', async (done) => {
     const plugin = uniq('svelte');
     ensureNxProject('@nxext/svelte', 'dist/packages/svelte');
     await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
@@ -26,6 +26,19 @@ describe('svelte e2e', () => {
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
+      done();
+    });
+  });
+
+  describe('linting', () => {
+    it('should be able to run linter', async (done) => {
+      const plugin = uniq('svelte');
+      ensureNxProject('@nxext/svelte', 'dist/packages/svelte');
+      await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
+
+      const result = await runNxCommandAsync(`lint ${plugin}`);
+      expect(result.stdout).toContain('All files pass linting');
+
       done();
     });
   });

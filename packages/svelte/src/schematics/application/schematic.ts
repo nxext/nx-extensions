@@ -8,17 +8,18 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import {
-  addDepsToPackageJson,
-  addProjectToNxJsonInTree,
+  addDepsToPackageJson, addLintFiles,
+  addProjectToNxJsonInTree, formatFiles,
   names,
   offsetFromRoot,
   projectRootDir,
   ProjectType,
   toFileName,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
 import { NormalizedSchema, SvelteSchematicSchema } from './schema';
 import { join, normalize } from 'path';
+import { extraEslintDependencies, svelteEslintJson } from '../utils/lint';
 
 const projectType = ProjectType.Application;
 
@@ -35,6 +36,7 @@ function normalizeOptions(options: SvelteSchematicSchema): NormalizedSchema {
     projectName,
     projectRoot,
     parsedTags,
+    skipFormat: false
   };
 }
 
@@ -104,6 +106,21 @@ export default function (options: SvelteSchematicSchema): Rule {
           serve: true,
         },
       });
+      targetCollection.add({
+        name: 'lint',
+        builder: '@nrwl/linter:lint',
+        options: {
+          linter: 'eslint',
+          tsConfig: join(
+            normalize(normalizedOptions.projectRoot),
+            'tsconfig.app.json'
+          ),
+          exclude: [
+            '**/node_modules/**',
+            `!${join(normalize(normalizedOptions.projectRoot), '**/*')}`
+          ]
+        }
+      });
       /*targetCollection.add({
         name: 'test',
         builder: '@nrwl/jest:jest',
@@ -117,5 +134,10 @@ export default function (options: SvelteSchematicSchema): Rule {
       tags: normalizedOptions.parsedTags,
     }),
     addFiles(normalizedOptions),
+    addLintFiles(normalizedOptions.projectRoot, options.linter, {
+      localConfig: svelteEslintJson,
+      extraPackageDeps: extraEslintDependencies,
+    }),
+    formatFiles(normalizedOptions),
   ]);
 }

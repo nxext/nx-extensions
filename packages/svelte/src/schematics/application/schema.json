@@ -17,6 +17,12 @@
       "type": "string",
       "description": "Add tags to the project (used for linting)",
       "alias": "t"
+    },
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint"],
+      "default": "eslint"
     }
   },
   "required": ["name"]
