@@ -59,7 +59,7 @@ function Home() {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      description="Bring StencilJS and Svelte to Nx devtools"
     >
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">

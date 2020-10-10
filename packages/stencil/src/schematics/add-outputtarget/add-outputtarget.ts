@@ -27,7 +27,6 @@ import {
   vueOutputTargetVersion,
 } from '../../utils/versions';
 import { getDistDir, getRelativePath } from '../../utils/fileutils';
-import { VuexSchematicSchema } from '@nx-plus/vue/src/schematics/vuex/schema';
 
 type OutputTargetType = 'angular' | 'react' | 'vue';
 
