@@ -19,11 +19,16 @@
       "x-prompt": "What project would you like to use?",
       "alias": "p"
     },
-
     "directory": {
       "type": "string",
       "description": "A directory where the project is placed",
       "alias": "d"
+    },
+    "unitTestRunner": {
+      "type": "string",
+      "enum": ["jest", "none"],
+      "description": "Test runner to use for unit tests.",
+      "default": "jest"
     }
   },
   "required": ["name", "project"]

@@ -1,11 +1,11 @@
 import { Tree } from '@angular-devkit/schematics';
-import { ComponentSchema } from './schematic';
+import { ComponentSchema } from './component';
 import { createTestProject, runSchematic } from '../utils/testing';
 
 describe('component schematic', () => {
   let appTree: Tree;
   const projectName = 'testprojekt';
-  const options: ComponentSchema = { name: 'test', project: projectName };
+  const options: ComponentSchema = { name: 'test', project: projectName, unitTestRunner: 'jest' };
 
   beforeEach(async () => {
     appTree = await createTestProject(projectName);

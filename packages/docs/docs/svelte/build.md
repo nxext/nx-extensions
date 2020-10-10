@@ -20,6 +20,13 @@ Supported flags are:
 | --serve   | bool  | false   | Serve on dev webserver |
 | --open    | bool  | false   | Open in browser |
 
+
+## Test
+
+```
+nx test my-app
+```
+
 ## Serve
 
 Serve with:
