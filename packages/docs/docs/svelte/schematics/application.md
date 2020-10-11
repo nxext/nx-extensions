@@ -32,7 +32,6 @@ Type: `enum`
 
 Add tags to the project (used for linting)
 
-
 ### --unitTestRunner
 
 Default: `jest`
