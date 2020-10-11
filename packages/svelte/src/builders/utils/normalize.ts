@@ -1,21 +1,20 @@
-import {
-  NormalizedSvelteBuildOptions,
-  SvelteBuildOptions,
-} from '../build/schema';
+import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
 import { normalize, resolve, join, relative } from '@angular-devkit/core';
 import { InitOptions } from './init';
 import { statSync } from 'fs-extra';
-import { BuilderContext } from '@angular-devkit/architect';
 
 export function normalizeOptions(
-  options: SvelteBuildOptions,
+  options: RawSvelteBuildOptions,
   projectConfig: InitOptions
-): NormalizedSvelteBuildOptions {
+): SvelteBuildOptions {
+  const rollupConfig = options.rollupConfig ?
+    join(normalize(projectConfig.workspaceRoot), options.rollupConfig) : null;
   return {
     ...options,
     ...projectConfig,
-    sourceRoot: normalize(`${projectConfig.projectRoot}/src`),
-  } as NormalizedSvelteBuildOptions;
+    rollupConfig,
+    sourceRoot: normalize(`${projectConfig.projectRoot}/src`)
+  } as SvelteBuildOptions;
 }
 
 export interface AssetCopyCommand {
@@ -28,8 +27,7 @@ export function normalizeAssetCopyCommands(
   assets: string[],
   workspaceRoot: string,
   projectRoot: string,
-  outputPath: string,
-  contex: BuilderContext
+  outputPath: string
 ): AssetCopyCommand[] {
   if (!assets) {
     return [];
@@ -57,7 +55,7 @@ export function normalizeAssetCopyCommands(
     return {
       src,
       dest,
-      flatten: false,
+      flatten: false
     };
   });
 }

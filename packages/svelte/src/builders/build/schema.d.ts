@@ -1,6 +1,6 @@
 import { JsonObject } from '@angular-devkit/core';
 
-export interface SvelteBuildOptions extends JsonObject {
+export interface RawSvelteBuildOptions extends JsonObject {
   outputPath: string;
   tsConfig: string;
   entryFile: string;
@@ -14,9 +14,11 @@ export interface SvelteBuildOptions extends JsonObject {
 
   host?: string;
   port?: number;
+
+  rollupConfig?: string;
 }
 
-export interface NormalizedSvelteBuildOptions extends SvelteBuildOptions {
+export interface SvelteBuildOptions extends RawSvelteBuildOptions {
   projectName: string;
   projectRoot: string;
   workspaceRoot: string;

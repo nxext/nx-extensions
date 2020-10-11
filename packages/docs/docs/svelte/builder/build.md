@@ -4,6 +4,7 @@ title: Build
 ---
 
 ## Usage
+
 ```
 nx build my-app
 ```
@@ -27,6 +28,12 @@ The name of the Typescript configuration file.
 Type: `string`
 
 The name of the main entry-point file.
+
+### --rollupConfig
+
+Type: `string`
+
+Path to a function which takes a rollup config and SvelteBuildOptions object and returns an updated rollup config
 
 ### --assets
 

@@ -3,10 +3,7 @@ import { RollupWatcherEvent } from 'rollup';
 import { from, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
-import {
-  NormalizedSvelteBuildOptions,
-  SvelteBuildOptions,
-} from '../build/schema';
+import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { normalizeAssetCopyCommands } from './normalize';
 import { toClassName } from '@nrwl/workspace';
@@ -26,7 +23,7 @@ const livereload = require('rollup-plugin-livereload');
 /* eslint-enable */
 
 export function createRollupOptions(
-  options: NormalizedSvelteBuildOptions,
+  options: SvelteBuildOptions,
   dependencies: DependentBuildableProjectNode[],
   context: BuilderContext
 ): rollup.RollupOptions {
@@ -36,8 +33,7 @@ export function createRollupOptions(
         options.assets,
         options.workspaceRoot,
         options.projectRoot,
-        options.outputPath,
-        context
+        options.outputPath
       ),
     }),
     typescript({
@@ -78,7 +74,7 @@ export function createRollupOptions(
     .map((dependency) => dependency.name)
     .concat(options.external || []);
 
-  return {
+  const rollupConfig = {
     input: options.entryFile,
     output: {
       format: 'iife',
@@ -88,6 +84,12 @@ export function createRollupOptions(
     external: (id) => externalPackages.includes(id),
     plugins,
   } as rollup.RollupOptions;
+
+  /* eslint-disable */
+  return options.rollupConfig
+    ? require(options.rollupConfig)(rollupConfig, options)
+    : rollupConfig;
+  /* eslint-enable */
 }
 
 export function runRollup(
@@ -111,7 +113,7 @@ export function runRollup(
 export function runRollupWatch(
   context: BuilderContext,
   rollupOptions: rollup.RollupOptions,
-  svelteBuildOptions: SvelteBuildOptions
+  svelteBuildOptions: RawSvelteBuildOptions
 ): Observable<BuilderOutput> {
   return new Observable<BuilderOutput>((obs) => {
     const watcher = rollup.watch(rollupOptions);

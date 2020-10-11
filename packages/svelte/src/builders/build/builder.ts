@@ -5,14 +5,14 @@ import {
 } from '@angular-devkit/architect';
 import { from, Observable, of } from 'rxjs';
 import { catchError, concatMap, switchMap, tap } from 'rxjs/operators';
-import { SvelteBuildOptions } from './schema';
+import { RawSvelteBuildOptions } from './schema';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import { calculateProjectDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { runRollup, runRollupWatch } from '../utils/rollup';
 import { initRollupOptions } from '../utils/init';
 
 export function runBuilder(
-  options: SvelteBuildOptions,
+  options: RawSvelteBuildOptions,
   context: BuilderContext
 ): Observable<BuilderOutput> {
   const projGraph = createProjectGraph();

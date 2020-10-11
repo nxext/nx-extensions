@@ -1,4 +1,4 @@
-import { SvelteBuildOptions } from './schema';
+import { RawSvelteBuildOptions } from './schema';
 import { MockBuilderContext } from '@nrwl/workspace/testing';
 import { getMockContext } from '@nrwl/nx-plugin/src/utils/testing';
 import { createRollupOptions } from '../utils/rollup';
@@ -7,7 +7,7 @@ import { InitOptions } from '../utils/init';
 
 describe('Command Runner Builder', () => {
   let context: MockBuilderContext;
-  let testOptions: SvelteBuildOptions;
+  let testOptions: RawSvelteBuildOptions;
   let initOptions: InitOptions;
 
   beforeEach(async () => {
