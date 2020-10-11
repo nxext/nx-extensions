@@ -9,7 +9,11 @@ import { readJsonInTree } from '@nrwl/workspace';
 
 describe('init schematic', () => {
   let appTree: Tree;
-  const options: Schema = { unitTestRunner: 'jest', skipFormat: true };
+  const options: Schema = {
+    skipFormat: true,
+    unitTestRunner: 'jest',
+    e2eTestRunner: 'cypress'
+  };
 
   const testRunner = new SchematicTestRunner(
     '@nxext/init',

@@ -33,15 +33,25 @@
       "description": "Serve on dev webserver",
       "default": false
     },
-    "dev": {
+    "prod": {
       "type": "boolean",
-      "description": "Is dev build",
+      "description": "Is prod build",
       "default": false
     },
     "open": {
       "type": "boolean",
       "description": "Open browser",
       "default": false
+    },
+    "port": {
+      "type": "number",
+      "description": "Port to listen on.",
+      "default": 4200
+    },
+    "host": {
+      "type": "string",
+      "description": "Host to listen on.",
+      "default": "localhost"
     }
   },
   "required": []

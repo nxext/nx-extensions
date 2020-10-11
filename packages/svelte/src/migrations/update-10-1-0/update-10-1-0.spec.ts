@@ -4,34 +4,32 @@ import { readJsonInTree, serializeJson } from '@nrwl/workspace';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import * as path from 'path';
 
-describe('update-10.0.0', () => {
-  let tree: Tree;
+describe('update-10-1-0', () => {
+  let initialTree: Tree;
   let schematicRunner: SchematicTestRunner;
 
   beforeEach(async () => {
-    tree = createEmptyWorkspace(Tree.empty());
+    initialTree = createEmptyWorkspace(Tree.empty());
 
     schematicRunner = new SchematicTestRunner(
-      '@nxext/stencil',
+      '@nrwl/nx-plugin',
       path.join(__dirname, '../../../migrations.json')
     );
 
-    tree.overwrite(
+    initialTree.overwrite(
       'package.json',
       serializeJson({
-        devDependencies: {
-          '@stencil/core': '1.15.0',
-        },
+        dependencies: {},
       })
     );
   });
 
   it(`should update dependencies`, async () => {
     const result = await schematicRunner
-      .runSchematicAsync('update-10-0-0', {}, tree)
+      .runSchematicAsync('update-10-1-0', {}, initialTree)
       .toPromise();
 
-    const { devDependencies } = readJsonInTree(result, '/package.json');
-    expect(devDependencies['@stencil/core']).toEqual('1.17.3');
+    const { dependencies } = readJsonInTree(result, '/package.json');
+    expect(dependencies).toEqual({});
   });
 });
