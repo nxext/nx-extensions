@@ -4,7 +4,7 @@ import { readJsonInTree, serializeJson } from '@nrwl/workspace';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import * as path from 'path';
 
-describe('update-10.0.0', () => {
+describe('update-10.2.1', () => {
   let tree: Tree;
   let schematicRunner: SchematicTestRunner;
 
@@ -28,10 +28,10 @@ describe('update-10.0.0', () => {
 
   it(`should update dependencies`, async () => {
     const result = await schematicRunner
-      .runSchematicAsync('update-10-0-0', {}, tree)
+      .runSchematicAsync('update-10-2-1', {}, tree)
       .toPromise();
 
     const { devDependencies } = readJsonInTree(result, '/package.json');
-    expect(devDependencies['@stencil/core']).toEqual('1.17.3');
+    expect(devDependencies['@stencil/core']).toEqual('2.0.0');
   });
 });

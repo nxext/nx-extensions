@@ -10,7 +10,8 @@ describe('svelte app schematic', () => {
   const options: SvelteSchematicSchema = {
     name: 'test',
     linter: Linter.EsLint,
-    unitTestRunner: 'jest'
+    unitTestRunner: 'jest',
+    e2eTestRunner: 'cypress',
   };
 
   beforeEach(() => {

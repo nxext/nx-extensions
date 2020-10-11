@@ -142,13 +142,13 @@ jobs:
             ${{ runner.os }}-${{ matrix.node-version }}-workspace-
       - name: Run On main
         if: github.event_name == 'push'
-        run: yarn e2e --base=origin/main --head=HEAD
+        run: yarn affected:e2e --base=origin/main --head=HEAD
         env:
           NX_BRANCH: ${{ github.event.number }}
           NX_RUN_GROUP: ${{ github.run_id }}
       - name: Run on PR
         if: github.event_name == 'pull_request'
-        run: yarn e2e --base=origin/main --head=HEAD
+        run: yarn affected:e2e --base=origin/main --head=HEAD
         env:
           NX_BRANCH: ${{ github.event.number }}
           NX_RUN_GROUP: ${{ github.run_id }}

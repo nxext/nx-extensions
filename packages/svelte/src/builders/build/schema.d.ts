@@ -9,8 +9,11 @@ export interface SvelteBuildOptions extends JsonObject {
 
   watch?: boolean;
   serve?: boolean;
-  dev?: boolean;
+  prod?: boolean;
   open?: boolean;
+
+  host?: string;
+  port?: number;
 }
 
 export interface NormalizedSvelteBuildOptions extends SvelteBuildOptions {

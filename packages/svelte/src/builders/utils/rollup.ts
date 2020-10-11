@@ -1,12 +1,17 @@
 import * as rollup from 'rollup';
+import { RollupWatcherEvent } from 'rollup';
 import { from, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { BuilderOutput, BuilderContext } from '@angular-devkit/architect';
-import { RollupWatcherEvent } from 'rollup';
-import { NormalizedSvelteBuildOptions } from '../build/schema';
+import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
+import {
+  NormalizedSvelteBuildOptions,
+  SvelteBuildOptions,
+} from '../build/schema';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { normalizeAssetCopyCommands } from './normalize';
 import { toClassName } from '@nrwl/workspace';
+import * as url from 'url';
+import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 
 /* eslint-disable */
 const resolve = require('@rollup/plugin-node-resolve');
@@ -17,6 +22,7 @@ const svelte = require('rollup-plugin-svelte');
 const copy = require('rollup-plugin-copy');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
+
 /* eslint-enable */
 
 export function createRollupOptions(
@@ -37,10 +43,10 @@ export function createRollupOptions(
     typescript({
       tsconfig: options.tsConfig,
       rootDir: options.projectRoot,
-      sourceMap: options.dev,
+      sourceMap: !options.prod,
     }),
     svelte({
-      dev: options.dev,
+      dev: !options.prod,
       css: (css) => {
         css.write('bundle.css');
       },
@@ -62,12 +68,8 @@ export function createRollupOptions(
         verbose: false,
         contentBase: options.outputPath,
 
-        host: 'localhost',
-        port: 5000,
-
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
+        host: options.host,
+        port: options.port,
       }),
     ];
   }
@@ -108,11 +110,24 @@ export function runRollup(
 
 export function runRollupWatch(
   context: BuilderContext,
-  options: rollup.RollupOptions
+  rollupOptions: rollup.RollupOptions,
+  svelteBuildOptions: SvelteBuildOptions
 ): Observable<BuilderOutput> {
   return new Observable<BuilderOutput>((obs) => {
-    const watcher = rollup.watch(options);
-    context.logger.info('Project ready on http://localhost:5000');
+    const watcher = rollup.watch(rollupOptions);
+
+    const serverUrl = url.format({
+      protocol: 'http',
+      hostname: svelteBuildOptions.host,
+      port: svelteBuildOptions.port.toString(),
+    });
+
+    context.logger.info(stripIndents`
+            **
+            Web Development Server is listening at ${serverUrl}
+            **
+          `);
+
     watcher.on('event', (data: RollupWatcherEvent) => {
       if (data.code === 'START') {
         context.logger.info('Bundling...');

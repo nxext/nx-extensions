@@ -144,6 +144,11 @@
                 "input": "./packages/svelte",
                 "glob": "builders.json",
                 "output": "."
+              },
+              {
+                "input": "./packages/svelte",
+                "glob": "migrations.json",
+                "output": "."
               }
             ]
           }

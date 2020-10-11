@@ -21,7 +21,7 @@ export function runBuilder(
   return from(initRollupOptions(options, dependencies, context)).pipe(
     switchMap((rollupOptions) => {
       if (options.watch) {
-        return runRollupWatch(context, rollupOptions);
+        return runRollupWatch(context, rollupOptions, options);
       } else {
         return of(rollupOptions).pipe(
           concatMap((options) =>

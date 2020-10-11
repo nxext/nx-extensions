@@ -1,10 +1,10 @@
 import {
-  checkFilesExist,
   ensureNxProject,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+
 describe('svelte e2e', () => {
   it('should create svelte application', async (done) => {
     const plugin = uniq('svelte');

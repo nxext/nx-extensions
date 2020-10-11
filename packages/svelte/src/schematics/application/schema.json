@@ -29,6 +29,22 @@
       "enum": ["jest", "none"],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
+    },
+    "e2eTestRunner": {
+      "type": "string",
+      "enum": ["cypress", "none"],
+      "description": "Test runner to use for end to end (e2e) tests.",
+      "default": "cypress"
+    },
+    "port": {
+      "type": "number",
+      "description": "Port to listen on.",
+      "default": 4200
+    },
+    "host": {
+      "type": "string",
+      "description": "Host to listen on.",
+      "default": "localhost"
     }
   },
   "required": ["name"]
