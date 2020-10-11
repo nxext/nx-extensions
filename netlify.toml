@@ -1,0 +1,2 @@
+[[plugins]]
+package = "./tools/plugins/netlify/stop-build"
