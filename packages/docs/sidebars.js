@@ -33,6 +33,7 @@ module.exports = {
           items: [
             'stencil/builder/build',
             'stencil/builder/test',
+            'stencil/builder/e2e',
             'stencil/builder/serve',
             'stencil/builder/storybook'
           ],
@@ -59,6 +60,7 @@ module.exports = {
           items: [
             'svelte/builder/build',
             'svelte/builder/test',
+            'svelte/builder/e2e',
             'svelte/builder/serve'
           ],
         },
