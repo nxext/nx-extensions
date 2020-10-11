@@ -1,6 +1,6 @@
 import { BuilderContext } from '@angular-devkit/architect';
 import { normalize, Path } from '@angular-devkit/core';
-import { SvelteBuildOptions } from '../build/schema';
+import { RawSvelteBuildOptions } from '../build/schema';
 import { normalizeOptions } from './normalize';
 import * as rollup from 'rollup';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
@@ -13,7 +13,7 @@ export interface InitOptions {
 }
 
 export async function initRollupOptions(
-  options: SvelteBuildOptions,
+  options: RawSvelteBuildOptions,
   dependencies: DependentBuildableProjectNode[],
   context: BuilderContext
 ): Promise<rollup.RollupOptions> {
