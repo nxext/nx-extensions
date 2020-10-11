@@ -14,9 +14,29 @@ module.exports = {
       items: [
         'stencil/overview',
         'stencil/installation',
-        'stencil/schematics',
-        'stencil/build',
-        'stencil/third-party',
+        {
+          type: 'category',
+          label: 'Schematics',
+          items: [
+            'stencil/schematics/core',
+            'stencil/schematics/application',
+            'stencil/schematics/library',
+            'stencil/schematics/add-outputtarget',
+            'stencil/schematics/ionic-app',
+            'stencil/schematics/ionic-pwa',
+            'stencil/schematics/storybook',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Builder',
+          items: [
+            'stencil/builder/build',
+            'stencil/builder/test',
+            'stencil/builder/serve',
+            'stencil/builder/storybook'
+          ],
+        },
       ],
     },
     {
@@ -25,8 +45,23 @@ module.exports = {
       items: [
         'svelte/overview',
         'svelte/installation',
-        'svelte/schematics',
-        'svelte/build',
+        {
+          type: 'category',
+          label: 'Schematics',
+          items: [
+            'svelte/schematics/init',
+            'svelte/schematics/application',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Builder',
+          items: [
+            'svelte/builder/build',
+            'svelte/builder/test',
+            'svelte/builder/serve'
+          ],
+        },
       ],
     },
   ],
