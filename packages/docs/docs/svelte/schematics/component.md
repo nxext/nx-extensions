@@ -3,19 +3,17 @@ id: component
 title: Component
 ---
 
-Generates a Stencil application
-
-This schematic also executes the [Core](core) schematic
+Generates a Svelte component
 
 ## Usage
 ```
-nx g @nxext/stencil:c my-app
+nx g @nxext/svelte:c my-app
 ```
 
 or
 
 ```
-nx g @nxext/stencil:component my-app
+nx g @nxext/svelte:component my-app
 ```
 
 ## Options

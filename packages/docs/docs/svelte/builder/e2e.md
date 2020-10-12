@@ -1,6 +1,6 @@
 ---
-id: serve
-title: Serve
+id: e2e
+title: E2e
 ---
 
 ## Usage
