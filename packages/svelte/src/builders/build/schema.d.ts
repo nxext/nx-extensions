@@ -16,6 +16,7 @@ export interface RawSvelteBuildOptions extends JsonObject {
   port?: number;
 
   rollupConfig?: string;
+  sveltePreprocessConfig?: string;
 }
 
 export interface SvelteBuildOptions extends RawSvelteBuildOptions {

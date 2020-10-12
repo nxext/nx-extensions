@@ -7,13 +7,21 @@ export function normalizeOptions(
   options: RawSvelteBuildOptions,
   projectConfig: InitOptions
 ): SvelteBuildOptions {
-  const rollupConfig = options.rollupConfig ?
-    join(normalize(projectConfig.workspaceRoot), options.rollupConfig) : null;
+  const rollupConfig = options.rollupConfig
+    ? join(normalize(projectConfig.workspaceRoot), options.rollupConfig)
+    : null;
+  const sveltePreprocessConfig = options.sveltePreprocessConfig
+    ? join(
+        normalize(projectConfig.workspaceRoot),
+        options.sveltePreprocessConfig
+      )
+    : null;
   return {
     ...options,
     ...projectConfig,
     rollupConfig,
-    sourceRoot: normalize(`${projectConfig.projectRoot}/src`)
+    sveltePreprocessConfig,
+    sourceRoot: normalize(`${projectConfig.projectRoot}/src`),
   } as SvelteBuildOptions;
 }
 
@@ -55,7 +63,7 @@ export function normalizeAssetCopyCommands(
     return {
       src,
       dest,
-      flatten: false
+      flatten: false,
     };
   });
 }
