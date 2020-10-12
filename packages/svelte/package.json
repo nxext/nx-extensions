@@ -1,6 +1,6 @@
 {
   "name": "@nxext/svelte",
-  "version": "10.1.1",
+  "version": "10.1.2",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",

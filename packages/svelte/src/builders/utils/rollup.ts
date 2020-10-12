@@ -27,6 +27,12 @@ export function createRollupOptions(
   dependencies: DependentBuildableProjectNode[],
   context: BuilderContext
 ): rollup.RollupOptions {
+  /* eslint-disable */
+  const sveltePreprocessConfig = options.sveltePreprocessConfig
+    ? require(options.sveltePreprocessConfig)(options)
+    : {};
+  /* eslint-enable */
+
   let plugins = [
     copy({
       targets: normalizeAssetCopyCommands(
@@ -46,7 +52,7 @@ export function createRollupOptions(
       css: (css) => {
         css.write('bundle.css');
       },
-      preprocess: sveltePreprocess(),
+      preprocess: sveltePreprocess(sveltePreprocessConfig),
     }),
     resolve({
       browser: true,
@@ -63,7 +69,6 @@ export function createRollupOptions(
         open: options.open,
         verbose: false,
         contentBase: options.outputPath,
-
         host: options.host,
         port: options.port,
       }),

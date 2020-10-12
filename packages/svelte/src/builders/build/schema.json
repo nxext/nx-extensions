@@ -22,6 +22,11 @@
       "description": "Path to a function which takes a rollup config and SvelteBuildOptions object and returns an updated rollup config",
       "defaul": null
     },
+    "sveltePreprocessConfig": {
+      "type": "string",
+      "description": "Path to a function which takes  SvelteBuildOptions object and returns an new sveltePreprocessor options object",
+      "defaul": null
+    },
     "assets": {
       "type": "array",
       "description": "List of static application assets.",

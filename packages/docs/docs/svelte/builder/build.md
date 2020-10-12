@@ -31,9 +31,17 @@ The name of the main entry-point file.
 
 ### --rollupConfig
 
+Default: `null`
+
 Type: `string`
 
 Path to a function which takes a rollup config and SvelteBuildOptions object and returns an updated rollup config
+
+### --sveltePreprocessConfig
+
+Default: `null`
+
+Path to a function which takes SvelteBuildOptions object and returns an new sveltePreprocessor options object.
 
 ### --assets
 
