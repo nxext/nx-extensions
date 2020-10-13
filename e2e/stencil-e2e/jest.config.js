@@ -1,7 +1,17 @@
 module.exports = {
   name: 'stencil-e2e',
-  preset: '../../jest.config.js',
-  coverageDirectory: '../../coverage/e2e/stencil-e2e',
+  preset: '../../jest.preset.js',
   testTimeout: 300000,
-  runner: './serial-jest-runner.js',
+  globals: {
+    'ts-jest': {
+      tsConfig: '<rootDir>/tsconfig.spec.json',
+    },
+  },
+  transform: {
+    '^.+\\.[tj]s$': 'ts-jest',
+  },
+  moduleFileExtensions: ['ts', 'js', 'html'],
+  coverageDirectory: '../../coverage/e2e/stencil-e2e',
+  runner: '../serial-jest-runner.js',
 };
+

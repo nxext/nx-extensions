@@ -1,6 +1,7 @@
 module.exports = {
   name: 'svelte-e2e',
-  preset: '../../jest.config.js',
+  preset: '../../jest.preset.js',
+  testTimeout: 300000,
   globals: {
     'ts-jest': {
       tsConfig: '<rootDir>/tsconfig.spec.json',
@@ -11,4 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/svelte-e2e',
+  runner: '../serial-jest-runner.js'
 };
