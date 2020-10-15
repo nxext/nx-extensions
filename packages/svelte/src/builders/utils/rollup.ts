@@ -19,6 +19,7 @@ const svelte = require('rollup-plugin-svelte');
 const copy = require('rollup-plugin-copy');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
+const { terser } = require('rollup-plugin-terser');
 
 /* eslint-enable */
 
@@ -59,6 +60,13 @@ export function createRollupOptions(
       dedupe: ['svelte'],
     }),
     commonjs(),
+
+    options.prod &&
+      terser({
+        output: {
+          comments: false,
+        },
+      }),
   ];
 
   if (options.serve) {
