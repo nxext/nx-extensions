@@ -16317,10 +16317,10 @@ supports-hyperlinks@^2.0.0:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
 
-svelte-check@^1.0.58:
-  version "1.0.58"
-  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.0.58.tgz#50855b6ece94acd0974f4957b7ab87af6f0c9bf2"
-  integrity sha512-X6HuqsWWEcsEelV3PP9YMue7kIyS55sfAHCveXRxmGt+I3v6NOt71NtQbH4ZXMp5p/yJc5b41bAGAe1z5K+klw==
+svelte-check@^1.0.59:
+  version "1.0.59"
+  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.0.59.tgz#9af3eeb607bee9e343ba7d5ca3d61c1a03168cba"
+  integrity sha512-NE8xe0A+zivc4mzcD4JIJ7eymOE/+j2HJ/XXcm41oBUgDFAeFaiZFKHuxrbRQ7MTCSB3cMvBCku2WkAqALZ7Ew==
   dependencies:
     chalk "^4.0.0"
     chokidar "^3.4.1"
