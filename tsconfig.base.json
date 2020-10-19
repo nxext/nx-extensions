@@ -18,8 +18,7 @@
     "paths": {
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
-      "@nxext/tailwind": ["packages/tailwind/src/index.ts"],
-      "@nxext/stencil-core-utils": ["packages/stencil-core-utils/src/index.ts"]
+      "@nxext/tailwind": ["packages/tailwind/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
