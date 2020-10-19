@@ -1,0 +1,13 @@
+function setSveltePreprocessOptions(options) {
+  return {
+    postcss: {
+      plugins: [
+        require('postcss-import')(),
+        require('postcss-nested')(), // Remove if you can't wan't to use nested structures.
+        require('tailwindcss')(options.projectRoot + '/tailwind.config.js'),
+      ]
+    }
+  };
+}
+
+module.exports = setSveltePreprocessOptions;
