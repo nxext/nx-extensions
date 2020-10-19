@@ -1,0 +1,15 @@
+module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
+  purge: {
+    enabled: true,
+    content: ['<%= sourceRoot %>/**/*.svelte'],
+  },
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+}
