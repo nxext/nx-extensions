@@ -32,6 +32,9 @@
     },
     "docs": {
       "tags": []
+    },
+    "tailwind": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

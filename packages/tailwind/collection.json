@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "tailwind",
+  "version": "0.0.1",
+  "schematics": {
+    "svelte": {
+      "factory": "./src/schematics/svelte/schematic",
+      "schema": "./src/schematics/svelte/schema.json",
+      "description": "svelte schematic"
+    }
+  }
+}
