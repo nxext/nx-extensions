@@ -39,6 +39,9 @@
     },
     "docs-docusaurus": {
       "tags": []
+    },
+    "tailwind": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {
