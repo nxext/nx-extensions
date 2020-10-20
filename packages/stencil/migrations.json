@@ -39,6 +39,11 @@
       "version": "10.2.1",
       "description": "update-10-2-1",
       "factory": "./src/migrations/update-10-2-1/update-10-2-1"
+    },
+    "update-10-3-0": {
+      "version": "10.3.0",
+      "description": "update-10-3-0",
+      "factory": "./src/migrations/update-10-3-0/update-10-3-0"
     }
   },
   "packageJsonUpdates": {
@@ -65,6 +70,15 @@
       "packages": {
         "@stencil/core": {
           "version": "2.0.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "10.3.0": {
+      "version": "10.3.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "2.1.0",
           "alwaysAddToPackageJson": false
         }
       }
