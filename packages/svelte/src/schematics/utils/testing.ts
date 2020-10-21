@@ -8,6 +8,8 @@ import {
 } from '@nrwl/workspace/testing';
 import { externalSchematic, Rule, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
+import { Schema as InitSchema } from '../init/schema';
+import { SvelteSchematicSchema as ApplicationSchema } from '../application/schema';
 
 const testRunner = new SchematicTestRunner(
   '@nxext/svelte',
@@ -49,7 +51,7 @@ export async function mockContext() {
   return [architect, context] as [Architect, MockBuilderContext];
 }
 
-export function runSchematic<SchemaOptions = any>(
+export function runSchematic<SchemaOptions = InitSchema | ApplicationSchema>(
   schematicName: string,
   options: SchemaOptions,
   tree: Tree

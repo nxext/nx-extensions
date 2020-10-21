@@ -32,8 +32,8 @@
     "@nrwl/storybook": "^10.0.0",
     "@nrwl/react": "^10.0.0",
     "@nrwl/angular": "^10.0.0",
-    "@nxtend/capacitor": "^1.0.0",
-    "@stencil/core": "^2.0.0"
+    "@nxtend/capacitor": "^1.1.0",
+    "@stencil/core": "^2.1.0"
   },
   "ng-update": {
     "migrations": "./migrations.json"

@@ -13,7 +13,7 @@ describe('Command Runner Test', () => {
       createStencilProcess: jest.fn(() => function (source: Observable<any>): Observable<BuilderOutput> {
         return source.pipe(switchMap(() => of({ success: true })));
       }),
-      createStencilConfig: jest.fn(() => of({} as any))
+      createStencilConfig: jest.fn(() => of({}))
     }))
   });
 

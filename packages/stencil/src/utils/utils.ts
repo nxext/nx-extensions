@@ -7,12 +7,12 @@ import {
   SchematicContext,
   SchematicsException,
   Source,
-  Tree,
+  Tree
 } from '@angular-devkit/schematics';
 import {
   JsonAstObject,
   JsonParseMode,
-  parseJsonAst,
+  parseJsonAst
 } from '@angular-devkit/core';
 import { ProjectType } from '@nrwl/workspace';
 import { LibrarySchema } from '../schematics/library/schema';
@@ -42,7 +42,7 @@ export function applyWithSkipExisting(source: Source, rules: Rule[]): Rule {
             return null;
           }
           return fileEntry;
-        }),
+        })
       ])
     );
 
@@ -65,8 +65,8 @@ export function addDefaultBuilders(
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
       serve: true,
-      watch: true,
-    },
+      watch: true
+    }
   });
 }
 
@@ -81,8 +81,8 @@ export function addBuilderToTarget(
     builder: `@nxext/stencil:${builder}`,
     options: {
       projectType,
-      configPath: `${options.projectRoot}/stencil.config.ts`,
-    },
+      configPath: `${options.projectRoot}/stencil.config.ts`
+    }
   });
 }
 
@@ -96,11 +96,13 @@ export function addToGitignore(path: string): Rule {
     ig.add(tree.read('.gitignore').toString('utf-8'));
 
     if (!ig.ignores(path)) {
-      const content = `${tree
-        .read('.gitignore')!
-        .toString('utf-8')
-        .trimRight()}\n${path}\n`;
-      tree.overwrite('.gitignore', content);
+      const gitignore = tree.read('.gitignore');
+      if (gitignore) {
+        const content = `${gitignore
+          .toString('utf-8')
+          .trimRight()}\n${path}\n`;
+        tree.overwrite('.gitignore', content);
+      }
     }
   };
 }

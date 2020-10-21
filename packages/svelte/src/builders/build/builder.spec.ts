@@ -4,6 +4,7 @@ import { getMockContext } from '@nrwl/nx-plugin/src/utils/testing';
 import { createRollupOptions } from '../utils/rollup';
 import { normalizeOptions } from '../utils/normalize';
 import { InitOptions } from '../utils/init';
+import { RollupOptions } from 'rollup';
 
 describe('Command Runner Builder', () => {
   let context: MockBuilderContext;
@@ -30,7 +31,7 @@ describe('Command Runner Builder', () => {
 
   describe('createRollupOptions', () => {
     xit('should', () => {
-      const result: any = createRollupOptions(
+      const result: RollupOptions = createRollupOptions(
         normalizeOptions(testOptions, initOptions),
         [],
         context

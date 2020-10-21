@@ -6,7 +6,6 @@ import {
   move,
   Rule,
   url,
-  SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
 import {
