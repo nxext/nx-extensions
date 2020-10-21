@@ -98,7 +98,8 @@ function createRootStorybookDir(): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.debug('adding .storybook folder to lib');
 
-    return chain([applyWithSkipExisting(url('./files/root'), [template({})])])(
+    return chain([
+      applyWithSkipExisting(url('./files/root'), [template({})])])(
       tree,
       context
     );
@@ -129,7 +130,7 @@ function configureTsConfig(projectName: string): Rule {
     const tsConfigPath = projectPath + '/tsconfig.json';
     const projectTsConfig = parseJsonAtPath(tree, tsConfigPath);
 
-    let tsConfigContent: any;
+    let tsConfigContent;
 
     if (projectTsConfig && projectTsConfig.value) {
       tsConfigContent = projectTsConfig.value;

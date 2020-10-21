@@ -1,7 +1,5 @@
 import { Tree } from '@angular-devkit/schematics';
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import { join } from 'path';
 
 import { Schema } from './schema';
 import { runSchematic } from '../utils/testing';
@@ -14,11 +12,6 @@ describe('init schematic', () => {
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress'
   };
-
-  const testRunner = new SchematicTestRunner(
-    '@nxext/init',
-    join(__dirname, '../../../collection.json')
-  );
 
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty());
