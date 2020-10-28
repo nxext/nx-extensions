@@ -27,6 +27,10 @@
       "type": "boolean",
       "default": false
     },
+    "buildable": {
+      "type": "boolean",
+      "default": false
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

@@ -19,7 +19,7 @@ describe('e2e', () => {
       it(`should generate react lib`, async (done) => {
         const plugin = uniq('lib');
         await runNxCommandAsync(
-          `generate @nxext/stencil:lib ${plugin} --style='css'`
+          `generate @nxext/stencil:lib ${plugin} --style='css' --buildable`
         );
         await runNxCommandAsync(
           `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=react`
@@ -35,7 +35,7 @@ describe('e2e', () => {
       it(`should generate angular lib`, async (done) => {
         const plugin = uniq('lib');
         await runNxCommandAsync(
-          `generate @nxext/stencil:lib ${plugin} --style='css'`
+          `generate @nxext/stencil:lib ${plugin} --style='css' --buildable`
         );
         await runNxCommandAsync(
           `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
@@ -55,7 +55,7 @@ describe('e2e', () => {
     it('should create src in the specified directory', async (done) => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --directory subdir --style=css`
+        `generate @nxext/stencil:lib ${plugin} --directory subdir --style=css --buildable`
       );
       expect(() =>
         checkFilesExist(`libs/subdir/${plugin}/stencil.config.ts`)
@@ -76,7 +76,7 @@ describe('e2e', () => {
     it(`should build app with scss`, async (done) => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --style='scss'`
+        `generate @nxext/stencil:lib ${plugin} --style='scss' --buildable`
       );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
@@ -143,7 +143,7 @@ describe('e2e', () => {
       const plugin = uniq('library');
 
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --style=scss`
+        `generate @nxext/stencil:lib ${plugin} --style=scss --buildable`
       );
 
       const uniqConfigFilename = uniq('stencil.config');
@@ -163,7 +163,7 @@ describe('e2e', () => {
     it(`should build with custom configPath`, async (done) => {
       const plugin = uniq('library');
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --style=scss`
+        `generate @nxext/stencil:lib ${plugin} --style=scss --buildable`
       );
 
       const result = await runNxCommandAsync(
@@ -171,18 +171,6 @@ describe('e2e', () => {
       );
       expect(result.stdout).toContain('build finished');
 
-      done();
-    });
-
-    it('should build with --directory', async (done) => {
-      const plugin = uniq('app');
-
-      await runNxCommandAsync(
-        `generate @nxext/stencil:application ${plugin} --directory subdir --style=css`
-      );
-
-      const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain('build finished');
       done();
     });
   });

@@ -26,7 +26,7 @@ import { LibrarySchema } from './schema';
 import core from '../core/core';
 import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
-import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
+import { addBuilderToTarget, calculateStyle } from '../../utils/utils';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { insertImport, libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
@@ -73,7 +73,7 @@ function addFiles(options: LibrarySchema): Rule {
 }
 
 function updateTsConfig(options: LibrarySchema): Rule {
-  return (host: Tree) => {
+  return () => {
     return chain([
       (host: Tree, context: SchematicContext) => {
         const nxJson = readJsonInTree<NxJson>(host, 'nx.json');
@@ -83,12 +83,14 @@ function updateTsConfig(options: LibrarySchema): Rule {
           c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [
             `${libsDir(host)}/${options.projectDirectory}/src/index.ts`,
           ];
-          delete c.paths[
-            `@${nxJson.npmScope}/${options.projectDirectory}/loader`
+          if(options.buildable) {
+            delete c.paths[
+              `@${nxJson.npmScope}/${options.projectDirectory}/loader`
+              ];
+            c.paths[`@${nxJson.npmScope}/${options.projectDirectory}/loader`] = [
+              `dist/${libsDir(host)}/${options.projectDirectory}/loader`,
             ];
-          c.paths[`@${nxJson.npmScope}/${options.projectDirectory}/loader`] = [
-            `dist/${libsDir(host)}/${options.projectDirectory}/loader`,
-          ];
+          }
           return json;
         })(host, context);
       },
@@ -163,6 +165,22 @@ function updateStencilConfig(options: LibrarySchema): Rule {
   };
 }
 
+function removeUnusedFiles(options: LibrarySchema): Rule {
+  return (tree: Tree) => {
+    if(!options.buildable) {
+      const projectDir = options.directory
+        ? `${options.directory}/${options.name}`
+        : options.name;
+
+      tree.delete(`${libsDir(tree)}/${projectDir}/stencil.config.ts`);
+      tree.delete(`${libsDir(tree)}/${projectDir}/src/components.d.ts`);
+      tree.delete(`${libsDir(tree)}/${projectDir}/src/index.html`);
+    }
+
+    return tree;
+  };
+}
+
 export default function (options: CoreSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
@@ -181,11 +199,22 @@ export default function (options: CoreSchema): Rule {
             },
           },
         }).targets;
-        addDefaultBuilders(
-          targetCollection,
-          projectType,
-          normalizedOptions
-        );
+        addBuilderToTarget(targetCollection, 'test', projectType, normalizedOptions);
+
+        if(normalizedOptions.buildable) {
+          addBuilderToTarget(targetCollection, 'e2e', projectType, normalizedOptions);
+          addBuilderToTarget(targetCollection, 'build', projectType, normalizedOptions);
+          targetCollection.add({
+            name: 'serve',
+            builder: `@nxext/stencil:build`,
+            options: {
+              projectType,
+              configPath: `${options.projectRoot}/stencil.config.ts`,
+              serve: true,
+              watch: true
+            }
+          });
+        }
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
         tags: normalizedOptions.parsedTags,
@@ -193,6 +222,7 @@ export default function (options: CoreSchema): Rule {
       addFiles(normalizedOptions),
       updateTsConfig(normalizedOptions),
       updateStencilConfig(normalizedOptions),
+      removeUnusedFiles(normalizedOptions),
     ]);
   };
 }

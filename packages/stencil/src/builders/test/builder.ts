@@ -10,7 +10,7 @@ import {
   createStencilConfig,
   createStencilProcess,
   parseRunParameters,
-} from '../utils';
+} from '../stencil-runtime';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,

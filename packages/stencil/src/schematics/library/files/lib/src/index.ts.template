@@ -1,1 +1,5 @@
+<% if(buildable) { %>
 export * from './components';
+<% } else { %>
+export * from './components/my-component/my-component';
+<% } %>

@@ -71,7 +71,8 @@ export async function createTestUILib(
   appTree = await callRule(
     externalSchematic('@nxext/stencil', 'library', {
       name: libName,
-      style: style
+      style: style,
+      buildable: true
     }),
     appTree
   );
