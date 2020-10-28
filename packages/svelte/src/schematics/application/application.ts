@@ -6,7 +6,7 @@ import {
   move,
   Rule,
   url,
-  Tree,
+  Tree
 } from '@angular-devkit/schematics';
 import {
   addLintFiles,
@@ -17,7 +17,7 @@ import {
   projectRootDir,
   ProjectType,
   toFileName,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
 import { NormalizedSchema, SvelteSchematicSchema } from './schema';
 import { join, normalize } from '@angular-devkit/core';
@@ -40,7 +40,7 @@ function normalizeOptions(options: SvelteSchematicSchema): NormalizedSchema {
     projectName,
     projectRoot,
     parsedTags,
-    skipFormat: false,
+    skipFormat: false
   };
 }
 
@@ -50,7 +50,7 @@ function addProject(options: NormalizedSchema): Rule {
       name: options.projectName,
       root: options.projectRoot,
       sourceRoot: `${options.projectRoot}/src`,
-      projectType,
+      projectType
     }).targets;
 
     targetCollection.add(getBuildOptions(options));
@@ -73,7 +73,7 @@ function getBuildOptions(options: NormalizedSchema) {
   if (options.host !== 'localhost') {
     serverOptions = {
       ...serverOptions,
-      ...{ host: options.host },
+      ...{ host: options.host }
     };
   }
 
@@ -85,18 +85,18 @@ function getBuildOptions(options: NormalizedSchema) {
         outputPath: join(normalize('dist'), options.projectRoot),
         entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
         tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
-        assets: [join(normalize(options.projectRoot), 'public')],
+        assets: ['public']
       },
-      ...serverOptions,
+      ...serverOptions
     },
     configurations: {
       production: {
         ...{
-          dev: false,
+          dev: false
         },
-        ...serverOptions,
-      },
-    },
+        ...serverOptions
+      }
+    }
   };
 }
 
@@ -108,15 +108,15 @@ function getServeOptions(options: NormalizedSchema) {
       outputPath: join(normalize('dist'), options.projectRoot),
       entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
       tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
-      assets: [join(normalize(options.projectRoot), 'public')],
+      assets: ['public'],
       watch: true,
-      serve: true,
+      serve: true
     },
     configurations: {
       production: {
-        prod: true,
-      },
-    },
+        prod: true
+      }
+    }
   };
 }
 
@@ -129,9 +129,9 @@ function getLintOptions(options: NormalizedSchema) {
       tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
       exclude: [
         '**/node_modules/**',
-        `!${join(normalize(options.projectRoot), '**/*')}`,
-      ],
-    },
+        `!${join(normalize(options.projectRoot), '**/*')}`
+      ]
+    }
   };
 }
 
@@ -141,8 +141,8 @@ function getJestOptions(options: NormalizedSchema) {
     builder: '@nrwl/jest:jest',
     options: {
       jestConfig: join(normalize(options.projectRoot), 'jest.config.js'),
-      passWithNoTests: true,
-    },
+      passWithNoTests: true
+    }
   };
 }
 
@@ -153,9 +153,9 @@ function addFiles(options: NormalizedSchema): Rule {
         ...options,
         ...names(options.name),
         offsetFromRoot: offsetFromRoot(options.projectRoot),
-        projectRoot: options.projectRoot,
+        projectRoot: options.projectRoot
       }),
-      move(options.projectRoot),
+      move(options.projectRoot)
     ])
   );
 }
@@ -169,21 +169,21 @@ function handleJest(options: NormalizedSchema) {
   };
 }
 
-export default function (options: SvelteSchematicSchema): Rule {
+export default function(options: SvelteSchematicSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
     init({ ...normalizedOptions, skipFormat: true }),
     addProject(normalizedOptions),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags,
+      tags: normalizedOptions.parsedTags
     }),
     addFiles(normalizedOptions),
     addLintFiles(normalizedOptions.projectRoot, options.linter, {
       localConfig: svelteEslintJson,
-      extraPackageDeps: extraEslintDependencies,
+      extraPackageDeps: extraEslintDependencies
     }),
     handleJest(normalizedOptions),
     addCypress(normalizedOptions),
-    formatFiles(normalizedOptions),
+    formatFiles(normalizedOptions)
   ]);
 }

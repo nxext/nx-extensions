@@ -5,10 +5,10 @@ import { map, switchMap } from 'rxjs/operators';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { normalizeAssetCopyCommands } from './normalize';
 import { toClassName } from '@nrwl/workspace';
 import * as url from 'url';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
+import { convertCopyAssetsToRollupOptions } from './normalize';
 
 /* eslint-disable */
 const resolve = require('@rollup/plugin-node-resolve');
@@ -20,7 +20,6 @@ const copy = require('rollup-plugin-copy');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
 const { terser } = require('rollup-plugin-terser');
-
 /* eslint-enable */
 
 export function createRollupOptions(
@@ -36,11 +35,9 @@ export function createRollupOptions(
 
   let plugins = [
     copy({
-      targets: normalizeAssetCopyCommands(
-        options.assets,
-        options.workspaceRoot,
-        options.projectRoot,
-        options.outputPath
+      targets: convertCopyAssetsToRollupOptions(
+        options.outputPath,
+        options.assets
       ),
     }),
     typescript({
@@ -138,10 +135,10 @@ export function runRollupWatch(
     });
 
     context.logger.info(stripIndents`
-            **
-            Web Development Server is listening at ${serverUrl}
-            **
-          `);
+      **
+      Web Development Server is listening at ${serverUrl}
+      **
+    `);
 
     watcher.on('event', (data: RollupWatcherEvent) => {
       if (data.code === 'START') {
