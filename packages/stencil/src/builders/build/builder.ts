@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess, parseRunParameters } from '../stencil-runtime';
+import { createStencilConfig, createStencilProcess } from '../stencil-runtime';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import {
   calculateProjectDependencies,
@@ -11,6 +11,7 @@ import {
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { inspect } from 'util';
+import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,

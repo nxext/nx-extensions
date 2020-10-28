@@ -3,7 +3,7 @@ import { map, tap } from 'rxjs/operators';
 import { deleteFile, getRelativePath } from '../../utils/fileutils';
 import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
-import { ConfigAndPathCollection } from './stencil-runtime';
+import { ConfigAndPathCollection } from './types';
 
 export function prepareE2eTesting() {
   return function(

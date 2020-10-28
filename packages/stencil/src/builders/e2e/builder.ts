@@ -8,9 +8,9 @@ import { StencilE2EOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {
   createStencilConfig,
-  createStencilProcess,
-  parseRunParameters,
+  createStencilProcess
 } from '../stencil-runtime';
+import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
