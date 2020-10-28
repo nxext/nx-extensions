@@ -1,5 +1,5 @@
 export {
-  parseRunParameters,
-  createStencilProcess,
-  createStencilConfig,
+  createStencilConfig
 } from './stencil-runtime';
+
+export { createStencilProcess } from './stencil-process';

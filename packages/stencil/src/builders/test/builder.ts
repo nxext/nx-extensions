@@ -9,8 +9,8 @@ import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {
   createStencilConfig,
   createStencilProcess,
-  parseRunParameters,
 } from '../stencil-runtime';
+import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
