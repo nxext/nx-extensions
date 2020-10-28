@@ -6,6 +6,7 @@ export interface LibrarySchema extends CoreSchema {
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
+  buildable: boolean;
   appType: AppType;
   style: SupportedStyles;
 }

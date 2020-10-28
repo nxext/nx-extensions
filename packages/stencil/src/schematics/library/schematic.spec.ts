@@ -86,4 +86,97 @@ describe('schematic:library', () => {
       });
     });
   });
+
+  describe('default libraries', () => {
+
+    let options;
+    let projectName;
+    beforeEach(() => {
+      projectName = 'testlib';
+      options = { name: projectName, appType: AppType.Library };
+    });
+
+    it('shouldnt create build targets if not buildable', async () => {
+      const result = await runSchematic(
+        'lib',
+        options,
+        tree
+      );
+
+      const projectConfig = getProjectConfig(result, projectName);
+      expect(projectConfig.architect['build']).toBeUndefined();
+      expect(projectConfig.architect['e2e']).toBeUndefined();
+      expect(projectConfig.architect['serve']).toBeUndefined();
+    });
+
+    it('should export component', async () => {
+      const result = await runSchematic(
+        'lib',
+        options,
+        tree
+      );
+
+      expect(result.readContent('libs/testlib/src/index.ts'))
+        .toContain("export * from './components/my-component/my-component';");
+    });
+
+    it('shouldnt create build files', async () => {
+      const result = await runSchematic(
+        'lib',
+        options,
+        tree
+      );
+
+      expect(result.exists('libs/testlib/stencil.config.ts')).toBeFalsy();
+      expect(result.exists('libs/testlib/src/index.html')).toBeFalsy();
+      expect(result.exists('libs/testlib/src/components.d.ts')).toBeFalsy();
+    });
+  });
+
+  describe('buildable libraries', () => {
+
+    let options;
+    let projectName;
+    beforeEach(() => {
+      projectName = 'testlib';
+      options = { name: projectName, appType: AppType.Library, buildable: true };
+    });
+
+    it('should create build targets', async () => {
+      const projectName = 'testlib';
+      const result = await runSchematic(
+        'lib',
+        options,
+        tree
+      );
+
+      const projectConfig = getProjectConfig(result, projectName);
+      expect(projectConfig.architect['build']).toBeDefined();
+      expect(projectConfig.architect['e2e']).toBeDefined();
+      expect(projectConfig.architect['serve']).toBeDefined();
+    });
+
+    it('should export bundle', async () => {
+      const result = await runSchematic(
+        'lib',
+        options,
+        tree
+      );
+
+      expect(result.readContent('libs/testlib/src/index.ts'))
+        .toContain("export * from './components';");
+    });
+
+    it('should create build files', async () => {
+      const result = await runSchematic(
+        'lib',
+        options,
+        tree
+      );
+
+      expect(result.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
+      expect(result.exists('libs/testlib/src/index.html')).toBeTruthy();
+      expect(result.exists('libs/testlib/src/components.d.ts')).toBeTruthy();
+    });
+  });
 });

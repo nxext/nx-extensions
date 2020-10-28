@@ -40,6 +40,9 @@
     },
     "prerender": {
       "type": "boolean"
+    },
+    "ssr": {
+      "type": "boolean"
     }
   },
   "required": []

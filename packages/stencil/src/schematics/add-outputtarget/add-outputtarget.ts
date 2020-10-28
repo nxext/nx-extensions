@@ -2,8 +2,8 @@ import {
   chain,
   externalSchematic,
   noop,
-  Rule,
-  Tree,
+  Rule, SchematicContext,
+  Tree
 } from '@angular-devkit/schematics';
 import { Schema as ReactLibrarySchema } from '@nrwl/react/src/schematics/library/schema';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
@@ -27,6 +27,7 @@ import {
   vueOutputTargetVersion,
 } from '../../utils/versions';
 import { getDistDir, getRelativePath } from '../../utils/fileutils';
+import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 
 type OutputTargetType = 'angular' | 'react' | 'vue';
 
@@ -172,10 +173,18 @@ function addToOutputTargetToConfig(
   projectName: string,
   outputType: OutputTargetType
 ): Rule {
-  return (tree: Tree) => {
+  return (tree: Tree, context: SchematicContext) => {
     const stencilProjectConfig = getProjectConfig(tree, projectName);
 
     const stencilConfigPath = `${stencilProjectConfig.root}/stencil.config.ts`;
+
+
+    if(tree.exists(stencilConfigPath)) {
+      context.logger.info(stripIndents`
+        Please use a buildable library for custom outputtargets
+      `)
+    }
+
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath

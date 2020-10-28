@@ -1,25 +1,18 @@
-import {
-  CompilerSystem,
-  Config,
-  ConfigFlags,
-  Logger,
-  runTask,
-  TaskCommand
-} from '@stencil/core/cli';
+import { CompilerSystem, Config, ConfigFlags, Logger, runTask, TaskCommand } from '@stencil/core/cli';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { StencilBuildOptions } from '../build/schema';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { from, Observable, of } from 'rxjs';
-import { copyFile, ProjectType } from '@nrwl/workspace';
+import { copyFile } from '@nrwl/workspace';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
 import { StencilE2EOptions } from '../e2e/schema';
-import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utils/fileutils';
+import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
-import { ensureDirExists, deleteFile, getRelativePath } from '../../utils/fileutils';
+import { ensureDirExists } from '../../utils/fileutils';
 import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
-import { log } from 'util';
+import { cleanupE2eTesting, prepareE2eTesting } from './e2e-testing';
 
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
   await sys.dynamicImport(sys.getCompilerExecutingPath());
@@ -33,7 +26,7 @@ function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
 }
 
-type ConfigAndPathCollection = {
+export type ConfigAndPathCollection = {
   config: Config;
   distDir: Path;
   coreCompiler: CoreCompiler;
@@ -145,67 +138,14 @@ interface ConfigAndCoreCompiler {
   coreCompiler: CoreCompiler;
 }
 
-function prepareDistDirAndPkgJson(options) {
+function prepareDistDirAndPkgJson() {
   return function(
     source: Observable<ConfigAndPathCollection>
   ): Observable<ConfigAndPathCollection> {
     return source.pipe(
       tap((values: ConfigAndPathCollection) => {
         ensureDirExists(values.distDir);
-
-        if (options.projectType == ProjectType.Library) {
-          copyOrCreatePackageJson(values);
-        }
-      })
-    );
-  };
-}
-
-function prepareE2eTesting() {
-  return function(
-    source: Observable<ConfigAndPathCollection>
-  ): Observable<ConfigAndPathCollection> {
-    return source.pipe(tap((values: ConfigAndPathCollection) => {
-      if (values.config.flags.e2e) {
-        const libPackageJson = {
-          name: values.projectName,
-          main: `${getRelativePath(values.projectRoot, values.distDir)}/dist/index.js`,
-          module: `${getRelativePath(values.projectRoot, values.distDir)}/dist/index.mjs`,
-          es2015: `${getRelativePath(values.projectRoot, values.distDir)}/dist/esm/index.mjs`,
-          es2017: `${getRelativePath(values.projectRoot, values.distDir)}/dist/esm/index.mjs`,
-          types: `${getRelativePath(values.projectRoot, values.distDir)}/dist/types/index.d.ts`,
-          collection: `${getRelativePath(values.projectRoot, values.distDir)}/dist/collection/collection-manifest.json`,
-          'collection:main': `${getRelativePath(values.projectRoot, values.distDir)}/dist/collection/index.js`,
-          unpkg: `${getRelativePath(values.projectRoot, values.distDir)}/dist/${values.projectName}/${values.projectName}.js`,
-          files: [`${getRelativePath(values.projectRoot, values.distDir)}/dist/`, `${getRelativePath(values.projectRoot, values.distDir)}/loader/`]
-        };
-
-        writeJsonFile(
-          getSystemPath(join(values.projectRoot, `package.e2e.json`)),
-          libPackageJson
-        );
-      }
-    }));
-  };
-}
-
-function cleanupE2eTesting() {
-  return function(
-    source: Observable<ConfigAndPathCollection>
-  ): Observable<ConfigAndPathCollection> {
-    return source.pipe(
-      tap((values: ConfigAndPathCollection) => {
-        if (values.config.flags.e2e) {
-          const pkgJsonPath = getSystemPath(join(values.projectRoot, `package.e2e.json`));
-          if (fileExists(pkgJsonPath)) {
-            deleteFile(pkgJsonPath);
-          }
-        }
-      }),
-      map((values: ConfigAndPathCollection) => {
-        values.config.packageJsonFilePath = getSystemPath(normalize(join(values.projectRoot, `package.e2e.json`)));
-
-        return values;
+        copyOrCreatePackageJson(values);
       })
     );
   };
@@ -220,13 +160,6 @@ export function createStencilConfig(
     options: StencilBuildOptions
   ) => ConfigFlags
 ): Observable<ConfigAndCoreCompiler> {
-  if (!options?.configPath) {
-    // remove later
-    throw new Error(
-      'ConfigPath not set. Please use --configPath or update your project builder in workspace.json/angular.json accordingly!'
-    );
-  }
-
   return from(
     initializeStencilConfig(
       taskCommand,
@@ -235,7 +168,7 @@ export function createStencilConfig(
       createStencilCompilerOptions
     )
   ).pipe(
-    prepareDistDirAndPkgJson(options),
+    prepareDistDirAndPkgJson(),
     prepareE2eTesting(),
     map((values: ConfigAndPathCollection) => {
       const pathVariables = [
@@ -272,7 +205,7 @@ export function createStencilConfig(
         )
       });
 
-      if(!values.config.flags.e2e) {
+      if (!values.config.flags.e2e) {
         values.config.packageJsonFilePath = getSystemPath(
           normalize(
             normalize(values.config.packageJsonFilePath).replace(
@@ -315,7 +248,6 @@ export function createStencilProcess() {
       ),
       map(() => ({ success: true })),
       catchError((err) => {
-        log(err);
         return of({ success: false, error: err });
       })
     );
