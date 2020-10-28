@@ -51,7 +51,6 @@ export function runBuilder(
   ).pipe(
     tap(() => {
       if (dependencies.length > 0) {
-        context.logger.info(inspect(dependencies));
         updateBuildableProjectPackageJsonDependencies(
           context,
           target,
