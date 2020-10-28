@@ -32,6 +32,6 @@ describe('update-10-3-0', () => {
       .toPromise();
 
     const { devDependencies } = readJsonInTree(result, '/package.json');
-    expect(devDependencies['@stencil/core']).toEqual('2.1.0');
+    expect(devDependencies['@stencil/core']).toEqual('2.2.0');
   });
 });

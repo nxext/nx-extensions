@@ -78,7 +78,7 @@
       "version": "10.3.0",
       "packages": {
         "@stencil/core": {
-          "version": "2.1.0",
+          "version": "2.2.0",
           "alwaysAddToPackageJson": false
         }
       }
