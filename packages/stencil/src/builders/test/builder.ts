@@ -33,7 +33,7 @@ export function runBuilder(
     options,
     context,
     createStencilCompilerOptions
-  ).pipe(createStencilProcess());
+  ).pipe(createStencilProcess(context));
 }
 
 export default createBuilder(runBuilder);
