@@ -57,7 +57,7 @@ export function runBuilder(
         );
       }
     }),
-    createStencilProcess()
+    createStencilProcess(context)
   );
 }
 
