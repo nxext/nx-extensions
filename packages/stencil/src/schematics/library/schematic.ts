@@ -209,7 +209,7 @@ export default function (options: CoreSchema): Rule {
             builder: `@nxext/stencil:build`,
             options: {
               projectType,
-              configPath: `${options.projectRoot}/stencil.config.ts`,
+              configPath: `${normalizedOptions.projectRoot}/stencil.config.ts`,
               serve: true,
               watch: true
             }

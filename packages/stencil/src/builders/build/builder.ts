@@ -10,7 +10,6 @@ import {
   checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { inspect } from 'util';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 
 function createStencilCompilerOptions(
@@ -50,7 +49,7 @@ export function runBuilder(
     createStencilCompilerOptions
   ).pipe(
     tap(() => {
-      if (dependencies.length > 0) {
+      if (dependencies.length > 0 && context.target.target !== 'serve') {
         updateBuildableProjectPackageJsonDependencies(
           context,
           target,

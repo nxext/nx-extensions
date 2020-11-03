@@ -19,7 +19,7 @@ export function createStencilProcess() {
       ),
       map(() => ({ success: true })),
       catchError((err) => {
-        return of({ success: false, error: err });
+        return of({ success: false, error: err.message });
       })
     );
   };
