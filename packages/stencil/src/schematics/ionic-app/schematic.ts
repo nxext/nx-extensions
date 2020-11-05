@@ -42,7 +42,6 @@ function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
   const style = calculateStyle(options.style);
   const appType = AppType.CapacitorApp;
   const appTemplate = toFileName(options.appTemplate);
-  const capAppName = `${projectName}-cap`;
 
   return {
     ...options,
@@ -52,8 +51,7 @@ function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
     parsedTags,
     style,
     appType,
-    appTemplate,
-    capAppName
+    appTemplate
   } as IonicAppSchema;
 }
 
@@ -79,13 +77,13 @@ function showInformation(options: IonicAppSchema): Rule {
 
       After that you're able to add the native platforms to the Capacitor project
 
-      Android: nx run ${options.capAppName}:add --platform android
-      iOS:     nx run ${options.capAppName}:add --platform ios
+      Android: nx run ${options.projectName}:add --platform android
+      iOS:     nx run ${options.projectName}:add --platform ios
 
       Now you're done and ready to run the project
 
-      Android: nx run ${options.capAppName}:open --platform android
-      iOS:     nx run ${options.capAppName}:open --platform ios
+      Android: nx run ${options.projectName}:open --platform android
+      iOS:     nx run ${options.projectName}:open --platform ios
 
       The documentation for the nx capacitor plugin is here:
       https://nxtend.dev/docs/capacitor/overview
@@ -123,13 +121,12 @@ export default function(options: IonicAppSchema): Rule {
         tags: normalizedOptions.parsedTags
       }),
       addFiles(normalizedOptions),
-      addDepsToPackageJson({}, {"@nxtend/capacitor": "^1.0.0"}),
+      addDepsToPackageJson({}, {"@nxtend/capacitor": "^2.0.0"}),
       addPackageWithInit('@nxtend/capacitor'),
       externalSchematic('@nxtend/capacitor', 'capacitor-project', {
-        name: normalizedOptions.capAppName,
         project: normalizedOptions.projectName
       }),
-      updateJsonInTree(`${appsDir(host)}/${normalizedOptions.capAppName}/capacitor.config.json`, json => {
+      updateJsonInTree(`${appsDir(host)}/${normalizedOptions.projectName}/capacitor.config.json`, json => {
         json.webDir = `${json.webDir}/www`;
 
         return json;
