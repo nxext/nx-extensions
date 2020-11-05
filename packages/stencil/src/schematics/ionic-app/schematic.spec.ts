@@ -12,7 +12,7 @@ describe('schematic:ionic-app', () => {
     tree = createEmptyWorkspace(Tree.empty());
   });
 
-  // TODO: Fix testsetu, add @nxtend/capacitor before run
+  // TODO: Fix testsetup, add @nxtend/capacitor before run
   xit('should run successfully', async () => {
     await expect(
       runSchematic('ionic-app', options, tree)

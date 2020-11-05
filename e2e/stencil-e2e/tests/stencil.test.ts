@@ -123,7 +123,6 @@ describe('e2e', () => {
 
   describe('e2e-ionic-app', () => {
     describe('stencil ionic app builder', () => {
-      // Disabled until the capacitor plugin works on windows
       xit(`should build ionic app`, async (done) => {
         const plugin = uniq('ionic-app');
         await runNxCommandAsync(

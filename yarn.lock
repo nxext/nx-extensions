@@ -4360,10 +4360,10 @@
     tsconfig-paths-webpack-plugin "3.3.0"
     typescript "4.0.3"
 
-"@nxtend/capacitor@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@nxtend/capacitor/-/capacitor-1.1.0.tgz#89886e87907473a77151174999068214afb00eb0"
-  integrity sha512-gZIAHB9gmIblrCWgQU0tZBroPpEou1xlHQBWnSXKUd0mJkMBy5y1fw6sfkrT7kVt3oDMDl7rmBPpFxS/rjjZaQ==
+"@nxtend/capacitor@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@nxtend/capacitor/-/capacitor-2.0.2.tgz#01c43d9f0135651ad353abd6f73a4370e1aed495"
+  integrity sha512-9Cpa8vvqCmaZoXA3rJfRP/1ou1TaTc11Lh6YWaiEd1CxcXio2equwk9ttdCc1bwaicUjl9VpfIsOCe2xCZjF0Q==
 
 "@rollup/plugin-babel@5.0.2":
   version "5.0.2"

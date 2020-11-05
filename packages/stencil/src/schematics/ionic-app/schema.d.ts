@@ -9,5 +9,4 @@ export interface IonicAppSchema extends CoreSchema {
   appType: AppType;
   style: SupportedStyles;
   appTemplate: string;
-  capAppName?: string;
 }
