@@ -23,17 +23,17 @@ import {
   updateWorkspace
 } from '@nrwl/workspace';
 import { LibrarySchema } from './schema';
-import core from '../core/core';
-import { CoreSchema } from '../core/schema';
 import { AppType } from '../../utils/typings';
 import { addBuilderToTarget, calculateStyle } from '../../utils/utils';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { insertImport, libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
+import { InitSchema } from '../init/schema';
+import init from '../init/init';
 
 const projectType = ProjectType.Library;
 
-function normalizeOptions(options: CoreSchema, host: Tree): LibrarySchema {
+function normalizeOptions(options: InitSchema, host: Tree): LibrarySchema {
   const name = toFileName(options.name);
   const projectDirectory = options.directory
     ? `${toFileName(options.directory)}/${name}`
@@ -181,11 +181,11 @@ function removeUnusedFiles(options: LibrarySchema): Rule {
   };
 }
 
-export default function (options: CoreSchema): Rule {
+export default function (options: InitSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
-      core(normalizedOptions),
+      init(normalizedOptions),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
           name: normalizedOptions.projectName,

@@ -6,7 +6,7 @@ import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { join } from 'path';
 import { runSchematic } from '../../utils/testing';
 
-describe('core', () => {
+describe('init', () => {
   let tree: Tree;
 
   const testRunner = new SchematicTestRunner(
@@ -21,7 +21,7 @@ describe('core', () => {
 
   it('should add stencil dependencies', async () => {
     const result = await runSchematic(
-      'core',
+      'init',
       { name: 'test', appType: AppType.Library },
       tree
     );
@@ -33,7 +33,7 @@ describe('core', () => {
   it('should add stencil app dependencies', async () => {
     const result = await testRunner
       .runSchematicAsync(
-        'core',
+        'init',
         { name: 'test', appType: AppType.Application },
         tree
       )
@@ -47,7 +47,7 @@ describe('core', () => {
 
   it('should add stencil pwa dependencies', async () => {
     const result = await testRunner
-      .runSchematicAsync('core', { name: 'test', appType: AppType.Pwa }, tree)
+      .runSchematicAsync('init', { name: 'test', appType: AppType.Pwa }, tree)
       .toPromise();
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
@@ -59,7 +59,7 @@ describe('core', () => {
     it('should be set if none was set before', async () => {
       const result = await testRunner
         .runSchematicAsync(
-          'core',
+          'init',
           { name: 'test', appType: AppType.Library },
           tree
         )

@@ -4,11 +4,11 @@ import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType, runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
-import { CoreSchema } from '../core/schema';
+import { InitSchema } from '../init/schema';
 
 describe('schematic:application', () => {
   let tree: Tree;
-  const options: CoreSchema = { name: 'test' };
+  const options: InitSchema = { name: 'test' };
 
   beforeEach(() => {
     tree = createEmptyWorkspace(Tree.empty());

@@ -10,7 +10,7 @@ import {
   PROJECT_TYPE_DEPENDENCIES,
   STYLE_PLUGIN_DEPENDENCIES,
 } from '../../utils/typings';
-import { CoreSchema } from './schema';
+import { InitSchema } from './schema';
 
 function addDependencies(appType: AppType): Rule {
   const projectDependency = PROJECT_TYPE_DEPENDENCIES[appType];
@@ -20,7 +20,7 @@ function addDependencies(appType: AppType): Rule {
   );
 }
 
-function addStyledModuleDependencies<T extends CoreSchema>(options: T): Rule {
+function addStyledModuleDependencies<T extends InitSchema>(options: T): Rule {
   const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[options.style];
 
   return styleDependencies
@@ -31,7 +31,7 @@ function addStyledModuleDependencies<T extends CoreSchema>(options: T): Rule {
     : noop();
 }
 
-function addE2eDependencies<T extends CoreSchema>(options: T): Rule {
+function addE2eDependencies<T extends InitSchema>(options: T): Rule {
   const testDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
 
   return testDependencies
@@ -67,7 +67,7 @@ const moveToDevDependencies = updateJsonInTree(
   }
 );
 
-export default function <T extends CoreSchema>(options: T): Rule {
+export default function <T extends InitSchema>(options: T): Rule {
   return chain([
     addDependencies(options.appType),
     moveToDevDependencies,
