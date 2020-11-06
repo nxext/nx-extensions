@@ -1,7 +1,7 @@
-import { CoreSchema } from '../core/schema';
 import { AppType, SupportedStyles } from '../../utils/typings';
+import { InitSchema } from '../init/schema';
 
-export interface IonicAppSchema extends CoreSchema {
+export interface IonicAppSchema extends InitSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
@@ -9,4 +9,5 @@ export interface IonicAppSchema extends CoreSchema {
   appType: AppType;
   style: SupportedStyles;
   appTemplate: string;
+  npmClient?: 'npm' | 'yarn';
 }

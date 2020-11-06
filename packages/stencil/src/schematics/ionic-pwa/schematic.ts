@@ -18,15 +18,15 @@ import {
   updateWorkspace
 } from '@nrwl/workspace';
 import { PWASchema } from './schema';
-import { CoreSchema } from '../core/schema';
+import { InitSchema } from '../init/schema';
 import { AppType } from '../../utils/typings';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
-import core from '../core/core';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
+import init from '../init/init';
 
 const projectType = ProjectType.Application;
 
-function normalizeOptions(options: CoreSchema, host: Tree): PWASchema {
+function normalizeOptions(options: InitSchema, host: Tree): PWASchema {
   const name = toFileName(options.name);
   const projectDirectory = options.directory
     ? `${toFileName(options.directory)}/${name}`
@@ -65,11 +65,11 @@ function addFiles(options: PWASchema): Rule {
   );
 }
 
-export default function (options: CoreSchema): Rule {
+export default function (options: InitSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
-      core(normalizedOptions),
+      init(normalizedOptions),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
           name: normalizedOptions.projectName,

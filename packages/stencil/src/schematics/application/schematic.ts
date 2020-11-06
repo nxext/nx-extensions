@@ -6,7 +6,6 @@ import {
   mergeWith,
   move,
   Rule,
-  SchematicContext,
   Tree,
   url
 } from '@angular-devkit/schematics';
@@ -20,14 +19,14 @@ import {
   updateWorkspace
 } from '@nrwl/workspace';
 import { ApplicationSchema } from './schema';
-import core from '../core/core';
-import { CoreSchema } from '../core/schema';
+import { InitSchema } from '../init/schema';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
+import init from '../init/init';
 
 const projectType = ProjectType.Application;
 
-function normalizeOptions(options: CoreSchema, host: Tree): ApplicationSchema {
+function normalizeOptions(options: InitSchema, host: Tree): ApplicationSchema {
   const projectName = toFileName(options.name);
   const projectDirectory = options.directory
     ? `${toFileName(options.directory)}/${projectName}`
@@ -66,11 +65,11 @@ function addFiles(options: ApplicationSchema): Rule {
   );
 }
 
-export default function (options: CoreSchema): Rule {
+export default function (options: InitSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
-      core(normalizedOptions),
+      init(normalizedOptions),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
           name: normalizedOptions.projectName,

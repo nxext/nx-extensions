@@ -3,9 +3,9 @@
   "name": "stencil",
   "version": "0.0.1",
   "schematics": {
-    "core": {
-      "factory": "./src/schematics/core/core",
-      "schema": "./src/schematics/core/schema.json",
+    "init": {
+      "factory": "./src/schematics/init/init",
+      "schema": "./src/schematics/init/schema.json",
       "description": "Core features for collections",
       "hidden": true
     },

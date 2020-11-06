@@ -6,6 +6,8 @@ export const ionicVersion = '^5.4.2';
 export const autoprefixerVersion = '^9.7.6';
 export const autoprefixerTypesVersion = '^9.7.2';
 
+export const capacitorVersion = '^2.0.0';
+
 export const puppeteer = '~5.3.1';
 export const puppeteerType = '~3.0.2';
 

@@ -5,13 +5,11 @@ import {
   runNxCommandAsync,
   uniq
 } from '@nrwl/nx-plugin/testing';
-import { addPackageBeforeTest } from '../utils/testing';
 import { normalize } from '@angular-devkit/core';
 
 describe('e2e', () => {
   beforeAll(() => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
-    addPackageBeforeTest('@nxtend/capacitor', '^1.0.0');
   });
 
   describe('library', () => {
@@ -123,10 +121,10 @@ describe('e2e', () => {
 
   describe('e2e-ionic-app', () => {
     describe('stencil ionic app builder', () => {
-      xit(`should build ionic app`, async (done) => {
+      it(`should build ionic app`, async (done) => {
         const plugin = uniq('ionic-app');
         await runNxCommandAsync(
-          `generate @nxext/stencil:ionic-app ${plugin} --style='css'`
+          `generate @nxext/stencil:ionic-app ${plugin} --style=css --npmClient=yarn`
         );
 
         const result = await runNxCommandAsync(`build ${plugin} --dev`);

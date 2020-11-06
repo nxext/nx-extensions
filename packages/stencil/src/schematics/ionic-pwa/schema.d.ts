@@ -1,7 +1,7 @@
 import { AppType, SupportedStyles } from './../../utils/typings';
-import { CoreSchema } from '../core/schema';
+import { InitSchema } from '../init/schema';
 
-export interface PWASchema extends CoreSchema {
+export interface PWASchema extends InitSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
