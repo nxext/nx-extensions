@@ -1,12 +1,12 @@
 import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { readJsonInTree } from '@nrwl/workspace';
-import { CoreSchema } from '../core/schema';
 import { runSchematic } from '../../utils/testing';
+import { InitSchema } from '../init/schema';
 
 describe('stencil schematic', () => {
   let appTree: Tree;
-  const options: CoreSchema = { name: 'test' };
+  const options: InitSchema = { name: 'test' };
 
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty());

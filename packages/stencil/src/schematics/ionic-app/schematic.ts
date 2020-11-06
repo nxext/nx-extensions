@@ -22,9 +22,10 @@ import {
 import { IonicAppSchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
-import core from '../core/core';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
+import init from '../init/init';
+import { capacitorVersion } from '../../utils/versions';
 
 const projectType = ProjectType.Application;
 
@@ -97,7 +98,7 @@ export default function(options: IonicAppSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
-      core(normalizedOptions),
+      init(normalizedOptions),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
           name: normalizedOptions.projectName,
@@ -121,10 +122,12 @@ export default function(options: IonicAppSchema): Rule {
         tags: normalizedOptions.parsedTags
       }),
       addFiles(normalizedOptions),
-      addDepsToPackageJson({}, {"@nxtend/capacitor": "^2.0.0"}),
+      addDepsToPackageJson({}, {'@nxtend/capacitor': capacitorVersion}),
       addPackageWithInit('@nxtend/capacitor'),
       externalSchematic('@nxtend/capacitor', 'capacitor-project', {
-        project: normalizedOptions.projectName
+        project: normalizedOptions.projectName,
+        appName: normalizedOptions.projectName,
+        npmClient: normalizedOptions.npmClient
       }),
       updateJsonInTree(`${appsDir(host)}/${normalizedOptions.projectName}/capacitor.config.json`, json => {
         json.webDir = `${json.webDir}/www`;

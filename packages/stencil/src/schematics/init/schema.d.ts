@@ -1,6 +1,6 @@
 import { AppType, SupportedStyles } from '../../utils/typings';
 
-export interface CoreSchema {
+export interface InitSchema {
   name: string;
   tags?: string;
   directory?: string;
