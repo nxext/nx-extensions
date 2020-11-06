@@ -22,9 +22,7 @@ import {
 import { formatFiles, getNpmScope, toFileName } from '@nrwl/workspace';
 import { addToGitignore } from '../../utils/utils';
 import {
-  angularOutputTargetVersion,
-  reactOutputTargetVersion,
-  vueOutputTargetVersion,
+  STENCIL_OUTPUTTARGET_VERSION
 } from '../../utils/versions';
 import { getDistDir, getRelativePath } from '../../utils/fileutils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
@@ -57,7 +55,7 @@ function prepareVueLibrary(options: AddOutputtargetSchematicSchema) {
       addDepsToPackageJson(
         {},
         {
-          '@stencil/vue-output-target': vueOutputTargetVersion,
+          '@stencil/vue-output-target': STENCIL_OUTPUTTARGET_VERSION['vue'],
         }
       ),
       (tree) => {
@@ -94,7 +92,7 @@ function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
       addDepsToPackageJson(
         {},
         {
-          '@stencil/react-output-target': reactOutputTargetVersion,
+          '@stencil/react-output-target': STENCIL_OUTPUTTARGET_VERSION['react'],
         }
       ),
       (tree) => {
@@ -136,7 +134,7 @@ function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
       addDepsToPackageJson(
         {},
         {
-          '@stencil/angular-output-target': angularOutputTargetVersion,
+          '@stencil/angular-output-target': STENCIL_OUTPUTTARGET_VERSION['angular'],
         }
       ),
       (tree: Tree) => {

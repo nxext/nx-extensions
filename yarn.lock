@@ -4474,10 +4474,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stencil/core@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.2.0.tgz#f92b480a387bce688a368b2fb23207f1acd45bc2"
-  integrity sha512-2V+DEUs9wvkcgnIIs0huye/M1v7x6qEzeOjp056RQlB08U1I4ex3vnBoE0/CrR35wK3ZZv2JYPOfBUuqR+6AAg==
+"@stencil/core@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.3.0.tgz#9190df3a0064537730be1546545e13531d701da8"
+  integrity sha512-VZ/Ox0E1kngcmHbJhHUufuLELi+xG3of3LuRI3X2AMWyE82JUVYlOEsQci/YBZWpfc9BS9I36R88prBew22oew==
 
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   version "1.4.1"
@@ -17141,10 +17141,10 @@ supports-hyperlinks@^2.0.0:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
 
-svelte-check@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.3.tgz#e841784cc778848fd85434c56d9c7783a70c6b07"
-  integrity sha512-zJdKceG8DHsOB3bPm+TOC1zYkPgjtXwUrrr1OgLhBRrblbCYmt8R8NPa0+l7jmmA2yzKuGSjzia/aSWA88rg4g==
+svelte-check@^1.1.10:
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-1.1.10.tgz#e81a1aaf619f25483eb0a195cdbf475f64774e19"
+  integrity sha512-lRrHv6cXRQ3RDWFElunwJfUeb2XfeIvEOdWvvOgDvAUYytlyV9bRedF8nWylpCfVB5don9E5TURhNEG+vW1BqA==
   dependencies:
     chalk "^4.0.0"
     chokidar "^3.4.1"
