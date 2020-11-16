@@ -1,4 +1,5 @@
 import { JsonObject } from '@angular-devkit/core';
+import { NormalizedCopyAssetOption } from '../utils/normalize';
 
 export interface RawSvelteBuildOptions extends JsonObject {
   outputPath: string;
@@ -24,5 +25,5 @@ export interface SvelteBuildOptions extends RawSvelteBuildOptions {
   projectRoot: string;
   workspaceRoot: string;
   sourceRoot: string;
-  assets: string[];
+  assets: NormalizedCopyAssetOption[];
 }

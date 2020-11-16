@@ -5,10 +5,10 @@ import { map, switchMap } from 'rxjs/operators';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { normalizeAssetCopyCommands } from './normalize';
 import { toClassName } from '@nrwl/workspace';
 import * as url from 'url';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
+import { convertCopyAssetsToRollupOptions } from './normalize';
 
 /* eslint-disable */
 const resolve = require('@rollup/plugin-node-resolve');
@@ -36,11 +36,9 @@ export function createRollupOptions(
 
   let plugins = [
     copy({
-      targets: normalizeAssetCopyCommands(
-        options.assets,
-        options.workspaceRoot,
-        options.projectRoot,
-        options.outputPath
+      targets: convertCopyAssetsToRollupOptions(
+        options.outputPath,
+        options.assets
       ),
     }),
     typescript({
