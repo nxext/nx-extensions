@@ -1,8 +1,8 @@
 import {
   chain,
-  externalSchematic,
+  externalSchematic, noop,
   Rule,
-  schematic,
+  schematic
 } from '@angular-devkit/schematics';
 import { StorybookConfigureSchema } from './schema';
 import { CypressConfigureSchema } from '@nrwl/storybook/src/schematics/cypress-project/cypress-project';
@@ -20,6 +20,6 @@ export default function (options: StorybookConfigureSchema): Rule {
             linter: options.linter,
           }
         )
-      : () => {},
+      : noop(),
   ]);
 }

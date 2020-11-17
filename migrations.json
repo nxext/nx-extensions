@@ -1,25 +1,39 @@
 {
   "migrations": [
     {
-      "version": "10.3.1-beta.1",
-      "description": "Fix ts-jest migration",
-      "factory": "./src/migrations/update-10-3-0/update-ts-jest",
-      "package": "@nrwl/jest",
-      "name": "update-ts-jest"
+      "version": "10.4.0-beta.5",
+      "description": "Add an explicit dependency on @nrwl/tao",
+      "factory": "./src/migrations/update-10-4-0/add-explicit-dep-on-tao",
+      "package": "@nrwl/workspace",
+      "name": "add-explicit-dep-on-tao"
     },
     {
-      "version": "10.3.1-beta.1",
-      "description": "Revert any node_modules lintFilesPatterns that were accidentally included by update-eslint-builder-and-config",
-      "factory": "./src/migrations/update-10-3-1/revert-node-modules-files-in-eslint-builder-options",
+      "version": "10.4.0-beta.3",
+      "description": "Adjust karma and protractor setup",
+      "factory": "./src/migrations/update-10-4-0/update-10-4-0",
+      "package": "@nrwl/angular",
+      "name": "update-10-4-0"
+    },
+    {
+      "version": "10.4.0-beta.0",
+      "description": "Update ESLint config files to use preset configs which eslint-plugin-nx exports",
+      "factory": "./src/migrations/update-10-4-0/update-eslint-configs-to-use-nx-presets",
       "package": "@nrwl/linter",
-      "name": "revert-node-modules-files-in-eslint-builder-options"
+      "name": "update-eslint-configs-to-use-nx-presets"
     },
     {
-      "version": "10.3.1-beta.1",
-      "description": "Add missing storybook config to lint target",
-      "factory": "./src/migrations/update-10-3-0/update-10-3-0",
-      "package": "@nrwl/storybook",
-      "name": "update-10.3.1"
+      "version": "10.4.0-beta.1",
+      "description": "Update root ESLint config to use overrides",
+      "factory": "./src/migrations/update-10-4-0/update-root-eslint-config-to-use-overrides",
+      "package": "@nrwl/linter",
+      "name": "update-root-eslint-config-to-use-overrides"
+    },
+    {
+      "version": "10.4.0-beta.1",
+      "description": "Update libraries",
+      "factory": "./src/migrations/update-10-4-0/update-10-4-0",
+      "package": "@nrwl/react",
+      "name": "update-10.4.0"
     }
   ]
 }

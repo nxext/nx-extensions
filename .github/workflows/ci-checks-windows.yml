@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 3
+          fetch-depth: 0
       - name: Get origin main
         run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
@@ -51,7 +51,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 3
+          fetch-depth: 0
       - name: Get origin main
         if: github.event_name == 'pull_request'
         run: |
@@ -92,7 +92,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 3
+          fetch-depth: 0
       - name: Get origin main
         if: github.event_name == 'pull_request'
         run: |
