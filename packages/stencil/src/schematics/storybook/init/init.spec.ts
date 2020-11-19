@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 
 import { getProjectConfig, readJsonInTree } from '@nrwl/workspace';
 import { createTestUILib, runSchematic } from '../../../utils/testing';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../../../stencil-core-utils';
 
 describe('init', () => {
   let appTree: Tree;

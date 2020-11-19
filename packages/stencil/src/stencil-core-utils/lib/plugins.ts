@@ -1,8 +1,4 @@
-import {
-  Change,
-  findNodes,
-  InsertChange,
-} from '@nrwl/workspace/src/utils/ast-utils';
+import { Change, findNodes, InsertChange } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 
 function addCodeIntoArray(source: ts.SourceFile, identifier: string, toInsert: string, file: string): InsertChange[] {

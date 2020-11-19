@@ -7,7 +7,7 @@ import {
   SchematicContext,
   SchematicsException,
   Tree,
-  url,
+  url
 } from '@angular-devkit/schematics';
 import { getProjectConfig, toClassName, toFileName } from '@nrwl/workspace';
 import { applyWithSkipExisting } from '../../utils/utils';

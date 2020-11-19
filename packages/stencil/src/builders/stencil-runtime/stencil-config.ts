@@ -1,9 +1,4 @@
-import {
-  CompilerSystem,
-  ConfigFlags,
-  Logger,
-  TaskCommand,
-} from '@stencil/core/cli';
+import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/cli';
 import { StencilBuildOptions } from '../build/schema';
 import { StencilTestOptions } from '../test/schema';
 import { BuilderContext } from '@angular-devkit/architect';

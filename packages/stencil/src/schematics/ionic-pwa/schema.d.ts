@@ -1,6 +1,6 @@
 import { AppType } from './../../utils/typings';
 import { InitSchema } from '../init/schema';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../../stencil-core-utils';
 
 export interface PWASchema extends InitSchema {
   projectName: string;

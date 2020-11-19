@@ -6,20 +6,16 @@ import {
   SchematicContext,
   SchematicsException,
   Source,
-  Tree,
+  Tree
 } from '@angular-devkit/schematics';
-import {
-  JsonAstObject,
-  JsonParseMode,
-  parseJsonAst,
-} from '@angular-devkit/core';
+import { JsonAstObject, JsonParseMode, parseJsonAst } from '@angular-devkit/core';
 import { ProjectType } from '@nrwl/workspace';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../schematics/ionic-pwa/schema';
 import { ApplicationSchema } from '../schematics/application/schema';
 import ignore from 'ignore';
 import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../stencil-core-utils';
 
 export function calculateStyle(
   style: SupportedStyles | undefined

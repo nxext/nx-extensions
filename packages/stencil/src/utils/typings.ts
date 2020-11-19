@@ -7,9 +7,9 @@ import {
   puppeteerType,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
-  stencilVersion,
+  stencilVersion
 } from './versions';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../stencil-core-utils';
 
 export enum AppType {
   application = 'application',

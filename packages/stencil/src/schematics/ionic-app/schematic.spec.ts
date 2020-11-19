@@ -3,7 +3,7 @@ import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { runSchematic } from '../../utils/testing';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../../stencil-core-utils';
 
 describe('schematic:ionic-app', () => {
   let tree: Tree;

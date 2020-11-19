@@ -6,7 +6,7 @@ import { createEmptyWorkspace, MockBuilderContext } from '@nrwl/workspace/testin
 import { externalSchematic, Rule, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { ProjectType } from '@nrwl/workspace';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../stencil-core-utils';
 
 const testRunner = new SchematicTestRunner(
   '@nxext/stencil',

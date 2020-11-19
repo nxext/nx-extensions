@@ -3,7 +3,7 @@ import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { readJsonInTree } from '@nrwl/workspace';
 import * as path from 'path';
 import { createTestUILib } from '../../utils/testing';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../../stencil-core-utils';
 
 describe('update-1-0-0-beta0', () => {
   let tree: Tree;

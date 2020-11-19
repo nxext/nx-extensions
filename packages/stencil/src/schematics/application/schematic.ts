@@ -1,14 +1,5 @@
 import { AppType } from './../../utils/typings';
-import {
-  apply,
-  applyTemplates,
-  chain,
-  mergeWith,
-  move,
-  Rule,
-  Tree,
-  url,
-} from '@angular-devkit/schematics';
+import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
@@ -16,15 +7,15 @@ import {
   offsetFromRoot,
   ProjectType,
   toFileName,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
 import { ApplicationSchema } from './schema';
 import { InitSchema } from '../init/schema';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import init from '../init/init';
-import { addStylePluginToConfigInTree } from '@nxext/stencil-core-utils';
-import { join } from "path";
+import { join } from 'path';
+import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
 
 const projectType = ProjectType.Application;
 

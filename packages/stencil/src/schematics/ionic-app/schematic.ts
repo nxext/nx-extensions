@@ -8,7 +8,7 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  url,
+  url
 } from '@angular-devkit/schematics';
 import {
   addDepsToPackageJson,
@@ -20,7 +20,7 @@ import {
   ProjectType,
   toFileName,
   updateJsonInTree,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
 import { IonicAppSchema } from './schema';
 import { AppType } from '../../utils/typings';
@@ -29,8 +29,8 @@ import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import init from '../init/init';
 import { capacitorVersion } from '../../utils/versions';
-import { addStylePluginToConfigInTree } from '@nxext/stencil-core-utils';
-import { join } from "path";
+import { join } from 'path';
+import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
 
 const projectType = ProjectType.Application;
 

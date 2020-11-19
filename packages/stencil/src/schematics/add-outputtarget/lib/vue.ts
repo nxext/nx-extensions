@@ -5,14 +5,14 @@ import {
   getProjectConfig,
   insert,
   insertImport,
-  libsDir,
+  libsDir
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utils';
 import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import * as ts from 'typescript';
-import { addToOutputTargets } from '@nxext/stencil-core-utils';
+import { addToOutputTargets } from '../../../stencil-core-utils';
 
 export function prepareVueLibrary(options: AddOutputtargetSchematicSchema) {
   return (host: Tree) => {
