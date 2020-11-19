@@ -30,11 +30,11 @@ execSync(
 publishableLibNames.forEach((pubLibName) => {
   const { outputPath, packageJson } = workspaceJson.projects[
     pubLibName
-    ].architect.build.options;
+  ].architect.build.options;
   const p = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
   p.devDependencies[
     require(`${appRootPath}/${packageJson}`).name
-    ] = `file:${appRootPath}/${outputPath}`;
+  ] = `file:${appRootPath}/${outputPath}`;
   writeFileSync(tmpProjPath('package.json'), JSON.stringify(p, null, 2));
 });
 

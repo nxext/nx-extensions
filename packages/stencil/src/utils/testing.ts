@@ -4,7 +4,7 @@ import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { join } from 'path';
 import {
   createEmptyWorkspace,
-  MockBuilderContext
+  MockBuilderContext,
 } from '@nrwl/workspace/testing';
 import { externalSchematic, Rule, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
@@ -16,7 +16,7 @@ export const SUPPORTED_STYLE_LIBRARIES = [
   'scss',
   'less',
   'styl',
-  'pcss'
+  'pcss',
 ];
 
 const testRunner = new SchematicTestRunner(
@@ -65,14 +65,15 @@ export function runMigration(migrationName: string, options: any, tree: Tree) {
 
 export async function createTestUILib(
   libName: string,
-  style?: SupportedStyles
+  style: SupportedStyles,
+  buildable = true
 ): Promise<Tree> {
   let appTree = createEmptyWorkspace(Tree.empty());
   appTree = await callRule(
     externalSchematic('@nxext/stencil', 'library', {
       name: libName,
       style: style,
-      buildable: true
+      buildable,
     }),
     appTree
   );
@@ -102,7 +103,7 @@ export function fileListForAppType(
         `apps/${projectName}/src/components/app-profile/app-profile.${style}`,
         `apps/${projectName}/src/components/app-root/app-root.e2e.ts`,
         `apps/${projectName}/src/components/app-root/app-root.tsx`,
-        `apps/${projectName}/src/components/app-root/app-root.${style}`
+        `apps/${projectName}/src/components/app-root/app-root.${style}`,
       ];
     }
 
@@ -115,7 +116,7 @@ export function fileListForAppType(
         `libs/${projectName}/src/components/my-component/my-component.tsx`,
         `libs/${projectName}/src/components/my-component/my-component.${style}`,
         `libs/${projectName}/src/utils/utils.spec.ts`,
-        `libs/${projectName}/src/utils/utils.ts`
+        `libs/${projectName}/src/utils/utils.ts`,
       ];
     }
   } else {
@@ -134,7 +135,7 @@ export function fileListForAppType(
         `apps/${subDirectory}/${projectName}/src/components/app-profile/app-profile.${style}`,
         `apps/${subDirectory}/${projectName}/src/components/app-root/app-root.e2e.ts`,
         `apps/${subDirectory}/${projectName}/src/components/app-root/app-root.tsx`,
-        `apps/${subDirectory}/${projectName}/src/components/app-root/app-root.${style}`
+        `apps/${subDirectory}/${projectName}/src/components/app-root/app-root.${style}`,
       ];
     }
 
@@ -147,7 +148,7 @@ export function fileListForAppType(
         `libs/${subDirectory}/${projectName}/src/components/my-component/my-component.tsx`,
         `libs/${subDirectory}/${projectName}/src/components/my-component/my-component.${style}`,
         `libs/${subDirectory}/${projectName}/src/utils/utils.spec.ts`,
-        `libs/${subDirectory}/${projectName}/src/utils/utils.ts`
+        `libs/${subDirectory}/${projectName}/src/utils/utils.ts`,
       ];
     }
   }

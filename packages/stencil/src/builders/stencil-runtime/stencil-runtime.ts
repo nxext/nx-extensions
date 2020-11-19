@@ -19,6 +19,7 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
   } else {
     const libPackageJson = {
       name: values.projectName,
+      version: '0.0.0',
       main: './dist/index.cjs.js',
       module: './dist/index.js',
       es2015: './dist/esm/index.mjs',
@@ -27,7 +28,7 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
       collection: './dist/collection/collection-manifest.json',
       'collection:main': './dist/collection/index.js',
       unpkg: `./dist/${values.projectName}/${values.projectName}.js`,
-      files: ['dist/', 'loader/']
+      files: ['dist/', 'loader/'],
     };
 
     writeJsonFile(
@@ -51,7 +52,7 @@ function calculateOutputTargetPathVariables(
           normalize(outputTarget[pathVar] as string)
         );
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(values.projectRoot, values.distDir)
+          [pathVar]: origPath.replace(values.projectRoot, values.distDir),
         });
       }
     });
@@ -61,7 +62,7 @@ function calculateOutputTargetPathVariables(
 }
 
 function prepareDistDirAndPkgJson() {
-  return function(
+  return function (
     source: Observable<ConfigAndPathCollection>
   ): Observable<ConfigAndPathCollection> {
     return source.pipe(
@@ -110,7 +111,7 @@ export function createStencilConfig(
         'cjsDir',
         'cjsIndexFile',
         'esmIndexFile',
-        'componentDts'
+        'componentDts',
       ];
       const outputTargets: OutputTarget[] = calculateOutputTargetPathVariables(
         values,
@@ -124,7 +125,7 @@ export function createStencilConfig(
               values.distDir
             )
           )
-        )
+        ),
       });
 
       if (!values.config.flags.e2e) {
@@ -150,7 +151,7 @@ export function createStencilConfig(
 
       return {
         config: config,
-        coreCompiler: values.coreCompiler
+        coreCompiler: values.coreCompiler,
       };
     })
   );

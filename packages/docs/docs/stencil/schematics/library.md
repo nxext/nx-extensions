@@ -8,6 +8,7 @@ Generates a Stencil library
 This schematic also executes the [Core](core) schematic
 
 ## Usage
+
 ```
 nx g @nxext/stencil:lib my-app
 ```

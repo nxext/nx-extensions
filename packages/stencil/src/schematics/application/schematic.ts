@@ -7,7 +7,7 @@ import {
   move,
   Rule,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
@@ -16,7 +16,7 @@ import {
   offsetFromRoot,
   ProjectType,
   toFileName,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { ApplicationSchema } from './schema';
 import { InitSchema } from '../init/schema';
@@ -83,16 +83,12 @@ export default function (options: InitSchema): Rule {
             },
           },
         }).targets;
-        addDefaultBuilders(
-          targetCollection,
-          projectType,
-          normalizedOptions
-        );
+        addDefaultBuilders(targetCollection, projectType, normalizedOptions);
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
         tags: normalizedOptions.parsedTags,
       }),
       addFiles(normalizedOptions),
     ]);
-  }
+  };
 }

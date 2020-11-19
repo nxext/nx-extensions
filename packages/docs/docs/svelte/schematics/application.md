@@ -8,6 +8,7 @@ Generates a Svelte application
 This schematic also executes the [Init](init) schematic
 
 ## Usage
+
 ```
 nx g @nxext/svelte:app my-app
 ```
@@ -51,7 +52,6 @@ Possible values: cypress, none
 Type: `enum`
 
 Adds the specified e2e test runner.
-
 
 ### --port
 

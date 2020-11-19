@@ -1,4 +1,9 @@
-import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/cli';
+import {
+  CompilerSystem,
+  ConfigFlags,
+  Logger,
+  TaskCommand,
+} from '@stencil/core/cli';
 import { StencilBuildOptions } from '../build/schema';
 import { StencilTestOptions } from '../test/schema';
 import { BuilderContext } from '@angular-devkit/architect';
@@ -43,13 +48,13 @@ export async function initializeStencilConfig(
 
   const loadConfigResults = await loadConfig({
     config: {
-      flags
+      flags,
     },
     configPath: getSystemPath(
       join(normalize(context.workspaceRoot), configFilePath)
     ),
     logger,
-    sys
+    sys,
   });
   const coreCompiler = await loadCoreCompiler(sys);
 
@@ -64,6 +69,6 @@ export async function initializeStencilConfig(
     projectRoot: getSystemPath(projectRoot),
     coreCompiler: coreCompiler,
     distDir: getSystemPath(distDir),
-    pkgJson: getSystemPath(join(projectRoot, `package.json`))
+    pkgJson: getSystemPath(join(projectRoot, `package.json`)),
   } as ConfigAndPathCollection;
 }

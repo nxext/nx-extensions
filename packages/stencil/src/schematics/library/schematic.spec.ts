@@ -2,7 +2,11 @@ import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { fileListForAppType, runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
+import {
+  fileListForAppType,
+  runSchematic,
+  SUPPORTED_STYLE_LIBRARIES,
+} from '../../utils/testing';
 import { InitSchema } from '../init/schema';
 
 describe('schematic:library', () => {
@@ -28,19 +32,24 @@ describe('schematic:library', () => {
     );
 
     const fileList = fileListForAppType(appName, 'css', ProjectType.Library);
-    fileList.forEach(file => expect(result.exists(file)))
+    fileList.forEach((file) => expect(result.exists(file)));
   });
 
   it('should create files in specified dir', async () => {
     const appName = 'testlib';
     const result = await runSchematic(
       'lib',
-      { name: appName, appType: AppType.Library, subdir: 'subdir'},
+      { name: appName, appType: AppType.Library, subdir: 'subdir' },
       tree
     );
 
-    const fileList = fileListForAppType(appName, 'css', ProjectType.Library, 'subdir');
-    fileList.forEach(file => expect(result.exists(file)))
+    const fileList = fileListForAppType(
+      appName,
+      'css',
+      ProjectType.Library,
+      'subdir'
+    );
+    fileList.forEach((file) => expect(result.exists(file)));
   });
 
   it('should add Stencil Library dependencies', async () => {
@@ -88,7 +97,6 @@ describe('schematic:library', () => {
   });
 
   describe('default libraries', () => {
-
     let options;
     let projectName;
     beforeEach(() => {
@@ -97,11 +105,7 @@ describe('schematic:library', () => {
     });
 
     it('shouldnt create build targets if not buildable', async () => {
-      const result = await runSchematic(
-        'lib',
-        options,
-        tree
-      );
+      const result = await runSchematic('lib', options, tree);
 
       const projectConfig = getProjectConfig(result, projectName);
       expect(projectConfig.architect['build']).toBeUndefined();
@@ -110,45 +114,37 @@ describe('schematic:library', () => {
     });
 
     it('should export component', async () => {
-      const result = await runSchematic(
-        'lib',
-        options,
-        tree
-      );
+      const result = await runSchematic('lib', options, tree);
 
-      expect(result.readContent('libs/testlib/src/index.ts'))
-        .toContain("export * from './components/my-component/my-component';");
+      expect(result.readContent('libs/testlib/src/components.d.ts')).toContain(
+        "export * from './components/my-component/my-component';"
+      );
     });
 
     it('shouldnt create build files', async () => {
-      const result = await runSchematic(
-        'lib',
-        options,
-        tree
-      );
+      const result = await runSchematic('lib', options, tree);
 
-      expect(result.exists('libs/testlib/stencil.config.ts')).toBeFalsy();
+      expect(result.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
       expect(result.exists('libs/testlib/src/index.html')).toBeFalsy();
-      expect(result.exists('libs/testlib/src/components.d.ts')).toBeFalsy();
+      expect(result.exists('libs/testlib/src/components.d.ts')).toBeTruthy();
     });
   });
 
   describe('buildable libraries', () => {
-
     let options;
     let projectName;
     beforeEach(() => {
       projectName = 'testlib';
-      options = { name: projectName, appType: AppType.Library, buildable: true };
+      options = {
+        name: projectName,
+        appType: AppType.Library,
+        buildable: true,
+      };
     });
 
     it('should create build targets', async () => {
       const projectName = 'testlib';
-      const result = await runSchematic(
-        'lib',
-        options,
-        tree
-      );
+      const result = await runSchematic('lib', options, tree);
 
       const projectConfig = getProjectConfig(result, projectName);
       expect(projectConfig.architect['build']).toBeDefined();
@@ -157,22 +153,15 @@ describe('schematic:library', () => {
     });
 
     it('should export bundle', async () => {
-      const result = await runSchematic(
-        'lib',
-        options,
-        tree
-      );
+      const result = await runSchematic('lib', options, tree);
 
-      expect(result.readContent('libs/testlib/src/index.ts'))
-        .toContain("export * from './components';");
+      expect(result.readContent('libs/testlib/src/index.ts')).toContain(
+        "export * from './components';"
+      );
     });
 
     it('should create build files', async () => {
-      const result = await runSchematic(
-        'lib',
-        options,
-        tree
-      );
+      const result = await runSchematic('lib', options, tree);
 
       expect(result.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
       expect(result.exists('libs/testlib/src/index.html')).toBeTruthy();

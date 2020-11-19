@@ -1,5 +1,10 @@
 import { projectRootDir, ProjectType } from '@nrwl/workspace';
-import { checkFilesExist, readJson, runYarnInstall, tmpProjPath } from '@nrwl/nx-plugin/testing';
+import {
+  checkFilesExist,
+  readJson,
+  runYarnInstall,
+  tmpProjPath,
+} from '@nrwl/nx-plugin/testing';
 import { normalize } from '@angular-devkit/core';
 import { readFileSync, writeFileSync } from 'fs';
 
@@ -55,27 +60,21 @@ export function testProject(
       workspaceJson.projects[projectName].architect.build.options.configPath
     ).toBe(
       normalize(
-        `${projectRootDir(
-          projectType
-        )}/${projectName}/stencil.config.ts`
+        `${projectRootDir(projectType)}/${projectName}/stencil.config.ts`
       )
     );
     expect(
       workspaceJson.projects[projectName].architect.test.options.configPath
     ).toBe(
       normalize(
-        `${projectRootDir(
-          projectType
-        )}/${projectName}/stencil.config.ts`
+        `${projectRootDir(projectType)}/${projectName}/stencil.config.ts`
       )
     );
     expect(
       workspaceJson.projects[projectName].architect.e2e.options.configPath
     ).toBe(
       normalize(
-        `${projectRootDir(
-          projectType
-        )}/${projectName}/stencil.config.ts`
+        `${projectRootDir(projectType)}/${projectName}/stencil.config.ts`
       )
     );
   } else {
@@ -151,8 +150,13 @@ export function testProject(
 }
 
 export function addPackageBeforeTest(pkgName, pkgVersion) {
-    const packageJson = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
-    packageJson.devDependencies[pkgName] = pkgVersion;
-    writeFileSync(tmpProjPath('package.json'), JSON.stringify(packageJson, null, 2));
-    runYarnInstall();
+  const packageJson = JSON.parse(
+    readFileSync(tmpProjPath('package.json')).toString()
+  );
+  packageJson.devDependencies[pkgName] = pkgVersion;
+  writeFileSync(
+    tmpProjPath('package.json'),
+    JSON.stringify(packageJson, null, 2)
+  );
+  runYarnInstall();
 }

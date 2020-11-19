@@ -7,18 +7,19 @@ import {
   SchematicContext,
   SchematicsException,
   Source,
-  Tree
+  Tree,
 } from '@angular-devkit/schematics';
 import {
   JsonAstObject,
   JsonParseMode,
-  parseJsonAst
+  parseJsonAst,
 } from '@angular-devkit/core';
 import { ProjectType } from '@nrwl/workspace';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../schematics/ionic-pwa/schema';
 import { ApplicationSchema } from '../schematics/application/schema';
 import ignore from 'ignore';
+import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
 
 export function calculateStyle(
   style: SupportedStyles | undefined
@@ -42,7 +43,7 @@ export function applyWithSkipExisting(source: Source, rules: Rule[]): Rule {
             return null;
           }
           return fileEntry;
-        })
+        }),
       ])
     );
 
@@ -65,8 +66,8 @@ export function addDefaultBuilders(
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
       serve: true,
-      watch: true
-    }
+      watch: true,
+    },
   });
 }
 
@@ -74,15 +75,19 @@ export function addBuilderToTarget(
   targetCollection,
   builder: string,
   projectType: ProjectType,
-  options: LibrarySchema | PWASchema | ApplicationSchema
+  options:
+    | LibrarySchema
+    | PWASchema
+    | ApplicationSchema
+    | MakeLibBuildableSchema
 ) {
   targetCollection.add({
     name: builder,
     builder: `@nxext/stencil:${builder}`,
     options: {
       projectType,
-      configPath: `${options.projectRoot}/stencil.config.ts`
-    }
+      configPath: `${options.projectRoot}/stencil.config.ts`,
+    },
   });
 }
 
@@ -98,9 +103,7 @@ export function addToGitignore(path: string): Rule {
     if (!ig.ignores(path)) {
       const gitignore = tree.read('.gitignore');
       if (gitignore) {
-        const content = `${gitignore
-          .toString('utf-8')
-          .trimRight()}\n${path}\n`;
+        const content = `${gitignore.toString('utf-8').trimRight()}\n${path}\n`;
         tree.overwrite('.gitignore', content);
       }
     }

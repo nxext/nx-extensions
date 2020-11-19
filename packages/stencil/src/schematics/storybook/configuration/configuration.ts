@@ -1,8 +1,9 @@
 import {
   chain,
-  externalSchematic, noop,
+  externalSchematic,
+  noop,
   Rule,
-  schematic
+  schematic,
 } from '@angular-devkit/schematics';
 import { StorybookConfigureSchema } from './schema';
 import { CypressConfigureSchema } from '@nrwl/storybook/src/schematics/cypress-project/cypress-project';

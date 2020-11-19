@@ -1,4 +1,8 @@
-import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
+import {
+  BuilderContext,
+  BuilderOutput,
+  createBuilder,
+} from '@angular-devkit/architect';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StencilBuildOptions } from './schema';
@@ -8,9 +12,10 @@ import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
-  updateBuildableProjectPackageJsonDependencies
+  updateBuildableProjectPackageJsonDependencies,
 } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
+import { inspect } from 'util';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -31,6 +36,7 @@ export function runBuilder(
   context: BuilderContext
 ): Observable<BuilderOutput> {
   const taskCommand: TaskCommand = 'build';
+  context.target.target = 'build';
 
   const projGraph = createProjectGraph();
   const { target, dependencies } = calculateProjectDependencies(

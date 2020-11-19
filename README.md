@@ -6,7 +6,9 @@
 [Svelte](https://svelte.dev/) plugin for NX
 
 ## Install and usage
+
 Docs are here: https://nxext.dev
+
 ## Maintainers
 
 [@DominikPieper](https://github.com/DominikPieper)

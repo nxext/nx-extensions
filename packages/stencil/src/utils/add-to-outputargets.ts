@@ -1,12 +1,11 @@
-import { Change, findNodes, InsertChange } from '@nrwl/workspace/src/utils/ast-utils';
+import {
+  Change,
+  findNodes,
+  InsertChange,
+} from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 
-export function addToOutputTargets(
-  source: ts.SourceFile,
-  toInsert: string,
-  file: string
-): Change[] {
-  const outputTargetsIdentifier = 'outputTargets';
+function addCodeIntoArray(source: ts.SourceFile, identifier: string, toInsert: string, file: string): InsertChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
   let node = nodes[0];
   const matchingProperties: ts.ObjectLiteralElement[] = (node as ts.ObjectLiteralExpression).properties
@@ -14,8 +13,7 @@ export function addToOutputTargets(
     .filter((prop: ts.PropertyAssignment) => {
       if (prop.name.kind === ts.SyntaxKind.Identifier) {
         return (
-          (prop.name as ts.Identifier).getText(source) ==
-          outputTargetsIdentifier
+          (prop.name as ts.Identifier).getText(source) == identifier
         );
       }
 
@@ -33,7 +31,7 @@ export function addToOutputTargets(
     let toInsert2: string;
     if (expr.properties.length == 0) {
       position = expr.getEnd() - 1;
-      toInsert2 = `  ${outputTargetsIdentifier}: [${toInsert}]\n`;
+      toInsert2 = `  ${identifier}: [${toInsert}]\n`;
     } else {
       node = expr.properties[expr.properties.length - 1];
       position = node.getEnd();
@@ -42,9 +40,9 @@ export function addToOutputTargets(
       if (text.match('^\r?\r?\n')) {
         toInsert2 = `,${
           text.match(/^\r?\n\s+/)[0]
-        }${outputTargetsIdentifier}: [${toInsert}]`;
+        }${identifier}: [${toInsert}]`;
       } else {
-        toInsert2 = `, ${outputTargetsIdentifier}: [${toInsert}]`;
+        toInsert2 = `, ${identifier}: [${toInsert}]`;
       }
     }
     const newMetadataProperty = new InsertChange(file, position, toInsert2);
@@ -73,4 +71,22 @@ function getLastEntryOfOutputtargetArray(node: ts.Node) {
       (first: ts.Node, second: ts.Node) => first.getStart() - second.getStart()
     )
     .pop();
+}
+
+export function addToOutputTargets(
+  source: ts.SourceFile,
+  toInsert: string,
+  file: string
+): Change[] {
+  const outputTargetsIdentifier = 'outputTargets';
+  return addCodeIntoArray(source, outputTargetsIdentifier, toInsert, file);
+}
+
+export function addToPlugins(
+  source: ts.SourceFile,
+  file: string,
+  toInsert: string
+): Change[] {
+  const pluginsIdentifier = 'plugins';
+  return addCodeIntoArray(source, pluginsIdentifier, toInsert, file);
 }

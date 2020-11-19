@@ -16,7 +16,7 @@ export enum AppType {
   Application = 'application',
   Library = 'library',
   Pwa = 'pwa',
-  CapacitorApp = 'capacitorapp'
+  CapacitorApp = 'capacitorapp',
 }
 
 export interface PackageDependencies {
@@ -57,8 +57,8 @@ export const PROJECT_TYPE_DEPENDENCIES: {
   capacitorapp: {
     dependencies: {},
     devDependencies: {
-    ...stencilDependencies,
-        '@ionic/core': ionicVersion,
+      ...stencilDependencies,
+      '@ionic/core': ionicVersion,
     },
   },
   library: {

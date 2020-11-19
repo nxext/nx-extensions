@@ -6,6 +6,7 @@ title: Add Outputtargets
 You're able to generate angular/react libraries for yout stencil libraries using stencils outputtargets:
 
 ## Usage
+
 ```
 nx g @nxext/stencil:add-outputtarget my-lib
 ```

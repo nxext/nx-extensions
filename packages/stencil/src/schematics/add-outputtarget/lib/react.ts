@@ -5,13 +5,13 @@ import {
   getProjectConfig,
   insert,
   insertImport,
-  libsDir
+  libsDir,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utils';
 import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
-import { addToOutputTargets } from './add-to-outputargets';
+import { addToOutputTargets } from '../../../utils/add-to-outputargets';
 import * as ts from 'typescript';
 
 export function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
@@ -56,7 +56,14 @@ export function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
   };
 }
 
-export function addReactOutputtarget(tree: Tree, projectName: string, stencilProjectConfig, stencilConfigPath: string, stencilConfigSource: ts.SourceFile, packageName: string) {
+export function addReactOutputtarget(
+  tree: Tree,
+  projectName: string,
+  stencilProjectConfig,
+  stencilConfigPath: string,
+  stencilConfigSource: ts.SourceFile,
+  packageName: string
+) {
   const reactProjectConfig = getProjectConfig(tree, `${projectName}-react`);
   const realtivePath = getRelativePath(
     getDistDir(stencilProjectConfig.root),
@@ -79,6 +86,6 @@ export function addReactOutputtarget(tree: Tree, projectName: string, stencilPro
           })
           `,
       stencilConfigPath
-    )
+    ),
   ]);
 }

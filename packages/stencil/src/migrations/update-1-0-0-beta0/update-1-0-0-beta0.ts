@@ -8,9 +8,7 @@ export default function update(): Rule {
 const changeServeBuilderToBuild = updateWorkspace((workspace) => {
   workspace.projects.forEach((project) => {
     project.targets.forEach((target) => {
-      if (
-        target.builder === '@nxext/stencil:serve'
-      ) {
+      if (target.builder === '@nxext/stencil:serve') {
         target.builder = '@nxext/stencil:build';
         target.options.watch = true;
         target.options.serve = true;

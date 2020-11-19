@@ -5,7 +5,7 @@ import {
   getProjectConfig,
   insert,
   insertImport,
-  libsDir
+  libsDir,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { getNpmScope, toFileName } from '@nrwl/workspace';
@@ -13,7 +13,7 @@ import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
 import { addToGitignore } from '../../../utils/utils';
 import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
-import { addToOutputTargets } from './add-to-outputargets';
+import { addToOutputTargets } from '../../../utils/add-to-outputargets';
 import * as ts from 'typescript';
 
 export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
@@ -28,7 +28,8 @@ export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
       addDepsToPackageJson(
         {},
         {
-          '@stencil/angular-output-target': STENCIL_OUTPUTTARGET_VERSION['angular'],
+          '@stencil/angular-output-target':
+            STENCIL_OUTPUTTARGET_VERSION['angular'],
         }
       ),
       (tree: Tree) => {
@@ -61,11 +62,15 @@ export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
   };
 }
 
-export function addAngularOutputtarget(tree: Tree, projectName: string, stencilProjectConfig, stencilConfigPath: string, stencilConfigSource: ts.SourceFile, packageName: string) {
-  const angularProjectConfig = getProjectConfig(
-    tree,
-    `${projectName}-angular`
-  );
+export function addAngularOutputtarget(
+  tree: Tree,
+  projectName: string,
+  stencilProjectConfig,
+  stencilConfigPath: string,
+  stencilConfigSource: ts.SourceFile,
+  packageName: string
+) {
+  const angularProjectConfig = getProjectConfig(tree, `${projectName}-angular`);
   const realtivePath = getRelativePath(
     getDistDir(stencilProjectConfig.root),
     angularProjectConfig.root
@@ -93,6 +98,6 @@ export function addAngularOutputtarget(tree: Tree, projectName: string, stencilP
             }),
           `,
       stencilConfigPath
-    )
+    ),
   ]);
 }

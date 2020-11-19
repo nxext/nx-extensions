@@ -4,6 +4,7 @@ title: Build
 ---
 
 ## Usage
+
 ```
 nx build my-app
 ```

@@ -6,6 +6,7 @@ title: Component
 Generates a Svelte component
 
 ## Usage
+
 ```
 nx g @nxext/svelte:c my-app
 ```

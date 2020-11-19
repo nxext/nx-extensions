@@ -8,7 +8,7 @@ import {
 describe('svelte e2e', () => {
   beforeAll(() => {
     ensureNxProject('@nxext/svelte', 'dist/packages/svelte');
-  })
+  });
 
   xit('should create svelte application', async (done) => {
     const plugin = uniq('svelte');

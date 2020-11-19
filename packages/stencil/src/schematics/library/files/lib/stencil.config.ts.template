@@ -1,39 +1,21 @@
 import { Config } from '@stencil/core';
 
 export const config: Config = {
-  namespace: '<%= projectName %>',
+  namespace: '<%= name %>',
   taskQueue: 'async',
   outputTargets: [
     {
       type: 'dist',
       esmLoaderPath: '../loader',
-      dir: '<%= offsetFromRoot %>dist/libs/<%= projectName %>/dist',
+      dir: '<%= offsetFromRoot %>dist/libs/<%= name %>/dist',
     },
     {
       type: 'docs-readme'
     },
     {
       type: 'www',
-      dir: '<%= offsetFromRoot %>dist/libs/<%= projectName %>/www',
+      dir: '<%= offsetFromRoot %>dist/libs/<%= name %>/www',
       serviceWorker: null // disable service workers
     }
-  ],
-  <% if (style != 'css') { %>
-  plugins: [
-    <% if (style == 'scss') { %>
-    sass()
-    <% } %>
-    <% if (style == 'less') { %>
-    less()
-    <% } %>
-    <% if (style == 'pcss') { %>
-    postcss({
-      plugins: [autoprefixer()]
-    })
-    <% } %>
-    <% if (style == 'styl') { %>
-    stylus()
-    <% } %>
-  ],
-  <% } %>
+  ]
 };

@@ -12,7 +12,9 @@ const features = [
     imageUrl: 'img/stenciljs-logo.png',
     description: (
       <>
-        Stencil is a toolchain for building reusable, scalable Design Systems. Generate small, blazing fast, and 100% standards based Web Components that run in every browser.
+        Stencil is a toolchain for building reusable, scalable Design Systems.
+        Generate small, blazing fast, and 100% standards based Web Components
+        that run in every browser.
       </>
     ),
   },
@@ -21,7 +23,8 @@ const features = [
     imageUrl: 'img/nx-logo.png',
     description: (
       <>
-        Nx is a set of extensible dev tools for monorepos, which helps you develop like Google, Facebook, and Microsoft.
+        Nx is a set of extensible dev tools for monorepos, which helps you
+        develop like Google, Facebook, and Microsoft.
       </>
     ),
   },
@@ -30,7 +33,10 @@ const features = [
     imageUrl: 'img/svelte-logo.png',
     description: (
       <>
-        Svelte is a radical new approach to building user interfaces. Whereas traditional frameworks like React and Vue do the bulk of their work in the browser, Svelte shifts that work into a compile step that happens when you build your app.
+        Svelte is a radical new approach to building user interfaces. Whereas
+        traditional frameworks like React and Vue do the bulk of their work in
+        the browser, Svelte shifts that work into a compile step that happens
+        when you build your app.
       </>
     ),
   },
