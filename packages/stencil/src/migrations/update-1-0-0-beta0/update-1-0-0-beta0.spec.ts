@@ -3,13 +3,14 @@ import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { readJsonInTree } from '@nrwl/workspace';
 import * as path from 'path';
 import { createTestUILib } from '../../utils/testing';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('update-1-0-0-beta0', () => {
   let tree: Tree;
   let schematicRunner: SchematicTestRunner;
 
   beforeEach(async () => {
-    tree = await createTestUILib('testlib', 'css');
+    tree = await createTestUILib('testlib', SupportedStyles.css);
 
     schematicRunner = new SchematicTestRunner(
       '@nrwl/nx-plugin',
@@ -36,7 +37,7 @@ const oldWorkspaceJson = {
       projectType: 'library',
       schematics: {
         '@nxext/stencil:component': {
-          style: 'css',
+          style: SupportedStyles.css,
           storybook: false,
         },
       },
@@ -145,7 +146,7 @@ const newWorkspaceJson = {
       projectType: 'library',
       schematics: {
         '@nxext/stencil:component': {
-          style: 'css',
+          style: SupportedStyles.css,
           storybook: false,
         },
       },

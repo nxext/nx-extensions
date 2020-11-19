@@ -1,4 +1,5 @@
-import { AppType, SupportedStyles } from '../../utils/typings';
+import { AppType } from '../../utils/typings';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 export interface InitSchema {
   name: string;

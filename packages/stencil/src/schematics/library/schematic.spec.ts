@@ -5,9 +5,9 @@ import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import {
   fileListForAppType,
   runSchematic,
-  SUPPORTED_STYLE_LIBRARIES,
 } from '../../utils/testing';
 import { InitSchema } from '../init/schema';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('schematic:library', () => {
   let tree: Tree;
@@ -27,11 +27,11 @@ describe('schematic:library', () => {
     const appName = 'test';
     const result = await runSchematic(
       'lib',
-      { name: appName, appType: AppType.Library },
+      { name: appName, appType: AppType.library },
       tree
     );
 
-    const fileList = fileListForAppType(appName, 'css', ProjectType.Library);
+    const fileList = fileListForAppType(appName, SupportedStyles.css, ProjectType.Library);
     fileList.forEach((file) => expect(result.exists(file)));
   });
 
@@ -39,13 +39,13 @@ describe('schematic:library', () => {
     const appName = 'testlib';
     const result = await runSchematic(
       'lib',
-      { name: appName, appType: AppType.Library, subdir: 'subdir' },
+      { name: appName, appType: AppType.library, subdir: 'subdir' },
       tree
     );
 
     const fileList = fileListForAppType(
       appName,
-      'css',
+      SupportedStyles.css,
       ProjectType.Library,
       'subdir'
     );
@@ -59,7 +59,7 @@ describe('schematic:library', () => {
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to lib`, async () => {
       const result = await runSchematic(
         'lib',
@@ -76,13 +76,13 @@ describe('schematic:library', () => {
     });
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
       const projectName = 'test';
 
       tree = await runSchematic(
         'app',
-        { name: projectName, style: style, appType: AppType.Application },
+        { name: projectName, style: style, appType: AppType.application },
         tree
       );
 
@@ -101,7 +101,7 @@ describe('schematic:library', () => {
     let projectName;
     beforeEach(() => {
       projectName = 'testlib';
-      options = { name: projectName, appType: AppType.Library };
+      options = { name: projectName, appType: AppType.library };
     });
 
     it('shouldnt create build targets if not buildable', async () => {
@@ -137,7 +137,7 @@ describe('schematic:library', () => {
       projectName = 'testlib';
       options = {
         name: projectName,
-        appType: AppType.Library,
+        appType: AppType.library,
         buildable: true,
       };
     });

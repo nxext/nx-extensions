@@ -2,13 +2,14 @@ import { Tree } from '@angular-devkit/schematics';
 
 import { getProjectConfig, readJsonInTree } from '@nrwl/workspace';
 import { createTestUILib, runSchematic } from '../../../utils/testing';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('init', () => {
   let appTree: Tree;
 
   beforeEach(async () => {
     appTree = Tree.empty();
-    appTree = await createTestUILib('test-ui-lib', 'scss');
+    appTree = await createTestUILib('test-ui-lib', SupportedStyles.scss);
   });
 
   describe('dependencies for package.json', () => {
@@ -114,7 +115,7 @@ describe('init', () => {
         '@nxext/stencil:component'
       ]
     ).toEqual({
-      style: 'scss',
+      style: SupportedStyles.scss,
       storybook: true,
     });
   });

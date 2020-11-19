@@ -7,21 +7,17 @@ import {
   noop,
   Rule,
   schematic,
-  SchematicContext,
   Tree,
-  url,
+  url
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
   names,
-  NxJson,
   offsetFromRoot,
   ProjectType,
-  readJsonInTree,
   toFileName,
-  updateJsonInTree,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
 import { LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
@@ -30,6 +26,7 @@ import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { InitSchema } from '../init/schema';
 import init from '../init/init';
 import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
+import { updateTsConfig } from './lib/update-tsconfig';
 
 const projectType = ProjectType.Library;
 
@@ -45,7 +42,7 @@ function normalizeOptions(options: InitSchema, host: Tree): LibrarySchema {
     : [];
 
   const style = calculateStyle(options.style);
-  const appType = AppType.Library;
+  const appType = AppType.library;
 
   return {
     ...options,
@@ -70,32 +67,6 @@ function addFiles(options: LibrarySchema): Rule {
       formatFiles({ skipFormat: options.skipFormat }),
     ])
   );
-}
-
-function updateTsConfig(options: LibrarySchema): Rule {
-  return () => {
-    return chain([
-      (host: Tree, context: SchematicContext) => {
-        const nxJson = readJsonInTree<NxJson>(host, 'nx.json');
-        return updateJsonInTree('tsconfig.base.json', (json) => {
-          const c = json.compilerOptions;
-          delete c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`];
-          c.paths[`@${nxJson.npmScope}/${options.projectDirectory}`] = [
-            `${libsDir(host)}/${options.projectDirectory}/src/index.ts`,
-          ];
-          if (options.buildable) {
-            delete c.paths[
-              `@${nxJson.npmScope}/${options.projectDirectory}/loader`
-            ];
-            c.paths[
-              `@${nxJson.npmScope}/${options.projectDirectory}/loader`
-            ] = [`dist/${libsDir(host)}/${options.projectDirectory}/loader`];
-          }
-          return json;
-        })(host, context);
-      },
-    ]);
-  };
 }
 
 export default function (options: InitSchema): Rule {

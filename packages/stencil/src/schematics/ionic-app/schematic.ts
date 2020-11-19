@@ -29,6 +29,8 @@ import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import init from '../init/init';
 import { capacitorVersion } from '../../utils/versions';
+import { addStylePluginToConfigInTree } from '@nxext/stencil-core-utils';
+import { join } from "path";
 
 const projectType = ProjectType.Application;
 
@@ -44,7 +46,7 @@ function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
     : [];
 
   const style = calculateStyle(options.style);
-  const appType = AppType.CapacitorApp;
+  const appType = AppType.capacitorapp;
   const appTemplate = toFileName(options.appTemplate);
 
   return {
@@ -137,6 +139,10 @@ export default function (options: IonicAppSchema): Rule {
 
           return json;
         }
+      ),
+      addStylePluginToConfigInTree(
+        join(normalizedOptions.projectRoot, 'stencil.config.ts'),
+        normalizedOptions.style
       ),
       showInformation(normalizedOptions),
     ]);

@@ -6,9 +6,9 @@ import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import {
   fileListForAppType,
   runSchematic,
-  SUPPORTED_STYLE_LIBRARIES,
 } from '../../utils/testing';
 import { InitSchema } from '../init/schema';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('schematic:application', () => {
   let tree: Tree;
@@ -27,7 +27,7 @@ describe('schematic:application', () => {
   it('should add Stencil dependencies', async () => {
     const result = await runSchematic(
       'app',
-      { name: 'test', appType: AppType.Application },
+      { name: 'test', appType: AppType.application },
       tree
     );
     const packageJson = readJsonInTree(result, 'package.json');
@@ -39,13 +39,13 @@ describe('schematic:application', () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'app',
-      { name: appName, appType: AppType.Application },
+      { name: appName, appType: AppType.application },
       tree
     );
 
     const fileList = fileListForAppType(
       appName,
-      'css',
+      SupportedStyles.css,
       ProjectType.Application
     );
     fileList.forEach((file) => expect(result.exists(file)));
@@ -55,24 +55,24 @@ describe('schematic:application', () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'app',
-      { name: appName, appType: AppType.Application, subdir: 'subdir' },
+      { name: appName, appType: AppType.application, subdir: 'subdir' },
       tree
     );
 
     const fileList = fileListForAppType(
       appName,
-      'css',
+      SupportedStyles.css,
       ProjectType.Application,
       'subdir'
     );
     fileList.forEach((file) => expect(result.exists(file)));
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to application`, async () => {
       const result = await runSchematic(
         'app',
-        { name: 'test', style: style, appType: AppType.Application },
+        { name: 'test', style: style, appType: AppType.application },
         tree
       );
       const packageJson = readJsonInTree(result, 'package.json');
@@ -85,13 +85,13 @@ describe('schematic:application', () => {
     });
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
       const projectName = 'test';
 
       tree = await runSchematic(
         'app',
-        { name: projectName, style: style, appType: AppType.Application },
+        { name: projectName, style: style, appType: AppType.application },
         tree
       );
 

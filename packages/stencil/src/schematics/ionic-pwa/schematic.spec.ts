@@ -5,9 +5,9 @@ import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import {
   fileListForAppType,
   runSchematic,
-  SUPPORTED_STYLE_LIBRARIES,
 } from '../../utils/testing';
 import { InitSchema } from '../init/schema';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('schematic:ionic-pwa', () => {
   let tree: Tree;
@@ -27,13 +27,13 @@ describe('schematic:ionic-pwa', () => {
     const appName = 'testpwa';
     const result = await runSchematic(
       'pwa',
-      { name: appName, appType: AppType.Pwa },
+      { name: appName, appType: AppType.pwa },
       tree
     );
 
     const fileList = fileListForAppType(
       appName,
-      'css',
+      SupportedStyles.css,
       ProjectType.Application
     );
     fileList.forEach((file) => expect(result.exists(file)));
@@ -43,13 +43,13 @@ describe('schematic:ionic-pwa', () => {
     const appName = 'testpwa';
     const result = await runSchematic(
       'pwa',
-      { name: appName, appType: AppType.Pwa, subdir: 'subdir' },
+      { name: appName, appType: AppType.pwa, subdir: 'subdir' },
       tree
     );
 
     const fileList = fileListForAppType(
       appName,
-      'css',
+      SupportedStyles.css,
       ProjectType.Application,
       'subdir'
     );
@@ -63,7 +63,7 @@ describe('schematic:ionic-pwa', () => {
     expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to pwa`, async () => {
       const result = await runSchematic(
         'pwa',
@@ -80,13 +80,13 @@ describe('schematic:ionic-pwa', () => {
     });
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
       const projectName = 'test';
 
       tree = await runSchematic(
         'app',
-        { name: projectName, style: style, appType: AppType.Application },
+        { name: projectName, style: style, appType: AppType.application },
         tree
       );
 

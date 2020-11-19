@@ -13,8 +13,8 @@ import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
 import { addToGitignore } from '../../../utils/utils';
 import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
-import { addToOutputTargets } from '../../../utils/add-to-outputargets';
 import * as ts from 'typescript';
+import { addToOutputTargets } from '@nxext/stencil-core-utils';
 
 export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
   return (host: Tree) => {
