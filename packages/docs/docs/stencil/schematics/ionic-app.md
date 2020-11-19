@@ -9,8 +9,8 @@ This schematic also executes the [Core](core) schematic
 
 After that build it and follow the given instructions to add capacitors platform platforms. (look [here](https://nxtend.dev/docs/capacitor/getting-started) for the nx capacitor plugin documentation.)
 
-
 ## Usage
+
 ```
 nx g @nxext/stencil:ionic-app my-app
 ```

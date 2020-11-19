@@ -10,7 +10,7 @@ describe('init schematic', () => {
   const options: Schema = {
     skipFormat: true,
     unitTestRunner: 'jest',
-    e2eTestRunner: 'cypress'
+    e2eTestRunner: 'cypress',
   };
 
   beforeEach(() => {

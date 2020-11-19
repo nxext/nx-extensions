@@ -1,11 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import {
-  createDirectory
-} from '@nrwl/workspace';
+import { createDirectory } from '@nrwl/workspace';
 import {
   directoryExists as nxDirectoryExists,
-  writeJsonFile
+  writeJsonFile,
 } from '@nrwl/workspace/src/utils/fileutils';
 import { getSystemPath, Path } from '@angular-devkit/core';
 

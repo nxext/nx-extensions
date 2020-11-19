@@ -98,8 +98,7 @@ function createRootStorybookDir(): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.debug('adding .storybook folder to lib');
 
-    return chain([
-      applyWithSkipExisting(url('./files/root'), [template({})])])(
+    return chain([applyWithSkipExisting(url('./files/root'), [template({})])])(
       tree,
       context
     );

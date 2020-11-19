@@ -6,7 +6,7 @@ import { runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
 
 describe('schematic:ionic-app', () => {
   let tree: Tree;
-  const options = { name: 'test', appTemplate: "Tabs"};
+  const options = { name: 'test', appTemplate: 'Tabs' };
 
   beforeEach(() => {
     tree = createEmptyWorkspace(Tree.empty());
@@ -46,9 +46,9 @@ describe('schematic:ionic-app', () => {
       `apps/${appName}/src/components/app-profile/app-profile.css`,
       `apps/${appName}/src/components/app-root/app-root.e2e.ts`,
       `apps/${appName}/src/components/app-root/app-root.tsx`,
-      `apps/${appName}/src/components/app-root/app-root.css`
+      `apps/${appName}/src/components/app-root/app-root.css`,
     ];
-    fileList.forEach(file => expect(result.exists(file)))
+    fileList.forEach((file) => expect(result.exists(file)));
   });
 
   xit('should create files in subdir', async () => {
@@ -71,9 +71,9 @@ describe('schematic:ionic-app', () => {
       `apps/subdir/${appName}/src/components/app-profile/app-profile.css`,
       `apps/subdir/${appName}/src/components/app-root/app-root.e2e.ts`,
       `apps/subdir/${appName}/src/components/app-root/app-root.tsx`,
-      `apps/subdir/${appName}/src/components/app-root/app-root.css`
+      `apps/subdir/${appName}/src/components/app-root/app-root.css`,
     ];
-    fileList.forEach(file => expect(result.exists(file)))
+    fileList.forEach((file) => expect(result.exists(file)));
   });
 
   xit('should add capacitor project', async () => {
@@ -88,9 +88,9 @@ describe('schematic:ionic-app', () => {
       `apps/${appName}/src/components/app-root/app-root.tsx`,
       `apps/${appName}/src/components/app-profile/app-profile.tsx`,
       `apps/${appName}/src/components/app-home/app-home.tsx`,
-      `apps/${appName}/src/components/app-tabs/app-tabs.tsx`
+      `apps/${appName}/src/components/app-tabs/app-tabs.tsx`,
     ];
-    fileList.forEach(file => expect(result.exists(file)))
+    fileList.forEach((file) => expect(result.exists(file)));
   });
 
   SUPPORTED_STYLE_LIBRARIES.forEach((style) => {

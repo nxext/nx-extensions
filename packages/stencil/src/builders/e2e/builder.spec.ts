@@ -10,11 +10,14 @@ describe('Command Runner Test', () => {
   beforeEach(async () => {
     [architect] = await mockContext();
     jest.mock('../stencil-runtime', () => ({
-      createStencilProcess: jest.fn(() => function (source: Observable<any>): Observable<BuilderOutput> {
-        return source.pipe(switchMap(() => of({ success: true })));
-      }),
-      createStencilConfig: jest.fn(() => of({}))
-    }))
+      createStencilProcess: jest.fn(
+        () =>
+          function (source: Observable<any>): Observable<BuilderOutput> {
+            return source.pipe(switchMap(() => of({ success: true })));
+          }
+      ),
+      createStencilConfig: jest.fn(() => of({})),
+    }));
   });
 
   afterEach(() => {

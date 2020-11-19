@@ -1,16 +1,17 @@
 import { chain, externalSchematic, Tree } from '@angular-devkit/schematics';
 import {
-  addDepsToPackageJson, addGlobal,
+  addDepsToPackageJson,
+  addGlobal,
   getProjectConfig,
   insert,
   insertImport,
-  libsDir
+  libsDir,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utils';
 import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
-import { addToOutputTargets } from './add-to-outputargets';
+import { addToOutputTargets } from '../../../utils/add-to-outputargets';
 import * as ts from 'typescript';
 
 export function prepareVueLibrary(options: AddOutputtargetSchematicSchema) {
@@ -33,22 +34,23 @@ export function prepareVueLibrary(options: AddOutputtargetSchematicSchema) {
         tree.delete(
           `${libsDir(host)}/${vueProjectName}/src/lib/HelloWorld.vue`
         );
-        tree.delete(
-          `${libsDir(host)}/${vueProjectName}/src/index.ts`
-        );
-        tree.delete(
-          `${libsDir(host)}/${vueProjectName}/src/shims-tsx.d.ts`
-        );
-        tree.delete(
-          `${libsDir(host)}/${vueProjectName}/src/shims-vue.d.ts`
-        );
+        tree.delete(`${libsDir(host)}/${vueProjectName}/src/index.ts`);
+        tree.delete(`${libsDir(host)}/${vueProjectName}/src/shims-tsx.d.ts`);
+        tree.delete(`${libsDir(host)}/${vueProjectName}/src/shims-vue.d.ts`);
       },
       addToGitignore(`${libsDir(host)}/${vueProjectName}/**/generated`),
     ]);
   };
 }
 
-export function addVueOutputtarget(tree: Tree, projectName: string, stencilProjectConfig, stencilConfigPath: string, stencilConfigSource: ts.SourceFile, packageName: string) {
+export function addVueOutputtarget(
+  tree: Tree,
+  projectName: string,
+  stencilProjectConfig,
+  stencilConfigPath: string,
+  stencilConfigSource: ts.SourceFile,
+  packageName: string
+) {
   const reactProjectConfig = getProjectConfig(tree, `${projectName}-vue`);
   const realtivePath = getRelativePath(
     getDistDir(stencilProjectConfig.root),
@@ -77,6 +79,6 @@ export function addVueOutputtarget(tree: Tree, projectName: string, stencilProje
           })
           `,
       stencilConfigPath
-    )
+    ),
   ]);
 }

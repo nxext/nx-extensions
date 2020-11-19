@@ -15,5 +15,5 @@ export const svelteEslintJson = {
     jest: true,
     node: true,
   },
-  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks']
+  plugins: ['import', 'jsx-a11y', 'react', 'react-hooks'],
 };

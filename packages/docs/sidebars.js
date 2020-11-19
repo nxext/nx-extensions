@@ -3,10 +3,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Nxext',
-      items: [
-        'nxext/introduction',
-        'nxext/contributing'
-      ],
+      items: ['nxext/introduction', 'nxext/contributing'],
     },
     {
       type: 'category',
@@ -35,7 +32,7 @@ module.exports = {
             'stencil/builder/test',
             'stencil/builder/e2e',
             'stencil/builder/serve',
-            'stencil/builder/storybook'
+            'stencil/builder/storybook',
           ],
         },
       ],
@@ -49,10 +46,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Schematics',
-          items: [
-            'svelte/schematics/init',
-            'svelte/schematics/application',
-          ],
+          items: ['svelte/schematics/init', 'svelte/schematics/application'],
         },
         {
           type: 'category',
@@ -61,7 +55,7 @@ module.exports = {
             'svelte/builder/build',
             'svelte/builder/test',
             'svelte/builder/e2e',
-            'svelte/builder/serve'
+            'svelte/builder/serve',
           ],
         },
       ],

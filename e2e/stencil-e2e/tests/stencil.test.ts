@@ -1,9 +1,10 @@
 import {
   checkFilesExist,
   ensureNxProject,
-  readJson, renameFile,
+  readJson,
+  renameFile,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 import { normalize } from '@angular-devkit/core';
 

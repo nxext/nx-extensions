@@ -1,12 +1,14 @@
 import {
   apply,
   applyTemplates,
-  chain, externalSchematic,
+  chain,
+  externalSchematic,
   mergeWith,
   move,
-  Rule, SchematicContext,
+  Rule,
+  SchematicContext,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import {
   addDepsToPackageJson,
@@ -16,8 +18,9 @@ import {
   names,
   offsetFromRoot,
   ProjectType,
-  toFileName, updateJsonInTree,
-  updateWorkspace
+  toFileName,
+  updateJsonInTree,
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { IonicAppSchema } from './schema';
 import { AppType } from '../../utils/typings';
@@ -52,7 +55,7 @@ function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
     parsedTags,
     style,
     appType,
-    appTemplate
+    appTemplate,
   } as IonicAppSchema;
 }
 
@@ -62,10 +65,10 @@ function addFiles(options: IonicAppSchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot)
+        offsetFromRoot: offsetFromRoot(options.projectRoot),
       }),
       move(options.projectRoot),
-      formatFiles({ skipFormat: false })
+      formatFiles({ skipFormat: false }),
     ])
   );
 }
@@ -94,7 +97,7 @@ function showInformation(options: IonicAppSchema): Rule {
   };
 }
 
-export default function(options: IonicAppSchema): Rule {
+export default function (options: IonicAppSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
@@ -108,33 +111,34 @@ export default function(options: IonicAppSchema): Rule {
           schematics: {
             '@nxext/stencil:component': {
               style: options.style,
-              storybook: false
-            }
-          }
+              storybook: false,
+            },
+          },
         }).targets;
-        addDefaultBuilders(
-          targetCollection,
-          projectType,
-          normalizedOptions
-        );
+        addDefaultBuilders(targetCollection, projectType, normalizedOptions);
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
-        tags: normalizedOptions.parsedTags
+        tags: normalizedOptions.parsedTags,
       }),
       addFiles(normalizedOptions),
-      addDepsToPackageJson({}, {'@nxtend/capacitor': capacitorVersion}),
+      addDepsToPackageJson({}, { '@nxtend/capacitor': capacitorVersion }),
       addPackageWithInit('@nxtend/capacitor'),
       externalSchematic('@nxtend/capacitor', 'capacitor-project', {
         project: normalizedOptions.projectName,
         appName: normalizedOptions.projectName,
-        npmClient: normalizedOptions.npmClient
+        npmClient: normalizedOptions.npmClient,
       }),
-      updateJsonInTree(`${appsDir(host)}/${normalizedOptions.projectName}/capacitor.config.json`, json => {
-        json.webDir = `${json.webDir}/www`;
+      updateJsonInTree(
+        `${appsDir(host)}/${
+          normalizedOptions.projectName
+        }/capacitor.config.json`,
+        (json) => {
+          json.webDir = `${json.webDir}/www`;
 
-        return json;
-      }),
-      showInformation(normalizedOptions)
+          return json;
+        }
+      ),
+      showInformation(normalizedOptions),
     ]);
   };
 }

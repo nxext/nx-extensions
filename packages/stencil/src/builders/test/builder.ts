@@ -6,10 +6,7 @@ import {
 import { Observable } from 'rxjs';
 import { StencilTestOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import {
-  createStencilConfig,
-  createStencilProcess,
-} from '../stencil-runtime';
+import { createStencilConfig, createStencilProcess } from '../stencil-runtime';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 
 function createStencilCompilerOptions(

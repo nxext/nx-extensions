@@ -29,224 +29,222 @@ describe('update-1-0-0-beta0', () => {
   });
 });
 
-const oldWorkspaceJson =
-  {
-    'version': 1,
-    'projects': {
-      'testlib': {
-        'projectType': 'library',
-        'schematics': {
-          '@nxext/stencil:component': {
-            'style': 'css',
-            'storybook': false
-          }
+const oldWorkspaceJson = {
+  version: 1,
+  projects: {
+    testlib: {
+      projectType: 'library',
+      schematics: {
+        '@nxext/stencil:component': {
+          style: 'css',
+          storybook: false,
         },
-        'root': 'libs/testlib',
-        'sourceRoot': 'libs/testlib/src',
-        'architect': {
-          'build': {
-            'builder': '@nxext/stencil:build',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts'
-            }
+      },
+      root: 'libs/testlib',
+      sourceRoot: 'libs/testlib/src',
+      architect: {
+        build: {
+          builder: '@nxext/stencil:build',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
           },
-          'test': {
-            'builder': '@nxext/stencil:test',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts'
-            }
+        },
+        test: {
+          builder: '@nxext/stencil:test',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
           },
-          'e2e': {
-            'builder': '@nxext/stencil:e2e',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts'
-            }
+        },
+        e2e: {
+          builder: '@nxext/stencil:e2e',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
           },
-          'serve': {
-            'builder': '@nxext/stencil:serve',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts'
-            }
-          }
-        }
-      }
+        },
+        serve: {
+          builder: '@nxext/stencil:serve',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
+          },
+        },
+      },
     },
-    'cli': {
-      'defaultCollection': '@nxext/stencil'
+  },
+  cli: {
+    defaultCollection: '@nxext/stencil',
+  },
+  schematics: {
+    '@nrwl/workspace': {
+      library: {
+        linter: 'eslint',
+      },
     },
-    'schematics': {
-      '@nrwl/workspace': {
-        'library': {
-          'linter': 'eslint'
-        }
+    '@nrwl/cypress': {
+      'cypress-project': {
+        linter: 'eslint',
       },
-      '@nrwl/cypress': {
-        'cypress-project': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/react': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/react': {
-        'application': {
-          'linter': 'eslint'
-        },
-        'library': {
-          'linter': 'eslint'
-        },
-        'storybook-configuration': {
-          'linter': 'eslint'
-        }
+      library: {
+        linter: 'eslint',
       },
-      '@nrwl/next': {
-        'application': {
-          'linter': 'eslint'
-        }
+      'storybook-configuration': {
+        linter: 'eslint',
       },
-      '@nrwl/web': {
-        'application': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/next': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/node': {
-        'application': {
-          'linter': 'eslint'
-        },
-        'library': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/web': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/nx-plugin': {
-        'plugin': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/node': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/nest': {
-        'application': {
-          'linter': 'eslint'
-        }
+      library: {
+        linter: 'eslint',
       },
-      '@nrwl/express': {
-        'application': {
-          'linter': 'eslint'
-        },
-        'library': {
-          'linter': 'eslint'
-        }
-      }
-    }
-  };
+    },
+    '@nrwl/nx-plugin': {
+      plugin: {
+        linter: 'eslint',
+      },
+    },
+    '@nrwl/nest': {
+      application: {
+        linter: 'eslint',
+      },
+    },
+    '@nrwl/express': {
+      application: {
+        linter: 'eslint',
+      },
+      library: {
+        linter: 'eslint',
+      },
+    },
+  },
+};
 
-const newWorkspaceJson =
-  {
-    'version': 1,
-    'projects': {
-      'testlib': {
-        'projectType': 'library',
-        'schematics': {
-          '@nxext/stencil:component': {
-            'style': 'css',
-            'storybook': false
-          }
+const newWorkspaceJson = {
+  version: 1,
+  projects: {
+    testlib: {
+      projectType: 'library',
+      schematics: {
+        '@nxext/stencil:component': {
+          style: 'css',
+          storybook: false,
         },
-        'root': 'libs/testlib',
-        'sourceRoot': 'libs/testlib/src',
-        'architect': {
-          'build': {
-            'builder': '@nxext/stencil:build',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts'
-            }
+      },
+      root: 'libs/testlib',
+      sourceRoot: 'libs/testlib/src',
+      architect: {
+        build: {
+          builder: '@nxext/stencil:build',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
           },
-          'test': {
-            'builder': '@nxext/stencil:test',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts'
-            }
+        },
+        test: {
+          builder: '@nxext/stencil:test',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
           },
-          'e2e': {
-            'builder': '@nxext/stencil:e2e',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts'
-            }
+        },
+        e2e: {
+          builder: '@nxext/stencil:e2e',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
           },
-          'serve': {
-            'builder': '@nxext/stencil:build',
-            'options': {
-              'projectType': 'library',
-              'configPath': 'libs/testlib/stencil.config.ts',
-              'watch': true,
-              'serve': true
-            }
-          }
-        }
-      }
+        },
+        serve: {
+          builder: '@nxext/stencil:build',
+          options: {
+            projectType: 'library',
+            configPath: 'libs/testlib/stencil.config.ts',
+            watch: true,
+            serve: true,
+          },
+        },
+      },
     },
-    'cli': {
-      'defaultCollection': '@nxext/stencil'
+  },
+  cli: {
+    defaultCollection: '@nxext/stencil',
+  },
+  schematics: {
+    '@nrwl/workspace': {
+      library: {
+        linter: 'eslint',
+      },
     },
-    'schematics': {
-      '@nrwl/workspace': {
-        'library': {
-          'linter': 'eslint'
-        }
+    '@nrwl/cypress': {
+      'cypress-project': {
+        linter: 'eslint',
       },
-      '@nrwl/cypress': {
-        'cypress-project': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/react': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/react': {
-        'application': {
-          'linter': 'eslint'
-        },
-        'library': {
-          'linter': 'eslint'
-        },
-        'storybook-configuration': {
-          'linter': 'eslint'
-        }
+      library: {
+        linter: 'eslint',
       },
-      '@nrwl/next': {
-        'application': {
-          'linter': 'eslint'
-        }
+      'storybook-configuration': {
+        linter: 'eslint',
       },
-      '@nrwl/web': {
-        'application': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/next': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/node': {
-        'application': {
-          'linter': 'eslint'
-        },
-        'library': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/web': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/nx-plugin': {
-        'plugin': {
-          'linter': 'eslint'
-        }
+    },
+    '@nrwl/node': {
+      application: {
+        linter: 'eslint',
       },
-      '@nrwl/nest': {
-        'application': {
-          'linter': 'eslint'
-        }
+      library: {
+        linter: 'eslint',
       },
-      '@nrwl/express': {
-        'application': {
-          'linter': 'eslint'
-        },
-        'library': {
-          'linter': 'eslint'
-        }
-      }
-    }
-  };
+    },
+    '@nrwl/nx-plugin': {
+      plugin: {
+        linter: 'eslint',
+      },
+    },
+    '@nrwl/nest': {
+      application: {
+        linter: 'eslint',
+      },
+    },
+    '@nrwl/express': {
+      application: {
+        linter: 'eslint',
+      },
+      library: {
+        linter: 'eslint',
+      },
+    },
+  },
+};

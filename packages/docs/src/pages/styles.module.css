@@ -47,7 +47,7 @@
 
 .features blockquote:before {
   display: block;
-  content: "\201C";
+  content: '\201C';
   position: absolute;
   font-size: 80px;
   left: -10px;
@@ -57,7 +57,7 @@
 
 .features blockquote:after {
   display: block;
-  content: "\201E";
+  content: '\201E';
   position: absolute;
   font-size: 80px;
   right: -10px;

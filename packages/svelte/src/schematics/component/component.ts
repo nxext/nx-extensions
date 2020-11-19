@@ -32,7 +32,7 @@ function createComponentInProject(options: ComponentSchema): Rule {
       applyWithSkipExisting(url('./files/src'), [
         applyTemplates({
           fileName: fileName,
-          testFileName: testFileName
+          testFileName: testFileName,
         }),
         move(join(normalize(projectConfig.sourceRoot), projectDirectory)),
       ]),
