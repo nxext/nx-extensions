@@ -1,5 +1,6 @@
-import { AppType, SupportedStyles } from '../../utils/typings';
+import { AppType } from '../../utils/typings';
 import { InitSchema } from '../init/schema';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 export interface IonicAppSchema extends InitSchema {
   projectName: string;

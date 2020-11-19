@@ -3,6 +3,7 @@ import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { join } from 'path';
 import { ComponentSchema } from './component';
 import { createTestUILib, runSchematic } from '../../utils/testing';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('component schematic', () => {
   let tree: Tree;
@@ -19,7 +20,7 @@ describe('component schematic', () => {
   );
 
   beforeEach(async () => {
-    tree = await createTestUILib(projectName, 'scss');
+    tree = await createTestUILib(projectName, SupportedStyles.scss);
   });
 
   it('should run successfully', async () => {

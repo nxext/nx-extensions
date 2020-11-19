@@ -22,7 +22,7 @@ describe('init', () => {
   it('should add stencil dependencies', async () => {
     const result = await runSchematic(
       'init',
-      { name: 'test', appType: AppType.Library },
+      { name: 'test', appType: AppType.library },
       tree
     );
     const packageJson = readJsonInTree(result, 'package.json');
@@ -34,7 +34,7 @@ describe('init', () => {
     const result = await testRunner
       .runSchematicAsync(
         'init',
-        { name: 'test', appType: AppType.Application },
+        { name: 'test', appType: AppType.application },
         tree
       )
       .toPromise();
@@ -47,7 +47,7 @@ describe('init', () => {
 
   it('should add stencil pwa dependencies', async () => {
     const result = await testRunner
-      .runSchematicAsync('init', { name: 'test', appType: AppType.Pwa }, tree)
+      .runSchematicAsync('init', { name: 'test', appType: AppType.pwa }, tree)
       .toPromise();
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
@@ -60,7 +60,7 @@ describe('init', () => {
       const result = await testRunner
         .runSchematicAsync(
           'init',
-          { name: 'test', appType: AppType.Library },
+          { name: 'test', appType: AppType.library },
           tree
         )
         .toPromise();

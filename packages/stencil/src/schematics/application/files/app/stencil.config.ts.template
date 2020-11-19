@@ -1,17 +1,4 @@
 import { Config } from '@stencil/core';
-<% if (style == 'scss') { %>
-import { sass } from '@stencil/sass';
-<% } %>
-<% if (style == 'less') { %>
-import { less } from '@stencil/less';
-<% } %>
-<% if (style == 'pcss') { %>
-import { postcss } from '@stencil/postcss';
-import autoprefixer from 'autoprefixer'
-<% } %>
-<% if (style == 'styl') { %>
-import { stylus } from '@stencil/stylus';
-<% } %>
 // https://stenciljs.com/docs/config
 
 export const config: Config = {
@@ -25,23 +12,5 @@ export const config: Config = {
       serviceWorker: null,
       baseUrl: 'https://<% projectName %>.local/',
     },
-  ],
-  <% if (style != 'css') { %>
-  plugins: [
-    <% if (style == 'scss') { %>
-    sass()
-    <% } %>
-    <% if (style == 'less') { %>
-    less()
-    <% } %>
-    <% if (style == 'pcss') { %>
-    postcss({
-      plugins: [autoprefixer()]
-    })
-    <% } %>
-    <% if (style == 'styl') { %>
-    stylus()
-    <% } %>
-  ],
-  <% } %>
+  ]
 };

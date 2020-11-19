@@ -2,9 +2,9 @@ import {
   checkFilesExist,
   ensureNxProject,
   readJson,
-  renameFile,
+  renameFile, runNxCommand,
   runNxCommandAsync,
-  uniq,
+  uniq
 } from '@nrwl/nx-plugin/testing';
 import { normalize } from '@angular-devkit/core';
 
@@ -84,7 +84,7 @@ describe('e2e', () => {
       done();
     });
   });
-
+/*
   describe('e2e-pwa', () => {
     describe('--tags', () => {
       it('should add tags to nx.json', async (done) => {
@@ -202,4 +202,5 @@ describe('e2e', () => {
       done();
     });
   });
+*/
 });

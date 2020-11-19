@@ -32,6 +32,9 @@
     },
     "docs": {
       "tags": []
+    },
+    "stencil-core-utils": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

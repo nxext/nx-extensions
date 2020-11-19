@@ -193,6 +193,27 @@
           }
         }
       }
+    },
+    "stencil-core-utils": {
+      "root": "packages/stencil-core-utils",
+      "sourceRoot": "packages/stencil-core-utils/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["packages/stencil-core-utils/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "packages/stencil-core-utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

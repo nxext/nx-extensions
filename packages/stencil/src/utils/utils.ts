@@ -1,4 +1,3 @@
-import { SupportedStyles } from './typings';
 import {
   apply,
   forEach,
@@ -20,11 +19,12 @@ import { PWASchema } from '../schematics/ionic-pwa/schema';
 import { ApplicationSchema } from '../schematics/application/schema';
 import ignore from 'ignore';
 import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 export function calculateStyle(
   style: SupportedStyles | undefined
 ): SupportedStyles {
-  const styleDefault = 'css';
+  const styleDefault = SupportedStyles.css;
 
   if (style == undefined) {
     return styleDefault;

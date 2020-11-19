@@ -2,22 +2,11 @@ import { Architect } from '@angular-devkit/architect';
 import { schema } from '@angular-devkit/core';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { join } from 'path';
-import {
-  createEmptyWorkspace,
-  MockBuilderContext,
-} from '@nrwl/workspace/testing';
+import { createEmptyWorkspace, MockBuilderContext } from '@nrwl/workspace/testing';
 import { externalSchematic, Rule, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { SupportedStyles } from './typings';
 import { ProjectType } from '@nrwl/workspace';
-
-export const SUPPORTED_STYLE_LIBRARIES = [
-  'css',
-  'scss',
-  'less',
-  'styl',
-  'pcss',
-];
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 const testRunner = new SchematicTestRunner(
   '@nxext/stencil',
@@ -65,7 +54,7 @@ export function runMigration(migrationName: string, options: any, tree: Tree) {
 
 export async function createTestUILib(
   libName: string,
-  style: SupportedStyles,
+  style: SupportedStyles = SupportedStyles.css,
   buildable = true
 ): Promise<Tree> {
   let appTree = createEmptyWorkspace(Tree.empty());

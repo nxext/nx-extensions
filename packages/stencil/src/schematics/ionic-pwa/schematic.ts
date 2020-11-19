@@ -23,6 +23,8 @@ import { AppType } from '../../utils/typings';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import init from '../init/init';
+import { addStylePluginToConfigInTree } from '@nxext/stencil-core-utils';
+import { join } from "path";
 
 const projectType = ProjectType.Application;
 
@@ -38,7 +40,7 @@ function normalizeOptions(options: InitSchema, host: Tree): PWASchema {
     : [];
 
   const style = calculateStyle(options.style);
-  const appType = AppType.Pwa;
+  const appType = AppType.pwa;
 
   return {
     ...options,
@@ -89,6 +91,10 @@ export default function (options: InitSchema): Rule {
         tags: normalizedOptions.parsedTags,
       }),
       addFiles(normalizedOptions),
+      addStylePluginToConfigInTree(
+        join(normalizedOptions.projectRoot, 'stencil.config.ts'),
+        normalizedOptions.style
+      ),
     ]);
   };
 }

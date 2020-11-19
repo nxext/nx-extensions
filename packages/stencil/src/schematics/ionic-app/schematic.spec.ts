@@ -2,7 +2,8 @@ import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { runSchematic, SUPPORTED_STYLE_LIBRARIES } from '../../utils/testing';
+import { runSchematic } from '../../utils/testing';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('schematic:ionic-app', () => {
   let tree: Tree;
@@ -30,7 +31,7 @@ describe('schematic:ionic-app', () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
-      { name: appName, appType: AppType.Application },
+      { name: appName, appType: AppType.application },
       tree
     );
 
@@ -55,7 +56,7 @@ describe('schematic:ionic-app', () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
-      { name: appName, appType: AppType.Application, subdir: 'subdir' },
+      { name: appName, appType: AppType.application, subdir: 'subdir' },
       tree
     );
 
@@ -80,7 +81,7 @@ describe('schematic:ionic-app', () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
-      { name: appName, appType: AppType.Application },
+      { name: appName, appType: AppType.application },
       tree
     );
 
@@ -93,7 +94,7 @@ describe('schematic:ionic-app', () => {
     fileList.forEach((file) => expect(result.exists(file)));
   });
 
-  SUPPORTED_STYLE_LIBRARIES.forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     xit(`should add Stencil ${style} dependencies to ionic-app`, async () => {
       const result = await runSchematic(
         'ionic-app',

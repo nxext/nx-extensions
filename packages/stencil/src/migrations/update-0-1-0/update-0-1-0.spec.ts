@@ -4,9 +4,8 @@ import { readJsonInTree, serializeJson } from '@nrwl/workspace';
 import * as path from 'path';
 import {
   createTestUILib,
-  SUPPORTED_STYLE_LIBRARIES,
 } from '../../utils/testing';
-import { SupportedStyles } from '../../utils/typings';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('update-0-1-0', () => {
   let initialTree: Tree;
@@ -19,10 +18,10 @@ describe('update-0-1-0', () => {
     );
   });
 
-  (SUPPORTED_STYLE_LIBRARIES as SupportedStyles[]).forEach((style) => {
+  Object.keys(SupportedStyles).forEach((style) => {
     it(`should update component schematics config with ${style}`, async () => {
       const projectName = 'testlib';
-      initialTree = await createTestUILib(projectName, style);
+      initialTree = await createTestUILib(projectName, SupportedStyles[style]);
       initialTree.overwrite(
         'workspace.json',
         serializeJson({

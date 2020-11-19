@@ -5,11 +5,12 @@ import { join } from 'path';
 import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { MakeLibBuildableSchema } from './schema';
+import { SupportedStyles } from '@nxext/stencil-core-utils';
 
 describe('make-lib-buildable schematic', () => {
   let tree: Tree;
   const name = uniq('testproject');
-  const options: MakeLibBuildableSchema = { name, style: 'css' };
+  const options: MakeLibBuildableSchema = { name, style: SupportedStyles.css };
 
   const testRunner = new SchematicTestRunner(
     '@nxext/stencil',
@@ -17,7 +18,7 @@ describe('make-lib-buildable schematic', () => {
   );
 
   beforeEach(async () => {
-    tree = await createTestUILib(name, 'css', false);
+    tree = await createTestUILib(name, SupportedStyles.css, false);
   });
 
   it('should run successfully', async () => {

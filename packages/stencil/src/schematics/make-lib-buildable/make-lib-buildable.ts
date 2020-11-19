@@ -1,32 +1,10 @@
-import {
-  apply,
-  applyTemplates,
-  chain,
-  mergeWith,
-  move,
-  Rule,
-  Tree,
-  url
-} from '@angular-devkit/schematics';
-import {
-  formatFiles,
-  insert,
-  names,
-  offsetFromRoot,
-  ProjectType,
-  updateWorkspace
-} from '@nrwl/workspace';
-import {
-  getProjectConfig,
-  insertImport,
-  libsDir
-} from '@nrwl/workspace/src/utils/ast-utils';
+import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
+import { formatFiles, names, offsetFromRoot, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
-import { readTsSourceFileFromTree } from '../../utils/ast-utils';
-import * as ts from 'typescript';
 import { join } from 'path';
-import { addToPlugins } from '../../utils/add-to-outputargets';
+import { addStylePluginToConfigInTree } from '@nxext/stencil-core-utils';
 
 const projectType = ProjectType.Library;
 
@@ -52,102 +30,6 @@ function addFiles(options: MakeLibBuildableSchema): Rule {
       move(options.projectRoot)
     ])
   );
-}
-
-function updateStencilConfig(options: MakeLibBuildableSchema): Rule {
-  return (tree: Tree) => {
-    const stencilConfigPath = join(options.projectRoot, 'stencil.config.ts');
-    const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
-      tree,
-      stencilConfigPath
-    );
-
-    const changes = [];
-    if (options.style === 'scss') {
-      changes.push(
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'sass',
-          '@stencil/sass'
-        )
-      );
-      changes.push(
-        ...addToPlugins(
-          stencilConfigSource,
-          stencilConfigPath,
-          'sass()'
-        )
-      );
-    }
-    if (options.style === 'less') {
-      changes.push(
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'less',
-          '@stencil/less'
-        )
-      );
-      changes.push(
-        ...addToPlugins(
-          stencilConfigSource,
-          stencilConfigPath,
-          'less()'
-        )
-      );
-    }
-    if (options.style === 'postcss') {
-      changes.push(
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'postcss',
-          '@stencil/postcss'
-        )
-      );
-      changes.push(
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'autoprefixer',
-          'autoprefixer'
-        )
-      );
-      changes.push(
-        ...addToPlugins(
-          stencilConfigSource,
-          stencilConfigPath,
-          `
-          postcss({
-            plugins: [autoprefixer()]
-          })
-          `
-        )
-      );
-    }
-    if (options.style === 'styl') {
-      changes.push(
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'stylus',
-          '@stencil/stylus'
-        )
-      );
-      changes.push(
-        ...addToPlugins(
-          stencilConfigSource,
-          stencilConfigPath,
-          'stylus()'
-        )
-      );
-    }
-
-    insert(tree, stencilConfigPath, changes);
-
-    return tree;
-  };
 }
 
 export default function(options: MakeLibBuildableSchema): Rule {
@@ -183,7 +65,10 @@ export default function(options: MakeLibBuildableSchema): Rule {
         });
       }),
       addFiles(normalizedOptions),
-      updateStencilConfig(normalizedOptions),
+      addStylePluginToConfigInTree(
+        join(normalizedOptions.projectRoot, 'stencil.config.ts'),
+        normalizedOptions.style
+      ),
       formatFiles()
     ]);
   };
