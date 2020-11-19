@@ -1,139 +1,38 @@
-name: nxext macos CI
+name: Nx Windows CI
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches: [main]
-
-env:
-  NX_BRANCH: ${{ github.event.number }}
-  NX_RUN_GROUP: ${{ github.run_id }}
+  pull_request:
+    branches: [main]
 
 jobs:
-  setup:
+  build:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
-    steps:
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Get origin main
-        run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
-      - uses: actions/cache@v2
-        id: workspace-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
-  lint:
-    runs-on: macos-latest
-
-    needs: [setup]
-    strategy:
-      matrix:
-        node-version: [12.x]
-
-    steps:
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Get origin main
-        if: github.event_name == 'pull_request'
-        run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
-      - uses: actions/cache@v2
-        id: workspace-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Run On main
-        if: github.event_name == 'push'
-        run: yarn affected:lint --parallel
-      - name: Run on PR
-        if: github.event_name == 'pull_request'
-        run: yarn affected:lint --base=origin/main --head=HEAD --parallel
-  test:
-    runs-on: macos-latest
-
-    needs: [setup]
 
     strategy:
       matrix:
         node-version: [12.x]
 
+    env:
+      NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+      NX_BRANCH: ${{ github.event.number }}
+      NX_RUN_GROUP: ${{ github.run_id }}
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Get origin main
-        if: github.event_name == 'pull_request'
-        run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
-      - uses: actions/cache@v2
-        id: workspace-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Run On main
-        if: github.event_name == 'push'
-        run: yarn affected:test --parallel
-      - name: Run on PR
-        if: github.event_name == 'pull_request'
-        run: yarn affected:test --base=origin/main --head=HEAD --parallel
-
-  e2e:
-    runs-on: macos-latest
-    needs: [setup]
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
-    steps:
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Get origin main
-        if: github.event_name == 'pull_request'
-        run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/main:refs/remotes/origin/main
-      - uses: actions/cache@v2
-        id: workspace-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ matrix.node-version }}-workspace-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-workspace-
-      - name: Run On main
-        if: github.event_name == 'push'
-        run: yarn affected:e2e
-      - name: Run on PR
-        if: github.event_name == 'pull_request'
-        run: yarn affected:e2e --base=origin/main --head=HEAD
+      - run: git fetch --no-tags --prune --depth=5 origin main
+      - run: yarn install --frozen-lockfile
+      - run: yarn affected:build --base=origin/main --head=HEAD --with-deps
+      - run: yarn affected:lint --base=origin/main --head=HEAD --parallel
+      - run: yarn affected:test --base=origin/main --head=HEAD --parallel
+      - run: yarn affected:e2e --base=origin/main --head=HEAD
