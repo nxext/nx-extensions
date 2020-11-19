@@ -1,5 +1,5 @@
 import { from, Observable, of } from 'rxjs';
-import { BuilderOutput, BuilderContext } from '@angular-devkit/architect';
+import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { runTask } from '@stencil/core/cli';
 import { cleanupE2eTesting } from './e2e-testing';

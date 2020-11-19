@@ -1,7 +1,7 @@
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
 import { updateWorkspaceInTree } from '@nrwl/workspace';
 import { isStencilProjectBuilder } from '../utils/migration-utils';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../../stencil-core-utils';
 
 export default function update(): Rule {
   return chain([updateWorkspaceAddSchematicsOptions]);

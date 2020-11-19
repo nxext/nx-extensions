@@ -1,15 +1,7 @@
 import { chain, noop, Rule } from '@angular-devkit/schematics';
-import {
-  addDepsToPackageJson,
-  addPackageWithInit,
-  updateJsonInTree,
-} from '@nrwl/workspace';
+import { addDepsToPackageJson, addPackageWithInit, updateJsonInTree } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
-import {
-  AppType,
-  PROJECT_TYPE_DEPENDENCIES,
-  STYLE_PLUGIN_DEPENDENCIES,
-} from '../../utils/typings';
+import { AppType, PROJECT_TYPE_DEPENDENCIES, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { InitSchema } from './schema';
 
 function addDependencies(appType: AppType): Rule {

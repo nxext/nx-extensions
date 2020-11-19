@@ -5,7 +5,7 @@ import { join } from 'path';
 import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { MakeLibBuildableSchema } from './schema';
-import { SupportedStyles } from '@nxext/stencil-core-utils';
+import { SupportedStyles } from '../../stencil-core-utils';
 
 describe('make-lib-buildable schematic', () => {
   let tree: Tree;

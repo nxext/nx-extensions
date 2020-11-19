@@ -2,8 +2,8 @@ import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 import { addToPlugins } from './plugins';
 import { Rule, Tree } from '@angular-devkit/schematics';
-import { readTsSourceFileFromTree } from '../../../stencil/src/utils/ast-utils';
 import { insert } from '@nrwl/workspace';
+import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 
 export enum SupportedStyles {
   css = 'css',

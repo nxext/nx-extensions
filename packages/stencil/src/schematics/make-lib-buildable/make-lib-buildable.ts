@@ -4,7 +4,7 @@ import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
 import { join } from 'path';
-import { addStylePluginToConfigInTree } from '@nxext/stencil-core-utils';
+import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
 
 const projectType = ProjectType.Library;
 
