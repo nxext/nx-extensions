@@ -84,7 +84,7 @@ describe('e2e', () => {
       done();
     });
   });
-/*
+
   describe('e2e-pwa', () => {
     describe('--tags', () => {
       it('should add tags to nx.json', async (done) => {
@@ -202,5 +202,4 @@ describe('e2e', () => {
       done();
     });
   });
-*/
 });
