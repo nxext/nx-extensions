@@ -1,4 +1,4 @@
-name: Nx Windows CI
+name: Nx MacOSX CI
 
 on:
   push:
