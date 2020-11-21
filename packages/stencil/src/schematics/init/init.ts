@@ -1,67 +1,15 @@
-import { chain, noop, Rule } from '@angular-devkit/schematics';
-import { addDepsToPackageJson, addPackageWithInit, updateJsonInTree } from '@nrwl/workspace';
+import { chain, Rule } from '@angular-devkit/schematics';
+import { addPackageWithInit } from '@nrwl/workspace';
 import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
-import { AppType, PROJECT_TYPE_DEPENDENCIES, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { InitSchema } from './schema';
-
-function addDependencies(appType: AppType): Rule {
-  const projectDependency = PROJECT_TYPE_DEPENDENCIES[appType];
-  return addDepsToPackageJson(
-    projectDependency.dependencies,
-    projectDependency.devDependencies
-  );
-}
-
-function addStyledModuleDependencies<T extends InitSchema>(options: T): Rule {
-  const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[options.style];
-
-  return styleDependencies
-    ? addDepsToPackageJson(
-        styleDependencies.dependencies,
-        styleDependencies.devDependencies
-      )
-    : noop();
-}
-
-function addE2eDependencies<T extends InitSchema>(options: T): Rule {
-  const testDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
-
-  return testDependencies
-    ? addDepsToPackageJson(
-        testDependencies.dependencies,
-        testDependencies.devDependencies
-      )
-    : noop();
-  if (options.e2eTestRunner === 'puppeteer') {
-    return testDependencies
-      ? addDepsToPackageJson(
-          testDependencies.dependencies,
-          testDependencies.devDependencies
-        )
-      : noop();
-  }
-
-  return noop();
-}
-
-const moveToDevDependencies = updateJsonInTree(
-  'package.json',
-  (packageJson) => {
-    packageJson.dependencies = packageJson.dependencies || {};
-    packageJson.devDependencies = packageJson.devDependencies || {};
-
-    if (packageJson.dependencies['@nxext/stencil']) {
-      packageJson.devDependencies['@nxext/stencil'] =
-        packageJson.dependencies['@nxext/stencil'];
-      delete packageJson.dependencies['@nxext/stencil'];
-    }
-    return packageJson;
-  }
-);
+import { addStyledModuleDependencies } from './lib/add-style-module-dependencies';
+import { addE2eDependencies } from './lib/add-e2e-dependencies';
+import { moveToDevDependencies } from './lib/move-nxext-to-dev-dependencies';
+import { addDependenciesForApptype } from './lib/add-dependencies-for-apptype';
 
 export default function <T extends InitSchema>(options: T): Rule {
   return chain([
-    addDependencies(options.appType),
+    addDependenciesForApptype(options.appType),
     moveToDevDependencies,
     addStyledModuleDependencies(options),
     addPackageWithInit(`@nrwl/jest`),
