@@ -1,6 +1,4 @@
 import { Tree } from '@angular-devkit/schematics';
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { join } from 'path';
 import { ComponentSchema } from './component';
 import { createTestUILib, runSchematic } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
@@ -14,18 +12,13 @@ describe('component schematic', () => {
     storybook: false,
   };
 
-  const testRunner = new SchematicTestRunner(
-    '@nxext/stencil',
-    join(__dirname, '../../../collection.json')
-  );
-
   beforeEach(async () => {
     tree = await createTestUILib(projectName, SupportedStyles.scss);
   });
 
   it('should run successfully', async () => {
     await expect(
-      testRunner.runSchematicAsync('component', options, tree).toPromise()
+      runSchematic('component', options, tree)
     ).resolves.not.toThrowError();
   });
 
