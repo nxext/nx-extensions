@@ -1,7 +1,5 @@
 import { Tree } from '@angular-devkit/schematics';
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { join } from 'path';
-import { createTestUILib } from '../../utils/testing';
+import { createTestUILib, runSchematic } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { AddOutputtargetSchematicSchema } from './add-outputtarget';
 import { toFileName } from '@nrwl/workspace';
@@ -19,20 +17,13 @@ describe('schematics:add-outputtarget', () => {
     outputType: 'angular',
   };
 
-  const testRunner = new SchematicTestRunner(
-    '@nxext/stencil',
-    join(__dirname, '../../../collection.json')
-  );
-
   beforeEach(async () => {
     tree = await createTestUILib(projectName);
   });
 
   describe('using react', () => {
     it('should not generate default react library', async () => {
-      tree = await testRunner
-        .runSchematicAsync('add-outputtarget', reactOptions, tree)
-        .toPromise();
+      tree = await runSchematic('add-outputtarget', reactOptions, tree);
 
       expect(
         tree.exists(
@@ -61,9 +52,7 @@ describe('schematics:add-outputtarget', () => {
 
   describe('using angular', () => {
     xit('should generate default angular library', async () => {
-      tree = await testRunner
-        .runSchematicAsync('add-outputtarget', angularOptions, tree)
-        .toPromise();
+      tree = await runSchematic('add-outputtarget', angularOptions, tree);
 
       expect(
         tree.exists(
