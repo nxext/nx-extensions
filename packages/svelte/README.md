@@ -17,13 +17,13 @@
 Add this plugin to an Nx workspace:
 
 ```
-yarn add @nxext/svelte
+yarn add -dev @nxext/svelte
 ```
 
 or
 
 ```
-npm install @nxext/svelte --save
+npm install @nxext/svelte --save-dev
 ```
 
 ## Project schematics
