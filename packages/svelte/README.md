@@ -17,7 +17,7 @@
 Add this plugin to an Nx workspace:
 
 ```
-yarn add -dev @nxext/svelte
+yarn add --dev @nxext/svelte
 ```
 
 or
