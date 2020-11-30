@@ -3,6 +3,7 @@ import { Config } from '@stencil/core';
 export const config: Config = {
   namespace: '<%= name %>',
   taskQueue: 'async',
+  <% if(buildable) { %>
   outputTargets: [
     {
       type: 'dist',
@@ -18,4 +19,5 @@ export const config: Config = {
       serviceWorker: null // disable service workers
     }
   ]
+  <% } %>
 };
