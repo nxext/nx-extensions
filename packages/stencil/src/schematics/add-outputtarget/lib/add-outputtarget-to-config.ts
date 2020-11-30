@@ -1,6 +1,5 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
-import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
 import { getNpmScope } from '@nrwl/workspace';
 import { addReactOutputtarget } from './react';
@@ -18,13 +17,6 @@ export function addToOutputTargetToConfig(
     const stencilProjectConfig = getProjectConfig(tree, projectName);
 
     const stencilConfigPath = `${stencilProjectConfig.root}/stencil.config.ts`;
-
-    if (tree.exists(stencilConfigPath)) {
-      context.logger.info(stripIndents`
-        Please use a buildable library for custom outputtargets
-      `);
-    }
-
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath

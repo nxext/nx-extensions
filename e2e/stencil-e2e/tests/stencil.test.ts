@@ -49,6 +49,20 @@ describe('e2e', () => {
 
         done();
       });
+
+      it(`should stop if lib not buildable`, async (done) => {
+        const plugin = uniq('lib');
+        await runNxCommandAsync(
+          `generate @nxext/stencil:lib ${plugin} --style='css'`
+        );
+        const result = await runNxCommandAsync(
+          `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
+        );
+
+        expect(result.stdout).toContain('Please use a buildable library for custom outputtargets');
+
+        done();
+      });
     });
 
     it('should create src in the specified directory', async (done) => {
@@ -77,6 +91,17 @@ describe('e2e', () => {
       await runNxCommandAsync(
         `generate @nxext/stencil:lib ${plugin} --style='scss' --buildable`
       );
+
+      const result = await runNxCommandAsync(`build ${plugin} --dev`);
+      expect(result.stdout).toContain('build finished');
+
+      done();
+    });
+
+    it('should be able to make a lib buildable', async (done) => {
+      const plugin = uniq('lib');
+      await runNxCommandAsync(`generate @nxext/stencil:lib ${plugin}`);
+      await runNxCommandAsync(`generate @nxext/stencil:make-lib-buildable ${plugin}`);
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
       expect(result.stdout).toContain('build finished');
