@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "id": "TailwindStencil",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What project would you like tp use?"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["project"]
+}

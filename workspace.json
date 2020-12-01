@@ -193,6 +193,70 @@
           }
         }
       }
+    },
+    "tailwind": {
+      "root": "packages/tailwind",
+      "sourceRoot": "packages/tailwind/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["packages/tailwind/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "packages/tailwind/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/packages/tailwind",
+            "tsConfig": "packages/tailwind/tsconfig.lib.json",
+            "packageJson": "packages/tailwind/package.json",
+            "main": "packages/tailwind/src/index.ts",
+            "assets": [
+              "packages/tailwind/*.md",
+              {
+                "input": "./packages/tailwind/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/tailwind",
+                "glob": "collection.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/tailwind",
+                "glob": "builders.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "tailwind-e2e": {
+      "projectType": "application",
+      "root": "e2e/tailwind-e2e",
+      "sourceRoot": "e2e/tailwind-e2e/src",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "tailwind:build",
+            "npmPackageName": "@nxext/tailwind",
+            "pluginOutputPath": "dist/packages/tailwind",
+            "jestConfig": "e2e/tailwind-e2e/jest.config.js"
+          }
+        }
+      }
     }
   },
   "cli": {

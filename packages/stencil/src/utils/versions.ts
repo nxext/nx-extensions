@@ -26,7 +26,7 @@ export const STENCIL_STYLE_PLUGIN_VERSION: {
   [style: string]: string;
 } = {
   less: '1.0.0',
-  scss: '1.4.0',
+  scss: '1.4.1',
   pcss: '1.0.1',
   styl: '1.0.1',
 };
