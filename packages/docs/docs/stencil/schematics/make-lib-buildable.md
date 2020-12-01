@@ -1,0 +1,31 @@
+---
+id: add-outputtarget
+title: Add Outputtargets
+---
+
+Adds build and e2e builders to a not yet buildable library:
+
+## Usage
+
+```
+nx g @nxext/stencil:make-lib-buildable my-lib
+```
+
+or
+
+```
+ng g @nxext/stencil:make-lib-buildable my-lib
+```
+
+
+## Options
+
+### --style
+
+Default: `css`
+
+Possible values: css, scss, styl, less, pcss
+
+Type: `list`
+
+The file extension to be used for style files.

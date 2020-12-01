@@ -47,6 +47,14 @@ Type: `list`
 
 The file extension to be used for style files.
 
+## --buildable
+
+Default: false
+
+Type: `boolean`
+
+Generate the build and e2e commands and be able to build and redistribute the library independently.
+
 ### --skipFormat
 
 Default: `false`
