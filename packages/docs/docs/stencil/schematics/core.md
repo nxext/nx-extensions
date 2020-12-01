@@ -3,7 +3,9 @@ id: core
 title: Core
 ---
 
-This schematic possibly installs the following deendencies:
+*The user don't need to call this. It'll be called by the application schematics automatically.*
+
+This schematic possibly installs the following dependencies:
 
 ```
 @stencil/core

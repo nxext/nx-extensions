@@ -15,13 +15,14 @@ module.exports = {
           type: 'category',
           label: 'Schematics',
           items: [
-            'stencil/schematics/core',
             'stencil/schematics/application',
-            'stencil/schematics/library',
-            'stencil/schematics/add-outputtarget',
             'stencil/schematics/ionic-app',
             'stencil/schematics/ionic-pwa',
             'stencil/schematics/storybook',
+            'stencil/schematics/library',
+            'stencil/schematics/add-outputtarget',
+            'stencil/schematics/make-lib-buildable',
+            'stencil/schematics/core',
           ],
         },
         {
