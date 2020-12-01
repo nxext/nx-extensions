@@ -2,7 +2,6 @@ import { projectRootDir, ProjectType } from '@nrwl/workspace';
 import {
   checkFilesExist,
   readJson,
-  runYarnInstall,
   tmpProjPath,
 } from '@nrwl/nx-plugin/testing';
 import { normalize } from '@angular-devkit/core';
@@ -147,16 +146,4 @@ export function testProject(
       )
     );
   }
-}
-
-export function addPackageBeforeTest(pkgName, pkgVersion) {
-  const packageJson = JSON.parse(
-    readFileSync(tmpProjPath('package.json')).toString()
-  );
-  packageJson.devDependencies[pkgName] = pkgVersion;
-  writeFileSync(
-    tmpProjPath('package.json'),
-    JSON.stringify(packageJson, null, 2)
-  );
-  runYarnInstall();
 }

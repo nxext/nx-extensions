@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "tailwind",
+  "version": "0.0.1",
+  "schematics": {
+    "stencil": {
+      "factory": "./src/schematics/stencil/schematic",
+      "schema": "./src/schematics/stencil/schema.json",
+      "description": "stencil tailwind schematic"
+    }
+  }
+}

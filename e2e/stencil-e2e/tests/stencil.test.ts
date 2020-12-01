@@ -2,7 +2,7 @@ import {
   checkFilesExist,
   ensureNxProject,
   readJson,
-  renameFile, runNxCommand,
+  renameFile,
   runNxCommandAsync,
   uniq
 } from '@nrwl/nx-plugin/testing';
