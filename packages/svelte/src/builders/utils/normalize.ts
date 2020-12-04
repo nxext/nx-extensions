@@ -1,6 +1,6 @@
 import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
-import { normalize } from '@angular-devkit/core';
-import { resolve, dirname, relative, basename, join } from 'path';
+import { normalize, join, resolve, Path, dirname, basename, relative, getSystemPath } from '@angular-devkit/core';
+import { join as pathJoin } from 'path';
 import { InitOptions } from './init';
 import { statSync } from 'fs-extra';
 
@@ -18,26 +18,21 @@ export function normalizeOptions(
       )
     : null;
 
-  const sourceRoot = join(projectConfig.projectRoot, 'src');
+  const projectRoot = normalize(projectConfig.projectRoot);
+  const sourceRoot = join(projectRoot, 'src');
 
   return {
     ...options,
     ...projectConfig,
     rollupConfig,
     sveltePreprocessConfig,
+    sourceRoot,
     assets: normalizeAssets(
       options.assets,
-      projectConfig.projectRoot,
+      projectRoot,
       sourceRoot
     ),
-    sourceRoot,
   } as SvelteBuildOptions;
-}
-
-export interface AssetCopyCommand {
-  src: string;
-  dest: string;
-  flatten: boolean;
 }
 
 export interface NormalizedCopyAssetOption {
@@ -48,14 +43,14 @@ export interface NormalizedCopyAssetOption {
 
 export function normalizeAssets(
   assets: (string | NormalizedCopyAssetOption)[],
-  root: string,
-  sourceRoot: string
+  root: Path,
+  sourceRoot: Path
 ): NormalizedCopyAssetOption[] {
   return assets.map((asset) => {
     if (typeof asset === 'string') {
       const assetPath = normalize(asset);
-      const resolvedAssetPath = resolve(root, assetPath);
-      const resolvedSourceRoot = resolve(root, sourceRoot);
+      const resolvedAssetPath = resolve(normalize(root), assetPath);
+      const resolvedSourceRoot = resolve(normalize(root), sourceRoot);
 
       if (!resolvedAssetPath.startsWith(resolvedSourceRoot)) {
         throw new Error(
@@ -85,13 +80,14 @@ export function normalizeAssets(
       const resolvedAssetPath = resolve(root, assetPath);
       return {
         ...asset,
-        input: resolvedAssetPath,
+        input: getSystemPath(resolvedAssetPath),
         // Now we remove starting slash to make Webpack place it from the output root.
-        output: asset.output.replace(/^\//, ''),
+        output: getSystemPath(normalize(asset.output.replace(/^\//, ''))),
       };
     }
   });
 }
+
 interface RollupCopyAssetOption {
   src: string;
   dest: string;
@@ -102,9 +98,9 @@ export function convertCopyAssetsToRollupOptions(
   assets: NormalizedCopyAssetOption[]
 ): RollupCopyAssetOption[] {
   return assets
-    ? assets.map((a) => ({
-        src: join(a.input, a.glob).replace(/\\/g, '/'),
-        dest: join(outputPath, a.output).replace(/\\/g, '/'),
+    ? assets.map((normalizedCopyAssetOption) => ({
+        src: getSystemPath(normalize(pathJoin(normalizedCopyAssetOption.input, normalizedCopyAssetOption.glob).replace(/\\/g, '/'))),
+        dest: getSystemPath(normalize(pathJoin(outputPath, normalizedCopyAssetOption.output).replace(/\\/g, '/'))),
       }))
     : undefined;
 }
