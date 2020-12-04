@@ -10,7 +10,7 @@ describe('svelte e2e', () => {
     ensureNxProject('@nxext/svelte', 'dist/packages/svelte');
   });
 
-  xit('should create svelte application', async (done) => {
+  it('should create svelte application', async (done) => {
     const plugin = uniq('svelte');
     await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
 
@@ -21,7 +21,7 @@ describe('svelte e2e', () => {
   });
 
   describe('--tags', () => {
-    xit('should add tags to nx.json', async (done) => {
+    it('should add tags to nx.json', async (done) => {
       const plugin = uniq('sveltetags');
       await runNxCommandAsync(
         `generate @nxext/svelte:app ${plugin} --tags e2etag,e2ePackage`
@@ -33,7 +33,7 @@ describe('svelte e2e', () => {
   });
 
   describe('linting', () => {
-    xit('should be able to run linter', async (done) => {
+    it('should be able to run linter', async (done) => {
       const plugin = uniq('sveltelint');
       await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
 
