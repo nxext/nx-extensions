@@ -8,7 +8,7 @@ import { readJsonInTree } from '@nrwl/workspace';
 
 describe('stencil tailwindcss schematic', () => {
   let appTree: Tree;
-  const options: Schema = { project: 'test' };
+  const options: Schema = { project: 'test', skipFormat: false };
 
   const testRunner = new SchematicTestRunner(
     '@nxext/tailwind',
