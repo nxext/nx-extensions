@@ -25,7 +25,10 @@
           "options": {
             "jestConfig": "packages/stencil/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/packages/stencil"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -78,7 +81,10 @@
               }
             ],
             "srcRootForCompilationRoot": "packages/stencil"
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -123,7 +129,10 @@
           "options": {
             "jestConfig": "packages/svelte/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/packages/svelte"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -155,7 +164,10 @@
                 "output": "."
               }
             ]
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },
@@ -203,7 +215,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["packages/tailwind/**/*.ts"]
+            "lintFilePatterns": [
+              "packages/tailwind/**/*.ts"
+            ]
           }
         },
         "test": {
@@ -211,7 +225,10 @@
           "options": {
             "jestConfig": "packages/tailwind/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/packages/tailwind"
+          ]
         },
         "build": {
           "builder": "@nrwl/node:package",
@@ -238,7 +255,10 @@
                 "output": "."
               }
             ]
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       }
     },

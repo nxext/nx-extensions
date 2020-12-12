@@ -1,6 +1,6 @@
 import { RawSvelteBuildOptions } from './schema';
 import { MockBuilderContext } from '@nrwl/workspace/testing';
-import { getMockContext } from '@nrwl/nx-plugin/src/utils/testing';
+import { getMockContext } from '@nrwl/web/src/utils/testing';
 import { createRollupOptions } from '../utils/rollup';
 import { normalizeOptions } from '../utils/normalize';
 import { InitOptions } from '../utils/init';

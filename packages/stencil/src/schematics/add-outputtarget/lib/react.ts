@@ -40,11 +40,20 @@ export function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
             options.projectName
           }-react.spec.tsx`
         );
-        tree.delete(
-          `${libsDir(host)}/${reactProjectName}/src/lib/${
-            options.projectName
-          }-react.css`
-        );
+
+        // Nx10
+        const cssFile = `${libsDir(host)}/${reactProjectName}/src/lib/${
+          options.projectName
+        }-react.css`;
+        if(tree.exists(cssFile)) {
+          tree.delete(cssFile);
+        }
+        const cssModuleFile = `${libsDir(host)}/${reactProjectName}/src/lib/${
+          options.projectName
+        }-react.module.css`;
+        if(tree.exists(cssModuleFile)) {
+          tree.delete(cssModuleFile);
+        }
 
         tree.overwrite(
           `${libsDir(host)}/${reactProjectName}/src/index.ts`,

@@ -1,20 +1,21 @@
-import {
-  BuilderContext,
-  BuilderOutput,
-  createBuilder,
-} from '@angular-devkit/architect';
-import { from, Observable, of } from 'rxjs';
-import { catchError, concatMap, switchMap, tap } from 'rxjs/operators';
+import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
+import { from, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { RawSvelteBuildOptions } from './schema';
-import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
-import { calculateProjectDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { runRollup, runRollupWatch } from '../utils/rollup';
-import { initRollupOptions } from '../utils/init';
 
 export function runBuilder(
   options: RawSvelteBuildOptions,
   context: BuilderContext
 ): Observable<BuilderOutput> {
+
+  return from(context.scheduleBuilder('@nrwl/web:package', {
+    outputPath: options.outputPath,
+    tsConfig: options.tsConfig,
+    project: options.project,
+    entryFile: options.entryFile
+  })).pipe(switchMap(x => x.result));
+
+  /*
   const projGraph = createProjectGraph();
   const { dependencies } = calculateProjectDependencies(projGraph, context);
 
@@ -42,7 +43,7 @@ export function runBuilder(
         );
       }
     })
-  );
+  );*/
 }
 
 export default createBuilder(runBuilder);

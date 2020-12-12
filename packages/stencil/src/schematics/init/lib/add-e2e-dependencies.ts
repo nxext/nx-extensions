@@ -12,14 +12,4 @@ export function addE2eDependencies<T extends InitSchema>(options: T): Rule {
       testDependencies.devDependencies
     )
     : noop();
-  if (options.e2eTestRunner === 'puppeteer') {
-    return testDependencies
-      ? addDepsToPackageJson(
-        testDependencies.dependencies,
-        testDependencies.devDependencies
-      )
-      : noop();
-  }
-
-  return noop();
 }

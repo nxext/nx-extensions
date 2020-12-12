@@ -1,5 +1,5 @@
 import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { formatFiles, getWorkspacePath, readJsonInTree, serializeJson } from '@nrwl/workspace';
+import { formatFiles, getWorkspacePath, readJsonInTree } from '@nrwl/workspace';
 import { prepareVueLibrary } from './lib/vue';
 import { prepareReactLibrary } from './lib/react';
 import { prepareAngularLibrary } from './lib/angular';

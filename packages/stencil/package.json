@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "10.3.0",
+  "version": "11.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -23,19 +23,20 @@
   "schematics": "./collection.json",
   "builders": "./builders.json",
   "dependencies": {
-    "@nrwl/jest": "^10.0.0",
-    "@nrwl/workspace": "^10.0.0",
+    "@nrwl/jest": "^11.0.0",
+    "@nrwl/workspace": "^11.0.0",
+    "@nrwl/devkit": "^11.0.0",
     "ignore": "^5.1.8"
   },
   "peerDependencies": {
-    "@angular-devkit/schematics": "^10.0.0",
-    "@nrwl/storybook": "^10.0.0",
-    "@nrwl/react": "^10.0.0",
-    "@nrwl/angular": "^10.0.0",
+    "@angular-devkit/schematics": "^11.0.0",
+    "@nrwl/storybook": "^11.0.0",
+    "@nrwl/react": "^11.0.0",
+    "@nrwl/angular": "^11.0.0",
     "@nxtend/capacitor": "^1.1.0",
     "@stencil/core": "^2.1.0"
   },
-  "ng-update": {
+  "nx-migrate": {
     "migrations": "./migrations.json"
   }
 }
