@@ -5,6 +5,10 @@
   "description": "",
   "type": "object",
   "properties": {
+    "project": {
+      "type": "string",
+      "description": "The path to package.json file."
+    },
     "outputPath": {
       "type": "string",
       "description": "The output path of the generated files."
@@ -26,11 +30,6 @@
       "type": "string",
       "description": "Path to a function which takes  SvelteBuildOptions object and returns an new sveltePreprocessor options object",
       "defaul": null
-    },
-    "assets": {
-      "type": "array",
-      "description": "List of static application assets.",
-      "default": []
     },
     "watch": {
       "type": "boolean",

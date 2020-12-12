@@ -12,13 +12,13 @@ import {
   addLintFiles,
   addProjectToNxJsonInTree,
   formatFiles,
-  names,
   offsetFromRoot,
   projectRootDir,
   ProjectType,
   toFileName,
   updateWorkspace,
 } from '@nrwl/workspace';
+import { names } from '@nrwl/devkit';
 import { NormalizedSchema, SvelteSchematicSchema } from './schema';
 import { join, normalize } from '@angular-devkit/core';
 import { extraEslintDependencies, svelteEslintJson } from '../utils/lint';
@@ -79,12 +79,14 @@ function getBuildOptions(options: NormalizedSchema) {
 
   return {
     name: 'build',
-    builder: '@nxext/svelte:build',
+    builder: '@nrwl/web:package',
     options: {
       ...{
         outputPath: join(normalize('dist'), options.projectRoot),
         entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
         tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
+        project: join(normalize(options.projectRoot), 'package.json'),
+        rollupConfig: `@nxext/svelte/plugins/bundle-rollup`,
         assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       },
       ...serverOptions,
@@ -103,11 +105,13 @@ function getBuildOptions(options: NormalizedSchema) {
 function getServeOptions(options: NormalizedSchema) {
   return {
     name: 'serve',
-    builder: '@nxext/svelte:build',
+    builder: '@nrwl/web:package',
     options: {
       outputPath: join(normalize('dist'), options.projectRoot),
       entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
       tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
+      project: join(normalize(options.projectRoot), 'package.json'),
+      rollupConfig: `@nxext/svelte/plugins/bundle-rollup`,
       assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       watch: true,
       serve: true,
