@@ -20,7 +20,7 @@ import {
 } from '@nrwl/workspace';
 import { names } from '@nrwl/devkit';
 import { NormalizedSchema, SvelteSchematicSchema } from './schema';
-import { join, normalize } from '@angular-devkit/core';
+import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { extraEslintDependencies, svelteEslintJson } from '../utils/lint';
 import init from '../init/init';
 import { addCypress } from './lib/add-cypress';
@@ -82,9 +82,9 @@ function getBuildOptions(options: NormalizedSchema) {
     builder: '@nxext/svelte:build',
     options: {
       ...{
-        outputPath: join(normalize('dist'), options.projectRoot),
-        entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
-        tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
+        outputPath: getSystemPath(join(normalize('dist'), options.projectRoot)),
+        entryFile: getSystemPath(join(normalize(options.projectRoot), 'src/main.ts')),
+        tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.app.json')),
         assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       },
       ...serverOptions,
@@ -105,9 +105,9 @@ function getServeOptions(options: NormalizedSchema) {
     name: 'serve',
     builder: '@nxext/svelte:build',
     options: {
-      outputPath: join(normalize('dist'), options.projectRoot),
-      entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
-      tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
+      outputPath: getSystemPath(join(normalize('dist'), options.projectRoot)),
+      entryFile: getSystemPath(join(normalize(options.projectRoot), 'src/main.ts')),
+      tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.app.json')),
       assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       watch: true,
       serve: true,
@@ -126,10 +126,10 @@ function getLintOptions(options: NormalizedSchema) {
     builder: '@nrwl/linter:lint',
     options: {
       linter: 'eslint',
-      tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
+      tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.app.json')),
       exclude: [
         '**/node_modules/**',
-        `!${join(normalize(options.projectRoot), '**/*')}`,
+        `!${getSystemPath(join(normalize(options.projectRoot), '**/*'))}`,
       ],
     },
   };
@@ -140,7 +140,7 @@ function getJestOptions(options: NormalizedSchema) {
     name: 'test',
     builder: '@nrwl/jest:jest',
     options: {
-      jestConfig: join(normalize(options.projectRoot), 'jest.config.js'),
+      jestConfig: getSystemPath(join(normalize(options.projectRoot), 'jest.config.js')),
       passWithNoTests: true,
     },
   };

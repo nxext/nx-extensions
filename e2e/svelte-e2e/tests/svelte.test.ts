@@ -1,8 +1,9 @@
 import {
+  checkFilesExist,
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq,
+  uniq
 } from '@nrwl/nx-plugin/testing';
 
 describe('svelte e2e', () => {
@@ -17,6 +18,10 @@ describe('svelte e2e', () => {
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(result.stdout).toContain('Bundle complete');
 
+    expect(() =>
+      checkFilesExist(`dist/apps/${plugin}/index.html`)
+    ).not.toThrow();
+
     done();
   });
 
@@ -28,6 +33,19 @@ describe('svelte e2e', () => {
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
+      done();
+    });
+  });
+
+  describe('directory', () => {
+    it('should generate app into directory', async (done) => {
+      await runNxCommandAsync(
+        `generate @nxext/svelte:app project/ui`
+      );
+      expect(() =>
+        checkFilesExist(`apps/project/ui/src/main.ts`)
+      ).not.toThrow();
+
       done();
     });
   });

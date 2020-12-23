@@ -34,10 +34,15 @@ export function createRollupOptions(
     : {};
   /* eslint-enable */
 
+  context.logger.info('Assets');
+  const tmp = convertCopyAssetsToRollupOptions(
+    options.assets
+  );
+  context.logger.info(JSON.stringify(tmp));
+
   let plugins = [
     copy({
       targets: convertCopyAssetsToRollupOptions(
-        options.outputPath,
         options.assets
       ),
     }),

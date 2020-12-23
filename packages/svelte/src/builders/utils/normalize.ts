@@ -1,6 +1,5 @@
 import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
-import { normalize, join, resolve, Path, dirname, basename, relative, getSystemPath } from '@angular-devkit/core';
-import { join as pathJoin } from 'path';
+import { normalize, join, resolve, Path, dirname, basename, getSystemPath } from '@angular-devkit/core';
 import { InitOptions } from './init';
 import { statSync } from 'fs-extra';
 
@@ -9,17 +8,18 @@ export function normalizeOptions(
   projectConfig: InitOptions
 ): SvelteBuildOptions {
   const rollupConfig = options.rollupConfig
-    ? join(normalize(projectConfig.workspaceRoot), options.rollupConfig)
+    ? getSystemPath(join(normalize(projectConfig.workspaceRoot), options.rollupConfig))
     : null;
   const sveltePreprocessConfig = options.sveltePreprocessConfig
-    ? join(
+    ? getSystemPath(join(
         normalize(projectConfig.workspaceRoot),
         options.sveltePreprocessConfig
-      )
+      ))
     : null;
 
   const projectRoot = normalize(projectConfig.projectRoot);
   const sourceRoot = join(projectRoot, 'src');
+  const destRoot = join(normalize(projectConfig.workspaceRoot), options.outputPath);
 
   return {
     ...options,
@@ -30,27 +30,28 @@ export function normalizeOptions(
     assets: normalizeAssets(
       options.assets,
       projectRoot,
-      sourceRoot
+      sourceRoot,
+      destRoot
     ),
   } as SvelteBuildOptions;
 }
 
 export interface NormalizedCopyAssetOption {
-  glob: string;
-  input: string;
-  output: string;
+  input: Path;
+  output: Path;
 }
 
 export function normalizeAssets(
   assets: (string | NormalizedCopyAssetOption)[],
-  root: Path,
-  sourceRoot: Path
+  projectRoot: Path,
+  sourceRoot: Path,
+  destRoot: Path
 ): NormalizedCopyAssetOption[] {
   return assets.map((asset) => {
     if (typeof asset === 'string') {
       const assetPath = normalize(asset);
-      const resolvedAssetPath = resolve(normalize(root), assetPath);
-      const resolvedSourceRoot = resolve(normalize(root), sourceRoot);
+      const resolvedAssetPath = resolve(projectRoot, assetPath);
+      const resolvedSourceRoot = resolve(projectRoot, sourceRoot);
 
       if (!resolvedAssetPath.startsWith(resolvedSourceRoot)) {
         throw new Error(
@@ -58,16 +59,13 @@ export function normalizeAssets(
         );
       }
 
-      const isDirectory = statSync(resolvedAssetPath).isDirectory();
-      const input = isDirectory
-        ? resolvedAssetPath
-        : dirname(resolvedAssetPath);
-      const output = relative(resolvedSourceRoot, resolve(root, input));
-      const glob = isDirectory ? '**/*' : basename(resolvedAssetPath);
+      const isDirectory = statSync(getSystemPath(resolvedAssetPath)).isDirectory();
+      const input = isDirectory ? join(resolvedAssetPath, '**/*') : join(dirname(resolvedAssetPath), basename(resolvedAssetPath));
+      const output = join(destRoot, input);
+
       return {
         input,
-        output,
-        glob,
+        output
       };
     } else {
       if (asset.output.startsWith('..')) {
@@ -76,13 +74,11 @@ export function normalizeAssets(
         );
       }
 
-      const assetPath = normalize(asset.input);
-      const resolvedAssetPath = resolve(root, assetPath);
       return {
         ...asset,
-        input: getSystemPath(resolvedAssetPath),
+        input: resolve(projectRoot, normalize(asset.input)),
         // Now we remove starting slash to make Webpack place it from the output root.
-        output: getSystemPath(normalize(asset.output.replace(/^\//, ''))),
+        output: destRoot,
       };
     }
   });
@@ -94,13 +90,12 @@ interface RollupCopyAssetOption {
 }
 
 export function convertCopyAssetsToRollupOptions(
-  outputPath: string,
   assets: NormalizedCopyAssetOption[]
 ): RollupCopyAssetOption[] {
   return assets
-    ? assets.map((normalizedCopyAssetOption) => ({
-        src: getSystemPath(normalize(pathJoin(normalizedCopyAssetOption.input, normalizedCopyAssetOption.glob).replace(/\\/g, '/'))),
-        dest: getSystemPath(normalize(pathJoin(outputPath, normalizedCopyAssetOption.output).replace(/\\/g, '/'))),
-      }))
+    ? assets.map((a) => ({
+      src: getSystemPath(a.input),
+      dest: getSystemPath(a.output),
+    }))
     : undefined;
 }

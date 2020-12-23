@@ -13,7 +13,7 @@ export function addCypress(options: NormalizedSchema): Rule {
     ? chain([
         externalSchematic('@nrwl/cypress', 'cypress-project', {
           ...options,
-          name: options.name + '-e2e',
+          name: options.projectName + '-e2e',
           project: options.projectName,
         }),
         updateWorkspaceJson(options),
