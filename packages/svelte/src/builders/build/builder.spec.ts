@@ -17,7 +17,6 @@ describe('Command Runner Builder', () => {
     testOptions = {
       entryFile: 'libs/ui/src/index.ts',
       outputPath: 'dist/ui',
-      project: 'libs/ui/package.json',
       tsConfig: 'libs/ui/tsconfig.json',
       watch: false,
     };

@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/schema",
   "id": "Init",
   "title": "",
   "type": "object",
@@ -7,13 +7,19 @@
     "unitTestRunner": {
       "description": "Adds the specified unit test runner.",
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": [
+        "jest",
+        "none"
+      ],
       "default": "jest"
     },
     "e2eTestRunner": {
       "description": "Adds the specified e2e test runner.",
       "type": "string",
-      "enum": ["cypress", "none"],
+      "enum": [
+        "cypress",
+        "none"
+      ],
       "default": "cypress"
     },
     "skipFormat": {

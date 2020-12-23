@@ -67,7 +67,7 @@ function getBuildOptions(options: NormalizedSchema) {
   let serverOptions: {
     // Ignore
   };
-  if (options.port !== 4200) {
+  if (options.port !== 5000) {
     serverOptions = { port: options.port };
   }
   if (options.host !== 'localhost') {
@@ -79,14 +79,12 @@ function getBuildOptions(options: NormalizedSchema) {
 
   return {
     name: 'build',
-    builder: '@nrwl/web:package',
+    builder: '@nxext/svelte:build',
     options: {
       ...{
         outputPath: join(normalize('dist'), options.projectRoot),
         entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
         tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
-        project: join(normalize(options.projectRoot), 'package.json'),
-        rollupConfig: `@nxext/svelte/plugins/bundle-rollup`,
         assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       },
       ...serverOptions,
@@ -105,13 +103,11 @@ function getBuildOptions(options: NormalizedSchema) {
 function getServeOptions(options: NormalizedSchema) {
   return {
     name: 'serve',
-    builder: '@nrwl/web:package',
+    builder: '@nxext/svelte:build',
     options: {
       outputPath: join(normalize('dist'), options.projectRoot),
       entryFile: join(normalize(options.projectRoot), 'src/main.ts'),
       tsConfig: join(normalize(options.projectRoot), 'tsconfig.app.json'),
-      project: join(normalize(options.projectRoot), 'package.json'),
-      rollupConfig: `@nxext/svelte/plugins/bundle-rollup`,
       assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       watch: true,
       serve: true,

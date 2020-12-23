@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/schema",
   "id": "TailwindStencil",
   "title": "",
   "type": "object",
@@ -18,5 +18,7 @@
       "default": false
     }
   },
-  "required": ["project"]
+  "required": [
+    "project"
+  ]
 }

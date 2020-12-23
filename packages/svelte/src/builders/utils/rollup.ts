@@ -9,18 +9,18 @@ import { toClassName } from '@nrwl/workspace';
 import * as url from 'url';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { convertCopyAssetsToRollupOptions } from './normalize';
+import resolve from '@rollup/plugin-node-resolve';
 
 /* eslint-disable */
-const resolve = require('@rollup/plugin-node-resolve');
-const commonjs = require('@rollup/plugin-commonjs');
 const typescript = require('@rollup/plugin-typescript');
 const sveltePreprocess = require('svelte-preprocess');
-const svelte = require('rollup-plugin-svelte');
+const svelte = require('rollup-plugin-svelte')
 const copy = require('rollup-plugin-copy');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
 const { terser } = require('rollup-plugin-terser');
-
+const css = require('rollup-plugin-css-only')
+const commonjs = require('@rollup/plugin-commonjs');
 /* eslint-enable */
 
 export function createRollupOptions(
@@ -45,14 +45,17 @@ export function createRollupOptions(
       tsconfig: options.tsConfig,
       rootDir: options.projectRoot,
       sourceMap: !options.prod,
+      inlineSources: !options.prod
     }),
     svelte({
-      dev: !options.prod,
-      css: (css) => {
-        css.write('bundle.css');
+      compilerOptions: {
+        dev: !options.prod,
       },
       preprocess: sveltePreprocess(sveltePreprocessConfig),
     }),
+    // we'll extract any component CSS out into
+    // a separate file - better for performance
+    css({ output: 'bundle.css' }),
     resolve({
       browser: true,
       dedupe: ['svelte'],
