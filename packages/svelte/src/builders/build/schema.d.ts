@@ -7,7 +7,6 @@ export interface RawSvelteBuildOptions extends JsonObject {
   entryFile: string;
   external?: string[];
   assets?: string[];
-  project: string;
 
   watch?: boolean;
   serve?: boolean;

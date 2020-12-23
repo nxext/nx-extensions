@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/schema",
   "id": "Svelte",
   "title": "",
   "type": "object",
@@ -21,25 +21,33 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint"],
+      "enum": [
+        "eslint"
+      ],
       "default": "eslint"
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": [
+        "jest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": ["cypress", "none"],
+      "enum": [
+        "cypress",
+        "none"
+      ],
       "description": "Test runner to use for end to end (e2e) tests.",
       "default": "cypress"
     },
     "port": {
       "type": "number",
       "description": "Port to listen on.",
-      "default": 4200
+      "default": 5000
     },
     "host": {
       "type": "string",
@@ -47,5 +55,7 @@
       "default": "localhost"
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

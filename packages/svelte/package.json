@@ -31,7 +31,15 @@
     "@nrwl/cypress": "^11.0.0",
     "@nrwl/workspace": "^11.0.0",
     "@nrwl/linter": "^11.0.0",
-    "@nrwl/devkit": "^11.0.0"
+    "@nrwl/devkit": "^11.0.0",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.1.0",
+
+    "rollup-plugin-css-only": "^3.0.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"

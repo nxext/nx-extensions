@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/schema",
   "id": "Nxext-Ionic-App",
   "title": "",
   "type": "object",
@@ -15,7 +15,9 @@
     },
     "appTemplate": {
       "type": "string",
-      "enum": ["Tabs"],
+      "enum": [
+        "Tabs"
+      ],
       "default": "Tabs"
     },
     "tags": {
@@ -30,7 +32,10 @@
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": ["puppeteer", "none"],
+      "enum": [
+        "puppeteer",
+        "none"
+      ],
       "description": "Test runner to use for end to end (e2e) tests",
       "default": "puppeteer"
     },
@@ -40,7 +45,10 @@
     },
     "npmClient": {
       "type": "string",
-      "enum": ["npm", "yarn"]
+      "enum": [
+        "npm",
+        "yarn"
+      ]
     },
     "style": {
       "description": "The file extension to be used for style files.",
@@ -51,7 +59,10 @@
         "message": "Which stylesheet format would you like to use?",
         "type": "list",
         "items": [
-          { "value": "css", "label": "CSS" },
+          {
+            "value": "css",
+            "label": "CSS"
+          },
           {
             "value": "scss",
             "label": "SASS(.scss)       [ http://sass-lang.com          ]"
@@ -72,5 +83,7 @@
       }
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

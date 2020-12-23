@@ -10,7 +10,7 @@ describe('svelte e2e', () => {
     ensureNxProject('@nxext/svelte', 'dist/packages/svelte');
   });
 
-  xit('should create svelte application', async (done) => {
+  it('should create svelte application', async (done) => {
     const plugin = uniq('svelte');
     await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
 

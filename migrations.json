@@ -1,11 +1,11 @@
 {
   "migrations": [
     {
-      "version": "11.0.12",
-      "description": "Update storybook if installed and above 6",
-      "factory": "./src/migrations/update-11-0-12/update-storybook",
-      "package": "@nrwl/storybook",
-      "name": "update-11-0-12"
+      "version": "11.0.17",
+      "description": "Update schema versions for executors and generators",
+      "factory": "./src/migrations/update-11-0-0/update-schema-version-for-executors-and-generators",
+      "package": "@nrwl/nx-plugin",
+      "name": "update-schema-version-for-executors-and-generators"
     }
   ]
 }
