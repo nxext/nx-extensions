@@ -48,7 +48,8 @@
         "accessToken": "",
         "cacheableOperations": ["build", "test", "lint"],
         "canTrackAnalytics": false,
-        "showUsageWarnings": true
+        "showUsageWarnings": true,
+        "scan": true
       }
     }
   },
