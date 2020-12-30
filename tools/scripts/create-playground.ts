@@ -8,7 +8,7 @@ import {
   writeFileSync,
 } from 'fs-extra';
 import { getPublishableLibNames, tmpProjPath } from './utils';
-import * as path from 'path';
+import { dirname } from 'path';
 
 console.log('\nCreating playground. This may take a few minutes.');
 
@@ -21,13 +21,14 @@ ensureDirSync(tmpProjPath());
 
 removeSync(tmpProjPath());
 
-const nxWorkspaceRoot = process.cwd().replace(/\\/g, '/');
-
+const localTmpDir = dirname(tmpProjPath());
 execSync(
   `node ${require.resolve(
     '@nrwl/tao'
-  )} new proj --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty --nxWorkspaceRoot=${nxWorkspaceRoot}`,
-  { cwd: path.join(process.cwd(), 'tmp/nx-playground') }
+  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty`,
+  {
+    cwd: localTmpDir
+  }
 );
 
 publishableLibNames.forEach((pubLibName) => {
