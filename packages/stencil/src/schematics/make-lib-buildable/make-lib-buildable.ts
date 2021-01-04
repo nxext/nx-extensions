@@ -4,7 +4,7 @@ import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
 import { join } from 'path';
-import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
+import { addStylePluginToConfigInTree, addToOutputTargetsInTree } from '../../stencil-core-utils';
 
 const projectType = ProjectType.Library;
 
@@ -69,6 +69,21 @@ export default function(options: MakeLibBuildableSchema): Rule {
         join(normalizedOptions.projectRoot, 'stencil.config.ts'),
         normalizedOptions.style
       ),
+      addToOutputTargetsInTree([
+        `{
+          type: 'dist',
+          esmLoaderPath: '../loader',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}/dist/libs/${normalizedOptions.name}/dist',
+        }`,
+        `{
+          type: 'docs-readme'
+        }`,
+        `{
+          type: 'www',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}/dist/${normalizedOptions.projectRoot}/www',
+          serviceWorker: null
+        }`
+      ], join(normalizedOptions.projectRoot, 'stencil.config.ts')),
       formatFiles()
     ]);
   };

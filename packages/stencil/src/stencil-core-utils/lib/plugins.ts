@@ -1,5 +1,9 @@
 import { Change, findNodes, InsertChange } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
+import { Rule, Tree } from '@angular-devkit/schematics';
+import { readTsSourceFileFromTree } from '../../utils/ast-utils';
+import { insert } from '@nrwl/workspace';
+import { addStylePlugin, SupportedStyles } from './style-plugins';
 
 function addCodeIntoArray(source: ts.SourceFile, identifier: string, toInsert: string, file: string): InsertChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
@@ -76,6 +80,19 @@ export function addToOutputTargets(
 ): Change[] {
   const outputTargetsIdentifier = 'outputTargets';
   return addCodeIntoArray(source, outputTargetsIdentifier, toInsert, file);
+}
+
+export function addToOutputTargetsInTree(outputTargets: string[], stencilConfigPath: string): Rule {
+  return (tree: Tree) => {
+    const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
+      tree,
+      stencilConfigPath
+    );
+
+    outputTargets.forEach(outputTarget => addToOutputTargets(stencilConfigSource, outputTarget, stencilConfigPath));
+
+    return tree;
+  };
 }
 
 export function addToPlugins(
