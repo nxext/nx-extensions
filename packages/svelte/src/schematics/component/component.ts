@@ -10,6 +10,7 @@ import {
 import { getProjectConfig, toClassName, toFileName } from '@nrwl/workspace';
 import { join, normalize } from '@angular-devkit/core';
 import { applyWithSkipExisting } from '../utils/utils';
+import { names } from '@nrwl/devkit';
 
 export interface ComponentSchema {
   name: string;
@@ -20,8 +21,6 @@ export interface ComponentSchema {
 
 function createComponentInProject(options: ComponentSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    const fileName = toClassName(options.name);
-    const testFileName = toFileName(options.name);
     const projectConfig = getProjectConfig(tree, options.project);
 
     const projectDirectory = options.directory
@@ -30,10 +29,7 @@ function createComponentInProject(options: ComponentSchema): Rule {
 
     return chain([
       applyWithSkipExisting(url('./files/src'), [
-        applyTemplates({
-          fileName: fileName,
-          testFileName: testFileName,
-        }),
+        applyTemplates(names(options.name)),
         move(join(normalize(projectConfig.sourceRoot), projectDirectory)),
       ]),
     ])(tree, context);

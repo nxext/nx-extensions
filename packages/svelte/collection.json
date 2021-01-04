@@ -9,6 +9,12 @@
       "description": "Svelte application schematic",
       "aliases": ["app"]
     },
+    "library": {
+      "factory": "./src/schematics/library/library",
+      "schema": "./src/schematics/library/schema.json",
+      "description": "Svelte library schematic",
+      "aliases": ["lib"]
+    },
     "component": {
       "factory": "./src/schematics/component/component",
       "schema": "./src/schematics/component/schema.json",
