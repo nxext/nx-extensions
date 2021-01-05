@@ -1,5 +1,6 @@
 import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
-import { formatFiles, names, offsetFromRoot, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { formatFiles, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { names, offsetFromRoot } from '@nrwl/devkit';
 import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
