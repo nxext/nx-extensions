@@ -12,13 +12,13 @@ import {
   addLintFiles,
   addProjectToNxJsonInTree,
   formatFiles,
-  offsetFromRoot,
   projectRootDir,
   ProjectType,
   toFileName,
   updateWorkspace,
 } from '@nrwl/workspace';
-import { names } from '@nrwl/devkit';
+import { names, offsetFromRoot } from '@nrwl/devkit';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 import { NormalizedSchema, SvelteSchematicSchema } from './schema';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { extraEslintDependencies, svelteEslintJson } from '../utils/lint';
@@ -187,3 +187,8 @@ export default function (options: SvelteSchematicSchema): Rule {
     formatFiles(normalizedOptions),
   ]);
 }
+
+export const applicationGenerator = wrapAngularDevkitSchematic(
+  '@nxext/svelte',
+  'application'
+);
