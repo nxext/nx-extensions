@@ -19,7 +19,7 @@ export const STENCIL_OUTPUTTARGET_VERSION: {
 } = {
   react: '^0.0.9',
   angular: '^0.0.5',
-  pcss: '^0.1.8',
+  vue: '^0.2.2',
 };
 
 export const STENCIL_STYLE_PLUGIN_VERSION: {
