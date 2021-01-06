@@ -65,7 +65,7 @@
     "@nrwl/workspace": "11.0.20",
     "@nx-plus/docusaurus": "10.2.0",
     "@nx-plus/vue": "10.2.0",
-    "@nxtend/capacitor": "2.0.2",
+    "@nxtend/capacitor": "11.0.1",
     "@rollup/plugin-commonjs": "17.0.0",
     "@rollup/plugin-node-resolve": "11.0.1",
     "@rollup/plugin-typescript": "^8.1.0",
