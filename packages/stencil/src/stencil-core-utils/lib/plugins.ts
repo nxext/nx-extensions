@@ -89,7 +89,9 @@ export function addToOutputTargetsInTree(outputTargets: string[], stencilConfigP
       stencilConfigPath
     );
 
-    outputTargets.forEach(outputTarget => addToOutputTargets(stencilConfigSource, outputTarget, stencilConfigPath));
+    insert(tree, stencilConfigPath,
+      addToOutputTargets(stencilConfigSource, outputTargets.join(','), stencilConfigPath)
+    );
 
     return tree;
   };

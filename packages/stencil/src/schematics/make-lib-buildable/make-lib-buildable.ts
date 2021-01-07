@@ -73,14 +73,14 @@ export default function(options: MakeLibBuildableSchema): Rule {
         `{
           type: 'dist',
           esmLoaderPath: '../loader',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}/dist/libs/${normalizedOptions.name}/dist',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/libs/${normalizedOptions.name}/dist',
         }`,
         `{
           type: 'docs-readme'
         }`,
         `{
           type: 'www',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}/dist/${normalizedOptions.projectRoot}/www',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${normalizedOptions.projectRoot}/www',
           serviceWorker: null
         }`
       ], join(normalizedOptions.projectRoot, 'stencil.config.ts')),

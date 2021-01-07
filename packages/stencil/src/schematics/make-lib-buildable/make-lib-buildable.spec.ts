@@ -19,4 +19,31 @@ describe('make-lib-buildable schematic', () => {
       runSchematic('make-lib-buildable', options, tree)
     ).resolves.not.toThrowError();
   });
+
+  it('should add outputTargets', async () => {
+    const result = await runSchematic('make-lib-buildable', options, tree);
+
+    expect(result.readContent(`libs/${name}/stencil.config.ts`)).toEqual(`import { Config } from '@stencil/core';
+
+export const config: Config = {
+  namespace: '${name}',
+  taskQueue: 'async',
+  outputTargets: [
+    {
+      type: 'dist',
+      esmLoaderPath: '../loader',
+      dir: '../../dist/libs/${name}/dist',
+    },
+    {
+      type: 'docs-readme',
+    },
+    {
+      type: 'www',
+      dir: '../../dist/libs/${name}/www',
+      serviceWorker: null,
+    },
+  ],
+};
+`);
+  });
 });

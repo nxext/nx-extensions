@@ -106,6 +106,10 @@ describe('e2e', () => {
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
       expect(result.stdout).toContain('build finished');
 
+      expect(() =>
+        checkFilesExist(`libs/${plugin}/stencil.config.ts`)
+      ).not.toThrow();
+
       done();
     });
   });
