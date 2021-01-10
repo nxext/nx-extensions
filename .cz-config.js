@@ -13,6 +13,10 @@ module.exports = {
       value: 'chore',
       name: "chore:      Other changes that don't modify src or test files",
     },
+    {
+      value: 'test',
+      name: "test:    A codechange that affects the tests only",
+    }
   ],
 
   scopes: [
