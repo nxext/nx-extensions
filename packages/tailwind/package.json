@@ -22,7 +22,7 @@
   "schematics": "./collection.json",
   "dependencies": {
     "@nrwl/workspace": "^11.0.0",
-    "@nrwl/devkit": "^11.0.0"
+    "@nrwl/devkit": "^11.1.0"
   },
   "peerDependencies": {
     "@nxext/stencil": "^11.0.0"

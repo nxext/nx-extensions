@@ -31,7 +31,7 @@
     "@nrwl/cypress": "^11.0.0",
     "@nrwl/workspace": "^11.0.0",
     "@nrwl/linter": "^11.0.0",
-    "@nrwl/devkit": "^11.0.0",
+    "@nrwl/devkit": "^11.1.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.1.0",
