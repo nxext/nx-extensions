@@ -10,6 +10,7 @@ import * as url from 'url';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { convertCopyAssetsToRollupOptions } from './normalize';
 import resolve from '@rollup/plugin-node-resolve';
+import { join, normalize } from '@angular-devkit/core';
 
 /* eslint-disable */
 const typescript = require('@rollup/plugin-typescript');
@@ -91,7 +92,7 @@ export function createRollupOptions(
     input: options.entryFile,
     output: {
       format: 'iife',
-      file: `${options.outputPath}/bundle.js`,
+      file: join(normalize(options.outputPath), 'bundle.js'),
       name: toClassName(context.target.project),
     },
     external: (id) => externalPackages.includes(id),
