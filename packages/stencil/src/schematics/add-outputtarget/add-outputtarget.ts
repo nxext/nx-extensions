@@ -5,6 +5,7 @@ import { prepareReactLibrary } from './lib/react';
 import { prepareAngularLibrary } from './lib/angular';
 import { addToOutputTargetToConfig, OutputTargetType } from './lib/add-outputtarget-to-config';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 export interface AddOutputtargetSchematicSchema {
   projectName: string;
@@ -57,3 +58,8 @@ function checkBuildable(options: AddOutputtargetSchematicSchema): Rule {
 export default function(options: AddOutputtargetSchematicSchema): Rule {
   return checkBuildable(options);
 }
+
+export const outputtargetGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'add-outputtarget'
+);

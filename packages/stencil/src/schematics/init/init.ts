@@ -6,6 +6,7 @@ import { addStyledModuleDependencies } from './lib/add-style-module-dependencies
 import { addE2eDependencies } from './lib/add-e2e-dependencies';
 import { moveToDevDependencies } from './lib/move-nxext-to-dev-dependencies';
 import { addDependenciesForApptype } from './lib/add-dependencies-for-apptype';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 export default function <T extends InitSchema>(options: T): Rule {
   return chain([
@@ -17,3 +18,8 @@ export default function <T extends InitSchema>(options: T): Rule {
     setDefaultCollection('@nxext/stencil'),
   ]);
 }
+
+export const initGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'init'
+);

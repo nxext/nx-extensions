@@ -15,6 +15,7 @@ import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import init from '../init/init';
 import { join } from 'path';
 import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 const projectType = ProjectType.Application;
 
@@ -88,3 +89,8 @@ export default function (options: InitSchema): Rule {
     ]);
   };
 }
+
+export const applicationGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'application'
+);

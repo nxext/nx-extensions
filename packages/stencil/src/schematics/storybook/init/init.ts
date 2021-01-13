@@ -22,6 +22,7 @@ import { nxVersion, storybookVersion } from '../../../utils/versions';
 import { toJS } from '@nrwl/workspace/src/utils/rules/to-js';
 import { join, normalize } from '@angular-devkit/core';
 import { StorybookConfigureSchema } from '../configuration/schema';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 export default function (schema: StorybookConfigureSchema) {
   return chain([
@@ -206,3 +207,8 @@ function changeStorybookComponentOption(projectName: string): Rule {
     return json;
   });
 }
+
+export const storybookInitGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'storybook-init'
+);

@@ -6,6 +6,7 @@ import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
 import { join } from 'path';
 import { addStylePluginToConfigInTree, addToOutputTargetsInTree } from '../../stencil-core-utils';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 const projectType = ProjectType.Library;
 
@@ -89,3 +90,8 @@ export default function(options: MakeLibBuildableSchema): Rule {
     ]);
   };
 }
+
+export const makeLibBuildableGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'make-lib-buildable'
+);

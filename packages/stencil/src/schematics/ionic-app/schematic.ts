@@ -31,6 +31,7 @@ import init from '../init/init';
 import { capacitorVersion } from '../../utils/versions';
 import { join } from 'path';
 import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 const projectType = ProjectType.Application;
 
@@ -148,3 +149,8 @@ export default function (options: IonicAppSchema): Rule {
     ]);
   };
 }
+
+export const ionicAppGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'ionic-app'
+);
