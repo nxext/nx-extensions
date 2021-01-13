@@ -24,6 +24,6 @@ describe('component schematic', () => {
   it('should add file', async () => {
     const result = await runSchematic('component', options, appTree);
 
-    expect(result.exists(`apps/${projectName}/src/Test.svelte`));
+    expect(result.exists(`apps/${projectName}/src/components/test/Test.svelte`));
   });
 });

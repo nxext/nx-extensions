@@ -44,15 +44,9 @@
       "description": "Test runner to use for end to end (e2e) tests.",
       "default": "cypress"
     },
-    "port": {
-      "type": "number",
-      "description": "Port to listen on.",
-      "default": 5000
-    },
-    "host": {
-      "type": "string",
-      "description": "Host to listen on.",
-      "default": "localhost"
+    "buildable": {
+      "type": "boolean",
+      "default": false
     }
   },
   "required": [
