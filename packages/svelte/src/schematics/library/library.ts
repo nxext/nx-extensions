@@ -52,56 +52,16 @@ function addProject(options: NormalizedSchema): Rule {
       projectType,
     }).targets;
 
-    targetCollection.add(getBuildOptions(options));
-    targetCollection.add(getServeOptions(options));
     targetCollection.add(getLintOptions(options));
+
+    if (options.buildable) {
+      targetCollection.add(getBuildOptions(options));
+    }
 
     if (options.unitTestRunner === 'jest') {
       targetCollection.add(getJestOptions(options));
     }
   });
-}
-
-function getBuildOptions(options: NormalizedSchema) {
-  return {
-    name: 'build',
-    builder: '@nxext/svelte:build',
-    options: {
-      ...{
-        outputPath: getSystemPath(join(normalize('dist'), options.projectRoot)),
-        entryFile: getSystemPath(join(normalize(options.projectRoot), 'src/main.ts')),
-        tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.lib.json')),
-        assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
-      }
-    },
-    configurations: {
-      production: {
-        ...{
-          dev: false,
-        },
-      }
-    }
-  };
-}
-
-function getServeOptions(options: NormalizedSchema) {
-  return {
-    name: 'serve',
-    builder: '@nxext/svelte:build',
-    options: {
-      outputPath: getSystemPath(join(normalize('dist'), options.projectRoot)),
-      entryFile: getSystemPath(join(normalize(options.projectRoot), 'src/main.ts')),
-      tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.lib.json')),
-      assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
-      watch: true,
-      serve: true,
-    },
-    configurations: {
-      production: {
-        prod: true,
-      },
-    },
-  };
 }
 
 function getLintOptions(options: NormalizedSchema) {
@@ -115,6 +75,29 @@ function getLintOptions(options: NormalizedSchema) {
         '**/node_modules/**',
         `!${getSystemPath(join(normalize(options.projectRoot), '**/*'))}`,
       ],
+    },
+  };
+}
+
+
+function getBuildOptions(options: NormalizedSchema) {
+  return {
+    name: 'build',
+    builder: '@nxext/svelte:build',
+    options: {
+      ...{
+        outputPath: getSystemPath(join(normalize('dist'), options.projectRoot)),
+        entryFile: getSystemPath(join(normalize(options.projectRoot), 'src/index.ts')),
+        tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.lib.json')),
+        assets: [],
+      }
+    },
+    configurations: {
+      production: {
+        ...{
+          dev: false,
+        }
+      },
     },
   };
 }

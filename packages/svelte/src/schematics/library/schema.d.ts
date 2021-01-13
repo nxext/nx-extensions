@@ -7,6 +7,7 @@ export interface SvelteSchematicSchema {
   linter: Linter;
   unitTestRunner: 'jest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
+  buildable?: boolean;
 }
 
 export interface NormalizedSchema extends SvelteSchematicSchema {
