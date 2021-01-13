@@ -1,5 +1,6 @@
 import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
-import { formatFiles, names, offsetFromRoot, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { formatFiles, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { names, offsetFromRoot } from '@nrwl/devkit';
 import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
@@ -73,14 +74,14 @@ export default function(options: MakeLibBuildableSchema): Rule {
         `{
           type: 'dist',
           esmLoaderPath: '../loader',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}/dist/libs/${normalizedOptions.name}/dist',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/libs/${normalizedOptions.name}/dist',
         }`,
         `{
           type: 'docs-readme'
         }`,
         `{
           type: 'www',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}/dist/${normalizedOptions.projectRoot}/www',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${normalizedOptions.projectRoot}/www',
           serviceWorker: null
         }`
       ], join(normalizedOptions.projectRoot, 'stencil.config.ts')),

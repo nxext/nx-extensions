@@ -25,10 +25,11 @@
   "dependencies": {
     "@nrwl/jest": "^11.0.0",
     "@nrwl/workspace": "^11.0.0",
-    "@nrwl/devkit": "^11.0.0",
+    "@nrwl/devkit": "^11.1.0",
     "ignore": "^5.1.8"
   },
   "peerDependencies": {
+    "@nxext/tailwind": "*",
     "@angular-devkit/schematics": "^11.0.0",
     "@nrwl/storybook": "^11.0.0",
     "@nrwl/react": "^11.0.0",

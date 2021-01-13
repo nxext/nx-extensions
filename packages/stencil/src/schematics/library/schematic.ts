@@ -13,12 +13,11 @@ import {
 import {
   addProjectToNxJsonInTree,
   formatFiles,
-  names,
-  offsetFromRoot,
   ProjectType,
   toFileName,
   updateWorkspace
 } from '@nrwl/workspace';
+import { names, offsetFromRoot } from '@nrwl/devkit';
 import { LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { addBuilderToTarget, calculateStyle } from '../../utils/utils';

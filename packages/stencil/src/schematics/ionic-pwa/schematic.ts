@@ -2,12 +2,12 @@ import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '
 import {
   addProjectToNxJsonInTree,
   formatFiles,
-  names,
   offsetFromRoot,
   ProjectType,
   toFileName,
   updateWorkspace
 } from '@nrwl/workspace';
+import { names } from '@nrwl/devkit';
 import { PWASchema } from './schema';
 import { InitSchema } from '../init/schema';
 import { AppType } from '../../utils/typings';

@@ -15,13 +15,13 @@ import {
   addPackageWithInit,
   addProjectToNxJsonInTree,
   formatFiles,
-  names,
   offsetFromRoot,
   ProjectType,
   toFileName,
   updateJsonInTree,
   updateWorkspace
 } from '@nrwl/workspace';
+import { names } from '@nrwl/devkit';
 import { IonicAppSchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
