@@ -1,15 +1,16 @@
 import * as rollup from 'rollup';
 import { RollupWatcherEvent } from 'rollup';
-import { from, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
 import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { toClassName } from '@nrwl/workspace';
+import { logger } from '@nrwl/devkit';
 import * as url from 'url';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { convertCopyAssetsToRollupOptions } from './normalize';
 import resolve from '@rollup/plugin-node-resolve';
+import { join } from 'path';
 
 /* eslint-disable */
 const typescript = require('@rollup/plugin-typescript');
@@ -91,7 +92,7 @@ export function createRollupOptions(
     input: options.entryFile,
     output: {
       format: 'iife',
-      file: `${options.outputPath}/bundle.js`,
+      file: join(options.outputPath, 'bundle.js'),
       name: toClassName(context.target.project),
     },
     external: (id) => externalPackages.includes(id),
@@ -105,22 +106,25 @@ export function createRollupOptions(
   /* eslint-enable */
 }
 
-export function runRollup(
+export async function runRollup(
   options: rollup.RollupOptions
-): Observable<BuilderOutput> {
-  return from(rollup.rollup(options)).pipe(
-    switchMap((bundle) => {
-      const outputOptions: rollup.OutputOptions[] = Array.isArray(
-        options.output
-      )
-        ? options.output
-        : [options.output];
-      return from(
-        Promise.all(outputOptions.map((output) => bundle.write(output)))
-      );
-    }),
-    map(() => ({ success: true }))
-  );
+): Promise<BuilderOutput> {
+  const bundle = await rollup.rollup(options);
+
+  const outputOptions: rollup.OutputOptions[] = Array.isArray(
+    options.output
+  ) ? options.output : [options.output];
+
+  return Promise.all(outputOptions.map((output) => bundle.write(output)))
+    .then(() => {
+      logger.info('Bundle complete.');
+      return { success: true }
+    })
+    .catch((error) => {
+      logger.error(`Error during bundle: ${error}`);
+      logger.error('Bundle failed.');
+      return { success: false }
+    });
 }
 
 export function runRollupWatch(
@@ -137,20 +141,20 @@ export function runRollupWatch(
       port: svelteBuildOptions.port.toString(),
     });
 
-    context.logger.info(stripIndents`
-            **
-            Web Development Server is listening at ${serverUrl}
-            **
-          `);
+    logger.info(stripIndents`
+      **
+      Web Development Server is listening at ${serverUrl}
+      **
+    `);
 
     watcher.on('event', (data: RollupWatcherEvent) => {
       if (data.code === 'START') {
-        context.logger.info('Bundling...');
+        logger.info('Bundling...');
       } else if (data.code === 'END') {
-        context.logger.info('Bundle complete. Watching for file changes...');
+        logger.info('Bundle complete. Watching for file changes...');
         obs.next({ success: true });
       } else if (data.code === 'ERROR') {
-        context.logger.error(`Error during bundle: ${data.error.message}`);
+        logger.error(`Error during bundle: ${data.error.message}`);
         obs.next({ success: false });
       }
     });
