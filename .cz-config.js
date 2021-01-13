@@ -1,16 +1,17 @@
 module.exports = {
   types: [
-    { value: 'feat', name: 'feat:     A new feature' },
-    { value: 'fix', name: 'fix:      A bug fix' },
-    { value: 'docs', name: 'docs:     Documentation only changes' },
+    { value: 'feat', name: 'feat:       A new feature' },
+    { value: 'fix', name: 'fix:        A bug fix' },
+    { value: 'docs', name: 'docs:       Documentation only changes' },
+    { value: 'refactor', name: 'refactor:   Refactoring of a feature'},
     {
       value: 'cleanup',
       name:
-        'cleanup:  A code change that neither fixes a bug nor adds a feature',
+        'cleanup:    A code change that neither fixes a bug nor adds a feature',
     },
     {
       value: 'chore',
-      name: "chore:    Other changes that don't modify src or test files",
+      name: "chore:      Other changes that don't modify src or test files",
     },
   ],
 
