@@ -13,6 +13,7 @@ import { getProjectConfig, toClassName, toFileName } from '@nrwl/workspace';
 import { applyWithSkipExisting } from '../../utils/utils';
 import { join, normalize } from '@angular-devkit/core';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 export interface ComponentSchema {
   name: string;
@@ -88,3 +89,8 @@ function createComponentInProject(options: ComponentSchema): Rule {
 export default function (options: ComponentSchema): Rule {
   return chain([createComponentInProject(options)]);
 }
+
+export const componentGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'component'
+);

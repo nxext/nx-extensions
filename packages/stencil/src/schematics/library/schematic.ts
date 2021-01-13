@@ -26,6 +26,7 @@ import { InitSchema } from '../init/schema';
 import init from '../init/init';
 import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 const projectType = ProjectType.Library;
 
@@ -107,3 +108,8 @@ export default function (options: InitSchema): Rule {
     ]);
   };
 }
+
+export const libraryGenerator = wrapAngularDevkitSchematic(
+  '@nxext/stencil',
+  'library'
+);
