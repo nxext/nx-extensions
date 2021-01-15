@@ -1,35 +1,30 @@
 import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
 import { normalize, join, resolve, Path, dirname, basename, getSystemPath } from '@angular-devkit/core';
-import { InitOptions } from './init';
 import { statSync } from 'fs-extra';
 
 export function normalizeOptions(
   options: RawSvelteBuildOptions,
-  projectConfig: InitOptions
+  workspaceRoot: string,
+  sourceRoot: string
 ): SvelteBuildOptions {
-  const workspaceRoot = normalize(projectConfig.workspaceRoot);
-
   const rollupConfig = options.rollupConfig
-    ? getSystemPath(join(workspaceRoot, normalize(options.rollupConfig)))
+    ? getSystemPath(join(normalize(workspaceRoot), normalize(options.rollupConfig)))
     : null;
   const sveltePreprocessConfig = options.sveltePreprocessConfig
-    ? getSystemPath(join(workspaceRoot, normalize(options.sveltePreprocessConfig)))
+    ? getSystemPath(join(normalize(workspaceRoot), normalize(options.sveltePreprocessConfig)))
     : null;
 
-  const projectRoot = join(workspaceRoot, normalize(projectConfig.projectRoot));
-  const sourceRoot = join(projectRoot, 'src');
   const destRoot = join(normalize(options.outputPath));
 
   return {
     ...options,
-    ...projectConfig,
     rollupConfig,
     sveltePreprocessConfig,
     sourceRoot,
     assets: normalizeAssets(
       options.assets,
       projectRoot,
-      sourceRoot,
+      normalize(sourceRoot),
       destRoot
     ),
   } as SvelteBuildOptions;
@@ -66,6 +61,7 @@ export function normalizeAssets(
         input,
         output
       };
+
     } else {
       if (asset.output.startsWith('..')) {
         throw new Error(

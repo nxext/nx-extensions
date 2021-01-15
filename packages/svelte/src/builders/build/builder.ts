@@ -1,11 +1,15 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { RawSvelteBuildOptions } from './schema';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
-import { calculateProjectDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils';
+import {
+  calculateProjectDependencies,
+  checkDependentProjectsHaveBeenBuilt
+} from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { runRollup, runRollupWatch } from '../utils/rollup';
-import { initRollupOptions } from '../utils/init';
+import { getSourceRoot } from '../utils/source-root';
+import { normalizeOptions } from '../utils/normalize';
 
 export function runBuilder(
   options: RawSvelteBuildOptions,
@@ -14,15 +18,23 @@ export function runBuilder(
   const projGraph = createProjectGraph();
   const { dependencies } = calculateProjectDependencies(projGraph, context);
 
-  const normalizedOptions = initRollupOptions(options, dependencies, context);
-
-  return from(normalizedOptions).pipe(
-    switchMap((rollupOptions) => {
-      if (options.watch) {
-        return runRollupWatch(context, rollupOptions, options);
-      } else {
-        return from(runRollup(rollupOptions));
+  return from(getSourceRoot(context)).pipe(
+    switchMap((sourceRoot) => {
+      if (!checkDependentProjectsHaveBeenBuilt(context, dependencies)) {
+        return of({ success: false });
       }
+
+      const normalizedOptions = normalizeOptions(options, context.workspaceRoot, sourceRoot);
+
+      return from(normalizedOptions).pipe(
+        switchMap((rollupOptions) => {
+          if (options.watch) {
+            return runRollupWatch(context, rollupOptions, options);
+          } else {
+            return from(runRollup(rollupOptions));
+          }
+        })
+      );
     })
   );
 }

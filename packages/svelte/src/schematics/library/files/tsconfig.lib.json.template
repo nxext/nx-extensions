@@ -2,5 +2,13 @@
   "extends": "./tsconfig.json",
 
   "include": ["src/**/*"],
-  "exclude": ["__sapper__/*", "public/*"],
+    "exclude": [
+      "__sapper__/*",
+      "public/*",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "**/*.spec.js",
+      "**/*.spec.jsx",
+      "**/*.d.ts"
+    ]
 }
