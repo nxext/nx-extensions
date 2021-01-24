@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/packages/stencil-core-utils',
     '<rootDir>/packages/tailwind',
     '<rootDir>/e2e/tailwind-e2e',
+    '<rootDir>/packages/stencil-compiler-utils',
   ],
 };

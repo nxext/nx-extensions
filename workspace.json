@@ -1,14 +1,13 @@
 {
-  "version": 1,
+  "version": 2,
   "projects": {
     "stencil": {
       "root": "packages/stencil",
       "sourceRoot": "packages/stencil/src",
       "projectType": "library",
-      "schematics": {},
-      "architect": {
+      "targets": {
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
               "packages/stencil/**/*.ts",
@@ -21,7 +20,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "packages/stencil/jest.config.js",
             "passWithNoTests": true
@@ -31,7 +30,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "executor": "@nrwl/node:package",
           "options": {
             "outputPath": "dist/packages/stencil",
             "tsConfig": "packages/stencil/tsconfig.lib.json",
@@ -92,11 +91,11 @@
       "projectType": "application",
       "root": "e2e/stencil-e2e",
       "sourceRoot": "e2e/stencil-e2e/src",
-      "architect": {
+      "targets": {
         "e2e": {
-          "builder": "@nrwl/nx-plugin:e2e",
+          "executor": "@nrwl/nx-plugin:e2e",
           "options": {
-            "target": "stencil:build",
+            "target": "platform:preparebuild:stencil",
             "npmPackageName": "@nxext/stencil",
             "pluginOutputPath": "dist/packages/stencil",
             "jestConfig": "e2e/stencil-e2e/jest.config.js",
@@ -109,10 +108,10 @@
       "root": "packages/svelte",
       "sourceRoot": "packages/svelte/src",
       "projectType": "library",
-      "schematics": {},
-      "architect": {
+      "generators": {},
+      "targets": {
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
               "packages/svelte/**/*.ts",
@@ -125,7 +124,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "packages/svelte/jest.config.js",
             "passWithNoTests": true
@@ -135,7 +134,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "executor": "@nrwl/node:package",
           "options": {
             "outputPath": "dist/packages/svelte",
             "tsConfig": "packages/svelte/tsconfig.lib.json",
@@ -175,9 +174,9 @@
       "projectType": "application",
       "root": "e2e/svelte-e2e",
       "sourceRoot": "e2e/svelte-e2e/src",
-      "architect": {
+      "targets": {
         "e2e": {
-          "builder": "@nrwl/nx-plugin:e2e",
+          "executor": "@nrwl/nx-plugin:e2e",
           "options": {
             "target": "svelte:build",
             "npmPackageName": "@nxext/svelte",
@@ -191,15 +190,15 @@
       "projectType": "application",
       "root": "packages/docs",
       "sourceRoot": "packages/docs/src",
-      "architect": {
+      "targets": {
         "build": {
-          "builder": "@nx-plus/docusaurus:browser",
+          "executor": "@nx-plus/docusaurus:browser",
           "options": {
             "outputPath": "dist/packages/docs"
           }
         },
         "serve": {
-          "builder": "@nx-plus/docusaurus:dev-server",
+          "executor": "@nx-plus/docusaurus:dev-server",
           "options": {
             "port": 3000
           }
@@ -210,10 +209,10 @@
       "root": "packages/tailwind",
       "sourceRoot": "packages/tailwind/src",
       "projectType": "library",
-      "schematics": {},
-      "architect": {
+      "generators": {},
+      "targets": {
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
               "packages/tailwind/**/*.ts"
@@ -221,7 +220,7 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "packages/tailwind/jest.config.js",
             "passWithNoTests": true
@@ -231,7 +230,7 @@
           ]
         },
         "build": {
-          "builder": "@nrwl/node:package",
+          "executor": "@nrwl/node:package",
           "options": {
             "outputPath": "dist/packages/tailwind",
             "tsConfig": "packages/tailwind/tsconfig.lib.json",
@@ -251,7 +250,7 @@
               },
               {
                 "input": "./packages/tailwind",
-                "glob": "builders.json",
+                "glob": "executors.json",
                 "output": "."
               }
             ]
@@ -266,9 +265,9 @@
       "projectType": "application",
       "root": "e2e/tailwind-e2e",
       "sourceRoot": "e2e/tailwind-e2e/src",
-      "architect": {
+      "targets": {
         "e2e": {
-          "builder": "@nrwl/nx-plugin:e2e",
+          "executor": "@nrwl/nx-plugin:e2e",
           "options": {
             "target": "tailwind:build",
             "npmPackageName": "@nxext/tailwind",
@@ -277,12 +276,70 @@
           }
         }
       }
+    },
+    "platform": {
+      "root": "./tools/executors/preparebuild",
+      "targets": {
+        "preparebuild": {
+          "executor": "./tools/executors/preparebuild:preparebuild",
+          "configurations": {
+            "stencil": {
+              "projectName": "stencil",
+              "target": "build"
+            },
+            "svelte": {
+              "projectName": "svelte",
+              "target": "build"
+            }
+          }
+        }
+      }
+    },
+    "stencil-compiler-utils": {
+      "root": "packages/stencil-compiler-utils",
+      "sourceRoot": "packages/stencil-compiler-utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/stencil-compiler-utils/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/packages/stencil-compiler-utils"
+          ],
+          "options": {
+            "jestConfig": "packages/stencil-compiler-utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/stencil-compiler-utils",
+            "tsConfig": "packages/stencil-compiler-utils/tsconfig.lib.json",
+            "packageJson": "packages/stencil-compiler-utils/package.json",
+            "main": "packages/stencil-compiler-utils/src/index.ts",
+            "assets": [
+              "packages/stencil-compiler-utils/*.md"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   },
-  "schematics": {
+  "generators": {
     "@nrwl/workspace": {
       "library": {
         "linter": "eslint"

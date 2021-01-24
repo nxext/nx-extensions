@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "preparebuild": {
+      "implementation": "./impl",
+      "schema": "./schema.json",
+      "description": "Runs preparebuild."
+    }
+  }
+}

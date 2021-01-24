@@ -26,7 +26,8 @@
     "@nrwl/jest": "^11.0.0",
     "@nrwl/workspace": "^11.0.0",
     "@nrwl/devkit": "^11.1.0",
-    "ignore": "^5.1.8"
+    "ignore": "^5.1.8",
+    "@nxext/stencil-compiler-utils": "11.0.0"
   },
   "peerDependencies": {
     "@nxext/tailwind": "*",

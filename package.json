@@ -57,6 +57,7 @@
     "@nrwl/devkit": "11.1.5",
     "@nrwl/eslint-plugin-nx": "11.1.5",
     "@nrwl/jest": "11.1.5",
+    "@nrwl/node": "^11.1.5",
     "@nrwl/nx-cloud": "11.0.2",
     "@nrwl/nx-plugin": "11.1.5",
     "@nrwl/react": "11.1.5",

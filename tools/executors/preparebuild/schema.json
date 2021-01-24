@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "the target Nx Plugin project"
+    },
+    "target": {
+      "type": "string",
+      "description": "the target Nx Plugin build"
+    }
+  },
+  "required": ["projectName", "target"]
+}

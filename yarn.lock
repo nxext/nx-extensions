@@ -2314,7 +2314,7 @@
     minimatch "3.0.4"
     tslib "^2.0.0"
 
-"@nrwl/node@11.1.5":
+"@nrwl/node@11.1.5", "@nrwl/node@^11.1.5":
   version "11.1.5"
   resolved "https://registry.yarnpkg.com/@nrwl/node/-/node-11.1.5.tgz#0bd4d8559a0f17b3def7256128f5b6387406efb2"
   integrity sha512-K4jUAOQPtLxwT5qz+S/avW/tue0vWOTGJYn5w45ztdI8q6Cau8fCe3iHLDA8aYzmSMVENlsU7yfFYAdyw+JinQ==
