@@ -1,4 +1,7 @@
 {
   "name": "@nxext/stencil-compiler-utils",
-  "version": "11.0.0"
+  "version": "11.0.0",
+  "peerDependencies": {
+    "@stencil/core": "^2.1.0"
+  }
 }

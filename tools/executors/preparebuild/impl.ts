@@ -31,6 +31,7 @@ export default createBuilder((options: Options, context: BuilderContext) => {
 
   return concat(dependencies.map(dep => {
     context.logger.info(`Building @${npmScope}/${dep}...`);
+
     return scheduleTargetAndForget(context, targetFromTargetString(`${dep}:${options.target}`));
   })).pipe(
     switchMap(() => from(scheduleTargetAndForget(context, targetFromTargetString(`${targetProject}:${options.target}`)))

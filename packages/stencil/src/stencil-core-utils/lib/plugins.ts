@@ -3,7 +3,6 @@ import * as ts from 'typescript';
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { insert } from '@nrwl/workspace';
-import { addStylePlugin, SupportedStyles } from './style-plugins';
 
 function addCodeIntoArray(source: ts.SourceFile, identifier: string, toInsert: string, file: string): InsertChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);

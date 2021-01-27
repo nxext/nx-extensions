@@ -30,7 +30,6 @@
     "@nxext/stencil-compiler-utils": "11.0.0"
   },
   "peerDependencies": {
-    "@nxext/tailwind": "*",
     "@angular-devkit/schematics": "^11.0.0",
     "@nrwl/storybook": "^11.0.0",
     "@nrwl/react": "^11.0.0",

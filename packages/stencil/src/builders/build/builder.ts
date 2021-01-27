@@ -1,16 +1,23 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess } from '../stencil-runtime';
+import {
+  prepareDistDirAndPkgJson,
+  createStencilProcess,
+  mapConfigPaths,
+  initializeStencilConfig,
+  prepareE2eTesting,
+  ConfigAndPathCollection
+} from '@nxext/stencil-compiler-utils';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
+import { parseRunParameters } from '@nxext/stencil-compiler-utils';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -43,12 +50,19 @@ export function runBuilder(
     return of({ success: false });
   }
 
-  return createStencilConfig(
-    taskCommand,
-    options,
-    context,
-    createStencilCompilerOptions
+  return from(
+    initializeStencilConfig(
+      taskCommand,
+      options,
+      context,
+      createStencilCompilerOptions
+    )
   ).pipe(
+    prepareDistDirAndPkgJson(),
+    prepareE2eTesting(),
+    map((values: ConfigAndPathCollection) => {
+      return mapConfigPaths(values);
+    }),
     tap(() => {
       if (dependencies.length > 0 && context.target.target !== 'serve') {
         updateBuildableProjectPackageJsonDependencies(

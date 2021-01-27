@@ -1,10 +1,8 @@
 import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/cli';
-import { StencilBuildOptions } from '../build/schema';
-import { StencilTestOptions } from '../test/schema';
 import { BuilderContext } from '@angular-devkit/architect';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
-import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
+import { getSystemPath, join, JsonObject, normalize, Path } from '@angular-devkit/core';
 import { ConfigAndPathCollection, CoreCompiler } from './types';
 
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
@@ -19,14 +17,14 @@ function getCompilerExecutingPath() {
 
 export async function initializeStencilConfig(
   taskCommand: TaskCommand,
-  options: StencilBuildOptions | StencilTestOptions,
+  options: JsonObject,
   context: BuilderContext,
   createStencilCompilerOptions: (
     taskCommand: TaskCommand,
-    options: StencilBuildOptions
+    options: JsonObject
   ) => ConfigFlags
 ) {
-  const configFilePath = options.configPath;
+  const configFilePath = options.configPath as Path;
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const logger: Logger = createNodeLogger({ process });

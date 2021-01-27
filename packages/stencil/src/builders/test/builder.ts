@@ -1,9 +1,17 @@
 import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { StencilTestOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess } from '../stencil-runtime';
-import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
+import {
+  initializeStencilConfig,
+  prepareE2eTesting,
+  createStencilProcess,
+  mapConfigPaths,
+  prepareDistDirAndPkgJson
+} from '@nxext/stencil-compiler-utils';
+import { parseRunParameters } from '@nxext/stencil-compiler-utils';
+import { map} from 'rxjs/operators';
+import { ConfigAndPathCollection } from '@nxext/stencil-compiler-utils';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -21,12 +29,22 @@ export function runBuilder(
   context: BuilderContext
 ): Observable<BuilderOutput> {
   const taskCommand: TaskCommand = 'test';
-  return createStencilConfig(
-    taskCommand,
-    options,
-    context,
-    createStencilCompilerOptions
-  ).pipe(createStencilProcess(context));
+
+  return from(
+    initializeStencilConfig(
+      taskCommand,
+      options,
+      context,
+      createStencilCompilerOptions
+    )
+  ).pipe(
+    prepareDistDirAndPkgJson(),
+    prepareE2eTesting(),
+    map((values: ConfigAndPathCollection) => {
+      return mapConfigPaths(values);
+    }),
+    createStencilProcess(context)
+  );
 }
 
 export default createBuilder(runBuilder);
