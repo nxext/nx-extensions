@@ -5,13 +5,13 @@ import { from, Observable } from 'rxjs';
 import { copyFile } from '@nrwl/workspace';
 import { map, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
-import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utils/fileutils';
 import { OutputTarget } from '@stencil/core/internal';
 import { ensureDirExists } from '../../utils/fileutils';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { prepareE2eTesting } from './e2e-testing';
 import { ConfigAndCoreCompiler, ConfigAndPathCollection } from './types';
 import { initializeStencilConfig } from './stencil-config';
+import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utilities/fileutils';
 
 function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
   if (fileExists(values.pkgJson)) {
