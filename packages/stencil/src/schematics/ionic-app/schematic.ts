@@ -32,7 +32,7 @@ import { capacitorVersion } from '../../utils/versions';
 import { join } from 'path';
 import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
-
+import { detectPackageManager } from '@nrwl/tao/src/shared/package-manager';
 const projectType = ProjectType.Application;
 
 function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
@@ -129,7 +129,7 @@ export default function (options: IonicAppSchema): Rule {
       externalSchematic('@nxtend/capacitor', 'capacitor-project', {
         project: normalizedOptions.projectName,
         appName: normalizedOptions.projectName,
-        npmClient: normalizedOptions.npmClient,
+        npmClient: detectPackageManager(),
       }),
       updateJsonInTree(
         `${appsDir(host)}/${
