@@ -10,5 +10,4 @@ export interface IonicAppSchema extends InitSchema {
   appType: AppType;
   style: SupportedStyles;
   appTemplate: string;
-  npmClient?: 'npm' | 'yarn';
 }

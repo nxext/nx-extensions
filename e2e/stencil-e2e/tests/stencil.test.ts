@@ -154,7 +154,7 @@ describe('e2e', () => {
       it(`should build ionic app`, async (done) => {
         const plugin = uniq('ionic-app');
         await runNxCommandAsync(
-          `generate @nxext/stencil:ionic-app ${plugin} --style=css --npmClient=yarn`
+          `generate @nxext/stencil:ionic-app ${plugin} --style=css`
         );
 
         const result = await runNxCommandAsync(`build ${plugin} --dev`);

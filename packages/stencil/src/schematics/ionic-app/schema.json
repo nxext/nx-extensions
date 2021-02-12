@@ -43,13 +43,6 @@
       "type": "boolean",
       "default": false
     },
-    "npmClient": {
-      "type": "string",
-      "enum": [
-        "npm",
-        "yarn"
-      ]
-    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

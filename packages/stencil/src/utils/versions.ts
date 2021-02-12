@@ -1,4 +1,4 @@
-export const nxextVersion = '10.3.0';
+export const nxextVersion = '11.2.0';
 export const stencilVersion = '^2.4.0';
 export const stencilRouterVersion = '^1.0.1';
 export const ionicVersion = '^5.5.0';
@@ -6,7 +6,7 @@ export const ionicVersion = '^5.5.0';
 export const autoprefixerVersion = '^9.7.6';
 export const autoprefixerTypesVersion = '^9.7.2';
 
-export const capacitorVersion = '^11.0.0';
+export const capacitorVersion = '^11.1.0';
 
 export const puppeteer = '~5.3.1';
 export const puppeteerType = '~3.0.2';
