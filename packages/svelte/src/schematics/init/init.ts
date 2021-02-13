@@ -14,10 +14,10 @@ export default function (schema: Schema): Rule {
       {},
       {
         'svelte-jester': '^1.3.0',
-        'svelte': '^3.31.0',
-        'svelte-check': '^1.1.20',
-        'svelte-preprocess': '^4.6.1',
-        '@tsconfig/svelte': '^1.0.0'
+        'svelte': '^3.32.3',
+        'svelte-check': '^1.1.34',
+        'svelte-preprocess': '^4.6.8',
+        '@tsconfig/svelte': '^1.0.10'
       }
     ),
   ]);
