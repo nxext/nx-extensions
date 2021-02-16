@@ -1,10 +1,10 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { normalize, Path } from '@angular-devkit/core';
+import { normalize, join, Path } from '@angular-devkit/core';
 import { RawSvelteBuildOptions } from '../build/schema';
 import { normalizeOptions } from './normalize';
 import * as rollup from 'rollup';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { createRollupOptions } from './rollup';
+import { createRollupOptions } from './rollup-options';
 
 export interface InitOptions {
   projectRoot: string;
@@ -20,7 +20,7 @@ export async function initRollupOptions(
   const { workspaceRoot } = context;
   const projectName: string = context.target.project;
   const metadata = await context.getProjectMetadata(context.target);
-  const projectRoot: Path = normalize(`${workspaceRoot}/${metadata.root}`);
+  const projectRoot: Path = join(normalize(workspaceRoot), normalize(metadata.root as string));
 
   const initOptions: InitOptions = {
     projectRoot,
