@@ -21,7 +21,8 @@ export function addExportsToBarrel(options: ComponentSchema): Rule {
 
     if(projectConfig.projectType === ProjectType.Library) {
       const buffer = tree.read(indexFilePath);
-      if (!!buffer) {
+
+      if (buffer) {
         const indexSource = buffer!.toString('utf-8');
         const indexSourceFile = ts.createSourceFile(
           indexFilePath,
@@ -34,7 +35,7 @@ export function addExportsToBarrel(options: ComponentSchema): Rule {
           ...addGlobal(
             indexSourceFile,
             indexFilePath,
-            `export { default as default } from '${relativeComponentFilePath}';`
+            `export { default as default } from './${relativeComponentFilePath}';`
           )
         ]);
       }

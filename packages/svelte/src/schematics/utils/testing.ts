@@ -2,14 +2,12 @@ import { Architect } from '@angular-devkit/architect';
 import { schema } from '@angular-devkit/core';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { join } from 'path';
-import {
-  createEmptyWorkspace,
-  MockBuilderContext,
-} from '@nrwl/workspace/testing';
+import { createEmptyWorkspace, MockBuilderContext } from '@nrwl/workspace/testing';
 import { externalSchematic, Rule, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { Schema as InitSchema } from '../init/schema';
 import { SvelteSchematicSchema as ApplicationSchema } from '../application/schema';
+import { ProjectType } from '@nrwl/workspace';
 
 const testRunner = new SchematicTestRunner(
   '@nxext/svelte',
@@ -23,14 +21,24 @@ const migrationRunner = new SchematicTestRunner(
 );
 */
 
-export async function createTestProject(name: string): Promise<Tree> {
+export async function createTestProject(name: string, type: ProjectType = ProjectType.Application): Promise<Tree> {
   let appTree = createEmptyWorkspace(Tree.empty());
-  appTree = await callRule(
-    externalSchematic('@nxext/svelte', 'app', {
-      name: name,
-    }),
-    appTree
-  );
+  if(type === ProjectType.Application) {
+    appTree = await callRule(
+      externalSchematic('@nxext/svelte', 'app', {
+        name: name,
+      }),
+      appTree
+    );
+  }
+  if(type === ProjectType.Library) {
+    appTree = await callRule(
+      externalSchematic('@nxext/svelte', 'lib', {
+        name: name,
+      }),
+      appTree
+    );
+  }
 
   return appTree;
 }

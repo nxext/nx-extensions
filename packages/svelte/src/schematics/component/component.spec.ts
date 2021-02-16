@@ -1,12 +1,16 @@
 import { Tree } from '@angular-devkit/schematics';
 import { ComponentSchema } from './component';
 import { createTestProject, runSchematic } from '../utils/testing';
+import { ProjectType } from '@nrwl/workspace';
+import { uniq } from '@nrwl/nx-plugin/testing';
+import { names } from '@nrwl/devkit';
 
 describe('component schematic', () => {
   let appTree: Tree;
-  const projectName = 'testprojekt';
+  const projectName = uniq('testprojekt');
+  const componentName = uniq('test');
   const options: ComponentSchema = {
-    name: 'test',
+    name: componentName,
     project: projectName,
     unitTestRunner: 'jest',
   };
@@ -23,7 +27,16 @@ describe('component schematic', () => {
 
   it('should add file', async () => {
     const result = await runSchematic('component', options, appTree);
+    const name = names(componentName);
+    expect(result.exists(`apps/${projectName}/src/components/${name.fileName}/${name.className}.svelte`));
+  });
 
-    expect(result.exists(`apps/${projectName}/src/components/test/Test.svelte`));
+  it('should add file to barrel', async () => {
+    const tree = await createTestProject(projectName, ProjectType.Library);
+    const result = await runSchematic('component', options, tree);
+    const name = names(componentName);
+
+    const indexFile = result.readContent(`libs/${projectName}/src/index.ts`)
+    expect(indexFile).toMatch(`export { default as default } from './components/${name.fileName}/${name.className}.svelte';`);
   });
 });
