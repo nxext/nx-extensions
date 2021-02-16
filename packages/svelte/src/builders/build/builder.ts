@@ -8,8 +8,10 @@ import { catchError, concatMap, switchMap, tap } from 'rxjs/operators';
 import { RawSvelteBuildOptions } from './schema';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import { calculateProjectDependencies } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { runRollup, runRollupWatch } from '../utils/rollup';
-import { initRollupOptions } from '../utils/init';
+import { runRollup } from '../utils/run-rollup';
+import { runRollupWatch } from '../utils/run-rollup-watch';
+import { initRollupOptions } from '../utils/init-rollup-options';
+import { logger } from '@nrwl/devkit';
 
 export function runBuilder(
   options: RawSvelteBuildOptions,
@@ -27,14 +29,14 @@ export function runBuilder(
           concatMap((options) =>
             runRollup(options).pipe(
               catchError((e) => {
-                context.logger.error(`Error during bundle: ${e}`);
+                logger.error(`Error during bundle: ${e}`);
                 return of({ success: false });
               }),
               tap((result) => {
                 if (result.success) {
-                  context.logger.info('Bundle complete.');
+                  logger.info('Bundle complete.');
                 } else {
-                  context.logger.error('Bundle failed.');
+                  logger.error('Bundle failed.');
                 }
               })
             )

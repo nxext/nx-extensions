@@ -1,15 +1,11 @@
-import * as rollup from 'rollup';
-import { RollupWatcherEvent } from 'rollup';
-import { from, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
-import { SvelteBuildOptions, RawSvelteBuildOptions } from '../build/schema';
+import { SvelteBuildOptions } from '../build/schema';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { toClassName } from '@nrwl/workspace';
-import * as url from 'url';
-import { stripIndents } from '@angular-devkit/core/src/utils/literals';
-import { convertCopyAssetsToRollupOptions } from './normalize';
+import { BuilderContext } from '@angular-devkit/architect';
+import * as rollup from 'rollup';
 import resolve from '@rollup/plugin-node-resolve';
+import { toClassName } from '@nrwl/workspace';
+import { convertCopyAssetsToRollupOptions } from './normalize-assets';
+import * as path from 'path';
 
 /* eslint-disable */
 const typescript = require('@rollup/plugin-typescript');
@@ -22,6 +18,7 @@ const { terser } = require('rollup-plugin-terser');
 const css = require('rollup-plugin-css-only')
 const commonjs = require('@rollup/plugin-commonjs');
 /* eslint-enable */
+
 
 export function createRollupOptions(
   options: SvelteBuildOptions,
@@ -62,11 +59,11 @@ export function createRollupOptions(
     commonjs(),
 
     options.prod &&
-      terser({
-        output: {
-          comments: false,
-        },
-      }),
+    terser({
+      output: {
+        comments: false,
+      },
+    }),
   ];
 
   if (options.serve) {
@@ -91,7 +88,7 @@ export function createRollupOptions(
     input: options.entryFile,
     output: {
       format: 'iife',
-      file: `${options.outputPath}/bundle.js`,
+      file: path.join(options.outputPath, 'bundle.js'),
       name: toClassName(context.target.project),
     },
     external: (id) => externalPackages.includes(id),
@@ -103,58 +100,4 @@ export function createRollupOptions(
     ? require(options.rollupConfig)(rollupConfig, options)
     : rollupConfig;
   /* eslint-enable */
-}
-
-export function runRollup(
-  options: rollup.RollupOptions
-): Observable<BuilderOutput> {
-  return from(rollup.rollup(options)).pipe(
-    switchMap((bundle) => {
-      const outputOptions: rollup.OutputOptions[] = Array.isArray(
-        options.output
-      )
-        ? options.output
-        : [options.output];
-      return from(
-        Promise.all(outputOptions.map((output) => bundle.write(output)))
-      );
-    }),
-    map(() => ({ success: true }))
-  );
-}
-
-export function runRollupWatch(
-  context: BuilderContext,
-  rollupOptions: rollup.RollupOptions,
-  svelteBuildOptions: RawSvelteBuildOptions
-): Observable<BuilderOutput> {
-  return new Observable<BuilderOutput>((obs) => {
-    const watcher = rollup.watch(rollupOptions);
-
-    const serverUrl = url.format({
-      protocol: 'http',
-      hostname: svelteBuildOptions.host,
-      port: svelteBuildOptions.port.toString(),
-    });
-
-    context.logger.info(stripIndents`
-            **
-            Web Development Server is listening at ${serverUrl}
-            **
-          `);
-
-    watcher.on('event', (data: RollupWatcherEvent) => {
-      if (data.code === 'START') {
-        context.logger.info('Bundling...');
-      } else if (data.code === 'END') {
-        context.logger.info('Bundle complete. Watching for file changes...');
-        obs.next({ success: true });
-      } else if (data.code === 'ERROR') {
-        context.logger.error(`Error during bundle: ${data.error.message}`);
-        obs.next({ success: false });
-      }
-    });
-    // Teardown logic. Close watcher when unsubscribed.
-    return () => watcher.close();
-  });
 }

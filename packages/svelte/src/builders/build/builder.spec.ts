@@ -1,9 +1,9 @@
 import { RawSvelteBuildOptions } from './schema';
 import { MockBuilderContext } from '@nrwl/workspace/testing';
 import { getMockContext } from '@nrwl/web/src/utils/testing';
-import { createRollupOptions } from '../utils/rollup';
+import { createRollupOptions } from '../utils/rollup-options';
 import { normalizeOptions } from '../utils/normalize';
-import { InitOptions } from '../utils/init';
+import { InitOptions } from '../utils/init-rollup-options';
 import { RollupOptions } from 'rollup';
 
 describe('Command Runner Builder', () => {
