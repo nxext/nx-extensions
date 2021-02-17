@@ -27,14 +27,6 @@ Type: `string`
 
 Project where the component is generated
 
-### --directory
-
-Alias(es): d
-
-Type: `string`
-
-A directory where the project is placed
-
 ### --unitTestRunner
 
 Default: `jest`
