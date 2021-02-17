@@ -1,5 +1,5 @@
 import { Tree } from '@angular-devkit/schematics';
-import { ComponentSchema } from './component';
+import { SvelteComponentSchema } from './component';
 import { createTestProject, runSchematic } from '../utils/testing';
 import { ProjectType } from '@nrwl/workspace';
 import { uniq } from '@nrwl/nx-plugin/testing';
@@ -9,7 +9,7 @@ describe('component schematic', () => {
   let appTree: Tree;
   const projectName = uniq('testprojekt');
   const componentName = uniq('test');
-  const options: ComponentSchema = {
+  const options: SvelteComponentSchema = {
     name: componentName,
     project: projectName,
     unitTestRunner: 'jest',

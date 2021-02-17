@@ -17,14 +17,14 @@ import {
 } from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
-import { NormalizedSchema, SvelteSchematicSchema } from './schema';
+import { NormalizedSchema, SvelteApplicationSchema } from './schema';
 import { extraEslintDependencies, svelteEslintJson } from '../utils/lint';
 import { addCypress } from './lib/add-cypress';
 import { addProject } from './lib/add-project';
 import { handleJest } from './lib/handle-jest';
 import init from '../init/init';
 
-function normalizeOptions(options: SvelteSchematicSchema): NormalizedSchema {
+function normalizeOptions(options: SvelteApplicationSchema): NormalizedSchema {
   const name = toFileName(options.name);
   const projectName = name.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${projectRootDir(ProjectType.Application)}/${name}`;
@@ -55,7 +55,7 @@ function addFiles(options: NormalizedSchema): Rule {
   );
 }
 
-export default function (options: SvelteSchematicSchema): Rule {
+export default function (options: SvelteApplicationSchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
     init({ ...normalizedOptions, skipFormat: true }),

@@ -1,6 +1,6 @@
 import { Linter } from '@nrwl/workspace';
 
-export interface SvelteSchematicSchema {
+export interface SvelteApplicationSchema {
   name: string;
   tags?: string;
 
@@ -12,7 +12,7 @@ export interface SvelteSchematicSchema {
   port?: number;
 }
 
-export interface NormalizedSchema extends SvelteSchematicSchema {
+export interface NormalizedSchema extends SvelteApplicationSchema {
   projectName: string;
   projectRoot: string;
   parsedTags: string[];

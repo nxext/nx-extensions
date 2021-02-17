@@ -6,7 +6,7 @@ import { createEmptyWorkspace, MockBuilderContext } from '@nrwl/workspace/testin
 import { externalSchematic, Rule, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { Schema as InitSchema } from '../init/schema';
-import { SvelteSchematicSchema as ApplicationSchema } from '../application/schema';
+import { SvelteApplicationSchema as ApplicationSchema } from '../application/schema';
 import { ProjectType } from '@nrwl/workspace';
 
 const testRunner = new SchematicTestRunner(
