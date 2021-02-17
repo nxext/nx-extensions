@@ -1,7 +1,4 @@
-import {
-  chain,
-  Rule,
-} from '@angular-devkit/schematics';
+import { chain, Rule } from '@angular-devkit/schematics';
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { createComponentInProject } from './lib/create-component-in-project';
 
