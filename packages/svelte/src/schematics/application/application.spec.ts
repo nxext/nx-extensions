@@ -1,13 +1,13 @@
 import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 
-import { SvelteSchematicSchema } from './schema';
+import { SvelteApplicationSchema } from './schema';
 import { Linter, readJsonInTree } from '@nrwl/workspace';
 import { runSchematic } from '../utils/testing';
 
 describe('svelte app schematic', () => {
   let appTree: Tree;
-  const options: SvelteSchematicSchema = {
+  const options: SvelteApplicationSchema = {
     name: 'test',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',

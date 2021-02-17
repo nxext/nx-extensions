@@ -3,9 +3,9 @@ import { getProjectConfig } from '@nrwl/workspace';
 import { join, normalize } from '@angular-devkit/core';
 import { applyWithSkipExisting } from '../../utils/utils';
 import { names } from '@nrwl/devkit';
-import { ComponentSchema } from '../component';
+import { SvelteComponentSchema } from '../component';
 
-export function createComponentInProject(options: ComponentSchema): Rule {
+export function createComponentInProject(options: SvelteComponentSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const projectConfig = getProjectConfig(tree, options.project);
 

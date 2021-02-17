@@ -10,13 +10,14 @@ import {
   ProjectType,
   toFileName,
 } from '@nrwl/workspace';
-import { NormalizedSchema, SvelteSchematicSchema } from './schema';
+import { NormalizedSchema, SvelteLibrarySchema } from './schema';
 import { extraEslintDependencies, svelteEslintJson } from '../utils/lint';
 import init from '../init/init';
 import { handleJest, addFiles } from './lib';
 import { addProject } from './lib/add-project';
+import { updateTsConfig } from './lib/update-tsconfig';
 
-function normalizeOptions(options: SvelteSchematicSchema): NormalizedSchema {
+function normalizeOptions(options: SvelteLibrarySchema): NormalizedSchema {
   const name = toFileName(options.name);
   const projectName = name.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${projectRootDir(ProjectType.Library)}/${name}`;
@@ -33,11 +34,12 @@ function normalizeOptions(options: SvelteSchematicSchema): NormalizedSchema {
   };
 }
 
-export default function (options: SvelteSchematicSchema): Rule {
+export default function (options: SvelteLibrarySchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
     init({ ...normalizedOptions, skipFormat: true }),
     addProject(normalizedOptions),
+    updateTsConfig(normalizedOptions),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
       tags: normalizedOptions.parsedTags,
     }),

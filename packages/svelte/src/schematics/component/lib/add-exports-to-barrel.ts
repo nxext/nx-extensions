@@ -2,11 +2,11 @@ import * as ts from 'typescript';
 import { Rule, Tree } from '@angular-devkit/schematics';
 
 import { insert, addGlobal, getProjectConfig, ProjectType } from '@nrwl/workspace';
-import { ComponentSchema } from '../component';
+import { SvelteComponentSchema } from '../component';
 import { names } from '@nrwl/devkit';
 import { join } from 'path';
 
-export function addExportsToBarrel(options: ComponentSchema): Rule {
+export function addExportsToBarrel(options: SvelteComponentSchema): Rule {
   return (tree: Tree) => {
     const projectConfig = getProjectConfig(tree, options.project);
 
