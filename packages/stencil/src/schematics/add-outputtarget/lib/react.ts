@@ -1,5 +1,4 @@
 import { chain, externalSchematic, Tree } from '@angular-devkit/schematics';
-import { Schema as ReactLibrarySchema } from '@nrwl/react/src/schematics/library/schema';
 import {
   addDepsToPackageJson,
   getProjectConfig,
@@ -22,7 +21,7 @@ export function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
         name: reactProjectName,
         style: 'css',
         publishable: options.publishable,
-      } as ReactLibrarySchema),
+      }),
       addDepsToPackageJson(
         {},
         {
