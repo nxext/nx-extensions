@@ -1,13 +1,12 @@
 import { chain, externalSchematic, noop, Rule, schematic } from '@angular-devkit/schematics';
 import { StorybookConfigureSchema } from './schema';
-import { CypressConfigureSchema } from '@nrwl/storybook/src/schematics/cypress-project/cypress-project';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 export default function (options: StorybookConfigureSchema): Rule {
   return chain([
     schematic('storybook-init', options),
     options.configureCypress
-      ? externalSchematic<CypressConfigureSchema>(
+      ? externalSchematic(
           '@nrwl/storybook',
           'cypress-project',
           {
