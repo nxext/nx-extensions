@@ -1,4 +1,8 @@
-import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
+import {
+  BuilderContext,
+  BuilderOutput,
+  createBuilder,
+} from '@angular-devkit/architect';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StencilBuildOptions } from './schema';
@@ -8,9 +12,10 @@ import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
-  updateBuildableProjectPackageJsonDependencies
+  updateBuildableProjectPackageJsonDependencies,
 } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
+import { updateBuildableProjectPackageJsonDependenciesWithLocalPath } from './lib/update-buildable-dependencies-local';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -50,12 +55,20 @@ export function runBuilder(
     createStencilCompilerOptions
   ).pipe(
     tap(() => {
-      if (dependencies.length > 0 && context.target.target !== 'serve') {
-        updateBuildableProjectPackageJsonDependencies(
-          context,
-          target,
-          dependencies
-        );
+      if (dependencies.length > 0) {
+        if (options?.replaceDependenciesWithLocalPath) {
+          updateBuildableProjectPackageJsonDependenciesWithLocalPath(
+            context,
+            target,
+            dependencies.filter((dep) => dep.node.type === 'lib')
+          );
+        } else {
+          updateBuildableProjectPackageJsonDependencies(
+            context,
+            target,
+            dependencies
+          );
+        }
       }
     }),
     createStencilProcess(context)

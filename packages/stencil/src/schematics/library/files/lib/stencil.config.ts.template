@@ -2,22 +2,5 @@ import { Config } from '@stencil/core';
 
 export const config: Config = {
   namespace: '<%= name %>',
-  taskQueue: 'async',
-  <% if(buildable) { %>
-  outputTargets: [
-    {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-      dir: '<%= offsetFromRoot %>dist/libs/<%= name %>/dist',
-    },
-    {
-      type: 'docs-readme'
-    },
-    {
-      type: 'www',
-      dir: '<%= offsetFromRoot %>dist/libs/<%= name %>/www',
-      serviceWorker: null // disable service workers
-    }
-  ]
-  <% } %>
+  taskQueue: 'async'
 };

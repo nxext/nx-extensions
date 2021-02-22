@@ -6,9 +6,13 @@ import {
   SchematicContext,
   SchematicsException,
   Source,
-  Tree
+  Tree,
 } from '@angular-devkit/schematics';
-import { JsonAstObject, JsonParseMode, parseJsonAst } from '@angular-devkit/core';
+import {
+  JsonAstObject,
+  JsonParseMode,
+  parseJsonAst,
+} from '@angular-devkit/core';
 import { ProjectType } from '@nrwl/workspace';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../schematics/ionic-pwa/schema';
@@ -52,7 +56,22 @@ export function addDefaultBuilders(
   projectType: ProjectType,
   options: LibrarySchema | PWASchema | ApplicationSchema
 ) {
-  addBuilderToTarget(targetCollection, 'build', projectType, options);
+  targetCollection.add({
+    name: 'build',
+    builder: `@nxext/stencil:build`,
+    options: {
+      projectType,
+      configPath: `${options.projectRoot}/stencil.config.ts`,
+      outputPath: `dist/${options.projectRoot}`,
+      replaceDependenciesWithLocalPath: true,
+    },
+    configurations: {
+      production: {
+        dev: false,
+        replaceDependenciesWithLocalPath: false,
+      },
+    },
+  });
   addBuilderToTarget(targetCollection, 'test', projectType, options);
   addBuilderToTarget(targetCollection, 'e2e', projectType, options);
   targetCollection.add({
@@ -61,6 +80,7 @@ export function addDefaultBuilders(
     options: {
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
+      outputPath: `dist/${options.projectRoot}`,
       serve: true,
       watch: true,
     },
@@ -83,6 +103,7 @@ export function addBuilderToTarget(
     options: {
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
+      outputPath: `dist/${options.projectRoot}`,
     },
   });
 }

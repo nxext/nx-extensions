@@ -1,11 +1,28 @@
-import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
-import { formatFiles, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import {
+  apply,
+  applyTemplates,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  Tree,
+  url,
+} from '@angular-devkit/schematics';
+import {
+  formatFiles,
+  ProjectType,
+  readNxJson,
+  updateWorkspace,
+} from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
 import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
 import { join } from 'path';
-import { addStylePluginToConfigInTree, addToOutputTargetsInTree } from '../../stencil-core-utils';
+import {
+  addStylePluginToConfigInTree,
+  addToOutputTargetsInTree,
+} from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 const projectType = ProjectType.Library;
@@ -22,19 +39,22 @@ function normalize(
 }
 
 function addFiles(options: MakeLibBuildableSchema): Rule {
+  const nxJson = readNxJson();
+  const projectNames = names(options.name);
   return mergeWith(
     apply(url(`./files/lib`), [
       applyTemplates({
         ...options,
-        ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot)
+        ...projectNames,
+        offsetFromRoot: offsetFromRoot(options.projectRoot),
+        pkgJsonName: `@${nxJson.npmScope}/${projectNames.fileName}`,
       }),
-      move(options.projectRoot)
+      move(options.projectRoot),
     ])
   );
 }
 
-export default function(options: MakeLibBuildableSchema): Rule {
+export default function (options: MakeLibBuildableSchema): Rule {
   return (tree: Tree) => {
     const stencilProjectConfig = getProjectConfig(tree, options.name);
     const normalizedOptions = normalize(options, stencilProjectConfig);
@@ -62,8 +82,8 @@ export default function(options: MakeLibBuildableSchema): Rule {
             projectType,
             configPath: `${normalizedOptions.projectRoot}/stencil.config.ts`,
             serve: true,
-            watch: true
-          }
+            watch: true,
+          },
         });
       }),
       addFiles(normalizedOptions),
@@ -71,22 +91,32 @@ export default function(options: MakeLibBuildableSchema): Rule {
         join(normalizedOptions.projectRoot, 'stencil.config.ts'),
         normalizedOptions.style
       ),
-      addToOutputTargetsInTree([
-        `{
+      addToOutputTargetsInTree(
+        [
+          `{
           type: 'dist',
           esmLoaderPath: '../loader',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/libs/${normalizedOptions.name}/dist',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${
+            normalizedOptions.projectRoot
+          }/loader',
         }`,
-        `{
+          `{
           type: 'docs-readme'
         }`,
-        `{
+          `{
+          type: 'dist-custom-elements-bundle',
+        }`,
+          `{
           type: 'www',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${normalizedOptions.projectRoot}/www',
+          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${
+            normalizedOptions.projectRoot
+          }/www',
           serviceWorker: null
-        }`
-      ], join(normalizedOptions.projectRoot, 'stencil.config.ts')),
-      formatFiles()
+        }`,
+        ],
+        join(normalizedOptions.projectRoot, 'stencil.config.ts')
+      ),
+      formatFiles(),
     ]);
   };
 }

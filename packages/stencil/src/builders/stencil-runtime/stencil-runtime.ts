@@ -2,7 +2,7 @@ import { ConfigFlags, TaskCommand } from '@stencil/core/cli';
 import { StencilBuildOptions } from '../build/schema';
 import { BuilderContext } from '@angular-devkit/architect';
 import { from, Observable } from 'rxjs';
-import { copyFile } from '@nrwl/workspace';
+import { copyFile, readJsonFile } from '@nrwl/workspace';
 import { map, tap } from 'rxjs/operators';
 import { StencilTestOptions } from '../test/schema';
 import { OutputTarget } from '@stencil/core/internal';
@@ -11,26 +11,40 @@ import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { prepareE2eTesting } from './e2e-testing';
 import { ConfigAndCoreCompiler, ConfigAndPathCollection } from './types';
 import { initializeStencilConfig } from './stencil-config';
-import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utilities/fileutils';
+import {
+  writeJsonFile,
+  fileExists,
+} from '@nrwl/workspace/src/utilities/fileutils';
 
 function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
+  const libPackageJson = {
+    name: values.projectName,
+    version: '0.0.0',
+    main: './dist/index.cjs.js',
+    module: './dist/index.js',
+    es2015: './dist/esm/index.mjs',
+    es2017: './dist/esm/index.mjs',
+    types: './dist/custom-elements/index.d.ts',
+    collection: './dist/collection/collection-manifest.json',
+    'collection:main': './dist/collection/index.js',
+    unpkg: `./dist/${values.projectName}/${values.projectName}.js`,
+    files: ['dist/', 'loader/'],
+  };
+
   if (fileExists(values.pkgJson)) {
     copyFile(values.pkgJson, values.distDir);
+    const packageJson = readJsonFile(values.pkgJson);
+    packageJson['main'] = libPackageJson.main;
+    packageJson['module'] = libPackageJson.module;
+    packageJson['es2015'] = libPackageJson.es2015;
+    packageJson['es2017'] = libPackageJson.es2017;
+    packageJson['types'] = libPackageJson.types;
+    packageJson['collection'] = libPackageJson.collection;
+    packageJson['collection:main'] = libPackageJson['collection:main'];
+    packageJson['unpkg'] = libPackageJson.unpkg;
+    packageJson['files'] = libPackageJson.files;
+    writeJsonFile(values.pkgJson, packageJson);
   } else {
-    const libPackageJson = {
-      name: values.projectName,
-      version: '0.0.0',
-      main: './dist/index.cjs.js',
-      module: './dist/index.js',
-      es2015: './dist/esm/index.mjs',
-      es2017: './dist/esm/index.mjs',
-      types: './dist/types/index.d.ts',
-      collection: './dist/collection/collection-manifest.json',
-      'collection:main': './dist/collection/index.js',
-      unpkg: `./dist/${values.projectName}/${values.projectName}.js`,
-      files: ['dist/', 'loader/'],
-    };
-
     writeJsonFile(
       getSystemPath(join(values.distDir, `package.json`)),
       libPackageJson

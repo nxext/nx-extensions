@@ -4,6 +4,8 @@ import { ProjectType } from '@nrwl/workspace';
 export interface StencilBuildOptions extends JsonObject {
   projectType?: ProjectType;
   configPath: string;
+  replaceDependenciesWithLocalPath?: boolean;
+  outputPath?: string;
 
   // Stencil compiler Options
   ci?: boolean;

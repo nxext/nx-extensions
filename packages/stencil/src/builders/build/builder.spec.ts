@@ -3,6 +3,7 @@ import { ProjectType } from '@nrwl/workspace';
 import { mockContext } from '../../utils/testing';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { StencilBuildOptions } from './schema';
 
 describe('Command Runner Build', () => {
   let architect: Architect;
