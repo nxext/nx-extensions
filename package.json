@@ -54,7 +54,7 @@
   "devDependencies": {
     "@nrwl/angular": "11.2.12",
     "@nrwl/cli": "11.2.12",
-    "@nrwl/devkit": "11.2.12",
+    "@nrwl/devkit": "11.3.1",
     "@nrwl/eslint-plugin-nx": "11.2.12",
     "@nrwl/jest": "11.2.12",
     "@nrwl/nx-cloud": "11.1.4",

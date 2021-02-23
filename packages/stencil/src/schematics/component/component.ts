@@ -9,11 +9,12 @@ import {
   Tree,
   url
 } from '@angular-devkit/schematics';
-import { getProjectConfig, toClassName, toFileName } from '@nrwl/workspace';
+import { getProjectConfig } from '@nrwl/workspace';
 import { applyWithSkipExisting } from '../../utils/utils';
 import { join, normalize } from '@angular-devkit/core';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { logger, names } from '@nrwl/devkit';
 
 export interface ComponentSchema {
   name: string;
@@ -25,7 +26,7 @@ export interface ComponentSchema {
 
 function createComponentInProject(options: ComponentSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    context.logger.debug('adding component to lib');
+    logger.debug('adding component to lib');
 
     if (!/[-]/.test(options.name)) {
       throw new SchematicsException(stripIndents`
@@ -34,19 +35,19 @@ function createComponentInProject(options: ComponentSchema): Rule {
       `);
     }
 
-    const componentFileName = toFileName(options.name);
-    const className = toClassName(options.name);
+    const componentFileName = names(options.name).fileName;
+    const className = names(options.name).className;
     const projectConfig = getProjectConfig(tree, options.project);
 
     const projectDirectory = options.directory
-      ? join(normalize(options.directory), normalize(toFileName(options.name)))
-      : join(normalize(toFileName(options.name)));
+      ? join(normalize(options.directory), normalize(names(options.name).fileName))
+      : join(normalize(names(options.name).fileName));
 
     const componentOptions = ((projectConfig || {}).schematics || {
       '@nxext/stencil:component': {},
     })['@nxext/stencil:component'];
     if (!componentOptions) {
-      context.logger.info(stripIndents`
+      logger.info(stripIndents`
         Style options for components not set, please run "nx migrate @nxext/stencil"
       `);
     }

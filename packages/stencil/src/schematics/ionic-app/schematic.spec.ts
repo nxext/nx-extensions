@@ -13,21 +13,20 @@ describe('schematic:ionic-app', () => {
     tree = createEmptyWorkspace(Tree.empty());
   });
 
-  // TODO: Fix testsetup, add @nxtend/capacitor before run
-  xit('should run successfully', async () => {
+  it('should run successfully', async () => {
     await expect(
       runSchematic('ionic-app', options, tree)
     ).resolves.not.toThrowError();
   });
 
-  xit('should add Stencil/Ionic App dependencies', async () => {
+  it('should add Stencil/Ionic App dependencies', async () => {
     const result = await runSchematic('ionic-app', options, tree);
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
   });
 
-  xit('should create files', async () => {
+  it('should create files', async () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
@@ -52,7 +51,7 @@ describe('schematic:ionic-app', () => {
     fileList.forEach((file) => expect(result.exists(file)));
   });
 
-  xit('should create files in subdir', async () => {
+  it('should create files in subdir', async () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
@@ -77,7 +76,7 @@ describe('schematic:ionic-app', () => {
     fileList.forEach((file) => expect(result.exists(file)));
   });
 
-  xit('should add capacitor project', async () => {
+  it('should add capacitor project', async () => {
     const appName = 'testapp';
     const result = await runSchematic(
       'ionic-app',
@@ -95,7 +94,7 @@ describe('schematic:ionic-app', () => {
   });
 
   Object.keys(SupportedStyles).forEach((style) => {
-    xit(`should add Stencil ${style} dependencies to ionic-app`, async () => {
+    it(`should add Stencil ${style} dependencies to ionic-app`, async () => {
       const result = await runSchematic(
         'ionic-app',
         { ...options, style: style },

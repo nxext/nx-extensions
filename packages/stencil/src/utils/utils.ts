@@ -63,12 +63,12 @@ export function addDefaultBuilders(
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
       outputPath: `dist/${options.projectRoot}`,
-      replaceDependenciesWithLocalPath: true,
+      //replaceDependenciesWithLocalPath: true,
     },
     configurations: {
       production: {
         dev: false,
-        replaceDependenciesWithLocalPath: false,
+        //replaceDependenciesWithLocalPath: false,
       },
     },
   });

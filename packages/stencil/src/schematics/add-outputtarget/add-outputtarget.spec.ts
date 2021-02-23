@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { createTestUILib, runSchematic } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { AddOutputtargetSchematicSchema } from './add-outputtarget';
-import { toFileName } from '@nrwl/workspace';
+import { names } from '@nrwl/devkit';
 
 describe('schematics:add-outputtarget', () => {
   let tree: Tree;
@@ -56,9 +56,9 @@ describe('schematics:add-outputtarget', () => {
 
       expect(
         tree.exists(
-          `libs/${projectName}-angular/src/lib/${toFileName(
+          `libs/${projectName}-angular/src/lib/${names(
             projectName + '-angular'
-          )}.module.ts`
+          ).fileName}.module.ts`
         )
       ).toBeTruthy();
     });
