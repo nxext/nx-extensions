@@ -30,15 +30,15 @@
       "tags": [],
       "implicitDependencies": ["svelte"]
     },
-    "docs": {
-      "tags": []
-    },
     "tailwind": {
       "tags": []
     },
     "tailwind-e2e": {
       "tags": [],
       "implicitDependencies": ["tailwind"]
+    },
+    "docs-docusaurus": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

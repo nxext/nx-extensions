@@ -17,7 +17,6 @@ or
 ng g @nxext/stencil:make-lib-buildable my-lib
 ```
 
-
 ## Options
 
 ### --style

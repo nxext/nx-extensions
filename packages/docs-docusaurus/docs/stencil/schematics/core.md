@@ -3,7 +3,7 @@ id: core
 title: Core
 ---
 
-*The user don't need to call this. It'll be called by the application schematics automatically.*
+_The user don't need to call this. It'll be called by the application schematics automatically._
 
 This schematic possibly installs the following dependencies:
 

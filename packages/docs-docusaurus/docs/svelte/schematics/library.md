@@ -45,7 +45,6 @@ Type: `boolean`
 
 Generate the build command and be able to build and redistribute the library independently.
 
-
 ### --skipFormat
 
 Default: `false`
