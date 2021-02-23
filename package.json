@@ -41,7 +41,8 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "commit": "git-cz",
-    "workspace-generator": "nx workspace-generator"
+    "workspace-generator": "nx workspace-generator",
+    "fetch-latest-versions": "ts-node tools/scripts/fetch_latest_versions.ts"
   },
   "private": true,
   "dependencies": {
