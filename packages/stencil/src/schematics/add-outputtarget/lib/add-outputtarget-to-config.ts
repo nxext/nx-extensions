@@ -7,13 +7,13 @@ import { addVueOutputtarget } from './vue';
 import { addAngularOutputtarget } from './angular';
 import * as ts from 'typescript';
 
-export type OutputTargetType = 'angular' | 'react' | 'vue';
+export type OutputTargetType = 'angular' | 'react' | 'vue' | 'svelte';
 
 export function addToOutputTargetToConfig(
   projectName: string,
   outputType: OutputTargetType
 ): Rule {
-  return (tree: Tree, context: SchematicContext) => {
+  return (tree: Tree) => {
     const stencilProjectConfig = getProjectConfig(tree, projectName);
 
     const stencilConfigPath = `${stencilProjectConfig.root}/stencil.config.ts`;
