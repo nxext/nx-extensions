@@ -6,7 +6,6 @@ import {
   mergeWith,
   move,
   Rule,
-  SchematicContext,
   Tree,
   url
 } from '@angular-devkit/schematics';
@@ -17,11 +16,9 @@ import {
   formatFiles,
   offsetFromRoot,
   ProjectType,
-  toFileName,
-  updateJsonInTree,
   updateWorkspace
 } from '@nrwl/workspace';
-import { names } from '@nrwl/devkit';
+import { names, logger } from '@nrwl/devkit';
 import { IonicAppSchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
@@ -33,12 +30,13 @@ import { join } from 'path';
 import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 import { detectPackageManager } from '@nrwl/tao/src/shared/package-manager';
+import { CapacitorSchematicSchema } from '@nxtend/capacitor';
 const projectType = ProjectType.Application;
 
 function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
-  const name = toFileName(options.name);
+  const name = names(options.name).fileName;
   const projectDirectory = options.directory
-    ? `${toFileName(options.directory)}/${name}`
+    ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${appsDir(host)}/${projectDirectory}`;
@@ -48,7 +46,7 @@ function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
 
   const style = calculateStyle(options.style);
   const appType = AppType.capacitorapp;
-  const appTemplate = toFileName(options.appTemplate);
+  const appTemplate = names(options.appTemplate).fileName;
 
   return {
     ...options,
@@ -77,8 +75,8 @@ function addFiles(options: IonicAppSchema): Rule {
 }
 
 function showInformation(options: IonicAppSchema): Rule {
-  return (host: Tree, context: SchematicContext) => {
-    context.logger.info(stripIndents`
+  return () => {
+    logger.info(stripIndents`
       You need to build '${options.projectName}' first.
       nx build ${options.projectName}
 
@@ -130,17 +128,8 @@ export default function (options: IonicAppSchema): Rule {
         project: normalizedOptions.projectName,
         appName: normalizedOptions.projectName,
         npmClient: detectPackageManager(),
-      }),
-      updateJsonInTree(
-        `${appsDir(host)}/${
-          normalizedOptions.projectName
-        }/capacitor.config.json`,
-        (json) => {
-          json.webDir = `${json.webDir}/www`;
-
-          return json;
-        }
-      ),
+        webDir: `dist/${options.projectRoot}/www`
+      } as CapacitorSchematicSchema),
       addStylePluginToConfigInTree(
         join(normalizedOptions.projectRoot, 'stencil.config.ts'),
         normalizedOptions.style

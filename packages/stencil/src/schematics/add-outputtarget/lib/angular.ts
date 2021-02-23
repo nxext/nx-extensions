@@ -8,13 +8,14 @@ import {
   libsDir
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { getNpmScope, toFileName } from '@nrwl/workspace';
+import { getNpmScope } from '@nrwl/workspace';
 import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
 import { addToGitignore } from '../../../utils/utils';
 import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import * as ts from 'typescript';
 import { addToOutputTargets } from '../../../stencil-core-utils';
+import { names } from '@nrwl/devkit';
 
 export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
   return (host: Tree) => {
@@ -33,7 +34,7 @@ export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
         }
       ),
       (tree: Tree) => {
-        const angularModuleFilename = toFileName(angularProjectName);
+        const angularModuleFilename = names(angularProjectName).fileName;
         const angularModulePath = `${libsDir(
           host
         )}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;

@@ -14,7 +14,6 @@ import {
   addProjectToNxJsonInTree,
   formatFiles,
   ProjectType,
-  toFileName,
   updateWorkspace
 } from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
@@ -31,9 +30,9 @@ import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 const projectType = ProjectType.Library;
 
 function normalizeOptions(options: InitSchema, host: Tree): LibrarySchema {
-  const name = toFileName(options.name);
+  const name = names(options.name).fileName;
   const projectDirectory = options.directory
-    ? `${toFileName(options.directory)}/${name}`
+    ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${libsDir(host)}/${projectDirectory}`;

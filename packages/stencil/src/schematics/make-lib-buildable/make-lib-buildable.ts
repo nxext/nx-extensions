@@ -98,7 +98,7 @@ export default function (options: MakeLibBuildableSchema): Rule {
           esmLoaderPath: '../loader',
           dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${
             normalizedOptions.projectRoot
-          }/loader',
+          }/dist',
         }`,
           `{
           type: 'docs-readme'

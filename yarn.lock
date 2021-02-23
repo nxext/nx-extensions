@@ -2200,6 +2200,18 @@
     strip-json-comments "2.0.1"
     tslib "^2.0.0"
 
+"@nrwl/devkit@11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-11.3.1.tgz#dd15c2cf27f37dc35bcc9c8b2bf53a81adf9e66f"
+  integrity sha512-FOEJLUtXdZ+lfMw73rPDUzN1l5I75hIp9/ah8Myq2YwIm8JmgAuvDB4ZpTw6QiVZ/oqOiHiFq0bG4nekboCl4A==
+  dependencies:
+    "@nrwl/tao" "11.3.1"
+    ejs "^3.1.5"
+    ignore "^5.0.4"
+    semver "6.3.0"
+    strip-json-comments "2.0.1"
+    tslib "^2.0.0"
+
 "@nrwl/eslint-plugin-nx@11.2.12":
   version "11.2.12"
   resolved "https://registry.yarnpkg.com/@nrwl/eslint-plugin-nx/-/eslint-plugin-nx-11.2.12.tgz#36616d449d13616d6c2c5c3c7c530ea7931daaa7"
@@ -2331,6 +2343,23 @@
     "@angular-devkit/architect" "~0.1100.1"
     "@angular-devkit/core" "~11.0.1"
     "@angular-devkit/schematics" "~11.0.1"
+    chalk "4.1.0"
+    fs-extra "7.0.1"
+    inquirer "^6.3.1"
+    minimist "^1.2.5"
+    rxjs "^6.5.4"
+    rxjs-for-await "0.0.2"
+    semver "6.3.0"
+    strip-json-comments "2.0.1"
+    tmp "0.0.33"
+    tslib "^2.0.0"
+    yargs-parser "20.0.0"
+
+"@nrwl/tao@11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-11.3.1.tgz#a92a65bf7de0e43fc3bf0dd5985b996be91e1234"
+  integrity sha512-5GuFBpUooJMdzzSqibue5XIQnqS64KRNQtO0SY30OKGlLj4VKHLTDlAtgnzKyPR297C/vgerCWbVl3DYApXsLw==
+  dependencies:
     chalk "4.1.0"
     fs-extra "7.0.1"
     inquirer "^6.3.1"
