@@ -107,7 +107,7 @@ export function addStylePluginToConfigInTree(options: Schema): Rule {
 export default function(options: Schema): Rule {
   return chain([
     addDepsToPackageJson({}, {
-      '@stencil/postcss': '^1.0.0',
+      '@stencil/postcss': '^2.0.0',
       tailwindcss: 'npm:@tailwindcss/postcss7-compat',
       autoprefixer: '^9.0.0',
       cssnano: '^4.1.10'
