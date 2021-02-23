@@ -4,6 +4,7 @@ title: Stencil
 ---
 
 This schematic installs the following packages:
+
 ```
 tailwindcss
 @stencil/postcss

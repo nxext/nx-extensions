@@ -71,7 +71,7 @@ module.exports = {
           type: 'category',
           label: 'Schematics',
           items: ['tailwind/schematics/stencil'],
-        }
+        },
       ],
     },
   ],
