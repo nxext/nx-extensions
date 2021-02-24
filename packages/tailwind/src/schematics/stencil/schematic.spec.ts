@@ -35,7 +35,7 @@ describe('stencil tailwindcss schematic', () => {
       appTree
     ).toPromise();
 
-    expect(result.exists(`apps/${options.project}/tailwind.config.js`));
+    expect(result.exists(`apps/${options.project}/tailwind.config.js`)).toBe(true);
   });
 
   it('should add dependencies', async () => {

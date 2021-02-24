@@ -9,7 +9,7 @@
       "description": "stencil tailwind schematic"
     },
     "svelte": {
-      "factory": "./src/schematics/svelte/schematic",
+      "factory": "./src/schematics/svelte/generator#tailwindSvelteSchematic",
       "schema": "./src/schematics/svelte/schema.json",
       "description": "svelte schematic"
     }
