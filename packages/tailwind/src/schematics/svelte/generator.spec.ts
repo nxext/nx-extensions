@@ -35,9 +35,9 @@ describe('svelte schematic', () => {
       appTree
     ).toPromise();
 
-    expect(result.exists(`apps/${options.project}/src/Tailwind.svelte`));
-    expect(result.exists(`apps/${options.project}/tailwind.config.js`));
-    expect(result.exists(`apps/${options.project}/update-svelte-preprocess.js`));
+    expect(result.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(true);
+    expect(result.exists(`apps/${options.project}/tailwind.config.js`)).toBe(true);
+    expect(result.exists(`apps/${options.project}/update-svelte-preprocess.js`)).toBe(true);
   });
 
   it('should add dependencies', async () => {
