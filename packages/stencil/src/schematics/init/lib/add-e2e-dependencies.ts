@@ -1,15 +1,20 @@
 import { InitSchema } from '../schema';
-import { noop, Rule } from '@angular-devkit/schematics';
 import { PROJECT_TYPE_DEPENDENCIES } from '../../../utils/typings';
-import { addDepsToPackageJson } from '@nrwl/workspace';
+import { addDependenciesToPackageJson, GeneratorCallback, Tree } from '@nrwl/devkit';
 
-export function addE2eDependencies<T extends InitSchema>(options: T): Rule {
+export function addE2eTestDependencies<T extends InitSchema>(tree: Tree): GeneratorCallback[] {
   const testDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
+  const tasks: GeneratorCallback[] = [];
 
-  return testDependencies
-    ? addDepsToPackageJson(
-      testDependencies.dependencies,
-      testDependencies.devDependencies
-    )
-    : noop();
+  if (testDependencies) {
+    tasks.push(
+      addDependenciesToPackageJson(
+        tree,
+        testDependencies.dependencies,
+        testDependencies.devDependencies
+      )
+    );
+  }
+
+  return tasks;
 }

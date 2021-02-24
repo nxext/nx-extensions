@@ -1,6 +1,7 @@
 import { chain, Rule } from '@angular-devkit/schematics';
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { createComponentInProject } from './lib/create-component-in-project';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 export interface SvelteComponentSchema {
   name: string;
@@ -9,9 +10,15 @@ export interface SvelteComponentSchema {
   unitTestRunner: 'jest' | 'none';
 }
 
-export default function (options: SvelteComponentSchema): Rule {
+export function componentSchematic(options: SvelteComponentSchema): Rule {
   return chain([
     createComponentInProject(options),
     addExportsToBarrel(options)
   ]);
 }
+
+export default componentSchematic;
+export const componentGenerator = wrapAngularDevkitSchematic(
+  '@nxext/svelte',
+  'component'
+);

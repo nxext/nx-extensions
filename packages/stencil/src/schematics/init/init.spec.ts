@@ -2,8 +2,6 @@ import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { readJsonInTree } from '@nrwl/workspace';
 import { AppType } from '../../utils/typings';
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { join } from 'path';
 import { runSchematic } from '../../utils/testing';
 
 describe('init', () => {

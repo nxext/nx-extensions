@@ -1,7 +1,8 @@
 import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { SvelteLibrarySchema } from './schema';
-import { Linter, readJsonInTree } from '@nrwl/workspace';
+import { readJsonInTree } from '@nrwl/workspace';
+import { Linter } from '@nrwl/linter';
 import { runSchematic } from '../utils/testing';
 
 describe('svelte library schematic', () => {
@@ -15,12 +16,6 @@ describe('svelte library schematic', () => {
 
   beforeEach(() => {
     appTree = createEmptyWorkspace(Tree.empty());
-  });
-
-  it('should run successfully', async () => {
-    await expect(
-      runSchematic('library', options, appTree)
-    ).resolves.not.toThrowError();
   });
 
   it('should add Svelte dependencies', async () => {

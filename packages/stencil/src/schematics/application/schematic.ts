@@ -1,20 +1,15 @@
 import { AppType } from './../../utils/typings';
 import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
-import {
-  addProjectToNxJsonInTree,
-  formatFiles,
-  ProjectType,
-  updateWorkspace
-} from '@nrwl/workspace';
+import { addProjectToNxJsonInTree, formatFiles, ProjectType, updateWorkspace } from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
 import { ApplicationSchema } from './schema';
 import { InitSchema } from '../init/schema';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
-import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
-import init from '../init/init';
+import { initSchematic } from '../init/init';
 import { join } from 'path';
 import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 
 const projectType = ProjectType.Application;
 
@@ -49,19 +44,19 @@ function addFiles(options: ApplicationSchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot),
+        offsetFromRoot: offsetFromRoot(options.projectRoot)
       }),
       move(options.projectRoot),
-      formatFiles({ skipFormat: false }),
+      formatFiles({ skipFormat: false })
     ])
   );
 }
 
-export default function (options: InitSchema): Rule {
+export function applicationSchematic(options: InitSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
-      init(normalizedOptions),
+      initSchematic(normalizedOptions),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
           name: normalizedOptions.projectName,
@@ -71,24 +66,25 @@ export default function (options: InitSchema): Rule {
           schematics: {
             '@nxext/stencil:component': {
               style: options.style,
-              storybook: false,
-            },
-          },
+              storybook: false
+            }
+          }
         }).targets;
         addDefaultBuilders(targetCollection, projectType, normalizedOptions);
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
-        tags: normalizedOptions.parsedTags,
+        tags: normalizedOptions.parsedTags
       }),
       addFiles(normalizedOptions),
       addStylePluginToConfigInTree(
         join(normalizedOptions.projectRoot, 'stencil.config.ts'),
         normalizedOptions.style
-      ),
+      )
     ]);
   };
 }
 
+export default applicationSchematic;
 export const applicationGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'application'

@@ -24,7 +24,7 @@ import { AppType } from '../../utils/typings';
 import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
-import init from '../init/init';
+import { initSchematic } from '../init/init';
 import { capacitorVersion } from '../../utils/versions';
 import { join } from 'path';
 import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
@@ -102,7 +102,7 @@ export default function (options: IonicAppSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
-      init(normalizedOptions),
+      initSchematic(normalizedOptions),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
           name: normalizedOptions.projectName,

@@ -4,7 +4,14 @@
   "version": "0.0.1",
   "schematics": {
     "stencil": {
-      "factory": "./src/schematics/stencil/schematic",
+      "factory": "./src/schematics/stencil/schematic#tailwindStencilSchematic",
+      "schema": "./src/schematics/stencil/schema.json",
+      "description": "stencil tailwind schematic"
+    }
+  },
+  "generators": {
+    "stencil": {
+      "factory": "./src/schematics/stencil/schematic#tailwindStencilGenerator",
       "schema": "./src/schematics/stencil/schema.json",
       "description": "stencil tailwind schematic"
     }

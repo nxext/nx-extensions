@@ -12,10 +12,11 @@ import {
 } from '@nrwl/workspace';
 import { NormalizedSchema, SvelteLibrarySchema } from './schema';
 import { extraEslintDependencies, svelteEslintJson } from '../utils/lint';
-import init from '../init/init';
+import { initSchematic } from '../init/init';
 import { handleJest, addFiles } from './lib';
 import { addProject } from './lib/add-project';
 import { updateTsConfig } from './lib/update-tsconfig';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 function normalizeOptions(options: SvelteLibrarySchema): NormalizedSchema {
   const name = toFileName(options.name);
@@ -34,10 +35,10 @@ function normalizeOptions(options: SvelteLibrarySchema): NormalizedSchema {
   };
 }
 
-export default function (options: SvelteLibrarySchema): Rule {
+export function librarySchematic(options: SvelteLibrarySchema): Rule {
   const normalizedOptions = normalizeOptions(options);
   return chain([
-    init({ ...normalizedOptions, skipFormat: true }),
+    initSchematic({ ...normalizedOptions, skipFormat: true }),
     addProject(normalizedOptions),
     updateTsConfig(normalizedOptions),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
@@ -52,3 +53,9 @@ export default function (options: SvelteLibrarySchema): Rule {
     formatFiles(normalizedOptions),
   ]);
 }
+
+export default librarySchematic;
+export const libraryGenerator = wrapAngularDevkitSchematic(
+  '@nxext/svelte',
+  'library'
+);

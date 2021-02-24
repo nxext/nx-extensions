@@ -4,25 +4,25 @@
   "version": "0.0.1",
   "schematics": {
     "application": {
-      "factory": "./src/schematics/application/application",
+      "factory": "./src/schematics/application/application#applicationSchematic",
       "schema": "./src/schematics/application/schema.json",
       "description": "Svelte application schematic",
       "aliases": ["app"]
     },
     "library": {
-      "factory": "./src/schematics/library/library",
+      "factory": "./src/schematics/library/library#librarySchematic",
       "schema": "./src/schematics/library/schema.json",
       "description": "Svelte library schematic",
       "aliases": ["lib"]
     },
     "component": {
-      "factory": "./src/schematics/component/component",
+      "factory": "./src/schematics/component/component#componentSchematic",
       "schema": "./src/schematics/component/schema.json",
       "description": "Add component",
       "aliases": ["c"]
     },
     "init": {
-      "factory": "./src/schematics/init/init",
+      "factory": "./src/schematics/init/init#initSchematic",
       "schema": "./src/schematics/init/schema.json",
       "description": "init schematic",
       "hidden": true
