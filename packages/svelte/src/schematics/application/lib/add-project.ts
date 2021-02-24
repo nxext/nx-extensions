@@ -2,27 +2,42 @@ import { NormalizedSchema } from '../schema';
 import { Rule } from '@angular-devkit/schematics';
 import { ProjectType, updateWorkspace } from '@nrwl/workspace';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
+import {
+  addProjectConfiguration,
+  joinPathFragments,
+  NxJsonProjectConfiguration,
+  TargetConfiguration,
+  Tree
+} from '@nrwl/devkit';
 
-export function addProject(options: NormalizedSchema): Rule {
-  return updateWorkspace((workspace) => {
-    const targetCollection = workspace.projects.add({
-      name: options.projectName,
-      root: options.projectRoot,
-      sourceRoot: `${options.projectRoot}/src`,
-      projectType: ProjectType.Application,
-    }).targets;
+export function _addProject(tree: Tree, options: NormalizedSchema) {
+  const targets: { [key: string]: TargetConfiguration } = {
+    build: createBuildTarget(options),
+    serve: createServeTarget(options),
+    lint: createLintTarget(options)
+  };
 
-    targetCollection.add(getBuildOptions(options));
-    targetCollection.add(getServeOptions(options));
-    targetCollection.add(getLintOptions(options));
+  if(options.unitTestRunner === 'jest') {
+    targets.test = createTestTarget(options);
+  } else {
+    tree.delete(joinPathFragments(options.projectRoot, 'jest.config.js'));
+    tree.delete(joinPathFragments(options.projectRoot, 'tsconfig.spec.json'));
+  }
 
-    if (options.unitTestRunner === 'jest') {
-      targetCollection.add(getJestOptions(options));
-    }
+  const nxConfig: NxJsonProjectConfiguration = {
+    tags: options.parsedTags,
+  };
+
+  addProjectConfiguration(tree, options.projectName, {
+    root: options.projectRoot,
+    sourceRoot: `${options.projectRoot}/src`,
+    projectType: ProjectType.Application,
+    ...nxConfig,
+    targets
   });
 }
 
-function getBuildOptions(options: NormalizedSchema) {
+function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
   let serverOptions: {
     // Ignore
   };
@@ -37,36 +52,33 @@ function getBuildOptions(options: NormalizedSchema) {
   }
 
   return {
-    name: 'build',
-    builder: '@nxext/svelte:build',
+    executor: '@nxext/svelte:build',
+    outputs: ['{options.outputPath}'],
     options: {
       ...{
-        outputPath: getSystemPath(join(normalize('dist'), options.projectRoot)),
-        entryFile: getSystemPath(join(normalize(options.projectRoot), 'src/main.ts')),
-        tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.app.json')),
+        outputPath: joinPathFragments('dist', options.projectRoot),
+        entryFile: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
+        tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
         assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       },
       ...serverOptions,
     },
     configurations: {
       production: {
-        ...{
-          dev: false,
-        },
+        dev: false,
         ...serverOptions,
       },
     },
   };
 }
 
-function getServeOptions(options: NormalizedSchema) {
+function createServeTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    name: 'serve',
-    builder: '@nxext/svelte:build',
+    executor: '@nxext/svelte:build',
     options: {
-      outputPath: getSystemPath(join(normalize('dist'), options.projectRoot)),
-      entryFile: getSystemPath(join(normalize(options.projectRoot), 'src/main.ts')),
-      tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.app.json')),
+      outputPath: joinPathFragments('dist', options.projectRoot),
+      entryFile: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
+      tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
       assets: [{"glob": "/*", "input": "./public/**", "output": "./"}],
       watch: true,
       serve: true,
@@ -79,27 +91,25 @@ function getServeOptions(options: NormalizedSchema) {
   };
 }
 
-function getLintOptions(options: NormalizedSchema) {
+function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    name: 'lint',
-    builder: '@nrwl/linter:lint',
+    executor: '@nrwl/linter:lint',
     options: {
       linter: 'eslint',
-      tsConfig: getSystemPath(join(normalize(options.projectRoot), 'tsconfig.app.json')),
+      tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
       exclude: [
         '**/node_modules/**',
-        `!${getSystemPath(join(normalize(options.projectRoot), '**/*'))}`,
+        `!${joinPathFragments(options.projectRoot, '**/*')}`,
       ],
     },
   };
 }
 
-function getJestOptions(options: NormalizedSchema) {
+function createTestTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    name: 'test',
-    builder: '@nrwl/jest:jest',
+    executor: '@nrwl/jest:jest',
     options: {
-      jestConfig: getSystemPath(join(normalize(options.projectRoot), 'jest.config.js')),
+      jestConfig: joinPathFragments(options.projectRoot, 'jest.config.js'),
       passWithNoTests: true,
     },
   };

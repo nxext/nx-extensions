@@ -1,8 +1,7 @@
-import { updateJsonInTree } from '@nrwl/workspace';
+import { Tree, updateJson } from '@nrwl/devkit';
 
-export const moveToDevDependencies = updateJsonInTree(
-  'package.json',
-  (packageJson) => {
+export function moveNxextToDevDependencies(tree: Tree) {
+  updateJson(tree, '/package.json', (packageJson) => {
     packageJson.dependencies = packageJson.dependencies || {};
     packageJson.devDependencies = packageJson.devDependencies || {};
 
@@ -12,5 +11,5 @@ export const moveToDevDependencies = updateJsonInTree(
       delete packageJson.dependencies['@nxext/stencil'];
     }
     return packageJson;
-  }
-);
+  })
+}

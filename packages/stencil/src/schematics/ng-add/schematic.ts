@@ -1,13 +1,15 @@
-import { chain, Rule } from '@angular-devkit/schematics';
 import { PROJECT_TYPE_DEPENDENCIES } from '../../utils/typings';
-import { addDepsToPackageJson } from '@nrwl/workspace';
+import { addDependenciesToPackageJson, convertNxGenerator, Tree } from '@nrwl/devkit';
 
-export default function (): Rule {
+export async function ngAddGenerator(tree: Tree) {
   const projectDependency = PROJECT_TYPE_DEPENDENCIES['init'];
-  return chain([
-    addDepsToPackageJson(
-      projectDependency.dependencies,
-      projectDependency.devDependencies
-    ),
-  ]);
+
+  return addDependenciesToPackageJson(
+    tree,
+    projectDependency.dependencies,
+    projectDependency.devDependencies
+  );
 }
+
+export default ngAddGenerator;
+export const ngAddSchematic = convertNxGenerator(ngAddGenerator);

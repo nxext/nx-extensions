@@ -1,15 +1,20 @@
 import { InitSchema } from '../schema';
-import { noop, Rule } from '@angular-devkit/schematics';
 import { STYLE_PLUGIN_DEPENDENCIES } from '../../../utils/typings';
-import { addDepsToPackageJson } from '@nrwl/workspace';
+import { addDependenciesToPackageJson, GeneratorCallback, Tree } from '@nrwl/devkit';
 
-export function addStyledModuleDependencies<T extends InitSchema>(options: T): Rule {
+export function addStyledDependencies<T extends InitSchema>(tree: Tree, options: T): GeneratorCallback[] {
   const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[options.style];
+  const tasks: GeneratorCallback[] = [];
 
-  return styleDependencies
-    ? addDepsToPackageJson(
-      styleDependencies.dependencies,
-      styleDependencies.devDependencies
-    )
-    : noop();
+  if (styleDependencies) {
+    tasks.push(
+      addDependenciesToPackageJson(
+        tree,
+        styleDependencies.dependencies,
+        styleDependencies.devDependencies
+      )
+    );
+  }
+
+  return tasks;
 }

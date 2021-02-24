@@ -1,25 +1,25 @@
-import { chain, Rule } from '@angular-devkit/schematics';
-import { addPackageWithInit } from '@nrwl/workspace';
-import { setDefaultCollection } from '@nrwl/workspace/src/utils/rules/workspace';
+import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 import { InitSchema } from './schema';
-import { addStyledModuleDependencies } from './lib/add-style-module-dependencies';
-import { addE2eDependencies } from './lib/add-e2e-dependencies';
-import { moveToDevDependencies } from './lib/move-nxext-to-dev-dependencies';
-import { addDependenciesForApptype } from './lib/add-dependencies-for-apptype';
-import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { addStyledDependencies } from './lib/add-style-module-dependencies';
+import { addE2eTestDependencies } from './lib/add-e2e-dependencies';
+import { moveNxextToDevDependencies } from './lib/move-nxext-to-dev-dependencies';
+import { addDependenciesByApptype } from './lib/add-dependencies-for-apptype';
+import { convertNxGenerator, GeneratorCallback, Tree } from '@nrwl/devkit';
+import { jestInitGenerator } from '@nrwl/jest';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
-export default function <T extends InitSchema>(options: T): Rule {
-  return chain([
-    addDependenciesForApptype(options.appType),
-    moveToDevDependencies,
-    addStyledModuleDependencies(options),
-    addPackageWithInit(`@nrwl/jest`),
-    addE2eDependencies(options),
-    setDefaultCollection('@nxext/stencil'),
-  ]);
+export async function initGenerator<T extends InitSchema>(tree: Tree, options: T) {
+  const tasks: GeneratorCallback[] = [];
+
+  moveNxextToDevDependencies(tree);
+  tasks.push(addDependenciesByApptype(tree, options.appType));
+  tasks.push(...addStyledDependencies(tree, options));
+  tasks.push(...addE2eTestDependencies(tree));
+  tasks.push(jestInitGenerator(tree, {}));
+
+  setDefaultCollection(tree, '@nxext/stencil');
+
+  return runTasksInSerial(...tasks);
 }
 
-export const initGenerator = wrapAngularDevkitSchematic(
-  '@nxext/stencil',
-  'init'
-);
+export const initSchematic = convertNxGenerator(initGenerator);

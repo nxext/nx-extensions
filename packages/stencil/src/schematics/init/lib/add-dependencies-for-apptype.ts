@@ -1,10 +1,11 @@
 import { AppType, PROJECT_TYPE_DEPENDENCIES } from '../../../utils/typings';
-import { Rule } from '@angular-devkit/schematics';
-import { addDepsToPackageJson } from '@nrwl/workspace';
+import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 
-export function addDependenciesForApptype(appType: AppType): Rule {
+export function addDependenciesByApptype(tree: Tree, appType: AppType) {
   const projectDependency = PROJECT_TYPE_DEPENDENCIES[appType];
-  return addDepsToPackageJson(
+
+  return addDependenciesToPackageJson(
+    tree,
     projectDependency.dependencies,
     projectDependency.devDependencies
   );

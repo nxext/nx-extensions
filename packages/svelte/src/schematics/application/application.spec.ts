@@ -1,9 +1,8 @@
-import { Tree } from '@angular-devkit/schematics';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-
 import { SvelteApplicationSchema } from './schema';
-import { Linter, readJsonInTree } from '@nrwl/workspace';
-import { runSchematic } from '../utils/testing';
+import { Linter } from '@nrwl/linter';
+import applicationGenerator from './application';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree, readJson } from '@nrwl/devkit';
 
 describe('svelte app schematic', () => {
   let appTree: Tree;
@@ -15,18 +14,12 @@ describe('svelte app schematic', () => {
   };
 
   beforeEach(() => {
-    appTree = createEmptyWorkspace(Tree.empty());
-  });
-
-  it('should run successfully', async () => {
-    await expect(
-      runSchematic('app', options, appTree)
-    ).resolves.not.toThrowError();
+    appTree = createTreeWithEmptyWorkspace();
   });
 
   it('should add Svelte dependencies', async () => {
-    const result = await runSchematic('app', options, appTree);
-    const packageJson = readJsonInTree(result, 'package.json');
+    await applicationGenerator(appTree, options);
+    const packageJson = readJson(appTree, 'package.json');
     expect(packageJson.devDependencies['svelte']).toBeDefined();
     expect(packageJson.devDependencies['svelte-preprocess']).toBeDefined();
     expect(packageJson.devDependencies['svelte-jester']).toBeDefined();

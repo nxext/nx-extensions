@@ -14,13 +14,6 @@ const testRunner = new SchematicTestRunner(
   join(__dirname, '../../../collection.json')
 );
 
-/*
-const migrationRunner = new SchematicTestRunner(
-  '@nxext/svelte',
-  join(__dirname, '../../../migrations.json')
-);
-*/
-
 export async function createTestProject(name: string, type: ProjectType = ProjectType.Application): Promise<Tree> {
   let appTree = createEmptyWorkspace(Tree.empty());
   if(type === ProjectType.Application) {
@@ -70,11 +63,3 @@ export function runSchematic<SchemaOptions = InitSchema | ApplicationSchema>(
 export function callRule(rule: Rule, tree: Tree) {
   return testRunner.callRule(rule, tree).toPromise();
 }
-
-/*
-export function runMigration(migrationName: string, options: any, tree: Tree) {
-  return migrationRunner
-    .runSchematicAsync(migrationName, options, tree)
-    .toPromise();
-}
-*/

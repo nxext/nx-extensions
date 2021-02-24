@@ -22,7 +22,7 @@ import { AppType } from '../../utils/typings';
 import { addBuilderToTarget, calculateStyle } from '../../utils/utils';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { InitSchema } from '../init/schema';
-import init from '../init/init';
+import { initSchematic } from '../init/init';
 import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
@@ -72,7 +72,7 @@ export default function (options: InitSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
-      init(normalizedOptions),
+      initSchematic(normalizedOptions),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
           name: normalizedOptions.projectName,

@@ -14,6 +14,7 @@ import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { addCodeIntoArray } from '../../utils/utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 export interface Schema {
   project: string;
@@ -104,7 +105,7 @@ export function addStylePluginToConfigInTree(options: Schema): Rule {
   };
 }
 
-export default function(options: Schema): Rule {
+export function tailwindStencilSchematic(options: Schema): Rule {
   return chain([
     addDepsToPackageJson({}, {
       '@stencil/postcss': '^2.0.0',
@@ -129,3 +130,9 @@ export default function(options: Schema): Rule {
     formatFiles({ skipFormat: options.skipFormat })
   ]);
 }
+
+export default tailwindStencilSchematic;
+export const tailwindStencilGenerator = wrapAngularDevkitSchematic(
+  '@nxext/tailwind',
+  'stencil'
+);
