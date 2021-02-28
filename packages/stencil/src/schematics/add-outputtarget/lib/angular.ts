@@ -5,7 +5,7 @@ import {
   getProjectConfig,
   insert,
   insertImport,
-  libsDir
+  libsDir,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { getNpmScope } from '@nrwl/workspace';

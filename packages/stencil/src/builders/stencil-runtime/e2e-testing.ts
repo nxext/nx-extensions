@@ -1,7 +1,10 @@
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { deleteFile, getRelativePath } from '../../utils/fileutils';
-import { writeJsonFile, fileExists } from '@nrwl/workspace/src/utilities/fileutils';
+import {
+  writeJsonFile,
+  fileExists,
+} from '@nrwl/workspace/src/utilities/fileutils';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { ConfigAndPathCollection } from './types';
 

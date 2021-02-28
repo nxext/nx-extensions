@@ -4,7 +4,7 @@ import {
   getProjectConfig,
   insert,
   insertImport,
-  libsDir
+  libsDir,
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utils';
@@ -44,13 +44,13 @@ export function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
         const cssFile = `${libsDir(host)}/${reactProjectName}/src/lib/${
           options.projectName
         }-react.css`;
-        if(tree.exists(cssFile)) {
+        if (tree.exists(cssFile)) {
           tree.delete(cssFile);
         }
         const cssModuleFile = `${libsDir(host)}/${reactProjectName}/src/lib/${
           options.projectName
         }-react.module.css`;
-        if(tree.exists(cssModuleFile)) {
+        if (tree.exists(cssModuleFile)) {
           tree.delete(cssModuleFile);
         }
 

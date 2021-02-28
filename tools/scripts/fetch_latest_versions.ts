@@ -10,12 +10,12 @@ const pkgs = [
   '@stencil/react-output-target',
   '@stencil/vue-output-target',
   '@stencil/angular-output-target',
-  '@stencil/svelte-output-target'
+  '@stencil/svelte-output-target',
 ];
 
-pkgs.forEach(pkg => {
+pkgs.forEach((pkg) => {
   exec(`npm show ${pkg} version`, (error, stdout, sterr) => {
-    if(error) {
+    if (error) {
       console.log(`Error fetching ${pkg}`);
       return;
     }

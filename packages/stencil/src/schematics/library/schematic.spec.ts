@@ -28,7 +28,11 @@ describe('schematic:library', () => {
       tree
     );
 
-    const fileList = fileListForAppType(appName, SupportedStyles.css, ProjectType.Library);
+    const fileList = fileListForAppType(
+      appName,
+      SupportedStyles.css,
+      ProjectType.Library
+    );
     fileList.forEach((file) => expect(result.exists(file)));
   });
 

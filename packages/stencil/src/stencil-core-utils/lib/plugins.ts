@@ -1,20 +1,27 @@
-import { Change, findNodes, InsertChange } from '@nrwl/workspace/src/utils/ast-utils';
+import {
+  Change,
+  findNodes,
+  InsertChange,
+} from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { insert } from '@nrwl/workspace';
 import { addStylePlugin, SupportedStyles } from './style-plugins';
 
-function addCodeIntoArray(source: ts.SourceFile, identifier: string, toInsert: string, file: string): InsertChange[] {
+function addCodeIntoArray(
+  source: ts.SourceFile,
+  identifier: string,
+  toInsert: string,
+  file: string
+): InsertChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
   let node = nodes[0];
   const matchingProperties: ts.ObjectLiteralElement[] = (node as ts.ObjectLiteralExpression).properties
     .filter((prop) => prop.kind == ts.SyntaxKind.PropertyAssignment)
     .filter((prop: ts.PropertyAssignment) => {
       if (prop.name.kind === ts.SyntaxKind.Identifier) {
-        return (
-          (prop.name as ts.Identifier).getText(source) == identifier
-        );
+        return (prop.name as ts.Identifier).getText(source) == identifier;
       }
 
       return false;
@@ -82,15 +89,24 @@ export function addToOutputTargets(
   return addCodeIntoArray(source, outputTargetsIdentifier, toInsert, file);
 }
 
-export function addToOutputTargetsInTree(outputTargets: string[], stencilConfigPath: string): Rule {
+export function addToOutputTargetsInTree(
+  outputTargets: string[],
+  stencilConfigPath: string
+): Rule {
   return (tree: Tree) => {
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath
     );
 
-    insert(tree, stencilConfigPath,
-      addToOutputTargets(stencilConfigSource, outputTargets.join(','), stencilConfigPath)
+    insert(
+      tree,
+      stencilConfigPath,
+      addToOutputTargets(
+        stencilConfigSource,
+        outputTargets.join(','),
+        stencilConfigPath
+      )
     );
 
     return tree;

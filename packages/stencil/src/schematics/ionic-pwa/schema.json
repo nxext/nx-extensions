@@ -25,10 +25,7 @@
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": [
-        "puppeteer",
-        "none"
-      ],
+      "enum": ["puppeteer", "none"],
       "description": "Test runner to use for end to end (e2e) tests",
       "default": "puppeteer"
     },
@@ -69,7 +66,5 @@
       }
     }
   },
-  "required": [
-    "name"
-  ]
+  "required": ["name"]
 }

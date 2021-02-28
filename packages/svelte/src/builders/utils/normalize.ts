@@ -8,18 +8,25 @@ export function normalizeOptions(
   projectConfig: InitOptions
 ): SvelteBuildOptions {
   const rollupConfig = options.rollupConfig
-    ? getSystemPath(join(normalize(projectConfig.workspaceRoot), options.rollupConfig))
+    ? getSystemPath(
+        join(normalize(projectConfig.workspaceRoot), options.rollupConfig)
+      )
     : null;
   const sveltePreprocessConfig = options.sveltePreprocessConfig
-    ? getSystemPath(join(
-        normalize(projectConfig.workspaceRoot),
-        options.sveltePreprocessConfig
-      ))
+    ? getSystemPath(
+        join(
+          normalize(projectConfig.workspaceRoot),
+          options.sveltePreprocessConfig
+        )
+      )
     : null;
 
   const projectRoot = normalize(projectConfig.projectRoot);
   const sourceRoot = join(projectRoot, 'src');
-  const destRoot = join(normalize(projectConfig.workspaceRoot), options.outputPath);
+  const destRoot = join(
+    normalize(projectConfig.workspaceRoot),
+    options.outputPath
+  );
 
   return {
     ...options,
@@ -27,11 +34,6 @@ export function normalizeOptions(
     rollupConfig,
     sveltePreprocessConfig,
     sourceRoot,
-    assets: normalizeAssets(
-      options.assets,
-      projectRoot,
-      sourceRoot,
-      destRoot
-    ),
+    assets: normalizeAssets(options.assets, projectRoot, sourceRoot, destRoot),
   } as SvelteBuildOptions;
 }

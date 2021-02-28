@@ -20,30 +20,23 @@ describe('stencil tailwindcss schematic', () => {
   });
 
   it('should run successfully', async () => {
-    await expect(testRunner.runSchematicAsync(
-      'stencil',
-      options,
-      appTree
-      ).toPromise()
+    await expect(
+      testRunner.runSchematicAsync('stencil', options, appTree).toPromise()
     ).resolves.not.toThrowError();
   });
 
   it('should create files', async () => {
-    const result = await testRunner.runSchematicAsync(
-      'stencil',
-      options,
-      appTree
-    ).toPromise();
+    const result = await testRunner
+      .runSchematicAsync('stencil', options, appTree)
+      .toPromise();
 
     expect(result.exists(`apps/${options.project}/tailwind.config.js`));
   });
 
   it('should add dependencies', async () => {
-    const result = await testRunner.runSchematicAsync(
-      'stencil',
-      options,
-      appTree
-    ).toPromise();
+    const result = await testRunner
+      .runSchematicAsync('stencil', options, appTree)
+      .toPromise();
 
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['tailwindcss']).toBeDefined();
@@ -58,9 +51,7 @@ const stencilTestRunner = new SchematicTestRunner(
   join(__dirname, '../../../../stencil/collection.json')
 );
 
-export async function createTestApp(
-  name: string
-): Promise<Tree> {
+export async function createTestApp(name: string): Promise<Tree> {
   let appTree = createEmptyWorkspace(Tree.empty());
   appTree = await stencilTestRunner
     .runSchematicAsync('application', { name: name, style: 'css' }, appTree)

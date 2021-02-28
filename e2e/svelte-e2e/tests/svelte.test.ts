@@ -3,7 +3,7 @@ import {
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
 describe('svelte e2e', () => {
@@ -37,9 +37,7 @@ describe('svelte e2e', () => {
     });
 
     it('should generate app into directory', async (done) => {
-      await runNxCommandAsync(
-        `generate @nxext/svelte:app project/ui`
-      );
+      await runNxCommandAsync(`generate @nxext/svelte:app project/ui`);
       expect(() =>
         checkFilesExist(`apps/project/ui/src/main.ts`)
       ).not.toThrow();
@@ -70,11 +68,8 @@ describe('svelte e2e', () => {
       done();
     });
 
-
     it('should generate lib into directory', async (done) => {
-      await runNxCommandAsync(
-        `generate @nxext/svelte:lib project/uilib`
-      );
+      await runNxCommandAsync(`generate @nxext/svelte:lib project/uilib`);
       expect(() =>
         checkFilesExist(`libs/project/uilib/src/index.ts`)
       ).not.toThrow();
@@ -94,7 +89,9 @@ describe('svelte e2e', () => {
 
     it('should be able build lib if buildable', async (done) => {
       const plugin = uniq('sveltelib');
-      await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin} --buildable`);
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib ${plugin} --buildable`
+      );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
       expect(result.stdout).toContain('Bundle complete');

@@ -8,7 +8,10 @@ import { convertNxGenerator, GeneratorCallback, Tree } from '@nrwl/devkit';
 import { jestInitGenerator } from '@nrwl/jest';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
-export async function initGenerator<T extends InitSchema>(tree: Tree, options: T) {
+export async function initGenerator<T extends InitSchema>(
+  tree: Tree,
+  options: T
+) {
   const tasks: GeneratorCallback[] = [];
 
   moveNxextToDevDependencies(tree);

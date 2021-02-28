@@ -5,9 +5,14 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
-import { addDepsToPackageJson, formatFiles, getProjectConfig, insert } from '@nrwl/workspace';
+import {
+  addDepsToPackageJson,
+  formatFiles,
+  getProjectConfig,
+  insert,
+} from '@nrwl/workspace';
 import { applyWithSkipExisting } from '../../utils/utils';
 import * as ts from 'typescript';
 import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
@@ -39,10 +44,10 @@ function createTailwindConfigForProject(options: Schema): Rule {
     return chain([
       applyWithSkipExisting(url('./files'), [
         applyTemplates({
-          sourceRoot
+          sourceRoot,
         }),
-        move(projectRoot)
-      ])
+        move(projectRoot),
+      ]),
     ])(tree, context);
   };
 }
@@ -51,44 +56,46 @@ export function addStylePluginToConfigInTree(options: Schema): Rule {
   return (tree: Tree) => {
     const projectConfig = getProjectConfig(tree, options.project);
     const projectRoot = projectConfig.root;
-    const stencilConfigPath = projectConfig?.architect?.build?.options?.configPath || projectConfig?.architect?.test?.options?.configPath;
+    const stencilConfigPath =
+      projectConfig?.architect?.build?.options?.configPath ||
+      projectConfig?.architect?.test?.options?.configPath;
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath
     );
 
     insert(tree, stencilConfigPath, [
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'postcss',
-          '@stencil/postcss'
-        ),
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'autoprefixer',
-          'autoprefixer',
-          true
-        ),
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'cssnano',
-          'cssnano',
-          true
-        ),
-        insertImport(
-          stencilConfigSource,
-          stencilConfigPath,
-          'tailwindcss',
-          'tailwindcss',
-          true
-        ),
-        ...addToPlugins(
-          stencilConfigSource,
-          stencilConfigPath,
-          `
+      insertImport(
+        stencilConfigSource,
+        stencilConfigPath,
+        'postcss',
+        '@stencil/postcss'
+      ),
+      insertImport(
+        stencilConfigSource,
+        stencilConfigPath,
+        'autoprefixer',
+        'autoprefixer',
+        true
+      ),
+      insertImport(
+        stencilConfigSource,
+        stencilConfigPath,
+        'cssnano',
+        'cssnano',
+        true
+      ),
+      insertImport(
+        stencilConfigSource,
+        stencilConfigPath,
+        'tailwindcss',
+        'tailwindcss',
+        true
+      ),
+      ...addToPlugins(
+        stencilConfigSource,
+        stencilConfigPath,
+        `
           postcss({
             plugins: [
               tailwindcss('./${projectRoot}/tailwind.config.js'),
@@ -97,9 +104,8 @@ export function addStylePluginToConfigInTree(options: Schema): Rule {
             ]
           })
           `
-        )
-      ]
-    );
+      ),
+    ]);
 
     return tree;
   };
@@ -107,12 +113,15 @@ export function addStylePluginToConfigInTree(options: Schema): Rule {
 
 export function tailwindStencilSchematic(options: Schema): Rule {
   return chain([
-    addDepsToPackageJson({}, {
-      '@stencil/postcss': '^2.0.0',
-      tailwindcss: 'npm:@tailwindcss/postcss7-compat',
-      autoprefixer: '^9.0.0',
-      cssnano: '^4.1.10'
-    }),
+    addDepsToPackageJson(
+      {},
+      {
+        '@stencil/postcss': '^2.0.0',
+        tailwindcss: 'npm:@tailwindcss/postcss7-compat',
+        autoprefixer: '^9.0.0',
+        cssnano: '^4.1.10',
+      }
+    ),
     createTailwindConfigForProject(options),
     addStylePluginToConfigInTree(options),
     (tree: Tree, context: SchematicContext) => {
@@ -127,7 +136,7 @@ export function tailwindStencilSchematic(options: Schema): Rule {
           More informations about tailwindcss and tailwind imports: https://tailwindcss.com/docs/installation#include-tailwind-in-your-css
       `);
     },
-    formatFiles({ skipFormat: options.skipFormat })
+    formatFiles({ skipFormat: options.skipFormat }),
   ]);
 }
 

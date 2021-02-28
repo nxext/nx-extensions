@@ -1,10 +1,19 @@
-import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
+import {
+  apply,
+  applyTemplates,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  Tree,
+  url,
+} from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
   offsetFromRoot,
   ProjectType,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { names } from '@nrwl/devkit';
 import { PWASchema } from './schema';

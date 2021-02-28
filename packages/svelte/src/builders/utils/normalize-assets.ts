@@ -1,4 +1,12 @@
-import { basename, dirname, getSystemPath, join, normalize, Path, resolve } from '@angular-devkit/core';
+import {
+  basename,
+  dirname,
+  getSystemPath,
+  join,
+  normalize,
+  Path,
+  resolve,
+} from '@angular-devkit/core';
 import { statSync } from 'fs-extra';
 
 export interface NormalizedCopyAssetOption {
@@ -24,13 +32,17 @@ export function normalizeAssets(
         );
       }
 
-      const isDirectory = statSync(getSystemPath(resolvedAssetPath)).isDirectory();
-      const input = isDirectory ? join(resolvedAssetPath, '**/*') : join(dirname(resolvedAssetPath), basename(resolvedAssetPath));
+      const isDirectory = statSync(
+        getSystemPath(resolvedAssetPath)
+      ).isDirectory();
+      const input = isDirectory
+        ? join(resolvedAssetPath, '**/*')
+        : join(dirname(resolvedAssetPath), basename(resolvedAssetPath));
       const output = join(destRoot, input);
 
       return {
         input,
-        output
+        output,
       };
     } else {
       if (asset.output.startsWith('..')) {
@@ -59,9 +71,8 @@ export function convertCopyAssetsToRollupOptions(
 ): RollupCopyAssetOption[] {
   return assets
     ? assets.map((a) => ({
-      src: getSystemPath(a.input),
-      dest: getSystemPath(a.output),
-    }))
+        src: getSystemPath(a.input),
+        dest: getSystemPath(a.output),
+      }))
     : undefined;
 }
-

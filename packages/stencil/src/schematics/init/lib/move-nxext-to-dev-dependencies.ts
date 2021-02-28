@@ -11,5 +11,5 @@ export function moveNxextToDevDependencies(tree: Tree) {
       delete packageJson.dependencies['@nxext/stencil'];
     }
     return packageJson;
-  })
+  });
 }

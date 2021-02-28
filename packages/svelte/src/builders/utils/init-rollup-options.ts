@@ -20,7 +20,10 @@ export async function initRollupOptions(
   const { workspaceRoot } = context;
   const projectName: string = context.target.project;
   const metadata = await context.getProjectMetadata(context.target);
-  const projectRoot: Path = join(normalize(workspaceRoot), normalize(metadata.root as string));
+  const projectRoot: Path = join(
+    normalize(workspaceRoot),
+    normalize(metadata.root as string)
+  );
 
   const initOptions: InitOptions = {
     projectRoot,

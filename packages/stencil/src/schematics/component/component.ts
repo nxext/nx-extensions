@@ -7,7 +7,7 @@ import {
   SchematicContext,
   SchematicsException,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import { getProjectConfig } from '@nrwl/workspace';
 import { applyWithSkipExisting } from '../../utils/utils';
@@ -40,7 +40,10 @@ function createComponentInProject(options: ComponentSchema): Rule {
     const projectConfig = getProjectConfig(tree, options.project);
 
     const projectDirectory = options.directory
-      ? join(normalize(options.directory), normalize(names(options.name).fileName))
+      ? join(
+          normalize(options.directory),
+          normalize(names(options.name).fileName)
+        )
       : join(normalize(names(options.name).fileName));
 
     const componentOptions = ((projectConfig || {}).schematics || {

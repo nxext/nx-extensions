@@ -25,10 +25,10 @@ describe('init', () => {
 
   it('should add stencil app dependencies', async () => {
     const result = await runSchematic(
-        'init',
-        { name: 'test', appType: AppType.application },
-        tree
-      );
+      'init',
+      { name: 'test', appType: AppType.application },
+      tree
+    );
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
@@ -37,7 +37,11 @@ describe('init', () => {
   });
 
   it('should add stencil pwa dependencies', async () => {
-    const result = await runSchematic('init', { name: 'test', appType: AppType.pwa }, tree);
+    const result = await runSchematic(
+      'init',
+      { name: 'test', appType: AppType.pwa },
+      tree
+    );
     const packageJson = readJsonInTree(result, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
@@ -47,10 +51,10 @@ describe('init', () => {
   describe('defaultCollection', () => {
     it('should be set if none was set before', async () => {
       const result = await runSchematic(
-          'init',
-          { name: 'test', appType: AppType.library },
-          tree
-        );
+        'init',
+        { name: 'test', appType: AppType.library },
+        tree
+      );
       const workspaceJson = readJsonInTree(result, 'workspace.json');
       expect(workspaceJson.cli.defaultCollection).toEqual('@nxext/stencil');
     });

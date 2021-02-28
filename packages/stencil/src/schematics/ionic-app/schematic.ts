@@ -7,7 +7,7 @@ import {
   move,
   Rule,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import {
   addDepsToPackageJson,
@@ -16,7 +16,7 @@ import {
   formatFiles,
   offsetFromRoot,
   ProjectType,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { names, logger } from '@nrwl/devkit';
 import { IonicAppSchema } from './schema';
@@ -128,7 +128,7 @@ export default function (options: IonicAppSchema): Rule {
         project: normalizedOptions.projectName,
         appName: normalizedOptions.projectName,
         npmClient: detectPackageManager(),
-        webDir: `dist/${options.projectRoot}/www`
+        webDir: `dist/${options.projectRoot}/www`,
       } as CapacitorSchematicSchema),
       addStylePluginToConfigInTree(
         join(normalizedOptions.projectRoot, 'stencil.config.ts'),
