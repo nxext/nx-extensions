@@ -10,13 +10,14 @@ export enum SupportedStyles {
   scss = 'scss',
   styl = 'styl',
   less = 'less',
-  pcss = 'pcss'
+  pcss = 'pcss',
 }
 
 export function addStylePlugin(
   stencilConfigSource: ts.SourceFile,
   stencilConfigPath: string,
-  style: SupportedStyles): Change[] {
+  style: SupportedStyles
+): Change[] {
   const styleImports = {
     [SupportedStyles.css]: [],
     [SupportedStyles.scss]: [
@@ -26,11 +27,7 @@ export function addStylePlugin(
         'sass',
         '@stencil/sass'
       ),
-      ...addToPlugins(
-        stencilConfigSource,
-        stencilConfigPath,
-        'sass()'
-      )
+      ...addToPlugins(stencilConfigSource, stencilConfigPath, 'sass()'),
     ],
     [SupportedStyles.styl]: [
       insertImport(
@@ -39,11 +36,7 @@ export function addStylePlugin(
         'stylus',
         '@stencil/stylus'
       ),
-      ...addToPlugins(
-        stencilConfigSource,
-        stencilConfigPath,
-        'stylus()'
-      )
+      ...addToPlugins(stencilConfigSource, stencilConfigPath, 'stylus()'),
     ],
     [SupportedStyles.less]: [
       insertImport(
@@ -52,11 +45,7 @@ export function addStylePlugin(
         'less',
         '@stencil/less'
       ),
-      ...addToPlugins(
-        stencilConfigSource,
-        stencilConfigPath,
-        'less()'
-      )
+      ...addToPlugins(stencilConfigSource, stencilConfigPath, 'less()'),
     ],
     [SupportedStyles.pcss]: [
       insertImport(
@@ -79,21 +68,26 @@ export function addStylePlugin(
             plugins: [autoprefixer()]
           })
           `
-      )
-    ]
+      ),
+    ],
   };
 
   return styleImports[style];
 }
 
-export function addStylePluginToConfigInTree(stencilConfigPath: string, style: SupportedStyles): Rule {
+export function addStylePluginToConfigInTree(
+  stencilConfigPath: string,
+  style: SupportedStyles
+): Rule {
   return (tree: Tree) => {
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath
     );
 
-    insert(tree, stencilConfigPath,
+    insert(
+      tree,
+      stencilConfigPath,
       addStylePlugin(stencilConfigSource, stencilConfigPath, style)
     );
 

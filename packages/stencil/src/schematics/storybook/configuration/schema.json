@@ -19,10 +19,7 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": [
-        "eslint",
-        "tslint"
-      ],
+      "enum": ["eslint", "tslint"],
       "default": "tslint"
     },
     "js": {
@@ -31,7 +28,5 @@
       "default": false
     }
   },
-  "required": [
-    "name"
-  ]
+  "required": ["name"]
 }

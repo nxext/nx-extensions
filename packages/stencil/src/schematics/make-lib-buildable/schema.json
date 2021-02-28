@@ -46,7 +46,5 @@
       }
     }
   },
-  "required": [
-    "name"
-  ]
+  "required": ["name"]
 }

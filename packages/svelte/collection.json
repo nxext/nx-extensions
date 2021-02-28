@@ -1,29 +1,54 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "name": "svelte",
-  "version": "0.0.1",
+  "version": "0.1",
   "schematics": {
     "application": {
-      "factory": "./src/schematics/application/application#applicationSchematic",
-      "schema": "./src/schematics/application/schema.json",
+      "factory": "./src/generators/application/application#applicationSchematic",
+      "schema": "./src/generators/application/schema.json",
       "description": "Svelte application schematic",
       "aliases": ["app"]
     },
     "library": {
-      "factory": "./src/schematics/library/library#librarySchematic",
-      "schema": "./src/schematics/library/schema.json",
+      "factory": "./src/generators/library/library#librarySchematic",
+      "schema": "./src/generators/library/schema.json",
       "description": "Svelte library schematic",
       "aliases": ["lib"]
     },
     "component": {
-      "factory": "./src/schematics/component/component#componentSchematic",
-      "schema": "./src/schematics/component/schema.json",
+      "factory": "./src/generators/component/component#componentSchematic",
+      "schema": "./src/generators/component/schema.json",
       "description": "Add component",
       "aliases": ["c"]
     },
     "init": {
-      "factory": "./src/schematics/init/init#initSchematic",
-      "schema": "./src/schematics/init/schema.json",
+      "factory": "./src/generators/init/init#initSchematic",
+      "schema": "./src/generators/init/schema.json",
+      "description": "init schematic",
+      "hidden": true
+    }
+  },
+  "generators": {
+    "application": {
+      "factory": "./src/generators/application/application#applicationGenerator",
+      "schema": "./src/generators/application/schema.json",
+      "description": "Svelte application schematic",
+      "aliases": ["app"]
+    },
+    "library": {
+      "factory": "./src/generators/library/library#libraryGenerator",
+      "schema": "./src/generators/library/schema.json",
+      "description": "Svelte library schematic",
+      "aliases": ["lib"]
+    },
+    "component": {
+      "factory": "./src/generators/component/component#componentGenerator",
+      "schema": "./src/generators/component/schema.json",
+      "description": "Add component",
+      "aliases": ["c"]
+    },
+    "init": {
+      "factory": "./src/generators/init/init#initGenerator",
+      "schema": "./src/generators/init/schema.json",
       "description": "init schematic",
       "hidden": true
     }

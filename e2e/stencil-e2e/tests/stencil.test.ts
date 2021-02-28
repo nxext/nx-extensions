@@ -4,7 +4,7 @@ import {
   readJson,
   renameFile,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 import { normalize } from '@angular-devkit/core';
 
@@ -59,7 +59,9 @@ describe('e2e', () => {
           `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
         );
 
-        expect(result.stdout).toContain('Please use a buildable library for custom outputtargets');
+        expect(result.stdout).toContain(
+          'Please use a buildable library for custom outputtargets'
+        );
 
         done();
       });
@@ -101,7 +103,9 @@ describe('e2e', () => {
     it('should be able to make a lib buildable', async (done) => {
       const plugin = uniq('lib');
       await runNxCommandAsync(`generate @nxext/stencil:lib ${plugin}`);
-      await runNxCommandAsync(`generate @nxext/stencil:make-lib-buildable ${plugin}`);
+      await runNxCommandAsync(
+        `generate @nxext/stencil:make-lib-buildable ${plugin}`
+      );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
       expect(result.stdout).toContain('build finished');

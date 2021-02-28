@@ -1,4 +1,8 @@
-import { joinPathFragments, ProjectConfiguration, TargetConfiguration } from '@nrwl/devkit';
+import {
+  joinPathFragments,
+  ProjectConfiguration,
+  TargetConfiguration,
+} from '@nrwl/devkit';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../schematics/ionic-pwa/schema';
 import { ApplicationSchema } from '../schematics/application/schema';

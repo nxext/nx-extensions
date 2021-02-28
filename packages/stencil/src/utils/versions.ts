@@ -20,7 +20,7 @@ export const STENCIL_OUTPUTTARGET_VERSION: {
   react: '^0.0.9',
   angular: '^0.0.5',
   vue: '^0.3.0',
-  svelte: '^0.0.3'
+  svelte: '^0.0.3',
 };
 
 export const STENCIL_STYLE_PLUGIN_VERSION: {

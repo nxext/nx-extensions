@@ -1,9 +1,18 @@
-import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import {
+  chain,
+  noop,
+  Rule,
+  SchematicContext,
+  Tree,
+} from '@angular-devkit/schematics';
 import { formatFiles, getWorkspacePath, readJsonInTree } from '@nrwl/workspace';
 import { prepareVueLibrary } from './lib/vue';
 import { prepareReactLibrary } from './lib/react';
 import { prepareAngularLibrary } from './lib/angular';
-import { addToOutputTargetToConfig, OutputTargetType } from './lib/add-outputtarget-to-config';
+import {
+  addToOutputTargetToConfig,
+  OutputTargetType,
+} from './lib/add-outputtarget-to-config';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 import { logger } from '@nrwl/devkit';
@@ -36,10 +45,12 @@ function checkBuildable(options: AddOutputtargetSchematicSchema): Rule {
     if (isStencilProjectBuilder(project, 'build')) {
       return chain([
         options.outputType === 'react' ? prepareReactLibrary(options) : noop(),
-        options.outputType === 'angular' ? prepareAngularLibrary(options) : noop(),
+        options.outputType === 'angular'
+          ? prepareAngularLibrary(options)
+          : noop(),
         options.outputType === 'vue' ? prepareVueLibrary(options) : noop(),
         addToOutputTargetToConfig(options.projectName, options.outputType),
-        formatFiles()
+        formatFiles(),
       ]);
     } else {
       logger.info(stripIndents`
@@ -56,7 +67,7 @@ function checkBuildable(options: AddOutputtargetSchematicSchema): Rule {
   };
 }
 
-export default function(options: AddOutputtargetSchematicSchema): Rule {
+export default function (options: AddOutputtargetSchematicSchema): Rule {
   return checkBuildable(options);
 }
 

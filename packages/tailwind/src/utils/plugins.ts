@@ -1,16 +1,23 @@
-import { Change, findNodes, InsertChange } from '@nrwl/workspace/src/utils/ast-utils';
+import {
+  Change,
+  findNodes,
+  InsertChange,
+} from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 
-function addCodeIntoArray(source: ts.SourceFile, identifier: string, toInsert: string, file: string): InsertChange[] {
+function addCodeIntoArray(
+  source: ts.SourceFile,
+  identifier: string,
+  toInsert: string,
+  file: string
+): InsertChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
   let node = nodes[0];
   const matchingProperties: ts.ObjectLiteralElement[] = (node as ts.ObjectLiteralExpression).properties
     .filter((prop) => prop.kind == ts.SyntaxKind.PropertyAssignment)
     .filter((prop: ts.PropertyAssignment) => {
       if (prop.name.kind === ts.SyntaxKind.Identifier) {
-        return (
-          (prop.name as ts.Identifier).getText(source) == identifier
-        );
+        return (prop.name as ts.Identifier).getText(source) == identifier;
       }
 
       return false;

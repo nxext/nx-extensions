@@ -7,7 +7,7 @@ import {
   SchematicContext,
   template,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import {
   addDepsToPackageJson,
@@ -15,7 +15,7 @@ import {
   offsetFromRoot,
   updateJsonInTree,
   updateWorkspace,
-  updateWorkspaceInTree
+  updateWorkspaceInTree,
 } from '@nrwl/workspace';
 import { applyWithSkipExisting, parseJsonAtPath } from '../../../utils/utils';
 import { nxVersion, storybookVersion } from '../../../utils/versions';

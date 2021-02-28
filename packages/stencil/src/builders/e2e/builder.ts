@@ -1,4 +1,8 @@
-import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
+import {
+  BuilderContext,
+  BuilderOutput,
+  createBuilder,
+} from '@angular-devkit/architect';
 import { Observable } from 'rxjs';
 import { StencilE2EOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';

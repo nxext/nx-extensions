@@ -10,15 +10,14 @@ import * as path from 'path';
 /* eslint-disable */
 const typescript = require('@rollup/plugin-typescript');
 const sveltePreprocess = require('svelte-preprocess');
-const svelte = require('rollup-plugin-svelte')
+const svelte = require('rollup-plugin-svelte');
 const copy = require('rollup-plugin-copy');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
 const { terser } = require('rollup-plugin-terser');
-const css = require('rollup-plugin-css-only')
+const css = require('rollup-plugin-css-only');
 const commonjs = require('@rollup/plugin-commonjs');
 /* eslint-enable */
-
 
 export function createRollupOptions(
   options: SvelteBuildOptions,
@@ -33,15 +32,13 @@ export function createRollupOptions(
 
   let plugins = [
     copy({
-      targets: convertCopyAssetsToRollupOptions(
-        options.assets
-      ),
+      targets: convertCopyAssetsToRollupOptions(options.assets),
     }),
     typescript({
       tsconfig: options.tsConfig,
       rootDir: options.projectRoot,
       sourceMap: !options.prod,
-      inlineSources: !options.prod
+      inlineSources: !options.prod,
     }),
     svelte({
       compilerOptions: {
@@ -59,11 +56,11 @@ export function createRollupOptions(
     commonjs(),
 
     options.prod &&
-    terser({
-      output: {
-        comments: false,
-      },
-    }),
+      terser({
+        output: {
+          comments: false,
+        },
+      }),
   ];
 
   if (options.serve) {

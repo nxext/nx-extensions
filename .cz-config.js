@@ -3,7 +3,7 @@ module.exports = {
     { value: 'feat', name: 'feat:       A new feature' },
     { value: 'fix', name: 'fix:        A bug fix' },
     { value: 'docs', name: 'docs:       Documentation only changes' },
-    { value: 'refactor', name: 'refactor:   Refactoring of a feature'},
+    { value: 'refactor', name: 'refactor:   Refactoring of a feature' },
     {
       value: 'cleanup',
       name:
@@ -19,7 +19,7 @@ module.exports = {
     { name: 'nxext', description: 'Whole repo' },
     { name: 'stencil', description: 'Stencil specific' },
     { name: 'svelte', description: 'Svelte specific' },
-    { name: 'tailwind', description: 'Tailwindcss specific' }
+    { name: 'tailwind', description: 'Tailwindcss specific' },
   ],
 
   allowTicketNumber: true,

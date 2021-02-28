@@ -1,4 +1,9 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import {
+  chain,
+  Rule,
+  SchematicContext,
+  Tree,
+} from '@angular-devkit/schematics';
 import { formatFiles, updateWorkspaceInTree } from '@nrwl/workspace';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { isStencilProjectBuilder } from '../utils/migration-utils';

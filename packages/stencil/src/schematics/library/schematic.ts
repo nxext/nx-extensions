@@ -8,13 +8,13 @@ import {
   Rule,
   schematic,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
   formatFiles,
   ProjectType,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
 import { LibrarySchema } from './schema';

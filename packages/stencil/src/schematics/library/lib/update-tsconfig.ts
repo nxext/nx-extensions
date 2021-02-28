@@ -1,5 +1,10 @@
 import { LibrarySchema } from '../schema';
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import {
+  chain,
+  Rule,
+  SchematicContext,
+  Tree,
+} from '@angular-devkit/schematics';
 import { NxJson, readJsonInTree, updateJsonInTree } from '@nrwl/workspace';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { MakeLibBuildableSchema } from '../../make-lib-buildable/schema';
@@ -18,10 +23,10 @@ export function updateTsConfig(options: LibrarySchema): Rule {
           if (options.buildable) {
             delete c.paths[
               `@${nxJson.npmScope}/${options.projectDirectory}/loader`
-              ];
+            ];
             c.paths[
               `@${nxJson.npmScope}/${options.projectDirectory}/loader`
-              ] = [`dist/${libsDir(host)}/${options.projectDirectory}/loader`];
+            ] = [`dist/${libsDir(host)}/${options.projectDirectory}/loader`];
           }
           return json;
         })(host, context);

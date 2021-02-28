@@ -56,9 +56,9 @@ describe('schematics:add-outputtarget', () => {
 
       expect(
         tree.exists(
-          `libs/${projectName}-angular/src/lib/${names(
-            projectName + '-angular'
-          ).fileName}.module.ts`
+          `libs/${projectName}-angular/src/lib/${
+            names(projectName + '-angular').fileName
+          }.module.ts`
         )
       ).toBeTruthy();
     });

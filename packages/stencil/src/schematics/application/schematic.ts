@@ -1,6 +1,20 @@
 import { AppType } from './../../utils/typings';
-import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
-import { addProjectToNxJsonInTree, formatFiles, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import {
+  apply,
+  applyTemplates,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  Tree,
+  url,
+} from '@angular-devkit/schematics';
+import {
+  addProjectToNxJsonInTree,
+  formatFiles,
+  ProjectType,
+  updateWorkspace,
+} from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
 import { ApplicationSchema } from './schema';
 import { InitSchema } from '../init/schema';
@@ -44,10 +58,10 @@ function addFiles(options: ApplicationSchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot)
+        offsetFromRoot: offsetFromRoot(options.projectRoot),
       }),
       move(options.projectRoot),
-      formatFiles({ skipFormat: false })
+      formatFiles({ skipFormat: false }),
     ])
   );
 }
@@ -66,20 +80,20 @@ export function applicationSchematic(options: InitSchema): Rule {
           schematics: {
             '@nxext/stencil:component': {
               style: options.style,
-              storybook: false
-            }
-          }
+              storybook: false,
+            },
+          },
         }).targets;
         addDefaultBuilders(targetCollection, projectType, normalizedOptions);
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
-        tags: normalizedOptions.parsedTags
+        tags: normalizedOptions.parsedTags,
       }),
       addFiles(normalizedOptions),
       addStylePluginToConfigInTree(
         join(normalizedOptions.projectRoot, 'stencil.config.ts'),
         normalizedOptions.style
-      )
+      ),
     ]);
   };
 }
