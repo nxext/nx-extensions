@@ -7,6 +7,11 @@
       "factory": "./src/schematics/stencil/schematic#tailwindStencilSchematic",
       "schema": "./src/schematics/stencil/schema.json",
       "description": "stencil tailwind schematic"
+    },
+    "svelte": {
+      "factory": "./src/schematics/svelte/generator#tailwindSvelteSchematic",
+      "schema": "./src/schematics/svelte/schema.json",
+      "description": "svelte schematic"
     }
   },
   "generators": {
@@ -16,7 +21,7 @@
       "description": "stencil tailwind schematic"
     },
     "svelte": {
-      "factory": "./src/schematics/svelte/generator#tailwindSvelteSchematic",
+      "factory": "./src/schematics/svelte/generator#tailwindSvelteGenerator",
       "schema": "./src/schematics/svelte/schema.json",
       "description": "svelte schematic"
     }

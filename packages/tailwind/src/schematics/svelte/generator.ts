@@ -2,10 +2,11 @@ import {
   addDependenciesToPackageJson,
   convertNxGenerator,
   generateFiles,
+  joinPathFragments,
+  logger,
   readProjectConfiguration,
   Tree
 } from '@nrwl/devkit';
-import { join } from 'path';
 
 export interface Schema {
   project: string;
@@ -18,10 +19,14 @@ async function tailwindSvelteGenerator(tree: Tree, options: Schema) {
 
   generateFiles(
     tree,
-    join(__dirname, '../files/common'),
+    joinPathFragments(__dirname, './files'),
     projectRoot,
-    {sourceRoot}
+    {
+      sourceRoot
+    }
   );
+
+  addImportToMainFile(tree, sourceRoot);
 
   return addDependenciesToPackageJson(
     tree,
@@ -34,4 +39,10 @@ async function tailwindSvelteGenerator(tree: Tree, options: Schema) {
   );
 }
 
+function addImportToMainFile(tree: Tree, sourceRoot: string) {
+  const file = tree.read(`${sourceRoot}/App.svelte`);
+  logger.info(file.toString('utf-8'));
+}
+
+export default tailwindSvelteGenerator;
 export const tailwindSvelteSchematic = convertNxGenerator(tailwindSvelteGenerator);

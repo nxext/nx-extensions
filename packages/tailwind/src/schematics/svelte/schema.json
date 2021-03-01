@@ -11,7 +11,7 @@
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What project would you like tp use?"
+      "x-prompt": "What project would you like to use?"
     }
   },
   "required": ["project"]
