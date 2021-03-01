@@ -16,9 +16,9 @@ function updateDependencies(tree: Tree) {
     {},
     {
       'svelte-jester': '^1.3.0',
-      svelte: '^3.32.3',
-      'svelte-check': '^1.1.34',
-      'svelte-preprocess': '^4.6.8',
+      svelte: '^3.35.0',
+      'svelte-check': '^1.1.36',
+      'svelte-preprocess': '^4.6.9',
       '@tsconfig/svelte': '^1.0.10',
     }
   );

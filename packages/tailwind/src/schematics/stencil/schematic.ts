@@ -20,6 +20,7 @@ import { readTsSourceFileFromTree } from '../../utils/ast-utils';
 import { addCodeIntoArray } from '../../utils/utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { logger } from '@nrwl/devkit';
 
 export interface Schema {
   project: string;
@@ -125,7 +126,7 @@ export function tailwindStencilSchematic(options: Schema): Rule {
     createTailwindConfigForProject(options),
     addStylePluginToConfigInTree(options),
     (tree: Tree, context: SchematicContext) => {
-      context.logger.info(stripIndents`
+      logger.info(stripIndents`
           To use Tailwindcss, import the modules you need into your app.css (or scss, less, styl or whatever your global file extension is).
 
           Import e.g.:

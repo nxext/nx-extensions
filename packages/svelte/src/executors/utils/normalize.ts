@@ -13,7 +13,7 @@ export function normalizeOptions(
   const project = `${root}/${options.project}`;
   const projectRoot = dirname(project);
   const outputPath = `${root}/${options.outputPath}`;
-
+  
   return {
     ...options,
     assets: options.assets

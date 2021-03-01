@@ -23,7 +23,7 @@ function normalizeOptions(
   const { appsDir } = getWorkspaceLayout(tree);
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
+    ? joinPathFragments(`${names(options.directory).fileName}/${name}`)
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const fileName = projectName;

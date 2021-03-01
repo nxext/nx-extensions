@@ -1,69 +1,42 @@
-import { Tree } from '@angular-devkit/schematics';
-import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import { join } from 'path';
-
 import { Schema } from './schema';
-import { readJsonInTree } from '@nrwl/workspace';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { applicationGenerator } from '@nxext/svelte';
+import { readJson, Tree } from '@nrwl/devkit';
+import { Linter } from '@nrwl/linter';
+import tailwindSvelteGenerator from './generator';
 
 describe('svelte schematic', () => {
-  let appTree: Tree;
+  let tree: Tree;
   const options: Schema = { project: 'test' };
 
-  const testRunner = new SchematicTestRunner(
-    '@nxext/tailwind',
-    join(__dirname, '../../../collection.json')
-  );
-
   beforeEach(async () => {
-    appTree = await createTestApp('test');
-  });
-
-  it('should run successfully', async () => {
-    await expect(testRunner.runSchematicAsync(
-      'svelte',
-      options,
-      appTree
-      ).toPromise()
-    ).resolves.not.toThrowError();
+    tree = await createTestApp('test');
   });
 
   it('should create files', async () => {
-    const result = await testRunner.runSchematicAsync(
-      'svelte',
-      options,
-      appTree
-    ).toPromise();
+    await tailwindSvelteGenerator(tree, options)
 
-    expect(result.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(true);
-    expect(result.exists(`apps/${options.project}/tailwind.config.js`)).toBe(true);
-    expect(result.exists(`apps/${options.project}/update-svelte-preprocess.js`)).toBe(true);
+    expect(tree.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(true);
+    expect(tree.exists(`apps/${options.project}/tailwind.config.js`)).toBe(true);
+    expect(tree.exists(`apps/${options.project}/update-svelte-preprocess.js`)).toBe(true);
   });
 
   it('should add dependencies', async () => {
-    const result = await testRunner.runSchematicAsync(
-      'svelte',
-      options,
-      appTree
-    ).toPromise();
+    await tailwindSvelteGenerator(tree, options)
 
-    const packageJson = readJsonInTree(result, 'package.json');
+    const packageJson = readJson(tree, '/package.json');
     expect(packageJson.devDependencies['tailwindcss']).toBeDefined();
   });
 });
 
-const svelteTestRunner = new SchematicTestRunner(
-  '@nxext/svelte',
-  join(__dirname, '../../../../svelte/collection.json')
-);
+export async function createTestApp(name: string) {
+  const tree = createTreeWithEmptyWorkspace();
+  await applicationGenerator(tree, {
+    name: name,
+    linter: Linter.EsLint,
+    unitTestRunner: 'jest',
+    e2eTestRunner: 'cypress',
+  })
 
-export async function createTestApp(
-  name: string
-): Promise<Tree> {
-  let appTree = createEmptyWorkspace(Tree.empty());
-  appTree = await svelteTestRunner
-    .runSchematicAsync('application', { name: name }, appTree)
-    .toPromise();
-
-  return appTree;
+  return tree;
 }

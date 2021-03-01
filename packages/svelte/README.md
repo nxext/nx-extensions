@@ -1,7 +1,6 @@
 # @nxext/svelte
 
 [![License](https://img.shields.io/npm/l/@nxext/svelte.svg?style=flat-square)]()
-[![NPM Version](https://badge.fury.io/js/%40nxext%2Fsvelte.svg)](https://www.npmjs.com/@nxext/svelte)
 [![nxext windows CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%20windows%20CI/badge.svg)]()
 [![nxext macos CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%20macos%20CI/badge.svg)]()
 
