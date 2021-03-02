@@ -43,7 +43,7 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
       outputPath: joinPathFragments('dist', options.projectRoot),
       entryFile: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
-      assets: [{ glob: '/*', input: './public/**', output: './' }],
+      assets: [{ glob: '/*', input: joinPathFragments(options.projectRoot, 'public/**'), output: './' }],
     },
     configurations: {
       production: {
@@ -74,7 +74,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
         outputPath: joinPathFragments('dist', options.projectRoot),
         entryFile: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
         tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
-        assets: [{ glob: '/*', input: './public/**', output: './' }],
+        assets: [{ glob: '/*', input: joinPathFragments(options.projectRoot, 'public/**'), output: './' }],
         watch: true,
         serve: true,
       },
