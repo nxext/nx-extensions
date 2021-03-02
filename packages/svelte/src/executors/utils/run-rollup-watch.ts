@@ -1,14 +1,14 @@
 import * as rollup from 'rollup';
 import { RollupWatcherEvent } from 'rollup';
 import { Observable } from 'rxjs';
-import { BuilderContext, BuilderOutput } from '@angular-devkit/architect';
+import { BuilderOutput } from '@angular-devkit/architect';
 import { RawSvelteBuildOptions } from '../build/schema';
 import * as url from 'url';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
-import { logger } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 
 export function runRollupWatch(
-  context: BuilderContext,
+  context: ExecutorContext,
   rollupOptions: rollup.RollupOptions,
   svelteBuildOptions: RawSvelteBuildOptions
 ): Observable<BuilderOutput> {

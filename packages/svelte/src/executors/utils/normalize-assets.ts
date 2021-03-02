@@ -1,28 +1,20 @@
-import {
-  basename,
-  dirname,
-  getSystemPath,
-  join,
-  normalize,
-  Path,
-  resolve,
-} from '@angular-devkit/core';
 import { statSync } from 'fs-extra';
+import { normalizePath } from '@nrwl/devkit';
+import { basename, dirname, join, relative, resolve } from 'path';
 
 export interface NormalizedCopyAssetOption {
-  input: Path;
-  output: Path;
+  input: string;
+  output: string;
 }
 
 export function normalizeAssets(
   assets: (string | NormalizedCopyAssetOption)[],
-  projectRoot: Path,
-  sourceRoot: Path,
-  destRoot: Path
+  projectRoot: string,
+  sourceRoot: string
 ): NormalizedCopyAssetOption[] {
   return assets.map((asset) => {
     if (typeof asset === 'string') {
-      const assetPath = normalize(asset);
+      const assetPath = normalizePath(asset);
       const resolvedAssetPath = resolve(projectRoot, assetPath);
       const resolvedSourceRoot = resolve(projectRoot, sourceRoot);
 
@@ -32,17 +24,16 @@ export function normalizeAssets(
         );
       }
 
-      const isDirectory = statSync(
-        getSystemPath(resolvedAssetPath)
-      ).isDirectory();
+      const isDirectory = statSync(resolvedAssetPath).isDirectory();
       const input = isDirectory
-        ? join(resolvedAssetPath, '**/*')
-        : join(dirname(resolvedAssetPath), basename(resolvedAssetPath));
-      const output = join(destRoot, input);
-
+        ? resolvedAssetPath
+        : dirname(resolvedAssetPath);
+      const output = relative(resolvedSourceRoot, resolve(projectRoot, input));
+      const glob = isDirectory ? '**/*' : basename(resolvedAssetPath);
       return {
         input,
         output,
+        glob,
       };
     } else {
       if (asset.output.startsWith('..')) {
@@ -51,14 +42,23 @@ export function normalizeAssets(
         );
       }
 
+      const assetPath = normalizePath(asset.input);
+      const resolvedAssetPath = resolve(projectRoot, assetPath);
       return {
         ...asset,
-        input: resolve(projectRoot, normalize(asset.input)),
+        input: resolvedAssetPath,
         // Now we remove starting slash to make Webpack place it from the output root.
-        output: destRoot,
+        output: asset.output.replace(/^\//, ''),
       };
     }
   });
+}
+
+export interface AssetGlobPattern {
+  glob: string;
+  input: string;
+  output: string;
+  ignore?: string[];
 }
 
 interface RollupCopyAssetOption {
@@ -67,12 +67,14 @@ interface RollupCopyAssetOption {
 }
 
 export function convertCopyAssetsToRollupOptions(
-  assets: NormalizedCopyAssetOption[]
+  outputPath: string,
+  assets: AssetGlobPattern[]
 ): RollupCopyAssetOption[] {
   return assets
     ? assets.map((a) => ({
-        src: getSystemPath(a.input),
-        dest: getSystemPath(a.output),
-      }))
+        src: join(a.input, a.glob).replace(/\\/g, '/'),
+        dest: join(outputPath, a.output).replace(/\\/g, '/'),
+      })
+    )
     : undefined;
 }

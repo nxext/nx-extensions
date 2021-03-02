@@ -1,15 +1,16 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
   "builders": {
     "build": {
-      "implementation": "./src/builders/build/builder",
-      "schema": "./src/builders/build/schema.json",
+      "implementation": "./src/executors/build/compat",
+      "schema": "./src/executors/build/schema.json",
       "description": "build builder"
-    },
-    "serve": {
-      "implementation": "./src/builders/serve/builder",
-      "schema": "./src/builders/serve/schema.json",
-      "description": "serve builder"
+    }
+  },
+  "executors": {
+    "build": {
+      "implementation": "./src/executors/build/builder",
+      "schema": "./src/executors/build/schema.json",
+      "description": "build executor"
     }
   }
 }

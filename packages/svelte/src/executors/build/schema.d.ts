@@ -1,7 +1,6 @@
-import { JsonObject, Path } from '@angular-devkit/core';
 import { NormalizedCopyAssetOption } from '../utils/normalize';
 
-export interface RawSvelteBuildOptions extends JsonObject {
+export interface RawSvelteBuildOptions {
   outputPath: string;
   tsConfig: string;
   entryFile: string;
@@ -16,14 +15,13 @@ export interface RawSvelteBuildOptions extends JsonObject {
   host?: string;
   port?: number;
 
-  rollupConfig?: Path;
-  sveltePreprocessConfig?: Path;
+  rollupConfig?: string;
+  sveltePreprocessConfig?: string;
+  project: string;
 }
 
 export interface SvelteBuildOptions extends RawSvelteBuildOptions {
-  projectName: string;
-  projectRoot: string;
-  workspaceRoot: string;
-  sourceRoot: Path;
   assets: NormalizedCopyAssetOption[];
+  entryRoot: string;
+  projectRoot: string;
 }

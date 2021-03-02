@@ -1,11 +1,11 @@
 import { SvelteBuildOptions } from '../build/schema';
 import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { BuilderContext } from '@angular-devkit/architect';
 import * as rollup from 'rollup';
 import resolve from '@rollup/plugin-node-resolve';
+import * as localResolve from 'rollup-plugin-local-resolve';
 import { toClassName } from '@nrwl/workspace';
-import { convertCopyAssetsToRollupOptions } from './normalize-assets';
 import * as path from 'path';
+import { convertCopyAssetsToRollupOptions } from './normalize-assets';
 
 /* eslint-disable */
 const typescript = require('@rollup/plugin-typescript');
@@ -19,10 +19,11 @@ const css = require('rollup-plugin-css-only');
 const commonjs = require('@rollup/plugin-commonjs');
 /* eslint-enable */
 
+const fileExtensions = ['.js', '.ts', '.svelte'];
+
 export function createRollupOptions(
   options: SvelteBuildOptions,
-  dependencies: DependentBuildableProjectNode[],
-  context: BuilderContext
+  dependencies: DependentBuildableProjectNode[]
 ): rollup.RollupOptions {
   /* eslint-disable */
   const sveltePreprocessConfig = options.sveltePreprocessConfig
@@ -32,11 +33,11 @@ export function createRollupOptions(
 
   let plugins = [
     copy({
-      targets: convertCopyAssetsToRollupOptions(options.assets),
+      targets: convertCopyAssetsToRollupOptions(options.outputPath, options.assets),
     }),
     typescript({
       tsconfig: options.tsConfig,
-      rootDir: options.projectRoot,
+      rootDir: options.entryRoot,
       sourceMap: !options.prod,
       inlineSources: !options.prod,
     }),
@@ -49,9 +50,12 @@ export function createRollupOptions(
     // we'll extract any component CSS out into
     // a separate file - better for performance
     css({ output: 'bundle.css' }),
+    localResolve(),
     resolve({
       browser: true,
       dedupe: ['svelte'],
+      preferBuiltins: true,
+      extensions: fileExtensions,
     }),
     commonjs(),
 
@@ -86,7 +90,7 @@ export function createRollupOptions(
     output: {
       format: 'iife',
       file: path.join(options.outputPath, 'bundle.js'),
-      name: toClassName(context.target.project),
+      name: toClassName(options.project),
     },
     external: (id) => externalPackages.includes(id),
     plugins,

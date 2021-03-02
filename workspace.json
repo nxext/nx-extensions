@@ -144,7 +144,7 @@
               },
               {
                 "input": "./packages/svelte",
-                "glob": "collection.json",
+                "glob": "generators.json",
                 "output": "."
               },
               {
