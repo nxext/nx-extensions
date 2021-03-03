@@ -4,6 +4,7 @@ import { applicationGenerator } from '@nxext/svelte';
 import { readJson, Tree } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import tailwindSvelteGenerator from './generator';
+import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 
 describe('svelte schematic', () => {
   let tree: Tree;
@@ -18,7 +19,7 @@ describe('svelte schematic', () => {
 
     expect(tree.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(true);
     expect(tree.exists(`apps/${options.project}/tailwind.config.js`)).toBe(true);
-    expect(tree.exists(`apps/${options.project}/update-svelte-preprocess.js`)).toBe(true);
+    expect(tree.exists(`apps/${options.project}/update-svelte-preprocess.js`)).toBe(false);
   });
 
   it('should add dependencies', async () => {
@@ -26,6 +27,14 @@ describe('svelte schematic', () => {
 
     const packageJson = readJson(tree, '/package.json');
     expect(packageJson.devDependencies['tailwindcss']).toBeDefined();
+  });
+
+  it('should add import to App.svelte', async () => {
+    await tailwindSvelteGenerator(tree, options)
+
+    expect(tree.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(true);
+
+    expect(tree.read(`apps/${options.project}/src/App.svelte`).toString('utf-8')).toContain(`import './Tailwind.svelte';`);
   });
 });
 

@@ -17,6 +17,7 @@ export interface RawSvelteBuildOptions {
 
   rollupConfig?: string;
   sveltePreprocessConfig?: string;
+  svelteConfig?: string;
   project: string;
 }
 

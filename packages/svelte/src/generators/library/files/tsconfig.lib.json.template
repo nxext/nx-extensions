@@ -2,5 +2,5 @@
   "extends": "./tsconfig.json",
 
   "include": ["src/**/*"],
-  "exclude": ["__sapper__/*", "public/*"],
+  "exclude": ["**/*.spec.ts", "**/*_spec.ts", "public/*"],
 }

@@ -2,19 +2,20 @@ import {
   convertNxGenerator,
   formatFiles,
   generateFiles,
-  GeneratorCallback,
   getWorkspaceLayout,
   joinPathFragments,
   names,
   offsetFromRoot,
-  Tree,
+  Tree
 } from '@nrwl/devkit';
 import { NormalizedSchema, SvelteApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
-import { cypressInitGenerator, cypressProjectGenerator } from '@nrwl/cypress';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
+import { addCypress } from './lib/add-cypress';
+import { addJest } from './lib/add-jest';
+import { updateJestConfig } from './lib/update-jest-config';
 
 function normalizeOptions(
   tree: Tree,
@@ -60,34 +61,22 @@ export async function applicationGenerator(
   tree: Tree,
   schema: SvelteApplicationSchema
 ) {
-  const tasks: GeneratorCallback[] = [];
   const options = normalizeOptions(tree, schema);
-
   const initTask = await initGenerator(tree, { ...options, skipFormat: true });
-  tasks.push(initTask);
 
   addProject(tree, options);
   createFiles(tree, options);
 
-  if (options.e2eTestRunner === 'cypress') {
-    const cypressInitTask = await cypressInitGenerator(tree);
-    tasks.push(cypressInitTask);
-
-    const cypressProjectTask = await cypressProjectGenerator(tree, {
-      name: options.name + '-e2e',
-      project: options.name,
-    });
-    tasks.push(cypressProjectTask);
-  }
-
   const lintTask = await addLinting(tree, options);
-  tasks.push(lintTask);
+  const jestTask = await addJest(tree, options);
+  const cypressTask = await addCypress(tree, options);
+  updateJestConfig(tree, options);
 
   if (!options.skipFormat) {
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(...tasks);
+  return runTasksInSerial(initTask, lintTask, jestTask, cypressTask);
 }
 
 export default applicationGenerator;

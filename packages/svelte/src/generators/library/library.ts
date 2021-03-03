@@ -6,15 +6,16 @@ import {
   convertNxGenerator,
   formatFiles,
   generateFiles,
-  GeneratorCallback,
   getWorkspaceLayout,
   joinPathFragments,
   names,
   offsetFromRoot,
-  Tree,
+  Tree
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
+import { addJest } from './lib/add-jest';
+import { updateJestConfig } from './lib/update-jest-config';
 
 function normalizeOptions(
   tree: Tree,
@@ -60,25 +61,23 @@ export async function libraryGenerator(
   tree: Tree,
   schema: SvelteLibrarySchema
 ) {
-  const tasks: GeneratorCallback[] = [];
   const options = normalizeOptions(tree, schema);
-
   const initTask = await initGenerator(tree, { ...options, skipFormat: true });
-  tasks.push(initTask);
 
   addProject(tree, options);
   createFiles(tree, options);
 
   const lintTask = await addLinting(tree, options);
-  tasks.push(lintTask);
+  const jestTask = await addJest(tree, options);
 
   updateTsConfig(tree, options);
+  updateJestConfig(tree, options);
 
   if (!options.skipFormat) {
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(...tasks);
+  return runTasksInSerial(initTask, lintTask, jestTask);
 }
 
 export default libraryGenerator;

@@ -37,6 +37,15 @@ Type: `string`
 
 Path to a function which takes a rollup config and SvelteBuildOptions object and returns an updated rollup config
 
+### --svelteConfig
+
+Default: `null`
+
+Type: `string`
+
+Path to a svelte.config.js file, which exports a svelte config for the svelte-rollup-plugin.
+
+
 ### --sveltePreprocessConfig
 
 Default: `null`

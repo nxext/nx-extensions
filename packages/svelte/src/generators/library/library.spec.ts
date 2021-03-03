@@ -25,4 +25,13 @@ describe('svelte library schematic', () => {
     expect(packageJson.devDependencies['svelte-preprocess']).toBeDefined();
     expect(packageJson.devDependencies['svelte-jester']).toBeDefined();
   });
+
+  it('should add Svelte project files', async () => {
+    await libraryGenerator(tree, options);
+
+    expect(tree.exists(`libs/${options.name}/svelte.config.js`)).toBe(true);
+    expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBe(true);
+    expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBe(true);
+    expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBe(true);
+  });
 });
