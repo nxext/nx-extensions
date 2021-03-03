@@ -23,15 +23,29 @@ const commonjs = require('@rollup/plugin-commonjs');
 
 const fileExtensions = ['.js', '.ts', '.svelte'];
 
-export function createRollupOptions(
-  options: SvelteBuildOptions,
-  dependencies: DependentBuildableProjectNode[]
-): rollup.RollupOptions {
+function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
   /* eslint-disable */
   const sveltePreprocessConfig = options.sveltePreprocessConfig
     ? require(options.sveltePreprocessConfig)(options)
     : {};
   /* eslint-enable */
+  const compilerOptions = svelteConfig.compilerOptions ? {...svelteConfig.compilerOptions, dev: !!options.prod }: {dev: !!options.prod };
+  const config = { ...svelteConfig, compilerOptions: compilerOptions};
+
+  return svelteConfig ? config : {
+    compilerOptions: {
+      dev: !options.prod
+    },
+    preprocess: sveltePreprocessConfig
+  };
+}
+
+export function createRollupOptions(
+  options: SvelteBuildOptions,
+  dependencies: DependentBuildableProjectNode[],
+  svelteConfig: any | null
+): rollup.RollupOptions {
+  const sveltePluginConfig = getSveltePluginConfig(svelteConfig, options);
 
   let plugins = [
     copy({
@@ -39,16 +53,9 @@ export function createRollupOptions(
     }),
     typescript({
       tsconfig: options.tsConfig,
-      rootDir: options.entryRoot,
-      sourceMap: !options.prod,
-      inlineSources: !options.prod,
+      rootDir: options.entryRoot
     }),
-    svelte({
-      compilerOptions: {
-        dev: !options.prod,
-      },
-      preprocess: sveltePreprocess(sveltePreprocessConfig),
-    }),
+    svelte(sveltePluginConfig),
     // we'll extract any component CSS out into
     // a separate file - better for performance
     css({ output: 'bundle.css' }),

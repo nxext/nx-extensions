@@ -2,24 +2,17 @@ import { NormalizedSchema } from '../schema';
 import { ProjectType } from '@nrwl/workspace';
 import {
   addProjectConfiguration,
-  getWorkspaceLayout,
-  joinPathFragments,
+  getWorkspaceLayout, joinPathFragments,
   NxJsonProjectConfiguration,
   TargetConfiguration,
-  Tree,
+  Tree
 } from '@nrwl/devkit';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const targets: { [key: string]: TargetConfiguration } = {
     lint: createLintTarget(options),
+    check: createSvelteCheckTarget(options)
   };
-
-  if (options.unitTestRunner === 'jest') {
-    targets.test = createTestTarget(options);
-  } else {
-    tree.delete(joinPathFragments(options.projectRoot, 'jest.config.js'));
-    tree.delete(joinPathFragments(options.projectRoot, 'tsconfig.spec.json'));
-  }
 
   if (options.buildable) {
     targets.build = createBuildTarget(tree, options);
@@ -50,6 +43,7 @@ function createBuildTarget(
       outputPath: `dist/${libsDir}/${options.projectDirectory}`,
       entryFile: `${options.projectRoot}/src/index.ts`,
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,
+      svelteConfig: joinPathFragments(options.projectRoot, 'svelte.config.js'),
       assets: [{ glob: '/*', input: './public/**', output: './' }],
     },
     configurations: {
@@ -71,12 +65,12 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   };
 }
 
-function createTestTarget(options: NormalizedSchema): TargetConfiguration {
+function createSvelteCheckTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    executor: '@nrwl/jest:jest',
+    executor: '@nrwl/workspace:run-commands',
     options: {
-      jestConfig: `${options.projectRoot}/jest.config.js`,
-      passWithNoTests: true,
-    },
+      command: 'svelte-check',
+      cwd: options.projectRoot
+    }
   };
 }

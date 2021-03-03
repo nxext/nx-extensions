@@ -30,6 +30,11 @@
       "description": "Path to a function which takes  SvelteBuildOptions object and returns an new sveltePreprocessor options object",
       "defaul": null
     },
+    "svelteConfig": {
+      "type": "string",
+      "description": "Path to a svelte.config.js file",
+      "defaul": null
+    },
     "watch": {
       "type": "boolean",
       "description": "Enable re-building when files change.",

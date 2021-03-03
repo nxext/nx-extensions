@@ -59,6 +59,14 @@ module.exports = {
             'svelte/builder/serve',
           ],
         },
+        {
+          type: 'category',
+          label: 'Config examples',
+          items: [
+            'svelte/examples/svelte-config',
+            'svelte/examples/custom-preprocessor-config'
+          ],
+        },
       ],
     },
     {

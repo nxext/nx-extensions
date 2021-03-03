@@ -54,6 +54,16 @@ describe('svelte e2e', () => {
 
       done();
     });
+
+    it('should be able to run check', async (done) => {
+      const plugin = uniq('svelteappcheck');
+      await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
+
+      const result = await runNxCommandAsync(`check ${plugin}`);
+      expect(result.stdout).toContain('svelte-check found 0 errors, 0 warnings and 0 hints');
+
+      done();
+    });
   });
 
   describe('Svelte lib', () => {
@@ -83,6 +93,16 @@ describe('svelte e2e', () => {
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
       expect(result.stdout).toContain('All files pass linting');
+
+      done();
+    });
+
+    it('should be able to run check', async (done) => {
+      const plugin = uniq('sveltelibcheck');
+      await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin}`);
+
+      const result = await runNxCommandAsync(`check ${plugin}`);
+      expect(result.stdout).toContain('svelte-check found 0 errors, 0 warnings and 0 hints');
 
       done();
     });
