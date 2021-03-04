@@ -29,21 +29,23 @@ function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
     ? require(options.sveltePreprocessConfig)(options)
     : {};
   /* eslint-enable */
-  const compilerOptions = svelteConfig.compilerOptions ? {...svelteConfig.compilerOptions, dev: !!options.prod }: {dev: !!options.prod };
-  const config = { ...svelteConfig, compilerOptions: compilerOptions};
-
-  return svelteConfig ? config : {
-    compilerOptions: {
-      dev: !options.prod
-    },
-    preprocess: sveltePreprocessConfig
-  };
+  if(svelteConfig == null) {
+    return {
+      compilerOptions: {
+        dev: !options.prod
+      },
+      preprocess: sveltePreprocess(sveltePreprocessConfig)
+    };
+  } else {
+    const compilerOptions = svelteConfig.compilerOptions ? {...svelteConfig.compilerOptions, dev: !!options.prod }: {dev: !!options.prod };
+    return  { ...svelteConfig, compilerOptions: compilerOptions};
+  }
 }
 
 export function createRollupOptions(
   options: SvelteBuildOptions,
   dependencies: DependentBuildableProjectNode[],
-  svelteConfig: any | null
+  svelteConfig: string | null
 ): rollup.RollupOptions {
   const sveltePluginConfig = getSveltePluginConfig(svelteConfig, options);
 

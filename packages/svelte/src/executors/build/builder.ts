@@ -39,7 +39,10 @@ export default async function runExecutor(
 
   const options = normalizeOptions({...rawOptions, project: context.projectName}, context.root, sourceRoot);
 
-  const svelteConfig = options.svelteConfig ? await import(options.svelteConfig) : null;
+  let svelteConfig = null;
+  if(options.svelteConfig) {
+    svelteConfig = await import(options.svelteConfig);
+  }
   const initOptions = {...options, dependencies};
   return of(createRollupOptions(initOptions, dependencies, svelteConfig)).pipe(
     switchMap((rollupOptions) => {
