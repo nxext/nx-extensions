@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 
-const pkgs = [
+const stencilpkgs = [
   '@stencil/core',
   '@stencil/sass',
   '@stencil/less',
@@ -13,7 +13,29 @@ const pkgs = [
   '@stencil/svelte-output-target',
 ];
 
-pkgs.forEach((pkg) => {
+console.log('Stencil:');
+stencilpkgs.forEach((pkg) => {
+  checkVersion(pkg);
+});
+
+const sveltepkgs = [
+  'svelte-jester',
+  'svelte',
+  'svelte-check',
+  'svelte-preprocess',
+  '@tsconfig/svelte',
+  '@testing-library/svelte',
+  'rollup-plugin-local-resolve'
+];
+
+console.log('======================================');
+console.log('Svelte:');
+sveltepkgs.forEach((pkg) => {
+  checkVersion(pkg);
+});
+
+
+function checkVersion(pkg) {
   exec(`npm show ${pkg} version`, (error, stdout, sterr) => {
     if (error) {
       console.log(`Error fetching ${pkg}`);
@@ -21,4 +43,4 @@ pkgs.forEach((pkg) => {
     }
     console.log(`${pkg} = ${stdout}`);
   });
-});
+}
