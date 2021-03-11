@@ -17,9 +17,7 @@
       "type": "boolean"
     },
     "dev": {
-      "type": "boolean",
-      "description": "Run build in dev mode.",
-      "default": true
+      "type": "boolean"
     },
     "docs": {
       "type": "boolean"
@@ -44,10 +42,6 @@
     },
     "ssr": {
       "type": "boolean"
-    },
-    "replaceDependenciesWithLocalPath": {
-      "type": "boolean",
-      "default": false
     }
   },
   "required": []
