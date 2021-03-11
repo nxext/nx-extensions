@@ -39,6 +39,15 @@ describe('e2e', () => {
         await runNxCommandAsync(
           `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
         );
+        await runNxCommandAsync(`build ${plugin}`);
+
+        expect(() =>
+          checkFilesExist(
+            `libs/${plugin}-angular/src/index.ts`,
+            `libs/${plugin}-angular/src/lib/${plugin}-angular.module.ts`,
+            `libs/${plugin}-angular/src/generated/directives/proxies.ts`
+          )
+        ).not.toThrow();
 
         expect(() =>
           checkFilesExist(
