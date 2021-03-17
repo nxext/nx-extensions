@@ -1,24 +1,13 @@
-import { eslintPluginSvelteVersion } from './versions';
-import { offsetFromRoot } from '@nrwl/workspace';
-
-export const extraEslintDependencies = {
-  dependencies: {},
-  devDependencies: {
-    'eslint-plugin-svelte3': eslintPluginSvelteVersion,
-  },
-};
-
-export const createSvelteEslintJson = (projectRoot: string) => (`
 module.exports = {
   "parser": "@typescript-eslint/parser",
   "plugins": ["svelte3", "@typescript-eslint"],
-  "extends": ["${offsetFromRoot(projectRoot)}/.eslintrc.json"],
+  "extends": ["<%= offsetFromRoot %>.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.js", "*.svelte"],
       "parserOptions": {
-        "project": ["${projectRoot}/tsconfig.*?.json"]
+        "project": ["<%= projectRoot %>/tsconfig.*?.json"]
       },
       "rules": {}
     },
@@ -38,4 +27,4 @@ module.exports = {
   "settings": {
     'svelte3/typescript': require('typescript')
   }
-}`);
+}

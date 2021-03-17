@@ -1,43 +1,25 @@
 import { Schema } from './schema';
-import {
-  addDependenciesToPackageJson,
-  convertNxGenerator,
-  formatFiles,
-  GeneratorCallback,
-  Tree,
-} from '@nrwl/devkit';
-import { jestInitGenerator } from '@nrwl/jest';
-import { cypressInitGenerator } from '@nrwl/cypress';
+import { convertNxGenerator, formatFiles, GeneratorCallback, Tree } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-
-function updateDependencies(tree: Tree) {
-  return addDependenciesToPackageJson(
-    tree,
-    {},
-    {
-      'svelte-jester': '^1.3.0',
-      svelte: '^3.35.0',
-      'svelte-check': '^1.2.3',
-      'svelte-preprocess': '^4.6.9',
-      '@tsconfig/svelte': '^1.0.10',
-      '@testing-library/svelte': '^3.0.3',
-      'rollup-plugin-local-resolve': '^1.0.7'
-    }
-  );
-}
+import { addJestPlugin } from './lib/add-jest-plugin';
+import { addCypressPlugin } from './lib/add-cypress-plugin';
+import { updateDependencies } from './lib/add-dependencies';
+import { addLinterPlugin } from './lib/add-linter-plugin';
 
 export async function initGenerator(tree: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
 
   if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
-    const jestTask = jestInitGenerator(tree, {});
+    const jestTask = addJestPlugin(tree);
     tasks.push(jestTask);
   }
   if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
-    const cypressTask = cypressInitGenerator(tree);
+    const cypressTask = addCypressPlugin(tree);
     tasks.push(cypressTask);
   }
 
+  const linterTask = addLinterPlugin(tree);
+  tasks.push(linterTask);
   const installTask = updateDependencies(tree);
   tasks.push(installTask);
 

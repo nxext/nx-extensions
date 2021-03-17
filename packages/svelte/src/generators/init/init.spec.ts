@@ -1,10 +1,10 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 describe('init schematic', () => {
-  let tree: Tree;
+  let tree;
   const options: Schema = {
     skipFormat: true,
     unitTestRunner: 'jest',
@@ -13,6 +13,18 @@ describe('init schematic', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    tree.overwrite(
+      'package.json',
+      `
+      {
+        "name": "test-name",
+        "dependencies": {},
+        "devDependencies": {
+          "@nrwl/workspace": "0.0.0"
+        }
+      }
+    `
+    );
   });
 
   it('should add Svelte dependencies', async () => {

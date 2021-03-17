@@ -1,11 +1,11 @@
 import { SvelteLibrarySchema } from './schema';
 import { Linter } from '@nrwl/linter';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '@nxext/svelte';
 
 describe('svelte library schematic', () => {
-  let tree: Tree;
+  let tree;
   const options: SvelteLibrarySchema = {
     name: 'test',
     linter: Linter.EsLint,
@@ -15,6 +15,18 @@ describe('svelte library schematic', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    tree.overwrite(
+      'package.json',
+      `
+      {
+        "name": "test-name",
+        "dependencies": {},
+        "devDependencies": {
+          "@nrwl/workspace": "0.0.0"
+        }
+      }
+    `
+    );
   });
 
   it('should add Svelte dependencies', async () => {
@@ -29,9 +41,11 @@ describe('svelte library schematic', () => {
   it('should add Svelte project files', async () => {
     await libraryGenerator(tree, options);
 
-    expect(tree.exists(`libs/${options.name}/svelte.config.js`)).toBe(true);
-    expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBe(true);
-    expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBe(true);
-    expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBe(true);
+    expect(tree.exists(`libs/${options.name}/svelte.config.js`)).toBeTruthy();
+    expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
+    expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
+    expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
+    expect(tree.exists(`libs/${options.name}/.eslintrc.json`)).toBeFalsy();
+    expect(tree.exists(`libs/${options.name}/.eslintrc.js`)).toBeTruthy();
   });
 });

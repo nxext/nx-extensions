@@ -13,7 +13,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
     build: createBuildTarget(options),
     serve: createServeTarget(options),
     lint: createLintTarget(options),
-    check: createSvelteCheckTarget(options)
+    check: createSvelteCheckTarget(options),
   };
 
   const nxConfig: NxJsonProjectConfiguration = {

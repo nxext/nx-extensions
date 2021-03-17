@@ -1,12 +1,7 @@
-import {
-  addDependenciesToPackageJson,
-  joinPathFragments,
-  Tree,
-  updateJson,
-} from '@nrwl/devkit';
+import { addDependenciesToPackageJson, joinPathFragments, Tree } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 import { lintProjectGenerator } from '@nrwl/linter';
-import { extraEslintDependencies, svelteEslintJson } from '../../utils/lint';
+import { extraEslintDependencies } from '../../utils/lint';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
@@ -16,18 +11,15 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     tsConfigPaths: [
       joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
     ],
-    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,tsx,js,jsx}`],
+    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,svelte,spec.ts}`],
     skipFormat: true,
   });
 
-  updateJson(
-    host,
-    joinPathFragments(options.projectRoot, '.eslintrc.json'),
-    (json) => {
-      json = { ...svelteEslintJson, ...json };
-      return json;
-    }
+  host.rename(
+    joinPathFragments(options.projectRoot, 'eslintrc.js'),
+    joinPathFragments(options.projectRoot, '.eslintrc.js')
   );
+  host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'))
 
   const installTask = await addDependenciesToPackageJson(
     host,
