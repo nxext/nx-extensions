@@ -1,13 +1,12 @@
 import { Schema } from './schema';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { applicationGenerator } from '@nxext/svelte';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import tailwindSvelteGenerator from './generator';
-import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 
 describe('svelte schematic', () => {
-  let tree: Tree;
+  let tree;
   const options: Schema = { project: 'test' };
 
   beforeEach(async () => {
@@ -40,6 +39,18 @@ describe('svelte schematic', () => {
 
 export async function createTestApp(name: string) {
   const tree = createTreeWithEmptyWorkspace();
+  tree.overwrite(
+    'package.json',
+    `
+      {
+        "name": "test-name",
+        "dependencies": {},
+        "devDependencies": {
+          "@nrwl/workspace": "0.0.0"
+        }
+      }
+    `
+  );
   await applicationGenerator(tree, {
     name: name,
     linter: Linter.EsLint,
