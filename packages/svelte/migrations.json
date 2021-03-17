@@ -1,9 +1,15 @@
 {
-  "schematics": {
+  "generators": {
     "update-10-1-0": {
       "version": "10.1.0",
       "description": "update-10-1-0",
       "factory": "./src/migrations/update-10-1-0/update-10-1-0"
+    },
+    "update-11-3-0": {
+      "version": "11.3.0",
+      "description": "update-11-3-0",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-11-3-0/add-dependencies-installed-automatically-now"
     }
   }
 }

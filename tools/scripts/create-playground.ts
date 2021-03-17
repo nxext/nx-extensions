@@ -25,7 +25,7 @@ const localTmpDir = dirname(tmpProjPath());
 execSync(
   `node ${require.resolve(
     '@nrwl/tao'
-  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty`,
+  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty --packageManager=yarn --nxCloud=false`,
   {
     cwd: localTmpDir,
   }
