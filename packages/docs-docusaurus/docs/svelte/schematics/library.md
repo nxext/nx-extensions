@@ -1,6 +1,6 @@
 ---
-id: component
-title: Component
+id: library
+title: Library
 ---
 
 Generates a Svelte library
