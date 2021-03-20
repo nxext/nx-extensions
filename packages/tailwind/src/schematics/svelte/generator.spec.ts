@@ -14,26 +14,36 @@ describe('svelte schematic', () => {
   });
 
   it('should create files', async () => {
-    await tailwindSvelteGenerator(tree, options)
+    await tailwindSvelteGenerator(tree, options);
 
-    expect(tree.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(true);
-    expect(tree.exists(`apps/${options.project}/tailwind.config.js`)).toBe(true);
-    expect(tree.exists(`apps/${options.project}/update-svelte-preprocess.js`)).toBe(false);
+    expect(tree.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(
+      true
+    );
+    expect(tree.exists(`apps/${options.project}/tailwind.config.js`)).toBe(
+      true
+    );
+    expect(
+      tree.exists(`apps/${options.project}/update-svelte-preprocess.js`)
+    ).toBe(false);
   });
 
   it('should add dependencies', async () => {
-    await tailwindSvelteGenerator(tree, options)
+    await tailwindSvelteGenerator(tree, options);
 
     const packageJson = readJson(tree, '/package.json');
     expect(packageJson.devDependencies['tailwindcss']).toBeDefined();
   });
 
   it('should add import to App.svelte', async () => {
-    await tailwindSvelteGenerator(tree, options)
+    await tailwindSvelteGenerator(tree, options);
 
-    expect(tree.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(true);
+    expect(tree.exists(`apps/${options.project}/src/Tailwind.svelte`)).toBe(
+      true
+    );
 
-    expect(tree.read(`apps/${options.project}/src/App.svelte`).toString('utf-8')).toContain(`import './Tailwind.svelte';`);
+    expect(
+      tree.read(`apps/${options.project}/src/App.svelte`).toString('utf-8')
+    ).toContain(`import './Tailwind.svelte';`);
   });
 });
 
@@ -56,7 +66,7 @@ export async function createTestApp(name: string) {
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
-  })
+  });
 
   return tree;
 }

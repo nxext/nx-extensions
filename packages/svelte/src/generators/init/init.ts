@@ -1,5 +1,10 @@
 import { Schema } from './schema';
-import { convertNxGenerator, formatFiles, GeneratorCallback, Tree } from '@nrwl/devkit';
+import {
+  convertNxGenerator,
+  formatFiles,
+  GeneratorCallback,
+  Tree,
+} from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';

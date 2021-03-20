@@ -1,4 +1,8 @@
-import { addDependenciesToPackageJson, joinPathFragments, Tree } from '@nrwl/devkit';
+import {
+  addDependenciesToPackageJson,
+  joinPathFragments,
+  Tree,
+} from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 import { lintProjectGenerator } from '@nrwl/linter';
 import { extraEslintDependencies } from '../../utils/lint';
@@ -9,17 +13,17 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     linter: options.linter,
     project: options.name,
     tsConfigPaths: [
-      joinPathFragments(options.projectRoot, 'tsconfig.lib.json')
+      joinPathFragments(options.projectRoot, 'tsconfig.lib.json'),
     ],
     eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,svelte,spec.ts}`],
-    skipFormat: true
+    skipFormat: true,
   });
 
   host.rename(
     joinPathFragments(options.projectRoot, 'eslintrc.js'),
     joinPathFragments(options.projectRoot, '.eslintrc.js')
   );
-  host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'))
+  host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
 
   const installTask = await addDependenciesToPackageJson(
     host,

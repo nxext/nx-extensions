@@ -30,7 +30,9 @@ describe('stencil tailwindcss schematic', () => {
       .runSchematicAsync('stencil', options, appTree)
       .toPromise();
 
-    expect(result.exists(`apps/${options.project}/tailwind.config.js`)).toBe(true);
+    expect(result.exists(`apps/${options.project}/tailwind.config.js`)).toBe(
+      true
+    );
   });
 
   it('should add dependencies', async () => {

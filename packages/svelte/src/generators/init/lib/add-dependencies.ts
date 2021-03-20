@@ -11,7 +11,7 @@ export function updateDependencies(tree: Tree) {
       'svelte-preprocess': '^4.6.9',
       '@tsconfig/svelte': '^1.0.10',
       '@testing-library/svelte': '^3.0.3',
-      'rollup-plugin-local-resolve': '^1.0.7'
+      'rollup-plugin-local-resolve': '^1.0.7',
     }
   );
 }

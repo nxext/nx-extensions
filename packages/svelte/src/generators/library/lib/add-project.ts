@@ -2,16 +2,17 @@ import { NormalizedSchema } from '../schema';
 import { ProjectType } from '@nrwl/workspace';
 import {
   addProjectConfiguration,
-  getWorkspaceLayout, joinPathFragments,
+  getWorkspaceLayout,
+  joinPathFragments,
   NxJsonProjectConfiguration,
   TargetConfiguration,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const targets: { [key: string]: TargetConfiguration } = {
     lint: createLintTarget(options),
-    check: createSvelteCheckTarget(options)
+    check: createSvelteCheckTarget(options),
   };
 
   if (options.buildable) {
@@ -65,12 +66,14 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   };
 }
 
-function createSvelteCheckTarget(options: NormalizedSchema): TargetConfiguration {
+function createSvelteCheckTarget(
+  options: NormalizedSchema
+): TargetConfiguration {
   return {
     executor: '@nrwl/workspace:run-commands',
     options: {
       command: 'svelte-check',
-      cwd: options.projectRoot
-    }
+      cwd: options.projectRoot,
+    },
   };
 }

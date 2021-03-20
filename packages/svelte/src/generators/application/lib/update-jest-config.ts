@@ -14,11 +14,10 @@ export function updateJestConfig(host: Tree, options: NormalizedSchema) {
 }
 
 function updateJestConfigContent(content: string, svelteConfigPath: string) {
-  return  content.replace(
-    'moduleFileExtensions: [',
-    "moduleFileExtensions: ['svelte', "
-  ).replace(
-    'transform: {',
-    `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      'preprocess': '${svelteConfigPath}/svelte.config.js'\n    }\n    ],`
-  );
+  return content
+    .replace('moduleFileExtensions: [', "moduleFileExtensions: ['svelte', ")
+    .replace(
+      'transform: {',
+      `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      'preprocess': '${svelteConfigPath}/svelte.config.js'\n    }\n    ],`
+    );
 }

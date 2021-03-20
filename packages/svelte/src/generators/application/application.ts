@@ -6,7 +6,7 @@ import {
   joinPathFragments,
   names,
   offsetFromRoot,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { NormalizedSchema, SvelteApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';

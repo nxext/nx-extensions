@@ -45,7 +45,6 @@ Type: `string`
 
 Path to a svelte.config.js file, which exports a svelte config for the svelte-rollup-plugin.
 
-
 ### --sveltePreprocessConfig
 
 Default: `null`

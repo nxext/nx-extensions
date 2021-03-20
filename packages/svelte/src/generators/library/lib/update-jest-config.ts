@@ -13,11 +13,10 @@ export function updateJestConfig(host: Tree, options: NormalizedSchema) {
 }
 
 function updateJestConfigContent(content: string) {
-  return  content.replace(
-    'moduleFileExtensions: [',
-    "moduleFileExtensions: ['svelte', "
-  ).replace(
-    'transform: {',
-    "transform: {\n    '^(.+\\\\.svelte$)': 'svelte-jester',"
-  );
+  return content
+    .replace('moduleFileExtensions: [', "moduleFileExtensions: ['svelte', ")
+    .replace(
+      'transform: {',
+      "transform: {\n    '^(.+\\\\.svelte$)': 'svelte-jester',"
+    );
 }

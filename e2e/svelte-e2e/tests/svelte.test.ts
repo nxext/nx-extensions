@@ -60,7 +60,9 @@ describe('svelte e2e', () => {
       await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
 
       const result = await runNxCommandAsync(`check ${plugin}`);
-      expect(result.stdout).toContain('svelte-check found 0 errors, 0 warnings and 0 hints');
+      expect(result.stdout).toContain(
+        'svelte-check found 0 errors, 0 warnings and 0 hints'
+      );
 
       done();
     });
@@ -102,7 +104,9 @@ describe('svelte e2e', () => {
       await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin}`);
 
       const result = await runNxCommandAsync(`check ${plugin}`);
-      expect(result.stdout).toContain('svelte-check found 0 errors, 0 warnings and 0 hints');
+      expect(result.stdout).toContain(
+        'svelte-check found 0 errors, 0 warnings and 0 hints'
+      );
 
       done();
     });

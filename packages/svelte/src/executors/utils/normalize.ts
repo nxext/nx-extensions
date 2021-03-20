@@ -19,13 +19,16 @@ export function normalizeOptions(
       ? normalizeAssets(options.assets, root, sourceRoot)
       : undefined,
     rollupConfig: normalizePluginPath(options.rollupConfig, root),
-    sveltePreprocessConfig: normalizePluginPath(options.sveltePreprocessConfig, root),
+    sveltePreprocessConfig: normalizePluginPath(
+      options.sveltePreprocessConfig,
+      root
+    ),
     svelteConfig: normalizePluginPath(options.svelteConfig, root),
     entryFile,
     entryRoot,
     project,
     projectRoot,
-    outputPath
+    outputPath,
   };
 }
 

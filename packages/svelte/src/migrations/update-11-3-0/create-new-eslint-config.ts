@@ -8,14 +8,16 @@ export default async function update(host: Tree) {
   projects.forEach((project) => {
     const eslintConfigPath = join(project.root, '.eslintrc.json');
 
-    if(!host.exists(eslintConfigPath)) {
+    if (!host.exists(eslintConfigPath)) {
       return;
     }
 
-    const isSvelteProject = project.targets?.build?.executor === '@nxext/svelte:build' ||
-      (project.targets?.check?.executor === '@nrwl/workspace:run-commands' && project.targets?.check?.options?.command === 'svelte-check');
+    const isSvelteProject =
+      project.targets?.build?.executor === '@nxext/svelte:build' ||
+      (project.targets?.check?.executor === '@nrwl/workspace:run-commands' &&
+        project.targets?.check?.options?.command === 'svelte-check');
 
-    if(isSvelteProject) {
+    if (isSvelteProject) {
       host.delete(eslintConfigPath);
 
       host.write(
@@ -49,7 +51,8 @@ export default async function update(host: Tree) {
             "settings": {
               'svelte3/typescript': require('typescript')
             }
-          }`);
+          }`
+      );
     }
   });
   await formatFiles(host);
