@@ -4,14 +4,7 @@
 [![nxext windows CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%20windows%20CI/badge.svg)]()
 [![nxext macos CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%20macos%20CI/badge.svg)]()
 
-## Table of Contents
-
-- [Usage](#usage)
-- [Project schematics](#project-schematics)
-- [Build](#build)
-- [Serve](#serve)
-
-## Usage
+## Getting Started
 
 Add this plugin to an Nx workspace:
 
@@ -25,54 +18,24 @@ or
 npm install @nxext/svelte --save-dev
 ```
 
-## Project schematics
-
 Generate your project:
 
 ```
 nx g @nxext/svelte:app my-app
 ```
 
-You can generate components with:
+Or a library with:
 
 ```
-nx g @nxext/svelte:component my-comp
+nx g @nxext/svelte:library my-lib
 ```
 
-or
+#Use your project
 
-```
-nx g @nxext/svelte:c my-comp
-```
+* Run ``nx build my-app`` to build the app
+* Run ``nx test my-app`` to test the app
+* Run ``nx e2e my-app`` to run the e2e tests
 
-## Build
+#Documentation
 
-Build your project:
-
-```
-nx build my-app
-```
-
-Supported flags are:
-
-| Parameter | Type | Default | Description            |
-| --------- | ---- | ------- | ---------------------- |
-| --dev     | bool | false   | Is dev build           |
-| --watch   | bool | false   | Start watchmode        |
-| --serve   | bool | false   | Serve on dev webserver |
-| --open    | bool | false   | Open in browser        |
-
-## Serve
-
-Serve with:
-
-```
-nx serve my-app
-```
-
-Supported flags are:
-
-| Parameter | Type    | Default | Description  |
-| --------- | ------- | ------- | ------------ |
-| --dev     | bool    | false   | Is dev build |
-| --open    | boolean | false   |              |
+The full docs are found [here](https://nxext.dev/docs/svelte/overview)
