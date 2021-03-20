@@ -5,8 +5,8 @@ import {
   writeJsonFile,
   fileExists,
 } from '@nrwl/workspace/src/utilities/fileutils';
-import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { ConfigAndPathCollection } from './types';
+import { joinPathFragments } from '@nrwl/devkit';
 
 export function prepareE2eTesting() {
   return function (
@@ -57,7 +57,7 @@ export function prepareE2eTesting() {
           };
 
           writeJsonFile(
-            getSystemPath(join(values.projectRoot, `package.e2e.json`)),
+            joinPathFragments(values.projectRoot, `package.e2e.json`),
             libPackageJson
           );
         }
@@ -73,18 +73,14 @@ export function cleanupE2eTesting() {
     return source.pipe(
       tap((values: ConfigAndPathCollection) => {
         if (values.config.flags.e2e) {
-          const pkgJsonPath = getSystemPath(
-            join(values.projectRoot, `package.e2e.json`)
-          );
+          const pkgJsonPath = joinPathFragments(values.projectRoot, `package.e2e.json`);
           if (fileExists(pkgJsonPath)) {
             deleteFile(pkgJsonPath);
           }
         }
       }),
       map((values: ConfigAndPathCollection) => {
-        values.config.packageJsonFilePath = getSystemPath(
-          normalize(join(values.projectRoot, `package.e2e.json`))
-        );
+        values.config.packageJsonFilePath = joinPathFragments(values.projectRoot, `package.e2e.json`);
 
         return values;
       })

@@ -9,8 +9,8 @@ import { StencilTestOptions } from '../test/schema';
 import { BuilderContext } from '@angular-devkit/architect';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
-import { getSystemPath, join, normalize, Path } from '@angular-devkit/core';
 import { ConfigAndPathCollection, CoreCompiler } from './types';
+import { joinPathFragments } from '@nrwl/devkit';
 
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
   await sys.dynamicImport(sys.getCompilerExecutingPath());
@@ -50,25 +50,24 @@ export async function initializeStencilConfig(
     config: {
       flags,
     },
-    configPath: getSystemPath(
-      join(normalize(context.workspaceRoot), configFilePath)
-    ),
+    configPath: joinPathFragments(`${context.workspaceRoot}/${configFilePath}`),
     logger,
     sys,
   });
+  logger.info(joinPathFragments(`${context.workspaceRoot}/${configFilePath}`));
   const coreCompiler = await loadCoreCompiler(sys);
 
   const { workspaceRoot } = context;
   const projectName: string = context.target.project;
-  const distDir: Path = normalize(`${workspaceRoot}/${options.outputPath}`);
-  const projectRoot: Path = normalize(`${workspaceRoot}/${metadata.root}`);
+  const distDir = joinPathFragments(`${workspaceRoot}/${options.outputPath}`);
+  const projectRoot = joinPathFragments(`${workspaceRoot}/${metadata.root}`);
 
   return {
     projectName: projectName,
     config: loadConfigResults.config,
-    projectRoot: getSystemPath(projectRoot),
-    distDir: getSystemPath(distDir),
-    pkgJson: getSystemPath(join(projectRoot, `package.json`)),
+    projectRoot: projectRoot,
+    distDir: distDir,
+    pkgJson: joinPathFragments(projectRoot, `package.json`),
     coreCompiler: coreCompiler,
   } as ConfigAndPathCollection;
 }
