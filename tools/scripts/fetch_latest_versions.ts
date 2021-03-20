@@ -25,7 +25,7 @@ const sveltepkgs = [
   'svelte-preprocess',
   '@tsconfig/svelte',
   '@testing-library/svelte',
-  'rollup-plugin-local-resolve'
+  'rollup-plugin-local-resolve',
 ];
 
 console.log('======================================');
@@ -33,7 +33,6 @@ console.log('Svelte:');
 sveltepkgs.forEach((pkg) => {
   checkVersion(pkg);
 });
-
 
 function checkVersion(pkg) {
   exec(`npm show ${pkg} version`, (error, stdout, sterr) => {

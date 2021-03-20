@@ -6,10 +6,14 @@ import { eslintPluginSvelteVersion } from '../../generators/utils/versions';
 export default function update(host: Tree) {
   const nxVersion = readNxVersion(host);
 
-  addDependenciesToPackageJson(host, {}, {
-    '@nrwl/cypress': nxVersion,
-    '@nrwl/linter': nxVersion,
-    '@nrwl/jest': nxVersion,
-    'eslint-plugin-svelte3': eslintPluginSvelteVersion,
-  });
+  addDependenciesToPackageJson(
+    host,
+    {},
+    {
+      '@nrwl/cypress': nxVersion,
+      '@nrwl/linter': nxVersion,
+      '@nrwl/jest': nxVersion,
+      'eslint-plugin-svelte3': eslintPluginSvelteVersion,
+    }
+  );
 }

@@ -22,7 +22,9 @@ describe('create-new-eslint-config', () => {
     );
     tree.delete('.eslintrc.js');
     const config = readProjectConfiguration(tree, 'testproject');
-    tree.write(`${config.root}/.eslintrc.json`, `
+    tree.write(
+      `${config.root}/.eslintrc.json`,
+      `
 {
   "root": true,
   "ignorePatterns": ["**/*"],
@@ -57,84 +59,79 @@ describe('create-new-eslint-config', () => {
       "rules": {}
     }
   ]
-}`);
+}`
+    );
     const workspaceJson = readJson(tree, 'workspace.json');
     workspaceJson.projects = {
       ...workspaceJson.projects,
-      "testproject": {
-        "root": "apps/testproject",
-        "sourceRoot": "apps/testproject/src",
-        "projectType": "application",
-        "targets": {
-          "build": {
-            "executor": "@nxext/svelte:build",
-            "outputs": [
-              "{options.outputPath}"
-            ],
-            "options": {
-              "outputPath": "dist/apps/testproject",
-              "entryFile": "apps/testproject/src/main.ts",
-              "tsConfig": "apps/testproject/tsconfig.app.json",
-              "svelteConfig": "apps/testproject/svelte.config.js",
-              "assets": [
+      testproject: {
+        root: 'apps/testproject',
+        sourceRoot: 'apps/testproject/src',
+        projectType: 'application',
+        targets: {
+          build: {
+            executor: '@nxext/svelte:build',
+            outputs: ['{options.outputPath}'],
+            options: {
+              outputPath: 'dist/apps/testproject',
+              entryFile: 'apps/testproject/src/main.ts',
+              tsConfig: 'apps/testproject/tsconfig.app.json',
+              svelteConfig: 'apps/testproject/svelte.config.js',
+              assets: [
                 {
-                  "glob": "/*",
-                  "input": "apps/testproject/public/**",
-                  "output": "./"
-                }
-              ]
-            },
-            "configurations": {
-              "production": {
-                "dev": false
-              }
-            }
-          },
-          "serve": {
-            "executor": "@nxext/svelte:build",
-            "options": {
-              "outputPath": "dist/apps/testproject",
-              "entryFile": "apps/testproject/src/main.ts",
-              "tsConfig": "apps/testproject/tsconfig.app.json",
-              "svelteConfig": "apps/testproject/svelte.config.js",
-              "assets": [
-                {
-                  "glob": "/*",
-                  "input": "apps/testproject/public/**",
-                  "output": "./"
-                }
+                  glob: '/*',
+                  input: 'apps/testproject/public/**',
+                  output: './',
+                },
               ],
-              "watch": true,
-              "serve": true
-            }
+            },
+            configurations: {
+              production: {
+                dev: false,
+              },
+            },
           },
-          "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-              "lintFilePatterns": [
-                "apps/testproject/**/*.{ts,tsx,js,jsx}"
-              ]
-            }
+          serve: {
+            executor: '@nxext/svelte:build',
+            options: {
+              outputPath: 'dist/apps/testproject',
+              entryFile: 'apps/testproject/src/main.ts',
+              tsConfig: 'apps/testproject/tsconfig.app.json',
+              svelteConfig: 'apps/testproject/svelte.config.js',
+              assets: [
+                {
+                  glob: '/*',
+                  input: 'apps/testproject/public/**',
+                  output: './',
+                },
+              ],
+              watch: true,
+              serve: true,
+            },
           },
-          "check": {
-            "executor": "@nrwl/workspace:run-commands",
-            "options": {
-              "command": "svelte-check",
-              "cwd": "apps/testproject"
-            }
+          lint: {
+            executor: '@nrwl/linter:eslint',
+            options: {
+              lintFilePatterns: ['apps/testproject/**/*.{ts,tsx,js,jsx}'],
+            },
           },
-          "test": {
-            "executor": "@nrwl/jest:jest",
-            "outputs": [
-              "coverage/apps/testproject"
-            ],
-            "options": {
-              "jestConfig": "apps/testproject/jest.config.js",
-              "passWithNoTests": true
-            }
-          }
-        }
-      }
+          check: {
+            executor: '@nrwl/workspace:run-commands',
+            options: {
+              command: 'svelte-check',
+              cwd: 'apps/testproject',
+            },
+          },
+          test: {
+            executor: '@nrwl/jest:jest',
+            outputs: ['coverage/apps/testproject'],
+            options: {
+              jestConfig: 'apps/testproject/jest.config.js',
+              passWithNoTests: true,
+            },
+          },
+        },
+      },
     };
     tree.overwrite('workspace.json', workspaceJson);
   });

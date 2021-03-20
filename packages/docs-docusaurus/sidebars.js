@@ -64,7 +64,7 @@ module.exports = {
           label: 'Config examples',
           items: [
             'svelte/examples/svelte-config',
-            'svelte/examples/custom-preprocessor-config'
+            'svelte/examples/custom-preprocessor-config',
           ],
         },
       ],

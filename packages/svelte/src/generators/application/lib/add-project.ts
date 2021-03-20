@@ -5,7 +5,7 @@ import {
   joinPathFragments,
   NxJsonProjectConfiguration,
   TargetConfiguration,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
@@ -17,7 +17,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
   };
 
   const nxConfig: NxJsonProjectConfiguration = {
-    tags: options.parsedTags
+    tags: options.parsedTags,
   };
 
   addProjectConfiguration(tree, options.name, {
@@ -25,7 +25,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
     sourceRoot: `${options.projectRoot}/src`,
     projectType: ProjectType.Application,
     ...nxConfig,
-    targets
+    targets,
   });
 }
 
@@ -38,23 +38,31 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
       entryFile: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
       svelteConfig: joinPathFragments(options.projectRoot, 'svelte.config.js'),
-      assets: [{ glob: '/*', input: joinPathFragments(options.projectRoot, 'public/**'), output: './' }]
+      assets: [
+        {
+          glob: '/*',
+          input: joinPathFragments(options.projectRoot, 'public/**'),
+          output: './',
+        },
+      ],
     },
     configurations: {
       production: {
-        dev: false
-      }
-    }
+        dev: false,
+      },
+    },
   };
 }
 
-function createSvelteCheckTarget(options: NormalizedSchema): TargetConfiguration {
+function createSvelteCheckTarget(
+  options: NormalizedSchema
+): TargetConfiguration {
   return {
     executor: '@nrwl/workspace:run-commands',
     options: {
       command: 'svelte-check',
-      cwd: options.projectRoot
-    }
+      cwd: options.projectRoot,
+    },
   };
 }
 
@@ -68,7 +76,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
   if (options.host !== 'localhost') {
     serverOptions = {
       ...serverOptions,
-      ...{ host: options.host }
+      ...{ host: options.host },
     };
   }
 
@@ -79,13 +87,22 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
         outputPath: joinPathFragments('dist', options.projectRoot),
         entryFile: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
         tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
-        svelteConfig: joinPathFragments(options.projectRoot, 'svelte.config.js'),
-        assets: [{ glob: '/*', input: joinPathFragments(options.projectRoot, 'public/**'), output: './' }],
+        svelteConfig: joinPathFragments(
+          options.projectRoot,
+          'svelte.config.js'
+        ),
+        assets: [
+          {
+            glob: '/*',
+            input: joinPathFragments(options.projectRoot, 'public/**'),
+            output: './',
+          },
+        ],
         watch: true,
-        serve: true
+        serve: true,
       },
-      ...serverOptions
-    }
+      ...serverOptions,
+    },
   };
 }
 
@@ -97,9 +114,9 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
       exclude: [
         '**/node_modules/**',
-        `!${joinPathFragments(options.projectRoot, '**/*')}`
-      ]
-    }
+        `!${joinPathFragments(options.projectRoot, '**/*')}`,
+      ],
+    },
   };
 }
 
@@ -108,7 +125,7 @@ function createTestTarget(options: NormalizedSchema): TargetConfiguration {
     executor: '@nrwl/jest:jest',
     options: {
       jestConfig: joinPathFragments(options.projectRoot, 'jest.config.js'),
-      passWithNoTests: true
-    }
+      passWithNoTests: true,
+    },
   };
 }

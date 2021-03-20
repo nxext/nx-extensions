@@ -10,7 +10,7 @@ import {
   joinPathFragments,
   names,
   offsetFromRoot,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';

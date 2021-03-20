@@ -17,6 +17,8 @@ export function readNxVersion(tree: Tree): string {
 export function hasNxPackage(tree: Tree, nxPackage: string): boolean {
   const packageJson = readJson(tree, 'package.json');
 
-  return packageJson.dependencies && packageJson.dependencies[nxPackage] ||
-    packageJson.devDependencies && packageJson.devDependencies[nxPackage];
+  return (
+    (packageJson.dependencies && packageJson.dependencies[nxPackage]) ||
+    (packageJson.devDependencies && packageJson.devDependencies[nxPackage])
+  );
 }

@@ -29,16 +29,18 @@ function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
     ? require(options.sveltePreprocessConfig)(options)
     : {};
   /* eslint-enable */
-  if(svelteConfig == null) {
+  if (svelteConfig == null) {
     return {
       compilerOptions: {
-        dev: !options.prod
+        dev: !options.prod,
       },
-      preprocess: sveltePreprocess(sveltePreprocessConfig)
+      preprocess: sveltePreprocess(sveltePreprocessConfig),
     };
   } else {
-    const compilerOptions = svelteConfig.compilerOptions ? {...svelteConfig.compilerOptions, dev: !!options.prod }: {dev: !!options.prod };
-    return  { ...svelteConfig, compilerOptions: compilerOptions};
+    const compilerOptions = svelteConfig.compilerOptions
+      ? { ...svelteConfig.compilerOptions, dev: !!options.prod }
+      : { dev: !!options.prod };
+    return { ...svelteConfig, compilerOptions: compilerOptions };
   }
 }
 
@@ -51,11 +53,14 @@ export function createRollupOptions(
 
   let plugins = [
     copy({
-      targets: convertCopyAssetsToRollupOptions(options.outputPath, options.assets),
+      targets: convertCopyAssetsToRollupOptions(
+        options.outputPath,
+        options.assets
+      ),
     }),
     typescript({
       tsconfig: options.tsConfig,
-      rootDir: options.entryRoot
+      rootDir: options.entryRoot,
     }),
     svelte(sveltePluginConfig),
     // we'll extract any component CSS out into

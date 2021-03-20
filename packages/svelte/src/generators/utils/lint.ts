@@ -8,7 +8,7 @@ export const extraEslintDependencies = {
   },
 };
 
-export const createSvelteEslintJson = (projectRoot: string) => (`
+export const createSvelteEslintJson = (projectRoot: string) => `
 module.exports = {
   "parser": "@typescript-eslint/parser",
   "plugins": ["svelte3", "@typescript-eslint"],
@@ -38,4 +38,4 @@ module.exports = {
   "settings": {
     'svelte3/typescript': require('typescript')
   }
-}`);
+}`;

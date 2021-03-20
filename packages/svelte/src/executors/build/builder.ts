@@ -4,7 +4,7 @@ import { RawSvelteBuildOptions } from './schema';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import {
   calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt
+  checkDependentProjectsHaveBeenBuilt,
 } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
 import { runRollup } from '../utils/run-rollup';
 import { runRollupWatch } from '../utils/run-rollup-watch';
@@ -37,36 +37,42 @@ export default async function runExecutor(
     throw new Error();
   }
 
-  const options = normalizeOptions({...rawOptions, project: context.projectName}, context.root, sourceRoot);
+  const options = normalizeOptions(
+    { ...rawOptions, project: context.projectName },
+    context.root,
+    sourceRoot
+  );
 
   let svelteConfig = null;
-  if(options.svelteConfig) {
+  if (options.svelteConfig) {
     svelteConfig = await import(options.svelteConfig);
   }
-  const initOptions = {...options, dependencies};
-  return of(createRollupOptions(initOptions, dependencies, svelteConfig)).pipe(
-    switchMap((rollupOptions) => {
-      if (options.watch) {
-        return runRollupWatch(context, rollupOptions, options);
-      } else {
-        return of(rollupOptions).pipe(
-          concatMap((options) =>
-            runRollup(options).pipe(
-              catchError((e) => {
-                logger.error(`Error during bundle: ${e}`);
-                return of({ success: false });
-              }),
-              tap((result) => {
-                if (result.success) {
-                  logger.info('Bundle complete.');
-                } else {
-                  logger.error('Bundle failed.');
-                }
-              })
+  const initOptions = { ...options, dependencies };
+  return of(createRollupOptions(initOptions, dependencies, svelteConfig))
+    .pipe(
+      switchMap((rollupOptions) => {
+        if (options.watch) {
+          return runRollupWatch(context, rollupOptions, options);
+        } else {
+          return of(rollupOptions).pipe(
+            concatMap((options) =>
+              runRollup(options).pipe(
+                catchError((e) => {
+                  logger.error(`Error during bundle: ${e}`);
+                  return of({ success: false });
+                }),
+                tap((result) => {
+                  if (result.success) {
+                    logger.info('Bundle complete.');
+                  } else {
+                    logger.error('Bundle failed.');
+                  }
+                })
+              )
             )
-          )
-        );
-      }
-    })
-  ).toPromise();
+          );
+        }
+      })
+    )
+    .toPromise();
 }

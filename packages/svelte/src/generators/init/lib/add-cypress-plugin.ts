@@ -1,4 +1,8 @@
-import { GeneratorCallback, Tree, addDependenciesToPackageJson } from '@nrwl/devkit';
+import {
+  GeneratorCallback,
+  Tree,
+  addDependenciesToPackageJson,
+} from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from './util';
 import { cypressInitGenerator } from '@nrwl/cypress';
