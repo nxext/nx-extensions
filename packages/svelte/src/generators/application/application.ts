@@ -55,6 +55,13 @@ function createFiles(host: Tree, options: NormalizedSchema) {
       offsetFromRoot: offsetFromRoot(options.projectRoot),
     }
   );
+
+  if (options?.bundler === 'vite') {
+    host.delete(joinPathFragments(`${options.projectRoot}/public/index.html`));
+  } else {
+    host.delete(joinPathFragments(options.projectRoot,'index.html'));
+    host.delete(joinPathFragments(options.projectRoot,'vite.config.js'));
+  }
 }
 
 export async function applicationGenerator(

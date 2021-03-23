@@ -6,8 +6,6 @@ import * as localResolve from 'rollup-plugin-local-resolve';
 import { toClassName } from '@nrwl/workspace';
 import * as path from 'path';
 import { convertCopyAssetsToRollupOptions } from './normalize-assets';
-import { logger } from '@nrwl/devkit';
-import { inspect } from 'util';
 
 /* eslint-disable */
 const typescript = require('@rollup/plugin-typescript');

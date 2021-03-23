@@ -37,7 +37,7 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
       outputPath: joinPathFragments('dist', options.projectRoot),
       entryFile: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
-      svelteConfig: joinPathFragments(options.projectRoot, 'svelte.config.js'),
+      svelteConfig: joinPathFragments(options.projectRoot, 'svelte.config.cjs'),
       assets: [
         {
           glob: '/*',
@@ -89,7 +89,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
         tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
         svelteConfig: joinPathFragments(
           options.projectRoot,
-          'svelte.config.js'
+          'svelte.config.cjs'
         ),
         assets: [
           {

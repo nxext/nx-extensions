@@ -19,6 +19,7 @@ module.exports = {
     { name: 'nxext', description: 'Whole repo' },
     { name: 'stencil', description: 'Stencil specific' },
     { name: 'svelte', description: 'Svelte specific' },
+    { name: 'sveltekit', description: 'Sveltekit specific' },
     { name: 'tailwind', description: 'Tailwindcss specific' },
   ],
 

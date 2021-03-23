@@ -51,6 +51,12 @@
       "description": "Host to listen on.",
       "default": "localhost"
     },
+    "bundler": {
+      "description": "The bundler to use.",
+      "type": "string",
+      "enum": ["rollup", "vite"],
+      "default": "rollup"
+    },
     "skipFormat": {
       "description": "Skip formatting files.",
       "type": "boolean",

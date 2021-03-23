@@ -1,0 +1,7 @@
+{
+  "name": "@nxext/sveltekit",
+  "version": "11.0.0-next.01",
+  "main": "src/index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json"
+}

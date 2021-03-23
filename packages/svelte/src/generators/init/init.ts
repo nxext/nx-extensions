@@ -11,25 +11,25 @@ import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
 import { addLinterPlugin } from './lib/add-linter-plugin';
 
-export async function initGenerator(tree: Tree, schema: Schema) {
+export async function initGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
 
   if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
-    const jestTask = addJestPlugin(tree);
+    const jestTask = addJestPlugin(host);
     tasks.push(jestTask);
   }
   if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
-    const cypressTask = addCypressPlugin(tree);
+    const cypressTask = addCypressPlugin(host);
     tasks.push(cypressTask);
   }
 
-  const linterTask = addLinterPlugin(tree);
+  const linterTask = addLinterPlugin(host);
   tasks.push(linterTask);
-  const installTask = updateDependencies(tree);
+  const installTask = updateDependencies(host, schema);
   tasks.push(installTask);
 
   if (!schema.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
   return runTasksInSerial(...tasks);
 }
