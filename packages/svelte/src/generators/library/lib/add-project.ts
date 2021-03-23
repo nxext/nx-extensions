@@ -44,7 +44,7 @@ function createBuildTarget(
       outputPath: `dist/${libsDir}/${options.projectDirectory}`,
       entryFile: `${options.projectRoot}/src/index.ts`,
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,
-      svelteConfig: joinPathFragments(options.projectRoot, 'svelte.config.js'),
+      svelteConfig: joinPathFragments(options.projectRoot, 'svelte.config.cjs'),
       assets: [{ glob: '/*', input: './public/**', output: './' }],
     },
     configurations: {

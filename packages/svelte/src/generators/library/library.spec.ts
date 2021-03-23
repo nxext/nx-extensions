@@ -41,7 +41,7 @@ describe('svelte library schematic', () => {
   it('should add Svelte project files', async () => {
     await libraryGenerator(tree, options);
 
-    expect(tree.exists(`libs/${options.name}/svelte.config.js`)).toBeTruthy();
+    expect(tree.exists(`libs/${options.name}/svelte.config.cjs`)).toBeTruthy();
     expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
     expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
     expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();

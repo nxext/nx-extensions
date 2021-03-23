@@ -1,45 +1,25 @@
 {
   "npmScope": "nxext",
-  "workspaceLayout": {
-    "appsDir": "e2e",
-    "libsDir": "packages"
-  },
+  "workspaceLayout": { "appsDir": "e2e", "libsDir": "packages" },
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tslint.json": "*",
     "nx.json": "*",
     "tsconfig.base.json": "*",
     ".eslintrc.json": "*"
   },
   "projects": {
-    "stencil": {
-      "tags": []
-    },
-    "stencil-e2e": {
-      "tags": [],
-      "implicitDependencies": ["stencil"]
-    },
-    "svelte": {
-      "tags": []
-    },
-    "svelte-e2e": {
-      "tags": [],
-      "implicitDependencies": ["svelte"]
-    },
-    "tailwind": {
-      "tags": []
-    },
-    "tailwind-e2e": {
-      "tags": [],
-      "implicitDependencies": ["tailwind"]
-    },
-    "docs-docusaurus": {
-      "tags": []
-    }
+    "stencil": { "tags": [] },
+    "stencil-e2e": { "tags": [], "implicitDependencies": ["stencil"] },
+    "svelte": { "tags": [] },
+    "svelte-e2e": { "tags": [], "implicitDependencies": ["svelte", "vite"] },
+    "tailwind": { "tags": [] },
+    "tailwind-e2e": { "tags": [], "implicitDependencies": ["tailwind"] },
+    "docs-docusaurus": { "tags": [] },
+    "sveltekit": { "tags": [] },
+    "sveltekit-e2e": { "tags": [], "implicitDependencies": ["sveltekit"] },
+    "vite": { "tags": [] }
   },
   "tasksRunnerOptions": {
     "default": {
@@ -53,7 +33,5 @@
       }
     }
   },
-  "affected": {
-    "defaultBase": "main"
-  }
+  "affected": { "defaultBase": "main" }
 }

@@ -10,7 +10,7 @@ describe('svelte app schematic', () => {
     name: 'test',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
-    e2eTestRunner: 'cypress',
+    e2eTestRunner: 'cypress'
   };
 
   beforeEach(() => {
@@ -38,14 +38,40 @@ describe('svelte app schematic', () => {
     expect(packageJson.devDependencies['svelte-jester']).toBeDefined();
   });
 
+  it('should add dependencies for vite', async () => {
+    await applicationGenerator(tree, { ...options, bundler: 'vite' });
+    const packageJson = readJson(tree, 'package.json');
+
+    expect(packageJson.devDependencies['@svitejs/vite-plugin-svelte']).toBeDefined();
+  });
+
   it('should add Svelte project files', async () => {
     await applicationGenerator(tree, options);
 
-    expect(tree.exists(`apps/${options.name}/svelte.config.js`)).toBeTruthy();
+    expect(tree.exists(`apps/${options.name}/svelte.config.cjs`)).toBeTruthy();
     expect(tree.exists(`apps/${options.name}/tsconfig.app.json`)).toBeTruthy();
     expect(tree.exists(`apps/${options.name}/tsconfig.spec.json`)).toBeTruthy();
     expect(tree.exists(`apps/${options.name}/tsconfig.json`)).toBeTruthy();
     expect(tree.exists(`apps/${options.name}/.eslintrc.json`)).toBeFalsy();
     expect(tree.exists(`apps/${options.name}/.eslintrc.js`)).toBeTruthy();
+  });
+
+  it('should add rollup specific files', async () => {
+    await applicationGenerator(tree, options);
+
+    expect(tree.exists(`apps/${options.name}/svelte.config.cjs`)).toBeTruthy();
+    expect(tree.exists(`apps/${options.name}/public/index.html`)).toBeTruthy();
+    expect(tree.exists(`apps/${options.name}/vite.config.js`)).toBeFalsy();
+    expect(tree.exists(`apps/${options.name}/index.html`)).toBeFalsy();
+  });
+
+  it('should add vite specific files', async () => {
+
+    await applicationGenerator(tree, { ...options, bundler: 'vite' });
+
+    expect(tree.exists(`apps/${options.name}/svelte.config.cjs`)).toBeTruthy();
+    expect(tree.exists(`apps/${options.name}/public/index.html`)).toBeFalsy();
+    expect(tree.exists(`apps/${options.name}/vite.config.js`)).toBeTruthy();
+    expect(tree.exists(`apps/${options.name}/index.html`)).toBeTruthy();
   });
 });
