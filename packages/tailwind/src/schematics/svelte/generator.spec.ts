@@ -24,7 +24,7 @@ describe('svelte schematic', () => {
     );
     expect(
       tree.exists(`apps/${options.project}/update-svelte-preprocess.js`)
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it('should add dependencies', async () => {

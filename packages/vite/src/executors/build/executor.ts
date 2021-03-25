@@ -1,6 +1,6 @@
 import { BuildExecutorSchema } from './schema';
 import { build } from 'vite';
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import { relative } from 'path';
 
 export default async function runExecutor(options: BuildExecutorSchema, context: ExecutorContext) {
@@ -15,7 +15,11 @@ export default async function runExecutor(options: BuildExecutorSchema, context:
         emptyOutDir: true
       }
     });
+
+    logger.info('Bundle complete.');
   } catch (error) {
+    logger.error(`Error during bundle: ${error}`);
+
     return {
       success: false
     };

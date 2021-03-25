@@ -1,14 +1,16 @@
 import {
   checkFilesExist,
-  ensureNxProject,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { ensureNxProjectWithDeps } from '../../tailwind-e2e/utils/testing';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
-    ensureNxProject('@nxext/svelte', 'dist/packages/svelte');
+    ensureNxProjectWithDeps('@nxext/svelte', 'dist/packages/svelte', [
+      ['@nxext/vite', 'dist/packages/vite'],
+    ]);
   });
 
   describe('Svelte app', () => {
@@ -123,6 +125,60 @@ describe('svelte e2e', () => {
       expect(() =>
         checkFilesExist(`dist/libs/${plugin}/bundle.js`)
       ).not.toThrow();
+
+      done();
+    });
+  });
+
+  describe('Svelte vite app', () => {
+    it('should build svelte application', async (done) => {
+      const plugin = uniq('svelte');
+      await runNxCommandAsync(`generate @nxext/svelte:app ${plugin} --bundler=vite`);
+
+      const result = await runNxCommandAsync(`build ${plugin}`);
+      expect(result.stdout).toContain('Bundle complete');
+
+      expect(() =>
+        checkFilesExist(`dist/apps/${plugin}/index.html`)
+      ).not.toThrow();
+
+      done();
+    });
+
+    it('should add tags to nx.json', async (done) => {
+      const plugin = uniq('sveltetags');
+      await runNxCommandAsync(
+        `generate @nxext/svelte:app ${plugin} --tags e2etag,e2ePackage --bundler=vite`
+      );
+      const nxJson = readJson('nx.json');
+      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
+      done();
+    });
+
+    it('should generate app into directory', async (done) => {
+      await runNxCommandAsync(`generate @nxext/svelte:app project/uivite --bundler=vite`);
+      expect(() =>
+        checkFilesExist(`apps/project/ui/src/main.ts`)
+      ).not.toThrow();
+
+      done();
+    });
+
+    it('should be able to run linter', async (done) => {
+      const plugin = uniq('sveltelint');
+      await runNxCommandAsync(`generate @nxext/svelte:app ${plugin} --bundler=vite`);
+
+      const result = await runNxCommandAsync(`lint ${plugin}`);
+      expect(result.stdout).toContain('All files pass linting');
+
+      done();
+    });
+
+    it('should add a experimental note', async (done) => {
+      const plugin = uniq('sveltenote');
+      const result = await runNxCommandAsync(`generate @nxext/svelte:app ${plugin} --bundler=vite`);
+
+      expect(result.stdout).toContain('The Vite feature is experimental, be aware!!');
 
       done();
     });
