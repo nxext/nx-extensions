@@ -1,5 +1,4 @@
-import { exec } from 'child_process';
-
+import { execSync } from 'child_process';
 const stencilpkgs = [
   '@stencil/core',
   '@stencil/sass',
@@ -13,7 +12,9 @@ const stencilpkgs = [
   '@stencil/svelte-output-target',
 ];
 
+console.log('======================================');
 console.log('Stencil:');
+console.log('======================================');
 stencilpkgs.forEach((pkg) => {
   checkVersion(pkg);
 });
@@ -26,20 +27,30 @@ const sveltepkgs = [
   '@tsconfig/svelte',
   '@testing-library/svelte',
   'rollup-plugin-local-resolve',
+  '@svitejs/vite-plugin-svelte'
 ];
 
 console.log('======================================');
 console.log('Svelte:');
+console.log('======================================');
 sveltepkgs.forEach((pkg) => {
   checkVersion(pkg);
 });
 
+const vitePkgs = [
+  'vite'
+];
+
+console.log('======================================');
+console.log('Vite:');
+console.log('======================================');
+vitePkgs.forEach((pkg) => {
+  checkVersion(pkg);
+});
+
 function checkVersion(pkg) {
-  exec(`npm show ${pkg} version`, (error, stdout, sterr) => {
-    if (error) {
-      console.log(`Error fetching ${pkg}`);
-      return;
-    }
-    console.log(`${pkg} = ${stdout}`);
-  });
+  console.log(`${pkg}: `);
+  execSync(`npm show ${pkg} version`, {
+    stdio: [0, 1, 2]
+  })
 }

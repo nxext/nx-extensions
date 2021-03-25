@@ -3,7 +3,6 @@ import {
   convertNxGenerator,
   generateFiles,
   joinPathFragments,
-  logger,
   ProjectConfiguration,
   readProjectConfiguration,
   Tree,

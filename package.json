@@ -42,7 +42,7 @@
     "help": "nx help",
     "commit": "git-cz",
     "workspace-generator": "nx workspace-generator",
-    "fetch-latest-versions": "ts-node tools/scripts/fetch_latest_versions.ts",
+    "fetch-latest-versions": "ts-node tools/scripts/fetch-latest-versions.ts",
     "release": "dotenv nxpm release"
   },
   "private": true,
