@@ -10,7 +10,7 @@ import {
   joinPathFragments,
   names,
   offsetFromRoot,
-  Tree,
+  Tree, updateJson
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
@@ -21,7 +21,7 @@ function normalizeOptions(
   tree: Tree,
   options: SvelteLibrarySchema
 ): NormalizedSchema {
-  const { libsDir } = getWorkspaceLayout(tree);
+  const { libsDir, npmScope } = getWorkspaceLayout(tree);
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -32,6 +32,7 @@ function normalizeOptions(
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
+  const importPath = options.importPath || `@${npmScope}/${projectDirectory}`;
 
   return {
     ...options,
@@ -40,7 +41,7 @@ function normalizeOptions(
     parsedTags,
     fileName,
     projectDirectory,
-    skipFormat: false,
+    importPath
   };
 }
 
@@ -55,26 +56,47 @@ function createFiles(host: Tree, options: NormalizedSchema) {
       offsetFromRoot: offsetFromRoot(options.projectRoot),
     }
   );
+
+  if (!options.publishable && !options.buildable) {
+    host.delete(`${options.projectRoot}/package.json`);
+  }
+}
+
+function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
+  return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
+    json.name = options.importPath;
+    return json;
+  });
 }
 
 export async function libraryGenerator(
-  tree: Tree,
+  host: Tree,
   schema: SvelteLibrarySchema
 ) {
-  const options = normalizeOptions(tree, schema);
-  const initTask = await initGenerator(tree, { ...options, skipFormat: true });
+  const options = normalizeOptions(host, schema);
+  if (options.publishable === true && !schema.importPath) {
+    throw new Error(
+      `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`
+    );
+  }
 
-  addProject(tree, options);
-  createFiles(tree, options);
+  const initTask = await initGenerator(host, { ...options, skipFormat: true });
 
-  const lintTask = await addLinting(tree, options);
-  const jestTask = await addJest(tree, options);
+  addProject(host, options);
+  createFiles(host, options);
 
-  updateTsConfig(tree, options);
-  updateJestConfig(tree, options);
+  const lintTask = await addLinting(host, options);
+  const jestTask = await addJest(host, options);
+
+  updateTsConfig(host, options);
+  updateJestConfig(host, options);
+
+  if (options.publishable || options.buildable) {
+    updateLibPackageNpmScope(host, options);
+  }
 
   if (!options.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
 
   return runTasksInSerial(initTask, lintTask, jestTask);

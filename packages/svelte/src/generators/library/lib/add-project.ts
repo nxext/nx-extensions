@@ -15,7 +15,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
     check: createSvelteCheckTarget(options),
   };
 
-  if (options.buildable) {
+  if (options.buildable || options.publishable) {
     targets.build = createBuildTarget(tree, options);
   }
 
