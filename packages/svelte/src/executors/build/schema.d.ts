@@ -19,6 +19,7 @@ export interface RawSvelteBuildOptions {
   sveltePreprocessConfig?: string;
   svelteConfig?: string;
   project: string;
+  extractCss?: boolean;
 }
 
 export interface SvelteBuildOptions extends RawSvelteBuildOptions {

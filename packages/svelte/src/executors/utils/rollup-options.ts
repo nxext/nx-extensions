@@ -3,15 +3,17 @@ import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildab
 import * as rollup from 'rollup';
 import resolve from '@rollup/plugin-node-resolve';
 import * as localResolve from 'rollup-plugin-local-resolve';
-import { toClassName } from '@nrwl/workspace';
 import * as path from 'path';
 import { convertCopyAssetsToRollupOptions } from './normalize-assets';
+import { computeCompilerOptionsPaths } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
+import { ExecutorContext, names } from '@nrwl/devkit';
 
 /* eslint-disable */
 const typescript = require('@rollup/plugin-typescript');
 const sveltePreprocess = require('svelte-preprocess');
 const svelte = require('rollup-plugin-svelte');
 const copy = require('rollup-plugin-copy');
+const image = require('@rollup/plugin-image');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
 const { terser } = require('rollup-plugin-terser');
@@ -20,6 +22,17 @@ const commonjs = require('@rollup/plugin-commonjs');
 /* eslint-enable */
 
 const fileExtensions = ['.js', '.ts', '.svelte'];
+
+interface OutputConfig {
+  format: rollup.ModuleFormat;
+  extension: string;
+  declaration?: boolean;
+}
+
+const outputConfigs: OutputConfig[] = [
+  { format: 'umd', extension: 'umd' },
+  { format: 'esm', extension: 'esm' }
+];
 
 function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
   /* eslint-disable */
@@ -30,9 +43,9 @@ function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
   if (svelteConfig == null) {
     return {
       compilerOptions: {
-        dev: !options.prod,
+        dev: !options.prod
       },
-      preprocess: sveltePreprocess(sveltePreprocessConfig),
+      preprocess: sveltePreprocess(sveltePreprocessConfig)
     };
   } else {
     const compilerOptions = svelteConfig.compilerOptions
@@ -45,20 +58,29 @@ function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
 export function createRollupOptions(
   options: SvelteBuildOptions,
   dependencies: DependentBuildableProjectNode[],
+  context: ExecutorContext,
   svelteConfig: string | null
 ): rollup.RollupOptions {
   const sveltePluginConfig = getSveltePluginConfig(svelteConfig, options);
+
+  const compilerOptionPaths = computeCompilerOptionsPaths(
+    options.tsConfig,
+    dependencies
+  );
 
   let plugins = [
     copy({
       targets: convertCopyAssetsToRollupOptions(
         options.outputPath,
         options.assets
-      ),
+      )
     }),
+    image(),
     typescript({
+      sourceMap: !options.prod,
       tsconfig: options.tsConfig,
-      rootDir: options.entryRoot,
+      rootDir: options.projectRoot,
+      paths: compilerOptionPaths
     }),
     svelte(sveltePluginConfig),
     // we'll extract any component CSS out into
@@ -66,7 +88,6 @@ export function createRollupOptions(
     css({ output: 'bundle.css' }),
     localResolve(),
     resolve({
-      browser: true,
       dedupe: ['svelte'],
       preferBuiltins: true,
       extensions: fileExtensions,
@@ -104,7 +125,7 @@ export function createRollupOptions(
     output: {
       format: 'iife',
       file: path.join(options.outputPath, 'bundle.js'),
-      name: toClassName(options.project),
+      name: names(options.project).className,
     },
     external: (id) => externalPackages.includes(id),
     plugins,

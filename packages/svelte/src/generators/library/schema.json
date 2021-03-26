@@ -41,9 +41,18 @@
       "description": "A directory where the lib is placed.",
       "alias": "d"
     },
+    "publishable": {
+      "type": "boolean",
+      "description": "Create a publishable library."
+    },
     "buildable": {
       "type": "boolean",
-      "default": false
+      "default": false,
+      "description": "Generate a buildable library."
+    },
+    "importPath": {
+      "type": "string",
+      "description": "The library name used to import it, like @myorg/my-awesome-lib"
     },
     "skipFormat": {
       "description": "Skip formatting files.",

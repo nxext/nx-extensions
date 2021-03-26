@@ -1,23 +1,22 @@
-import { readNxJson } from '@nrwl/workspace';
-import { SvelteLibrarySchema } from '../schema';
-import {
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
-  Tree,
-  updateJson,
-} from '@nrwl/devkit';
+import { NormalizedSchema } from '../schema';
+import { getWorkspaceLayout, joinPathFragments, Tree, updateJson } from '@nrwl/devkit';
 
-export function updateTsConfig(tree: Tree, options: SvelteLibrarySchema) {
-  const { fileName } = names(options.name);
+export function updateTsConfig(tree: Tree, options: NormalizedSchema) {
   const { libsDir } = getWorkspaceLayout(tree);
-  const { npmScope } = readNxJson();
 
   return updateJson(tree, 'tsconfig.base.json', (json) => {
     const c = json.compilerOptions;
-    delete c.paths[`@${npmScope}/${fileName}`];
-    c.paths[`@${npmScope}/${fileName}`] = [
-      joinPathFragments(`${libsDir}/${fileName}/src/index.ts`),
+    c.paths = c.paths || {};
+    delete c.paths[options.importPath];
+
+    if (c.paths[options.importPath]) {
+      throw new Error(
+        `You already have a library using the import path "${options.importPath}". Make sure to specify a unique one.`
+      );
+    }
+
+    c.paths[options.importPath] = [
+      joinPathFragments(`${libsDir}/${options.projectDirectory}/src/index.ts`),
     ];
     return json;
   });

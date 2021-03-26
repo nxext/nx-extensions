@@ -9,6 +9,9 @@ export interface SvelteLibrarySchema {
   e2eTestRunner: 'cypress' | 'none';
   buildable?: boolean;
   directory?: string;
+  publishable?: boolean;
+  importPath?: string;
+  skipFormat: boolean;
 }
 
 export interface NormalizedSchema extends SvelteLibrarySchema {
@@ -16,5 +19,5 @@ export interface NormalizedSchema extends SvelteLibrarySchema {
   projectDirectory: string;
   fileName: string;
   parsedTags: string[];
-  skipFormat: boolean;
+  importPath: string;
 }

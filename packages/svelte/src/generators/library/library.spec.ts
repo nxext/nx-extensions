@@ -11,6 +11,7 @@ describe('svelte library schematic', () => {
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
+    skipFormat: false
   };
 
   beforeEach(() => {
@@ -47,5 +48,18 @@ describe('svelte library schematic', () => {
     expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
     expect(tree.exists(`libs/${options.name}/.eslintrc.json`)).toBeFalsy();
     expect(tree.exists(`libs/${options.name}/.eslintrc.js`)).toBeTruthy();
+  });
+
+  it('should fail if no importPath is provided with publishable', async () => {
+    try {
+      await libraryGenerator(tree, {
+        ...options,
+        publishable: true
+      });
+    } catch (error) {
+      expect(error.message).toContain(
+        'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)'
+      );
+    }
   });
 });
