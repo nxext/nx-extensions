@@ -4,9 +4,26 @@
   "version": "0.0.1",
   "generators": {
     "app": {
-      "factory": "./src/generators/app/generator",
-      "schema": "./src/generators/app/schema.json",
+      "factory": "./src/generators/application/generator#applicationGenerator",
+      "schema": "./src/generators/application/schema.json",
       "description": "sveltekit app generator"
+    },
+    "component": {
+      "factory": "./src/generators/component/generator#componentGenerator",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator"
+    }
+  },
+  "schematics": {
+    "app": {
+      "factory": "./src/generators/application/generator#applicationSchematic",
+      "schema": "./src/generators/application/schema.json",
+      "description": "sveltekit app generator"
+    },
+    "component": {
+      "factory": "./src/generators/component/generator#componentSchematic",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator"
     }
   }
 }
