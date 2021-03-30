@@ -1,28 +1,11 @@
 {
   "migrations": [
     {
-      "cli": "nx",
-      "version": "11.5.2-beta.1",
-      "description": "Remove presets from the root babel.config.json file to prevent conflicts with babel presets used in apps.",
-      "factory": "./src/migrations/update-11-5-2/update-root-babel-config",
-      "package": "@nrwl/web",
-      "name": "update-root-babel-config-11-5-2"
-    },
-    {
-      "cli": "nx",
-      "version": "11.5.2-beta.1",
-      "description": "Create .babelrc files for workspace libs to fix compatibility with the new babel.config.json setup.",
-      "factory": "./src/migrations/update-11-5-2/create-babelrc-for-workspace-libs",
-      "package": "@nrwl/web",
-      "name": "create-babelrc-for-workspace-libs-11-5-2"
-    },
-    {
-      "cli": "nx",
-      "version": "11.5.2-beta.1",
-      "description": "Update existing .babelrc files to add missing '@nrwl/web/babel' preset if necessary.",
-      "factory": "./src/migrations/update-11-5-2/update-existing-babelrc-files",
-      "package": "@nrwl/web",
-      "name": "update-existing-babelrc-files-11-5-2"
+      "version": "11.0.0",
+      "description": "update docusaurus dependencies",
+      "factory": "./src/migrations/update-11.0.0/update-11.0.0",
+      "package": "@nx-plus/docusaurus",
+      "name": "update-11.0.0"
     }
   ]
 }

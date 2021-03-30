@@ -4,6 +4,6 @@
   "main": "src/index.js",
   "executors": "./executors.json",
   "dependencies": {
-    "vite": "^2.1.2"
+    "vite": "^2.1.5"
   }
 }
