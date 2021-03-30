@@ -19,7 +19,8 @@
     "docs-docusaurus": { "tags": [] },
     "sveltekit": { "tags": [] },
     "sveltekit-e2e": { "tags": [], "implicitDependencies": ["sveltekit"] },
-    "vite": { "tags": [] }
+    "vite": { "tags": [] },
+    "docs": { "tags": [] }
   },
   "tasksRunnerOptions": {
     "default": {

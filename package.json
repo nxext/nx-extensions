@@ -17,6 +17,7 @@
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "scripts": {
+    "postinstall": "yarn setup-local-plugins",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
@@ -75,6 +76,7 @@
     "@rollup/plugin-node-resolve": "11.1.1",
     "@rollup/plugin-typescript": "^8.1.1",
     "@stencil/core": "2.4.0",
+    "@sveltejs/adapter-static": "next",
     "@sveltejs/kit": "^1.0.0-next.55",
     "@types/jest": "26.0.20",
     "@types/node": "14.14.33",
@@ -86,6 +88,7 @@
     "eslint": "7.21.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-svelte3": "^3.1.2",
     "husky": "^4.3.8",
     "ignore": "^5.1.8",
     "jest": "26.6.3",
