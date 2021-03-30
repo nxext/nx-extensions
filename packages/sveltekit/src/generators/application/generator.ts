@@ -1,5 +1,4 @@
 import {
-  addDependenciesToPackageJson,
   addProjectConfiguration,
   formatFiles,
   generateFiles,
@@ -7,7 +6,7 @@ import {
   names,
   getWorkspacePath,
   offsetFromRoot,
-  Tree
+  Tree, convertNxGenerator
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
@@ -58,7 +57,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-export default async function (host: Tree, schema: SveltekitGeneratorSchema) {
+async function applicationGenerator(host: Tree, schema: SveltekitGeneratorSchema) {
   const options = normalizeOptions(host, schema);
   addProjectConfiguration(host, options.projectName, {
     root: options.projectRoot,
@@ -95,3 +94,6 @@ export default async function (host: Tree, schema: SveltekitGeneratorSchema) {
 
   return runTasksInSerial(installTask, lintTask);
 }
+
+export default applicationGenerator;
+export const applicationSchematic = convertNxGenerator(applicationGenerator);
