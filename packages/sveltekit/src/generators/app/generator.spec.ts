@@ -1,12 +1,13 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readProjectConfiguration } from '@nrwl/devkit';
+import { readProjectConfiguration, Tree } from '@nrwl/devkit';
 
 import generator from './generator';
 import { SveltekitGeneratorSchema } from './schema';
+import { Linter } from '@nrwl/linter';
 
 describe('sveltekit generator', () => {
   let appTree: Tree;
-  const options: SveltekitGeneratorSchema = { name: 'test', skipFormat: false };
+  const options: SveltekitGeneratorSchema = { name: 'test', skipFormat: false, linter: Linter.EsLint };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
