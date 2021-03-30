@@ -24,6 +24,12 @@
       "description": "A directory where the project is placed",
       "alias": "d"
     },
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "none"],
+      "default": "eslint"
+    },
     "skipFormat": {
       "description": "Skip formatting files.",
       "type": "boolean",

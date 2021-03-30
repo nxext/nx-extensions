@@ -10,17 +10,12 @@ import {
   Tree
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { SveltekitGeneratorSchema } from './schema';
+import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
 import { ProjectType } from '@nrwl/workspace';
 import { relative } from 'path';
-
-interface NormalizedSchema extends SveltekitGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  distDir: string;
-  parsedTags: string[];
-}
+import { addLinting } from './lib/add-linting';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { installDependencies } from './lib/install-dependencies';
 
 function normalizeOptions(
   host: Tree,
@@ -63,18 +58,18 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-export default async function (host: Tree, options: SveltekitGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(host, options);
-  addProjectConfiguration(host, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
+export default async function (host: Tree, schema: SveltekitGeneratorSchema) {
+  const options = normalizeOptions(host, schema);
+  addProjectConfiguration(host, options.projectName, {
+    root: options.projectRoot,
     projectType: ProjectType.Application,
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
+    sourceRoot: `${options.projectRoot}/src`,
     targets: {
       build: {
         executor: '@nrwl/workspace:run-commands',
         options: {
           commands: ['svelte-kit build'],
-          cwd: normalizedOptions.projectRoot,
+          cwd: options.projectRoot,
           parallel: false
         }
       },
@@ -82,24 +77,21 @@ export default async function (host: Tree, options: SveltekitGeneratorSchema) {
         executor: '@nrwl/workspace:run-commands',
         options: {
           commands: ['svelte-kit dev'],
-          cwd: normalizedOptions.projectRoot,
+          cwd: options.projectRoot,
           parallel: false
         }
       },
     },
-    tags: normalizedOptions.parsedTags,
+    tags: options.parsedTags,
   });
-  addFiles(host, normalizedOptions);
+  addFiles(host, options);
+  const lintTask = await addLinting(host, options);
 
-  if(!normalizedOptions.skipFormat) {
+  if(!options.skipFormat) {
     await formatFiles(host);
   }
 
-  return addDependenciesToPackageJson(host, {}, {
-    '@sveltejs/adapter-node': 'next',
-    '@sveltejs/kit': 'next',
-    'svelte': '^3.29.0',
-    'vite': '^2.1.0',
-    'svelte-preprocess': '^4.0.0'
-  });
+  const installTask = installDependencies(host);
+
+  return runTasksInSerial(installTask, lintTask);
 }

@@ -18,12 +18,23 @@ describe('sveltekit e2e', () => {
     done();
   });
 
+  it('should lint sveltekit app', async (done) => {
+    const plugin = uniq('sveltekit');
+    ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
+    await runNxCommandAsync(`generate @nxext/sveltekit:app ${plugin}`);
+
+    const result = await runNxCommandAsync(`lint ${plugin}`);
+    expect(result.stdout).toContain('All files pass linting');
+
+    done();
+  });
+
   describe('--directory', () => {
     it('should create src in the specified directory', async (done) => {
       const plugin = uniq('sveltekit');
       ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
       await runNxCommandAsync(
-        `generate @nxext/sveltekit:app ${plugin} --directory subdir`
+        `generate @nxext/sveltekit:app ${plugin} --directory subdir --linter none`
       );
       expect(() =>
         checkFilesExist(`apps/subdir/${plugin}/src/app.html`)
