@@ -65,6 +65,7 @@ module.exports = {
           items: [
             'svelte/examples/svelte-config',
             'svelte/examples/custom-preprocessor-config',
+            'svelte/examples/custom-rollup-config',
           ],
         },
       ],
