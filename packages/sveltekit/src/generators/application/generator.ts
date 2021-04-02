@@ -57,7 +57,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-async function applicationGenerator(host: Tree, schema: SveltekitGeneratorSchema) {
+export async function applicationGenerator(host: Tree, schema: SveltekitGeneratorSchema) {
   const options = normalizeOptions(host, schema);
   addProjectConfiguration(host, options.projectName, {
     root: options.projectRoot,
