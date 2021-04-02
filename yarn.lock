@@ -12160,6 +12160,11 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-deploy-npm@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-deploy-npm/-/ngx-deploy-npm-2.0.0.tgz#e849d81c569c034191b0a4fb32e7247446be60d0"
+  integrity sha512-65o0Uw9cv13O3tvSLl2MNMcENwI/G55SBnEAVJuupj2BE8lSr1knyqRfgGES1emupKsTkiOP3wqbBaAp5S5iug==
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

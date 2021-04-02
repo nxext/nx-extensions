@@ -1,7 +1,5 @@
 # sveltekit
 
-This library was generated with [Nx](https://nx.dev).
+This library is experimental, be aware...
 
-## Running unit tests
-
-Run `nx test sveltekit` to execute the unit tests via [Jest](https://jestjs.io).
+Right now there are the `app` and `component` generators.
