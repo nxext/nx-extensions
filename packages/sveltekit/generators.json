@@ -3,10 +3,11 @@
   "name": "sveltekit",
   "version": "0.0.1",
   "generators": {
-    "app": {
+    "application": {
       "factory": "./src/generators/application/generator#applicationGenerator",
       "schema": "./src/generators/application/schema.json",
-      "description": "sveltekit app generator"
+      "description": "sveltekit app generator",
+      "aliases": ["app"]
     },
     "component": {
       "factory": "./src/generators/component/generator#componentGenerator",
@@ -15,10 +16,11 @@
     }
   },
   "schematics": {
-    "app": {
+    "application": {
       "factory": "./src/generators/application/generator#applicationSchematic",
       "schema": "./src/generators/application/schema.json",
-      "description": "sveltekit app generator"
+      "description": "sveltekit app generator",
+      "aliases": ["app"]
     },
     "component": {
       "factory": "./src/generators/component/generator#componentSchematic",

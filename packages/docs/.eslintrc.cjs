@@ -7,12 +7,12 @@ module.exports = {
     'prettier',
   ],
   plugins: ['svelte3', '@typescript-eslint'],
-  ignorePatterns: ['!**/*'],
+  ignorePatterns: ['!**/*', '*.cjs'],
   overrides: [
     {
       files: ['*.ts', '*.js', '*.svelte'],
       parserOptions: {
-        project: ['e2e/docstsconfig.*?.json'],
+        project: ['packages/docs/tsconfig.*?.json'],
       },
       rules: {},
     },

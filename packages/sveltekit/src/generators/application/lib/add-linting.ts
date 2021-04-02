@@ -10,8 +10,7 @@ import { NormalizedSchema } from '../schema';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   if(options.linter === 'none') {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    return () => {};
+    return runTasksInSerial();
   }
 
   const lintTask = await lintProjectGenerator(host, {

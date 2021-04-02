@@ -4,7 +4,7 @@ import { Schema } from '../schema';
 export function updateDependencies(tree: Tree, schema: Schema) {
   let devDependencies = {
     'svelte-jester': '^1.3.0',
-    svelte: '^3.36.0',
+    svelte: '^3.37.0',
     'svelte-check': '^1.2.3',
     'svelte-preprocess': '^4.7.0',
     '@tsconfig/svelte': '^1.0.10',

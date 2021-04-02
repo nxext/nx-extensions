@@ -44,3 +44,6 @@ e2e/stencil-e2e/tests/dev.test.ts
 # Generated Docusaurus files
 .docusaurus/
 .cache-loader/
+
+# Generated Sveltekit files
+/**/.svelte/
