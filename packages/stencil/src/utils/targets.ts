@@ -1,73 +1,103 @@
-import {
-  joinPathFragments,
-  ProjectConfiguration,
-  TargetConfiguration,
-} from '@nrwl/devkit';
+import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../schematics/ionic-pwa/schema';
 import { ApplicationSchema } from '../schematics/application/schema';
 import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
 import { ProjectType } from '@nrwl/workspace';
 
-export function addBuildTarget(
-  project: ProjectConfiguration,
+export function getDefaultTargets(
   projectType: ProjectType,
   options:
     | LibrarySchema
     | PWASchema
     | ApplicationSchema
     | MakeLibBuildableSchema
-) {
-  const buildTarget: TargetConfiguration = {
+): { [key: string]: TargetConfiguration } {
+  return {
+    build: getBuildTarget(projectType, options),
+    serve: getServeTarget(projectType, options),
+    test: getTestTarget(projectType, options),
+    e2e: getE2eTarget(projectType, options)
+  };
+}
+
+export function getBuildTarget(
+  projectType: ProjectType,
+  options:
+    | LibrarySchema
+    | PWASchema
+    | ApplicationSchema
+    | MakeLibBuildableSchema
+): TargetConfiguration {
+  return {
     executor: '@nxext/stencil:build',
     options: {
       projectType,
-      configPath: joinPathFragments('dist', 'stencil.config.ts'),
-      outputPath: joinPathFragments('dist', options.projectRoot),
+      configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
+      outputPath: joinPathFragments('dist', options.projectRoot)
       //replaceDependenciesWithLocalPath: true,
     },
     configurations: {
       production: {
-        dev: false,
+        dev: false
         //replaceDependenciesWithLocalPath: false,
-      },
-    },
-  };
-
-  return {
-    ...project,
-    targets: {
-      ...project.targets,
-      build: buildTarget,
-    },
+      }
+    }
   };
 }
 
-export function addServeTarget(
-  project: ProjectConfiguration,
+export function getTestTarget(
   projectType: ProjectType,
   options:
     | LibrarySchema
     | PWASchema
     | ApplicationSchema
     | MakeLibBuildableSchema
-) {
-  const serveTarget: TargetConfiguration = {
+): TargetConfiguration {
+  return {
+    executor: '@nxext/stencil:test',
+    options: {
+      projectType,
+      configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
+      outputPath: joinPathFragments('dist', options.projectRoot)
+    }
+  };
+}
+
+export function getE2eTarget(
+  projectType: ProjectType,
+  options:
+    | LibrarySchema
+    | PWASchema
+    | ApplicationSchema
+    | MakeLibBuildableSchema
+): TargetConfiguration {
+  return {
+    executor: '@nxext/stencil:e2e',
+    options: {
+      projectType,
+      configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
+      outputPath: joinPathFragments('dist', options.projectRoot)
+    }
+  };
+}
+
+export function getServeTarget(
+  projectType: ProjectType,
+  options:
+    | LibrarySchema
+    | PWASchema
+    | ApplicationSchema
+    | MakeLibBuildableSchema
+): TargetConfiguration {
+  return {
     executor: `@nxext/stencil:build`,
     options: {
       projectType,
-      configPath: joinPathFragments('dist', 'stencil.config.ts'),
+      configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot),
       serve: true,
-      watch: true,
-    },
-  };
-
-  return {
-    ...project,
-    targets: {
-      ...project.targets,
-      serve: serveTarget,
-    },
+      watch: true
+    }
   };
 }

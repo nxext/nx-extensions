@@ -24,17 +24,17 @@ export function readTsSourceFileFromTree(
 }
 
 export function readTsSourceFile(host: Tree, path: string): ts.SourceFile {
-  const contentBuffer = host.read(path);
-  if (!contentBuffer) {
-    throw new SchematicsException(`Typescript file not readable (${path}).`);
+  if (!host.exists(path)) {
+    throw new Error(`Typescript file not readable (${path}).`);
+  } else {
+    const contentBuffer = host.read(path);
+    return ts.createSourceFile(
+      path,
+      contentBuffer.toString(),
+      ts.ScriptTarget.Latest,
+      true
+    );
   }
-
-  return ts.createSourceFile(
-    path,
-    contentBuffer.toString(),
-    ts.ScriptTarget.Latest,
-    true
-  );
 }
 
 export function addImport(

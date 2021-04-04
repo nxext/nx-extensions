@@ -90,10 +90,11 @@ function createComponentInProject(options: ComponentSchema): Rule {
   };
 }
 
-export default function (options: ComponentSchema): Rule {
+export function componentSchematic(options: ComponentSchema): Rule {
   return chain([createComponentInProject(options)]);
 }
 
+export default componentSchematic;
 export const componentGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'component'

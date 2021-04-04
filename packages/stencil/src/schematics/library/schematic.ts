@@ -68,7 +68,7 @@ function addFiles(options: LibrarySchema): Rule {
   );
 }
 
-export default function (options: InitSchema): Rule {
+export function librarySchematic(options: InitSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
@@ -108,6 +108,7 @@ export default function (options: InitSchema): Rule {
   };
 }
 
+export default librarySchematic;
 export const libraryGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'library'
