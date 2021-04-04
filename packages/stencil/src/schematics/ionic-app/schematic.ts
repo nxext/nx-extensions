@@ -98,7 +98,7 @@ function showInformation(options: IonicAppSchema): Rule {
   };
 }
 
-export default function (options: IonicAppSchema): Rule {
+export function ionicAppSchematic(options: IonicAppSchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     return chain([
@@ -139,6 +139,7 @@ export default function (options: IonicAppSchema): Rule {
   };
 }
 
+export default ionicAppSchematic;
 export const ionicAppGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'ionic-app'

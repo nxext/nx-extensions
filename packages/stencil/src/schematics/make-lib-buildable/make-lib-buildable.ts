@@ -54,7 +54,7 @@ function addFiles(options: MakeLibBuildableSchema): Rule {
   );
 }
 
-export default function (options: MakeLibBuildableSchema): Rule {
+export function makeLibBuildableSchematic(options: MakeLibBuildableSchema): Rule {
   return (tree: Tree) => {
     const stencilProjectConfig = getProjectConfig(tree, options.name);
     const normalizedOptions = normalize(options, stencilProjectConfig);
@@ -121,6 +121,7 @@ export default function (options: MakeLibBuildableSchema): Rule {
   };
 }
 
+export default makeLibBuildableSchematic;
 export const makeLibBuildableGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'make-lib-buildable'

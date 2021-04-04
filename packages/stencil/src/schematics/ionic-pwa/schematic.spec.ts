@@ -1,48 +1,35 @@
-import { Tree } from '@angular-devkit/schematics';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
+import { ProjectType } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { fileListForAppType, runSchematic } from '../../utils/testing';
+import { fileListForAppType } from '../../utils/testing';
 import { InitSchema } from '../init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
+import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { ionicPwaGenerator } from './schematic';
 
 describe('schematic:ionic-pwa', () => {
   let tree: Tree;
-  const options: InitSchema = { name: 'test' };
+  const options: InitSchema = { name: 'test', style: SupportedStyles.css, appType: AppType.pwa };
 
   beforeEach(() => {
-    tree = createEmptyWorkspace(Tree.empty());
-  });
-
-  it('should run successfully', async () => {
-    await expect(
-      runSchematic('pwa', options, tree)
-    ).resolves.not.toThrowError();
+    tree = createTreeWithEmptyWorkspace();
   });
 
   it('should create files', async () => {
     const appName = 'testpwa';
-    const result = await runSchematic(
-      'pwa',
-      { name: appName, appType: AppType.pwa },
-      tree
-    );
+    await ionicPwaGenerator(tree, options)
 
     const fileList = fileListForAppType(
       appName,
       SupportedStyles.css,
       ProjectType.Application
     );
-    fileList.forEach((file) => expect(result.exists(file)));
+    fileList.forEach((file) => expect(tree.exists(file)));
   });
 
   it('should create files in specified dir', async () => {
     const appName = 'testpwa';
-    const result = await runSchematic(
-      'pwa',
-      { name: appName, appType: AppType.pwa, subdir: 'subdir' },
-      tree
-    );
+    await ionicPwaGenerator(tree, { name: appName, appType: AppType.pwa, directory: 'subdir' });
 
     const fileList = fileListForAppType(
       appName,
@@ -50,24 +37,20 @@ describe('schematic:ionic-pwa', () => {
       ProjectType.Application,
       'subdir'
     );
-    fileList.forEach((file) => expect(result.exists(file)));
+    fileList.forEach((file) => expect(tree.exists(file)));
   });
 
   it('should add Stencil/Ionic PWA dependencies', async () => {
-    const result = await runSchematic('pwa', options, tree);
-    const packageJson = readJsonInTree(result, 'package.json');
+    await ionicPwaGenerator(tree, options);
+    const packageJson = readJson(tree, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
   });
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to pwa`, async () => {
-      const result = await runSchematic(
-        'pwa',
-        { name: 'test', style: style },
-        tree
-      );
-      const packageJson = readJsonInTree(result, 'package.json');
+      await ionicPwaGenerator(tree, { name: 'test', style: SupportedStyles[style] });
+      const packageJson = readJson(tree, 'package.json');
       expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
 
       const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[style];
@@ -80,15 +63,10 @@ describe('schematic:ionic-pwa', () => {
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
       const projectName = 'test';
+      await ionicPwaGenerator(tree, { name: projectName, style: SupportedStyles[style], appType: AppType.application });
 
-      tree = await runSchematic(
-        'app',
-        { name: projectName, style: style, appType: AppType.application },
-        tree
-      );
-
-      const projectConfig = getProjectConfig(tree, projectName);
-      expect(projectConfig.schematics).toEqual({
+      const projectConfig = readProjectConfiguration(tree, projectName);
+      expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,
           storybook: false,

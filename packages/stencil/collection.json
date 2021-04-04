@@ -10,21 +10,27 @@
       "hidden": true
     },
     "application": {
-      "factory": "./src/schematics/application/schematic",
+      "factory": "./src/schematics/application/schematic#applicationSchematic",
       "schema": "./src/schematics/application/schema.json",
       "description": "Generate Stencil application",
       "aliases": ["app"],
       "hidden": false
     },
     "ionic-pwa": {
-      "factory": "./src/schematics/ionic-pwa/schematic",
+      "factory": "./src/schematics/ionic-pwa/schematic#ionicPwaSchematic",
       "schema": "./src/schematics/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
       "aliases": ["pwa"],
       "hidden": false
     },
+    "ionic-app": {
+      "factory": "./src/schematics/ionic-app/schematic#ionicAppSchematic",
+      "schema": "./src/schematics/ionic-app/schema.json",
+      "description": "Generate Stencil Ionic Capacitor app",
+      "hidden": false
+    },
     "library": {
-      "factory": "./src/schematics/library/schematic",
+      "factory": "./src/schematics/library/schematic#librarySchematic",
       "schema": "./src/schematics/library/schema.json",
       "description": "Generate Stencil Library",
       "aliases": ["lib", "collection"],
@@ -36,38 +42,102 @@
       "hidden": false
     },
     "storybook-init": {
-      "factory": "./src/schematics/storybook/init/init",
+      "factory": "./src/schematics/storybook/init/init#storybookInitSchematic",
       "schema": "./src/schematics/storybook/configuration/schema.json",
       "description": "Add storybook configuration to the workspace",
       "hidden": true
     },
     "storybook-configuration": {
-      "factory": "./src/schematics/storybook/configuration/configuration",
+      "factory": "./src/schematics/storybook/configuration/configuration#storybookConfigurationSchematic",
       "schema": "./src/schematics/storybook/configuration/schema.json",
       "description": "Add storybook configuration to a ui library",
       "hidden": false
     },
     "component": {
-      "factory": "./src/schematics/component/component",
+      "factory": "./src/schematics/component/component#componentSchematic",
       "schema": "./src/schematics/component/schema.json",
       "description": "Add a component to a ui library",
       "aliases": ["c"],
       "hidden": false
     },
     "add-outputtarget": {
-      "factory": "./src/schematics/add-outputtarget/add-outputtarget",
+      "factory": "./src/schematics/add-outputtarget/add-outputtarget#outputtargetSchematic",
       "schema": "./src/schematics/add-outputtarget/add-outputtarget.schema.json",
       "description": "Add react/angular libraries for the component library",
       "hidden": false
     },
+    "make-lib-buildable": {
+      "factory": "./src/schematics/make-lib-buildable/make-lib-buildable#makeLibBuildableSchematic",
+      "schema": "./src/schematics/make-lib-buildable/schema.json",
+      "description": "Make a library buildable"
+    }
+  },
+  "generators": {
+    "init": {
+      "factory": "./src/schematics/init/init#initGenerator",
+      "schema": "./src/schematics/init/schema.json",
+      "description": "Core features for collections",
+      "hidden": true
+    },
+    "application": {
+      "factory": "./src/schematics/application/schematic#applicationGenerator",
+      "schema": "./src/schematics/application/schema.json",
+      "description": "Generate Stencil application",
+      "aliases": ["app"],
+      "hidden": false
+    },
+    "ionic-pwa": {
+      "factory": "./src/schematics/ionic-pwa/schematic#ionicPwaGenerator",
+      "schema": "./src/schematics/ionic-pwa/schema.json",
+      "description": "Generate Stencil ionic pwa",
+      "aliases": ["pwa"],
+      "hidden": false
+    },
     "ionic-app": {
-      "factory": "./src/schematics/ionic-app/schematic",
+      "factory": "./src/schematics/ionic-app/schematic#ionicAppGenerator",
       "schema": "./src/schematics/ionic-app/schema.json",
       "description": "Generate Stencil Ionic Capacitor app",
       "hidden": false
     },
+    "library": {
+      "factory": "./src/schematics/library/schematic#libraryGenerator",
+      "schema": "./src/schematics/library/schema.json",
+      "description": "Generate Stencil Library",
+      "aliases": ["lib", "collection"],
+      "hidden": false
+    },
+    "ng-add": {
+      "factory": "./src/schematics/ng-add/schematic#ngAddGenerator",
+      "description": "Add @nxext/stencil",
+      "hidden": false
+    },
+    "storybook-init": {
+      "factory": "./src/schematics/storybook/init/init#storybookInitGenerator",
+      "schema": "./src/schematics/storybook/configuration/schema.json",
+      "description": "Add storybook configuration to the workspace",
+      "hidden": true
+    },
+    "storybook-configuration": {
+      "factory": "./src/schematics/storybook/configuration/configuration#storybookConfigurationGenerator",
+      "schema": "./src/schematics/storybook/configuration/schema.json",
+      "description": "Add storybook configuration to a ui library",
+      "hidden": false
+    },
+    "component": {
+      "factory": "./src/schematics/component/component#componentGenerator",
+      "schema": "./src/schematics/component/schema.json",
+      "description": "Add a component to a ui library",
+      "aliases": ["c"],
+      "hidden": false
+    },
+    "add-outputtarget": {
+      "factory": "./src/schematics/add-outputtarget/add-outputtarget#outputtargetGenerator",
+      "schema": "./src/schematics/add-outputtarget/add-outputtarget.schema.json",
+      "description": "Add react/angular libraries for the component library",
+      "hidden": false
+    },
     "make-lib-buildable": {
-      "factory": "./src/schematics/make-lib-buildable/make-lib-buildable",
+      "factory": "./src/schematics/make-lib-buildable/make-lib-buildable#makeLibBuildableGenerator",
       "schema": "./src/schematics/make-lib-buildable/schema.json",
       "description": "Make a library buildable"
     }

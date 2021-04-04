@@ -67,10 +67,11 @@ function checkBuildable(options: AddOutputtargetSchematicSchema): Rule {
   };
 }
 
-export default function (options: AddOutputtargetSchematicSchema): Rule {
+export function outputtargetSchematic(options: AddOutputtargetSchematicSchema): Rule {
   return checkBuildable(options);
 }
 
+export default outputtargetSchematic;
 export const outputtargetGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'add-outputtarget'

@@ -25,7 +25,7 @@ import { StorybookConfigureSchema } from '../configuration/schema';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 import { logger } from '@nrwl/devkit';
 
-export default function (schema: StorybookConfigureSchema) {
+export function storybookInitSchematic(schema: StorybookConfigureSchema) {
   return chain([
     checkDependenciesInstalled(),
     moveToDevDependencies,
@@ -209,6 +209,7 @@ function changeStorybookComponentOption(projectName: string): Rule {
   });
 }
 
+export default storybookInitSchematic;
 export const storybookInitGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'storybook-init'

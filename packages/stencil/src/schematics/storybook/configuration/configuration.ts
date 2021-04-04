@@ -8,7 +8,7 @@ import {
 import { StorybookConfigureSchema } from './schema';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
-export default function (options: StorybookConfigureSchema): Rule {
+export function storybookConfigurationSchematic(options: StorybookConfigureSchema): Rule {
   return chain([
     schematic('storybook-init', options),
     options.configureCypress
@@ -21,6 +21,7 @@ export default function (options: StorybookConfigureSchema): Rule {
   ]);
 }
 
+export default storybookConfigurationSchematic;
 export const storybookConfigurationGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
   'storybook-configuration'
