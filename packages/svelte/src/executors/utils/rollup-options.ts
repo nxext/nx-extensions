@@ -112,6 +112,7 @@ export function createRollupOptions(
         contentBase: options.outputPath,
         host: options.host,
         port: options.port,
+        historyApiFallback: true
       }),
     ];
   }
