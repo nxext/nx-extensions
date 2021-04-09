@@ -1,1 +1,3 @@
-export interface AddExecutorSchema {} // eslint-disable-line
+export interface AddExecutorSchema {
+  package: string
+}

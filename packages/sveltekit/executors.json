@@ -1,10 +1,15 @@
 {
   "$schema": "http://json-schema.org/schema",
   "executors": {
-    "dev": {
-      "implementation": "./src/executors/dev/executor",
-      "schema": "./src/executors/dev/schema.json",
-      "description": "dev executor"
+    "sveltekit": {
+      "implementation": "./src/executors/sveltekit/executor",
+      "schema": "./src/executors/sveltekit/schema.json",
+      "description": "sveltekit executor"
+    },
+    "add": {
+      "implementation": "./src/executors/add/executor",
+      "schema": "./src/executors/add/schema.json",
+      "description": "add executor"
     }
   }
 }

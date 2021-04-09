@@ -65,21 +65,20 @@ export async function applicationGenerator(host: Tree, schema: SveltekitGenerato
     sourceRoot: `${options.projectRoot}/src`,
     targets: {
       build: {
-        executor: '@nrwl/workspace:run-commands',
+        executor: '@nxext/sveltekit:sveltekit',
         options: {
-          commands: ['svelte-kit build'],
-          cwd: options.projectRoot,
-          parallel: false
+          command: 'build'
         }
       },
       serve: {
-        executor: '@nrwl/workspace:run-commands',
+        executor: '@nxext/sveltekit:sveltekit',
         options: {
-          commands: ['svelte-kit dev'],
-          cwd: options.projectRoot,
-          parallel: false
+          command: 'dev'
         }
       },
+      add: {
+        executor: '@nxext/sveltekit:add',
+      }
     },
     tags: options.parsedTags,
   });

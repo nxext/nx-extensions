@@ -4,6 +4,14 @@
   "title": "Add executor",
   "description": "",
   "type": "object",
-  "properties": {},
-  "required": []
+  "properties": {
+    "package": {
+      "description": "Package you want to install",
+      "type": "string",
+      "enum": ["tailwindcss", "mdsvex", "graphql", "postcss", "bulma", "windicss", "firebase-hosting"]
+    }
+  },
+  "required": [
+    "package"
+  ]
 }
