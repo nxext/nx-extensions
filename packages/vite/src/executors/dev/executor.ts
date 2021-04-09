@@ -20,7 +20,7 @@ export default async function runExecutor(
   });
 
   const devProcess = await server.listen();
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     devProcess.watcher.on('event', (data: RollupWatcherEvent) => {
       if (data.code === 'END') {
         resolve()
