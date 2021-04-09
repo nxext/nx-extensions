@@ -23,9 +23,7 @@
   "schematics": "./collection.json",
   "builders": "./builders.json",
   "dependencies": {
-    "@nrwl/jest": "^11.2.0",
-    "@nrwl/workspace": "^11.2.0",
-    "@nrwl/devkit": "11.6.1",
+    "@nrwl/devkit": "12.0.0",
     "ignore": "^5.1.8"
   },
   "peerDependencies": {
@@ -34,6 +32,8 @@
     "@nrwl/storybook": "^11.0.0",
     "@nrwl/react": "^11.0.0",
     "@nrwl/angular": "^11.0.0",
+    "@nrwl/jest": "^11.2.0",
+    "@nrwl/workspace": "^11.2.0",
     "@nxtend/capacitor": "^11.1.1",
     "@stencil/core": "^2.4.0"
   },
