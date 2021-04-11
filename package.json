@@ -43,8 +43,7 @@
     "help": "nx help",
     "commit": "git-cz",
     "workspace-generator": "nx workspace-generator",
-    "fetch-latest-versions": "ts-node tools/scripts/fetch-latest-versions.ts",
-    "release": "dotenv nxpm release"
+    "fetch-latest-versions": "ts-node tools/scripts/fetch-latest-versions.ts"
   },
   "private": true,
   "dependencies": {
@@ -94,15 +93,18 @@
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-svelte3": "^3.1.2",
+    "front-matter": "^4.0.2",
     "husky": "^4.3.8",
     "ignore": "^5.1.8",
     "jest": "26.6.3",
+    "marked": "^2.0.2",
     "ngx-deploy-npm": "^2.0.0",
     "path": "^0.12.7",
     "postcss": "^8.2.9",
     "postcss-nested": "^5.0.5",
     "prettier": "2.2.1",
     "pretty-quick": "^3.1.0",
+    "prismjs": "^1.23.0",
     "rollup": "^2.45.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-css-only": "^3.1.0",
