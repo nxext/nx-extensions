@@ -5,17 +5,18 @@ import {
   getProjectConfig,
   insert,
   insertImport,
-  libsDir,
+  libsDir
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { getNpmScope } from '@nrwl/workspace';
 import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
 import { addToGitignore } from '../../../utils/utils';
 import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
-import { getDistDir, getRelativePath } from '../../../utils/fileutils';
+import { getDistDir } from '../../../utils/fileutils';
 import * as ts from 'typescript';
 import { addToOutputTargets } from '../../../stencil-core-utils';
 import { names } from '@nrwl/devkit';
+import { relative } from 'path';
 
 export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
   return (host: Tree) => {
@@ -24,13 +25,13 @@ export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
       externalSchematic('@nrwl/angular', 'library', {
         name: angularProjectName,
         style: 'css',
-        skipPackageJson: !options.publishable,
+        skipPackageJson: !options.publishable
       }),
       addDepsToPackageJson(
         {},
         {
           '@stencil/angular-output-target':
-            STENCIL_OUTPUTTARGET_VERSION['angular'],
+            STENCIL_OUTPUTTARGET_VERSION['angular']
         }
       ),
       (tree: Tree) => {
@@ -55,10 +56,10 @@ export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
             angularModuleSource,
             angularModulePath,
             'defineCustomElements(window);'
-          ),
+          )
         ]);
       },
-      addToGitignore(`${libsDir(host)}/${angularProjectName}/**/generated`),
+      addToGitignore(`${libsDir(host)}/${angularProjectName}/**/generated`)
     ]);
   };
 }
@@ -72,7 +73,7 @@ export function addAngularOutputtarget(
   packageName: string
 ) {
   const angularProjectConfig = getProjectConfig(tree, `${projectName}-angular`);
-  const realtivePath = getRelativePath(
+  const realtivePath = relative(
     getDistDir(stencilProjectConfig.root),
     angularProjectConfig.root
   );
@@ -99,6 +100,6 @@ export function addAngularOutputtarget(
             }),
           `,
       stencilConfigPath
-    ),
+    )
   ]);
 }

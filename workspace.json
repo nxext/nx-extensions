@@ -51,7 +51,7 @@
               },
               {
                 "input": "./packages/stencil",
-                "glob": "builders.json",
+                "glob": "executors.json",
                 "output": "."
               },
               {

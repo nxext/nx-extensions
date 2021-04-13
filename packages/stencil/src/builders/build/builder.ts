@@ -1,20 +1,13 @@
-import {
-  BuilderContext,
-  BuilderOutput,
-  createBuilder,
-} from '@angular-devkit/architect';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess } from '../stencil-runtime';
+import { createStencilConfig, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
+import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
+import { ExecutorContext } from '@nrwl/devkit';
 import {
   calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt,
-  updateBuildableProjectPackageJsonDependencies,
-} from '@nrwl/workspace/src/utils/buildable-libs-utils';
-import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
+  checkDependentProjectsHaveBeenBuilt, updateBuildableProjectPackageJsonDependencies
+} from '@nrwl/workspace/src/utilities/buildable-libs-utils';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -30,40 +23,59 @@ function createStencilCompilerOptions(
   return parseFlags(runOptions);
 }
 
-export function runBuilder(
+export default async function runExecutor(
   options: StencilBuildOptions,
-  context: BuilderContext
-): Observable<BuilderOutput> {
+  context: ExecutorContext
+) {
   const taskCommand: TaskCommand = 'build';
-  context.target.target = 'build';
+  context.target.executor = 'build';
 
   const projGraph = createProjectGraph();
   const { target, dependencies } = calculateProjectDependencies(
     projGraph,
-    context
+    context.root,
+    context.projectName,
+    context.targetName,
+    context.configurationName
   );
 
-  if (!checkDependentProjectsHaveBeenBuilt(context, dependencies)) {
-    return of({ success: false });
+  if (!checkDependentProjectsHaveBeenBuilt(
+    context.root,
+    context.projectName,
+    context.targetName,
+    dependencies
+  )) {
+    return { success: false };
   }
 
-  return createStencilConfig(
+  return run(taskCommand, options, context, dependencies, target);
+}
+
+async function run(taskCommand,
+                   options,
+                   context: ExecutorContext,
+                   dependencies,
+                   target) {
+  const configAndPathCollection = await initializeStencilConfig(
     taskCommand,
     options,
     context,
     createStencilCompilerOptions
-  ).pipe(
-    tap(() => {
-      if (dependencies.length > 0 && context.target.target !== 'serve') {
-        updateBuildableProjectPackageJsonDependencies(
-          context,
-          target,
-          dependencies
-        );
-      }
-    }),
-    createStencilProcess(context)
   );
-}
+  const stencilConfig = await createStencilConfig(
+    configAndPathCollection
+  );
 
-export default createBuilder(runBuilder);
+  if (dependencies.length > 0 && context.target.executor !== 'serve') {
+    updateBuildableProjectPackageJsonDependencies(
+      context.root,
+      context.projectName,
+      context.targetName,
+      context.configurationName,
+      target,
+      dependencies
+    );
+  }
+
+  return await createStencilProcess(stencilConfig, configAndPathCollection);
+}

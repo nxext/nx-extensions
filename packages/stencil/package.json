@@ -21,7 +21,7 @@
   },
   "main": "src/index.js",
   "schematics": "./collection.json",
-  "builders": "./builders.json",
+  "executors": "./executors.json",
   "dependencies": {
     "@nrwl/devkit": "12.0.0",
     "ignore": "^5.1.8"

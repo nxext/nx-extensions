@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { Rule, Tree } from '@angular-devkit/schematics';
 import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
 import { getNpmScope } from '@nrwl/workspace';
