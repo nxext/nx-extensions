@@ -1,5 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
   "title": "Stencil build",
   "description": "",
   "type": "object",

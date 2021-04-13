@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "builders": {
+    "build": {
+      "implementation": "./src/builders/build/compat",
+      "schema": "./src/builders/build/schema.json",
+      "description": "stencil build"
+    },
+    "test": {
+      "implementation": "./src/builders/test/compat",
+      "schema": "./src/builders/test/schema.json",
+      "description": "stencil test"
+    },
+    "e2e": {
+      "implementation": "./src/builders/e2e/compat",
+      "schema": "./src/builders/e2e/schema.json",
+      "description": "stencil e2e"
+    }
+  },
+  "executors": {
+    "build": {
+      "implementation": "./src/builders/build/builder",
+      "schema": "./src/builders/build/schema.json",
+      "description": "stencil build"
+    },
+    "test": {
+      "implementation": "./src/builders/test/builder",
+      "schema": "./src/builders/test/schema.json",
+      "description": "stencil test"
+    },
+    "e2e": {
+      "implementation": "./src/builders/e2e/builder",
+      "schema": "./src/builders/e2e/schema.json",
+      "description": "stencil e2e"
+    }
+  }
+}

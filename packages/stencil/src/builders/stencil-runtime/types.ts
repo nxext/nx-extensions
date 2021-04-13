@@ -1,13 +1,12 @@
 import { Config } from '@stencil/core/cli';
-import { Path } from '@angular-devkit/core';
 
 export type CoreCompiler = typeof import('@stencil/core/compiler');
 
 export type ConfigAndPathCollection = {
   config: Config;
-  distDir: Path;
+  distDir: string;
   coreCompiler: CoreCompiler;
-  projectRoot: Path;
+  projectRoot: string;
   projectName: string;
   pkgJson: string;
 };

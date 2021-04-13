@@ -1,13 +1,8 @@
-import {
-  BuilderContext,
-  BuilderOutput,
-  createBuilder,
-} from '@angular-devkit/architect';
-import { Observable } from 'rxjs';
 import { StencilTestOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess } from '../stencil-runtime';
+import { createStencilConfig, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
+import { ExecutorContext } from '@nrwl/devkit';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -20,17 +15,26 @@ function createStencilCompilerOptions(
   return parseFlags(runOptions);
 }
 
-export function runBuilder(
+export default async function runExecutor(
   options: StencilTestOptions,
-  context: BuilderContext
-): Observable<BuilderOutput> {
+  context: ExecutorContext
+) {
   const taskCommand: TaskCommand = 'test';
-  return createStencilConfig(
+  return await run(taskCommand, options, context)
+}
+
+async function run(taskCommand,
+                   options,
+                   context: ExecutorContext) {
+  const configAndPathCollection = await initializeStencilConfig(
     taskCommand,
     options,
     context,
     createStencilCompilerOptions
-  ).pipe(createStencilProcess(context));
-}
+  );
+  const stencilConfig = await createStencilConfig(
+    configAndPathCollection
+  );
 
-export default createBuilder(runBuilder);
+  return await createStencilProcess(stencilConfig, configAndPathCollection);
+}
