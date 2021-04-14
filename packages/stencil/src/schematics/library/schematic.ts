@@ -10,13 +10,8 @@ import {
   Tree,
   url
 } from '@angular-devkit/schematics';
-import {
-  addProjectToNxJsonInTree,
-  formatFiles, getNpmScope,
-  ProjectType, updateJsonInTree,
-  updateWorkspace
-} from '@nrwl/workspace';
-import { names, offsetFromRoot, updateJson } from '@nrwl/devkit';
+import { addProjectToNxJsonInTree, formatFiles, getNpmScope, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { names, offsetFromRoot } from '@nrwl/devkit';
 import { LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { addBuilderToTarget, calculateStyle } from '../../utils/utils';

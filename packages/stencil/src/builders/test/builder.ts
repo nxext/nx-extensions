@@ -20,12 +20,7 @@ export default async function runExecutor(
   context: ExecutorContext
 ) {
   const taskCommand: TaskCommand = 'test';
-  return await run(taskCommand, options, context)
-}
 
-async function run(taskCommand,
-                   options,
-                   context: ExecutorContext) {
   const configAndPathCollection = await initializeStencilConfig(
     taskCommand,
     options,
