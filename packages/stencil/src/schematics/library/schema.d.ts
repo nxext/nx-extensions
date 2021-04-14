@@ -9,4 +9,6 @@ export interface LibrarySchema extends InitSchema, MakeLibBuildableSchema {
   parsedTags: string[];
   buildable: boolean;
   appType: AppType;
+  publishable: boolean;
+  importPath: string;
 }

@@ -31,6 +31,14 @@
       "type": "boolean",
       "default": false
     },
+    "publishable": {
+      "type": "boolean",
+      "description": "Create a publishable library."
+    },
+    "importPath": {
+      "type": "string",
+      "description": "The library name used to import it, like @myorg/my-awesome-lib"
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

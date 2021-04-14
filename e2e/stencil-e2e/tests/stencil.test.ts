@@ -113,7 +113,7 @@ describe('e2e', () => {
       const plugin = uniq('lib');
       await runNxCommandAsync(`generate @nxext/stencil:lib ${plugin}`);
       await runNxCommandAsync(
-        `generate @nxext/stencil:make-lib-buildable ${plugin}`
+        `generate @nxext/stencil:make-lib-buildable ${plugin} --importPath=@my/lib`
       );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
@@ -178,7 +178,7 @@ describe('e2e', () => {
     });
   });
 
-  xdescribe('stencil builderoptions', () => {
+  describe('stencil builderoptions', () => {
     it(`should build with custom stencil config naming`, async (done) => {
       const plugin = uniq('library');
 
