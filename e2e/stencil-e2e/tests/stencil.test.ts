@@ -13,7 +13,7 @@ describe('e2e', () => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });
 
-  xdescribe('library', () => {
+  describe('library', () => {
     describe('outputtarget', () => {
       it(`should generate react lib`, async (done) => {
         const plugin = uniq('lib');
@@ -127,7 +127,7 @@ describe('e2e', () => {
     });
   });
 
-  xdescribe('e2e-pwa', () => {
+  describe('e2e-pwa', () => {
     describe('--tags', () => {
       it('should add tags to nx.json', async (done) => {
         const plugin = uniq('pwa');
@@ -162,7 +162,7 @@ describe('e2e', () => {
     });
   });
 
-  xdescribe('e2e-ionic-app', () => {
+  describe('e2e-ionic-app', () => {
     describe('stencil ionic app builder', () => {
       it(`should build ionic app`, async (done) => {
         const plugin = uniq('ionic-app');
