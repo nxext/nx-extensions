@@ -1,28 +1,11 @@
-import {
-  apply,
-  applyTemplates,
-  chain,
-  mergeWith,
-  move,
-  Rule,
-  Tree,
-  url,
-} from '@angular-devkit/schematics';
-import {
-  formatFiles,
-  ProjectType,
-  readNxJson,
-  updateWorkspace,
-} from '@nrwl/workspace';
-import { names, offsetFromRoot } from '@nrwl/devkit';
+import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
+import { formatFiles, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { offsetFromRoot } from '@nrwl/devkit';
 import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
 import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
 import { join } from 'path';
-import {
-  addStylePluginToConfigInTree,
-  addToOutputTargetsInTree,
-} from '../../stencil-core-utils';
+import { addStylePluginToConfigInTree, addToOutputTargetsInTree } from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 const projectType = ProjectType.Library;
@@ -39,15 +22,10 @@ function normalize(
 }
 
 function addFiles(options: MakeLibBuildableSchema): Rule {
-  const nxJson = readNxJson();
-  const projectNames = names(options.name);
   return mergeWith(
     apply(url(`./files/lib`), [
       applyTemplates({
-        ...options,
-        ...projectNames,
-        offsetFromRoot: offsetFromRoot(options.projectRoot),
-        pkgJsonName: `@${nxJson.npmScope}/${projectNames.fileName}`,
+        ...options
       }),
       move(options.projectRoot),
     ])

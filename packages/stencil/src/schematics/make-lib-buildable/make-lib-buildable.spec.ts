@@ -9,7 +9,7 @@ import { readJsonInTree } from '@nrwl/workspace';
 describe('make-lib-buildable schematic', () => {
   let tree: Tree;
   const name = uniq('testproject');
-  const options: MakeLibBuildableSchema = { name, style: SupportedStyles.css };
+  const options: MakeLibBuildableSchema = { name, style: SupportedStyles.css, importPath: '@my/lib' };
 
   beforeEach(async () => {
     tree = await createTestUILib(name, SupportedStyles.css, false);
@@ -56,6 +56,6 @@ export const config: Config = {
     const result = await runSchematic('make-lib-buildable', options, tree);
 
     const packageJson = readJsonInTree(result, `libs/${name}/package.json`);
-    expect(packageJson['name']).toEqual(`@nxext/${name}`);
+    expect(packageJson['name']).toEqual(`@my/lib`);
   });
 });

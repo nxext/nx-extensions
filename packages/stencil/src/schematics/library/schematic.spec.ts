@@ -169,4 +169,66 @@ describe('schematic:library', () => {
       expect(result.exists('libs/testlib/src/components.d.ts')).toBeTruthy();
     });
   });
+
+  describe('publishable libraries', () => {
+    let options;
+    let projectName;
+    beforeEach(() => {
+      projectName = 'testlib';
+      options = {
+        name: projectName,
+        appType: AppType.library,
+        publishable: true,
+        importPath: '@myorg/mylib'
+      };
+    });
+
+    it('should throw error if publishable without importPath', async () => {
+      try {
+        await runSchematic('lib', {
+          name: projectName,
+          appType: AppType.library,
+          publishable: true
+        }, tree);
+      } catch (error) {
+        expect(error.message).toContain(
+          'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)'
+        );
+      }
+    });
+
+    it('should create build targets', async () => {
+      const projectName = 'testlib';
+      const result = await runSchematic('lib', options, tree);
+
+      const projectConfig = getProjectConfig(result, projectName);
+      expect(projectConfig.architect['build']).toBeDefined();
+      expect(projectConfig.architect['e2e']).toBeDefined();
+      expect(projectConfig.architect['serve']).toBeDefined();
+    });
+
+    it('should export bundle', async () => {
+      const result = await runSchematic('lib', options, tree);
+
+      expect(result.readContent('libs/testlib/src/index.ts')).toContain(
+        "export * from './components';"
+      );
+    });
+
+    it('should create build files', async () => {
+      const result = await runSchematic('lib', options, tree);
+
+      expect(result.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
+      expect(result.exists('libs/testlib/package.json')).toBeTruthy();
+      expect(result.exists('libs/testlib/src/index.html')).toBeTruthy();
+      expect(result.exists('libs/testlib/src/components.d.ts')).toBeTruthy();
+    });
+
+    it('should update importPath', async () => {
+      const result = await runSchematic('lib', options, tree);
+      const pkgJson = readJsonInTree(result, 'libs/testlib/package.json');
+
+      expect(pkgJson.name).toBe('@myorg/mylib');
+    });
+  });
 });

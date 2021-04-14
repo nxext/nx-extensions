@@ -8,20 +8,19 @@ import {
   Rule,
   schematic,
   Tree,
-  url,
+  url
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
-  formatFiles,
-  ProjectType,
-  updateWorkspace,
+  formatFiles, getNpmScope,
+  ProjectType, updateJsonInTree,
+  updateWorkspace
 } from '@nrwl/workspace';
-import { names, offsetFromRoot } from '@nrwl/devkit';
+import { names, offsetFromRoot, updateJson } from '@nrwl/devkit';
 import { LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { addBuilderToTarget, calculateStyle } from '../../utils/utils';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
-import { InitSchema } from '../init/schema';
 import { initSchematic } from '../init/init';
 import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
@@ -29,7 +28,7 @@ import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 
 const projectType = ProjectType.Library;
 
-function normalizeOptions(options: InitSchema, host: Tree): LibrarySchema {
+function normalizeOptions(options: LibrarySchema, host: Tree): LibrarySchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -42,6 +41,7 @@ function normalizeOptions(options: InitSchema, host: Tree): LibrarySchema {
 
   const style = calculateStyle(options.style);
   const appType = AppType.library;
+  const importPath = options.importPath || `@${getNpmScope(host)}/${projectDirectory}`;
 
   return {
     ...options,
@@ -51,6 +51,7 @@ function normalizeOptions(options: InitSchema, host: Tree): LibrarySchema {
     parsedTags,
     style,
     appType,
+    importPath
   } as LibrarySchema;
 }
 
@@ -60,17 +61,22 @@ function addFiles(options: LibrarySchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot),
+        offsetFromRoot: offsetFromRoot(options.projectRoot)
       }),
       move(options.projectRoot),
-      formatFiles({ skipFormat: options.skipFormat }),
+      formatFiles({ skipFormat: options.skipFormat })
     ])
   );
 }
 
-export function librarySchematic(options: InitSchema): Rule {
+export function librarySchematic(options: LibrarySchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
+    if (options.publishable === true && !options.importPath) {
+      throw new Error(
+        `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`
+      );
+    }
     return chain([
       initSchematic(normalizedOptions),
       updateWorkspace((workspace) => {
@@ -82,9 +88,9 @@ export function librarySchematic(options: InitSchema): Rule {
           schematics: {
             '@nxext/stencil:component': {
               style: options.style,
-              storybook: false,
-            },
-          },
+              storybook: false
+            }
+          }
         }).targets;
         addBuilderToTarget(
           targetCollection,
@@ -94,20 +100,20 @@ export function librarySchematic(options: InitSchema): Rule {
         );
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
-        tags: normalizedOptions.parsedTags,
+        tags: normalizedOptions.parsedTags
       }),
       addFiles(normalizedOptions),
       updateTsConfig(normalizedOptions),
-      normalizedOptions.buildable
+      normalizedOptions.buildable || normalizedOptions.publishable
         ? schematic('make-lib-buildable', {
-            name: normalizedOptions.projectName,
-            style: normalizedOptions.style,
-          } as MakeLibBuildableSchema)
+          name: normalizedOptions.projectName,
+          importPath: normalizedOptions.importPath,
+          style: normalizedOptions.style
+        } as MakeLibBuildableSchema)
         : noop(),
     ]);
   };
 }
-
 export default librarySchematic;
 export const libraryGenerator = wrapAngularDevkitSchematic(
   '@nxext/stencil',
