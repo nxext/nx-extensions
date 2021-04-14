@@ -28,7 +28,6 @@ export default async function runExecutor(
   context: ExecutorContext
 ) {
   const taskCommand: TaskCommand = 'build';
-  context.target.executor = 'build';
 
   const projGraph = createProjectGraph();
   const { target, dependencies } = calculateProjectDependencies(
@@ -48,14 +47,6 @@ export default async function runExecutor(
     return { success: false };
   }
 
-  return run(taskCommand, options, context, dependencies, target);
-}
-
-async function run(taskCommand,
-                   options,
-                   context: ExecutorContext,
-                   dependencies,
-                   target) {
   const configAndPathCollection = await initializeStencilConfig(
     taskCommand,
     options,

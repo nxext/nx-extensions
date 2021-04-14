@@ -1,7 +1,7 @@
 export const nxextVersion = '11.2.0';
 export const stencilVersion = '^2.5.2';
 export const stencilRouterVersion = '^1.0.1';
-export const ionicVersion = '^5.5.0';
+export const ionicVersion = '^5.6.4';
 
 export const autoprefixerVersion = '^9.7.6';
 export const autoprefixerTypesVersion = '^9.7.2';

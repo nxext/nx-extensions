@@ -5,6 +5,8 @@ const stencilpkgs = [
   '@stencil/less',
   '@stencil/postcss',
   '@stencil/stylus',
+  '@ionic/core',
+  '@stencil/router',
 
   '@stencil/react-output-target',
   '@stencil/vue-output-target',
