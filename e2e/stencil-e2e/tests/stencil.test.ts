@@ -226,10 +226,10 @@ describe('e2e', () => {
       done();
     });
 
-    it(`should build app with scss`, async (done) => {
+    it(`should build app with css`, async (done) => {
       const plugin = uniq('app2');
       await runNxCommandAsync(
-        `generate @nxext/stencil:app ${plugin} --style='scss'`
+        `generate @nxext/stencil:app ${plugin} --style='css'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);

@@ -4,21 +4,13 @@ import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType, runSchematic } from '../../utils/testing';
-import { InitSchema } from '../init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 
 describe('schematic:application', () => {
   let tree: Tree;
-  const options: InitSchema = { name: 'test' };
 
   beforeEach(() => {
     tree = createEmptyWorkspace(Tree.empty());
-  });
-
-  it('should run successfully', async () => {
-    await expect(
-      runSchematic('application', options, tree)
-    ).resolves.not.toThrowError();
   });
 
   it('should add Stencil dependencies', async () => {
@@ -93,7 +85,7 @@ describe('schematic:application', () => {
       );
 
       const projectConfig = getProjectConfig(tree, projectName);
-      expect(projectConfig.schematics).toEqual({
+      expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,
           storybook: false,

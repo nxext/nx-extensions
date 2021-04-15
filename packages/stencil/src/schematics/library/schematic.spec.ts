@@ -88,7 +88,7 @@ describe('schematic:library', () => {
       );
 
       const projectConfig = getProjectConfig(tree, projectName);
-      expect(projectConfig.schematics).toEqual({
+      expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,
           storybook: false,
