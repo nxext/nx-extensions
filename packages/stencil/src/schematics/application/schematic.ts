@@ -66,33 +66,33 @@ function addFiles(options: ApplicationSchema): Rule {
   );
 }
 
-export function applicationSchematic(options: InitSchema): Rule {
+export function applicationSchematic(schema: InitSchema): Rule {
   return (host: Tree) => {
-    const normalizedOptions = normalizeOptions(options, host);
+    const options = normalizeOptions(schema, host);
     return chain([
-      initSchematic(normalizedOptions),
+      initSchematic(options),
       updateWorkspace((workspace) => {
         const targetCollection = workspace.projects.add({
-          name: normalizedOptions.projectName,
-          root: normalizedOptions.projectRoot,
-          sourceRoot: `${normalizedOptions.projectRoot}/src`,
+          name: options.projectName,
+          root: options.projectRoot,
+          sourceRoot: `${options.projectRoot}/src`,
           projectType,
           schematics: {
             '@nxext/stencil:component': {
-              style: options.style,
+              style: schema.style,
               storybook: false,
             },
           },
         }).targets;
-        addDefaultBuilders(targetCollection, projectType, normalizedOptions);
+        addDefaultBuilders(targetCollection, projectType, options);
       }),
-      addProjectToNxJsonInTree(normalizedOptions.projectName, {
-        tags: normalizedOptions.parsedTags,
+      addProjectToNxJsonInTree(options.projectName, {
+        tags: options.parsedTags,
       }),
-      addFiles(normalizedOptions),
+      addFiles(options),
       addStylePluginToConfigInTree(
-        join(normalizedOptions.projectRoot, 'stencil.config.ts'),
-        normalizedOptions.style
+        join(options.projectRoot, 'stencil.config.ts'),
+        options.style
       ),
     ]);
   };
