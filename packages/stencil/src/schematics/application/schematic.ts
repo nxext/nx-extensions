@@ -1,38 +1,21 @@
 import { AppType } from './../../utils/typings';
-import {
-  apply,
-  applyTemplates,
-  chain,
-  mergeWith,
-  move,
-  Rule,
-  Tree,
-  url,
-} from '@angular-devkit/schematics';
-import {
-  addProjectToNxJsonInTree,
-  formatFiles,
-  ProjectType,
-  updateWorkspace,
-} from '@nrwl/workspace';
-import { names, offsetFromRoot } from '@nrwl/devkit';
+import { convertNxGenerator, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nrwl/devkit';
 import { ApplicationSchema } from './schema';
 import { InitSchema } from '../init/schema';
-import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
-import { initSchematic } from '../init/init';
+import { calculateStyle } from '../../utils/utils';
+import { initGenerator } from '../init/init';
 import { join } from 'path';
-import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
-import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
-import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
+import { addStylePluginToConfigInTree } from '../../stencil-core-utils/lib/devkit/style-plugins';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { addProject } from './lib/add-project';
 
-const projectType = ProjectType.Application;
-
-function normalizeOptions(options: InitSchema, host: Tree): ApplicationSchema {
+function normalizeOptions(host: Tree, options: InitSchema): ApplicationSchema {
+  const { appsDir } = getWorkspaceLayout(host);
   const projectName = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${projectName}`
     : projectName;
-  const projectRoot = `${appsDir(host)}/${projectDirectory}`;
+  const projectRoot = `${appsDir}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -52,54 +35,34 @@ function normalizeOptions(options: InitSchema, host: Tree): ApplicationSchema {
   };
 }
 
-function addFiles(options: ApplicationSchema): Rule {
-  return mergeWith(
-    apply(url(`./files/app`), [
-      applyTemplates({
-        ...options,
-        ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot),
-      }),
-      move(options.projectRoot),
-      formatFiles({ skipFormat: false }),
-    ])
+function createFiles(host: Tree, options: ApplicationSchema) {
+  generateFiles(
+    host,
+    join(__dirname, './files/app'),
+    options.projectRoot,
+    {
+      ...options,
+      ...names(options.name),
+      offsetFromRoot: offsetFromRoot(options.projectRoot)
+    }
   );
 }
 
-export function applicationSchematic(schema: InitSchema): Rule {
-  return (host: Tree) => {
-    const options = normalizeOptions(schema, host);
-    return chain([
-      initSchematic(options),
-      updateWorkspace((workspace) => {
-        const targetCollection = workspace.projects.add({
-          name: options.projectName,
-          root: options.projectRoot,
-          sourceRoot: `${options.projectRoot}/src`,
-          projectType,
-          schematics: {
-            '@nxext/stencil:component': {
-              style: schema.style,
-              storybook: false,
-            },
-          },
-        }).targets;
-        addDefaultBuilders(targetCollection, projectType, options);
-      }),
-      addProjectToNxJsonInTree(options.projectName, {
-        tags: options.parsedTags,
-      }),
-      addFiles(options),
-      addStylePluginToConfigInTree(
-        join(options.projectRoot, 'stencil.config.ts'),
-        options.style
-      ),
-    ]);
-  };
+export async function applicationGenerator(host: Tree, schema: InitSchema) {
+  const options = normalizeOptions(host, schema);
+  const initTask = await initGenerator(host, options);
+
+  createFiles(host, options);
+  addProject(host, options);
+
+  addStylePluginToConfigInTree(
+    host,
+    join(options.projectRoot, 'stencil.config.ts'),
+    options.style
+  );
+
+  return runTasksInSerial(initTask);
 }
 
-export default applicationSchematic;
-export const applicationGenerator = wrapAngularDevkitSchematic(
-  '@nxext/stencil',
-  'application'
-);
+export default applicationGenerator;
+export const applicationSchematic = convertNxGenerator(applicationGenerator);

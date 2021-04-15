@@ -80,7 +80,7 @@ export function librarySchematic(options: LibrarySchema): Rule {
           root: normalizedOptions.projectRoot,
           sourceRoot: `${normalizedOptions.projectRoot}/src`,
           projectType,
-          schematics: {
+          generators: {
             '@nxext/stencil:component': {
               style: options.style,
               storybook: false

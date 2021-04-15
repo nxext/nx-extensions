@@ -35,12 +35,13 @@ export function getBuildTarget(
       projectType,
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot)
-      //replaceDependenciesWithLocalPath: true,
     },
+    outputs: [
+      '{options.outputPath}'
+    ],
     configurations: {
       production: {
         dev: false
-        //replaceDependenciesWithLocalPath: false,
       }
     }
   };
