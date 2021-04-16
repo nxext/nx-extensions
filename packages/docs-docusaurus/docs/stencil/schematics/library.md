@@ -55,6 +55,20 @@ Type: `boolean`
 
 Generate the build and e2e commands and be able to build and redistribute the library independently.
 
+## --publishable
+
+Default: false
+
+Type: `boolean`
+
+Set the importPath, generate the build and e2e commands and be able to build and redistribute the library independently.
+
+## --importPath
+
+Type: `string`
+
+ImportPath used for publishable libraries and set into the package.json
+
 ### --skipFormat
 
 Default: `false`

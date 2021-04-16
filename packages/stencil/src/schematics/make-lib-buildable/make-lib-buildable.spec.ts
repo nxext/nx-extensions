@@ -36,17 +36,6 @@ export const config: Config = {
       esmLoaderPath: '../loader',
       dir: '../../dist/libs/${name}/dist',
     },
-    {
-      type: 'docs-readme',
-    },
-    {
-      type: 'dist-custom-elements-bundle',
-    },
-    {
-      type: 'www',
-      dir: '../../dist/libs/${name}/www',
-      serviceWorker: null,
-    },
   ],
 };
 `);

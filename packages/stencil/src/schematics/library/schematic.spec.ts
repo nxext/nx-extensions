@@ -109,9 +109,9 @@ describe('schematic:library', () => {
       const result = await runSchematic('lib', options, tree);
 
       const projectConfig = getProjectConfig(result, projectName);
-      expect(projectConfig.architect['build']).toBeUndefined();
-      expect(projectConfig.architect['e2e']).toBeUndefined();
-      expect(projectConfig.architect['serve']).toBeUndefined();
+      expect(projectConfig.targets['build']).toBeUndefined();
+      expect(projectConfig.targets['e2e']).toBeUndefined();
+      expect(projectConfig.targets['serve']).toBeUndefined();
     });
 
     it('should export component', async () => {
@@ -165,7 +165,6 @@ describe('schematic:library', () => {
       const result = await runSchematic('lib', options, tree);
 
       expect(result.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
-      expect(result.exists('libs/testlib/src/index.html')).toBeTruthy();
       expect(result.exists('libs/testlib/src/components.d.ts')).toBeTruthy();
     });
   });
@@ -220,7 +219,6 @@ describe('schematic:library', () => {
 
       expect(result.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
       expect(result.exists('libs/testlib/package.json')).toBeTruthy();
-      expect(result.exists('libs/testlib/src/index.html')).toBeTruthy();
       expect(result.exists('libs/testlib/src/components.d.ts')).toBeTruthy();
     });
 

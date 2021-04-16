@@ -6,7 +6,8 @@ import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 import { ExecutorContext } from '@nrwl/devkit';
 import {
   calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt, updateBuildableProjectPackageJsonDependencies
+  checkDependentProjectsHaveBeenBuilt,
+  updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
 
 function createStencilCompilerOptions(
@@ -57,16 +58,14 @@ export default async function runExecutor(
     configAndPathCollection
   );
 
-  if (dependencies.length > 0 && context.target.executor !== 'serve') {
-    updateBuildableProjectPackageJsonDependencies(
-      context.root,
-      context.projectName,
-      context.targetName,
-      context.configurationName,
-      target,
-      dependencies
-    );
-  }
+  updateBuildableProjectPackageJsonDependencies(
+    context.root,
+    context.projectName,
+    context.targetName,
+    context.configurationName,
+    target,
+    dependencies
+  );
 
   return await createStencilProcess(stencilConfig, configAndPathCollection);
 }
