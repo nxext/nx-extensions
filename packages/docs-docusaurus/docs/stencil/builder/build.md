@@ -61,6 +61,15 @@ Type: `boolean`
 
 Is prod build
 
+### --prerender
+
+Default: `false`
+
+Type: `boolean`
+
+Stencil doesn't prerender components by default. However, the build can be made to prerender using the --prerender flag
+
+
 ### --open
 
 Default: `false`
