@@ -59,16 +59,17 @@ export function addDefaultBuilders(
   targetCollection.add({
     name: 'build',
     builder: `@nxext/stencil:build`,
+    outputs: [
+      '{options.outputPath}'
+    ],
     options: {
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
       outputPath: `dist/${options.projectRoot}`,
-      //replaceDependenciesWithLocalPath: true,
     },
     configurations: {
       production: {
-        dev: false,
-        //replaceDependenciesWithLocalPath: false,
+        dev: false
       },
     },
   });
@@ -77,6 +78,9 @@ export function addDefaultBuilders(
   targetCollection.add({
     name: 'serve',
     builder: `@nxext/stencil:build`,
+    outputs: [
+      '{options.outputPath}'
+    ],
     options: {
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
@@ -100,6 +104,9 @@ export function addBuilderToTarget(
   targetCollection.add({
     name: builder,
     builder: `@nxext/stencil:${builder}`,
+    outputs: [
+      '{options.outputPath}'
+    ],
     options: {
       projectType,
       configPath: `${options.projectRoot}/stencil.config.ts`,
