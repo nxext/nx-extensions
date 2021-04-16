@@ -1,10 +1,8 @@
-import { StencilBuildOptions } from '../build/schema';
-import { StencilTestOptions } from '../test/schema';
-import { StencilE2EOptions } from '../e2e/schema';
+import { StencilBaseConfigOptions } from './stencil-config';
 
-export function parseRunParameters(
+export function parseRunParameters<T extends StencilBaseConfigOptions>(
   runOptions: string[],
-  options: StencilBuildOptions | StencilTestOptions | StencilE2EOptions
+  options: T
 ) {
   Object.keys(options).forEach((optionKey) => {
     if (typeof options[optionKey] === 'boolean' && options[optionKey]) {
