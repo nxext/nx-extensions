@@ -10,16 +10,24 @@ import {
   Tree,
   url
 } from '@angular-devkit/schematics';
-import { addProjectToNxJsonInTree, formatFiles, getNpmScope, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import {
+  addProjectToNxJsonInTree,
+  formatFiles,
+  getNpmScope,
+  getWorkspacePath,
+  ProjectType,
+  updateJsonInTree
+} from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
 import { LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
-import { addBuilderToTarget, calculateStyle } from '../../utils/utils';
+import { calculateStyle } from '../../utils/utils';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { initSchematic } from '../init/init';
 import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { getTestBuilder } from '../../utils/builders';
 
 const projectType = ProjectType.Library;
 
@@ -74,25 +82,23 @@ export function librarySchematic(options: LibrarySchema): Rule {
     }
     return chain([
       initSchematic(normalizedOptions),
-      updateWorkspace((workspace) => {
-        const targetCollection = workspace.projects.add({
-          name: normalizedOptions.projectName,
+      updateJsonInTree(getWorkspacePath(host),(json) => {
+        const targets = {};
+        targets['test'] = getTestBuilder(projectType, normalizedOptions);
+        json.projects[normalizedOptions.projectName] = {
           root: normalizedOptions.projectRoot,
           sourceRoot: `${normalizedOptions.projectRoot}/src`,
           projectType,
+          targets,
           generators: {
             '@nxext/stencil:component': {
               style: options.style,
               storybook: false
             }
           }
-        }).targets;
-        addBuilderToTarget(
-          targetCollection,
-          'test',
-          projectType,
-          normalizedOptions
-        );
+        };
+
+        return json;
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
         tags: normalizedOptions.parsedTags

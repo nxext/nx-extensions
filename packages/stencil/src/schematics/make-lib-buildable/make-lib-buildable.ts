@@ -1,12 +1,12 @@
 import { apply, applyTemplates, chain, mergeWith, move, Rule, Tree, url } from '@angular-devkit/schematics';
-import { formatFiles, ProjectType, updateWorkspace } from '@nrwl/workspace';
+import { formatFiles, getWorkspacePath, ProjectType, updateJsonInTree } from '@nrwl/workspace';
 import { offsetFromRoot } from '@nrwl/devkit';
 import { getProjectConfig } from '@nrwl/workspace/src/utils/ast-utils';
-import { addBuilderToTarget } from '../../utils/utils';
 import { MakeLibBuildableSchema } from './schema';
 import { join } from 'path';
 import { addStylePluginToConfigInTree, addToOutputTargetsInTree } from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { getBuildBuilder, getE2eBuilder, getServeBuilder } from '../../utils/builders';
 
 const projectType = ProjectType.Library;
 
@@ -32,67 +32,38 @@ function addFiles(options: MakeLibBuildableSchema): Rule {
   );
 }
 
-export function makeLibBuildableSchematic(options: MakeLibBuildableSchema): Rule {
+export function makeLibBuildableSchematic(schema: MakeLibBuildableSchema): Rule {
   return (tree: Tree) => {
-    const stencilProjectConfig = getProjectConfig(tree, options.name);
-    const normalizedOptions = normalize(options, stencilProjectConfig);
+    const stencilProjectConfig = getProjectConfig(tree, schema.name);
+    const options = normalize(schema, stencilProjectConfig);
 
     return chain([
-      updateWorkspace((workspace) => {
-        const projectConfig = workspace.projects.get(options.name);
-        const targetCollection = projectConfig.targets;
-        addBuilderToTarget(
-          targetCollection,
-          'e2e',
-          projectType,
-          normalizedOptions
-        );
-        addBuilderToTarget(
-          targetCollection,
-          'build',
-          projectType,
-          normalizedOptions
-        );
-        targetCollection.add({
-          name: 'serve',
-          builder: `@nxext/stencil:build`,
-          options: {
-            projectType,
-            configPath: `${normalizedOptions.projectRoot}/stencil.config.ts`,
-            serve: true,
-            watch: true,
-          },
-        });
+      updateJsonInTree(getWorkspacePath(tree),(json) => {
+        const project = json.projects[schema.name];
+        const targets = {};
+        targets['build'] = getBuildBuilder(projectType, options);
+        targets['serve'] = getServeBuilder(projectType, options);
+        targets['e2e'] = getE2eBuilder(projectType, options);
+        project.targets = targets;
+
+        return json;
       }),
-      addFiles(normalizedOptions),
+      addFiles(options),
       addStylePluginToConfigInTree(
-        join(normalizedOptions.projectRoot, 'stencil.config.ts'),
-        normalizedOptions.style
+        join(options.projectRoot, 'stencil.config.ts'),
+        options.style
       ),
       addToOutputTargetsInTree(
         [
           `{
           type: 'dist',
           esmLoaderPath: '../loader',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${
-            normalizedOptions.projectRoot
+          dir: '${offsetFromRoot(options.projectRoot)}dist/${
+            options.projectRoot
           }/dist',
-        }`,
-          `{
-          type: 'docs-readme'
-        }`,
-          `{
-          type: 'dist-custom-elements-bundle',
-        }`,
-          `{
-          type: 'www',
-          dir: '${offsetFromRoot(normalizedOptions.projectRoot)}dist/${
-            normalizedOptions.projectRoot
-          }/www',
-          serviceWorker: null
-        }`,
+        }`
         ],
-        join(normalizedOptions.projectRoot, 'stencil.config.ts')
+        join(options.projectRoot, 'stencil.config.ts')
       ),
       formatFiles(),
     ]);

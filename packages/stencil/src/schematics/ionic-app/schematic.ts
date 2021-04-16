@@ -7,7 +7,7 @@ import {
   move,
   Rule,
   Tree,
-  url,
+  url
 } from '@angular-devkit/schematics';
 import {
   addDepsToPackageJson,
@@ -16,12 +16,12 @@ import {
   formatFiles,
   offsetFromRoot,
   ProjectType,
-  updateWorkspace,
+  updateWorkspace
 } from '@nrwl/workspace';
-import { names, logger } from '@nrwl/devkit';
+import { logger, names } from '@nrwl/devkit';
 import { IonicAppSchema } from './schema';
 import { AppType } from '../../utils/typings';
-import { addDefaultBuilders, calculateStyle } from '../../utils/utils';
+import { calculateStyle } from '../../utils/utils';
 import { appsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
 import { initSchematic } from '../init/init';
@@ -31,6 +31,8 @@ import { addStylePluginToConfigInTree } from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 import { detectPackageManager } from '@nrwl/tao/src/shared/package-manager';
 import { CapacitorSchematicSchema } from '@nxtend/capacitor';
+import { getBuildBuilder, getE2eBuilder, getServeBuilder, getTestBuilder } from '../../utils/builders';
+
 const projectType = ProjectType.Application;
 
 function normalizeOptions(options: IonicAppSchema, host: Tree): IonicAppSchema {
@@ -116,7 +118,22 @@ export function ionicAppSchematic(options: IonicAppSchema): Rule {
             },
           },
         }).targets;
-        addDefaultBuilders(targetCollection, projectType, normalizedOptions);
+        targetCollection.add({
+          name: 'test',
+          ...getTestBuilder(projectType, options)
+        });
+        targetCollection.add({
+          name: 'build',
+          ...getBuildBuilder(projectType, options)
+        });
+        targetCollection.add({
+          name: 'serve',
+          ...getServeBuilder(projectType, options)
+        });
+        targetCollection.add({
+          name: 'e2e',
+          ...getE2eBuilder(projectType, options)
+        });
       }),
       addProjectToNxJsonInTree(normalizedOptions.projectName, {
         tags: normalizedOptions.parsedTags,
