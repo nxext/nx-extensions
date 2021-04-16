@@ -1,6 +1,4 @@
 import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/cli';
-import { StencilBuildOptions } from '../build/schema';
-import { StencilTestOptions } from '../test/schema';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { ConfigAndPathCollection, CoreCompiler } from './types';
@@ -17,13 +15,18 @@ function getCompilerExecutingPath() {
   return require.resolve('@stencil/core/compiler');
 }
 
-export async function initializeStencilConfig(
+export interface StencilBaseConfigOptions {
+  configPath: string;
+  outputPath: string;
+}
+
+export async function initializeStencilConfig<T extends StencilBaseConfigOptions>(
   taskCommand: TaskCommand,
-  options: StencilBuildOptions | StencilTestOptions,
+  options: T,
   context: ExecutorContext,
   createStencilCompilerOptions: (
     taskCommand: TaskCommand,
-    options: StencilBuildOptions
+    options: T
   ) => ConfigFlags
 ): Promise<ConfigAndPathCollection> {
   const configFilePath = options.configPath;
