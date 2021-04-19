@@ -23,12 +23,6 @@
       "aliases": ["pwa"],
       "hidden": false
     },
-    "ionic-app": {
-      "factory": "./src/schematics/ionic-app/schematic#ionicAppSchematic",
-      "schema": "./src/schematics/ionic-app/schema.json",
-      "description": "Generate Stencil Ionic Capacitor app",
-      "hidden": false
-    },
     "library": {
       "factory": "./src/schematics/library/schematic#librarySchematic",
       "schema": "./src/schematics/library/schema.json",

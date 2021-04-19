@@ -7,7 +7,7 @@ import {
   puppeteerType,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
-  stencilVersion,
+  stencilVersion
 } from './versions';
 import { SupportedStyles } from '../stencil-core-utils';
 
@@ -15,7 +15,6 @@ export enum AppType {
   application = 'application',
   library = 'library',
   pwa = 'pwa',
-  capacitorapp = 'capacitorapp',
 }
 
 export interface PackageDependencies {
@@ -47,13 +46,6 @@ export const PROJECT_TYPE_DEPENDENCIES: {
     },
   },
   [AppType.pwa]: {
-    dependencies: {},
-    devDependencies: {
-      ...stencilDependencies,
-      '@ionic/core': ionicVersion,
-    },
-  },
-  [AppType.capacitorapp]: {
     dependencies: {},
     devDependencies: {
       ...stencilDependencies,

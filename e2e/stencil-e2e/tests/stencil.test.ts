@@ -162,22 +162,6 @@ describe('e2e', () => {
     });
   });
 
-  describe('e2e-ionic-app', () => {
-    describe('stencil ionic app builder', () => {
-      it(`should build ionic app`, async (done) => {
-        const plugin = uniq('ionic-app');
-        await runNxCommandAsync(
-          `generate @nxext/stencil:ionic-app ${plugin} --style=css`
-        );
-
-        const result = await runNxCommandAsync(`build ${plugin} --dev`);
-        expect(result.stdout).toContain('build finished');
-
-        done();
-      });
-    });
-  });
-
   describe('stencil builderoptions', () => {
     it(`should build with custom stencil config naming`, async (done) => {
       const plugin = uniq('library');
