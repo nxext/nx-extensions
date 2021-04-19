@@ -64,7 +64,7 @@ function Home() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`${siteConfig.title}`}
       description="Bring StencilJS and Svelte to Nx devtools"
     >
       <header className={clsx('hero hero--primary', styles.heroBanner)}>

@@ -4,15 +4,16 @@ module.exports = {
   url: 'https://nxext.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  favicon: 'img/favicon.png',
+  favicon: 'img/fav.png',
   organizationName: 'nxext', // Usually your GitHub org/user name.
   projectName: 'Nxext', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'Nxext',
+      title: '',
       logo: {
         alt: 'Nxext Logo',
-        src: 'img/logo.png',
+        src: 'img/logo-dark.svg',
+        srcDark: 'img/logo-light.svg'
       },
       items: [
         {
@@ -21,7 +22,6 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        /*{ to: 'blog', label: 'Blog', position: 'left' },*/
         {
           href: 'https://github.com/nxext/nx-extensions',
           label: 'GitHub',
@@ -31,34 +31,7 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      links: [
-        /*{
-          title: 'Docs',
-          items: [
-            {
-              label: 'Stencil',
-              to: 'docs/doc1/',
-            },
-            {
-              label: 'Svelte',
-              to: 'docs/doc2/',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/nxext/nx-extensions',
-            },
-          ],
-        },*/
-      ],
+      links: [],
       copyright: `Copyright © ${new Date().getFullYear()} Dominik Pieper. Built with Docusaurus.`,
     },
   },
