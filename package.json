@@ -128,8 +128,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --pattern '{apps,libs}/**/*.{jsx,ts,tsx,html,js,json,css,scss,styl,pcss,md}'"
+      "pre-commit": "lint-staged'"
     }
+  },
+  "lint-staged": {
+    "*.{ts,js,tsx,jsx,scss,less,css,html,json,md,mdx}": "prettier --write"
   },
   "config": {
     "commitizen": {
