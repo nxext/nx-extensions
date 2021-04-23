@@ -12,7 +12,7 @@ export interface Schema {
   project: string;
 }
 
-async function tailwindSvelteGenerator(tree: Tree, options: Schema) {
+export async function tailwindSvelteGenerator(tree: Tree, options: Schema) {
   const projectConfig = readProjectConfiguration(tree, options.project);
   const sourceRoot = projectConfig.sourceRoot;
   const projectRoot = projectConfig.root;

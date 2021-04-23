@@ -4,25 +4,25 @@
   "version": "0.0.1",
   "schematics": {
     "stencil": {
-      "factory": "./src/schematics/stencil/schematic#tailwindStencilSchematic",
-      "schema": "./src/schematics/stencil/schema.json",
+      "factory": "./src/generators/stencil/schematic#tailwindStencilSchematic",
+      "schema": "./src/generators/stencil/schema.json",
       "description": "stencil tailwind schematic"
     },
     "svelte": {
-      "factory": "./src/schematics/svelte/generator#tailwindSvelteSchematic",
-      "schema": "./src/schematics/svelte/schema.json",
+      "factory": "./src/generators/svelte/generator#tailwindSvelteSchematic",
+      "schema": "./src/generators/svelte/schema.json",
       "description": "svelte schematic"
     }
   },
   "generators": {
     "stencil": {
-      "factory": "./src/schematics/stencil/schematic#tailwindStencilGenerator",
-      "schema": "./src/schematics/stencil/schema.json",
+      "factory": "./src/generators/stencil/schematic#tailwindStencilGenerator",
+      "schema": "./src/generators/stencil/schema.json",
       "description": "stencil tailwind schematic"
     },
     "svelte": {
-      "factory": "./src/schematics/svelte/generator#tailwindSvelteGenerator",
-      "schema": "./src/schematics/svelte/schema.json",
+      "factory": "./src/generators/svelte/generator#tailwindSvelteGenerator",
+      "schema": "./src/generators/svelte/schema.json",
       "description": "svelte schematic"
     }
   }

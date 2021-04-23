@@ -58,8 +58,8 @@ export function addStylePluginToConfigInTree(options: Schema): Rule {
     const projectConfig = getProjectConfig(tree, options.project);
     const projectRoot = projectConfig.root;
     const stencilConfigPath =
-      projectConfig?.architect?.build?.options?.configPath ||
-      projectConfig?.architect?.test?.options?.configPath;
+      projectConfig?.targets?.build?.options?.configPath ||
+      projectConfig?.targets?.test?.options?.configPath;
     const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
       tree,
       stencilConfigPath
