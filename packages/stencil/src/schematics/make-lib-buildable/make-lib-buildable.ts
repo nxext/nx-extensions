@@ -7,6 +7,7 @@ import { join } from 'path';
 import { addStylePluginToConfigInTree, addToOutputTargetsInTree } from '../../stencil-core-utils';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 import { getBuildBuilder, getE2eBuilder, getServeBuilder } from '../../utils/builders';
+import { updateTsConfig } from './lib/update-tsconfig';
 
 const projectType = ProjectType.Library;
 
@@ -65,6 +66,7 @@ export function makeLibBuildableSchematic(schema: MakeLibBuildableSchema): Rule 
         ],
         join(options.projectRoot, 'stencil.config.ts')
       ),
+      updateTsConfig(options),
       formatFiles(),
     ]);
   };
