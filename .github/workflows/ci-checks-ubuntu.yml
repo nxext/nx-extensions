@@ -1,4 +1,4 @@
-name: Nx MacOSX CI
+name: Nx Linux CI
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-20.04
 
     strategy:
       matrix:

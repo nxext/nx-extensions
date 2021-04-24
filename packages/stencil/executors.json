@@ -2,35 +2,35 @@
   "$schema": "http://json-schema.org/schema",
   "builders": {
     "build": {
-      "implementation": "./src/builders/build/compat",
-      "schema": "./src/builders/build/schema.json",
+      "implementation": "./src/executors/build/compat",
+      "schema": "./src/executors/build/schema.json",
       "description": "stencil build"
     },
     "test": {
-      "implementation": "./src/builders/test/compat",
-      "schema": "./src/builders/test/schema.json",
+      "implementation": "./src/executors/test/compat",
+      "schema": "./src/executors/test/schema.json",
       "description": "stencil test"
     },
     "e2e": {
-      "implementation": "./src/builders/e2e/compat",
-      "schema": "./src/builders/e2e/schema.json",
+      "implementation": "./src/executors/e2e/compat",
+      "schema": "./src/executors/e2e/schema.json",
       "description": "stencil e2e"
     }
   },
   "executors": {
     "build": {
-      "implementation": "./src/builders/build/builder",
-      "schema": "./src/builders/build/schema.json",
+      "implementation": "./src/executors/build/builder",
+      "schema": "./src/executors/build/schema.json",
       "description": "stencil build"
     },
     "test": {
-      "implementation": "./src/builders/test/builder",
-      "schema": "./src/builders/test/schema.json",
+      "implementation": "./src/executors/test/builder",
+      "schema": "./src/executors/test/schema.json",
       "description": "stencil test"
     },
     "e2e": {
-      "implementation": "./src/builders/e2e/builder",
-      "schema": "./src/builders/e2e/schema.json",
+      "implementation": "./src/executors/e2e/builder",
+      "schema": "./src/executors/e2e/schema.json",
       "description": "stencil e2e"
     }
   }
