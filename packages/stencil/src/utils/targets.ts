@@ -33,7 +33,6 @@ export function getBuildTarget(
     executor: '@nxext/stencil:build',
     options: {
       projectType,
-      outputs: ['{options.outputPath}'],
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot)
     },
@@ -60,10 +59,12 @@ export function getTestTarget(
     executor: '@nxext/stencil:test',
     options: {
       projectType,
-      outputs: ['{options.outputPath}'],
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot)
-    }
+    },
+    outputs: [
+      '{options.outputPath}'
+    ],
   };
 }
 
@@ -79,10 +80,12 @@ export function getE2eTarget(
     executor: '@nxext/stencil:e2e',
     options: {
       projectType,
-      outputs: ['{options.outputPath}'],
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot)
-    }
+    },
+    outputs: [
+      '{options.outputPath}'
+    ],
   };
 }
 
@@ -98,11 +101,13 @@ export function getServeTarget(
     executor: `@nxext/stencil:build`,
     options: {
       projectType,
-      outputs: ['{options.outputPath}'],
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot),
       serve: true,
       watch: true
-    }
+    },
+    outputs: [
+      '{options.outputPath}'
+    ],
   };
 }
