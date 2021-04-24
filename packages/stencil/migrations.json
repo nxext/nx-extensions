@@ -51,6 +51,14 @@
       "factory": "./src/migrations/update-11-2-1/update-11-2-1"
     }
   },
+  "generators": {
+    "update-11-3-1": {
+      "version": "11.3.1",
+      "description": "update-11-3-1",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-11-3-1/update-11-3-1"
+    }
+  },
   "packageJsonUpdates": {
     "1.1.0": {
       "version": "1.1.0",
