@@ -91,6 +91,7 @@ export function addReactOutputtarget(
           reactOutputTarget({
             componentCorePackage: '${packageName}',
             proxiesFile: '${realtivePath}/src/generated/components.ts',
+            includeDefineCustomElements: true,
           })
           `,
       stencilConfigPath
