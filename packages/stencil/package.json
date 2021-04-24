@@ -30,13 +30,12 @@
   },
   "peerDependencies": {
     "@nxext/tailwind": "^11.2.0",
-    "@angular-devkit/schematics": "^11.0.0",
     "@nrwl/storybook": "^11.0.0",
     "@nrwl/react": "^11.0.0",
     "@nrwl/angular": "^11.0.0",
     "@nrwl/jest": "^11.2.0",
     "@nrwl/workspace": "^11.2.0",
-    "@stencil/core": "^2.4.0"
+    "@stencil/core": "^2.5.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"
