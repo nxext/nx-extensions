@@ -51,11 +51,6 @@
               },
               {
                 "input": "./packages/stencil",
-                "glob": "builders.json",
-                "output": "."
-              },
-              {
-                "input": "./packages/stencil",
                 "glob": "executors.json",
                 "output": "."
               },
