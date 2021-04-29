@@ -16,7 +16,6 @@
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
-  "builders": "./executors.json",
   "scripts": {
     "postinstall": "yarn setup-local-plugins",
     "nx": "nx",
