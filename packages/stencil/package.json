@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
-  "builders": "./builders.json",
+  "builders": "./executors.json",
   "main": "src/index.js",
   "schematics": "./collection.json",
   "executors": "./executors.json",
