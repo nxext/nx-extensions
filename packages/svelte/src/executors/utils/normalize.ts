@@ -28,7 +28,7 @@ export function normalizeOptions(
     entryRoot,
     project,
     projectRoot,
-    outputPath,
+    outputPath
   };
 }
 

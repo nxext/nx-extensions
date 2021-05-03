@@ -24,7 +24,6 @@
     "@nrwl/devkit": "12.0.0"
   },
   "peerDependencies": {
-    "@nxext/stencil": "^11.0.0",
     "@nrwl/workspace": "^11.0.0"
   }
 }

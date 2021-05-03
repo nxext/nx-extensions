@@ -106,3 +106,17 @@ Default: `localhost`
 Type: `string`
 
 Host to listen on.
+
+### --headers
+
+Default: '[]'
+
+Type: `array`
+
+List of http headers for the dev-server. The entries, as an object like:
+```
+{
+  key: 'Access-Control-Allow-Origin',
+  value: '*'
+}
+```

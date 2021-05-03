@@ -103,17 +103,27 @@ export function createRollupOptions(
   ];
 
   if (options.serve) {
+    let serveOptions = {
+      open: options.open,
+      verbose: false,
+      contentBase: options.outputPath,
+      host: options.host,
+      port: options.port,
+      historyApiFallback: true,
+      headers: {}
+    };
+
+    if(options.headers.length != 0) {
+      serveOptions = {
+        ...serveOptions,
+        headers: Object.assign({}, ...options.headers.map(header => ({[header.key]: header.value})))
+      }
+    }
+
     plugins = [
       ...plugins,
       livereload(),
-      serve({
-        open: options.open,
-        verbose: false,
-        contentBase: options.outputPath,
-        host: options.host,
-        port: options.port,
-        historyApiFallback: true
-      }),
+      serve(serveOptions),
     ];
   }
 

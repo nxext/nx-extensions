@@ -125,7 +125,7 @@ export function tailwindStencilSchematic(options: Schema): Rule {
     ),
     createTailwindConfigForProject(options),
     addStylePluginToConfigInTree(options),
-    (tree: Tree, context: SchematicContext) => {
+    () => {
       logger.info(stripIndents`
           To use Tailwindcss, import the modules you need into your app.css (or scss, less, styl or whatever your global file extension is).
 

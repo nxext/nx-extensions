@@ -20,7 +20,10 @@ export interface RawSvelteBuildOptions {
   svelteConfig?: string;
   project: string;
   extractCss?: boolean;
+  headers: HeaderParam[];
 }
+
+export type Header = {[key: string]: string};
 
 export interface SvelteBuildOptions extends RawSvelteBuildOptions {
   assets: NormalizedCopyAssetOption[];
