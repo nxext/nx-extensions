@@ -228,4 +228,21 @@ describe('e2e', () => {
       done();
     });
   });
+
+  /*
+  describe('Storybook', () => {
+    it('should build', async (done) => {
+      const plugin = uniq('lib');
+      await runNxCommandAsync(
+        `generate @nxext/stencil:lib ${plugin} --style='css'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/stencil:lib ${plugin} --style='css'`
+      );
+      await runNxCommandAsync(`generate @nxext/stencil:storybook-configuration ${plugin} --configureCypress=false`);
+      await runNxCommandAsync(`build-storybook ${plugin}`);
+
+      done();
+    })
+  })*/
 });
