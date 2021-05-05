@@ -9,7 +9,7 @@ describe('tailwind e2e', () => {
       ['@nxext/stencil', 'dist/packages/stencil'],
     ]);
 
-    await runNxCommandAsync(`generate @nxext/stencil:app ${plugin}`);
+    await runNxCommandAsync(`generate @nxext/stencil:app ${plugin} --style=css`);
     await runNxCommandAsync(`generate @nxext/tailwind:stencil ${plugin}`);
 
     updateFile(
