@@ -4,21 +4,21 @@
   "version": "0.0.1",
   "schematics": {
     "init": {
-      "factory": "./src/schematics/init/init#initSchematic",
-      "schema": "./src/schematics/init/schema.json",
+      "factory": "./src/generators/init/init#initSchematic",
+      "schema": "./src/generators/init/schema.json",
       "description": "Core features for collections",
       "hidden": true
     },
     "application": {
-      "factory": "./src/schematics/application/schematic#applicationSchematic",
-      "schema": "./src/schematics/application/schema.json",
+      "factory": "./src/generators/application/generator#applicationSchematic",
+      "schema": "./src/generators/application/schema.json",
       "description": "Generate Stencil application",
       "aliases": ["app"],
       "hidden": false
     },
     "ionic-pwa": {
-      "factory": "./src/schematics/ionic-pwa/schematic#ionicPwaSchematic",
-      "schema": "./src/schematics/ionic-pwa/schema.json",
+      "factory": "./src/generators/ionic-pwa/generator#ionicPwaSchematic",
+      "schema": "./src/generators/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
       "aliases": ["pwa"],
       "hidden": false
@@ -31,7 +31,7 @@
       "hidden": false
     },
     "ng-add": {
-      "factory": "./src/schematics/ng-add/schematic#ngAddSchematic",
+      "factory": "./src/generators/ng-add/generator#ngAddSchematic",
       "description": "Add @nxext/stencil",
       "hidden": false
     },
@@ -48,8 +48,8 @@
       "hidden": false
     },
     "component": {
-      "factory": "./src/schematics/component/component#componentSchematic",
-      "schema": "./src/schematics/component/schema.json",
+      "factory": "./src/generators/component/component#componentSchematic",
+      "schema": "./src/generators/component/schema.json",
       "description": "Add a component to a ui library",
       "aliases": ["c"],
       "hidden": false
@@ -68,29 +68,23 @@
   },
   "generators": {
     "init": {
-      "factory": "./src/schematics/init/init#initGenerator",
-      "schema": "./src/schematics/init/schema.json",
+      "factory": "./src/generators/init/init#initGenerator",
+      "schema": "./src/generators/init/schema.json",
       "description": "Core features for collections",
       "hidden": true
     },
     "application": {
-      "factory": "./src/schematics/application/schematic#applicationGenerator",
-      "schema": "./src/schematics/application/schema.json",
+      "factory": "./src/generators/application/generator#applicationGenerator",
+      "schema": "./src/generators/application/schema.json",
       "description": "Generate Stencil application",
       "aliases": ["app"],
       "hidden": false
     },
     "ionic-pwa": {
-      "factory": "./src/schematics/ionic-pwa/schematic#ionicPwaGenerator",
-      "schema": "./src/schematics/ionic-pwa/schema.json",
+      "factory": "./src/generators/ionic-pwa/generator#ionicPwaGenerator",
+      "schema": "./src/generators/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
       "aliases": ["pwa"],
-      "hidden": false
-    },
-    "ionic-app": {
-      "factory": "./src/schematics/ionic-app/schematic#ionicAppGenerator",
-      "schema": "./src/schematics/ionic-app/schema.json",
-      "description": "Generate Stencil Ionic Capacitor app",
       "hidden": false
     },
     "library": {
@@ -101,7 +95,7 @@
       "hidden": false
     },
     "ng-add": {
-      "factory": "./src/schematics/ng-add/schematic#ngAddGenerator",
+      "factory": "./src/generators/ng-add/generator#ngAddGenerator",
       "description": "Add @nxext/stencil",
       "hidden": false
     },
@@ -118,8 +112,8 @@
       "hidden": false
     },
     "component": {
-      "factory": "./src/schematics/component/component#componentGenerator",
-      "schema": "./src/schematics/component/schema.json",
+      "factory": "./src/generators/component/component#componentGenerator",
+      "schema": "./src/generators/component/schema.json",
       "description": "Add a component to a ui library",
       "aliases": ["c"],
       "hidden": false

@@ -23,7 +23,7 @@ import { LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
-import { initSchematic } from '../init/init';
+import { initSchematic } from '../../generators/init/init';
 import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';

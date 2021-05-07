@@ -9,6 +9,7 @@ export type ConfigAndPathCollection = {
   projectRoot: string;
   projectName: string;
   pkgJson: string;
+  tsconfig: string;
 };
 
 export interface ConfigAndCoreCompiler {

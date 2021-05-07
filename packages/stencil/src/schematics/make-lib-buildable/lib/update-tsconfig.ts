@@ -9,10 +9,10 @@ export function updateTsConfig(options: MakeLibBuildableSchema): Rule {
         return updateJsonInTree('tsconfig.base.json', (json) => {
           const c = json.compilerOptions;
           delete c.paths[
-            `@${options.importPath}/loader`
+            `${options.importPath}/loader`
             ];
           c.paths[
-            `@${options.importPath}/loader`
+            `${options.importPath}/loader`
             ] = [`dist/${options.projectRoot}/loader`];
           return json;
         })(host, context);

@@ -18,6 +18,7 @@ function getCompilerExecutingPath() {
 export interface StencilBaseConfigOptions {
   configPath: string;
   outputPath: string;
+  tsConfig?: string;
 }
 
 export async function initializeStencilConfig<T extends StencilBaseConfigOptions>(
@@ -43,19 +44,28 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     logger.enableColors(false);
   }
 
+  const projectDir = context.workspace.projects[context.projectName].root;
+  const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
+  const distDir = joinPathFragments(`${context.root}/${options.outputPath}`);
+
+  let config = {
+    flags,
+  };
+  if(options.tsConfig) {
+    const tsconfig = joinPathFragments(`${context.root}/${options.tsConfig}`);
+    config = {
+      ...config,
+      ...{ tsconfig: tsconfig }
+    }
+  }
+
   const loadConfigResults = await loadConfig({
-    config: {
-      flags
-    },
+    config,
     configPath: path.join(context.root, configFilePath),
     logger,
     sys
   });
   const coreCompiler = await loadCoreCompiler(sys);
-
-  const projectDir = context.workspace.projects[context.projectName].root;
-  const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
-  const distDir = joinPathFragments(`${context.root}/${options.outputPath}`);
 
   return {
     projectName: context.projectName,

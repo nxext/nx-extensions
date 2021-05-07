@@ -1,7 +1,7 @@
 import { ProjectType } from '@nrwl/workspace';
 import { LibrarySchema } from '../schematics/library/schema';
-import { PWASchema } from '../schematics/ionic-pwa/schema';
-import { ApplicationSchema } from '../schematics/application/schema';
+import { PWASchema } from '../generators/ionic-pwa/schema';
+import { ApplicationSchema } from '../generators/application/schema';
 import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
 import { joinPathFragments } from '@nrwl/devkit';
 
