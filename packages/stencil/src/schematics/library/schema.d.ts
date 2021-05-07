@@ -1,5 +1,5 @@
 import { AppType } from './../../utils/typings';
-import { InitSchema } from '../init/schema';
+import { InitSchema } from '../../generators/init/schema';
 import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
 
 export interface LibrarySchema extends InitSchema, MakeLibBuildableSchema {

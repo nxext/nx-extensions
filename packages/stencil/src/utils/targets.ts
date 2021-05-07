@@ -1,7 +1,7 @@
 import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
 import { LibrarySchema } from '../schematics/library/schema';
-import { PWASchema } from '../schematics/ionic-pwa/schema';
-import { ApplicationSchema } from '../schematics/application/schema';
+import { PWASchema } from '../generators/ionic-pwa/schema';
+import { ApplicationSchema } from '../generators/application/schema';
 import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
 import { ProjectType } from '@nrwl/workspace';
 
@@ -29,10 +29,12 @@ export function getBuildTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
+  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
     executor: '@nxext/stencil:build',
     options: {
       projectType,
+      tsConfig: joinPathFragments(options.projectRoot, `tsconfig.${tsconfigAddition}.json`),
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot)
     },
@@ -55,10 +57,12 @@ export function getTestTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
+  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
     executor: '@nxext/stencil:test',
     options: {
       projectType,
+      tsConfig: joinPathFragments(options.projectRoot, `tsconfig.${tsconfigAddition}.json`),
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot)
     },
@@ -76,10 +80,12 @@ export function getE2eTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
+  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
     executor: '@nxext/stencil:e2e',
     options: {
       projectType,
+      tsConfig: joinPathFragments(options.projectRoot, `tsconfig.${tsconfigAddition}.json`),
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot)
     },
@@ -97,10 +103,12 @@ export function getServeTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
+  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
     executor: `@nxext/stencil:build`,
     options: {
       projectType,
+      tsConfig: joinPathFragments(options.projectRoot, `tsconfig.${tsconfigAddition}.json`),
       configPath: joinPathFragments(options.projectRoot, 'stencil.config.ts'),
       outputPath: joinPathFragments('dist', options.projectRoot),
       serve: true,

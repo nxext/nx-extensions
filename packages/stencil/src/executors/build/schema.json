@@ -43,6 +43,10 @@
     },
     "ssr": {
       "type": "boolean"
+    },
+    "tsConfig": {
+      "type": "string",
+      "description": "The path to tsconfig file."
     }
   },
   "required": []

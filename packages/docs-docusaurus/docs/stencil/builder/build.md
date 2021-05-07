@@ -93,3 +93,9 @@ Default: `localhost`
 Type: `string`
 
 Host to listen on.
+
+### --tsConfig
+
+Type: `string`
+
+The path to tsconfig file.

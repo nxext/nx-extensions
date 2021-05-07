@@ -5,7 +5,7 @@ import { InitSchema } from '../init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { ionicPwaGenerator } from './schematic';
+import { ionicPwaGenerator } from './generator';
 
 describe('schematic:ionic-pwa', () => {
   let tree: Tree;

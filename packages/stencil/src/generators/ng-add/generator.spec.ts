@@ -1,6 +1,6 @@
 import { Tree, readJson } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { ngAddGenerator } from './schematic';
+import { ngAddGenerator } from './generator';
 
 describe('stencil schematic', () => {
   let appTree: Tree;
