@@ -2,7 +2,7 @@ import { SvelteLibrarySchema } from './schema';
 import { Linter } from '@nrwl/linter';
 import { readJson } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator } from '@nxext/svelte';
+import { libraryGenerator } from './library';
 
 describe('svelte library schematic', () => {
   let tree;

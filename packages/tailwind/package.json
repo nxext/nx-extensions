@@ -1,6 +1,6 @@
 {
   "name": "@nxext/tailwind",
-  "version": "11.0.0",
+  "version": "12.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for adding tailwindcss into @nxext/stencil projects",
@@ -24,6 +24,6 @@
     "@nrwl/devkit": "^12.0.0"
   },
   "peerDependencies": {
-    "@nrwl/workspace": "^11.0.0"
+    "@nrwl/workspace": "^12.0.0"
   }
 }

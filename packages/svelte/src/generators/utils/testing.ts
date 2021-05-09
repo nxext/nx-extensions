@@ -3,7 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import applicationGenerator from '../application/application';
 import { Tree } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
-import { libraryGenerator } from '@nxext/svelte';
+import { libraryGenerator } from '../library/library';
 
 export async function createTestProject(
   name: string,

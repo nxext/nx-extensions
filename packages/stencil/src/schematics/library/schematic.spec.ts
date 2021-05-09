@@ -3,7 +3,7 @@ import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType, runSchematic } from '../../utils/testing';
-import { InitSchema } from '../init/schema';
+import { InitSchema } from '../../generators/init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 
 describe('schematic:library', () => {

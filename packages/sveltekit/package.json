@@ -1,10 +1,10 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "11.0.0-next.01",
+  "version": "12.0.0-next.01",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "12.0.0"
+    "@nrwl/devkit": "^12.0.0"
   }
 }

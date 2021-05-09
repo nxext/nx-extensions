@@ -1,4 +1,4 @@
-export const nxextVersion = '11.2.0';
+export const nxextVersion = '12.0.0';
 export const stencilVersion = '^2.5.2';
 export const stencilRouterVersion = '^1.0.1';
 export const ionicVersion = '^5.6.4';
@@ -12,7 +12,7 @@ export const puppeteer = '~5.3.1';
 export const puppeteerType = '~3.0.2';
 
 export const storybookVersion = '^6.0.21';
-export const nxVersion = '^11.0.0';
+export const nxVersion = '^12.0.0';
 
 export const STENCIL_OUTPUTTARGET_VERSION: {
   [style: string]: string;
