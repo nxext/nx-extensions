@@ -1,35 +1,12 @@
 {
   "migrations": [
     {
-      "version": "12.0.0-beta.0",
-      "description": "adjusts the ngcc postinstall command to just leave 'ngcc' in there. This fixes Ivy in Jest tests and Storybooks",
-      "factory": "./src/migrations/update-12-0-0/update-ngcc-postinstall",
-      "package": "@nrwl/angular",
-      "name": "update-ngcc-postinstall"
-    },
-    {
+      "version": "12.1.2-beta.1",
       "cli": "nx",
-      "version": "12.0.0-beta.0",
-      "description": "Migrate tsconfig.json to allow new jsx transform to be used. Removes the need for `import React from 'react'`",
-      "factory": "./src/migrations/update-12-0-0/use-react-jsx-in-tsconfig",
-      "package": "@nrwl/react",
-      "name": "use-react-jsx-in-tsconfig-12.0.0"
-    },
-    {
-      "cli": "nx",
-      "version": "12.0.0-beta.0",
-      "description": "Update workspace to use `@emotion/babel-plugin` instead of `@emotion/babel-preset-css-prop` to support new jsx transform",
-      "factory": "./src/migrations/update-12-0-0/update-emotion-setup",
-      "package": "@nrwl/react",
-      "name": "update-emotion-setup-12.0.0"
-    },
-    {
-      "cli": "nx",
-      "version": "12.0.0-beta.0",
-      "description": "Remove @types/react-redux from package.json since react-redux installs the package automatically now",
-      "factory": "./src/migrations/update-12-0-0/remove-react-redux-types-package",
-      "package": "@nrwl/react",
-      "name": "remove-react-redux-types-package-12.0.0"
+      "description": "Replace tsConfig with tsconfig for ts-jest in jest.config.js",
+      "factory": "./src/migrations/update-12-1-2/update-ts-jest",
+      "package": "@nrwl/jest",
+      "name": "update-ts-jest-6-5-5"
     }
   ]
 }

@@ -29,7 +29,7 @@ async function tailwindSvelteGenerator(tree: Tree, options: Schema) {
     tree,
     {},
     {
-      tailwindcss: '^2.1.1',
+      tailwindcss: '^2.1.2',
       'postcss-import': '^14.0.0',
       'postcss-nested': '^5.0.0',
     }

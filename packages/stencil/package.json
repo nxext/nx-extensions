@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "11.3.3",
+  "version": "12.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -29,12 +29,12 @@
     "@angular-devkit/schematics": "^11.0.0"
   },
   "peerDependencies": {
-    "@nxext/tailwind": "^11.2.0",
-    "@nrwl/storybook": "^11.0.0",
-    "@nrwl/react": "^11.0.0",
-    "@nrwl/angular": "^11.0.0",
-    "@nrwl/jest": "^11.2.0",
-    "@nrwl/workspace": "^11.2.0",
+    "@nxext/tailwind": "^12.0.0",
+    "@nrwl/storybook": "^12.0.0",
+    "@nrwl/react": "^12.0.0",
+    "@nrwl/angular": "^12.0.0",
+    "@nrwl/jest": "^12.0.0",
+    "@nrwl/workspace": "^12.0.0",
     "@stencil/core": "^2.5.0"
   },
   "nx-migrate": {
