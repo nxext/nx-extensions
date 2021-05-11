@@ -14,8 +14,6 @@
     "stencil-e2e": { "tags": [], "implicitDependencies": ["stencil"] },
     "svelte": { "tags": [] },
     "svelte-e2e": { "tags": [], "implicitDependencies": ["svelte", "vite"] },
-    "tailwind": { "tags": [] },
-    "tailwind-e2e": { "tags": [], "implicitDependencies": ["tailwind"] },
     "docs-docusaurus": { "tags": [] },
     "sveltekit": { "tags": [] },
     "sveltekit-e2e": { "tags": [], "implicitDependencies": ["sveltekit"] },
