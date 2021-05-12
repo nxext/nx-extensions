@@ -14,6 +14,9 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
   return {
     executor: '@nxext/vite:build',
     outputs: ['{options.outputPath}'],
+    options: {
+      outputPath: joinPathFragments('dist', options.projectRoot),
+    },
     configurations: {
       production: {
       },
@@ -35,7 +38,10 @@ function createSvelteCheckTarget(
 
 function createServeTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    executor: '@nxext/vite:dev'
+    executor: '@nxext/vite:dev',
+    options: {
+      outputPath: joinPathFragments('dist', options.projectRoot),
+    },
   };
 }
 
@@ -57,6 +63,7 @@ function createTestTarget(options: NormalizedSchema): TargetConfiguration {
   return {
     executor: '@nrwl/jest:jest',
     options: {
+      outputPath: joinPathFragments('dist', options.projectRoot),
       jestConfig: joinPathFragments(options.projectRoot, 'jest.config.js'),
       passWithNoTests: true,
     },
