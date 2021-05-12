@@ -29,7 +29,7 @@ const sveltepkgs = [
   '@tsconfig/svelte',
   '@testing-library/svelte',
   'rollup-plugin-local-resolve',
-  '@svitejs/vite-plugin-svelte'
+  '@sveltejs/vite-plugin-svelte'
 ];
 
 console.log('======================================');
