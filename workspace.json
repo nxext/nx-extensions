@@ -85,12 +85,6 @@
           "outputs": [
             "{options.outputPath}"
           ]
-        },
-        "deploy": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
-          }
         }
       }
     },
@@ -174,12 +168,6 @@
           "outputs": [
             "{options.outputPath}"
           ]
-        },
-        "deploy": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
-          }
         }
       }
     },
@@ -270,13 +258,6 @@
               }
             ]
           }
-        },
-        "deploy": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public",
-            "tag": "next"
-          }
         }
       }
     },
@@ -347,12 +328,6 @@
                 "output": "."
               }
             ]
-          }
-        },
-        "deploy": {
-          "executor": "ngx-deploy-npm:deploy",
-          "options": {
-            "access": "public"
           }
         }
       }
