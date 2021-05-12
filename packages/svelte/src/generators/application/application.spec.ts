@@ -43,7 +43,7 @@ describe('svelte app schematic', () => {
       await applicationGenerator(tree, { ...options, bundler: 'vite' });
       const packageJson = readJson(tree, 'package.json');
 
-      expect(packageJson.devDependencies['@svitejs/vite-plugin-svelte']).toBeDefined();
+      expect(packageJson.devDependencies['@sveltejs/vite-plugin-svelte']).toBeDefined();
     });
 
     it('should add Svelte project files', async () => {

@@ -14,7 +14,7 @@ export function updateDependencies(tree: Tree, schema: Schema) {
   if(schema?.bundler === 'vite') {
     devDependencies = {
       ...devDependencies,
-      ...{'@svitejs/vite-plugin-svelte': '^0.11.1'}
+      ...{'@sveltejs/vite-plugin-svelte': '^1.0.0-next.10'}
     };
   }
 

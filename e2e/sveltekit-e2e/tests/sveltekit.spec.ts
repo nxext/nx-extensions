@@ -12,8 +12,8 @@ describe('sveltekit e2e', () => {
     await runNxCommandAsync(`generate @nxext/sveltekit:app ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain('building for production...');
-    expect(result.stdout).toContain('done');
+    expect(result.stdout).toContain('modules transformed');
+    expect(result.stdout).toContain('Done');
 
     done();
   });
