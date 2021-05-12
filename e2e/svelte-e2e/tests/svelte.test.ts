@@ -4,7 +4,7 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../tailwind-e2e/utils/testing';
+import { ensureNxProjectWithDeps } from '../utils/testing';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
