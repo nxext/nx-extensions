@@ -177,9 +177,9 @@
       "sourceRoot": "e2e/svelte-e2e/src",
       "targets": {
         "e2e": {
-          "executor": "@nrwl/nx-plugin:e2e",
+          "executor": "./tools/executors/e2e:e2e",
           "options": {
-            "target": "svelte:build",
+            "targets": ["vite:build", "svelte:build"],
             "npmPackageName": "@nxext/svelte",
             "pluginOutputPath": "dist/packages/svelte",
             "jestConfig": "e2e/svelte-e2e/jest.config.js"

@@ -1,4 +1,3 @@
-import { join, normalize } from '@angular-devkit/core';
 import {
   generateFiles,
   joinPathFragments,
@@ -13,9 +12,7 @@ export function createComponentInProject(
   options: SvelteComponentSchema
 ) {
   const projectConfig = readProjectConfiguration(tree, options.project);
-  const projectDirectory = options.directory
-    ? join(normalize(options.directory))
-    : join(normalize(''));
+  const projectDirectory = options.directory ?? '';
 
   generateFiles(
     tree,
