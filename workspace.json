@@ -26,9 +26,7 @@
             "jestConfig": "packages/stencil/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/packages/stencil"
-          ]
+          "outputs": ["coverage/packages/stencil"]
         },
         "build": {
           "executor": "@nrwl/node:package",
@@ -82,9 +80,7 @@
             ],
             "srcRootForCompilationRoot": "packages/stencil"
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         }
       }
     },
@@ -130,9 +126,7 @@
             "jestConfig": "packages/svelte/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/packages/svelte"
-          ]
+          "outputs": ["coverage/packages/svelte"]
         },
         "build": {
           "executor": "@nrwl/node:package",
@@ -165,9 +159,7 @@
               }
             ]
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         }
       }
     },
@@ -214,16 +206,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "packages/sveltekit/**/*.ts"
-            ]
+            "lintFilePatterns": ["packages/sveltekit/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/packages/sveltekit"
-          ],
+          "outputs": ["coverage/packages/sveltekit"],
           "options": {
             "jestConfig": "packages/sveltekit/jest.config.js",
             "passWithNoTests": true
@@ -231,9 +219,7 @@
         },
         "build": {
           "executor": "@nrwl/node:package",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/packages/sveltekit",
             "tsConfig": "packages/sveltekit/tsconfig.lib.json",
@@ -285,16 +271,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "packages/vite/**/*.ts"
-            ]
+            "lintFilePatterns": ["packages/vite/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/packages/vite"
-          ],
+          "outputs": ["coverage/packages/vite"],
           "options": {
             "jestConfig": "packages/vite/jest.config.js",
             "passWithNoTests": true
@@ -302,9 +284,7 @@
         },
         "build": {
           "executor": "@nrwl/node:package",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/packages/vite",
             "tsConfig": "packages/vite/tsconfig.lib.json",
@@ -340,9 +320,7 @@
         "build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "svelte-kit build"
-            ],
+            "commands": ["svelte-kit build"],
             "cwd": "packages/docs",
             "parallel": false
           }
@@ -350,9 +328,7 @@
         "serve": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "svelte-kit dev"
-            ],
+            "commands": ["svelte-kit dev"],
             "cwd": "packages/docs",
             "parallel": false
           }
@@ -360,9 +336,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "packages/docs/**/*.{ts,svelte,spec.ts}"
-            ]
+            "lintFilePatterns": ["packages/docs/**/*.{ts,svelte,spec.ts}"]
           }
         }
       }

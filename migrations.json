@@ -1,12 +1,28 @@
 {
   "migrations": [
     {
-      "version": "12.1.2-beta.1",
       "cli": "nx",
-      "description": "Replace tsConfig with tsconfig for ts-jest in jest.config.js",
-      "factory": "./src/migrations/update-12-1-2/update-ts-jest",
-      "package": "@nrwl/jest",
-      "name": "update-ts-jest-6-5-5"
+      "version": "12.3.0-rc.1",
+      "description": "Remove deprecated options and update others according to new defaults. It syncs with the v12 migration of Angular builders.",
+      "factory": "./src/migrations/update-12-3-0/update-webpack-browser-config",
+      "package": "@nrwl/angular",
+      "name": "update-webpack-browser-config"
+    },
+    {
+      "cli": "nx",
+      "version": "12.3.0-rc.1",
+      "description": "Updates storybook configurations to support webpack 5",
+      "factory": "./src/migrations/update-12-3-0/update-storybook",
+      "package": "@nrwl/angular",
+      "name": "update-storybook"
+    },
+    {
+      "version": "12.3.0-rc.1",
+      "cli": "nx",
+      "description": "Update storybook if installed and above 6 but below 6.2.7",
+      "factory": "./src/migrations/update-11-6-0/update-storybook",
+      "package": "@nrwl/storybook",
+      "name": "update-12-3-0"
     }
   ]
 }
