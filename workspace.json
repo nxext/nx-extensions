@@ -39,7 +39,12 @@
               "packages/stencil/*.md",
               {
                 "input": "./packages/stencil/src",
-                "glob": "**/*.!(ts)",
+                "glob": "**/!(*.ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/stencil/src",
+                "glob": "**/*.d.ts",
                 "output": "./src"
               },
               {
@@ -139,7 +144,12 @@
               "packages/svelte/*.md",
               {
                 "input": "./packages/svelte/src",
-                "glob": "**/*.!(ts)",
+                "glob": "**/!(*.ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/svelte/src",
+                "glob": "**/*.d.ts",
                 "output": "./src"
               },
               {
@@ -229,7 +239,12 @@
               "packages/sveltekit/*.md",
               {
                 "input": "./packages/sveltekit/src",
-                "glob": "**/*.!(ts)",
+                "glob": "**/!(*.ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/sveltekit/src",
+                "glob": "**/*.d.ts",
                 "output": "./src"
               },
               {
@@ -294,7 +309,12 @@
               "packages/vite/*.md",
               {
                 "input": "./packages/vite/src",
-                "glob": "**/*.!(ts)",
+                "glob": "**/!(*.ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/vite/src",
+                "glob": "**/*.d.ts",
                 "output": "./src"
               },
               {
