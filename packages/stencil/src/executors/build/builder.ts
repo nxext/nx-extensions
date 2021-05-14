@@ -58,7 +58,6 @@ export default async function runExecutor(
   const stencilConfig = await createStencilConfig(
     configAndPathCollection
   );
-  logger.info(inspect(stencilConfig.config));
 
   updateBuildableProjectPackageJsonDependencies(
     context.root,
