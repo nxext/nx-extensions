@@ -19,8 +19,6 @@ export interface ComponentSchema {
 }
 
 export async function componentGenerator(host: Tree, options: ComponentSchema) {
-  logger.debug('adding component to lib');
-
   if (!/[-]/.test(options.name)) {
     throw new Error(stripIndents`
       "${options.name}" tag must contain a dash (-) to work as a valid web component. Please refer to

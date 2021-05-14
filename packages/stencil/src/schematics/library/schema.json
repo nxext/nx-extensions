@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "Nxext-Library",
+  "$id": "Nxext-Library",
   "title": "",
   "type": "object",
   "properties": {

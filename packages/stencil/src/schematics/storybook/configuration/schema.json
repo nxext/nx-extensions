@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "storybook-configure",
+  "$id": "storybook-configure",
   "type": "object",
   "properties": {
     "name": {

@@ -23,7 +23,6 @@ import { toJS } from '@nrwl/workspace/src/utils/rules/to-js';
 import { join, normalize } from '@angular-devkit/core';
 import { StorybookConfigureSchema } from '../configuration/schema';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
-import { logger } from '@nrwl/devkit';
 
 export function storybookInitSchematic(schema: StorybookConfigureSchema) {
   return chain([
@@ -98,8 +97,6 @@ const moveToDevDependencies = updateJsonInTree(
 
 function createRootStorybookDir(): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    logger.debug('adding .storybook folder to lib');
-
     return chain([applyWithSkipExisting(url('./files/root'), [template({})])])(
       tree,
       context
@@ -109,7 +106,6 @@ function createRootStorybookDir(): Rule {
 
 function createLibStorybookDir(projectName: string, js: boolean): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    logger.debug('adding .storybook folder to lib');
     const projectConfig = getProjectConfig(tree, projectName);
 
     return chain([
