@@ -29,7 +29,6 @@
     "@angular-devkit/schematics": "^11.0.0"
   },
   "peerDependencies": {
-    "@nxext/tailwind": "^12.0.0",
     "@nrwl/storybook": "^12.0.0",
     "@nrwl/react": "^12.0.0",
     "@nrwl/angular": "^12.0.0",
