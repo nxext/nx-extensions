@@ -1,5 +1,5 @@
 import ignore from 'ignore';
-import { Tree } from '@nrwl/devkit';
+import { Tree, ProjectConfiguration } from '@nrwl/devkit';
 
 export function addToGitignore(host: Tree, path: string) {
   if (!host.exists('.gitignore')) {
@@ -16,4 +16,25 @@ export function addToGitignore(host: Tree, path: string) {
       host.write('.gitignore', content);
     }
   }
+}
+
+export function isStencilProject(
+  project: ProjectConfiguration
+): boolean {
+  return ['build', 'test', 'serve', 'e2e'].map(command => {
+    const target = project.targets[command];
+    if(!target) {
+      return false;
+    }
+    return target.executor === `@nxext/stencil:${command}`;
+  }).some(value => value === true);
+}
+
+export function isProjectBuildable(project: ProjectConfiguration): boolean {
+  const command = 'build';
+  const target = project.targets[command];
+  if(!target) {
+    return false;
+  }
+  return target.executor === `@nxext/stencil:${command}`;
 }

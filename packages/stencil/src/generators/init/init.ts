@@ -9,18 +9,18 @@ import { jestInitGenerator } from '@nrwl/jest';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 export async function initGenerator<T extends InitSchema>(
-  tree: Tree,
+  host: Tree,
   options: T
 ) {
   const tasks: GeneratorCallback[] = [];
 
-  moveNxextToDevDependencies(tree);
-  tasks.push(addDependenciesByApptype(tree, options.appType));
-  tasks.push(...addStyledDependencies(tree, options));
-  tasks.push(...addE2eTestDependencies(tree));
-  tasks.push(jestInitGenerator(tree, {}));
+  moveNxextToDevDependencies(host);
+  tasks.push(addDependenciesByApptype(host, options.appType));
+  tasks.push(...addStyledDependencies(host, options));
+  tasks.push(...addE2eTestDependencies(host));
+  tasks.push(jestInitGenerator(host, {}));
 
-  setDefaultCollection(tree, '@nxext/stencil');
+  setDefaultCollection(host, '@nxext/stencil');
 
   return runTasksInSerial(...tasks);
 }

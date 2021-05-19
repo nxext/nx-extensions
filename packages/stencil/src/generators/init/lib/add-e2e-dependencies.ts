@@ -2,7 +2,7 @@ import { PROJECT_TYPE_DEPENDENCIES } from '../../../utils/typings';
 import { addDependenciesToPackageJson, GeneratorCallback, Tree } from '@nrwl/devkit';
 
 export function addE2eTestDependencies(
-  tree: Tree
+  host: Tree
 ): GeneratorCallback[] {
   const testDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
   const tasks: GeneratorCallback[] = [];
@@ -10,7 +10,7 @@ export function addE2eTestDependencies(
   if (testDependencies) {
     tasks.push(
       addDependenciesToPackageJson(
-        tree,
+        host,
         testDependencies.dependencies,
         testDependencies.devDependencies
       )

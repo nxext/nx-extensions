@@ -1,7 +1,7 @@
 import { Tree, updateJson } from '@nrwl/devkit';
 
-export function moveNxextToDevDependencies(tree: Tree) {
-  updateJson(tree, '/package.json', (packageJson) => {
+export function moveNxextToDevDependencies(host: Tree) {
+  updateJson(host, '/package.json', (packageJson) => {
     packageJson.dependencies = packageJson.dependencies || {};
     packageJson.devDependencies = packageJson.devDependencies || {};
 

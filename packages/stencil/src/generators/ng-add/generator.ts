@@ -5,11 +5,11 @@ import {
   Tree,
 } from '@nrwl/devkit';
 
-export async function ngAddGenerator(tree: Tree) {
+export async function ngAddGenerator(host: Tree) {
   const projectDependency = PROJECT_TYPE_DEPENDENCIES['init'];
 
   return addDependenciesToPackageJson(
-    tree,
+    host,
     projectDependency.dependencies,
     projectDependency.devDependencies
   );

@@ -7,7 +7,7 @@ import {
 } from '@nrwl/devkit';
 
 export function addStyledDependencies<T extends InitSchema>(
-  tree: Tree,
+  host: Tree,
   options: T
 ): GeneratorCallback[] {
   const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[options.style];
@@ -16,7 +16,7 @@ export function addStyledDependencies<T extends InitSchema>(
   if (styleDependencies) {
     tasks.push(
       addDependenciesToPackageJson(
-        tree,
+        host,
         styleDependencies.dependencies,
         styleDependencies.devDependencies
       )

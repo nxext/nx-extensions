@@ -43,9 +43,9 @@ function normalizeOptions(options: InitSchema, host: Tree): PWASchema {
   } as PWASchema;
 }
 
-function createFiles(tree: Tree, options: PWASchema) {
+function createFiles(host: Tree, options: PWASchema) {
   generateFiles(
-    tree,
+    host,
     join(__dirname, './files/pwa'),
     options.projectRoot,
     {
@@ -57,26 +57,26 @@ function createFiles(tree: Tree, options: PWASchema) {
   );
 }
 
-function addStylePlugin(tree: Tree, normalizedOptions: PWASchema) {
+function addStylePlugin(host: Tree, normalizedOptions: PWASchema) {
   addStylePluginToConfigInTree(
-    tree,
+    host,
     join(normalizedOptions.projectRoot, 'stencil.config.ts'),
     normalizedOptions.style
   );
 }
 
 export async function ionicPwaGenerator(
-  tree: Tree,
+  host: Tree,
   schema: InitSchema
 ) {
-  const options = normalizeOptions(schema, tree);
-  const initTask = await initGenerator(tree, options);
-  createFiles(tree, options);
-  addStylePlugin(tree, options);
-  addProject(tree, options);
+  const options = normalizeOptions(schema, host);
+  const initTask = await initGenerator(host, options);
+  createFiles(host, options);
+  addStylePlugin(host, options);
+  addProject(host, options);
 
   if (options.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
   return runTasksInSerial(initTask);
 }
