@@ -70,18 +70,5 @@ module.exports = {
         },
       ],
     },
-    {
-      type: 'category',
-      label: 'Tailwind',
-      items: [
-        'tailwind/overview',
-        'tailwind/installation',
-        {
-          type: 'category',
-          label: 'Schematics',
-          items: ['tailwind/schematics/stencil'],
-        },
-      ],
-    },
   ],
 };

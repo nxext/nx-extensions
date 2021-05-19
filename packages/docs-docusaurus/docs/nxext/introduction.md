@@ -10,4 +10,3 @@ sidebar_label: Introduction
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [`@nxext/stencil`](../stencil/overview.md)   | An Nx plugin for development of [StencilJS](https://stenciljs.com/) applications and libraries. |
 | [`@nxext/svelte`](../svelte/overview.md)     | An Nx plugin for development of [Svelte](https://svelte.dev/) applications.                     |
-| [`@nxext/tailwind`](../tailwind/overview.md) | To easily configure [Tailwindcss](https://tailwindcss.com/).                                    |

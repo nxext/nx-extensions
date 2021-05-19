@@ -20,7 +20,6 @@ module.exports = {
     { name: 'stencil', description: 'Stencil specific' },
     { name: 'svelte', description: 'Svelte specific' },
     { name: 'sveltekit', description: 'Sveltekit specific' },
-    { name: 'tailwind', description: 'Tailwindcss specific' },
     { name: 'vite', description: 'Vite specific' },
   ],
 
