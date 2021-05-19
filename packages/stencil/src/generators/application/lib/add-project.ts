@@ -15,8 +15,7 @@ export function addProject(tree: Tree, options: ApplicationSchema) {
     projectType: ProjectType.Application,
     generators: {
       '@nxext/stencil:component': {
-        style: options.style,
-        storybook: false
+        style: options.style
       }
     },
     ...nxConfig,

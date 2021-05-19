@@ -115,8 +115,7 @@ describe('init', () => {
         '@nxext/stencil:component'
       ]
     ).toEqual({
-      style: SupportedStyles.scss,
-      storybook: true,
+      style: SupportedStyles.scss
     });
   });
 });

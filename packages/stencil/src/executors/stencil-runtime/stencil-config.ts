@@ -8,7 +8,7 @@ import * as path from 'path';
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
   await sys.dynamicImport(sys.getCompilerExecutingPath());
 
-  return (globalThis as any).stencil;
+  return globalThis.stencil;
 };
 
 function getCompilerExecutingPath() {

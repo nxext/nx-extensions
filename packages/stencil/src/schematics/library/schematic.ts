@@ -92,8 +92,7 @@ export function librarySchematic(options: LibrarySchema): Rule {
           targets,
           generators: {
             '@nxext/stencil:component': {
-              style: options.style,
-              storybook: false
+              style: options.style
             }
           }
         };

@@ -14,7 +14,6 @@ export interface ComponentSchema {
   name: string;
   project: string;
   directory?: string;
-  storybook: boolean;
   style?: string;
 }
 
@@ -57,7 +56,7 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
     }
   );
 
-  if(!options.storybook) {
+  if(!host.exists(joinPathFragments(`${projectConfig.root}/.storybook`))) {
     host.delete(
       joinPathFragments(`${projectConfig.sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.ts`)
     );

@@ -3,13 +3,12 @@ import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import { createStencilConfig, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext, logger } from '@nrwl/devkit';
+import { ExecutorContext } from '@nrwl/devkit';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies
 } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
-import { inspect } from 'util';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,

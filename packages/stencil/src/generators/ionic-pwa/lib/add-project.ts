@@ -16,8 +16,7 @@ export function addProject(host: Tree, options: PWASchema) {
     projectType: ProjectType.Application,
     generators: {
       '@nxext/stencil:component': {
-        style: options.style,
-        storybook: false
+        style: options.style
       }
     },
     ...nxConfig,

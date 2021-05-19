@@ -8,8 +8,7 @@ describe('component schematic', () => {
   const projectName = 'test-project';
   const options: ComponentSchema = {
     name: 'test-component',
-    project: projectName,
-    storybook: false,
+    project: projectName
   };
 
   beforeEach(async () => {

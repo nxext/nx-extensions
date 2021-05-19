@@ -197,8 +197,7 @@ function changeStorybookComponentOption(projectName: string): Rule {
     const componentOptions =
       projectConfig.schematics['@nxext/stencil:component'];
     json.projects[projectName].schematics['@nxext/stencil:component'] = {
-      ...componentOptions,
-      storybook: true,
+      ...componentOptions
     };
 
     return json;
