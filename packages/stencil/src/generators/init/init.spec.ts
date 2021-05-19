@@ -1,35 +1,25 @@
-import { Tree } from '@angular-devkit/schematics';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-import { readJsonInTree } from '@nrwl/workspace';
 import { AppType } from '../../utils/typings';
-import { runSchematic } from '../../utils/testing';
+import { readJson, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { initGenerator } from './init';
 
 describe('init', () => {
-  let tree: Tree;
+  let host: Tree;
 
   beforeEach(() => {
-    tree = Tree.empty();
-    tree = createEmptyWorkspace(tree);
+    host = createTreeWithEmptyWorkspace();
   });
 
   it('should add stencil dependencies', async () => {
-    const result = await runSchematic(
-      'init',
-      { name: 'test', appType: AppType.library },
-      tree
-    );
-    const packageJson = readJsonInTree(result, 'package.json');
+    await initGenerator(host, { name: 'test', appType: AppType.library });
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
   });
 
   it('should add stencil app dependencies', async () => {
-    const result = await runSchematic(
-      'init',
-      { name: 'test', appType: AppType.application },
-      tree
-    );
-    const packageJson = readJsonInTree(result, 'package.json');
+    await initGenerator(host, { name: 'test', appType: AppType.application });
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/router']).toBeDefined();
@@ -37,12 +27,8 @@ describe('init', () => {
   });
 
   it('should add stencil pwa dependencies', async () => {
-    const result = await runSchematic(
-      'init',
-      { name: 'test', appType: AppType.pwa },
-      tree
-    );
-    const packageJson = readJsonInTree(result, 'package.json');
+    await initGenerator(host, { name: 'test', appType: AppType.pwa });
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@nxext/stencil']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
@@ -50,12 +36,8 @@ describe('init', () => {
 
   describe('defaultCollection', () => {
     it('should be set if none was set before', async () => {
-      const result = await runSchematic(
-        'init',
-        { name: 'test', appType: AppType.library },
-        tree
-      );
-      const workspaceJson = readJsonInTree(result, 'workspace.json');
+      await initGenerator(host, { name: 'test', appType: AppType.library });
+      const workspaceJson = readJson(host, 'workspace.json');
       expect(workspaceJson.cli.defaultCollection).toEqual('@nxext/stencil');
     });
   });

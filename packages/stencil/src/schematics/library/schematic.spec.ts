@@ -82,8 +82,8 @@ describe('schematic:library', () => {
       const projectName = 'test';
 
       tree = await runSchematic(
-        'app',
-        { name: projectName, style: style, appType: AppType.application },
+        'lib',
+        { name: projectName, style: style, appType: AppType.library },
         tree
       );
 

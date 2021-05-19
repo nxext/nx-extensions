@@ -2,7 +2,7 @@ import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../generators/ionic-pwa/schema';
 import { ApplicationSchema } from '../generators/application/schema';
-import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
+import { MakeLibBuildableSchema } from '../generators/make-lib-buildable/schema';
 import { ProjectType } from '@nrwl/workspace';
 
 export function getDefaultTargets(

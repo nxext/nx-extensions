@@ -2,7 +2,7 @@ import { ProjectType } from '@nrwl/workspace';
 import { LibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../generators/ionic-pwa/schema';
 import { ApplicationSchema } from '../generators/application/schema';
-import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
+import { MakeLibBuildableSchema } from '../generators/make-lib-buildable/schema';
 import { joinPathFragments } from '@nrwl/devkit';
 
 export function getDefaultBuilders(

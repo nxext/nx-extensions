@@ -24,7 +24,7 @@ import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import { initSchematic } from '../../generators/init/init';
-import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
+import { MakeLibBuildableSchema } from '../../generators/make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
 import { getTestBuilder } from '../../utils/builders';
