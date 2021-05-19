@@ -15,7 +15,6 @@
 - [Serve](#serve)
 - [Storybook](#storybook)
 - [React and Angular](#react-and-angular)
-- [Capacitor App](#capacitor-app)
 
 ## Features
 
@@ -162,13 +161,3 @@ nx g @nxext/stencil:add-outputtarget my-lib
 ```
 
 With the `--outputType='react'` or `--outputType='angular'` you can define the kind of library.
-
-## Capacitor App
-
-You're able to generate a StencilJs and Capacitor based mobile app.
-
-```
-nx g @nxext/stencil:ionic-app myapp
-```
-
-After that build it and follow the given instructions to add capacitors platform platforms. (look [here](https://nxtend.dev/docs/capacitor/getting-started) for the nx capacitor plugin documentation.)
