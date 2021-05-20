@@ -2,7 +2,7 @@ import { createTestUILib } from '../../utils/devkit/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { MakeLibBuildableSchema } from './schema';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { makeLibBuildableGenerator } from './make-lib-buildable';
 
 describe('make-lib-buildable schematic', () => {
@@ -29,15 +29,25 @@ export const config: Config = {
           esmLoaderPath: '../loader',
           dir: '../../dist/libs/${name}/dist',
         }]
-,
+
 };
 `);
   });
 
-  it('should add outputTargets', async () => {
+  it('should create package.json', async () => {
     await makeLibBuildableGenerator(host, options);
 
     const packageJson = readJson(host, `libs/${name}/package.json`);
     expect(packageJson['name']).toEqual(`@my/lib`);
+  });
+
+  it('should add build targets', async () => {
+    await makeLibBuildableGenerator(host, options);
+
+    const projectConfig = readProjectConfiguration(host, name);
+    expect(projectConfig.targets.build).toBeDefined();
+    expect(projectConfig.targets.test).toBeDefined();
+    expect(projectConfig.targets.serve).toBeDefined();
+    expect(projectConfig.targets.e2e).toBeDefined();
   });
 });

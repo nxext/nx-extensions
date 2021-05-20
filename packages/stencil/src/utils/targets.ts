@@ -1,17 +1,17 @@
 import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
-import { LibrarySchema } from '../schematics/library/schema';
+import { NormalizedLibrarySchema } from '../generators/library/schema';
 import { PWASchema } from '../generators/ionic-pwa/schema';
 import { ApplicationSchema } from '../generators/application/schema';
-import { MakeLibBuildableSchema } from '../generators/make-lib-buildable/schema';
+import { NormalizedMakeLibBuildableSchema } from '../generators/make-lib-buildable/schema';
 import { ProjectType } from '@nrwl/workspace';
 
 export function getDefaultTargets(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
-    | MakeLibBuildableSchema
+    | NormalizedMakeLibBuildableSchema
 ): { [key: string]: TargetConfiguration } {
   return {
     build: getBuildTarget(projectType, options),
@@ -24,10 +24,10 @@ export function getDefaultTargets(
 export function getBuildTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
-    | MakeLibBuildableSchema
+    | NormalizedMakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
@@ -52,10 +52,10 @@ export function getBuildTarget(
 export function getTestTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
-    | MakeLibBuildableSchema
+    | NormalizedMakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
@@ -75,10 +75,10 @@ export function getTestTarget(
 export function getE2eTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
-    | MakeLibBuildableSchema
+    | NormalizedMakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
@@ -98,10 +98,10 @@ export function getE2eTarget(
 export function getServeTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
-    | MakeLibBuildableSchema
+    | NormalizedMakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {

@@ -7,41 +7,37 @@
       "factory": "./src/generators/init/init#initSchematic",
       "schema": "./src/generators/init/schema.json",
       "description": "Core features for collections",
+      "aliases": ["ng-add"],
       "hidden": true
     },
     "application": {
       "factory": "./src/generators/application/generator#applicationSchematic",
       "schema": "./src/generators/application/schema.json",
       "description": "Generate Stencil application",
-      "aliases": ["app"],
-      "hidden": false
+      "aliases": ["app"]
     },
     "ionic-pwa": {
       "factory": "./src/generators/ionic-pwa/generator#ionicPwaSchematic",
       "schema": "./src/generators/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
-      "aliases": ["pwa"],
-      "hidden": false
+      "aliases": ["pwa"]
     },
     "library": {
-      "factory": "./src/schematics/library/schematic#librarySchematic",
-      "schema": "./src/schematics/library/schema.json",
+      "factory": "./src/generators/library/schematic#librarySchematic",
+      "schema": "./src/generators/library/schema.json",
       "description": "Generate Stencil Library",
-      "aliases": ["lib", "collection"],
-      "hidden": false
+      "aliases": ["lib", "collection"]
     },
     "component": {
       "factory": "./src/generators/component/component#componentSchematic",
       "schema": "./src/generators/component/schema.json",
       "description": "Add a component to a ui library",
-      "aliases": ["c"],
-      "hidden": false
+      "aliases": ["c"]
     },
     "add-outputtarget": {
       "factory": "./src/schematics/add-outputtarget/add-outputtarget#outputtargetSchematic",
-      "schema": "./src/schematics/add-outputtarget/add-outputtarget.schema.json",
-      "description": "Add react/angular libraries for the component library",
-      "hidden": false
+      "schema": "./src/schematics/add-outputtarget/schema.json",
+      "description": "Add react/angular libraries for the component library"
     },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableSchematic",
@@ -54,41 +50,37 @@
       "factory": "./src/generators/init/init#initGenerator",
       "schema": "./src/generators/init/schema.json",
       "description": "Core features for collections",
+      "aliases": ["ng-add"],
       "hidden": true
     },
     "application": {
       "factory": "./src/generators/application/generator#applicationGenerator",
       "schema": "./src/generators/application/schema.json",
       "description": "Generate Stencil application",
-      "aliases": ["app"],
-      "hidden": false
+      "aliases": ["app"]
     },
     "ionic-pwa": {
       "factory": "./src/generators/ionic-pwa/generator#ionicPwaGenerator",
       "schema": "./src/generators/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
-      "aliases": ["pwa"],
-      "hidden": false
+      "aliases": ["pwa"]
     },
     "library": {
-      "factory": "./src/schematics/library/schematic#libraryGenerator",
-      "schema": "./src/schematics/library/schema.json",
+      "factory": "./src/generators/library/schematic#libraryGenerator",
+      "schema": "./src/generators/library/schema.json",
       "description": "Generate Stencil Library",
-      "aliases": ["lib", "collection"],
-      "hidden": false
+      "aliases": ["lib", "collection"]
     },
     "component": {
       "factory": "./src/generators/component/component#componentGenerator",
       "schema": "./src/generators/component/schema.json",
       "description": "Add a component to a ui library",
-      "aliases": ["c"],
-      "hidden": false
+      "aliases": ["c"]
     },
     "add-outputtarget": {
       "factory": "./src/schematics/add-outputtarget/add-outputtarget#outputtargetGenerator",
-      "schema": "./src/schematics/add-outputtarget/add-outputtarget.schema.json",
-      "description": "Add react/angular libraries for the component library",
-      "hidden": false
+      "schema": "./src/schematics/add-outputtarget/schema.json",
+      "description": "Add react/angular libraries for the component library"
     },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableGenerator",

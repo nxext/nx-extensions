@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
   "$id": "Nxext-Library",
-  "title": "",
   "type": "object",
   "properties": {
     "name": {
@@ -33,7 +32,8 @@
     },
     "publishable": {
       "type": "boolean",
-      "description": "Create a publishable library."
+      "description": "Create a publishable library.",
+      "default": false
     },
     "importPath": {
       "type": "string",

@@ -5,31 +5,26 @@ import {
   offsetFromRoot,
   readProjectConfiguration,
   Tree,
-  formatFiles,
-  updateProjectConfiguration
+  updateProjectConfiguration,
 } from '@nrwl/devkit';
 import { addStylePluginToConfigInTree } from '../../stencil-core-utils/lib/devkit/style-plugins';
-import { MakeLibBuildableSchema } from './schema';
+import { MakeLibBuildableSchema, NormalizedMakeLibBuildableSchema } from './schema';
 import { join } from 'path';
 import { addToOutputTargetsInTree } from '../../stencil-core-utils/lib/devkit/plugins';
 import { getBuildTarget, getE2eTarget, getServeTarget } from '../../utils/targets';
 import { updateTsConfig } from './lib/update-tsconfig';
-
-
-const projectType = ProjectType.Library;
-
-interface NormalizedMakeLibBuildableSchema extends MakeLibBuildableSchema {
-  projectRoot: string;
-}
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 function normalize(
-  options: MakeLibBuildableSchema,
-  stencilProjectConfig
+  host: Tree,
+  options: MakeLibBuildableSchema
 ): NormalizedMakeLibBuildableSchema {
+  const stencilProjectConfig = readProjectConfiguration(host, options.name);
+
   return { ...options, projectRoot: stencilProjectConfig.root };
 }
 
-function createFiles(host: Tree, options: MakeLibBuildableSchema) {
+function createFiles(host: Tree, options: NormalizedMakeLibBuildableSchema) {
   generateFiles(
     host,
     join(__dirname, './files/lib'),
@@ -42,12 +37,13 @@ function createFiles(host: Tree, options: MakeLibBuildableSchema) {
 }
 
 function addBuildTargets(host: Tree, options: NormalizedMakeLibBuildableSchema) {
+  const projectType = ProjectType.Library;
   const stencilProjectConfig = readProjectConfiguration(host, options.name);
 
-  const targets = {};
-  targets['build'] = getBuildTarget(projectType, options);
-  targets['serve'] = getServeTarget(projectType, options);
-  targets['e2e'] = getE2eTarget(projectType, options);
+  const targets: Record<string, any> = {};
+  targets.build = getBuildTarget(projectType, options);
+  targets.serve = getServeTarget(projectType, options);
+  targets.e2e = getE2eTarget(projectType, options);
 
   stencilProjectConfig.targets = {
     ...stencilProjectConfig.targets,
@@ -58,8 +54,7 @@ function addBuildTargets(host: Tree, options: NormalizedMakeLibBuildableSchema) 
 }
 
 export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuildableSchema) {
-  const stencilProjectConfig = readProjectConfiguration(host, schema.name);
-  const options = normalize(schema, stencilProjectConfig);
+  const options = normalize(host, schema);
 
   createFiles(host, options);
 
@@ -77,9 +72,7 @@ export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuild
       `{
           type: 'dist',
           esmLoaderPath: '../loader',
-          dir: '${offsetFromRoot(options.projectRoot)}dist/${
-        options.projectRoot
-      }/dist',
+          dir: '${offsetFromRoot(options.projectRoot)}dist/${options.projectRoot}/dist',
         }`
     ],
     join(options.projectRoot, 'stencil.config.ts')
@@ -87,9 +80,7 @@ export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuild
 
   updateTsConfig(host, options);
 
-  if(!options.skipFormat) {
-    await formatFiles(host);
-  }
+  return runTasksInSerial(...[]);
 }
 
 export default makeLibBuildableGenerator;

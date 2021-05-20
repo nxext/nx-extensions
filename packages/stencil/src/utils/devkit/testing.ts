@@ -1,7 +1,7 @@
 import { SupportedStyles } from '../../stencil-core-utils/lib/devkit/style-plugins';
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator } from '../../schematics/library/schematic';
+import { libraryGenerator } from '../../generators/library/schematic';
 
 export async function createTestUILib(
   libName: string,

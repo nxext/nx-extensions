@@ -1,18 +1,21 @@
 import { AppType } from './../../utils/typings';
-import { InitSchema } from '../init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 
-export interface ApplicationSchema extends InitSchema {
+export interface LibrarySchema {
   name: string;
   tags?: string;
   directory?: string;
-  style?: SupportedStyles;
   skipFormat?: boolean;
-  appType?: AppType;
-  e2eTestRunner?: string;
-  projectRoot?: string;
+  buildable: boolean;
+  publishable: boolean;
+  importPath?: string;
+  style?: SupportedStyles;
+}
 
+export interface NormalizedLibrarySchema extends LibrarySchema {
   projectName: string;
+  projectRoot: string;
   projectDirectory: string;
+  appType: AppType;
   parsedTags: string[];
 }

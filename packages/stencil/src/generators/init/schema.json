@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
   "$id": "Nxext-Init",
-  "title": "Add Nxext Stencil Schematics",
   "type": "object",
   "properties": {
     "skipFormat": {

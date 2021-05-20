@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "AddOutputtarget",
-  "title": "",
   "type": "object",
   "properties": {
     "projectName": {
