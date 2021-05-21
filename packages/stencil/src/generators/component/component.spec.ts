@@ -8,8 +8,7 @@ describe('component schematic', () => {
   const projectName = 'test-project';
   const options: ComponentSchema = {
     name: 'test-component',
-    project: projectName,
-    storybook: false,
+    project: projectName
   };
 
   beforeEach(async () => {
@@ -50,41 +49,6 @@ describe('component schematic', () => {
         'libs/test-project/src/components/test-component/test-component.stories.ts'
       )
     ).toBeFalsy();
-  });
-
-  it('should generate files with storybook enabled', async () => {
-    tree = await runSchematic(
-      'storybook-configuration',
-      { name: projectName, configureCypress: false },
-      tree
-    );
-    tree = await runSchematic('component', options, tree);
-
-    expect(
-      tree.exists(
-        'libs/test-project/src/components/test-component/test-component.tsx'
-      )
-    ).toBeTruthy();
-    expect(
-      tree.exists(
-        'libs/test-project/src/components/test-component/test-component.e2e.ts'
-      )
-    ).toBeTruthy();
-    expect(
-      tree.exists(
-        'libs/test-project/src/components/test-component/test-component.spec.tsx'
-      )
-    ).toBeTruthy();
-    expect(
-      tree.exists(
-        'libs/test-project/src/components/test-component/test-component.scss'
-      )
-    ).toBeTruthy();
-    expect(
-      tree.exists(
-        'libs/test-project/src/components/test-component/test-component.stories.ts'
-      )
-    ).toBeTruthy();
   });
 
   it('should generate files in directory', async () => {

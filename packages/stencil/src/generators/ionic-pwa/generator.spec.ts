@@ -68,8 +68,7 @@ describe('schematic:ionic-pwa', () => {
       const projectConfig = readProjectConfiguration(tree, projectName);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
-          style: style,
-          storybook: false,
+          style: style
         },
       });
     });

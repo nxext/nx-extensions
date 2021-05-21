@@ -35,18 +35,6 @@
       "description": "Add @nxext/stencil",
       "hidden": false
     },
-    "storybook-init": {
-      "factory": "./src/schematics/storybook/init/init#storybookInitSchematic",
-      "schema": "./src/schematics/storybook/configuration/schema.json",
-      "description": "Add storybook configuration to the workspace",
-      "hidden": true
-    },
-    "storybook-configuration": {
-      "factory": "./src/schematics/storybook/configuration/configuration#storybookConfigurationSchematic",
-      "schema": "./src/schematics/storybook/configuration/schema.json",
-      "description": "Add storybook configuration to a ui library",
-      "hidden": false
-    },
     "component": {
       "factory": "./src/generators/component/component#componentSchematic",
       "schema": "./src/generators/component/schema.json",
@@ -97,18 +85,6 @@
     "ng-add": {
       "factory": "./src/generators/ng-add/generator#ngAddGenerator",
       "description": "Add @nxext/stencil",
-      "hidden": false
-    },
-    "storybook-init": {
-      "factory": "./src/schematics/storybook/init/init#storybookInitGenerator",
-      "schema": "./src/schematics/storybook/configuration/schema.json",
-      "description": "Add storybook configuration to the workspace",
-      "hidden": true
-    },
-    "storybook-configuration": {
-      "factory": "./src/schematics/storybook/configuration/configuration#storybookConfigurationGenerator",
-      "schema": "./src/schematics/storybook/configuration/schema.json",
-      "description": "Add storybook configuration to a ui library",
       "hidden": false
     },
     "component": {

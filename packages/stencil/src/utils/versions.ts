@@ -11,7 +11,6 @@ export const capacitorVersion = '^11.1.1';
 export const puppeteer = '~5.3.1';
 export const puppeteerType = '~3.0.2';
 
-export const storybookVersion = '^6.0.21';
 export const nxVersion = '^12.0.0';
 
 export const STENCIL_OUTPUTTARGET_VERSION: {
