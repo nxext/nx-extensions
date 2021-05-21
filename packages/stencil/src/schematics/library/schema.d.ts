@@ -1,14 +1,21 @@
 import { AppType } from './../../utils/typings';
-import { InitSchema } from '../../generators/init/schema';
-import { MakeLibBuildableSchema } from '../make-lib-buildable/schema';
+import { SupportedStyles } from '../../stencil-core-utils';
 
-export interface LibrarySchema extends InitSchema, MakeLibBuildableSchema {
+export interface LibrarySchema {
+  name: string;
+  tags?: string;
+  directory?: string;
+  skipFormat?: boolean;
+  buildable: boolean;
+  publishable: boolean;
+  importPath?: string;
+  style?: SupportedStyles;
+}
+
+export interface NormalizedLibrarySchema extends LibrarySchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
-  parsedTags: string[];
-  buildable: boolean;
   appType: AppType;
-  publishable: boolean;
-  importPath: string;
+  parsedTags: string[];
 }

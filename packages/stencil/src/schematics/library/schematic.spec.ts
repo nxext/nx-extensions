@@ -1,35 +1,28 @@
 import { Tree } from '@angular-devkit/schematics';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
-import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
+import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType, runSchematic } from '../../utils/testing';
-import { InitSchema } from '../../generators/init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
+import { LibrarySchema } from './schema';
 
 describe('schematic:library', () => {
   let tree: Tree;
-  const options: InitSchema = { name: 'test' };
+  const options: LibrarySchema = { name: 'test', buildable: false, publishable: false };
 
   beforeEach(() => {
     tree = createEmptyWorkspace(Tree.empty());
   });
 
-  it('should run successfully', async () => {
-    await expect(
-      runSchematic('lib', options, tree)
-    ).resolves.not.toThrowError();
-  });
-
   it('should create files', async () => {
-    const appName = 'test';
     const result = await runSchematic(
       'lib',
-      { name: appName, appType: AppType.library },
+      options,
       tree
     );
 
     const fileList = fileListForAppType(
-      appName,
+      options.name,
       SupportedStyles.css,
       ProjectType.Library
     );
@@ -37,15 +30,14 @@ describe('schematic:library', () => {
   });
 
   it('should create files in specified dir', async () => {
-    const appName = 'testlib';
     const result = await runSchematic(
       'lib',
-      { name: appName, appType: AppType.library, subdir: 'subdir' },
+      { ...options, subdir: 'subdir' },
       tree
     );
 
     const fileList = fileListForAppType(
-      appName,
+      options.name,
       SupportedStyles.css,
       ProjectType.Library,
       'subdir'
@@ -64,7 +56,7 @@ describe('schematic:library', () => {
     it(`should add Stencil ${style} dependencies to lib`, async () => {
       const result = await runSchematic(
         'lib',
-        { name: 'test', style: style },
+        { ...options, style: style },
         tree
       );
       const packageJson = readJsonInTree(result, 'package.json');
@@ -79,15 +71,13 @@ describe('schematic:library', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
-      const projectName = 'test';
-
       tree = await runSchematic(
         'app',
-        { name: projectName, style: style, appType: AppType.application },
+        { ...options, style: style },
         tree
       );
 
-      const projectConfig = getProjectConfig(tree, projectName);
+      const projectConfig = getProjectConfig(tree, options.name);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,
@@ -98,17 +88,12 @@ describe('schematic:library', () => {
   });
 
   describe('default libraries', () => {
-    let options;
-    let projectName;
-    beforeEach(() => {
-      projectName = 'testlib';
-      options = { name: projectName, appType: AppType.library };
-    });
+    const options: LibrarySchema = { name: 'testlib', buildable: false, publishable: false };
 
     it('shouldnt create build targets if not buildable', async () => {
       const result = await runSchematic('lib', options, tree);
 
-      const projectConfig = getProjectConfig(result, projectName);
+      const projectConfig = getProjectConfig(result, options.name);
       expect(projectConfig.targets['build']).toBeUndefined();
       expect(projectConfig.targets['e2e']).toBeUndefined();
       expect(projectConfig.targets['serve']).toBeUndefined();
@@ -132,22 +117,12 @@ describe('schematic:library', () => {
   });
 
   describe('buildable libraries', () => {
-    let options;
-    let projectName;
-    beforeEach(() => {
-      projectName = 'testlib';
-      options = {
-        name: projectName,
-        appType: AppType.library,
-        buildable: true,
-      };
-    });
+    const options: LibrarySchema = { name: 'testlib', buildable: true, publishable: false };
 
     it('should create build targets', async () => {
-      const projectName = 'testlib';
       const result = await runSchematic('lib', options, tree);
 
-      const projectConfig = getProjectConfig(result, projectName);
+      const projectConfig = getProjectConfig(result, options.name);
       expect(projectConfig.architect['build']).toBeDefined();
       expect(projectConfig.architect['e2e']).toBeDefined();
       expect(projectConfig.architect['serve']).toBeDefined();
@@ -170,23 +145,13 @@ describe('schematic:library', () => {
   });
 
   describe('publishable libraries', () => {
-    let options;
-    let projectName;
-    beforeEach(() => {
-      projectName = 'testlib';
-      options = {
-        name: projectName,
-        appType: AppType.library,
-        publishable: true,
-        importPath: '@myorg/mylib'
-      };
-    });
+    const options: LibrarySchema = { name: 'testlib', buildable: false, publishable: true, importPath: '@myorg/mylib' };
 
     it('should throw error if publishable without importPath', async () => {
       try {
         await runSchematic('lib', {
-          name: projectName,
-          appType: AppType.library,
+          name: options.name,
+          buildable: false,
           publishable: true
         }, tree);
       } catch (error) {
@@ -197,10 +162,9 @@ describe('schematic:library', () => {
     });
 
     it('should create build targets', async () => {
-      const projectName = 'testlib';
       const result = await runSchematic('lib', options, tree);
 
-      const projectConfig = getProjectConfig(result, projectName);
+      const projectConfig = getProjectConfig(result, options.name);
       expect(projectConfig.architect['build']).toBeDefined();
       expect(projectConfig.architect['e2e']).toBeDefined();
       expect(projectConfig.architect['serve']).toBeDefined();
