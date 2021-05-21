@@ -19,7 +19,7 @@ import {
   updateJsonInTree
 } from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
-import { LibrarySchema, NormalizedLibrarySchema } from './schema';
+import { RawLibrarySchema, LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
@@ -31,7 +31,7 @@ import { getTestBuilder } from '../../utils/builders';
 
 const projectType = ProjectType.Library;
 
-function normalizeOptions(options: LibrarySchema, host: Tree): NormalizedLibrarySchema {
+function normalizeOptions(options: RawLibrarySchema, host: Tree): LibrarySchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -55,10 +55,10 @@ function normalizeOptions(options: LibrarySchema, host: Tree): NormalizedLibrary
     style,
     appType,
     importPath
-  } as NormalizedLibrarySchema;
+  } as LibrarySchema;
 }
 
-function addFiles(options: NormalizedLibrarySchema): Rule {
+function addFiles(options: LibrarySchema): Rule {
   return mergeWith(
     apply(url(`./files/lib`), [
       applyTemplates({
@@ -72,7 +72,7 @@ function addFiles(options: NormalizedLibrarySchema): Rule {
   );
 }
 
-export function librarySchematic(options: LibrarySchema): Rule {
+export function librarySchematic(options: RawLibrarySchema): Rule {
   return (host: Tree) => {
     const normalizedOptions = normalizeOptions(options, host);
     if (options.publishable === true && !options.importPath) {

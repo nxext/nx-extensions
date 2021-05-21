@@ -4,11 +4,11 @@ import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
 import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType, runSchematic } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { LibrarySchema } from './schema';
+import { RawLibrarySchema } from './schema';
 
 describe('schematic:library', () => {
   let tree: Tree;
-  const options: LibrarySchema = { name: 'test', buildable: false, publishable: false };
+  const options: RawLibrarySchema = { name: 'test', buildable: false, publishable: false };
 
   beforeEach(() => {
     tree = createEmptyWorkspace(Tree.empty());
@@ -88,7 +88,7 @@ describe('schematic:library', () => {
   });
 
   describe('default libraries', () => {
-    const options: LibrarySchema = { name: 'testlib', buildable: false, publishable: false };
+    const options: RawLibrarySchema = { name: 'testlib', buildable: false, publishable: false };
 
     it('shouldnt create build targets if not buildable', async () => {
       const result = await runSchematic('lib', options, tree);
@@ -117,7 +117,7 @@ describe('schematic:library', () => {
   });
 
   describe('buildable libraries', () => {
-    const options: LibrarySchema = { name: 'testlib', buildable: true, publishable: false };
+    const options: RawLibrarySchema = { name: 'testlib', buildable: true, publishable: false };
 
     it('should create build targets', async () => {
       const result = await runSchematic('lib', options, tree);
@@ -145,7 +145,7 @@ describe('schematic:library', () => {
   });
 
   describe('publishable libraries', () => {
-    const options: LibrarySchema = { name: 'testlib', buildable: false, publishable: true, importPath: '@myorg/mylib' };
+    const options: RawLibrarySchema = { name: 'testlib', buildable: false, publishable: true, importPath: '@myorg/mylib' };
 
     it('should throw error if publishable without importPath', async () => {
       try {

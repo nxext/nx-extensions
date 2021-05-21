@@ -1,7 +1,7 @@
 import { AppType } from './../../utils/typings';
 import { SupportedStyles } from '../../stencil-core-utils';
 
-export interface LibrarySchema {
+export interface RawLibrarySchema {
   name: string;
   tags?: string;
   directory?: string;
@@ -12,7 +12,7 @@ export interface LibrarySchema {
   style?: SupportedStyles;
 }
 
-export interface NormalizedLibrarySchema extends LibrarySchema {
+export interface LibrarySchema extends RawLibrarySchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
