@@ -57,6 +57,12 @@
       "description": "update-11-3-1",
       "cli": "nx",
       "implementation": "./src/migrations/update-11-3-1/update-11-3-1"
+    },
+    "update-12-0-0": {
+      "version": "12.0.0",
+      "description": "update-12-0-0",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-12-0-0/update-12-0-0"
     }
   },
   "packageJsonUpdates": {
@@ -101,6 +107,19 @@
       "packages": {
         "@stencil/core": {
           "version": "2.4.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "12.0.0": {
+      "version": "12.0.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "^2.5.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nxext/stencil": {
+          "version": "12.0.0",
           "alwaysAddToPackageJson": false
         }
       }
