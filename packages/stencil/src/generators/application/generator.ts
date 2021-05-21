@@ -1,7 +1,6 @@
 import { AppType } from './../../utils/typings';
 import { convertNxGenerator, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nrwl/devkit';
-import { ApplicationSchema } from './schema';
-import { InitSchema } from '../init/schema';
+import { ApplicationSchema, RawApplicationSchema } from './schema';
 import { calculateStyle } from '../../utils/utils';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
@@ -9,7 +8,7 @@ import { addStylePluginToConfigInTree } from '../../stencil-core-utils/lib/devki
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 
-function normalizeOptions(host: Tree, options: InitSchema): ApplicationSchema {
+function normalizeOptions(host: Tree, options: RawApplicationSchema): ApplicationSchema {
   const { appsDir } = getWorkspaceLayout(host);
   const projectName = names(options.name).fileName;
   const projectDirectory = options.directory
@@ -48,7 +47,7 @@ function createFiles(host: Tree, options: ApplicationSchema) {
   );
 }
 
-export async function applicationGenerator(host: Tree, schema: InitSchema) {
+export async function applicationGenerator(host: Tree, schema: RawApplicationSchema) {
   const options = normalizeOptions(host, schema);
   const initTask = await initGenerator(host, options);
 

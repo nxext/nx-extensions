@@ -1,8 +1,18 @@
 import { AppType } from './../../utils/typings';
-import { InitSchema } from '../init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 
-export interface ApplicationSchema extends InitSchema {
+export interface RawApplicationSchema {
+  name: string;
+  tags?: string;
+  directory?: string;
+  style?: SupportedStyles;
+  skipFormat?: boolean;
+  appType?: AppType;
+  e2eTestRunner?: string;
+  projectRoot?: string;
+}
+
+export interface ApplicationSchema extends RawApplicationSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
