@@ -1,5 +1,5 @@
 import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
-import { LibrarySchema } from '../schematics/library/schema';
+import { NormalizedLibrarySchema } from '../schematics/library/schema';
 import { PWASchema } from '../generators/ionic-pwa/schema';
 import { ApplicationSchema } from '../generators/application/schema';
 import { MakeLibBuildableSchema } from '../schematics/make-lib-buildable/schema';
@@ -8,7 +8,7 @@ import { ProjectType } from '@nrwl/workspace';
 export function getDefaultTargets(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
     | MakeLibBuildableSchema
@@ -24,7 +24,7 @@ export function getDefaultTargets(
 export function getBuildTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
     | MakeLibBuildableSchema
@@ -52,7 +52,7 @@ export function getBuildTarget(
 export function getTestTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
     | MakeLibBuildableSchema
@@ -75,7 +75,7 @@ export function getTestTarget(
 export function getE2eTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
     | MakeLibBuildableSchema
@@ -98,7 +98,7 @@ export function getE2eTarget(
 export function getServeTarget(
   projectType: ProjectType,
   options:
-    | LibrarySchema
+    | NormalizedLibrarySchema
     | PWASchema
     | ApplicationSchema
     | MakeLibBuildableSchema

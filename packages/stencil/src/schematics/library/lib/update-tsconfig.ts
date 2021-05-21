@@ -1,8 +1,8 @@
-import { LibrarySchema } from '../schema';
+import { NormalizedLibrarySchema } from '../schema';
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { updateJsonInTree } from '@nrwl/workspace';
 
-export function updateTsConfig(options: LibrarySchema): Rule {
+export function updateTsConfig(options: NormalizedLibrarySchema): Rule {
   return () => {
     return chain([
       (host: Tree, context: SchematicContext) => {

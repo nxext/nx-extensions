@@ -19,7 +19,7 @@ import {
   updateJsonInTree
 } from '@nrwl/workspace';
 import { names, offsetFromRoot } from '@nrwl/devkit';
-import { LibrarySchema } from './schema';
+import { LibrarySchema, NormalizedLibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { libsDir } from '@nrwl/workspace/src/utils/ast-utils';
@@ -31,7 +31,7 @@ import { getTestBuilder } from '../../utils/builders';
 
 const projectType = ProjectType.Library;
 
-function normalizeOptions(options: LibrarySchema, host: Tree): LibrarySchema {
+function normalizeOptions(options: LibrarySchema, host: Tree): NormalizedLibrarySchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -55,10 +55,10 @@ function normalizeOptions(options: LibrarySchema, host: Tree): LibrarySchema {
     style,
     appType,
     importPath
-  } as LibrarySchema;
+  } as NormalizedLibrarySchema;
 }
 
-function addFiles(options: LibrarySchema): Rule {
+function addFiles(options: NormalizedLibrarySchema): Rule {
   return mergeWith(
     apply(url(`./files/lib`), [
       applyTemplates({
