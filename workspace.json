@@ -331,35 +331,6 @@
           }
         }
       }
-    },
-    "docs": {
-      "root": "packages/docs",
-      "projectType": "application",
-      "sourceRoot": "packages/docs/src",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["svelte-kit build"],
-            "cwd": "packages/docs",
-            "parallel": false
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["svelte-kit dev"],
-            "cwd": "packages/docs",
-            "parallel": false
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["packages/docs/**/*.{ts,svelte,spec.ts}"]
-          }
-        }
-      }
     }
   },
   "cli": {
