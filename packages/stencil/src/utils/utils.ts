@@ -1,14 +1,7 @@
 import {
-  apply,
-  forEach,
-  mergeWith,
   Rule,
-  SchematicContext,
-  SchematicsException,
-  Source,
   Tree
 } from '@angular-devkit/schematics';
-import { JsonAstObject, JsonParseMode, parseJsonAst } from '@angular-devkit/core';
 import ignore from 'ignore';
 import { SupportedStyles } from '../stencil-core-utils';
 
@@ -22,24 +15,6 @@ export function calculateStyle(
   }
 
   return /^(css|scss|less|styl|pcss)$/.test(style) ? style : styleDefault;
-}
-
-export function applyWithSkipExisting(source: Source, rules: Rule[]): Rule {
-  return (tree: Tree, _context: SchematicContext) => {
-    const rule = mergeWith(
-      apply(source, [
-        ...rules,
-        forEach((fileEntry) => {
-          if (tree.exists(fileEntry.path)) {
-            return null;
-          }
-          return fileEntry;
-        }),
-      ])
-    );
-
-    return rule(tree, _context);
-  };
 }
 
 export function addToGitignore(path: string): Rule {
@@ -59,23 +34,6 @@ export function addToGitignore(path: string): Rule {
       }
     }
   };
-}
-
-export function parseJsonAtPath(tree: Tree, path: string): JsonAstObject {
-  const buffer = tree.read(path);
-
-  if (buffer === null) {
-    throw new SchematicsException(`Could not read ${path}.`);
-  }
-
-  const content = buffer.toString();
-
-  const json = parseJsonAst(content, JsonParseMode.Strict);
-  if (json.kind !== 'object') {
-    throw new SchematicsException(`Invalid ${path}. Was expecting an object`);
-  }
-
-  return json;
 }
 
 export function isProjectBuildable(project: any): boolean {
