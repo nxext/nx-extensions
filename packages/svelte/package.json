@@ -28,6 +28,7 @@
     "@nrwl/workspace": "^12.0.0"
   },
   "dependencies": {
+    "@next/vite": "12.0.0",
     "@nrwl/devkit": "^12.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
