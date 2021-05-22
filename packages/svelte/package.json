@@ -1,6 +1,6 @@
 {
   "name": "@nxext/svelte",
-  "version": "12.0.0",
+  "version": "12.0.1",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",
@@ -28,7 +28,7 @@
     "@nrwl/workspace": "^12.0.0"
   },
   "dependencies": {
-    "@next/vite": "12.0.0",
+    "@nxext/vite": "12.0.0",
     "@nrwl/devkit": "^12.0.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
