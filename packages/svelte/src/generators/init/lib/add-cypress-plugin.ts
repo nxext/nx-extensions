@@ -9,9 +9,9 @@ import { cypressInitGenerator } from '@nrwl/cypress';
 
 export function addCypressPlugin(tree: Tree): GeneratorCallback {
   const tasks: GeneratorCallback[] = [];
-  const hasNrwlJestDependency: boolean = hasNxPackage(tree, '@nrwl/cypress');
+  const hasNrwlCypressDependency: boolean = hasNxPackage(tree, '@nrwl/cypress');
 
-  if (!hasNrwlJestDependency) {
+  if (!hasNrwlCypressDependency) {
     const nxVersion = readNxVersion(tree);
 
     const installTask = addDependenciesToPackageJson(
