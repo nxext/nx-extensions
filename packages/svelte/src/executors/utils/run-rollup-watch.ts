@@ -1,18 +1,16 @@
 import * as rollup from 'rollup';
 import { RollupWatcherEvent } from 'rollup';
 import { Observable } from 'rxjs';
-import { BuilderOutput } from '@angular-devkit/architect';
 import { SvelteBuildOptions } from '../build/schema';
 import * as url from 'url';
-import { stripIndents } from '@angular-devkit/core/src/utils/literals';
-import { ExecutorContext, logger } from '@nrwl/devkit';
+import { ExecutorContext, logger, stripIndents } from '@nrwl/devkit';
 
 export function runRollupWatch(
   context: ExecutorContext,
   rollupOptions: rollup.RollupOptions,
   svelteBuildOptions: SvelteBuildOptions
-): Observable<BuilderOutput> {
-  return new Observable<BuilderOutput>((obs) => {
+): Observable<{ success: boolean }> {
+  return new Observable<{ success: boolean }>((obs) => {
     const watcher = rollup.watch(rollupOptions);
 
     const serverUrl = url.format({

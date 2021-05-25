@@ -1,11 +1,10 @@
 import * as rollup from 'rollup';
 import { from, Observable } from 'rxjs';
-import { BuilderOutput } from '@angular-devkit/architect';
 import { map, switchMap } from 'rxjs/operators';
 
 export function runRollup(
   options: rollup.RollupOptions
-): Observable<BuilderOutput> {
+): Observable<{ success: boolean }> {
   return from(rollup.rollup(options)).pipe(
     switchMap((bundle) => {
       const outputOptions: rollup.OutputOptions[] = Array.isArray(
