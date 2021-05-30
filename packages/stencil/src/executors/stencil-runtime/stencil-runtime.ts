@@ -3,8 +3,8 @@ import { OutputTarget } from '@stencil/core/internal';
 import { prepareE2eTesting } from './e2e-testing';
 import { ConfigAndCoreCompiler, ConfigAndPathCollection } from './types';
 import { createDirectory, fileExists, writeJsonFile } from '@nrwl/workspace/src/utilities/fileutils';
-import { directoryExists } from '@nrwl/nx-plugin/testing';
 import { joinPathFragments } from '@nrwl/devkit';
+import { existsSync } from 'fs';
 
 function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
   const libPackageJson = {
@@ -65,7 +65,7 @@ function calculateOutputTargetPathVariables(
 }
 
 function prepareDistDirAndPkgJson(configAndPathCollection: ConfigAndPathCollection) {
-  if (!directoryExists(configAndPathCollection.distDir)) {
+  if (!existsSync(configAndPathCollection.distDir)) {
     createDirectory(configAndPathCollection.distDir);
   }
   copyOrCreatePackageJson(configAndPathCollection);
