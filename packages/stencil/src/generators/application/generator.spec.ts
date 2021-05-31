@@ -1,52 +1,41 @@
-import { Tree } from '@angular-devkit/schematics';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
-
-import { getProjectConfig, ProjectType, readJsonInTree } from '@nrwl/workspace';
-import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { fileListForAppType, runSchematic } from '../../utils/testing';
+import { ProjectType } from '@nrwl/workspace';
+import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
+import { fileListForAppType } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { RawApplicationSchema } from './schema';
+import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { applicationGenerator } from './generator';
 
 describe('schematic:application', () => {
   let tree: Tree;
   const options: RawApplicationSchema = { name: 'test' };
 
   beforeEach(() => {
-    tree = createEmptyWorkspace(Tree.empty());
+    tree = createTreeWithEmptyWorkspace();
   });
 
   it('should add Stencil dependencies', async () => {
-    const result = await runSchematic(
-      'app',
-      options,
-      tree
-    );
-    const packageJson = readJsonInTree(result, 'package.json');
+    await applicationGenerator(tree, options);
+
+    const packageJson = readJson(tree, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
 
   it('should create files', async () => {
-    const result = await runSchematic(
-      'app',
-      options,
-      tree
-    );
+    await applicationGenerator(tree, options);
 
     const fileList = fileListForAppType(
       options.name,
       SupportedStyles.css,
       ProjectType.Application
     );
-    fileList.forEach((file) => expect(result.exists(file)));
+    fileList.forEach((file) => expect(tree.exists(file)));
   });
 
   it('should create files in specified dir', async () => {
-    const result = await runSchematic(
-      'app',
-      { ...options, subdir: 'subdir' },
-      tree
-    );
+    await applicationGenerator(tree, { ...options, directory: 'subdir' });
 
     const fileList = fileListForAppType(
       options.name,
@@ -54,17 +43,17 @@ describe('schematic:application', () => {
       ProjectType.Application,
       'subdir'
     );
-    fileList.forEach((file) => expect(result.exists(file)));
+    fileList.forEach((file) => expect(tree.exists(file)));
   });
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to application`, async () => {
-      const result = await runSchematic(
-        'app',
-        { ...options, style: style },
-        tree
-      );
-      const packageJson = readJsonInTree(result, 'package.json');
+      await applicationGenerator(tree, {
+        ...options,
+        style: SupportedStyles[style],
+      });
+
+      const packageJson = readJson(tree, 'package.json');
       expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
 
       const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[style];
@@ -76,16 +65,15 @@ describe('schematic:application', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
-      tree = await runSchematic(
-        'app',
-        { ...options, style: style },
-        tree
-      );
+      await applicationGenerator(tree, {
+        ...options,
+        style: SupportedStyles[style],
+      });
 
-      const projectConfig = getProjectConfig(tree, options.name);
+      const projectConfig = readProjectConfiguration(tree, options.name);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
-          style: style
+          style: style,
         },
       });
     });

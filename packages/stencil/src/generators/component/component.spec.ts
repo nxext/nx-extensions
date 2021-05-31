@@ -1,28 +1,22 @@
-import { Tree } from '@angular-devkit/schematics';
-import { ComponentSchema } from './component';
-import { createTestUILib, runSchematic } from '../../utils/testing';
+import componentGenerator, { ComponentSchema } from './component';
+import { createTestUILib } from '../../utils/devkit/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
+import { Tree } from '@nrwl/devkit';
 
 describe('component schematic', () => {
   let tree: Tree;
   const projectName = 'test-project';
   const options: ComponentSchema = {
     name: 'test-component',
-    project: projectName
+    project: projectName,
   };
 
   beforeEach(async () => {
     tree = await createTestUILib(projectName, SupportedStyles.scss);
   });
 
-  it('should run successfully', async () => {
-    await expect(
-      runSchematic('component', options, tree)
-    ).resolves.not.toThrowError();
-  });
-
   it('should generate files', async () => {
-    tree = await runSchematic('component', options, tree);
+    await componentGenerator(tree, options);
 
     expect(
       tree.exists(
@@ -52,14 +46,10 @@ describe('component schematic', () => {
   });
 
   it('should generate files in directory', async () => {
-    tree = await runSchematic(
-      'component',
-      {
-        ...options,
-        directory: 'sub-dir',
-      },
-      tree
-    );
+    await componentGenerator(tree, {
+      ...options,
+      directory: 'sub-dir',
+    });
 
     expect(
       tree.exists(

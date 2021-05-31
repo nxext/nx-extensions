@@ -1,10 +1,9 @@
-import { Tree } from '@angular-devkit/schematics';
-
-import { createTestUILib, runSchematic } from '../../utils/testing';
+import { createTestUILib } from '../../utils/devkit/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { MakeLibBuildableSchema } from './schema';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { readJsonInTree } from '@nrwl/workspace';
+import { readJson, Tree } from '@nrwl/devkit';
+import { makeLibBuildableGenerator } from './make-lib-buildable';
 
 describe('make-lib-buildable schematic', () => {
   let tree: Tree;
@@ -15,36 +14,30 @@ describe('make-lib-buildable schematic', () => {
     tree = await createTestUILib(name, SupportedStyles.css, false);
   });
 
-  it('should run successfully', async () => {
-    await expect(
-      runSchematic('make-lib-buildable', options, tree)
-    ).resolves.not.toThrowError();
-  });
-
   it('should add outputTargets', async () => {
-    const result = await runSchematic('make-lib-buildable', options, tree);
+    await makeLibBuildableGenerator(tree, options);
 
-    expect(result.readContent(`libs/${name}/stencil.config.ts`))
+    expect(tree.read(`libs/${name}/stencil.config.ts`).toString('utf-8'))
       .toEqual(`import { Config } from '@stencil/core';
 
 export const config: Config = {
   namespace: '${name}',
-  taskQueue: 'async',
-  outputTargets: [
-    {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-      dir: '../../dist/libs/${name}/dist',
-    },
-  ],
+  taskQueue: 'async'
+,
+  outputTargets: [{
+          type: 'dist',
+          esmLoaderPath: '../loader',
+          dir: '../../dist/libs/${name}/dist',
+        }]
+,
 };
 `);
   });
 
   it('should add outputTargets', async () => {
-    const result = await runSchematic('make-lib-buildable', options, tree);
+    await makeLibBuildableGenerator(tree, options);
 
-    const packageJson = readJsonInTree(result, `libs/${name}/package.json`);
+    const packageJson = readJson(tree, `libs/${name}/package.json`);
     expect(packageJson['name']).toEqual(`@my/lib`);
   });
 });

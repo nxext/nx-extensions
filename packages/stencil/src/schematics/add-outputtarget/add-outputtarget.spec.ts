@@ -1,8 +1,8 @@
-import { Tree } from '@angular-devkit/schematics';
-import { createTestUILib, runSchematic } from '../../utils/testing';
+import { createTestUILib } from '../../utils/devkit/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { AddOutputtargetSchematicSchema } from './add-outputtarget';
-import { names } from '@nrwl/devkit';
+import { names, Tree } from '@nrwl/devkit';
+import { outputtargetGenerator } from './add-outputtarget';
 
 describe('schematics:add-outputtarget', () => {
   let tree: Tree;
@@ -23,7 +23,7 @@ describe('schematics:add-outputtarget', () => {
 
   describe('using react', () => {
     it('should not generate default react library', async () => {
-      tree = await runSchematic('add-outputtarget', reactOptions, tree);
+      await outputtargetGenerator(tree, reactOptions);
 
       expect(
         tree.exists(
@@ -51,14 +51,13 @@ describe('schematics:add-outputtarget', () => {
   });
 
   describe('using angular', () => {
-    xit('should generate default angular library', async () => {
-      tree = await runSchematic('add-outputtarget', angularOptions, tree);
+    it('should generate default angular library', async () => {
+      await outputtargetGenerator(tree, angularOptions);
 
+      const fileName = names(projectName + '-angular').fileName;
       expect(
         tree.exists(
-          `libs/${projectName}-angular/src/lib/${
-            names(projectName + '-angular').fileName
-          }.module.ts`
+          `libs/${projectName}-angular/src/lib/${fileName}.module.ts`
         )
       ).toBeTruthy();
     });
