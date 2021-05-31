@@ -2,27 +2,11 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "12.3.1",
-      "description": "Remove deprecated options and update others according to new defaults. It syncs with the v12 migration of Angular builders.",
-      "factory": "./src/migrations/update-12-3-0/update-webpack-browser-config",
+      "version": "12.3.5-beta.0",
+      "description": "Convert targets using @nrwl/angular:webpack-browser with the buildTarget option set to use the @nrwl/angular:delegate-build executor instead.",
+      "factory": "./src/migrations/update-12-3-0/convert-webpack-browser-build-target-to-delegate-build",
       "package": "@nrwl/angular",
-      "name": "update-webpack-browser-config"
-    },
-    {
-      "cli": "nx",
-      "version": "12.3.1",
-      "description": "Updates storybook configurations to support webpack 5",
-      "factory": "./src/migrations/update-12-3-0/update-storybook",
-      "package": "@nrwl/angular",
-      "name": "update-storybook"
-    },
-    {
-      "cli": "nx",
-      "version": "12.3.1",
-      "description": "Migrates some rules that have changed in Angular EsLint",
-      "factory": "./src/migrations/update-12-3-0/update-angular-eslint-rules",
-      "package": "@nrwl/angular",
-      "name": "update-angular-eslint-rules"
+      "name": "convert-webpack-browser-build-target-to-delegate-build"
     }
   ]
 }
