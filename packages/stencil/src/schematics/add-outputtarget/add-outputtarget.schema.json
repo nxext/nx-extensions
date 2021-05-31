@@ -15,9 +15,25 @@
     },
     "outputType": {
       "type": "string",
-      "enum": ["angular", "react", "vue"],
       "description": "Select what kind of library you want to generate.",
-      "x-prompt": "Which framework do you use?"
+      "x-prompt": {
+        "message": "Which framework do you use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "angular",
+            "label": "Angular"
+          },
+          {
+            "value": "react",
+            "label": "React"
+          },
+          {
+            "value": "vue",
+            "label": "Vue"
+          }
+        ]
+      }
     },
     "publishable": {
       "type": "boolean",
