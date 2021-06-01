@@ -1,17 +1,21 @@
-import { chain, noop, Rule, Tree } from '@angular-devkit/schematics';
-import { formatFiles, getWorkspacePath, readJsonInTree } from '@nrwl/workspace';
-import { prepareVueLibrary } from './lib/vue';
-import { prepareReactLibrary } from './lib/react';
-import { prepareAngularLibrary } from './lib/angular';
-import { addToOutputTargetToConfig, OutputTargetType } from './lib/add-outputtarget-to-config';
 import { stripIndents } from '@angular-devkit/core/src/utils/literals';
-import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { chain, noop, Rule, Tree } from '@angular-devkit/schematics';
 import { logger } from '@nrwl/devkit';
+import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
+import { formatFiles, getWorkspacePath, readJsonInTree } from '@nrwl/workspace';
+
+import { SupportedStyles } from '../../stencil-core-utils';
+import { addToOutputTargetToConfig, OutputTargetType } from './lib/add-outputtarget-to-config';
+import { prepareAngularLibrary } from './lib/angular';
+import { prepareReactLibrary } from './lib/react';
+import { prepareVueLibrary } from './lib/vue';
 
 export interface AddOutputtargetSchematicSchema {
   projectName: string;
   outputType: OutputTargetType;
   publishable: boolean;
+  importPath?: string;
+  style?: SupportedStyles;
 }
 
 export function isStencilProjectBuilder(

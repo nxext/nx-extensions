@@ -1,17 +1,12 @@
 import { chain, externalSchematic, Tree } from '@angular-devkit/schematics';
-import {
-  addDepsToPackageJson,
-  getProjectConfig,
-  insert,
-  insertImport,
-  libsDir,
-} from '@nrwl/workspace/src/utils/ast-utils';
-import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore } from '../../../utils/utils';
-import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
-import { getDistDir, getRelativePath } from '../../../utils/fileutils';
+import { addDepsToPackageJson, getProjectConfig, insert, insertImport, libsDir } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
+
 import { addToOutputTargets } from '../../../stencil-core-utils';
+import { getDistDir, getRelativePath } from '../../../utils/fileutils';
+import { addToGitignore } from '../../../utils/utils';
+import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
+import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 
 export function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
   return (host: Tree) => {
@@ -19,8 +14,9 @@ export function prepareReactLibrary(options: AddOutputtargetSchematicSchema) {
     return chain([
       externalSchematic('@nrwl/react', 'library', {
         name: reactProjectName,
-        style: 'css',
+        style: options.style,
         publishable: options.publishable,
+        importPath: options.importPath,
       }),
       addDepsToPackageJson(
         {},

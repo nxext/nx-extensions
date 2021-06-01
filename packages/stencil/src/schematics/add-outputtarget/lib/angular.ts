@@ -1,22 +1,23 @@
 import { chain, externalSchematic, Tree } from '@angular-devkit/schematics';
+import { names } from '@nrwl/devkit';
+import { getNpmScope } from '@nrwl/workspace';
 import {
   addDepsToPackageJson,
   addGlobal,
   getProjectConfig,
   insert,
   insertImport,
-  libsDir
+  libsDir,
 } from '@nrwl/workspace/src/utils/ast-utils';
-import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { getNpmScope } from '@nrwl/workspace';
-import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
-import { addToGitignore } from '../../../utils/utils';
-import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
-import { getDistDir } from '../../../utils/fileutils';
-import * as ts from 'typescript';
-import { addToOutputTargets } from '../../../stencil-core-utils';
-import { names } from '@nrwl/devkit';
 import { relative } from 'path';
+import * as ts from 'typescript';
+
+import { addToOutputTargets } from '../../../stencil-core-utils';
+import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
+import { getDistDir } from '../../../utils/fileutils';
+import { addToGitignore } from '../../../utils/utils';
+import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
+import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 
 export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
   return (host: Tree) => {
@@ -24,8 +25,10 @@ export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
     return chain([
       externalSchematic('@nrwl/angular', 'library', {
         name: angularProjectName,
-        style: 'css',
-        skipPackageJson: !options.publishable
+        style: options.style,
+        skipPackageJson: !options.publishable,
+        publishable: options.publishable,
+        importPath: options.importPath,
       }),
       addDepsToPackageJson(
         {},
