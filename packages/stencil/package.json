@@ -34,7 +34,7 @@
     "@nrwl/angular": "^12.0.0",
     "@nrwl/jest": "^12.0.0",
     "@nrwl/workspace": "^12.0.0",
-    "@stencil/core": "^2.5.0"
+    "@stencil/core": "^2.6.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"
