@@ -5,7 +5,7 @@ title: Library
 
 Generates a Stencil library
 
-This schematic also executes the [Core](core) schematic
+This schematic also executes the [Init](init) schematic
 
 ## Usage
 

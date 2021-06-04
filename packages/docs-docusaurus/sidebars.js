@@ -22,7 +22,7 @@ module.exports = {
             'stencil/schematics/library',
             'stencil/schematics/add-outputtarget',
             'stencil/schematics/make-lib-buildable',
-            'stencil/schematics/core',
+            'stencil/schematics/init',
           ],
         },
         {

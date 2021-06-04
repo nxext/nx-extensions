@@ -5,7 +5,7 @@ title: Ionic PWA
 
 Generates a Ionic Progressive Web App
 
-This schematic also executes the [Core](core) schematic
+This schematic also executes the [Init](init) schematic
 
 ## Usage
 
