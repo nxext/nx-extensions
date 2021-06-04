@@ -2,7 +2,6 @@ import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-
 import { InitSchema } from './schema';
 import { addStyledDependencies } from './lib/add-style-module-dependencies';
 import { addE2eTestDependencies } from './lib/add-e2e-dependencies';
-import { moveNxextToDevDependencies } from './lib/move-nxext-to-dev-dependencies';
 import { addDependenciesByApptype } from './lib/add-dependencies-for-apptype';
 import { convertNxGenerator, GeneratorCallback, Tree } from '@nrwl/devkit';
 import { jestInitGenerator } from '@nrwl/jest';
@@ -14,7 +13,6 @@ export async function initGenerator<T extends InitSchema>(
 ) {
   const tasks: GeneratorCallback[] = [];
 
-  moveNxextToDevDependencies(tree);
   tasks.push(addDependenciesByApptype(tree, options.appType));
   tasks.push(...addStyledDependencies(tree, options));
   tasks.push(...addE2eTestDependencies(tree));

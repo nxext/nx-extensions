@@ -2,7 +2,6 @@ import {
   autoprefixerTypesVersion,
   autoprefixerVersion,
   ionicVersion,
-  nxextVersion,
   puppeteer,
   puppeteerType,
   STENCIL_STYLE_PLUGIN_VERSION,
@@ -28,7 +27,6 @@ export interface DependencyEntries {
 }
 
 const stencilDependencies = {
-  '@nxext/stencil': nxextVersion,
   '@stencil/core': stencilVersion,
 };
 const testDependencies = {
