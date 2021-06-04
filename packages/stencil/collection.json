@@ -25,8 +25,8 @@
       "hidden": false
     },
     "library": {
-      "factory": "./src/schematics/library/schematic#librarySchematic",
-      "schema": "./src/schematics/library/schema.json",
+      "factory": "./src/generators/library/schematic#librarySchematic",
+      "schema": "./src/generators/library/schema.json",
       "description": "Generate Stencil Library",
       "aliases": ["lib", "collection"],
       "hidden": false
@@ -45,8 +45,8 @@
       "hidden": false
     },
     "make-lib-buildable": {
-      "factory": "./src/schematics/make-lib-buildable/make-lib-buildable#makeLibBuildableSchematic",
-      "schema": "./src/schematics/make-lib-buildable/schema.json",
+      "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableSchematic",
+      "schema": "./src/generators/make-lib-buildable/schema.json",
       "description": "Make a library buildable"
     }
   },
@@ -73,8 +73,8 @@
       "hidden": false
     },
     "library": {
-      "factory": "./src/schematics/library/schematic#libraryGenerator",
-      "schema": "./src/schematics/library/schema.json",
+      "factory": "./src/generators/library/schematic#libraryGenerator",
+      "schema": "./src/generators/library/schema.json",
       "description": "Generate Stencil Library",
       "aliases": ["lib", "collection"],
       "hidden": false
@@ -93,8 +93,8 @@
       "hidden": false
     },
     "make-lib-buildable": {
-      "factory": "./src/schematics/make-lib-buildable/make-lib-buildable#makeLibBuildableGenerator",
-      "schema": "./src/schematics/make-lib-buildable/schema.json",
+      "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableGenerator",
+      "schema": "./src/generators/make-lib-buildable/schema.json",
       "description": "Make a library buildable"
     }
   }

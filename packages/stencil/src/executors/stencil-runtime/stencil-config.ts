@@ -3,7 +3,6 @@ import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { ConfigAndPathCollection, CoreCompiler } from './types';
 import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
-import * as path from 'path';
 
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
   await sys.dynamicImport(sys.getCompilerExecutingPath());
@@ -30,8 +29,6 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     options: T
   ) => ConfigFlags
 ): Promise<ConfigAndPathCollection> {
-  const configFilePath = options.configPath;
-
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const logger: Logger = createNodeLogger({ process });
   const sys: CompilerSystem = createNodeSys({ process });
@@ -47,6 +44,7 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   const projectDir = context.workspace.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
   const distDir = joinPathFragments(`${context.root}/${options.outputPath}`);
+  const configPath = joinPathFragments(`${context.root}/${options.configPath}`);
 
   let config = {
     flags,
@@ -61,7 +59,7 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
 
   const loadConfigResults = await loadConfig({
     config,
-    configPath: path.join(context.root, configFilePath),
+    configPath,
     logger,
     sys
   });

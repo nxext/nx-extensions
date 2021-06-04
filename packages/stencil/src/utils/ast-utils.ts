@@ -44,13 +44,6 @@ export function addImport(
   return [addAfterLastImport(source, statement)];
 }
 
-export function addGlobal(
-  source: ts.SourceFile,
-  statement: string
-): StringChange {
-  return addAfterLastImport(source, statement);
-}
-
 function addAfterLastImport(
   source: ts.SourceFile,
   statement: string
