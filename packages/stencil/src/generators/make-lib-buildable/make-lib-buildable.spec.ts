@@ -22,14 +22,14 @@ describe('make-lib-buildable schematic', () => {
 
 export const config: Config = {
   namespace: '${name}',
-  taskQueue: 'async',
-  outputTargets: [
-    {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-      dir: '../../dist/libs/${name}/dist',
-    },
-  ],
+  taskQueue: 'async'
+,
+  outputTargets: [{
+            type: 'dist',
+            esmLoaderPath: '../loader',
+            dir: '../../dist/libs/${name}/dist',
+          }]
+
 };
 `);
   });

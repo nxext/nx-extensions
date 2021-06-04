@@ -18,7 +18,7 @@ describe('e2e', () => {
       it(`should generate react lib`, async (done) => {
         const plugin = uniq('lib');
         await runNxCommandAsync(
-          `generate @nxext/stencil:lib ${plugin} --style='css' --buildable`
+          `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
         );
         await runNxCommandAsync(
           `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=react`
@@ -34,7 +34,7 @@ describe('e2e', () => {
       it(`should generate angular lib`, async (done) => {
         const plugin = uniq('lib');
         await runNxCommandAsync(
-          `generate @nxext/stencil:lib ${plugin} --style='css' --buildable`
+          `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
         );
         await runNxCommandAsync(
           `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
@@ -62,7 +62,7 @@ describe('e2e', () => {
       it(`should stop if lib not buildable`, async (done) => {
         const plugin = uniq('lib');
         await runNxCommandAsync(
-          `generate @nxext/stencil:lib ${plugin} --style='css'`
+          `generate @nxext/stencil:lib ${plugin} --style='css' --e2eTestRunner='none' --junitTestRunner='none'`
         );
         const result = await runNxCommandAsync(
           `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
@@ -79,7 +79,7 @@ describe('e2e', () => {
     it('should create src in the specified directory', async (done) => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --directory subdir --style=css --buildable`
+        `generate @nxext/stencil:lib ${plugin} --directory='subdir' --style=css --e2eTestRunner='none' --junitTestRunner='none'`
       );
       expect(() =>
         checkFilesExist(`libs/subdir/${plugin}/stencil.config.ts`)
@@ -90,7 +90,7 @@ describe('e2e', () => {
     it('should add tags to nx.json', async (done) => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --tags e2etag,e2ePackage --style=css`
+        `generate @nxext/stencil:lib ${plugin} --tags e2etag,e2ePackage --style=css --e2eTestRunner='none' --junitTestRunner='none'`
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
@@ -100,7 +100,7 @@ describe('e2e', () => {
     it(`should build app with scss`, async (done) => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --style='scss' --buildable`
+        `generate @nxext/stencil:lib ${plugin} --style='scss' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);
@@ -111,7 +111,7 @@ describe('e2e', () => {
 
     it('should be able to make a lib buildable', async (done) => {
       const plugin = uniq('lib');
-      await runNxCommandAsync(`generate @nxext/stencil:lib ${plugin}`);
+      await runNxCommandAsync(`generate @nxext/stencil:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
       await runNxCommandAsync(
         `generate @nxext/stencil:make-lib-buildable ${plugin} --importPath=@my/lib`
       );
@@ -132,7 +132,7 @@ describe('e2e', () => {
       it('should add tags to nx.json', async (done) => {
         const plugin = uniq('pwa');
         await runNxCommandAsync(
-          `generate @nxext/stencil:pwa ${plugin} --tags e2etag,e2ePackage --style=css`
+          `generate @nxext/stencil:pwa ${plugin} --tags e2etag,e2ePackage --style=css --e2eTestRunner='none' --junitTestRunner='none'`
         );
 
         expect(() => {
@@ -151,7 +151,7 @@ describe('e2e', () => {
       it(`should bould pwa app with scss`, async (done) => {
         const plugin = uniq('pwa');
         await runNxCommandAsync(
-          `generate @nxext/stencil:pwa ${plugin} --style='scss'`
+          `generate @nxext/stencil:pwa ${plugin} --style='scss' --e2eTestRunner='none' --junitTestRunner='none'`
         );
 
         const result = await runNxCommandAsync(`build ${plugin} --dev`);
@@ -167,7 +167,7 @@ describe('e2e', () => {
       const plugin = uniq('library');
 
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --style=scss --buildable`
+        `generate @nxext/stencil:lib ${plugin} --style=scss --buildable --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const uniqConfigFilename = uniq('stencil.config');
@@ -187,7 +187,7 @@ describe('e2e', () => {
     it(`should build with custom configPath`, async (done) => {
       const plugin = uniq('library');
       await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --style=scss --buildable`
+        `generate @nxext/stencil:lib ${plugin} --style=scss --buildable --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(
@@ -203,7 +203,7 @@ describe('e2e', () => {
     it('should add tags to nx.json', async (done) => {
       const plugin = uniq('app3');
       await runNxCommandAsync(
-        `generate @nxext/stencil:app ${plugin} --tags e2etag,e2ePackage --style=css`
+        `generate @nxext/stencil:app ${plugin} --tags e2etag,e2ePackage --style=css --e2eTestRunner='none' --junitTestRunner='none'`
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
@@ -213,7 +213,7 @@ describe('e2e', () => {
     it(`should build app with css`, async (done) => {
       const plugin = uniq('app2');
       await runNxCommandAsync(
-        `generate @nxext/stencil:app ${plugin} --style='css'`
+        `generate @nxext/stencil:app ${plugin} --style='css' --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin} --dev`);

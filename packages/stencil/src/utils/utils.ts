@@ -35,15 +35,3 @@ export function addToGitignore(path: string): Rule {
     }
   };
 }
-
-export function isProjectBuildable(project: any): boolean {
-  const builderCommand = 'build';
-  const buildArchitect =
-    project.architect && project.architect[builderCommand]
-      ? project.architect[builderCommand]
-      : {};
-  return (
-    buildArchitect &&
-    buildArchitect.builder === `@nxext/stencil:${builderCommand}`
-  );
-}
