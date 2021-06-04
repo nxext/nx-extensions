@@ -1,6 +1,6 @@
 ---
-id: core
-title: Core
+id: init
+title: Init
 ---
 
 _The user don't need to call this. It'll be called by the application schematics automatically._
@@ -25,9 +25,7 @@ autoprefixer
 
 ## Usage
 
-```
-nx g @nxext/stencil:core
-```
+*Not meant to be used by the users*
 
 ## Options
 

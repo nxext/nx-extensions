@@ -5,7 +5,7 @@ title: Ionic App
 
 You're able to generate a StencilJs and Capacitor based mobile app.
 
-This schematic also executes the [Core](core) schematic
+This schematic also executes the [Init](init) schematic
 
 After that build it and follow the given instructions to add capacitors platform platforms. (look [here](https://nxtend.dev/docs/capacitor/getting-started) for the nx capacitor plugin documentation.)
 
