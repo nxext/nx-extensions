@@ -2,7 +2,11 @@ import { copyFile, readJsonFile } from '@nrwl/workspace';
 import { OutputTarget } from '@stencil/core/internal';
 import { prepareE2eTesting } from './e2e-testing';
 import { ConfigAndCoreCompiler, ConfigAndPathCollection } from './types';
-import { createDirectory, fileExists, writeJsonFile } from '@nrwl/workspace/src/utilities/fileutils';
+import {
+  createDirectory,
+  fileExists,
+  writeJsonFile,
+} from '@nrwl/workspace/src/utilities/fileutils';
 import { joinPathFragments } from '@nrwl/devkit';
 import { existsSync } from 'fs';
 
@@ -18,21 +22,23 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
     collection: './dist/collection/collection-manifest.json',
     'collection:main': './dist/collection/index.js',
     unpkg: `./dist/${values.projectName}/${values.projectName}.js`,
-    files: ['dist/', 'loader/']
+    files: ['dist/', 'loader/'],
   };
 
   if (fileExists(values.pkgJson)) {
     copyFile(values.pkgJson, values.distDir);
     const packageJson = readJsonFile(values.pkgJson);
-    packageJson['main'] = libPackageJson.main;
-    packageJson['module'] = libPackageJson.module;
-    packageJson['es2015'] = libPackageJson.es2015;
-    packageJson['es2017'] = libPackageJson.es2017;
-    packageJson['types'] = libPackageJson.types;
-    packageJson['collection'] = libPackageJson.collection;
-    packageJson['collection:main'] = libPackageJson['collection:main'];
-    packageJson['unpkg'] = libPackageJson.unpkg;
-    packageJson['files'] = libPackageJson.files;
+    packageJson['main'] ??= libPackageJson.main;
+    packageJson['module'] ??= libPackageJson.module;
+    packageJson['es2015'] ??= libPackageJson.es2015;
+    packageJson['es2017'] ??= libPackageJson.es2017;
+    packageJson['types'] ??= libPackageJson.types;
+    packageJson['collection'] ??= libPackageJson.collection;
+    packageJson['collection:main'] ??= libPackageJson['collection:main'];
+    packageJson['unpkg'] ??= libPackageJson.unpkg;
+    packageJson['files'] = packageJson.files
+      ? [...new Set([...packageJson.files, ...libPackageJson.files])]
+      : libPackageJson.files;
     writeJsonFile(values.pkgJson, packageJson);
   } else {
     writeJsonFile(
@@ -55,7 +61,7 @@ function calculateOutputTargetPathVariables(
         const origPath = outputTarget[pathVar];
 
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(values.projectRoot, values.distDir)
+          [pathVar]: origPath.replace(values.projectRoot, values.distDir),
         });
       }
     });
@@ -64,7 +70,9 @@ function calculateOutputTargetPathVariables(
   });
 }
 
-function prepareDistDirAndPkgJson(configAndPathCollection: ConfigAndPathCollection) {
+function prepareDistDirAndPkgJson(
+  configAndPathCollection: ConfigAndPathCollection
+) {
   if (!existsSync(configAndPathCollection.distDir)) {
     createDirectory(configAndPathCollection.distDir);
   }
@@ -94,24 +102,28 @@ export async function createStencilConfig(
     'cjsDir',
     'cjsIndexFile',
     'esmIndexFile',
-    'componentDts'
+    'componentDts',
   ];
   const outputTargets: OutputTarget[] = calculateOutputTargetPathVariables(
     configAndPathCollection,
     pathVariables
   );
-  const devServerConfig = Object.assign(configAndPathCollection.config.devServer, {
-    root: configAndPathCollection.config.devServer.root.replace(
-      configAndPathCollection.projectRoot,
-      configAndPathCollection.distDir
-    )
-  });
+  const devServerConfig = Object.assign(
+    configAndPathCollection.config.devServer,
+    {
+      root: configAndPathCollection.config.devServer.root.replace(
+        configAndPathCollection.projectRoot,
+        configAndPathCollection.distDir
+      ),
+    }
+  );
 
   if (!configAndPathCollection.config.flags.e2e) {
-    configAndPathCollection.config.packageJsonFilePath = configAndPathCollection.config.packageJsonFilePath.replace(
-      configAndPathCollection.projectRoot,
-      configAndPathCollection.distDir
-    );
+    configAndPathCollection.config.packageJsonFilePath =
+      configAndPathCollection.config.packageJsonFilePath.replace(
+        configAndPathCollection.projectRoot,
+        configAndPathCollection.distDir
+      );
   }
 
   if (configAndPathCollection.config.flags.task === 'build') {
@@ -126,6 +138,6 @@ export async function createStencilConfig(
 
   return {
     config: config,
-    coreCompiler: configAndPathCollection.coreCompiler
+    coreCompiler: configAndPathCollection.coreCompiler,
   };
 }
