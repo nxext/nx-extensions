@@ -18,8 +18,8 @@
     "paths": {
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
-      "@nxext/tailwind": ["packages/tailwind/src/index.ts"],
       "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"],
+      "@nxext/tailwind": ["packages/tailwind/src/index.ts"],
       "@nxext/vite": ["packages/vite/src/index.ts"]
     }
   },
