@@ -1,6 +1,25 @@
 {
   "version": 2,
   "projects": {
+    "docs-docusaurus": {
+      "projectType": "application",
+      "root": "packages/docs-docusaurus",
+      "sourceRoot": "packages/docs-docusaurus/src",
+      "targets": {
+        "build": {
+          "executor": "@nx-plus/docusaurus:browser",
+          "options": {
+            "outputPath": "dist/packages/docs-docusaurus"
+          }
+        },
+        "serve": {
+          "executor": "@nx-plus/docusaurus:dev-server",
+          "options": {
+            "port": 3000
+          }
+        }
+      }
+    },
     "stencil": {
       "root": "packages/stencil",
       "sourceRoot": "packages/stencil/src",
@@ -185,25 +204,6 @@
             "npmPackageName": "@nxext/svelte",
             "pluginOutputPath": "dist/packages/svelte",
             "jestConfig": "e2e/svelte-e2e/jest.config.js"
-          }
-        }
-      }
-    },
-    "docs-docusaurus": {
-      "projectType": "application",
-      "root": "packages/docs-docusaurus",
-      "sourceRoot": "packages/docs-docusaurus/src",
-      "targets": {
-        "build": {
-          "executor": "@nx-plus/docusaurus:browser",
-          "options": {
-            "outputPath": "dist/packages/docs-docusaurus"
-          }
-        },
-        "serve": {
-          "executor": "@nx-plus/docusaurus:dev-server",
-          "options": {
-            "port": 3000
           }
         }
       }

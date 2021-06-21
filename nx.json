@@ -16,6 +16,9 @@
     ".eslintrc.json": "*"
   },
   "projects": {
+    "docs-docusaurus": {
+      "tags": []
+    },
     "stencil": {
       "tags": []
     },
@@ -29,9 +32,6 @@
     "svelte-e2e": {
       "tags": [],
       "implicitDependencies": ["svelte", "vite"]
-    },
-    "docs-docusaurus": {
-      "tags": []
     },
     "sveltekit": {
       "tags": []
