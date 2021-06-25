@@ -8,7 +8,11 @@ import { makeLibBuildableGenerator } from './make-lib-buildable';
 describe('make-lib-buildable schematic', () => {
   let tree: Tree;
   const name = uniq('testproject');
-  const options: MakeLibBuildableSchema = { name, style: SupportedStyles.css, importPath: '@my/lib' };
+  const options: MakeLibBuildableSchema = {
+    name,
+    style: SupportedStyles.css,
+    importPath: '@my/lib',
+  };
 
   beforeEach(async () => {
     tree = await createTestUILib(name, SupportedStyles.css, false);
@@ -18,20 +22,22 @@ describe('make-lib-buildable schematic', () => {
     await makeLibBuildableGenerator(tree, options);
 
     expect(tree.read(`libs/${name}/stencil.config.ts`).toString('utf-8'))
-      .toEqual(`import { Config } from '@stencil/core';
+      .toMatchInlineSnapshot(`
+      "import { Config } from '@stencil/core';
 
-export const config: Config = {
-  namespace: '${name}',
-  taskQueue: 'async'
-,
-  outputTargets: [{
-            type: 'dist',
-            esmLoaderPath: '../loader',
-            dir: '../../dist/libs/${name}/dist',
-          }]
+      export const config: Config = {
+        namespace: '${name}',
+        taskQueue: 'async'
+      ,
+        outputTargets: [{
+                  type: 'dist',
+                  esmLoaderPath: '../loader',
+                  dir: '../../dist/libs/${name}/dist',
+                }]
 
-};
-`);
+      };
+      "
+    `);
   });
 
   it('should add outputTargets', async () => {
