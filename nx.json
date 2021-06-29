@@ -15,35 +15,7 @@
     "tsconfig.base.json": "*",
     ".eslintrc.json": "*"
   },
-  "projects": {
-    "docs-docusaurus": {
-      "tags": []
-    },
-    "stencil": {
-      "tags": []
-    },
-    "stencil-e2e": {
-      "tags": [],
-      "implicitDependencies": ["stencil"]
-    },
-    "svelte": {
-      "tags": []
-    },
-    "svelte-e2e": {
-      "tags": [],
-      "implicitDependencies": ["svelte", "vite"]
-    },
-    "sveltekit": {
-      "tags": []
-    },
-    "sveltekit-e2e": {
-      "tags": [],
-      "implicitDependencies": ["sveltekit"]
-    },
-    "vite": {
-      "tags": []
-    }
-  },
+  "projects": {},
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",

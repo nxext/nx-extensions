@@ -1,0 +1,55 @@
+{
+  "root": "packages/vite",
+  "sourceRoot": "packages/vite/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/vite/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/vite"],
+      "options": {
+        "jestConfig": "packages/vite/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/vite",
+        "tsConfig": "packages/vite/tsconfig.lib.json",
+        "packageJson": "packages/vite/package.json",
+        "main": "packages/vite/src/index.ts",
+        "assets": [
+          "packages/vite/*.md",
+          {
+            "input": "./packages/vite/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/vite/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/vite",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/vite",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

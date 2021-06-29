@@ -1,0 +1,19 @@
+{
+  "projectType": "application",
+  "root": "e2e/stencil-e2e",
+  "sourceRoot": "e2e/stencil-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "stencil:build",
+        "npmPackageName": "@nxext/stencil",
+        "pluginOutputPath": "dist/packages/stencil",
+        "jestConfig": "e2e/stencil-e2e/jest.config.js",
+        "tsSpecConfig": "e2e/stencil-e2e/tsconfig.spec.json"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["stencil"]
+}
