@@ -1,0 +1,18 @@
+{
+  "projectType": "application",
+  "root": "e2e/sveltekit-e2e",
+  "sourceRoot": "e2e/sveltekit-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "sveltekit:build",
+        "npmPackageName": "@nxext/sveltekit",
+        "pluginOutputPath": "dist/packages/sveltekit",
+        "jestConfig": "e2e/sveltekit-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["sveltekit"]
+}

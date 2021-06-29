@@ -1,0 +1,68 @@
+{
+  "root": "packages/svelte",
+  "sourceRoot": "packages/svelte/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/svelte/**/*.ts",
+          "packages/svelte/**/*.spec.ts",
+          "packages/svelte/**/*.spec.tsx",
+          "packages/svelte/**/*.spec.js",
+          "packages/svelte/**/*.spec.jsx",
+          "packages/svelte/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "packages/svelte/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/packages/svelte"]
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "outputPath": "dist/packages/svelte",
+        "tsConfig": "packages/svelte/tsconfig.lib.json",
+        "packageJson": "packages/svelte/package.json",
+        "main": "packages/svelte/src/index.ts",
+        "assets": [
+          "packages/svelte/*.md",
+          {
+            "input": "./packages/svelte/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/svelte/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/svelte",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/svelte",
+            "glob": "builders.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/svelte",
+            "glob": "migrations.json",
+            "output": "."
+          }
+        ]
+      },
+      "outputs": ["{options.outputPath}"]
+    }
+  },
+  "tags": []
+}
