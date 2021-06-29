@@ -3,6 +3,7 @@
   "$id": "AddOutputtarget",
   "title": "",
   "type": "object",
+  "cli": "nx",
   "properties": {
     "projectName": {
       "type": "string",
@@ -19,9 +20,19 @@
       "description": "Select what kind of library you want to generate.",
       "x-prompt": "Which framework do you use?"
     },
+    "unitTestRunner": {
+      "description": "Adds the specified unit test runner.",
+      "type": "string",
+      "enum": ["jest", "none"],
+      "default": "jest"
+    },
     "publishable": {
       "type": "boolean",
       "description": "",
+      "default": false
+    },
+    "skipFormat": {
+      "type": "boolean",
       "default": false
     }
   },

@@ -3,6 +3,7 @@
   "$id": "MakeLibBuildable",
   "title": "",
   "type": "object",
+  "cli": "nx",
   "properties": {
     "name": {
       "type": "string",

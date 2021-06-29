@@ -1,20 +1,22 @@
 import { createTestUILib } from '../../utils/devkit/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
-import { AddOutputtargetSchematicSchema } from './add-outputtarget';
 import { names, Tree } from '@nrwl/devkit';
 import { outputtargetGenerator } from './add-outputtarget';
+import { AddOutputtargetSchematicSchema } from './schema';
 
 describe('schematics:add-outputtarget', () => {
   let tree: Tree;
   const projectName = uniq('testproject');
-  const options = { projectName: projectName, publishable: false };
+  const options = { projectName: projectName, publishable: false, skipFormat: false };
   const reactOptions: AddOutputtargetSchematicSchema = {
     ...options,
-    outputType: 'react',
+    unitTestRunner: 'none',
+    outputType: 'react'
   };
   const angularOptions: AddOutputtargetSchematicSchema = {
     ...options,
-    outputType: 'angular',
+    unitTestRunner: 'none',
+    outputType: 'angular'
   };
 
   beforeEach(async () => {
