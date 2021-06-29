@@ -13,7 +13,7 @@ export const STENCIL_OUTPUTTARGET_VERSION: {
 } = {
   react: '^0.0.9',
   angular: '^0.0.6',
-  vue: '^0.4.2',
+  vue: '^0.5.0',
   svelte: '^0.0.3',
 };
 

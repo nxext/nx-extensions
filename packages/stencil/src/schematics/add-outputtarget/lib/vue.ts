@@ -9,10 +9,10 @@ import {
 } from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utils';
-import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import * as ts from 'typescript';
 import { addToOutputTargets } from '../../../stencil-core-utils';
+import { AddOutputtargetSchematicSchema } from '../schema';
 
 export function prepareVueLibrary(options: AddOutputtargetSchematicSchema) {
   return (host: Tree) => {

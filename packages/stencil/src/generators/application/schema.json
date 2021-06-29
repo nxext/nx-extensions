@@ -3,6 +3,7 @@
   "$id": "Nxext-Application",
   "title": "",
   "type": "object",
+  "cli": "nx",
   "properties": {
     "name": {
       "type": "string",

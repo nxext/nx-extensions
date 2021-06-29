@@ -1,33 +1,13 @@
-import { chain, noop, Rule, Tree } from '@angular-devkit/schematics';
-import { formatFiles, getWorkspacePath, readJsonInTree } from '@nrwl/workspace';
 import { prepareVueLibrary } from './lib/vue';
 import { prepareReactLibrary } from './lib/react';
 import { prepareAngularLibrary } from './lib/angular';
-import { addToOutputTargetToConfig, OutputTargetType } from './lib/add-outputtarget-to-config';
-import { stripIndents } from '@angular-devkit/core/src/utils/literals';
-import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
-import { logger } from '@nrwl/devkit';
+import { addToOutputTargetToConfig } from './lib/add-outputtarget-to-config';
+import { convertNxGenerator, formatFiles, logger, readProjectConfiguration, stripIndents, Tree } from '@nrwl/devkit';
+import { isBuildableStencilProject } from '../../utils/utillities';
+import { AddOutputtargetSchematicSchema } from './schema';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
-export interface AddOutputtargetSchematicSchema {
-  projectName: string;
-  outputType: OutputTargetType;
-  publishable: boolean;
-}
-
-export function isStencilProjectBuilder(
-  project: any,
-  builderCommand: string
-): boolean {
-  const buildArchitect =
-    project.architect && project.architect[builderCommand]
-      ? project.architect[builderCommand]
-      : {};
-  return (
-    buildArchitect &&
-    buildArchitect.builder === `@nxext/stencil:${builderCommand}`
-  );
-}
-
+/*
 function checkBuildable(options: AddOutputtargetSchematicSchema): Rule {
   return (tree: Tree) => {
     const workspaceJson = readJsonInTree(tree, getWorkspacePath(tree));
@@ -56,14 +36,40 @@ function checkBuildable(options: AddOutputtargetSchematicSchema): Rule {
       return noop();
     }
   };
+}*/
+
+export async function outputtargetGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
+  const projectConfig = readProjectConfiguration(host, options.projectName);
+  const tasks = [];
+
+  if(isBuildableStencilProject(projectConfig)) {
+    if(options.outputType === 'react') {
+      await prepareReactLibrary(host, options);
+    }
+
+    if(options.outputType === 'angular') {
+      tasks.push(await prepareAngularLibrary(host, options));
+    }
+
+    await addToOutputTargetToConfig(host, options.projectName, options.outputType);
+
+    if(options.skipFormat) {
+      await formatFiles(host);
+    }
+  } else {
+    logger.info(stripIndents`
+      Please use a buildable library for custom outputtargets
+
+      You could make this library buildable with:
+
+      nx generate @nxext/stencil:make-lib-buildable ${options.projectName}
+      or
+      ng generate @nxext/stencil:make-lib-buildable ${options.projectName}
+    `);
+  }
+
+  return runTasksInSerial(...tasks);
 }
 
-export function outputtargetSchematic(options: AddOutputtargetSchematicSchema): Rule {
-  return checkBuildable(options);
-}
-
-export default outputtargetSchematic;
-export const outputtargetGenerator = wrapAngularDevkitSchematic(
-  '@nxext/stencil',
-  'add-outputtarget'
-);
+export default outputtargetGenerator;
+export const outputtargetSchematic = convertNxGenerator(outputtargetGenerator);

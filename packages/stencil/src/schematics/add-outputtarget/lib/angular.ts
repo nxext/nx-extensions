@@ -1,105 +1,94 @@
-import { chain, externalSchematic, Tree } from '@angular-devkit/schematics';
-import {
-  addDepsToPackageJson,
-  addGlobal,
-  getProjectConfig,
-  insert,
-  insertImport,
-  libsDir
-} from '@nrwl/workspace/src/utils/ast-utils';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { getNpmScope } from '@nrwl/workspace';
-import { readTsSourceFileFromTree } from '../../../utils/ast-utils';
+import { addImport, readTsSourceFile } from '../../../utils/ast-utils';
 import { addToGitignore } from '../../../utils/utils';
-import { AddOutputtargetSchematicSchema } from '../add-outputtarget';
 import { getDistDir } from '../../../utils/fileutils';
 import * as ts from 'typescript';
-import { addToOutputTargets } from '../../../stencil-core-utils';
-import { names } from '@nrwl/devkit';
+import {
+  addDependenciesToPackageJson,
+  applyChangesToString,
+  getWorkspaceLayout,
+  names,
+  readProjectConfiguration,
+  Tree
+} from '@nrwl/devkit';
 import { relative } from 'path';
+import { AddOutputtargetSchematicSchema } from '../schema';
+import { libraryGenerator } from '@nrwl/angular/generators';
+import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
+import { addToOutputTargets } from '../../../stencil-core-utils/lib/devkit/plugins';
 
-export function prepareAngularLibrary(options: AddOutputtargetSchematicSchema) {
-  return (host: Tree) => {
-    const angularProjectName = `${options.projectName}-angular`;
-    return chain([
-      externalSchematic('@nrwl/angular', 'library', {
-        name: angularProjectName,
-        style: 'css',
-        skipPackageJson: !options.publishable
-      }),
-      addDepsToPackageJson(
-        {},
-        {
-          '@stencil/angular-output-target':
-            STENCIL_OUTPUTTARGET_VERSION['angular']
-        }
-      ),
-      (tree: Tree) => {
-        const angularModuleFilename = names(angularProjectName).fileName;
-        const angularModulePath = `${libsDir(
-          host
-        )}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
-        const angularModuleSource = readTsSourceFileFromTree(
-          tree,
-          angularModulePath
-        );
-        const packageName = `@${getNpmScope(tree)}/${options.projectName}`;
+export async function prepareAngularLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
+  const angularProjectName = `${options.projectName}-angular`;
+  const { libsDir, npmScope } = getWorkspaceLayout(host);
 
-        insert(tree, angularModulePath, [
-          insertImport(
-            angularModuleSource,
-            angularModulePath,
-            'defineCustomElements',
-            `${packageName}/loader`
-          ),
-          ...addGlobal(
-            angularModuleSource,
-            angularModulePath,
-            'defineCustomElements(window);'
-          )
-        ]);
-      },
-      addToGitignore(`${libsDir(host)}/${angularProjectName}/**/generated`)
-    ]);
-  };
+  const libraryTarget = await libraryGenerator(host, {
+    name: angularProjectName,
+    skipFormat: true,
+    publishable: options.publishable
+  });
+
+  addDependenciesToPackageJson(
+    host,
+    {},
+    {
+      '@stencil/angular-output-target':
+        STENCIL_OUTPUTTARGET_VERSION['angular']
+    }
+  );
+
+  const angularModuleFilename = names(angularProjectName).fileName;
+  const angularModulePath = `${libsDir}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
+  const angularModuleSource = readTsSourceFile(
+    host,
+    angularModulePath
+  );
+  const packageName = `@${npmScope}/${options.projectName}`;
+
+  const changes = applyChangesToString(angularModuleSource.text, [
+    ...addImport(angularModuleSource, `import { defineCustomElements } from '${packageName}/loader';`),
+  ]);
+  host.write(angularModulePath, changes);
+
+  addGlobal(host, angularModuleSource, angularModulePath, 'defineCustomElements(window);');
+
+  addToGitignore(`${libsDir}/${angularProjectName}/**/generated`);
+
+  return libraryTarget;
 }
 
 export function addAngularOutputtarget(
-  tree: Tree,
+  host: Tree,
   projectName: string,
   stencilProjectConfig,
   stencilConfigPath: string,
   stencilConfigSource: ts.SourceFile,
   packageName: string
 ) {
-  const angularProjectConfig = getProjectConfig(tree, `${projectName}-angular`);
+  const angularProjectConfig = readProjectConfiguration(host, `${projectName}-angular`);
   const realtivePath = relative(
     getDistDir(stencilProjectConfig.root),
     angularProjectConfig.root
   );
 
-  insert(tree, stencilConfigPath, [
-    insertImport(
-      stencilConfigSource,
-      stencilConfigPath,
-      'angularOutputTarget, ValueAccessorConfig',
-      '@stencil/angular-output-target'
-    ),
-    ...addGlobal(
-      stencilConfigSource,
-      stencilConfigPath,
-      'const angularValueAccessorBindings: ValueAccessorConfig[] = [];'
-    ),
+  const changes = applyChangesToString(stencilConfigSource.text, [
+    ...addImport(stencilConfigSource, `import { angularOutputTarget, ValueAccessorConfig } from '@stencil/angular-output-target';`),
     ...addToOutputTargets(
       stencilConfigSource,
+  `
+      angularOutputTarget({
+          componentCorePackage: '${packageName}',
+          directivesProxyFile: '${realtivePath}/src/generated/directives/proxies.ts',
+          valueAccessorConfigs: angularValueAccessorBindings
+        }),
       `
-          angularOutputTarget({
-              componentCorePackage: '${packageName}',
-              directivesProxyFile: '${realtivePath}/src/generated/directives/proxies.ts',
-              valueAccessorConfigs: angularValueAccessorBindings
-            }),
-          `,
-      stencilConfigPath
     )
   ]);
+  host.write(stencilConfigPath, changes);
+
+  addGlobal(
+    host,
+    stencilConfigSource,
+    stencilConfigPath,
+    'const angularValueAccessorBindings: ValueAccessorConfig[] = [];'
+  );
 }
