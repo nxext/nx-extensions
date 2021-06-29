@@ -9,7 +9,7 @@ export async function createTestProject(
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
   const tree = createTreeWithEmptyWorkspace();
-  tree.overwrite(
+  tree.write(
     'package.json',
     `
       {

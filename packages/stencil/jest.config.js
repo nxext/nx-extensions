@@ -7,4 +7,5 @@ module.exports = {
   coverageDirectory: '../../coverage/packages/stencil',
   globals: { 'ts-jest': { tsconfig: '<rootDir>/tsconfig.spec.json' } },
   displayName: 'stencil',
+  testEnvironment: 'node',
 };
