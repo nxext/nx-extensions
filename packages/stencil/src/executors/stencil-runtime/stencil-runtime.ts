@@ -42,7 +42,7 @@ function copyOrCreatePackageJson(values: ConfigAndPathCollection) {
     writeJsonFile(values.pkgJson, packageJson);
   } else {
     writeJsonFile(
-      joinPathFragments(`${values.distDir}/package.json`),
+      joinPathFragments(values.distDir, 'package.json'),
       libPackageJson
     );
   }
@@ -128,6 +128,7 @@ export async function createStencilConfig(
 
   if (configAndPathCollection.config.flags.task === 'build') {
     configAndPathCollection.config.rootDir = configAndPathCollection.distDir;
+    configAndPathCollection.config.packageJsonFilePath = joinPathFragments(configAndPathCollection.distDir, 'package.json');
   }
 
   const config = Object.assign(
