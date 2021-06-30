@@ -2,7 +2,8 @@ import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { ConfigAndPathCollection, CoreCompiler } from './types';
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext } from '@nrwl/devkit';
+import { join } from 'path';
 
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
   await sys.dynamicImport(sys.getCompilerExecutingPath());
@@ -42,15 +43,15 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   }
 
   const projectDir = context.workspace.projects[context.projectName].root;
-  const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
-  const distDir = joinPathFragments(`${context.root}/${options.outputPath}`);
-  const configPath = joinPathFragments(`${context.root}/${options.configPath}`);
+  const projectRoot = join(context.root, projectDir);
+  const distDir = join(context.root, options.outputPath);
+  const configPath = join(context.root, options.configPath);
 
   let config = {
     flags,
   };
   if(options.tsConfig) {
-    const tsconfig = joinPathFragments(`${context.root}/${options.tsConfig}`);
+    const tsconfig = join(context.root, options.tsConfig);
     config = {
       ...config,
       ...{ tsconfig: tsconfig }
@@ -70,7 +71,7 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     config: loadConfigResults.config,
     projectRoot: projectRoot,
     distDir: distDir,
-    pkgJson: joinPathFragments(`${projectRoot}/package.json`),
+    pkgJson: join(projectRoot, 'package.json'),
     coreCompiler: coreCompiler
   } as ConfigAndPathCollection;
 }
