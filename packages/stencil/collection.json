@@ -39,8 +39,8 @@
       "hidden": false
     },
     "add-outputtarget": {
-      "factory": "./src/schematics/add-outputtarget/add-outputtarget#outputtargetSchematic",
-      "schema": "./src/schematics/add-outputtarget/add-outputtarget.schema.json",
+      "factory": "./src/generators/add-outputtarget/add-outputtarget#outputtargetSchematic",
+      "schema": "./src/generators/add-outputtarget/schema.json",
       "description": "Add react/angular libraries for the component library",
       "hidden": false
     },
@@ -87,8 +87,8 @@
       "hidden": false
     },
     "add-outputtarget": {
-      "factory": "./src/schematics/add-outputtarget/add-outputtarget#outputtargetGenerator",
-      "schema": "./src/schematics/add-outputtarget/add-outputtarget.schema.json",
+      "factory": "./src/generators/add-outputtarget/add-outputtarget#outputtargetGenerator",
+      "schema": "./src/generators/add-outputtarget/schema.json",
       "description": "Add react/angular libraries for the component library",
       "hidden": false
     },
