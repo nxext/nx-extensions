@@ -126,11 +126,6 @@ export async function createStencilConfig(
       );
   }
 
-  if (configAndPathCollection.config.flags.task === 'build') {
-    configAndPathCollection.config.rootDir = configAndPathCollection.distDir;
-    configAndPathCollection.config.packageJsonFilePath = joinPathFragments(configAndPathCollection.distDir, 'package.json');
-  }
-
   const config = Object.assign(
     configAndPathCollection.config,
     { outputTargets: outputTargets },

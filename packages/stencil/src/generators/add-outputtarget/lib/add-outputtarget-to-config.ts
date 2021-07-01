@@ -33,17 +33,16 @@ export function addToOutputTargetToConfig(
     );
   }
 
-  /*
   if (outputType === 'vue') {
     addVueOutputtarget(
-      tree,
+      host,
       projectName,
       stencilProjectConfig,
       stencilConfigPath,
       stencilConfigSource,
       packageName
     );
-  }*/
+  }
 
   if (outputType === 'angular') {
     addAngularOutputtarget(

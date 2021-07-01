@@ -4,6 +4,7 @@ import { loadConfig } from '@stencil/core/compiler';
 import { ConfigAndPathCollection, CoreCompiler } from './types';
 import { ExecutorContext } from '@nrwl/devkit';
 import { join } from 'path';
+import { normalizePath } from '../../utils/normalize-path';
 
 const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
   await sys.dynamicImport(sys.getCompilerExecutingPath());
@@ -43,9 +44,9 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   }
 
   const projectDir = context.workspace.projects[context.projectName].root;
-  const projectRoot = join(context.root, projectDir);
-  const distDir = join(context.root, options.outputPath);
-  const configPath = join(context.root, options.configPath);
+  const projectRoot = normalizePath(join(context.root, projectDir));
+  const distDir = normalizePath(join(context.root, options.outputPath));
+  const configPath = normalizePath(join(context.root, options.configPath));
 
   let config = {
     flags,
@@ -64,11 +65,17 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     logger,
     sys
   });
+  const loadedConfig = loadConfigResults.config;
   const coreCompiler = await loadCoreCompiler(sys);
+
+  if (loadedConfig.flags.task === 'build') {
+    loadedConfig.rootDir = distDir;
+    loadedConfig.packageJsonFilePath = normalizePath(join(distDir, 'package.json'));
+  }
 
   return {
     projectName: context.projectName,
-    config: loadConfigResults.config,
+    config: loadedConfig,
     projectRoot: projectRoot,
     distDir: distDir,
     pkgJson: join(projectRoot, 'package.json'),

@@ -9,7 +9,8 @@ import {
   getWorkspaceLayout,
   names,
   readProjectConfiguration,
-  Tree
+  Tree,
+  joinPathFragments
 } from '@nrwl/devkit';
 import { relative } from 'path';
 import { AddOutputtargetSchematicSchema } from '../schema';
@@ -69,6 +70,7 @@ export function addAngularOutputtarget(
     getDistDir(stencilProjectConfig.root),
     angularProjectConfig.root
   );
+  const proxyPath = joinPathFragments(realtivePath, 'src/generated/directives/proxies.ts');
 
   const changes = applyChangesToString(stencilConfigSource.text, [
     ...addImport(stencilConfigSource, `import { angularOutputTarget, ValueAccessorConfig } from '@stencil/angular-output-target';`),
@@ -77,7 +79,7 @@ export function addAngularOutputtarget(
   `
       angularOutputTarget({
           componentCorePackage: '${packageName}',
-          directivesProxyFile: '${realtivePath}/src/generated/directives/proxies.ts',
+          directivesProxyFile: '${proxyPath}',
           valueAccessorConfigs: angularValueAccessorBindings
         }),
       `
