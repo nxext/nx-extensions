@@ -1,19 +1,13 @@
-import {
-  Change,
-  findNodes,
-  InsertChange,
-} from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
-import { Rule, Tree } from '@angular-devkit/schematics';
-import { readTsSourceFileFromTree } from '../../utils/ast-utils';
-import { insert } from '@nrwl/workspace';
+import { readTsSourceFile } from '../../utils/ast-utils';
+import { applyChangesToString, ChangeType, StringChange, Tree } from '@nrwl/devkit';
+import { findNodes } from '@nrwl/workspace/src/utils/ast-utils';
 
 function addCodeIntoArray(
   source: ts.SourceFile,
   identifier: string,
-  toInsert: string,
-  file: string
-): InsertChange[] {
+  toInsert: string
+): StringChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
   let node = nodes[0];
   const matchingProperties: ts.ObjectLiteralElement[] = (node as ts.ObjectLiteralExpression).properties
@@ -51,8 +45,13 @@ function addCodeIntoArray(
         toInsert2 = `, ${identifier}: [${toInsert}]`;
       }
     }
-    const newMetadataProperty = new InsertChange(file, position, toInsert2);
-    return [newMetadataProperty];
+    return [
+      {
+        type: ChangeType.Insert,
+        index: position,
+        text: `\n${toInsert2}\n`
+      }
+    ];
   }
 
   const assignment = matchingProperties[0] as ts.PropertyAssignment;
@@ -67,10 +66,16 @@ function addCodeIntoArray(
     toInsert2 = toInsert;
   }
 
-  return [new InsertChange(file, lastItem.getEnd(), toInsert2)];
+  return [
+    {
+      type: ChangeType.Insert,
+      index: lastItem.getEnd(),
+      text: `\n${toInsert2}\n`
+    }
+  ];
 }
 
-function getLastEntryOfOutputtargetArray(node: ts.Node) {
+function getLastEntryOfOutputtargetArray(node: ts.Node): ts.Node {
   const arrayEntryList = node.getChildren()[2].getChildren()[1].getChildren();
   return arrayEntryList
     .sort(
@@ -81,42 +86,34 @@ function getLastEntryOfOutputtargetArray(node: ts.Node) {
 
 export function addToOutputTargets(
   source: ts.SourceFile,
-  toInsert: string,
-  file: string
-): Change[] {
+  toInsert: string
+): StringChange[] {
   const outputTargetsIdentifier = 'outputTargets';
-  return addCodeIntoArray(source, outputTargetsIdentifier, toInsert, file);
+  return addCodeIntoArray(source, outputTargetsIdentifier, toInsert);
 }
 
 export function addToOutputTargetsInTree(
+  host: Tree,
   outputTargets: string[],
   stencilConfigPath: string
-): Rule {
-  return (tree: Tree) => {
-    const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
-      tree,
-      stencilConfigPath
-    );
+): void {
+  const stencilConfigSource: ts.SourceFile = readTsSourceFile(
+    host,
+    stencilConfigPath
+  );
 
-    insert(
-      tree,
-      stencilConfigPath,
-      addToOutputTargets(
-        stencilConfigSource,
-        outputTargets.join(','),
-        stencilConfigPath
-      )
-    );
+  const changes = applyChangesToString(stencilConfigSource.text, addToOutputTargets(
+    stencilConfigSource,
+    outputTargets.join(',')
+  ));
 
-    return tree;
-  };
+  host.write(stencilConfigPath, changes);
 }
 
 export function addToPlugins(
   source: ts.SourceFile,
-  file: string,
   toInsert: string
-): Change[] {
+): StringChange[] {
   const pluginsIdentifier = 'plugins';
-  return addCodeIntoArray(source, pluginsIdentifier, toInsert, file);
+  return addCodeIntoArray(source, pluginsIdentifier, toInsert);
 }

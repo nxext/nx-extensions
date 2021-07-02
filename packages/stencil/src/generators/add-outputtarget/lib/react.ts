@@ -11,7 +11,7 @@ import {
 } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
-import { addToOutputTargetsInTree } from '../../../stencil-core-utils/lib/devkit/plugins';
+import { addToOutputTargetsInTree } from '../../../stencil-core-utils';
 import { addImport } from '../../../utils/ast-utils';
 import { AddOutputtargetSchematicSchema } from '../schema';
 

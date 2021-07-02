@@ -10,8 +10,8 @@ import {
   Tree
 } from '@nrwl/devkit';
 import { MakeLibBuildableSchema } from './schema';
-import { addStylePluginToConfigInTree } from '../../stencil-core-utils/lib/devkit/style-plugins';
-import { addToOutputTargetsInTree } from '../../stencil-core-utils/lib/devkit/plugins';
+import { addStylePluginToConfig } from '../../stencil-core-utils';
+import { addToOutputTargetsInTree } from '../../stencil-core-utils';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { join } from 'path';
 import { getBuildTarget, getE2eTarget, getServeTarget } from '../../utils/targets';
@@ -55,7 +55,7 @@ export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuild
 
   updateProjectConfig(host, options);
   createFiles(host, options);
-  addStylePluginToConfigInTree(
+  addStylePluginToConfig(
     host,
     joinPathFragments(options.projectRoot, 'stencil.config.ts'),
     options.style

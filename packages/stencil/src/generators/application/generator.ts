@@ -4,7 +4,7 @@ import { ApplicationSchema, RawApplicationSchema } from './schema';
 import { calculateStyle } from '../../utils/utils';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
-import { addStylePluginToConfigInTree } from '../../stencil-core-utils/lib/devkit/style-plugins';
+import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 
@@ -54,7 +54,7 @@ export async function applicationGenerator(host: Tree, schema: RawApplicationSch
   createFiles(host, options);
   addProject(host, options);
 
-  addStylePluginToConfigInTree(
+  addStylePluginToConfig(
     host,
     join(options.projectRoot, 'stencil.config.ts'),
     options.style

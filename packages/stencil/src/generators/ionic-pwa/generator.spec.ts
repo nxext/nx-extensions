@@ -1,6 +1,6 @@
 import { ProjectType } from '@nrwl/workspace';
 import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
-import { fileListForAppType } from '../../utils/testing';
+import { fileListForAppType } from '../../utils/devkit/testing';
 import { InitSchema } from '../init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';

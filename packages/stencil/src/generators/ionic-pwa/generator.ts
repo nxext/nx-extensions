@@ -13,7 +13,7 @@ import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
-import { addStylePluginToConfigInTree } from '../../stencil-core-utils/lib/devkit/style-plugins';
+import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 
@@ -58,7 +58,7 @@ function createFiles(tree: Tree, options: PWASchema) {
 }
 
 function addStylePlugin(tree: Tree, normalizedOptions: PWASchema) {
-  addStylePluginToConfigInTree(
+  addStylePluginToConfig(
     tree,
     join(normalizedOptions.projectRoot, 'stencil.config.ts'),
     normalizedOptions.style

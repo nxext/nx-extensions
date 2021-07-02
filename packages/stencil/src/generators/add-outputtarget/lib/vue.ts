@@ -2,7 +2,7 @@ import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import * as ts from 'typescript';
-import { addToOutputTargets } from '../../../stencil-core-utils/lib/devkit/plugins';
+import { addToOutputTargets } from '../../../stencil-core-utils';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import {
   addDependenciesToPackageJson, applyChangesToString,
