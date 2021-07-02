@@ -16,7 +16,7 @@ import { relative } from 'path';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { libraryGenerator } from '@nrwl/angular/generators';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
-import { addToOutputTargets } from '../../../stencil-core-utils/lib/devkit/plugins';
+import { addToOutputTargets } from '../../../stencil-core-utils';
 
 export async function prepareAngularLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
   const angularProjectName = `${options.projectName}-angular`;

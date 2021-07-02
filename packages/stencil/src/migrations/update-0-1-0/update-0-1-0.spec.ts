@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { readJsonInTree, serializeJson } from '@nrwl/workspace';
 import * as path from 'path';
-import { createTestUILib } from '../../utils/testing';
+import { createTestUILib } from '../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 
 describe('update-0-1-0', () => {

@@ -1,6 +1,6 @@
 import { Tree } from '@angular-devkit/schematics';
 import { readJsonInTree } from '@nrwl/workspace';
-import { createTestUILib, runMigration } from '../../utils/testing';
+import { createTestUILib, runMigration } from '../utils/testing';
 
 describe('update-0-0-14', () => {
   let initialTree: Tree;

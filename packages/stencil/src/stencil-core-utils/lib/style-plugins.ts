@@ -1,9 +1,7 @@
-import { Change, insertImport } from '@nrwl/workspace/src/utils/ast-utils';
 import * as ts from 'typescript';
 import { addToPlugins } from './plugins';
-import { Rule, Tree } from '@angular-devkit/schematics';
-import { insert } from '@nrwl/workspace';
-import { readTsSourceFileFromTree } from '../../utils/ast-utils';
+import { applyChangesToString, StringChange, Tree } from '@nrwl/devkit';
+import { addImport, readTsSourceFile } from '../../utils/ast-utils';
 
 export enum SupportedStyles {
   css = 'css',
@@ -15,82 +13,52 @@ export enum SupportedStyles {
 
 export function addStylePlugin(
   stencilConfigSource: ts.SourceFile,
-  stencilConfigPath: string,
   style: SupportedStyles
-): Change[] {
+): StringChange[] {
   const styleImports = {
     [SupportedStyles.css]: [],
     [SupportedStyles.scss]: [
-      insertImport(
-        stencilConfigSource,
-        stencilConfigPath,
-        'sass',
-        '@stencil/sass'
-      ),
-      ...addToPlugins(stencilConfigSource, stencilConfigPath, 'sass()'),
+      ...addImport(stencilConfigSource, `import { sass } from '@stencil/sass'`),
+      ...addToPlugins(stencilConfigSource, 'sass()')
     ],
     [SupportedStyles.styl]: [
-      insertImport(
-        stencilConfigSource,
-        stencilConfigPath,
-        'stylus',
-        '@stencil/stylus'
-      ),
-      ...addToPlugins(stencilConfigSource, stencilConfigPath, 'stylus()'),
+      ...addImport(stencilConfigSource, `import { stylus } from '@stencil/stylus'`),
+      ...addToPlugins(stencilConfigSource, 'stylus()')
     ],
     [SupportedStyles.less]: [
-      insertImport(
-        stencilConfigSource,
-        stencilConfigPath,
-        'less',
-        '@stencil/less'
-      ),
-      ...addToPlugins(stencilConfigSource, stencilConfigPath, 'less()'),
+      ...addImport(stencilConfigSource, `import { less } from '@stencil/less`),
+      ...addToPlugins(stencilConfigSource, 'less()')
     ],
     [SupportedStyles.pcss]: [
-      insertImport(
-        stencilConfigSource,
-        stencilConfigPath,
-        'postcss',
-        '@stencil/postcss'
-      ),
-      insertImport(
-        stencilConfigSource,
-        stencilConfigPath,
-        'autoprefixer',
-        'autoprefixer'
-      ),
+      ...addImport(stencilConfigSource, `import { postcss } from '@stencil/postcss`),
+      ...addImport(stencilConfigSource, `import autoprefixer from 'autoprefixer`),
       ...addToPlugins(
         stencilConfigSource,
-        stencilConfigPath,
         `
           postcss({
             plugins: [autoprefixer()]
           })
           `
-      ),
-    ],
+      )
+    ]
   };
 
   return styleImports[style];
 }
 
-export function addStylePluginToConfigInTree(
+export function addStylePluginToConfig(
+  host: Tree,
   stencilConfigPath: string,
   style: SupportedStyles
-): Rule {
-  return (tree: Tree) => {
-    const stencilConfigSource: ts.SourceFile = readTsSourceFileFromTree(
-      tree,
-      stencilConfigPath
-    );
+): void {
+  const stencilConfigSource: ts.SourceFile = readTsSourceFile(
+    host,
+    stencilConfigPath
+  );
 
-    insert(
-      tree,
-      stencilConfigPath,
-      addStylePlugin(stencilConfigSource, stencilConfigPath, style)
-    );
+  const changes = applyChangesToString(stencilConfigSource.text,
+    addStylePlugin(stencilConfigSource, style)
+  );
 
-    return tree;
-  };
+  host.write(stencilConfigPath, changes);
 }
