@@ -1,18 +1,6 @@
-import { Config } from '@stencil/core/cli';
-
-export type CoreCompiler = typeof import('@stencil/core/compiler');
-
-export type ConfigAndPathCollection = {
-  config: Config;
+export type PathCollection = {
   distDir: string;
-  coreCompiler: CoreCompiler;
   projectRoot: string;
   projectName: string;
   pkgJson: string;
-  tsconfig: string;
 };
-
-export interface ConfigAndCoreCompiler {
-  config: Config;
-  coreCompiler: CoreCompiler;
-}
