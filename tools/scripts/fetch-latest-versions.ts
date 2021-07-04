@@ -50,7 +50,7 @@ vitePkgs.forEach((pkg) => {
   checkVersion(pkg);
 });
 
-function checkVersion(pkg) {
+function checkVersion(pkg: string) {
   console.log(`${pkg}: `);
   execSync(`npm show ${pkg} version`, {
     stdio: [0, 1, 2]

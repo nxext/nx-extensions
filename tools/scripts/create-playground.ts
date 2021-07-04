@@ -1,5 +1,5 @@
 import { readWorkspaceJson } from '@nrwl/workspace';
-import { appRootPath } from '@nrwl/workspace/src/utils/app-root';
+import { appRootPath } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import {
   ensureDirSync,
