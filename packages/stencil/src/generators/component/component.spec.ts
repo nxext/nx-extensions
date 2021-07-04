@@ -1,5 +1,5 @@
 import componentGenerator, { ComponentSchema } from './component';
-import { createTestUILib } from '../../utils/devkit/testing';
+import { createTestUILib } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { Tree } from '@nrwl/devkit';
 

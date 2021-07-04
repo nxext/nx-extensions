@@ -70,16 +70,6 @@ describe('e2e', () => {
       });
     });
 
-    it('should create src in the specified directory', async () => {
-      const plugin = uniq('lib');
-      await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --directory='subdir' --style=css --e2eTestRunner='none' --junitTestRunner='none'`
-      );
-      expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/stencil.config.ts`)
-      ).not.toThrow();
-    });
-
     it('should add tags to nx.json', async () => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
@@ -118,25 +108,8 @@ describe('e2e', () => {
   });
 
   describe('e2e-pwa', () => {
-    describe('--tags', () => {
-      it('should add tags to nx.json', async () => {
-        const plugin = uniq('pwa');
-        await runNxCommandAsync(
-          `generate @nxext/stencil:pwa ${plugin} --tags e2etag,e2ePackage --style=css --e2eTestRunner='none' --junitTestRunner='none'`
-        );
-
-        expect(() => {
-          checkFilesExist(
-            `apps/${plugin}/src/components/app-root/app-root.e2e.ts`,
-            `apps/${plugin}/src/components/app-profile/app-profile.e2e.ts`,
-            `apps/${plugin}/src/components/app-home/app-home.e2e.ts`
-          );
-        }).not.toThrow();
-      });
-    });
-
     describe('stencil app builder', () => {
-      it(`should bould pwa app with scss`, async () => {
+      it(`should build pwa app with scss`, async () => {
         const plugin = uniq('pwa');
         await runNxCommandAsync(
           `generate @nxext/stencil:pwa ${plugin} --style='scss' --e2eTestRunner='none' --junitTestRunner='none'`

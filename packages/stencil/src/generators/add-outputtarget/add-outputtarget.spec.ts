@@ -1,4 +1,4 @@
-import { createTestUILib } from '../../utils/devkit/testing';
+import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { names, Tree } from '@nrwl/devkit';
 import { outputtargetGenerator } from './add-outputtarget';

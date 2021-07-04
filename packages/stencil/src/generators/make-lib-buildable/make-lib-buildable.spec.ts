@@ -1,4 +1,4 @@
-import { createTestUILib } from '../../utils/devkit/testing';
+import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { MakeLibBuildableSchema } from './schema';
 import { SupportedStyles } from '../../stencil-core-utils';

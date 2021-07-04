@@ -1,18 +1,13 @@
 import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/cli';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
-import { ConfigAndPathCollection, CoreCompiler } from './types';
+import { PathCollection } from './types';
 import { ExecutorContext } from '@nrwl/devkit';
 import { join } from 'path';
 import { normalizePath } from '../../utils/normalize-path';
+import type { Config } from '@stencil/core/compiler';
 
-const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
-  await sys.dynamicImport(sys.getCompilerExecutingPath());
-
-  return (globalThis as any).stencil;
-};
-
-function getCompilerExecutingPath() {
+function getCompilerExecutingPath(): string {
   return require.resolve('@stencil/core/compiler');
 }
 
@@ -30,7 +25,10 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     taskCommand: TaskCommand,
     options: T
   ) => ConfigFlags
-): Promise<ConfigAndPathCollection> {
+): Promise<{
+  pathCollection: PathCollection
+  config: Config
+}> {
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const logger: Logger = createNodeLogger({ process });
   const sys: CompilerSystem = createNodeSys({ process });
@@ -49,14 +47,14 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   const configPath = normalizePath(join(context.root, options.configPath));
 
   let config = {
-    flags,
+    flags
   };
-  if(options.tsConfig) {
+  if (options.tsConfig) {
     const tsconfig = join(context.root, options.tsConfig);
     config = {
       ...config,
       ...{ tsconfig: tsconfig }
-    }
+    };
   }
 
   const loadConfigResults = await loadConfig({
@@ -66,7 +64,6 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     sys
   });
   const loadedConfig = loadConfigResults.config;
-  const coreCompiler = await loadCoreCompiler(sys);
 
   if (loadedConfig.flags.task === 'build') {
     loadedConfig.rootDir = distDir;
@@ -74,11 +71,12 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   }
 
   return {
-    projectName: context.projectName,
-    config: loadedConfig,
-    projectRoot: projectRoot,
-    distDir: distDir,
-    pkgJson: join(projectRoot, 'package.json'),
-    coreCompiler: coreCompiler
-  } as ConfigAndPathCollection;
+    pathCollection: {
+      projectName: context.projectName,
+      projectRoot: projectRoot,
+      distDir: distDir,
+      pkgJson: join(projectRoot, 'package.json')
+    },
+    config: loadedConfig
+  };
 }

@@ -1,6 +1,6 @@
 import { StencilE2EOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
+import { prepareConfigAndOutputargetPaths, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 import { ExecutorContext } from '@nrwl/devkit';
 
@@ -21,15 +21,16 @@ export default async function runExecutor(
 ) {
   const taskCommand: TaskCommand = 'test';
 
-  const configAndPathCollection = await initializeStencilConfig(
+  const { config, pathCollection } = await initializeStencilConfig(
     taskCommand,
     options,
     context,
     createStencilCompilerOptions
   );
-  const stencilConfig = await createStencilConfig(
-    configAndPathCollection
+  const stencilConfig = await prepareConfigAndOutputargetPaths(
+    config,
+    pathCollection
   );
 
-  return await createStencilProcess(stencilConfig, configAndPathCollection);
+  return await createStencilProcess(stencilConfig, pathCollection);
 }

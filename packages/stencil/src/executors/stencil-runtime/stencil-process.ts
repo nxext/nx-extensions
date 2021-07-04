@@ -1,13 +1,25 @@
-import { runTask } from '@stencil/core/cli';
+import { CompilerSystem, runTask } from '@stencil/core/cli';
 import { cleanupE2eTesting } from './e2e-testing';
-import { ConfigAndCoreCompiler, ConfigAndPathCollection } from './types';
+import { PathCollection } from './types';
 import { logger } from '@nrwl/devkit';
+import type { Config } from '@stencil/core/compiler';
 
-export async function createStencilProcess(configAndCoreCompiler: ConfigAndCoreCompiler, configAndPathCollection: ConfigAndPathCollection) {
+type CoreCompiler = typeof import('@stencil/core/compiler');
+
+const loadCoreCompiler = async (sys: CompilerSystem): Promise<CoreCompiler> => {
+  await sys.dynamicImport(sys.getCompilerExecutingPath());
+
+  return (globalThis as any).stencil;
+};
+
+export async function createStencilProcess(config: Config, pathCollection: PathCollection) {
   try {
-    await runTask(configAndCoreCompiler.coreCompiler, configAndCoreCompiler.config, configAndCoreCompiler.config.flags.task);
+    const coreCompiler = await loadCoreCompiler(config.sys);
+    await runTask(coreCompiler, config, config.flags.task);
 
-    cleanupE2eTesting(configAndPathCollection);
+    if (config.flags.e2e) {
+      cleanupE2eTesting(pathCollection);
+    }
 
     return { success: true };
   } catch (err) {

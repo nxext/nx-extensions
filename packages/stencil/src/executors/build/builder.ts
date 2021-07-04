@@ -1,6 +1,6 @@
 import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { createStencilConfig, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
+import { prepareConfigAndOutputargetPaths, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 import { ExecutorContext } from '@nrwl/devkit';
@@ -48,15 +48,14 @@ export default async function runExecutor(
     return { success: false };
   }
 
-  const configAndPathCollection = await initializeStencilConfig(
+  const { config, pathCollection } = await initializeStencilConfig(
     taskCommand,
     options,
     context,
     createStencilCompilerOptions
   );
-  const stencilConfig = await createStencilConfig(
-    configAndPathCollection
-  );
+
+  const stencilConfig = await prepareConfigAndOutputargetPaths(config, pathCollection);
 
   updateBuildableProjectPackageJsonDependencies(
     context.root,
@@ -67,5 +66,5 @@ export default async function runExecutor(
     dependencies
   );
 
-  return await createStencilProcess(stencilConfig, configAndPathCollection);
+  return await createStencilProcess(stencilConfig, pathCollection);
 }
