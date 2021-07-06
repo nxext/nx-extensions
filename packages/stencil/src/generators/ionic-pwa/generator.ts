@@ -80,7 +80,7 @@ export async function ionicPwaGenerator(
   addStylePlugin(host, options);
   addProject(host, options);
 
-  if (options.skipFormat) {
+  if (!options.skipFormat) {
     await formatFiles(host);
   }
   return runTasksInSerial(initTask);
