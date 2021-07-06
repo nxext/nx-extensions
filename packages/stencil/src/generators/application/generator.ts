@@ -1,5 +1,13 @@
 import { AppType } from './../../utils/typings';
-import { convertNxGenerator, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nrwl/devkit';
+import {
+  convertNxGenerator,
+  formatFiles,
+  generateFiles,
+  getWorkspaceLayout,
+  names,
+  offsetFromRoot,
+  Tree
+} from '@nrwl/devkit';
 import { ApplicationSchema, RawApplicationSchema } from './schema';
 import { calculateStyle } from '../../utils/utils';
 import { initGenerator } from '../init/init';
@@ -65,6 +73,10 @@ export async function applicationGenerator(host: Tree, schema: RawApplicationSch
     join(options.projectRoot, 'stencil.config.ts'),
     options.style
   );
+
+  if (!options.skipFormat) {
+    await formatFiles(host);
+  }
 
   return runTasksInSerial(initTask);
 }

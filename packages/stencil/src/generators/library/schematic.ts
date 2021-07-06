@@ -1,4 +1,12 @@
-import { convertNxGenerator, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nrwl/devkit';
+import {
+  convertNxGenerator,
+  formatFiles,
+  generateFiles,
+  getWorkspaceLayout,
+  names,
+  offsetFromRoot,
+  Tree
+} from '@nrwl/devkit';
 import { RawLibrarySchema, LibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
@@ -75,6 +83,10 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
       importPath: options.importPath,
       style: options.style
     } as MakeLibBuildableSchema);
+  }
+
+  if (!options.skipFormat) {
+    await formatFiles(host);
   }
 
   return runTasksInSerial(initTask);

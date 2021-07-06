@@ -6,7 +6,7 @@ import {
   names,
   stripIndents,
   Tree,
-  readProjectConfiguration
+  readProjectConfiguration, formatFiles
 } from '@nrwl/devkit';
 import { join } from 'path';
 
@@ -15,6 +15,7 @@ export interface ComponentSchema {
   project: string;
   directory?: string;
   style?: string;
+  skipFormat?: boolean;
 }
 
 export async function componentGenerator(host: Tree, options: ComponentSchema) {
@@ -55,6 +56,10 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
       style: options.style,
     }
   );
+
+  if (!options.skipFormat) {
+    await formatFiles(host);
+  }
 }
 
 export default componentGenerator;

@@ -57,7 +57,7 @@ export async function outputtargetGenerator(host: Tree, options: AddOutputtarget
 
     await addToOutputTargetToConfig(host, options.projectName, options.outputType);
 
-    if(options.skipFormat) {
+    if(!options.skipFormat) {
       await formatFiles(host);
     }
   } else {
