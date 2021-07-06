@@ -10,6 +10,8 @@ export interface RawLibrarySchema {
   publishable: boolean;
   importPath?: string;
   style?: SupportedStyles;
+  e2eTestRunner?: string;
+  unitTestRunner?: string;
 }
 
 export interface LibrarySchema extends RawLibrarySchema {

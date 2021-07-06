@@ -1,8 +1,19 @@
 import { AppType } from './../../utils/typings';
-import { InitSchema } from '../init/schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 
-export interface PWASchema extends InitSchema {
+export interface RawPWASchema {
+  name: string;
+  tags?: string;
+  directory?: string;
+  style?: SupportedStyles;
+  skipFormat?: boolean;
+  appType?: AppType;
+  e2eTestRunner?: string;
+  unitTestRunner?: string;
+  projectRoot?: string;
+}
+
+export interface PWASchema extends RawPWASchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;

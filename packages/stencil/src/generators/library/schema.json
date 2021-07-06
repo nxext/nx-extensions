@@ -40,6 +40,18 @@
       "type": "string",
       "description": "The library name used to import it, like @myorg/my-awesome-lib"
     },
+    "e2eTestRunner": {
+      "type": "string",
+      "enum": ["puppeteer", "none"],
+      "description": "Test runner to use for end to end (e2e) tests",
+      "default": "puppeteer"
+    },
+    "unitTestRunner": {
+      "type": "string",
+      "enum": ["jest", "none"],
+      "description": "Test runner to use for unit tests.",
+      "default": "jest"
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

@@ -11,7 +11,7 @@ import {
 } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
-import { addToOutputTargetsInTree } from '../../../stencil-core-utils';
+import { addToOutputTargets } from '../../../stencil-core-utils';
 import { addImport } from '../../../utils/ast-utils';
 import { AddOutputtargetSchematicSchema } from '../schema';
 
@@ -59,20 +59,19 @@ export function addReactOutputtarget(
     reactProjectConfig.root
   );
 
-  addToOutputTargetsInTree(tree,
-    [`
+  const changes = applyChangesToString(
+    stencilConfigSource.text, [
+      ...addImport(stencilConfigSource, `import { reactOutputTarget } from '@stencil/react-output-target';`),
+      ...addToOutputTargets(stencilConfigSource,
+        `
       reactOutputTarget({
         componentCorePackage: '${packageName}',
         proxiesFile: '${realtivePath}/src/generated/components.ts',
         includeDefineCustomElements: true,
       })
-    `],
-    stencilConfigPath
+      `
+      )
+    ]
   );
-
-  const importChange = applyChangesToString(
-    stencilConfigSource.text,
-    addImport(stencilConfigSource, `import { reactOutputTarget } from '@stencil/react-output-target';`)
-  );
-  tree.write(stencilConfigPath, importChange);
+  tree.write(stencilConfigPath, changes);
 }

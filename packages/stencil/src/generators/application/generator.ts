@@ -45,6 +45,12 @@ function createFiles(host: Tree, options: ApplicationSchema) {
       offsetFromRoot: offsetFromRoot(options.projectRoot)
     }
   );
+
+  if(options.unitTestRunner === 'none') {
+    host.delete(`${options.projectRoot}/src/components/app-home/app-home.spec.ts`);
+    host.delete(`${options.projectRoot}/src/components/app-root/app-root.spec.ts`);
+    host.delete(`${options.projectRoot}/src/components/app-profile/app-profile.spec.ts`);
+  }
 }
 
 export async function applicationGenerator(host: Tree, schema: RawApplicationSchema) {

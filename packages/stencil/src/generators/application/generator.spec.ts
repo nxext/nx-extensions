@@ -8,34 +8,34 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { applicationGenerator } from './generator';
 
 describe('schematic:application', () => {
-  let tree: Tree;
+  let host: Tree;
   const options: RawApplicationSchema = { name: 'test' };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace();
   });
 
   it('should add Stencil dependencies', async () => {
-    await applicationGenerator(tree, options);
+    await applicationGenerator(host, options);
 
-    const packageJson = readJson(tree, 'package.json');
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
 
   it('should create files', async () => {
-    await applicationGenerator(tree, options);
+    await applicationGenerator(host, options);
 
     const fileList = fileListForAppType(
       options.name,
       SupportedStyles.css,
       ProjectType.Application
     );
-    fileList.forEach((file) => expect(tree.exists(file)));
+    fileList.forEach((file) => expect(host.exists(file)));
   });
 
   it('should create files in specified dir', async () => {
-    await applicationGenerator(tree, { ...options, directory: 'subdir' });
+    await applicationGenerator(host, { ...options, directory: 'subdir' });
 
     const fileList = fileListForAppType(
       options.name,
@@ -43,17 +43,17 @@ describe('schematic:application', () => {
       ProjectType.Application,
       'subdir'
     );
-    fileList.forEach((file) => expect(tree.exists(file)));
+    fileList.forEach((file) => expect(host.exists(file)));
   });
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to application`, async () => {
-      await applicationGenerator(tree, {
+      await applicationGenerator(host, {
         ...options,
         style: SupportedStyles[style],
       });
 
-      const packageJson = readJson(tree, 'package.json');
+      const packageJson = readJson(host, 'package.json');
       expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
 
       const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[style];
@@ -65,17 +65,31 @@ describe('schematic:application', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
-      await applicationGenerator(tree, {
+      await applicationGenerator(host, {
         ...options,
         style: SupportedStyles[style],
       });
 
-      const projectConfig = readProjectConfiguration(tree, options.name);
+      const projectConfig = readProjectConfiguration(host, options.name);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,
         },
       });
     });
+  });
+
+  it(`shouldn't create spec files if unitTestrunner is 'none'`, async () => {
+    await applicationGenerator(host, {...options, unitTestRunner: 'none'});
+
+    expect(
+      host.exists(`apps/test/src/components/app-home/app-home.spec.ts`)
+    ).toBeFalsy();
+    expect(
+      host.exists(`apps/test/src/components/app-root/app-root.spec.ts`)
+    ).toBeFalsy();
+    expect(
+      host.exists(`apps/test/src/components/app-profile/app-profile.spec.ts`)
+    ).toBeFalsy();
   });
 });

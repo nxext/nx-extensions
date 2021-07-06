@@ -9,6 +9,7 @@ export interface RawApplicationSchema {
   skipFormat?: boolean;
   appType?: AppType;
   e2eTestRunner?: string;
+  unitTestRunner?: string;
   projectRoot?: string;
 }
 
