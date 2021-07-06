@@ -49,6 +49,10 @@ function createFiles(host: Tree, options: LibrarySchema) {
       offsetFromRoot: offsetFromRoot(options.projectRoot)
     }
   );
+
+  if(options.unitTestRunner === 'none') {
+    host.delete(`${options.projectRoot}/src/components/my-component/my-component.spec.ts`);
+  }
 }
 
 export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {

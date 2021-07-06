@@ -9,5 +9,6 @@ export interface InitSchema {
   skipFormat?: boolean;
   appType?: AppType;
   e2eTestRunner?: string;
+  unitTestRunner?: string;
   projectRoot?: string;
 }

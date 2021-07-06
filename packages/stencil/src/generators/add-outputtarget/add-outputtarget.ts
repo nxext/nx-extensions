@@ -44,11 +44,15 @@ export async function outputtargetGenerator(host: Tree, options: AddOutputtarget
 
   if(isBuildableStencilProject(projectConfig)) {
     if(options.outputType === 'react') {
-      await prepareReactLibrary(host, options);
+      tasks.push(await prepareReactLibrary(host, options));
     }
 
     if(options.outputType === 'angular') {
       tasks.push(await prepareAngularLibrary(host, options));
+    }
+
+    if(options.outputType === 'vue') {
+      await prepareVueLibrary(host, options);
     }
 
     await addToOutputTargetToConfig(host, options.projectName, options.outputType);

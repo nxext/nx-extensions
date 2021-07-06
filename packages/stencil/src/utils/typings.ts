@@ -29,7 +29,7 @@ export interface DependencyEntries {
 const stencilDependencies = {
   '@stencil/core': stencilVersion,
 };
-const testDependencies = {
+const e2ePuppeteerDependencies = {
   '@types/puppeteer': puppeteerType,
   puppeteer: puppeteer,
 };
@@ -70,10 +70,10 @@ export const PROJECT_TYPE_DEPENDENCIES: {
       ...stencilDependencies,
     },
   },
-  e2e: {
+  puppeteer: {
     dependencies: {},
     devDependencies: {
-      ...testDependencies,
+      ...e2ePuppeteerDependencies,
     },
   },
 };

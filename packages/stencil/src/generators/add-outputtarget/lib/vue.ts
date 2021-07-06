@@ -2,7 +2,7 @@ import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import * as ts from 'typescript';
-import { addToOutputTargets } from '../../../stencil-core-utils';
+import { addToOutputTargets, addToOutputTargetsInTree } from '../../../stencil-core-utils';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import {
   addDependenciesToPackageJson, applyChangesToString,
@@ -19,7 +19,7 @@ export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSche
   const vueProjectName = `${options.projectName}-vue`;
   const { libsDir } = getWorkspaceLayout(host);
 
-  await libraryGenerator(host, {
+  const libraryTarget = await libraryGenerator(host, {
     name: vueProjectName
   });
 
@@ -38,6 +38,8 @@ export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSche
   host.delete(`${libsDir}/${vueProjectName}/src/shims-vue.d.ts`);
 
   addToGitignore(host, `${libsDir}/${vueProjectName}/**/generated`);
+
+  return libraryTarget;
 }
 
 export function addVueOutputtarget(

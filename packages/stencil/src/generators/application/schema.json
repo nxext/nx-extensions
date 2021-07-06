@@ -30,6 +30,12 @@
       "description": "Test runner to use for end to end (e2e) tests",
       "default": "puppeteer"
     },
+    "unitTestRunner": {
+      "type": "string",
+      "enum": ["jest", "none"],
+      "description": "Test runner to use for unit tests.",
+      "default": "jest"
+    },
     "skipFormat": {
       "type": "boolean",
       "default": false

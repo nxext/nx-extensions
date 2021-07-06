@@ -176,5 +176,13 @@ describe('library', () => {
 
       expect(pkgJson.name).toBe('@myorg/mylib');
     });
+
+    it(`shouldn't create spec files if unitTestrunner is 'none'`, async () => {
+      await libraryGenerator(host, {...options, unitTestRunner: 'none'});
+
+      expect(
+        host.exists(`libs/testlib/src/components/my-component/my-component.spec.ts`)
+      ).toBeFalsy();
+    });
   });
 });

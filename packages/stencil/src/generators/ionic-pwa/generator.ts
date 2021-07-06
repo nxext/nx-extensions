@@ -7,8 +7,7 @@ import {
   Tree,
   offsetFromRoot
 } from '@nrwl/devkit';
-import { PWASchema } from './schema';
-import { InitSchema } from '../init/schema';
+import { PWASchema, RawPWASchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { initGenerator } from '../init/init';
@@ -17,7 +16,7 @@ import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 
-function normalizeOptions(options: InitSchema, host: Tree): PWASchema {
+function normalizeOptions(options: RawPWASchema, host: Tree): PWASchema {
   const { appsDir } = getWorkspaceLayout(host);
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
@@ -43,9 +42,9 @@ function normalizeOptions(options: InitSchema, host: Tree): PWASchema {
   } as PWASchema;
 }
 
-function createFiles(tree: Tree, options: PWASchema) {
+function createFiles(host: Tree, options: PWASchema) {
   generateFiles(
-    tree,
+    host,
     join(__dirname, './files/pwa'),
     options.projectRoot,
     {
@@ -55,6 +54,12 @@ function createFiles(tree: Tree, options: PWASchema) {
       offsetFromRoot: offsetFromRoot(options.projectRoot)
     }
   );
+
+  if(options.unitTestRunner === 'none') {
+    host.delete(`${options.projectRoot}/src/components/app-home/app-home.spec.ts`);
+    host.delete(`${options.projectRoot}/src/components/app-root/app-root.spec.ts`);
+    host.delete(`${options.projectRoot}/src/components/app-profile/app-profile.spec.ts`);
+  }
 }
 
 function addStylePlugin(tree: Tree, normalizedOptions: PWASchema) {
@@ -66,17 +71,17 @@ function addStylePlugin(tree: Tree, normalizedOptions: PWASchema) {
 }
 
 export async function ionicPwaGenerator(
-  tree: Tree,
-  schema: InitSchema
+  host: Tree,
+  schema: RawPWASchema
 ) {
-  const options = normalizeOptions(schema, tree);
-  const initTask = await initGenerator(tree, options);
-  createFiles(tree, options);
-  addStylePlugin(tree, options);
-  addProject(tree, options);
+  const options = normalizeOptions(schema, host);
+  const initTask = await initGenerator(host, options);
+  createFiles(host, options);
+  addStylePlugin(host, options);
+  addProject(host, options);
 
   if (options.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
   return runTasksInSerial(initTask);
 }

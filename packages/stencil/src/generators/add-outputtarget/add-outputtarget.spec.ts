@@ -18,6 +18,11 @@ describe('schematics:add-outputtarget', () => {
     unitTestRunner: 'none',
     outputType: 'angular'
   };
+  const vueOptions: AddOutputtargetSchematicSchema = {
+    ...options,
+    unitTestRunner: 'none',
+    outputType: 'vue'
+  };
 
   beforeEach(async () => {
     tree = await createTestUILib(projectName);
@@ -50,6 +55,22 @@ describe('schematics:add-outputtarget', () => {
         `export * from './generated/components';`
       );
     });
+
+    it('should add reactOutputTarget', async () => {
+      await outputtargetGenerator(tree, reactOptions);
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`import { reactOutputTarget } from '@stencil/react-output-target';`)
+      ).toBeTruthy();
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`reactOutputTarget({`)
+      ).toBeTruthy();
+    });
   });
 
   describe('using angular', () => {
@@ -61,6 +82,52 @@ describe('schematics:add-outputtarget', () => {
         tree.exists(
           `libs/${projectName}-angular/src/lib/${fileName}.module.ts`
         )
+      ).toBeTruthy();
+    });
+
+    it('should add angularOutputTarget', async () => {
+      await outputtargetGenerator(tree, angularOptions);
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`import { angularOutputTarget, ValueAccessorConfig } from '@stencil/angular-output-target';`)
+      ).toBeTruthy();
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`const angularValueAccessorBindings: ValueAccessorConfig[] = [];`)
+      ).toBeTruthy();
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`angularOutputTarget({`)
+      ).toBeTruthy();
+    });
+  });
+
+  describe('using vue', () => {
+    it('should add vueOutputTarget', async () => {
+      await outputtargetGenerator(tree, vueOptions);
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`import { vueOutputTarget, ComponentModelConfig } from '@stencil/vue-output-target';`)
+      ).toBeTruthy();
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`const vueComponentModels: ComponentModelConfig[] = [];`)
+      ).toBeTruthy();
+
+      expect(
+        tree.read(
+          `libs/${projectName}/stencil.config.ts`
+        ).includes(`vueOutputTarget({`)
       ).toBeTruthy();
     });
   });

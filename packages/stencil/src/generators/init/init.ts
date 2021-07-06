@@ -15,8 +15,13 @@ export async function initGenerator<T extends InitSchema>(
 
   tasks.push(addDependenciesByApptype(tree, options.appType));
   tasks.push(...addStyledDependencies(tree, options));
-  tasks.push(...addE2eTestDependencies(tree));
-  tasks.push(jestInitGenerator(tree, {}));
+
+  if(options.e2eTestRunner === 'puppeteer') {
+    tasks.push(...addE2eTestDependencies(tree));
+  }
+  if(options.unitTestRunner === 'jest') {
+    tasks.push(jestInitGenerator(tree, {}));
+  }
 
   setDefaultCollection(tree, '@nxext/stencil');
 
