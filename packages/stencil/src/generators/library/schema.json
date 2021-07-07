@@ -52,6 +52,17 @@
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "tslint"],
+      "default": "eslint"
+    },
+    "component": {
+      "type": "boolean",
+      "description": "Generate a default component.",
+      "default": true
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

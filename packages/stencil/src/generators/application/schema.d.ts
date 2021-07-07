@@ -1,5 +1,6 @@
 import { AppType } from './../../utils/typings';
 import { SupportedStyles } from '../../stencil-core-utils';
+import { Linter } from '@nrwl/linter';
 
 export interface RawApplicationSchema {
   name: string;
@@ -11,6 +12,7 @@ export interface RawApplicationSchema {
   e2eTestRunner?: string;
   unitTestRunner?: string;
   projectRoot?: string;
+  linter?: Linter;
 }
 
 export interface ApplicationSchema extends RawApplicationSchema {

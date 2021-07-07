@@ -40,6 +40,12 @@
       "type": "boolean",
       "default": false
     },
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "tslint"],
+      "default": "eslint"
+    },
     "style": {
       "description": "The file extension to be used for style files.",
       "type": "string",

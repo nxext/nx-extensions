@@ -8,7 +8,7 @@ export enum SupportedStyles {
   scss = 'scss',
   styl = 'styl',
   less = 'less',
-  pcss = 'pcss',
+  pcss = 'pcss'
 }
 
 export function addStylePlugin(
