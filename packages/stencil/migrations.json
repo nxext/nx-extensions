@@ -1,5 +1,5 @@
 {
-  "generators": {
+  "schematics": {
     "update-0-0-14": {
       "version": "0.0.14",
       "description": "update-0-0-14",
@@ -49,6 +49,20 @@
       "version": "11.2.1",
       "description": "update-11-2-1",
       "factory": "./src/migrations/update-11-2-1/update-11-2-1"
+    }
+  },
+  "generators": {
+    "update-11-3-1": {
+      "version": "11.3.1",
+      "description": "update-11-3-1",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-11-3-1/update-11-3-1"
+    },
+    "update-12-0-0": {
+      "version": "12.0.0",
+      "description": "update-12-0-0",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-12-0-0/update-12-0-0"
     },
     "update-12-0-7": {
       "version": "12.0.7",
