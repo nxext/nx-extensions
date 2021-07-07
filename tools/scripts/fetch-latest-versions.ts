@@ -12,6 +12,9 @@ const stencilpkgs = [
   '@stencil/vue-output-target',
   '@stencil/angular-output-target',
   '@stencil/svelte-output-target',
+
+  'puppeteer',
+  '@types/puppeteer'
 ];
 
 console.log('======================================');

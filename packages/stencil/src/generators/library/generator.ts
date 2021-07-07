@@ -7,7 +7,7 @@ import {
   offsetFromRoot,
   Tree
 } from '@nrwl/devkit';
-import { RawLibrarySchema, LibrarySchema } from './schema';
+import { LibrarySchema, RawLibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utils';
 import { initGenerator } from '../../generators/init/init';
@@ -60,6 +60,10 @@ function createFiles(host: Tree, options: LibrarySchema) {
 
   if(options.unitTestRunner === 'none') {
     host.delete(`${options.projectRoot}/src/components/my-component/my-component.spec.ts`);
+  }
+
+  if(!options.component) {
+    host.delete(`${options.projectRoot}/src/components/my-component`);
   }
 }
 

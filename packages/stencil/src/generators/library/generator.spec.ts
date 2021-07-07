@@ -5,11 +5,11 @@ import { SupportedStyles } from '../../stencil-core-utils';
 import { RawLibrarySchema } from './schema';
 import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator } from './schematic';
+import { libraryGenerator } from './generator';
 
 describe('library', () => {
   let host: Tree;
-  const options: RawLibrarySchema = { name: 'test', buildable: false, publishable: false };
+  const options: RawLibrarySchema = { name: 'test', buildable: false, publishable: false, component: true };
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace();
@@ -24,6 +24,13 @@ describe('library', () => {
       ProjectType.Library
     );
     fileList.forEach((file) => expect(host.exists(file)));
+  });
+
+  it(`shouldn't create default component if component=false`, async () => {
+    await libraryGenerator(host, {...options, component: false});
+
+    expect(host.exists(`libs/${options.name}/src/components/my-component`)).toBeFalsy();
+    expect(host.exists(`libs/${options.name}/src/components/my-component/my-component.tsx`)).toBeFalsy();
   });
 
   it('should create files in specified dir', async () => {
@@ -101,7 +108,7 @@ describe('library', () => {
   });
 
   describe('buildable libraries', () => {
-    const options: RawLibrarySchema = { name: 'testlib', buildable: true, publishable: false };
+    const options: RawLibrarySchema = { name: 'testlib', buildable: true, publishable: false, component: true };
 
     it('should create build targets', async () => {
       await libraryGenerator(host, options);
@@ -129,12 +136,13 @@ describe('library', () => {
   });
 
   describe('publishable libraries', () => {
-    const options: RawLibrarySchema = { name: 'testlib', buildable: false, publishable: true, importPath: '@myorg/mylib' };
+    const options: RawLibrarySchema = { name: 'testlib', buildable: false, publishable: true, importPath: '@myorg/mylib', component: true };
 
     it('should throw error if publishable without importPath', async () => {
       try {
         await libraryGenerator(host, {
           name: options.name,
+          component: true,
           buildable: false,
           publishable: true
         });
