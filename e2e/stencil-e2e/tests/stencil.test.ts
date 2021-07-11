@@ -13,7 +13,7 @@ describe('e2e', () => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });
 
-  describe('library', () => {
+  xdescribe('library', () => {
     describe('outputtarget', () => {
       it(`should generate react lib`, async () => {
         const plugin = uniq('lib');
@@ -107,7 +107,7 @@ describe('e2e', () => {
     });
   });
 
-  describe('e2e-pwa', () => {
+  xdescribe('e2e-pwa', () => {
     describe('stencil app builder', () => {
       it(`should build pwa app with scss`, async () => {
         const plugin = uniq('pwa');
@@ -121,7 +121,7 @@ describe('e2e', () => {
     });
   });
 
-  describe('stencil builderoptions', () => {
+  xdescribe('stencil builderoptions', () => {
     it(`should build with custom stencil config naming`, async () => {
       const plugin = uniq('library');
 
@@ -154,7 +154,7 @@ describe('e2e', () => {
     });
   });
 
-  describe('application', () => {
+ xdescribe('application', () => {
     it('should add tags to nx.json', async () => {
       const plugin = uniq('app3');
       await runNxCommandAsync(
@@ -181,18 +181,15 @@ describe('e2e', () => {
     });
   });
 
-  /*
   describe('Storybook', () => {
     it('should build', async () => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
         `generate @nxext/stencil:lib ${plugin} --style='css'`
       );
-      await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --style='css'`
-      );
       await runNxCommandAsync(`generate @nxext/stencil:storybook-configuration ${plugin} --configureCypress=false`);
-      await runNxCommandAsync(`build-storybook ${plugin}`);
+      const result = await runNxCommandAsync(`build-storybook ${plugin}`);
+      expect(result.stdout).toContain('build finished');
     })
-  })*/
+  })
 });
