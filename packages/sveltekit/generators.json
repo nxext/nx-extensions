@@ -10,7 +10,7 @@
       "aliases": ["app"]
     },
     "component": {
-      "factory": "./src/generators/component/generator#componentGenerator",
+      "factory": "./src/generators/component/component#componentGenerator",
       "schema": "./src/generators/component/schema.json",
       "description": "component generator"
     }
@@ -23,7 +23,7 @@
       "aliases": ["app"]
     },
     "component": {
-      "factory": "./src/generators/component/generator#componentSchematic",
+      "factory": "./src/generators/component/component#componentSchematic",
       "schema": "./src/generators/component/schema.json",
       "description": "component generator"
     }
