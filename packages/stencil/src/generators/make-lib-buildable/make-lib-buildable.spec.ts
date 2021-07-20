@@ -30,10 +30,14 @@ describe('make-lib-buildable schematic', () => {
         taskQueue: 'async'
       ,
         outputTargets: [{
-                  type: 'dist',
-                  esmLoaderPath: '../loader',
-                  dir: '../../dist/libs/${name}/dist',
-                }]
+              type: 'dist',
+              esmLoaderPath: '../loader',
+              dir: '../../dist/libs/${name}/dist',
+            },{
+              type: 'www',
+              dir: '../../dist/libs/${name}/www',
+              serviceWorker: null // disable service workers
+            }]
 
       };
       "
