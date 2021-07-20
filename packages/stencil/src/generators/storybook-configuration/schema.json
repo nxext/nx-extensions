@@ -27,11 +27,6 @@
       "enum": ["eslint", "tslint", "none"],
       "default": "eslint"
     },
-    "js": {
-      "type": "boolean",
-      "description": "Generate JavaScript files rather than TypeScript files",
-      "default": false
-    },
     "standaloneConfig": {
       "description": "Split the project configuration into <projectRoot>/project.json rather than including it inside workspace.json",
       "type": "boolean",

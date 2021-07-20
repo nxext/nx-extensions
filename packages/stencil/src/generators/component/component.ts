@@ -57,6 +57,12 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
     }
   );
 
+  if (!host.exists('.storybook')) {
+    host.delete(
+      joinPathFragments(`${projectConfig.sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.jsx`)
+    );
+  }
+
   if (!options.skipFormat) {
     await formatFiles(host);
   }

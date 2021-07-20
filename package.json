@@ -17,7 +17,7 @@
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "scripts": {
-    "postinstall": "yarn setup-local-plugins",
+    "postinstall": "yarn run setup-local-plugins",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",

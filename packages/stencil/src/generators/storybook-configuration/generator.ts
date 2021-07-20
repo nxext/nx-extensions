@@ -8,7 +8,9 @@ import {
   readProjectConfiguration,
   Tree,
   updateProjectConfiguration,
-  writeJson
+  writeJson,
+  generateFiles,
+  offsetFromRoot, stripIndents
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { Linter } from '@nrwl/linter';
@@ -18,43 +20,57 @@ import { initGenerator } from '@nrwl/storybook/src/generators/init/init';
 import { TsConfig } from '@nrwl/storybook/src/utils/utilities';
 import { StorybookConfigureSchema } from './schema';
 import { updateLintConfig } from './lib/update-lint-config';
-import { createProjectStorybookDir, createRootStorybookDir } from './lib/create-project-dir';
+import { isBuildableStencilProject } from '../../utils/utillities';
 
-export async function configurationGenerator(
+export async function storybookConfigurationGenerator(
   tree: Tree,
   rawSchema: StorybookConfigureSchema
 ) {
-  const uiFramework = '@storybook/html';
-  const schema = normalizeSchema(rawSchema);
-
   const tasks: GeneratorCallback[] = [];
+  const uiFramework = '@storybook/html';
+  const options = normalizeSchema(rawSchema);
 
-  const { projectType } = readProjectConfiguration(tree, schema.name);
+  const projectConfig = readProjectConfiguration(tree, options.name);
+
+  if (!isBuildableStencilProject(projectConfig)) {
+    logger.info(stripIndents`
+      Please use a buildable library for storybook. Storybook needs a generated
+      Stencil loader to work (yet). They're working on native Stencil support, but
+      it's not ready yet.
+
+      You could make this library buildable with:
+
+      nx generate @nxext/stencil:make-lib-buildable ${options.name}
+      or
+      ng generate @nxext/stencil:make-lib-buildable ${options.name}
+    `);
+
+    return;
+  }
 
   const initTask = await initGenerator(tree, {
     uiFramework: uiFramework
   });
   tasks.push(initTask);
 
-  createRootStorybookDir(tree, schema.js);
+  createRootStorybookDir(tree);
   createProjectStorybookDir(
     tree,
-    schema.name,
-    uiFramework,
-    schema.js
+    options.name,
+    uiFramework
   );
-  configureTsProjectConfig(tree, schema);
-  configureTsSolutionConfig(tree, schema);
-  updateLintConfig(tree, schema);
-  addStorybookTask(tree, schema.name, uiFramework);
-  if (schema.configureCypress) {
-    if (projectType !== 'application') {
+  configureTsProjectConfig(tree, options);
+  configureTsSolutionConfig(tree, options);
+  updateLintConfig(tree, options);
+  addStorybookTask(tree, options.name, uiFramework);
+  if (options.configureCypress) {
+    if (projectConfig.projectType !== 'application') {
       const cypressTask = await cypressProjectGenerator(tree, {
-        name: schema.name,
-        js: schema.js,
-        linter: schema.linter,
-        directory: schema.cypressDirectory,
-        standaloneConfig: schema.standaloneConfig
+        name: options.name,
+        js: false,
+        linter: options.linter,
+        directory: options.cypressDirectory,
+        standaloneConfig: options.standaloneConfig
       });
       tasks.push(cypressTask);
     } else {
@@ -70,8 +86,7 @@ export async function configurationGenerator(
 function normalizeSchema(schema: StorybookConfigureSchema) {
   const defaults = {
     configureCypress: true,
-    linter: Linter.EsLint,
-    js: false
+    linter: Linter.EsLint
   };
   return {
     ...defaults,
@@ -93,6 +108,44 @@ function getTsConfigPath(
       ? 'tsconfig.app.json'
       : 'tsconfig.lib.json'
   );
+}
+
+export function createProjectStorybookDir(
+  tree: Tree,
+  projectName: string,
+  uiFramework: string
+) {
+  const { root, projectType } = readProjectConfiguration(tree, projectName);
+  const projectDirectory = projectType === 'application' ? 'app' : 'lib';
+
+  if (tree.exists(join(root, '.storybook'))) {
+    return;
+  }
+
+  const templatePath = join(
+    __dirname,
+    './project-files'
+  );
+  const offset = offsetFromRoot(root);
+
+  generateFiles(tree, templatePath, root, {
+    tmpl: '',
+    dot: '.',
+    uiFramework,
+    offsetFromRoot: offset,
+    projectType: projectDirectory,
+    loaderDir: `${offset}../dist/${root}/loader`
+  });
+}
+
+export function createRootStorybookDir(
+  tree: Tree
+) {
+  if (tree.exists('.storybook')) {
+    return;
+  }
+  const templatePath = join(__dirname, './root-files');
+  generateFiles(tree, templatePath, '', { dot: '.' });
 }
 
 function configureTsProjectConfig(
@@ -190,7 +243,7 @@ function addStorybookTask(
   updateProjectConfiguration(tree, projectName, projectConfig);
 }
 
-export default configurationGenerator;
-export const configurationSchematic = convertNxGenerator(
-  configurationGenerator
+export default storybookConfigurationGenerator;
+export const storybookConfigurationSchematic = convertNxGenerator(
+  storybookConfigurationGenerator
 );

@@ -16,6 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nxext/lib": ["dist/packages/lib"],
+      "@nxext/lib/loader": ["dist/packages/lib/loader"],
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
       "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"],

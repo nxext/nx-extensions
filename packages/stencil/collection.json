@@ -61,7 +61,7 @@
       "description": "Make a library buildable"
     },
     "storybook-configuration": {
-      "factory": "./src/generators/storybook-configuration/generator#configurationSchematic",
+      "factory": "./src/generators/storybook-configuration/generator#storybookConfigurationSchematic",
       "schema": "./src/generators/storybook-configuration/schema.json",
       "description": "storybook-configuration generator"
     }
@@ -125,7 +125,7 @@
       "description": "Make a library buildable"
     },
     "storybook-configuration": {
-      "factory": "./src/generators/storybook-configuration/generator#configurationGenerator",
+      "factory": "./src/generators/storybook-configuration/generator#storybookConfigurationGenerator",
       "schema": "./src/generators/storybook-configuration/schema.json",
       "description": "storybook-configuration generator"
     }
