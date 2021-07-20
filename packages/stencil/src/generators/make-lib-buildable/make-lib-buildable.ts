@@ -52,6 +52,7 @@ function updateProjectConfig(host: Tree, options: MakeLibBuildableOptions) {
 export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuildableSchema) {
   const stencilProjectConfig = readProjectConfiguration(host, schema.name);
   const options = normalize(schema, stencilProjectConfig.root);
+  const offset = offsetFromRoot(options.projectRoot);
 
   updateProjectConfig(host, options);
   createFiles(host, options);
@@ -64,12 +65,15 @@ export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuild
     host,
     [
       `{
-            type: 'dist',
-            esmLoaderPath: '../loader',
-            dir: '${offsetFromRoot(options.projectRoot)}dist/${
-        options.projectRoot
-      }/dist',
-          }`
+        type: 'dist',
+        esmLoaderPath: '../loader',
+        dir: '${offset}dist/${options.projectRoot}/dist',
+      }`,
+      `{
+        type: 'www',
+        dir: '${offset}dist/${options.projectRoot}/www',
+        serviceWorker: null // disable service workers
+      }`
     ],
     joinPathFragments(options.projectRoot, 'stencil.config.ts')
   );
