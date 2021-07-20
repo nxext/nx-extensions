@@ -2,6 +2,7 @@ import componentGenerator, { ComponentSchema } from './component';
 import { createTestUILib } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { Tree } from '@nrwl/devkit';
+import storybookConfigurationGenerator from '../storybook-configuration/generator';
 
 describe('component schematic', () => {
   let tree: Tree;
@@ -69,6 +70,37 @@ describe('component schematic', () => {
     expect(
       tree.exists(
         'libs/test-project/src/components/sub-dir/test-component/test-component.scss'
+      )
+    ).toBeTruthy();
+  });
+
+  it('should generate files with storybook enabled', async () => {
+    await storybookConfigurationGenerator(tree, { name: projectName, configureCypress: false });
+    await componentGenerator(tree, options);
+
+    expect(
+      tree.exists(
+        'libs/test-project/src/components/test-component/test-component.tsx'
+      )
+    ).toBeTruthy();
+    expect(
+      tree.exists(
+        'libs/test-project/src/components/test-component/test-component.e2e.ts'
+      )
+    ).toBeTruthy();
+    expect(
+      tree.exists(
+        'libs/test-project/src/components/test-component/test-component.spec.tsx'
+      )
+    ).toBeTruthy();
+    expect(
+      tree.exists(
+        'libs/test-project/src/components/test-component/test-component.scss'
+      )
+    ).toBeTruthy();
+    expect(
+      tree.exists(
+        'libs/test-project/src/components/test-component/test-component.stories.jsx'
       )
     ).toBeTruthy();
   });

@@ -7,37 +7,6 @@ import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
-/*
-function checkBuildable(options: AddOutputtargetSchematicSchema): Rule {
-  return (tree: Tree) => {
-    const workspaceJson = readJsonInTree(tree, getWorkspacePath(tree));
-    const project = workspaceJson.projects[options.projectName];
-
-    if (isStencilProjectBuilder(project, 'build')) {
-      return chain([
-        options.outputType === 'react' ? prepareReactLibrary(options) : noop(),
-        options.outputType === 'angular'
-          ? prepareAngularLibrary(options)
-          : noop(),
-        options.outputType === 'vue' ? prepareVueLibrary(options) : noop(),
-        addToOutputTargetToConfig(options.projectName, options.outputType),
-        formatFiles(),
-      ]);
-    } else {
-      logger.info(stripIndents`
-          Please use a buildable library for custom outputtargets
-
-          You could make this library buildable with:
-
-          nx generate @nxext/stencil:make-lib-buildable ${options.projectName}
-          or
-          ng generate @nxext/stencil:make-lib-buildable ${options.projectName}
-        `);
-      return noop();
-    }
-  };
-}*/
-
 export async function outputtargetGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
   const projectConfig = readProjectConfiguration(host, options.projectName);
   const tasks = [];
