@@ -16,6 +16,22 @@ describe('sveltekit e2e', () => {
     expect(result.stdout).toContain('Build executed...');
   });
 
+  it('should create sveltekit component', async () => {
+    const appName = uniq('app-sveltekit');
+    const componentName = uniq('component-sveltekit');
+    ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
+    await runNxCommandAsync(`generate @nxext/sveltekit:app ${appName}`);
+    await runNxCommandAsync(
+      `generate @nxext/sveltekit:component -p ${appName} ${componentName}`
+    );
+
+    expect(() =>
+      checkFilesExist(
+        `apps/${appName}/src/lib/${componentName}/${componentName}.spec.ts`
+      )
+    ).not.toThrow();
+  });
+
   it('should lint sveltekit app', async () => {
     const plugin = uniq('sveltekit');
     ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
