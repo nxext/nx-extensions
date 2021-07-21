@@ -9,7 +9,8 @@
       "type": "string"
     },
     "configPath": {
-      "type": "string"
+      "type": "string",
+      "description": "Path to the stencil.config.ts file."
     },
     "watch": {
       "type": "boolean"
