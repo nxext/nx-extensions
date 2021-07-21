@@ -15,11 +15,20 @@ function createStencilCompilerOptions(
   options: StencilBuildOptions
 ): ConfigFlags {
   let runOptions: string[] = [taskCommand];
+  runOptions = parseRunParameters(runOptions, options);
 
   if (options.port) {
     runOptions.push(`--port ${options.port}`);
   }
-  runOptions = parseRunParameters(runOptions, options);
+  if(options.docsReadme) {
+    runOptions.push(`--docs-readme`);
+  }
+  if(options.noOpen) {
+    runOptions.push(`--no-open`);
+  }
+  if(options.maxWorkers) {
+    runOptions.push(`--max-workers ${options.maxWorkers}`);
+  }
 
   return parseFlags(runOptions);
 }

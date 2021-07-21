@@ -41,7 +41,8 @@ export function getBuildTarget(
     },
     configurations: {
       production: {
-        dev: false
+        dev: false,
+        prod: true
       }
     }
   };
