@@ -1,44 +1,20 @@
 {
   "migrations": [
     {
-      "version": "12.5.0-beta.1",
-      "description": "Rename the workspace-schematic script into workspace-generator script",
-      "factory": "./src/migrations/update-12-5-0/add-target-dependencies",
+      "version": "12.6.0-beta.0",
       "cli": "nx",
-      "package": "@nrwl/workspace",
-      "name": "add-target-dependencies"
-    },
-    {
-      "version": "12.4.0-beta.1",
-      "cli": "nx",
-      "description": "Add testEnvironment: 'jsdom' in web apps + libraries",
-      "factory": "./src/migrations/update-12-4-0/add-test-environment-for-node",
+      "description": "Uses `getJestProjects()` to populate projects array in root level `jest.config.js` file.",
+      "factory": "./src/migrations/update-12-6-0/update-base-jest-config",
       "package": "@nrwl/jest",
-      "name": "support-jest-27"
+      "name": "update-jest-config-to-use-util"
     },
     {
-      "version": "12.4.0-beta.1",
+      "version": "12.5.9-beta.1",
       "cli": "nx",
-      "description": "Support for Jest 27 via updating ts-jest + jest-preset-angular",
-      "factory": "./src/migrations/update-12-4-0/update-jest-preset-angular",
-      "package": "@nrwl/jest",
-      "name": "update-ts-jest-and-jest-preset-angular"
-    },
-    {
-      "version": "12.5.0-beta.5",
-      "cli": "nx",
-      "description": "Upgrade Storybook to v6.3",
-      "factory": "./src/migrations/update-12-5-0/migrate-storybook-6-3",
+      "description": "Update Storybook React typings in tsconfig files",
+      "factory": "./src/migrations/update-12-5-9/update-storybook-react-typings",
       "package": "@nrwl/storybook",
-      "name": "update-12-5-0"
-    },
-    {
-      "version": "12.5.0-beta.5",
-      "cli": "nx",
-      "description": "Install the @storybook/addon-essentials package",
-      "factory": "./src/migrations/update-12-5-0/install-addon-essentials",
-      "package": "@nrwl/storybook",
-      "name": "install-addon-essentials"
+      "name": "update-12-5-9-beta.1"
     }
   ]
 }
