@@ -7,8 +7,6 @@
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
         "target": "sveltekit:build",
-        "npmPackageName": "@nxext/sveltekit",
-        "pluginOutputPath": "dist/packages/sveltekit",
         "jestConfig": "e2e/sveltekit-e2e/jest.config.js"
       }
     }
