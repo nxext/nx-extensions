@@ -12,6 +12,7 @@ export interface StencilBuildOptions extends StencilBaseConfigOptions {
   es5?: boolean;
   log?: boolean;
   prerender?: boolean;
+  ssr?: boolean;
   prod?: boolean;
   maxWorkers?: number;
   port?: number;
