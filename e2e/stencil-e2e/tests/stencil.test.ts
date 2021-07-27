@@ -107,17 +107,15 @@ describe('e2e', () => {
     });
   });
 
-  describe('e2e-pwa', () => {
-    describe('stencil app builder', () => {
-      it(`should build pwa app with scss`, async () => {
-        const plugin = uniq('pwa');
-        await runNxCommandAsync(
-          `generate @nxext/stencil:pwa ${plugin} --style='scss' --e2eTestRunner='none' --junitTestRunner='none'`
-        );
+  describe('pwa', () => {
+    it(`should build pwa app with scss`, async () => {
+      const plugin = uniq('pwa');
+      await runNxCommandAsync(
+        `generate @nxext/stencil:pwa ${plugin} --style='scss' --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
-        const result = await runNxCommandAsync(`build ${plugin} --dev`);
-        expect(result.stdout).toContain('build finished');
-      });
+      const result = await runNxCommandAsync(`build ${plugin} --dev`);
+      expect(result.stdout).toContain('build finished');
     });
   });
 
@@ -181,7 +179,7 @@ describe('e2e', () => {
     });
   });
 
-  describe('Storybook', () => {
+  describe('storybook', () => {
     it('should build', async () => {
       const plugin = uniq('lib');
       await runNxCommandAsync(

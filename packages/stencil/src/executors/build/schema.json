@@ -72,6 +72,10 @@
       "type": "boolean",
       "description": "Watches files during development and triggers a rebuild when files are updated."
     },
+    "ssr": {
+      "type": "boolean",
+      "description": "Starts the server side render process.."
+    },
     "noOpen": {
       "type": "boolean",
       "description": "By default the --serve command will open a browser window. Using the --noOpen command will no automatically open a browser window."
