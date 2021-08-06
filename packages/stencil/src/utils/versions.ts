@@ -8,6 +8,9 @@ export const autoprefixerTypesVersion = '^9.7.2';
 export const puppeteer = '~5.3.1';
 export const puppeteerType = '~3.0.2';
 
+export const eslintPluginImportVersion = '2.22.1';
+export const eslintPluginStencilVersion = '0.3.1';
+
 export const STENCIL_OUTPUTTARGET_VERSION: {
   [style: string]: string;
 } = {

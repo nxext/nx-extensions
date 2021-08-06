@@ -30,6 +30,7 @@
   },
   "peerDependencies": {
     "@nrwl/storybook": "^12.5.0",
+    "@nrwl/linter": "^12.5.0",
     "@nrwl/react": "^12.5.0",
     "@nrwl/angular": "^12.5.0",
     "@nrwl/jest": "^12.5.0",

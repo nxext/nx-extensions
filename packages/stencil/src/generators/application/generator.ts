@@ -15,6 +15,7 @@ import { join } from 'path';
 import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
+import { addLinting } from './lib/add-linting';
 
 function normalizeOptions(host: Tree, options: RawApplicationSchema): ApplicationSchema {
   const { appsDir } = getWorkspaceLayout(host);
@@ -63,22 +64,20 @@ function createFiles(host: Tree, options: ApplicationSchema) {
 
 export async function applicationGenerator(host: Tree, schema: RawApplicationSchema) {
   const options = normalizeOptions(host, schema);
-  const initTask = await initGenerator(host, options);
+  const initTask = await initGenerator(host, {
+    ...options,
+    skipFormat: true
+  });
 
   createFiles(host, options);
   addProject(host, options);
-
-  addStylePluginToConfig(
-    host,
-    join(options.projectRoot, 'stencil.config.ts'),
-    options.style
-  );
+  const lintTask = await addLinting(host, options);
 
   if (!options.skipFormat) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask);
+  return runTasksInSerial(initTask, lintTask);
 }
 
 export default applicationGenerator;

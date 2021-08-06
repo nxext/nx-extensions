@@ -1,5 +1,5 @@
 import { ProjectType } from '@nrwl/workspace';
-import { AppType, STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
+import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
@@ -7,33 +7,40 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { ionicPwaGenerator } from './generator';
 import { applicationGenerator } from '../application/generator';
 import { RawPWASchema } from './schema';
+import { Linter } from '@nrwl/linter';
 
 describe('schematic:ionic-pwa', () => {
   let host: Tree;
-  const options: RawPWASchema = { name: 'test', style: SupportedStyles.css, appType: AppType.pwa };
+  const options: RawPWASchema = { name: 'test', style: SupportedStyles.css, linter: Linter.None };
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace();
   });
 
   it('should create files', async () => {
-    const appName = 'testpwa';
-    await ionicPwaGenerator(host, options)
+    await ionicPwaGenerator(host, {...options, linter: Linter.EsLint})
 
     const fileList = fileListForAppType(
-      appName,
+      options.name,
       SupportedStyles.css,
       ProjectType.Application
     );
     fileList.forEach((file) => expect(host.exists(file)));
+
+    const eslintJson = readJson(host, 'apps/test/.eslintrc.json');
+    expect(eslintJson.extends).toEqual([
+      'plugin:@stencil/recommended',
+      'plugin:import/recommended',
+      'plugin:import/typescript',
+      '../../.eslintrc.json'
+    ]);
   });
 
   it('should create files in specified dir', async () => {
-    const appName = 'testpwa';
-    await ionicPwaGenerator(host, { name: appName, appType: AppType.pwa, directory: 'subdir' });
+    await ionicPwaGenerator(host, { ...options, directory: 'subdir' });
 
     const fileList = fileListForAppType(
-      appName,
+      options.name,
       SupportedStyles.css,
       ProjectType.Application,
       'subdir'
@@ -50,7 +57,7 @@ describe('schematic:ionic-pwa', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to pwa`, async () => {
-      await ionicPwaGenerator(host, { name: 'test', style: SupportedStyles[style] });
+      await ionicPwaGenerator(host, { ...options, style: SupportedStyles[style] });
       const packageJson = readJson(host, 'package.json');
       expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
 
@@ -63,10 +70,9 @@ describe('schematic:ionic-pwa', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
-      const projectName = 'test';
-      await ionicPwaGenerator(host, { name: projectName, style: SupportedStyles[style], appType: AppType.application });
+      await ionicPwaGenerator(host, { name: options.name, style: SupportedStyles[style] });
 
-      const projectConfig = readProjectConfiguration(host, projectName);
+      const projectConfig = readProjectConfiguration(host, options.name);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style
