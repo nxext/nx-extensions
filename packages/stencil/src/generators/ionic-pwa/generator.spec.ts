@@ -17,6 +17,13 @@ describe('schematic:ionic-pwa', () => {
     host = createTreeWithEmptyWorkspace();
   });
 
+  it('should add tags to nx.json', async () => {
+    await ionicPwaGenerator(host, {...options, tags: 'e2etag,e2ePackage'});
+
+    const nxJson = readJson(host, 'nx.json');
+    expect(nxJson.projects[options.name].tags).toEqual(['e2etag', 'e2ePackage']);
+  });
+
   it('should create files', async () => {
     await ionicPwaGenerator(host, {...options, linter: Linter.EsLint})
 

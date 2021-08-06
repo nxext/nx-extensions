@@ -1,7 +1,6 @@
 import {
   checkFilesExist,
   ensureNxProject,
-  readJson,
   renameFile,
   runNxCommandAsync,
   uniq
@@ -68,15 +67,6 @@ describe('e2e', () => {
           'Please use a buildable library for custom outputtargets'
         );
       });
-    });
-
-    it('should add tags to nx.json', async () => {
-      const plugin = uniq('lib');
-      await runNxCommandAsync(
-        `generate @nxext/stencil:lib ${plugin} --tags e2etag,e2ePackage --style=css --e2eTestRunner='none' --junitTestRunner='none'`
-      );
-      const nxJson = readJson('nx.json');
-      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
     });
 
     it(`should build app with scss`, async () => {
@@ -153,15 +143,6 @@ describe('e2e', () => {
   });
 
   describe('application', () => {
-    it('should add tags to nx.json', async () => {
-      const plugin = uniq('app3');
-      await runNxCommandAsync(
-        `generate @nxext/stencil:app ${plugin} --tags e2etag,e2ePackage --style=css --e2eTestRunner='none' --junitTestRunner='none'`
-      );
-      const nxJson = readJson('nx.json');
-      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
-    });
-
     it(`should build app with css`, async () => {
       const plugin = uniq('app2');
       await runNxCommandAsync(
