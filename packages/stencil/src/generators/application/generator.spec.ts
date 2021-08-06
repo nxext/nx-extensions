@@ -6,10 +6,11 @@ import { RawApplicationSchema } from './schema';
 import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { applicationGenerator } from './generator';
+import { Linter } from '@nrwl/linter';
 
 describe('schematic:application', () => {
   let host: Tree;
-  const options: RawApplicationSchema = { name: 'test' };
+  const options: RawApplicationSchema = { name: 'test', linter: Linter.None };
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace();
@@ -24,7 +25,7 @@ describe('schematic:application', () => {
   });
 
   it('should create files', async () => {
-    await applicationGenerator(host, options);
+    await applicationGenerator(host, { ...options, linter: Linter.EsLint });
 
     const fileList = fileListForAppType(
       options.name,
@@ -32,6 +33,14 @@ describe('schematic:application', () => {
       ProjectType.Application
     );
     fileList.forEach((file) => expect(host.exists(file)));
+
+    const eslintJson = readJson(host, 'apps/test/.eslintrc.json');
+    expect(eslintJson.extends).toEqual([
+      'plugin:@stencil/recommended',
+      'plugin:import/recommended',
+      'plugin:import/typescript',
+      '../../.eslintrc.json'
+    ]);
   });
 
   it('should create files in specified dir', async () => {

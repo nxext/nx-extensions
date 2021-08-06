@@ -13,8 +13,7 @@ import { SupportedStyles } from '../stencil-core-utils';
 export enum AppType {
   application = 'application',
   library = 'library',
-  pwa = 'pwa',
-  capacitorapp = 'capacitorapp',
+  pwa = 'pwa'
 }
 
 export interface PackageDependencies {
@@ -45,13 +44,6 @@ export const PROJECT_TYPE_DEPENDENCIES: {
     },
   },
   [AppType.pwa]: {
-    dependencies: {},
-    devDependencies: {
-      ...stencilDependencies,
-      '@ionic/core': ionicVersion,
-    },
-  },
-  [AppType.capacitorapp]: {
     dependencies: {},
     devDependencies: {
       ...stencilDependencies,

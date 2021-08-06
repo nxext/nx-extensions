@@ -15,6 +15,7 @@ import { join } from 'path';
 import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
+import { addLinting } from '../application/lib/add-linting';
 
 function normalizeOptions(options: RawPWASchema, host: Tree): PWASchema {
   const { appsDir } = getWorkspaceLayout(host);
@@ -80,10 +81,12 @@ export async function ionicPwaGenerator(
   addStylePlugin(host, options);
   addProject(host, options);
 
+  const lintTask = await addLinting(host, options);
+
   if (!options.skipFormat) {
     await formatFiles(host);
   }
-  return runTasksInSerial(initTask);
+  return runTasksInSerial(initTask, lintTask);
 }
 
 export default ionicPwaGenerator;
