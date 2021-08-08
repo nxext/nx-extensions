@@ -1,0 +1,57 @@
+{
+  "root": "packages/docs",
+  "sourceRoot": "packages/docs/src",
+  "projectType": "application",
+  "generators": {
+    "@nxext/stencil:component": {
+      "style": "css"
+    }
+  },
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nxext/stencil:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "projectType": "application",
+        "tsConfig": "packages/docs/tsconfig.app.json",
+        "configPath": "packages/docs/stencil.config.ts",
+        "outputPath": "dist/packages/docs",
+        "prerender": true,
+        "ssr": true
+      },
+      "configurations": {
+        "production": {
+          "prerender": true,
+          "ssr": true,
+          "dev": false,
+          "prod": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nxext/stencil:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "projectType": "application",
+        "tsConfig": "packages/docs/tsconfig.app.json",
+        "configPath": "packages/docs/stencil.config.ts",
+        "outputPath": "dist/packages/docs",
+        "serve": true,
+        "watch": true,
+        "dev": true,
+        "ssr": true
+      }
+    },
+    "test": {
+      "executor": "@nxext/stencil:test",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "projectType": "application",
+        "tsConfig": "packages/docs/tsconfig.app.json",
+        "configPath": "packages/docs/stencil.config.ts",
+        "outputPath": "dist/packages/docs"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Nxext",
+  "short_name": "Nxext",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/assets/icon/fav.png",
+      "sizes": "37x37",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/fav.ico",
+      "sizes": "37x37",
+      "type": "image/ico"
+    },
+    {
+      "src": "assets/icon/fav.jpg",
+      "sizes": "37x37",
+      "type": "image/jpg"
+    }
+  ],
+  "background_color": "#2D3748",
+  "theme_color": "#DD6B20"
+}
