@@ -1,0 +1,75 @@
+/**
+ * This injects Tailwind's base styles and any base styles registered by
+ * plugins.
+ */
+@tailwind base;
+
+/**
+ * This injects Tailwind's component classes and any component classes
+ * registered by plugins.
+ */
+@tailwind components;
+
+/**
+ * This injects Tailwind's utility classes and any utility classes registered
+ * by plugins.
+ */
+@tailwind utilities;
+
+/**
+ * Use this directive to control where Tailwind injects the responsive
+ * variations of each utility.
+ *
+ * If omitted, Tailwind will append these classes to the very end of
+ * your stylesheet by default.
+ */
+@tailwind screens;
+
+/*@import "prism.css";*/
+
+:root {
+  --brand: #DD6B20;
+}
+
+.dark {
+  --bg-background-primary: #2D3748 ;
+  --bg-background-secondary: #4A5568;
+  --bg-background-tertiary: #1A202C;
+
+  --highlight-primary: #FBD38D;
+  --highlight-secondary: #F7FAFC;
+
+  --modeswitch-primary: #cbd5e0;
+  --modeswitch-secondary: #4A5568;
+
+  --text-color: #E2E8F0;
+}
+
+.light {
+  --bg-background-primary: white;
+  --bg-background-secondary: white;
+  --bg-background-tertiary: #e2e8f0;
+
+  --highlight-primary: #DD6B20;
+  --highlight-secondary: #4A5568;
+
+  --modeswitch-primary: #cbd5e0;
+  --modeswitch-secondary: var(--highlight-secondary);
+
+  --text-color: #4A5568;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+.content p a {
+  text-decoration: none;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(70%,transparent),color-stop(70%,rgba(221, 107, 32, .4)));
+  background-image: linear-gradient(180deg,transparent 70%,rgba(221, 107, 32, .4) 0);
+}

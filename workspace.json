@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "docs": "packages/docs",
     "docs-docusaurus": "packages/docs-docusaurus",
     "stencil": "packages/stencil",
     "stencil-e2e": "e2e/stencil-e2e",
