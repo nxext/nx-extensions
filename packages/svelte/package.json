@@ -23,7 +23,7 @@
   "schematics": "./generators.json",
   "builders": "./builders.json",
   "peerDependencies": {
-    "svelte": "^3.41.0",
+    "svelte": "^3.42.1",
     "svelte-preprocess": "^4.4.2",
     "@nrwl/workspace": "^12.0.0",
     "@nrwl/cypress": "^12.0.0"
@@ -34,7 +34,7 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.2.3",
-    "rollup": "^2.55.1",
+    "rollup": "^2.56.1",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-css-only": "^3.0.0",
