@@ -19,17 +19,17 @@
   },
   "executors": {
     "build": {
-      "implementation": "./src/executors/build/builder",
+      "implementation": "./src/executors/build/executor",
       "schema": "./src/executors/build/schema.json",
       "description": "stencil build"
     },
     "test": {
-      "implementation": "./src/executors/test/builder",
+      "implementation": "./src/executors/test/executor",
       "schema": "./src/executors/test/schema.json",
       "description": "stencil test"
     },
     "e2e": {
-      "implementation": "./src/executors/e2e/builder",
+      "implementation": "./src/executors/e2e/executor",
       "schema": "./src/executors/e2e/schema.json",
       "description": "stencil e2e"
     }

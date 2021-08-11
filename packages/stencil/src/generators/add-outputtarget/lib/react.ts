@@ -11,7 +11,7 @@ import {
 } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
-import { addToOutputTargets } from '../../../stencil-core-utils';
+import { addOutputTarget } from '../../../stencil-core-utils';
 import { addImport } from '../../../utils/ast-utils';
 import { AddOutputtargetSchematicSchema } from '../schema';
 
@@ -62,7 +62,7 @@ export function addReactOutputtarget(
   const changes = applyChangesToString(
     stencilConfigSource.text, [
       ...addImport(stencilConfigSource, `import { reactOutputTarget } from '@stencil/react-output-target';`),
-      ...addToOutputTargets(stencilConfigSource,
+      ...addOutputTarget(stencilConfigSource,
         `
       reactOutputTarget({
         componentCorePackage: '${packageName}',

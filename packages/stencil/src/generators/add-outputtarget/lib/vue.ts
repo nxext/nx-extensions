@@ -2,7 +2,7 @@ import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import * as ts from 'typescript';
-import { addToOutputTargets, addToOutputTargetsInTree } from '../../../stencil-core-utils';
+import { addOutputTarget } from '../../../stencil-core-utils';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import {
   addDependenciesToPackageJson, applyChangesToString,
@@ -59,7 +59,7 @@ export function addVueOutputtarget(
 
   const changes = applyChangesToString(stencilConfigSource.text, [
     ...addImport(stencilConfigSource, `import { vueOutputTarget, ComponentModelConfig } from '@stencil/vue-output-target';`),
-    ...addToOutputTargets(
+    ...addOutputTarget(
       stencilConfigSource,
   `
       vueOutputTarget({

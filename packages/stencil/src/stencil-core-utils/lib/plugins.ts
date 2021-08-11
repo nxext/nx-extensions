@@ -84,7 +84,7 @@ function getLastEntryOfOutputtargetArray(node: ts.Node): ts.Node {
     .pop();
 }
 
-export function addToOutputTargets(
+export function addOutputTarget(
   source: ts.SourceFile,
   toInsert: string
 ): StringChange[] {
@@ -92,7 +92,7 @@ export function addToOutputTargets(
   return addCodeIntoArray(source, outputTargetsIdentifier, toInsert);
 }
 
-export function addToOutputTargetsInTree(
+export function addToOutputTargets(
   host: Tree,
   outputTargets: string[],
   stencilConfigPath: string
@@ -102,7 +102,7 @@ export function addToOutputTargetsInTree(
     stencilConfigPath
   );
 
-  const changes = applyChangesToString(stencilConfigSource.text, addToOutputTargets(
+  const changes = applyChangesToString(stencilConfigSource.text, addOutputTarget(
     stencilConfigSource,
     outputTargets.join(',')
   ));

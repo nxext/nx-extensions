@@ -24,6 +24,7 @@ export async function createStencilProcess(config: Config, pathCollection: PathC
     return { success: true };
   } catch (err) {
     logger.error(err.message);
+
     return { success: false, error: err.message };
   }
 }
