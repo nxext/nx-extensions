@@ -6,7 +6,7 @@ import { SupportedStyles } from '../../stencil-core-utils';
 
 const testRunner = new SchematicTestRunner(
   '@nxext/stencil',
-  join(__dirname, '../../../collection.json')
+  join(__dirname, '../../../generators.json')
 );
 
 const migrationRunner = new SchematicTestRunner(

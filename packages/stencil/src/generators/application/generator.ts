@@ -9,10 +9,9 @@ import {
   Tree
 } from '@nrwl/devkit';
 import { ApplicationSchema, RawApplicationSchema } from './schema';
-import { calculateStyle } from '../../utils/utils';
+import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
-import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 import { addLinting } from './lib/add-linting';

@@ -4,6 +4,10 @@ import { Tree, updateJson } from '@nrwl/devkit';
 export function updateTsConfig(host: Tree, options: MakeLibBuildableSchema) {
   updateJson(host, 'tsconfig.base.json', (json) => {
     const c = json.compilerOptions;
+    delete c.paths[`${options.importPath}`];
+    c.paths[`${options.importPath}`] = [
+      `dist/${options.projectRoot}`
+    ];
     delete c.paths[
       `${options.importPath}/loader`
       ];

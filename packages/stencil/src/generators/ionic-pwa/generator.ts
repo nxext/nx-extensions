@@ -9,7 +9,7 @@ import {
 } from '@nrwl/devkit';
 import { PWASchema, RawPWASchema } from './schema';
 import { AppType } from '../../utils/typings';
-import { calculateStyle } from '../../utils/utils';
+import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
 import { addStylePluginToConfig } from '../../stencil-core-utils';

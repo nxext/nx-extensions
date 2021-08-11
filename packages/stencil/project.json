@@ -46,7 +46,7 @@
           },
           {
             "input": "./packages/stencil",
-            "glob": "collection.json",
+            "glob": "generators.json",
             "output": "."
           },
           {
@@ -63,16 +63,6 @@
             "input": "./packages/stencil",
             "glob": "**/files/lib/.storybook/**",
             "output": "/"
-          },
-          {
-            "input": "./packages/stencil",
-            "glob": "**/files/root/.storybook/**",
-            "output": "/"
-          },
-          {
-            "input": "./packages/stencil",
-            "glob": "migrations.json",
-            "output": "."
           },
           {
             "input": "./packages/stencil",

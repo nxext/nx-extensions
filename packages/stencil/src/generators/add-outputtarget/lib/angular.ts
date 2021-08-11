@@ -1,6 +1,6 @@
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addImport, readTsSourceFile } from '../../../utils/ast-utils';
-import { addToGitignore } from '../../../utils/utils';
+import { addToGitignore } from '../../../utils/utillities';
 import { getDistDir } from '../../../utils/fileutils';
 import * as ts from 'typescript';
 import {
@@ -16,7 +16,7 @@ import { relative } from 'path';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { libraryGenerator } from '@nrwl/angular/generators';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
-import { addToOutputTargets } from '../../../stencil-core-utils';
+import { addOutputTarget } from '../../../stencil-core-utils';
 
 export async function prepareAngularLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
   const angularProjectName = `${options.projectName}-angular`;
@@ -52,7 +52,7 @@ export async function prepareAngularLibrary(host: Tree, options: AddOutputtarget
 
   addGlobal(host, angularModuleSource, angularModulePath, 'defineCustomElements(window);');
 
-  addToGitignore(`${libsDir}/${angularProjectName}/**/generated`);
+  addToGitignore(host, `${libsDir}/${angularProjectName}/**/generated`);
 
   return libraryTarget;
 }
@@ -74,7 +74,7 @@ export function addAngularOutputtarget(
 
   const changes = applyChangesToString(stencilConfigSource.text, [
     ...addImport(stencilConfigSource, `import { angularOutputTarget, ValueAccessorConfig } from '@stencil/angular-output-target';`),
-    ...addToOutputTargets(
+    ...addOutputTarget(
       stencilConfigSource,
   `
       angularOutputTarget({

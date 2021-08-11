@@ -9,14 +9,21 @@ import { libraryGenerator } from './generator';
 
 describe('library', () => {
   let host: Tree;
-  const options: RawLibrarySchema = { name: 'test', buildable: false, publishable: false, component: true };
+  const options: RawLibrarySchema = {
+    name: 'test',
+    buildable: false,
+    publishable: false,
+    component: true,
+    e2eTestRunner: 'none',
+    importPath: '@e2e/test'
+  };
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace();
   });
 
   it('should add tags to nx.json', async () => {
-    await libraryGenerator(host, {...options, tags: 'e2etag,e2ePackage'});
+    await libraryGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
 
     const nxJson = readJson(host, 'nx.json');
     expect(nxJson.projects[options.name].tags).toEqual(['e2etag', 'e2ePackage']);
@@ -33,8 +40,17 @@ describe('library', () => {
     fileList.forEach((file) => expect(host.exists(file)));
   });
 
+  it(`should set path in tsconfig`, async () => {
+    await libraryGenerator(host, { ...options });
+    const tsConfig = readJson(host, 'tsconfig.base.json');
+
+    expect(
+      tsConfig.compilerOptions.paths['@e2e/test']
+    ).toEqual([`libs/test/src/index.ts`]);
+  });
+
   it(`shouldn't create default component if component=false`, async () => {
-    await libraryGenerator(host, {...options, component: false});
+    await libraryGenerator(host, { ...options, component: false });
 
     expect(host.exists(`libs/${options.name}/src/components/my-component`)).toBeFalsy();
     expect(host.exists(`libs/${options.name}/src/components/my-component/my-component.tsx`)).toBeFalsy();
@@ -80,7 +96,7 @@ describe('library', () => {
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style
-        },
+        }
       });
     });
   });
@@ -101,7 +117,7 @@ describe('library', () => {
       await libraryGenerator(host, options);
 
       expect(host.read('libs/testlib/src/components.d.ts').toString('utf-8')).toContain(
-        "export * from './components/my-component/my-component';"
+        'export * from \'./components/my-component/my-component\';'
       );
     });
 
@@ -130,7 +146,7 @@ describe('library', () => {
       await libraryGenerator(host, options);
 
       expect(host.read('libs/testlib/src/index.ts').toString('utf-8')).toContain(
-        "export * from './components';"
+        'export * from \'./components\';'
       );
     });
 
@@ -143,7 +159,13 @@ describe('library', () => {
   });
 
   describe('publishable libraries', () => {
-    const options: RawLibrarySchema = { name: 'testlib', buildable: false, publishable: true, importPath: '@myorg/mylib', component: true };
+    const options: RawLibrarySchema = {
+      name: 'testlib',
+      buildable: false,
+      publishable: true,
+      importPath: '@myorg/mylib',
+      component: true
+    };
 
     it('should throw error if publishable without importPath', async () => {
       try {
@@ -173,7 +195,7 @@ describe('library', () => {
       await libraryGenerator(host, options);
 
       expect(host.read('libs/testlib/src/index.ts').toString('utf-8')).toContain(
-        "export * from './components';"
+        'export * from \'./components\';'
       );
     });
 
@@ -193,7 +215,7 @@ describe('library', () => {
     });
 
     it(`shouldn't create spec files if unitTestrunner is 'none'`, async () => {
-      await libraryGenerator(host, {...options, unitTestRunner: 'none'});
+      await libraryGenerator(host, { ...options, unitTestRunner: 'none' });
 
       expect(
         host.exists(`libs/testlib/src/components/my-component/my-component.spec.ts`)

@@ -18,8 +18,7 @@
       "description": "Generate Stencil application",
       "aliases": [
         "app"
-      ],
-      "hidden": false
+      ]
     },
     "ionic-pwa": {
       "factory": "./src/generators/ionic-pwa/generator#ionicPwaSchematic",
@@ -27,8 +26,7 @@
       "description": "Generate Stencil ionic pwa",
       "aliases": [
         "pwa"
-      ],
-      "hidden": false
+      ]
     },
     "library": {
       "factory": "./src/generators/library/generator#librarySchematic",
@@ -37,8 +35,7 @@
       "aliases": [
         "lib",
         "collection"
-      ],
-      "hidden": false
+      ]
     },
     "component": {
       "factory": "./src/generators/component/component#componentSchematic",
@@ -46,14 +43,12 @@
       "description": "Add a component to a ui library",
       "aliases": [
         "c"
-      ],
-      "hidden": false
+      ]
     },
     "add-outputtarget": {
       "factory": "./src/generators/add-outputtarget/add-outputtarget#outputtargetSchematic",
       "schema": "./src/generators/add-outputtarget/schema.json",
-      "description": "Add react/angular libraries for the component library",
-      "hidden": false
+      "description": "Add react/angular libraries for the component library"
     },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableSchematic",
@@ -82,8 +77,7 @@
       "description": "Generate Stencil application",
       "aliases": [
         "app"
-      ],
-      "hidden": false
+      ]
     },
     "ionic-pwa": {
       "factory": "./src/generators/ionic-pwa/generator#ionicPwaGenerator",
@@ -91,8 +85,7 @@
       "description": "Generate Stencil ionic pwa",
       "aliases": [
         "pwa"
-      ],
-      "hidden": false
+      ]
     },
     "library": {
       "factory": "./src/generators/library/generator#libraryGenerator",
@@ -101,8 +94,7 @@
       "aliases": [
         "lib",
         "collection"
-      ],
-      "hidden": false
+      ]
     },
     "component": {
       "factory": "./src/generators/component/component#componentGenerator",
@@ -110,14 +102,12 @@
       "description": "Add a component to a ui library",
       "aliases": [
         "c"
-      ],
-      "hidden": false
+      ]
     },
     "add-outputtarget": {
       "factory": "./src/generators/add-outputtarget/add-outputtarget#outputtargetGenerator",
       "schema": "./src/generators/add-outputtarget/schema.json",
-      "description": "Add react/angular libraries for the component library",
-      "hidden": false
+      "description": "Add react/angular libraries for the component library"
     },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableGenerator",

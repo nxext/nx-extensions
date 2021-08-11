@@ -1,5 +1,19 @@
 import ignore from 'ignore';
 import { Tree } from '@nrwl/devkit';
+import type { Diagnostic } from '@stencil/core/compiler';
+import { SupportedStyles } from '../stencil-core-utils';
+
+export function calculateStyle(
+  style: SupportedStyles | undefined
+): SupportedStyles {
+  const styleDefault = SupportedStyles.css;
+
+  if (style == undefined) {
+    return styleDefault;
+  }
+
+  return /^(css|scss|less|styl|pcss)$/.test(style) ? style : styleDefault;
+}
 
 export function addToGitignore(host: Tree, path: string) {
   if (!host.exists('.gitignore')) {
@@ -45,3 +59,10 @@ export function isBuildableStencilProject(
     target.executor === `@nxext/stencil:build`
   );
 }
+
+export const hasError = (diagnostics: Diagnostic[]): boolean => {
+  if (diagnostics == null || diagnostics.length === 0) {
+    return false;
+  }
+  return diagnostics.some((d) => d.level === 'error' && d.type !== 'runtime');
+};

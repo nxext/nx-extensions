@@ -9,7 +9,7 @@ import {
 } from '@nrwl/devkit';
 import { LibrarySchema, RawLibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
-import { calculateStyle } from '../../utils/utils';
+import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../../generators/init/init';
 import { MakeLibBuildableSchema } from '../../generators/make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';

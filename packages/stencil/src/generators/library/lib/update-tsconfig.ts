@@ -6,7 +6,7 @@ export function updateTsConfig(host: Tree, options: LibrarySchema) {
     const c = json.compilerOptions;
     delete c.paths[`${options.importPath}`];
     c.paths[`${options.importPath}`] = [
-      `dist/${options.projectRoot}`
+      `${options.projectRoot}/src/index.ts`
     ];
     return json;
   });

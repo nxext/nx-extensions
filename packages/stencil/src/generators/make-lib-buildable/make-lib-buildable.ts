@@ -11,7 +11,7 @@ import {
 } from '@nrwl/devkit';
 import { MakeLibBuildableSchema } from './schema';
 import { addStylePluginToConfig } from '../../stencil-core-utils';
-import { addToOutputTargetsInTree } from '../../stencil-core-utils';
+import { addToOutputTargets } from '../../stencil-core-utils';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { join } from 'path';
 import { getBuildTarget, getE2eTarget, getServeTarget } from '../../utils/targets';
@@ -61,7 +61,7 @@ export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuild
     joinPathFragments(options.projectRoot, 'stencil.config.ts'),
     options.style
   );
-  addToOutputTargetsInTree(
+  addToOutputTargets(
     host,
     [
       `{

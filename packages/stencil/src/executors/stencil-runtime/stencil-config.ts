@@ -6,6 +6,7 @@ import { ExecutorContext } from '@nrwl/devkit';
 import { join } from 'path';
 import { normalizePath } from '../../utils/normalize-path';
 import type { Config } from '@stencil/core/compiler';
+import { hasError } from '../../utils/utillities';
 
 function getCompilerExecutingPath(): string {
   return require.resolve('@stencil/core/compiler');
@@ -21,15 +22,12 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   taskCommand: TaskCommand,
   options: T,
   context: ExecutorContext,
-  createStencilCompilerOptions: (
-    taskCommand: TaskCommand,
-    options: T
-  ) => ConfigFlags
+  flags: ConfigFlags,
+  dependencies = []
 ): Promise<{
   pathCollection: PathCollection
   config: Config
 }> {
-  const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const logger: Logger = createNodeLogger({ process });
   const sys: CompilerSystem = createNodeSys({ process });
 
@@ -68,6 +66,20 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   if (loadedConfig.flags.task === 'build') {
     loadedConfig.rootDir = distDir;
     loadedConfig.packageJsonFilePath = normalizePath(join(distDir, 'package.json'));
+  }
+
+  await sys.ensureResources({ rootDir: loadedConfig.rootDir, logger, dependencies: dependencies as any });
+
+  const ensureDepsResults = await sys.ensureDependencies({
+    rootDir: loadedConfig.rootDir,
+    logger,
+    dependencies: dependencies as any,
+  });
+
+  logger.printDiagnostics(ensureDepsResults.diagnostics);
+  if (hasError(ensureDepsResults.diagnostics)) {
+    logger.printDiagnostics(ensureDepsResults.diagnostics);
+    await sys.exit(1);
   }
 
   return {
