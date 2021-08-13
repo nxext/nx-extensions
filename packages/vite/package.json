@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "executors": "./executors.json",
   "dependencies": {
-    "vite": "^2.4.4",
+    "vite": "^2.5.0",
     "@nrwl/devkit": "^12.5.0"
   }
 }
