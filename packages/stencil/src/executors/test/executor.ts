@@ -2,7 +2,7 @@ import { StencilTestOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import { prepareConfigAndOutputargetPaths, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -33,5 +33,13 @@ export default async function runExecutor(
     pathCollection
   );
 
-  return await createStencilProcess(stencilConfig, pathCollection);
+  try {
+    await createStencilProcess(stencilConfig, pathCollection);
+
+    return { success: true };
+  } catch (err) {
+    logger.error(err.message);
+
+    return { success: false, error: err.message };
+  }
 }

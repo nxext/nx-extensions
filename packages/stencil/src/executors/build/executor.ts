@@ -3,7 +3,7 @@ import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import { prepareConfigAndOutputargetPaths, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
 import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
@@ -20,13 +20,13 @@ function createStencilCompilerOptions(
   if (options.port) {
     runOptions.push(`--port ${options.port}`);
   }
-  if(options.docsReadme) {
+  if (options.docsReadme) {
     runOptions.push(`--docs-readme`);
   }
-  if(options.noOpen) {
+  if (options.noOpen) {
     runOptions.push(`--no-open`);
   }
-  if(options.maxWorkers) {
+  if (options.maxWorkers) {
     runOptions.push(`--max-workers ${options.maxWorkers}`);
   }
 
@@ -77,5 +77,13 @@ export default async function runExecutor(
     dependencies
   );
 
-  return await createStencilProcess(stencilConfig, pathCollection);
+  try {
+    await createStencilProcess(stencilConfig, pathCollection);
+
+    return { success: true };
+  } catch (err) {
+    logger.error(err.message);
+
+    return { success: false, error: err.message };
+  }
 }
