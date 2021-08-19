@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "12.1.1",
+  "version": "12.1.2",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -21,7 +21,9 @@
   },
   "main": "src/index.js",
   "schematics": "./generators.json",
+  "generators": "./generators.json",
   "builders": "./executors.json",
+  "executors": "./executors.json",
   "dependencies": {
     "@nrwl/devkit": "^12.5.0",
     "ignore": "^5.1.8",
