@@ -1,20 +1,12 @@
 {
   "migrations": [
     {
-      "version": "12.6.0-beta.0",
+      "version": "12.8.0-beta.11",
       "cli": "nx",
-      "description": "Uses `getJestProjects()` to populate projects array in root level `jest.config.js` file.",
-      "factory": "./src/migrations/update-12-6-0/update-base-jest-config",
-      "package": "@nrwl/jest",
-      "name": "update-jest-config-to-use-util"
-    },
-    {
-      "version": "12.5.9-beta.1",
-      "cli": "nx",
-      "description": "Update Storybook React typings in tsconfig files",
-      "factory": "./src/migrations/update-12-5-9/update-storybook-react-typings",
+      "description": "Adjust Storybook tsconfig to add styled-jsx typings",
+      "factory": "./src/migrations/update-12-8-0/update-storybook-styled-jsx-typings",
       "package": "@nrwl/storybook",
-      "name": "update-12-5-9-beta.1"
+      "name": "update-12-8.0"
     }
   ]
 }
