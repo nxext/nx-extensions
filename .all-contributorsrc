@@ -29,6 +29,15 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "dschwank",
+      "name": "Dominik Schwank",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8232196?v=4",
+      "profile": "https://schwank.cc/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
