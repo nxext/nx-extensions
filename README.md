@@ -51,6 +51,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/gavindoughtie-aon"><img src="https://avatars.githubusercontent.com/u/64151574?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gavin Doughtie</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=gavindoughtie-aon" title="Code">💻</a></td>
     <td align="center"><a href="http://luchsamappar.at/"><img src="https://avatars.githubusercontent.com/u/875017?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marvin Luchs</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=luchsamapparat" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/JoMen6"><img src="https://avatars.githubusercontent.com/u/6680618?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JoMen6</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=JoMen6" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Cammisuli"><img src="https://avatars.githubusercontent.com/u/4332460?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonathan Cammisuli</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=Cammisuli" title="Code">💻</a></td>
   </tr>
 </table>
 
