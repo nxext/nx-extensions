@@ -42,6 +42,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://schwank.cc/"><img src="https://avatars.githubusercontent.com/u/8232196?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dominik Schwank</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=dschwank" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/DiogoVCS"><img src="https://avatars.githubusercontent.com/u/24210544?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Diogo Soares</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=DiogoVCS" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Nico385412"><img src="https://avatars.githubusercontent.com/u/9024389?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nicolas Hansse</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=Nico385412" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/xsintill"><img src="https://avatars.githubusercontent.com/u/5768071?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luc Neville</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=xsintill" title="Code">💻</a></td>
   </tr>
 </table>
 
