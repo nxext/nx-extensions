@@ -101,6 +101,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "luchsamapparat",
+      "name": "Marvin Luchs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/875017?v=4",
+      "profile": "http://luchsamappar.at/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
