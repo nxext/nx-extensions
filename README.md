@@ -37,7 +37,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://www.pertiller.tech/"><img src="https://avatars.githubusercontent.com/u/1514111?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Pertiller</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=Mobiletainment" title="Code">💻</a> <a href="#ideas-Mobiletainment" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://www.pertiller.tech/"><img src="https://avatars.githubusercontent.com/u/1514111?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Pertiller</b></sub></a><br /><a href="#ideas-Mobiletainment" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
