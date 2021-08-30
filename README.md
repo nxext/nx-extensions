@@ -19,7 +19,7 @@ PRs, ideas and discussions accepted.
 
 ## License
 
-MIT © 2020 Dominik Pieper
+MIT © 2020 - 2021 Dominik Pieper
 
 ## Core Team
 <table>
