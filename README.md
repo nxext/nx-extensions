@@ -48,6 +48,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/jonathonadams"><img src="https://avatars.githubusercontent.com/u/24870903?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JA</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=jonathonadams" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/cassshh"><img src="https://avatars.githubusercontent.com/u/10263056?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cas van Dinter</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=cassshh" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/gavindoughtie-aon"><img src="https://avatars.githubusercontent.com/u/64151574?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gavin Doughtie</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=gavindoughtie-aon" title="Code">💻</a></td>
   </tr>
 </table>
 
