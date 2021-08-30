@@ -21,6 +21,13 @@ PRs, ideas and discussions accepted.
 
 MIT © 2020 Dominik Pieper
 
+## Core Team
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/DominikPieper"><img src="https://avatars.githubusercontent.com/u/77470?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dominik Pieper</b></sub></a></td>
+  </tr>
+</table>
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -30,7 +37,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/DominikPieper"><img src="https://avatars.githubusercontent.com/u/77470?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dominik Pieper</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=DominikPieper" title="Code">💻</a> <a href="#ideas-DominikPieper" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://www.pertiller.tech/"><img src="https://avatars.githubusercontent.com/u/1514111?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Pertiller</b></sub></a><br /><a href="https://github.com/Dominik Pieper/nxext/commits?author=Mobiletainment" title="Code">💻</a> <a href="#ideas-Mobiletainment" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
