@@ -65,6 +65,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "hnipps",
+      "name": "Harry Nicholls",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18580004?v=4",
+      "profile": "https://github.com/hnipps",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
