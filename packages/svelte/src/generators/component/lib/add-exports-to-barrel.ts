@@ -27,7 +27,7 @@ export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
       content,
       addExport(
         source,
-        `export { default as default } from '${componentFile}';`
+        `export { default as ${className} } from '${componentFile}';`
       )
     );
     tree.write(indexFilePath, changes);

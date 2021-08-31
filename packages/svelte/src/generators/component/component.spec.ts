@@ -39,7 +39,7 @@ describe('component schematic', () => {
 
     const indexFile = tree.read(`libs/${projectName}/src/index.ts`);
     expect(indexFile.toString('utf-8')).toMatch(
-      `export { default as default } from './components/${name.fileName}/${name.className}.svelte';`
+      `export { default as ${name.className} } from './components/${name.fileName}/${name.className}.svelte';`
     );
   });
 });
