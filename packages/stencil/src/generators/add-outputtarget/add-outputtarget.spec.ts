@@ -8,27 +8,18 @@ describe('schematics:add-outputtarget', () => {
   let tree: Tree;
   const projectName = uniq('testproject');
   const options = { projectName: projectName, publishable: false, skipFormat: false };
-  const reactOptions: AddOutputtargetSchematicSchema = {
-    ...options,
-    unitTestRunner: 'none',
-    outputType: 'react'
-  };
-  const angularOptions: AddOutputtargetSchematicSchema = {
-    ...options,
-    unitTestRunner: 'none',
-    outputType: 'angular'
-  };
-  const vueOptions: AddOutputtargetSchematicSchema = {
-    ...options,
-    unitTestRunner: 'none',
-    outputType: 'vue'
-  };
 
   beforeEach(async () => {
     tree = await createTestUILib(projectName);
   });
 
   describe('using react', () => {
+    const reactOptions: AddOutputtargetSchematicSchema = {
+      ...options,
+      unitTestRunner: 'none',
+      outputType: 'react'
+    };
+
     it('should not generate default react library', async () => {
       await outputtargetGenerator(tree, reactOptions);
 
@@ -74,6 +65,12 @@ describe('schematics:add-outputtarget', () => {
   });
 
   describe('using angular', () => {
+    const angularOptions: AddOutputtargetSchematicSchema = {
+      ...options,
+      unitTestRunner: 'none',
+      outputType: 'angular'
+    };
+
     it('should generate default angular library', async () => {
       await outputtargetGenerator(tree, angularOptions);
 
@@ -109,6 +106,12 @@ describe('schematics:add-outputtarget', () => {
   });
 
   describe('using vue', () => {
+    const vueOptions: AddOutputtargetSchematicSchema = {
+      ...options,
+      unitTestRunner: 'none',
+      outputType: 'vue'
+    };
+
     it('should add vueOutputTarget', async () => {
       await outputtargetGenerator(tree, vueOptions);
 

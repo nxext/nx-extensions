@@ -1,19 +1,20 @@
-import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore } from '../../../utils/utillities';
-import { getDistDir, getRelativePath } from '../../../utils/fileutils';
-import * as ts from 'typescript';
-import { addOutputTarget } from '../../../stencil-core-utils';
-import { AddOutputtargetSchematicSchema } from '../schema';
 import {
   addDependenciesToPackageJson, applyChangesToString,
-  getWorkspaceLayout,
-  joinPathFragments,
+  convertNxGenerator,
+  getWorkspaceLayout, joinPathFragments,
   readProjectConfiguration,
   Tree
 } from '@nrwl/devkit';
+import { AddOutputtargetSchematicSchema } from '../schema';
 import { libraryGenerator } from '@nx-plus/vue';
+import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
+import { addToGitignore } from '../../../utils/utillities';
+import * as ts from 'typescript';
+import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import { addImport } from '../../../utils/ast-utils';
+import { addOutputTarget } from '../../../stencil-core-utils';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
+import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 
 export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
   const vueProjectName = `${options.projectName}-vue`;
@@ -42,7 +43,7 @@ export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSche
   return libraryTarget;
 }
 
-export function addVueOutputtarget(
+function addVueOutputtarget(
   host: Tree,
   projectName: string,
   stencilProjectConfig,
@@ -61,7 +62,7 @@ export function addVueOutputtarget(
     ...addImport(stencilConfigSource, `import { vueOutputTarget, ComponentModelConfig } from '@stencil/vue-output-target';`),
     ...addOutputTarget(
       stencilConfigSource,
-  `
+      `
       vueOutputTarget({
         componentCorePackage: '${packageName}',
         proxiesFile: '${proxyPath}',
@@ -74,3 +75,23 @@ export function addVueOutputtarget(
 
   addGlobal(host, stencilConfigSource, stencilConfigPath, 'const vueComponentModels: ComponentModelConfig[] = [];');
 }
+
+export async function addVueGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
+  const libraryTarget = await prepareVueLibrary(host, options);
+
+  const { stencilProjectConfig, stencilConfigPath, stencilConfigSource, packageName } = calculateStencilSourceOptions(host, options.projectName);
+
+  addVueOutputtarget(
+    host,
+    options.projectName,
+    stencilProjectConfig,
+    stencilConfigPath,
+    stencilConfigSource,
+    packageName
+  );
+
+  return libraryTarget;
+}
+
+export default addVueGenerator;
+export const addVueSchematic = convertNxGenerator(addVueGenerator);

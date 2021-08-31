@@ -1,21 +1,22 @@
-import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore } from '../../../utils/utillities';
-import { getDistDir, getRelativePath } from '../../../utils/fileutils';
-import * as ts from 'typescript';
 import {
-  addDependenciesToPackageJson,
-  applyChangesToString,
+  addDependenciesToPackageJson, applyChangesToString,
+  convertNxGenerator,
   getWorkspaceLayout,
   readProjectConfiguration,
   Tree
 } from '@nrwl/devkit';
+import { AddOutputtargetSchematicSchema } from '../schema';
 import { libraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
-import { addOutputTarget } from '../../../stencil-core-utils';
+import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
+import { addToGitignore } from '../../../utils/utillities';
+import * as ts from 'typescript';
+import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import { addImport } from '../../../utils/ast-utils';
-import { AddOutputtargetSchematicSchema } from '../schema';
+import { addOutputTarget } from '../../../stencil-core-utils';
+import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 
-export async function prepareReactLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
+async function prepareReactLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
   const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
 
@@ -45,7 +46,7 @@ export async function prepareReactLibrary(host: Tree, options: AddOutputtargetSc
   return libraryTarget;
 }
 
-export function addReactOutputtarget(
+function addReactOutputtarget(
   tree: Tree,
   projectName: string,
   stencilProjectConfig,
@@ -75,3 +76,23 @@ export function addReactOutputtarget(
   );
   tree.write(stencilConfigPath, changes);
 }
+
+export async function addReactGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
+  const libraryTarget = await prepareReactLibrary(host, options);
+
+  const { stencilProjectConfig, stencilConfigPath, stencilConfigSource, packageName } = calculateStencilSourceOptions(host, options.projectName);
+
+  addReactOutputtarget(
+    host,
+    options.projectName,
+    stencilProjectConfig,
+    stencilConfigPath,
+    stencilConfigSource,
+    packageName
+  );
+
+  return libraryTarget;
+}
+
+export default addReactGenerator;
+export const addReactSchematic = convertNxGenerator(addReactGenerator);

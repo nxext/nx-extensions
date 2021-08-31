@@ -1,32 +1,29 @@
-import { prepareVueLibrary } from './lib/vue';
-import { prepareReactLibrary } from './lib/react';
-import { prepareAngularLibrary } from './lib/angular';
-import { addToOutputTargetToConfig } from './lib/add-outputtarget-to-config';
 import { convertNxGenerator, formatFiles, logger, readProjectConfiguration, stripIndents, Tree } from '@nrwl/devkit';
 import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import addAngularGenerator from './add-angular/generator';
+import addReactGenerator from './add-react/generator';
+import addVueGenerator from './add-vue/generator';
 
 export async function outputtargetGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
   const projectConfig = readProjectConfiguration(host, options.projectName);
   const tasks = [];
 
-  if(isBuildableStencilProject(projectConfig)) {
-    if(options.outputType === 'react') {
-      tasks.push(await prepareReactLibrary(host, options));
+  if (isBuildableStencilProject(projectConfig)) {
+    if (options.outputType === 'angular') {
+      tasks.push(await addAngularGenerator(host, options));
     }
 
-    if(options.outputType === 'angular') {
-      tasks.push(await prepareAngularLibrary(host, options));
+    if (options.outputType === 'react') {
+      tasks.push(await addReactGenerator(host, options));
     }
 
-    if(options.outputType === 'vue') {
-      await prepareVueLibrary(host, options);
+    if (options.outputType === 'vue') {
+      tasks.push(await addVueGenerator(host, options));
     }
 
-    await addToOutputTargetToConfig(host, options.projectName, options.outputType);
-
-    if(!options.skipFormat) {
+    if (!options.skipFormat) {
       await formatFiles(host);
     }
   } else {

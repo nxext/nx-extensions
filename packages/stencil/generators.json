@@ -50,6 +50,21 @@
       "schema": "./src/generators/add-outputtarget/schema.json",
       "description": "Add react/angular libraries for the component library"
     },
+    "add-outputtarget/add-angular": {
+      "factory": "./src/generators/add-outputtarget/add-angular/generator#addAngularSchematic",
+      "schema": "./src/generators/add-outputtarget/schema.json",
+      "hidden": true
+    },
+    "add-outputtarget/add-react": {
+      "factory": "./src/generators/add-outputtarget/add-react/generator#addReactSchematic",
+      "schema": "./src/generators/add-outputtarget/schema.json",
+      "hidden": true
+    },
+    "add-outputtarget/add-vue": {
+      "factory": "./src/generators/add-outputtarget/add-vue/generator#addVueSchematic",
+      "schema": "./src/generators/add-outputtarget/schema.json",
+      "hidden": true
+    },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableSchematic",
       "schema": "./src/generators/make-lib-buildable/schema.json",
@@ -108,6 +123,21 @@
       "factory": "./src/generators/add-outputtarget/add-outputtarget#outputtargetGenerator",
       "schema": "./src/generators/add-outputtarget/schema.json",
       "description": "Add react/angular libraries for the component library"
+    },
+    "add-outputtarget/add-angular": {
+      "factory": "./src/generators/add-outputtarget/add-angular/generator#addAngularGenerator",
+      "schema": "./src/generators/add-outputtarget/schema.json",
+      "hidden": true
+    },
+    "add-outputtarget/add-react": {
+      "factory": "./src/generators/add-outputtarget/add-react/generator#addReactGenerator",
+      "schema": "./src/generators/add-outputtarget/schema.json",
+      "hidden": true
+    },
+    "add-outputtarget/add-vue": {
+      "factory": "./src/generators/add-outputtarget/add-vue/generator#addVueGenerator",
+      "schema": "./src/generators/add-outputtarget/schema.json",
+      "hidden": true
     },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableGenerator",
