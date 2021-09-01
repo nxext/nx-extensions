@@ -1,16 +1,13 @@
 import { appRootPath } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import { copySync, removeSync } from 'fs-extra';
-import { getPublishableLibNames } from './utils';
 
-console.log('\nUpdating local plugins...');
+console.log('\nUpdating local stencil plugin...');
 
-const publishableLibNames = getPublishableLibNames();
-
-execSync(`yarn nx run-many --target build --projects ${publishableLibNames}`);
+execSync(`yarn nx build stencil`);
 
 removeSync(`${appRootPath}/node_modules/@nxext`);
 
-copySync(`${appRootPath}/dist/packages`, `${appRootPath}/node_modules/@nxext`);
+copySync(`${appRootPath}/dist/packages/stencil`, `${appRootPath}/node_modules/@nxext/stencil`);
 
 console.log('\nUpdate complete.');
