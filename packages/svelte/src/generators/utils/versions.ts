@@ -1,1 +1,1 @@
-export const eslintPluginSvelteVersion = '^3.1.2';
+export const eslintPluginSvelteVersion = '^3.2.1';

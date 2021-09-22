@@ -30,11 +30,11 @@
   },
   "dependencies": {
     "@nxext/vite": "12.0.1",
-    "@nrwl/devkit": "^12.5.0",
+    "@nrwl/devkit": "^12.9.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.2.3",
-    "rollup": "^2.56.3",
+    "rollup": "^2.57.0",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-css-only": "^3.0.0",
