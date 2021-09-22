@@ -12,11 +12,11 @@ export function prepareE2eTesting(pathCollection: PathCollection) {
     main: `${relative(
       pathCollection.projectRoot,
       pathCollection.distDir
-    )}/dist/index.js`,
+    )}/dist/index.cjs.js`,
     module: `${relative(
       pathCollection.projectRoot,
       pathCollection.distDir
-    )}/dist/index.mjs`,
+    )}/dist/index.js`,
     es2015: `${relative(
       pathCollection.projectRoot,
       pathCollection.distDir

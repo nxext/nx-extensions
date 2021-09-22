@@ -5,7 +5,7 @@ import { PathCollection } from './types';
 import {
   createDirectory,
   fileExists,
-  writeJsonFile,
+  writeJsonFile
 } from '@nrwl/workspace/src/utilities/fileutils';
 import { joinPathFragments } from '@nrwl/devkit';
 import { existsSync } from 'fs';
@@ -23,7 +23,7 @@ function copyOrCreatePackageJson(pathCollection: PathCollection) {
     collection: './dist/collection/collection-manifest.json',
     'collection:main': './dist/collection/index.js',
     unpkg: `./dist/${pathCollection.projectName}/${pathCollection.projectName}.js`,
-    files: ['dist/', 'loader/'],
+    files: ['dist/', 'loader/']
   };
 
   if (fileExists(pathCollection.pkgJson)) {
@@ -63,7 +63,7 @@ function calculateOutputTargetPathVariables(
         const origPath = outputTarget[pathVar];
 
         outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(pathCollection.projectRoot, pathCollection.distDir),
+          [pathVar]: origPath.replace(pathCollection.projectRoot, pathCollection.distDir)
         });
       }
     });
@@ -108,7 +108,7 @@ export async function prepareConfigAndOutputargetPaths(
     'cjsDir',
     'cjsIndexFile',
     'esmIndexFile',
-    'componentDts',
+    'componentDts'
   ];
   const outputTargets: OutputTarget[] = calculateOutputTargetPathVariables(
     config,
@@ -121,7 +121,7 @@ export async function prepareConfigAndOutputargetPaths(
       root: config.devServer.root.replace(
         pathCollection.projectRoot,
         pathCollection.distDir
-      ),
+      )
     }
   );
 
@@ -130,6 +130,12 @@ export async function prepareConfigAndOutputargetPaths(
       config.packageJsonFilePath.replace(
         pathCollection.projectRoot,
         pathCollection.distDir
+      );
+  } else {
+    config.packageJsonFilePath =
+      config.packageJsonFilePath.replace(
+        'package.json',
+        'package.e2e.json'
       );
   }
 
