@@ -22,7 +22,7 @@ export class <%= className %> {
   @Prop() last: string;
 
   private getText(): string {
-    return `${this.first} ${this.middle} ${this.last}`;
+    return (this.first || '') + (this.middle ? ` ${this.middle}` : '') + (this.last ? ` ${this.last}` : '');
   }
 
   render() {

@@ -4,7 +4,7 @@ import { addDependenciesToPackageJson, GeneratorCallback, Tree } from '@nrwl/dev
 export function addE2eTestDependencies(
   tree: Tree
 ): GeneratorCallback[] {
-  const testDependencies = PROJECT_TYPE_DEPENDENCIES['e2e'];
+  const testDependencies = PROJECT_TYPE_DEPENDENCIES['puppeteer'];
   const tasks: GeneratorCallback[] = [];
 
   if (testDependencies) {
