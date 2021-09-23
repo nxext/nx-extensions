@@ -26,7 +26,8 @@
     "svelte": "^3.42.1",
     "svelte-preprocess": "^4.4.2",
     "@nrwl/workspace": "^12.0.0",
-    "@nrwl/cypress": "^12.0.0"
+    "@nrwl/cypress": "^12.0.0",
+    "@nrwl/linter": "^12.0.0"
   },
   "dependencies": {
     "@nxext/vite": "12.0.1",
@@ -42,10 +43,7 @@
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "@rollup/plugin-image": "^2.1.1",
-    "rollup-plugin-local-resolve": "^1.0.7",
-    "@angular-devkit/core": "^12.0.0",
-    "@angular-devkit/schematics": "^12.0.0",
-    "@angular-devkit/architect": "^0.1200.2"
+    "rollup-plugin-local-resolve": "^1.0.7"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"

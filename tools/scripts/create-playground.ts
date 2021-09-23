@@ -1,4 +1,5 @@
 import { readWorkspaceJson } from '@nrwl/workspace';
+// @ts-ignore
 import { appRootPath } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import {
@@ -15,7 +16,7 @@ console.log('\nCreating playground. This may take a few minutes.');
 const workspaceJson = readWorkspaceJson();
 const publishableLibNames = getPublishableLibNames(workspaceJson);
 
-execSync(`yarn nx run-many --target build --projects ${publishableLibNames}`);
+execSync(`npx nx run-many --target build --projects ${publishableLibNames}`);
 
 ensureDirSync(tmpProjPath());
 
