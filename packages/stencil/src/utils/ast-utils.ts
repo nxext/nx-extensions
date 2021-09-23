@@ -1,27 +1,6 @@
-import {
-  SchematicsException,
-  Tree as OldTree
-} from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import { ChangeType, StringChange, Tree } from '@nrwl/devkit';
 import { findNodes } from '@nrwl/workspace/src/utils/ast-utils';
-
-export function readTsSourceFileFromTree(
-  host: OldTree,
-  path: string
-): ts.SourceFile {
-  const contentBuffer = host.read(path);
-  if (!contentBuffer) {
-    throw new SchematicsException(`Typescript file not readable (${path}).`);
-  }
-
-  return ts.createSourceFile(
-    path,
-    contentBuffer.toString(),
-    ts.ScriptTarget.Latest,
-    true
-  );
-}
 
 export function readTsSourceFile(host: Tree, path: string): ts.SourceFile {
   if (!host.exists(path)) {

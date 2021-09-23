@@ -1,3 +1,4 @@
+// @ts-ignore
 import { appRootPath } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import { copySync, removeSync } from 'fs-extra';

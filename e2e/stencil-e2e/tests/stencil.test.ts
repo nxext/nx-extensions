@@ -5,7 +5,6 @@ import {
   runNxCommandAsync,
   uniq
 } from '@nrwl/nx-plugin/testing';
-import { normalize } from '@angular-devkit/core';
 
 describe('e2e', () => {
   beforeAll(() => {
@@ -153,8 +152,8 @@ describe('e2e', () => {
       expect(result.stdout).toContain('build finished');
       expect(() => {
         checkFilesExist(
-          normalize(`dist/apps/${plugin}/www/index.html`),
-          normalize(`dist/apps/${plugin}/www/host.config.json`)
+          `dist/apps/${plugin}/www/index.html`,
+          `dist/apps/${plugin}/www/host.config.json`
         );
       }).not.toThrow();
     });
