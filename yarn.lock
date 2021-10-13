@@ -10530,7 +10530,7 @@ mime@1.6.0, mime@^1.4.1, mime@^1.6.0:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-mime@>=2.4.6, mime@^2.3.1, mime@^2.4.4:
+mime@>=2.0.3, mime@^2.3.1, mime@^2.4.4:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.5.2.tgz#6e3dc6cc2b9510643830e5f19d5cb753da5eeabe"
   integrity sha512-tqkh47FzKeCPD2PUiPB6pkbMzsCasjxAfC62/Wap5qrUWcb+sFasXUC5I3gYM5iBM8v/Qpn4UK0x+j0iHyFPDg==
@@ -13348,12 +13348,12 @@ rollup-plugin-postcss@^4.0.1:
     safe-identifier "^0.4.2"
     style-inject "^0.3.0"
 
-rollup-plugin-serve@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-serve/-/rollup-plugin-serve-1.1.0.tgz#0654a57021a21b903340c69940f7463706e8288d"
-  integrity sha512-pYkSsuA0/psKqhhictkJw1c2klya5b+LlCvipWqI9OE1aG2M97mRumZCbBlry5CMEOzYBBgSDgd1694sNbmyIw==
+rollup-plugin-serve-proxy@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-serve-proxy/-/rollup-plugin-serve-proxy-1.1.4.tgz#3918987305d7176c1daa5fef2cacbd78663c12c7"
+  integrity sha512-C3/1O/ZuD83/Y5pTM6lIOHCVmglbM2Ndw6E0W7u9pixKNftLN08n390rPCvrmT+oSzmvhK927/GSWJp2DclUGg==
   dependencies:
-    mime ">=2.4.6"
+    mime ">=2.0.3"
     opener "1"
 
 rollup-plugin-svelte@^7.1.0:
@@ -13392,10 +13392,17 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.38.5, rollup@^2.56.2, rollup@^2.57.0:
+rollup@^2.38.5, rollup@^2.56.2:
   version "2.57.0"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.57.0.tgz#c1694475eb22e1022477c0f4635fd0ac80713173"
   integrity sha512-bKQIh1rWKofRee6mv8SrF2HdP6pea5QkwBZSMImJysFj39gQuiV8MEPBjXOCpzk3wSYp63M2v2wkWBmFC8O/rg==
+  optionalDependencies:
+    fsevents "~2.3.2"
+
+rollup@^2.58.0:
+  version "2.58.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.58.0.tgz#a643983365e7bf7f5b7c62a8331b983b7c4c67fb"
+  integrity sha512-NOXpusKnaRpbS7ZVSzcEXqxcLDOagN6iFS8p45RkoiMqPHDLwJm758UF05KlMoCRbLBTZsPOIa887gZJ1AiXvw==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -14521,10 +14528,10 @@ svelte-hmr@^0.14.7:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.7.tgz#7fa8261c7b225d9409f0a86f3b9ea5c3ca6f6607"
   integrity sha512-pDrzgcWSoMaK6AJkBWkmgIsecW0GChxYZSZieIYfCP0v2oPyx2CYU/zm7TBIcjLVUPP714WxmViE9Thht4etog==
 
-svelte-preprocess@^4.9.5:
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.9.5.tgz#e11bdf3fcdacbd90188cdf29a7371030991f9eba"
-  integrity sha512-RbJbtuwKbuZq9RyzlljZUmmFNaojrg/zUEyDrS8io7haTcuITQmE4NERx8qiqHreApo6cQst5Qtp4MxUwr58Ew==
+svelte-preprocess@^4.9.8:
+  version "4.9.8"
+  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-4.9.8.tgz#fd40afebfb352f469beab289667485ebf0d811da"
+  integrity sha512-EQS/oRZzMtYdAprppZxY3HcysKh11w54MgA63ybtL+TAZ4hVqYOnhw41JVJjWN9dhPnNjjLzvbZ2tMhTsla1Og==
   dependencies:
     "@types/pug" "^2.0.4"
     "@types/sass" "^1.16.0"
@@ -14533,10 +14540,10 @@ svelte-preprocess@^4.9.5:
     sorcery "^0.10.0"
     strip-indent "^3.0.0"
 
-svelte@^3.42.6:
-  version "3.43.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.43.0.tgz#d28d06ec523bf0cea3de15558a3241c339a85762"
-  integrity sha512-T2pMPHrxXp+SM8pLLUXLQgkdo+JhTls7aqj9cD7z8wT2ccP+OrCAmtQS7h6pvMjitaZhXFNnCK582NxDpy8HSw==
+svelte@^3.43.2:
+  version "3.43.2"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.43.2.tgz#217fc6059f52afa281f39200b6253ac1b83812b4"
+  integrity sha512-Lj+TJfSeod8UGnoG2opysdlCy4MCck/hHQsZwtNPXdYTwLTz+WC37QwewPhZtd+h3dpfps4h9QzFxWGVI4tzQw==
 
 svg-parser@^2.0.2:
   version "2.0.4"

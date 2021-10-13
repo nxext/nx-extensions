@@ -25,7 +25,8 @@ describe('Command Runner Builder', () => {
       project: 'example',
       tsConfig: 'libs/ui/tsconfig.json',
       watch: false,
-      headers: []
+      headers: [],
+      proxy: null
     };
   });
 

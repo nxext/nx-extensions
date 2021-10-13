@@ -30,14 +30,14 @@
     "@nrwl/linter": "^12.0.0"
   },
   "dependencies": {
-    "@nxext/vite": "12.0.1",
+    "@nxext/vite": "12.0.2",
     "@nrwl/devkit": "^12.9.0",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.2.3",
-    "rollup": "^2.57.0",
+    "rollup": "^2.58.0",
     "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-serve-proxy": "^1.1.4",
     "rollup-plugin-css-only": "^3.0.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-svelte": "^7.0.0",
