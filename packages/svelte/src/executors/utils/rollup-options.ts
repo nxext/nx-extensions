@@ -14,7 +14,7 @@ const sveltePreprocess = require('svelte-preprocess');
 const svelte = require('rollup-plugin-svelte');
 const copy = require('rollup-plugin-copy');
 const image = require('@rollup/plugin-image');
-const serve = require('rollup-plugin-serve');
+const serve = require('rollup-plugin-serve-proxy');
 const livereload = require('rollup-plugin-livereload');
 const { terser } = require('rollup-plugin-terser');
 const css = require('rollup-plugin-css-only');
@@ -110,7 +110,8 @@ export function createRollupOptions(
       host: options.host,
       port: options.port,
       historyApiFallback: true,
-      headers: {}
+      headers: {},
+      proxy: options.proxy
     };
 
     if(options.headers.length != 0) {

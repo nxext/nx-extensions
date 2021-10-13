@@ -85,6 +85,15 @@
           }
         },
         "default": []
+      },
+      "proxy": {
+        "type": "object",
+        "properties": {
+          "api": {
+            "type": "string",
+            "description": "URL for the API resource"
+          }
+        }
       }
     }
   },

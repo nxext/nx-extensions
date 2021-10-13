@@ -96,16 +96,16 @@
     "lint-staged": "11.1.2",
     "prettier": "2.4.1",
     "pretty-quick": "^3.1.1",
-    "rollup": "^2.57.0",
+    "rollup": "^2.58.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-local-resolve": "^1.0.7",
-    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-serve-proxy": "^1.1.4",
     "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^7.0.2",
-    "svelte": "^3.42.6",
-    "svelte-preprocess": "^4.9.5",
+    "svelte": "^3.43.2",
+    "svelte-preprocess": "^4.9.8",
     "ts-jest": "27.0.5",
     "ts-node": "^10.2.1",
     "tslib": "2.1.0",
@@ -133,4 +133,3 @@
     }
   }
 }
-

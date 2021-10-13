@@ -1,5 +1,9 @@
 import { NormalizedCopyAssetOption } from '../utils/normalize';
 
+export interface ProxyOptions {
+  api: string
+}
+
 export interface RawSvelteBuildOptions {
   outputPath: string;
   tsConfig: string;
@@ -21,9 +25,8 @@ export interface RawSvelteBuildOptions {
   project: string;
   extractCss?: boolean;
   headers: HeaderParam[];
+  proxy: ProxyOptions
 }
-
-export type Header = {[key: string]: string};
 
 export interface SvelteBuildOptions extends RawSvelteBuildOptions {
   assets: NormalizedCopyAssetOption[];
