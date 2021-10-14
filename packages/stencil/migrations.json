@@ -84,6 +84,15 @@
           "alwaysAddToPackageJson": false
         }
       }
+    },
+    "12.2.0": {
+      "version": "12.2.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "^2.9.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
     }
   }
 }
