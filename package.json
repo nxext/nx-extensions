@@ -75,7 +75,7 @@
     "@rollup/plugin-image": "^2.1.1",
     "@rollup/plugin-node-resolve": "11.1.1",
     "@rollup/plugin-typescript": "^8.2.5",
-    "@stencil/core": "2.6.0",
+    "@stencil/core": "2.9.0",
     "@sveltejs/kit": "^1.0.0-next.55",
     "@types/jest": "27.0.2",
     "@types/node": "14.14.37",
