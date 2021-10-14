@@ -2701,10 +2701,10 @@
     url "^0.11.0"
     webpack-sources "^1.4.3"
 
-"@stencil/core@2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.6.0.tgz#29da96d8b6fc83e689b9f297ef3e8b59b90a676a"
-  integrity sha512-QsxWayZyusnqSZrlCl81R71rA3KqFjVVQSH4E0rGN15F1GdQaFonKlHLyCOLKLig1zzC+DQkLLiUuocexuvdeQ==
+"@stencil/core@2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.9.0.tgz#cbac84b996475b8fc983931539ed1261174e2df3"
+  integrity sha512-kY3xYolZoJO1MKslL0NQccHy72R3TIl1prHgfmIrEoGcnMgc6uiskdWaGMuI5/sCGz9T+QuTVz76B1H2ySyBZg==
 
 "@storybook/node-logger@6.1.20":
   version "6.1.20"
