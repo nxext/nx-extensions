@@ -3,6 +3,7 @@
   "title": "Build builder",
   "description": "",
   "type": "object",
+  "cli": "nx",
   "properties": {
     "project": {
       "type": "string",
