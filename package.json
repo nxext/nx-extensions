@@ -121,11 +121,17 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn format:check"
     }
   },
   "lint-staged": {
-    "*.{ts,js,tsx,jsx,scss,less,css,html,json,md,mdx}": "prettier --write"
+    "nx.json": [
+      "yarn format --uncommitted"
+    ],
+    "*.{js,json,css,scss,md,ts,html,graphql}": [
+      "yarn format --uncommitted"
+    ]
   },
   "config": {
     "commitizen": {
