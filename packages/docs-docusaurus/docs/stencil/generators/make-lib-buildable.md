@@ -3,7 +3,7 @@ id: make-lib-buildable
 title: Make lib buildable
 ---
 
-Adds build and e2e builders to a not yet buildable library:
+Adds build and e2e executors to a not yet buildable library:
 
 ## Usage
 

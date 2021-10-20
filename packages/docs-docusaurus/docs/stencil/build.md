@@ -27,7 +27,7 @@ Supported flags are:
 | --configPath | string | "libs/**_projectname_**/stencil.config.ts" or "apps/**_projectname_**/stencil.config.ts" | relative from workspace root |
 
 You can define the path for the stencil.config.ts file like this:
-The configPath is set in the workspace.json/angular.json for each builder. The default used path can be change there.
+The configPath is set in the workspace.json/angular.json for each executor. The default used path can be change there.
 
 Support for tests. For unit tests run:
 
