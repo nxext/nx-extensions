@@ -1,10 +1,10 @@
 import { of } from 'rxjs';
 import { catchError, concatMap, switchMap, tap } from 'rxjs/operators';
 import { RawSvelteBuildOptions } from './schema';
-import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
+import { createProjectGraphAsync } from '@nrwl/workspace/src/core/project-graph';
 import {
   calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt
+  checkDependentProjectsHaveBeenBuilt,
 } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
 import { runRollup } from '../utils/run-rollup';
 import { runRollupWatch } from '../utils/run-rollup-watch';
@@ -18,7 +18,7 @@ export default async function runExecutor(
 ) {
   const project = context.workspace.projects[context.projectName];
   const sourceRoot = project.sourceRoot;
-  const projGraph = createProjectGraph();
+  const projGraph = await createProjectGraphAsync();
   const { dependencies } = calculateProjectDependencies(
     projGraph,
     context.root,
@@ -43,9 +43,13 @@ export default async function runExecutor(
     sourceRoot
   );
 
-  const svelteConfig = options?.svelteConfig ? require(options.svelteConfig): null;
+  const svelteConfig = options?.svelteConfig
+    ? require(options.svelteConfig)
+    : null;
   const initOptions = { ...options, dependencies };
-  return of(createRollupOptions(initOptions, dependencies, context, svelteConfig))
+  return of(
+    createRollupOptions(initOptions, dependencies, context, svelteConfig)
+  )
     .pipe(
       switchMap((rollupOptions) => {
         if (options.watch) {

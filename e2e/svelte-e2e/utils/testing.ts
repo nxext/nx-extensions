@@ -1,9 +1,9 @@
 import {
+  ensureNxProject,
   patchPackageJsonForPlugin,
   runPackageManagerInstall,
-  tmpProjPath,
+  tmpProjPath
 } from '@nrwl/nx-plugin/testing';
-import { ensureDirSync, removeSync } from 'fs-extra';
 import { execSync } from 'child_process';
 import { dirname } from 'path';
 
@@ -12,14 +12,10 @@ export function ensureNxProjectWithDeps(
   pluginDistPath?: string,
   optionalNpmPackages?: [npmPackageName: string, pluginDistPath: string][]
 ): void {
-  ensureDirSync(tmpProjPath());
-
-  removeSync(tmpProjPath());
-  runNxNewCommand('', true);
+  ensureNxProject(npmPackageName, pluginDistPath);
   optionalNpmPackages.forEach(([npmPackageName, pluginDistPath]) =>
     patchPackageJsonForPlugin(npmPackageName, pluginDistPath)
   );
-  patchPackageJsonForPlugin(npmPackageName, pluginDistPath);
   runPackageManagerInstall();
 }
 

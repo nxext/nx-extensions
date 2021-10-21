@@ -15,7 +15,7 @@ describe('library', () => {
     publishable: false,
     component: true,
     e2eTestRunner: 'none',
-    importPath: '@e2e/test'
+    importPath: '@e2e/test',
   };
 
   beforeEach(() => {
@@ -25,8 +25,8 @@ describe('library', () => {
   it('should add tags to nx.json', async () => {
     await libraryGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
 
-    const nxJson = readJson(host, 'nx.json');
-    expect(nxJson.projects[options.name].tags).toEqual(['e2etag', 'e2ePackage']);
+    const projectConfig = readProjectConfiguration(host, options.name);
+    expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
 
   it('should create files', async () => {
@@ -44,16 +44,22 @@ describe('library', () => {
     await libraryGenerator(host, { ...options });
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
-    expect(
-      tsConfig.compilerOptions.paths['@e2e/test']
-    ).toEqual([`libs/test/src/index.ts`]);
+    expect(tsConfig.compilerOptions.paths['@e2e/test']).toEqual([
+      `libs/test/src/index.ts`,
+    ]);
   });
 
   it(`shouldn't create default component if component=false`, async () => {
     await libraryGenerator(host, { ...options, component: false });
 
-    expect(host.exists(`libs/${options.name}/src/components/my-component`)).toBeFalsy();
-    expect(host.exists(`libs/${options.name}/src/components/my-component/my-component.tsx`)).toBeFalsy();
+    expect(
+      host.exists(`libs/${options.name}/src/components/my-component`)
+    ).toBeFalsy();
+    expect(
+      host.exists(
+        `libs/${options.name}/src/components/my-component/my-component.tsx`
+      )
+    ).toBeFalsy();
   });
 
   it('should create files in specified dir', async () => {
@@ -77,7 +83,10 @@ describe('library', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to lib`, async () => {
-      await libraryGenerator(host, { ...options, style: SupportedStyles[style] });
+      await libraryGenerator(host, {
+        ...options,
+        style: SupportedStyles[style],
+      });
       const packageJson = readJson(host, 'package.json');
       expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
 
@@ -90,19 +99,26 @@ describe('library', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
-      await libraryGenerator(host, { ...options, style: SupportedStyles[style] });
+      await libraryGenerator(host, {
+        ...options,
+        style: SupportedStyles[style],
+      });
 
       const projectConfig = readProjectConfiguration(host, options.name);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
-          style: style
-        }
+          style: style,
+        },
       });
     });
   });
 
   describe('default libraries', () => {
-    const options: RawLibrarySchema = { name: 'testlib', buildable: false, publishable: false };
+    const options: RawLibrarySchema = {
+      name: 'testlib',
+      buildable: false,
+      publishable: false,
+    };
 
     it('shouldnt create build targets if not buildable', async () => {
       await libraryGenerator(host, options);
@@ -116,9 +132,9 @@ describe('library', () => {
     it('should export component', async () => {
       await libraryGenerator(host, options);
 
-      expect(host.read('libs/testlib/src/components.d.ts').toString('utf-8')).toContain(
-        'export * from \'./components/my-component/my-component\';'
-      );
+      expect(
+        host.read('libs/testlib/src/components.d.ts').toString('utf-8')
+      ).toContain("export * from './components/my-component/my-component';");
     });
 
     it('shouldnt create build files', async () => {
@@ -131,7 +147,12 @@ describe('library', () => {
   });
 
   describe('buildable libraries', () => {
-    const options: RawLibrarySchema = { name: 'testlib', buildable: true, publishable: false, component: true };
+    const options: RawLibrarySchema = {
+      name: 'testlib',
+      buildable: true,
+      publishable: false,
+      component: true,
+    };
 
     it('should create build targets', async () => {
       await libraryGenerator(host, options);
@@ -145,9 +166,9 @@ describe('library', () => {
     it('should export bundle', async () => {
       await libraryGenerator(host, options);
 
-      expect(host.read('libs/testlib/src/index.ts').toString('utf-8')).toContain(
-        'export * from \'./components\';'
-      );
+      expect(
+        host.read('libs/testlib/src/index.ts').toString('utf-8')
+      ).toContain("export * from './components';");
     });
 
     it('should create build files', async () => {
@@ -164,7 +185,7 @@ describe('library', () => {
       buildable: false,
       publishable: true,
       importPath: '@myorg/mylib',
-      component: true
+      component: true,
     };
 
     it('should throw error if publishable without importPath', async () => {
@@ -173,7 +194,7 @@ describe('library', () => {
           name: options.name,
           component: true,
           buildable: false,
-          publishable: true
+          publishable: true,
         });
       } catch (error) {
         expect(error.message).toContain(
@@ -194,9 +215,9 @@ describe('library', () => {
     it('should export bundle', async () => {
       await libraryGenerator(host, options);
 
-      expect(host.read('libs/testlib/src/index.ts').toString('utf-8')).toContain(
-        'export * from \'./components\';'
-      );
+      expect(
+        host.read('libs/testlib/src/index.ts').toString('utf-8')
+      ).toContain("export * from './components';");
     });
 
     it('should create build files', async () => {
@@ -218,7 +239,9 @@ describe('library', () => {
       await libraryGenerator(host, { ...options, unitTestRunner: 'none' });
 
       expect(
-        host.exists(`libs/testlib/src/components/my-component/my-component.spec.ts`)
+        host.exists(
+          `libs/testlib/src/components/my-component/my-component.spec.ts`
+        )
       ).toBeFalsy();
     });
   });

@@ -3,7 +3,7 @@ import executor from './executor';
 import { ExecutorContext } from '@nrwl/devkit';
 
 const options: SveltekitExecutorOptions = {
-  command: 'build'
+  command: 'build',
 };
 
 describe('Sveltekit Executor', () => {
@@ -16,11 +16,12 @@ describe('Sveltekit Executor', () => {
       cwd: '/root',
       workspace: {
         version: 2,
+        npmScope: 'proj',
         projects: {
           [projectName]: {
-            root: "/",
-            targets: {}
-          }
+            root: '/',
+            targets: {},
+          },
         },
       },
       isVerbose: false,

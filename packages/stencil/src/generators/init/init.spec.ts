@@ -1,47 +1,47 @@
 import { AppType } from '../../utils/typings';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, readWorkspaceConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { initGenerator } from './init';
 
 describe('init', () => {
-  let tree: Tree;
+  let host: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace();
   });
 
   it('should add stencil dependencies', async () => {
-    await initGenerator(tree, { name: 'test', appType: AppType.library });
-    const packageJson = readJson(tree, 'package.json');
+    await initGenerator(host, { name: 'test', appType: AppType.library });
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
   });
 
   it('should add jest 26 dependencies', async () => {
-    await initGenerator(tree, { name: 'test', appType: AppType.library });
-    const packageJson = readJson(tree, 'package.json');
+    await initGenerator(host, { name: 'test', appType: AppType.library });
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['jest']).toEqual('26.6.3');
     expect(packageJson.devDependencies['ts-jest']).toEqual('26.5.6');
   });
 
   it('should add stencil app dependencies', async () => {
-    await initGenerator(tree, { name: 'test', appType: AppType.application });
-    const packageJson = readJson(tree, 'package.json');
+    await initGenerator(host, { name: 'test', appType: AppType.application });
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@stencil/router']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
 
   it('should add stencil pwa dependencies', async () => {
-    await initGenerator(tree, { name: 'test', appType: AppType.pwa });
-    const packageJson = readJson(tree, 'package.json');
+    await initGenerator(host, { name: 'test', appType: AppType.pwa });
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
   });
 
   describe('defaultCollection', () => {
     it('should be set if none was set before', async () => {
-      await initGenerator(tree, { name: 'test', appType: AppType.application });
-      const workspaceJson = readJson(tree, 'workspace.json');
+      await initGenerator(host, { name: 'test', appType: AppType.application });
+      const workspaceJson = readWorkspaceConfiguration(host);
       expect(workspaceJson.cli.defaultCollection).toEqual('@nxext/stencil');
     });
   });
