@@ -4,7 +4,6 @@ import {
   addProjectConfiguration,
   getWorkspaceLayout,
   joinPathFragments,
-  NxJsonProjectConfiguration,
   TargetConfiguration,
   Tree,
 } from '@nrwl/devkit';
@@ -19,15 +18,11 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
     targets.build = createBuildTarget(tree, options);
   }
 
-  const nxConfig: NxJsonProjectConfiguration = {
-    tags: options.parsedTags,
-  };
-
   addProjectConfiguration(tree, options.name, {
     root: options.projectRoot,
     sourceRoot: `${options.projectRoot}/src`,
     projectType: ProjectType.Library,
-    ...nxConfig,
+    tags: options.parsedTags,
     targets,
   });
 }

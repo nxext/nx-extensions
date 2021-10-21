@@ -14,11 +14,12 @@ describe('Dev Executor', () => {
       cwd: '/root',
       workspace: {
         version: 2,
+        npmScope: 'proj',
         projects: {
           [projectName]: {
-            root: "/",
-            targets: {}
-          }
+            root: '/',
+            targets: {},
+          },
         },
       },
       isVerbose: false,

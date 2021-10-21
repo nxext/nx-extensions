@@ -9,12 +9,9 @@ describe('Command Runner Builder', () => {
 
   beforeEach(async () => {
     context = {
+      workspace: undefined,
       root: '/root',
       cwd: '/root',
-      workspace: {
-        version: 2,
-        projects: {},
-      },
       isVerbose: false,
       projectName: 'example',
       targetName: 'build',
@@ -26,7 +23,7 @@ describe('Command Runner Builder', () => {
       tsConfig: 'libs/ui/tsconfig.json',
       watch: false,
       headers: [],
-      proxy: null
+      proxy: null,
     };
   });
 

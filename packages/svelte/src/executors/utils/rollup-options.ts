@@ -1,11 +1,13 @@
 import { SvelteBuildOptions } from '../build/schema';
-import { DependentBuildableProjectNode } from '@nrwl/workspace/src/utils/buildable-libs-utils';
 import * as rollup from 'rollup';
 import resolve from '@rollup/plugin-node-resolve';
 import * as localResolve from 'rollup-plugin-local-resolve';
 import * as path from 'path';
 import { convertCopyAssetsToRollupOptions } from './normalize-assets';
-import { computeCompilerOptionsPaths } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
+import {
+  computeCompilerOptionsPaths,
+  DependentBuildableProjectNode,
+} from '@nrwl/workspace/src/utilities/buildable-libs-utils';
 import { ExecutorContext, names } from '@nrwl/devkit';
 
 /* eslint-disable */
@@ -31,7 +33,7 @@ interface OutputConfig {
 
 const outputConfigs: OutputConfig[] = [
   { format: 'umd', extension: 'umd' },
-  { format: 'esm', extension: 'esm' }
+  { format: 'esm', extension: 'esm' },
 ];
 
 function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
@@ -43,9 +45,9 @@ function getSveltePluginConfig(svelteConfig: any, options: SvelteBuildOptions) {
   if (svelteConfig == null) {
     return {
       compilerOptions: {
-        dev: !options.prod
+        dev: !options.prod,
       },
-      preprocess: sveltePreprocess(sveltePreprocessConfig)
+      preprocess: sveltePreprocess(sveltePreprocessConfig),
     };
   } else {
     const compilerOptions = svelteConfig.compilerOptions
@@ -73,14 +75,14 @@ export function createRollupOptions(
       targets: convertCopyAssetsToRollupOptions(
         options.outputPath,
         options.assets
-      )
+      ),
     }),
     image(),
     typescript({
       sourceMap: !options.prod,
       tsconfig: options.tsConfig,
       rootDir: options.projectRoot,
-      paths: compilerOptionPaths
+      paths: compilerOptionPaths,
     }),
     svelte(sveltePluginConfig),
     // we'll extract any component CSS out into
@@ -111,21 +113,20 @@ export function createRollupOptions(
       port: options.port,
       historyApiFallback: true,
       headers: {},
-      proxy: options.proxy
+      proxy: options.proxy,
     };
 
-    if(options.headers.length != 0) {
+    if (options.headers.length != 0) {
       serveOptions = {
         ...serveOptions,
-        headers: Object.assign({}, ...options.headers.map(header => ({[header.key]: header.value})))
-      }
+        headers: Object.assign(
+          {},
+          ...options.headers.map((header) => ({ [header.key]: header.value }))
+        ),
+      };
     }
 
-    plugins = [
-      ...plugins,
-      livereload(),
-      serve(serveOptions),
-    ];
+    plugins = [...plugins, livereload(), serve(serveOptions)];
   }
 
   const externalPackages = dependencies

@@ -1,4 +1,4 @@
-import { ProjectType } from '@nrwl/workspace';
+import { ProjectType, readNxJson } from '@nrwl/workspace';
 import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
@@ -11,21 +11,24 @@ import { Linter } from '@nrwl/linter';
 
 describe('schematic:ionic-pwa', () => {
   let host: Tree;
-  const options: RawPWASchema = { name: 'test', style: SupportedStyles.css, linter: Linter.None };
+  const options: RawPWASchema = {
+    name: 'test',
+    style: SupportedStyles.css,
+    linter: Linter.None,
+  };
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace();
   });
 
   it('should add tags to nx.json', async () => {
-    await ionicPwaGenerator(host, {...options, tags: 'e2etag,e2ePackage'});
-
-    const nxJson = readJson(host, 'nx.json');
-    expect(nxJson.projects[options.name].tags).toEqual(['e2etag', 'e2ePackage']);
+    await ionicPwaGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
+    const projectConfig = readProjectConfiguration(host, options.name);
+    expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
 
   it('should create files', async () => {
-    await ionicPwaGenerator(host, {...options, linter: Linter.EsLint})
+    await ionicPwaGenerator(host, { ...options, linter: Linter.EsLint });
 
     const fileList = fileListForAppType(
       options.name,
@@ -39,7 +42,7 @@ describe('schematic:ionic-pwa', () => {
       'plugin:@stencil/recommended',
       'plugin:import/recommended',
       'plugin:import/typescript',
-      '../../.eslintrc.json'
+      '../../.eslintrc.json',
     ]);
   });
 
@@ -64,7 +67,10 @@ describe('schematic:ionic-pwa', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add Stencil ${style} dependencies to pwa`, async () => {
-      await ionicPwaGenerator(host, { ...options, style: SupportedStyles[style] });
+      await ionicPwaGenerator(host, {
+        ...options,
+        style: SupportedStyles[style],
+      });
       const packageJson = readJson(host, 'package.json');
       expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
 
@@ -77,19 +83,22 @@ describe('schematic:ionic-pwa', () => {
 
   Object.keys(SupportedStyles).forEach((style) => {
     it(`should add component config for ${style} to workspace config`, async () => {
-      await ionicPwaGenerator(host, { name: options.name, style: SupportedStyles[style] });
+      await ionicPwaGenerator(host, {
+        name: options.name,
+        style: SupportedStyles[style],
+      });
 
       const projectConfig = readProjectConfiguration(host, options.name);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
-          style: style
+          style: style,
         },
       });
     });
   });
 
   it(`shouldn't create spec files if unitTestrunner is 'none'`, async () => {
-    await applicationGenerator(host, {...options, unitTestRunner: 'none'});
+    await applicationGenerator(host, { ...options, unitTestRunner: 'none' });
 
     expect(
       host.exists(`apps/test/src/components/app-home/app-home.spec.ts`)

@@ -55,14 +55,14 @@ describe('sveltekit e2e', () => {
   });
 
   describe('--tags', () => {
-    it('should add tags to nx.json', async () => {
+    it('should add tags to project', async () => {
       const plugin = uniq('sveltekit');
       ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
       await runNxCommandAsync(
         `generate @nxext/sveltekit:app ${plugin} --tags e2etag,e2ePackage`
       );
-      const nxJson = readJson('nx.json');
-      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
+      const project = readJson(`apps/${plugin}/project.json`);
+      expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     });
   });
 });

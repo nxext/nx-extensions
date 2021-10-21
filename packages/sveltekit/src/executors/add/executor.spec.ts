@@ -3,7 +3,7 @@ import executor from './executor';
 import { ExecutorContext } from '@nrwl/devkit';
 
 const options: AddExecutorSchema = {
-  package: 'tailwind'
+  package: 'tailwind',
 };
 
 describe('Add Executor', () => {
@@ -16,11 +16,12 @@ describe('Add Executor', () => {
       cwd: '/root',
       workspace: {
         version: 2,
+        npmScope: 'proj',
         projects: {
           [projectName]: {
-            root: "/",
-            targets: {}
-          }
+            root: '/',
+            targets: {},
+          },
         },
       },
       isVerbose: false,

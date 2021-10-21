@@ -26,13 +26,13 @@ describe('svelte e2e', () => {
       ).not.toThrow();
     });
 
-    it('should add tags to nx.json', async () => {
+    it('should add tags to project', async () => {
       const plugin = uniq('sveltetags');
       await runNxCommandAsync(
         `generate @nxext/svelte:app ${plugin} --tags e2etag,e2ePackage`
       );
-      const nxJson = readJson('nx.json');
-      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
+      const project = readJson(`apps/${plugin}/project.json`);
+      expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     });
 
     it('should generate app into directory', async () => {
@@ -126,13 +126,13 @@ describe('svelte e2e', () => {
       ).not.toThrow();
     });
 
-    it('should add tags to nx.json', async () => {
+    it('should add tags to project', async () => {
       const plugin = uniq('sveltetags');
       await runNxCommandAsync(
         `generate @nxext/svelte:app ${plugin} --tags e2etag,e2ePackage --bundler=vite`
       );
-      const nxJson = readJson('nx.json');
-      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
+      const project = readJson(`apps/${plugin}/project.json`);
+      expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     });
 
     it('should generate app into directory', async () => {

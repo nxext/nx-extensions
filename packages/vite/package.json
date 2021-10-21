@@ -1,10 +1,10 @@
 {
   "name": "@nxext/vite",
-  "version": "12.0.2",
+  "version": "13.0.0",
   "main": "src/index.js",
   "executors": "./executors.json",
   "dependencies": {
-    "vite": "^2.5.10",
-    "@nrwl/devkit": "^12.9.0"
+    "vite": "^2.6.10",
+    "@nrwl/devkit": "^13.0.1"
   }
 }

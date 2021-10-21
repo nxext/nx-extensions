@@ -17,10 +17,10 @@ describe('schematic:application', () => {
   });
 
   it('should add tags to nx.json', async () => {
-    await applicationGenerator(host, {...options, tags: 'e2etag,e2ePackage'});
+    await applicationGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
 
-    const nxJson = readJson(host, 'nx.json');
-    expect(nxJson.projects[options.name].tags).toEqual(['e2etag', 'e2ePackage']);
+    const projectConfig = readProjectConfiguration(host, options.name);
+    expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
 
   it('should add Stencil dependencies', async () => {
@@ -46,7 +46,7 @@ describe('schematic:application', () => {
       'plugin:@stencil/recommended',
       'plugin:import/recommended',
       'plugin:import/typescript',
-      '../../.eslintrc.json'
+      '../../.eslintrc.json',
     ]);
   });
 
@@ -96,7 +96,7 @@ describe('schematic:application', () => {
   });
 
   it(`shouldn't create spec files if unitTestrunner is 'none'`, async () => {
-    await applicationGenerator(host, {...options, unitTestRunner: 'none'});
+    await applicationGenerator(host, { ...options, unitTestRunner: 'none' });
 
     expect(
       host.exists(`apps/test/src/components/app-home/app-home.spec.ts`)

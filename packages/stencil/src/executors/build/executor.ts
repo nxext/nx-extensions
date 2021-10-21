@@ -1,13 +1,17 @@
 import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
-import { prepareConfigAndOutputargetPaths, createStencilProcess, initializeStencilConfig } from '../stencil-runtime';
-import { createProjectGraph } from '@nrwl/workspace/src/core/project-graph';
+import {
+  prepareConfigAndOutputargetPaths,
+  createStencilProcess,
+  initializeStencilConfig,
+} from '../stencil-runtime';
+import { createProjectGraphAsync } from '@nrwl/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 import { ExecutorContext, logger } from '@nrwl/devkit';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
-  updateBuildableProjectPackageJsonDependencies
+  updateBuildableProjectPackageJsonDependencies,
 } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
 
 function createStencilCompilerOptions(
@@ -39,7 +43,7 @@ export default async function runExecutor(
 ) {
   const taskCommand: TaskCommand = 'build';
 
-  const projGraph = createProjectGraph();
+  const projGraph = await createProjectGraphAsync();
   const { target, dependencies } = calculateProjectDependencies(
     projGraph,
     context.root,
@@ -48,12 +52,14 @@ export default async function runExecutor(
     context.configurationName
   );
 
-  if (!checkDependentProjectsHaveBeenBuilt(
-    context.root,
-    context.projectName,
-    context.targetName,
-    dependencies
-  )) {
+  if (
+    !checkDependentProjectsHaveBeenBuilt(
+      context.root,
+      context.projectName,
+      context.targetName,
+      dependencies
+    )
+  ) {
     return { success: false };
   }
 
@@ -66,7 +72,10 @@ export default async function runExecutor(
     dependencies
   );
 
-  const stencilConfig = await prepareConfigAndOutputargetPaths(config, pathCollection);
+  const stencilConfig = await prepareConfigAndOutputargetPaths(
+    config,
+    pathCollection
+  );
 
   updateBuildableProjectPackageJsonDependencies(
     context.root,
