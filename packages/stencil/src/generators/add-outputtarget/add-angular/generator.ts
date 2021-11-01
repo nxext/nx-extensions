@@ -2,17 +2,16 @@ import {
   addDependenciesToPackageJson,
   applyChangesToString, convertNxGenerator,
   getWorkspaceLayout, joinPathFragments,
-  names, readProjectConfiguration,
+  readProjectConfiguration,
   Tree
 } from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { libraryGenerator } from '@nrwl/angular/generators';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addImport, readTsSourceFile } from '../../../utils/ast-utils';
+import { addImport } from '../../../utils/ast-utils';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
 import { addToGitignore } from '../../../utils/utillities';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as ts from 'typescript';
 import { relative } from 'path';
 import { getDistDir } from '../../../utils/fileutils';
@@ -20,7 +19,7 @@ import { addOutputTarget } from '../../../stencil-core-utils';
 
 async function prepareAngularLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
   const angularProjectName = `${options.projectName}-angular`;
-  const { libsDir, npmScope } = getWorkspaceLayout(host);
+  const { libsDir } = getWorkspaceLayout(host);
 
   const libraryTarget = await libraryGenerator(host, {
     name: angularProjectName,
@@ -36,21 +35,6 @@ async function prepareAngularLibrary(host: Tree, options: AddOutputtargetSchemat
         STENCIL_OUTPUTTARGET_VERSION['angular']
     }
   );
-
-  const angularModuleFilename = names(angularProjectName).fileName;
-  const angularModulePath = `${libsDir}/${angularProjectName}/src/lib/${angularModuleFilename}.module.ts`;
-  const angularModuleSource = readTsSourceFile(
-    host,
-    angularModulePath
-  );
-  const packageName = `@${npmScope}/${options.projectName}`;
-
-  const changes = applyChangesToString(angularModuleSource.text, [
-    ...addImport(angularModuleSource, `import { defineCustomElements } from '${packageName}/loader';`),
-  ]);
-  host.write(angularModulePath, changes);
-
-  addGlobal(host, angularModuleSource, angularModulePath, 'defineCustomElements(window);');
 
   addToGitignore(host, `${libsDir}/${angularProjectName}/**/generated`);
 

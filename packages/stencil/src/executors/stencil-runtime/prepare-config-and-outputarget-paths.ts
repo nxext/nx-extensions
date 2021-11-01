@@ -19,7 +19,7 @@ function copyOrCreatePackageJson(pathCollection: PathCollection) {
     module: './dist/index.js',
     es2015: './dist/esm/index.mjs',
     es2017: './dist/esm/index.mjs',
-    types: './dist/types/components.d.ts',
+    types: './dist/types/index.d.ts',
     collection: './dist/collection/collection-manifest.json',
     'collection:main': './dist/collection/index.js',
     unpkg: `./dist/${pathCollection.projectName}/${pathCollection.projectName}.js`,
