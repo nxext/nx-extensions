@@ -4,6 +4,10 @@ import { loadConfig } from '@stencil/core/compiler';
 import { PathCollection } from './types';
 import { ExecutorContext } from '@nrwl/devkit';
 import { join } from 'path';
+import {
+  fileExists,
+  readJsonFile
+} from '@nrwl/workspace/src/utilities/fileutils';
 import { normalizePath } from '../../utils/normalize-path';
 import type { Config } from '@stencil/core/compiler';
 import { hasError } from '../../utils/utillities';
@@ -67,6 +71,19 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     loadedConfig.rootDir = distDir;
     loadedConfig.packageJsonFilePath = normalizePath(join(distDir, 'package.json'));
   }
+  dependencies = dependencies
+    .filter(dep => dep.node.type == 'lib')
+    .map(dep => {
+      const pkgJsonPath = `${dep.outputs[0]}/package.json`;
+      if(fileExists(pkgJsonPath)) {
+        const pkgJson = readJsonFile(pkgJsonPath);
+        return {
+          name: pkgJson.name,
+          version: pkgJson.name,
+          main: pkgJson.main
+        }
+      }
+    });
 
   await sys.ensureResources({ rootDir: loadedConfig.rootDir, logger, dependencies: dependencies as any });
 
