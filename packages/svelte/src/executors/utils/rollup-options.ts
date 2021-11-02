@@ -116,7 +116,7 @@ export function createRollupOptions(
       proxy: options.proxy,
     };
 
-    if (options.headers.length != 0) {
+    if (options?.headers) {
       serveOptions = {
         ...serveOptions,
         headers: Object.assign(
