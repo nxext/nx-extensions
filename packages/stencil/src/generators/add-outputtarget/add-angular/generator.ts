@@ -6,7 +6,6 @@ import {
   Tree
 } from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { libraryGenerator } from '@nrwl/angular/generators';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addImport } from '../../../utils/ast-utils';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
@@ -21,7 +20,8 @@ async function prepareAngularLibrary(host: Tree, options: AddOutputtargetSchemat
   const angularProjectName = `${options.projectName}-angular`;
   const { libsDir } = getWorkspaceLayout(host);
 
-  const libraryTarget = await libraryGenerator(host, {
+  const generators = await import('@nrwl/angular/generators');
+  const libraryTarget = await generators.libraryGenerator(host, {
     name: angularProjectName,
     skipFormat: true,
     publishable: options.publishable

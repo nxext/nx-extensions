@@ -6,7 +6,6 @@ import {
   Tree
 } from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { libraryGenerator } from '@nx-plus/vue';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';
@@ -20,7 +19,8 @@ export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSche
   const vueProjectName = `${options.projectName}-vue`;
   const { libsDir } = getWorkspaceLayout(host);
 
-  const libraryTarget = await libraryGenerator(host, {
+  const generators = await import('@nx-plus/vue');
+  const libraryTarget = await generators.libraryGenerator(host, {
     name: vueProjectName
   });
 
