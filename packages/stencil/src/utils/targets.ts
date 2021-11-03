@@ -17,7 +17,8 @@ export function getDefaultTargets(
     build: getBuildTarget(projectType, options),
     serve: getServeTarget(projectType, options),
     test: getTestTarget(projectType, options),
-    e2e: getE2eTarget(projectType, options)
+    e2e: getE2eTarget(projectType, options),
+    lint: getLintTarget(projectType, options.projectRoot),
   };
 }
 
@@ -110,5 +111,18 @@ export function getServeTarget(
       serve: true,
       watch: true
     }
+  };
+}
+
+export function getLintTarget(
+  projectType: ProjectType,
+  projectRoot: string
+): TargetConfiguration {
+  return {
+    executor: '@nrwl/linter:eslint',
+    outputs: ['{options.outputFile}'],
+    options: {
+      lintFilePatterns: `${projectRoot}/**/*.{ts,tsx}`,
+    },
   };
 }

@@ -14,7 +14,7 @@ import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { addToOutputTargets } from '../../stencil-core-utils';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { join } from 'path';
-import { getBuildTarget, getE2eTarget, getServeTarget } from '../../utils/targets';
+import { getBuildTarget, getE2eTarget, getLintTarget, getServeTarget } from '../../utils/targets';
 
 const projectType = ProjectType.Library;
 
@@ -45,6 +45,7 @@ function updateProjectConfig(host: Tree, options: MakeLibBuildableOptions) {
   projectConfig.targets.build = getBuildTarget(projectType, options);
   projectConfig.targets.serve = getServeTarget(projectType, options);
   projectConfig.targets.e2e = getE2eTarget(projectType, options);
+  projectConfig.targets.lint = getLintTarget(projectType, options.projectRoot);
 
   updateProjectConfiguration(host, options.name, projectConfig);
 }
