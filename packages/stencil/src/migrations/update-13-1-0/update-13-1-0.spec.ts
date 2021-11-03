@@ -4,16 +4,16 @@ import {
   readProjectConfiguration,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { default as update } from './update-12-0-7';
+import { default as update } from './update-13-1-0';
 
-describe('update-12-0-7', () => {
+describe('update-13-1-0', () => {
   let tree: Tree;
 
   beforeEach(async () => {
     tree = createTreeWithEmptyWorkspace();
   });
 
-  it(`should update generator definition`, async () => {
+  it(`should add the lint target`, async () => {
     updateJson(tree, 'workspace.json', (workspaceJson) => {
       workspaceJson.projects.app = {
         root: 'apps/app',
@@ -70,17 +70,6 @@ describe('update-12-0-7', () => {
     await update(tree);
     const projectConfig = readProjectConfiguration(tree, 'app');
 
-    expect(projectConfig.targets.build.options?.outputPath).toEqual(
-      'dist/apps/app'
-    );
-    expect(projectConfig.targets.test.options?.outputPath).toEqual(
-      'dist/apps/app'
-    );
-    expect(projectConfig.targets.e2e.options?.outputPath).toEqual(
-      'dist/apps/app'
-    );
-    expect(projectConfig.targets.serve.options?.outputPath).toEqual(
-      'dist/apps/app'
-    );
+    expect(projectConfig.targets.lint).toBeDefined();
   });
 });
