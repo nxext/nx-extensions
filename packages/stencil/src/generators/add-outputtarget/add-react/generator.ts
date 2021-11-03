@@ -6,7 +6,6 @@ import {
   Tree
 } from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { libraryGenerator } from '@nrwl/react';
 import { Linter } from '@nrwl/linter';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
@@ -20,7 +19,8 @@ async function prepareReactLibrary(host: Tree, options: AddOutputtargetSchematic
   const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
 
-  const libraryTarget = await libraryGenerator(host, {
+  const generators = await import('@nrwl/react');
+  const libraryTarget = await generators.libraryGenerator(host, {
     name: reactProjectName,
     style: 'css',
     publishable: options.publishable,
