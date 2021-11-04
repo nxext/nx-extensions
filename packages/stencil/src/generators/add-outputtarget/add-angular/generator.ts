@@ -24,7 +24,8 @@ async function prepareAngularLibrary(host: Tree, options: AddOutputtargetSchemat
   const libraryTarget = await generators.libraryGenerator(host, {
     name: angularProjectName,
     skipFormat: true,
-    publishable: options.publishable
+    publishable: options.publishable,
+    importPath: options.importPath
   });
 
   addDependenciesToPackageJson(

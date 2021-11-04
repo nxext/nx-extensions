@@ -31,6 +31,10 @@
       "description": "",
       "default": false
     },
+    "importPath": {
+      "type": "string",
+      "description": "The library name used to import it, like @myorg/my-awesome-lib"
+    },
     "skipFormat": {
       "type": "boolean",
       "default": false
