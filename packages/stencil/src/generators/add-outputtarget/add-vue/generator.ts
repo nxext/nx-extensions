@@ -21,7 +21,8 @@ export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSche
 
   const generators = await import('@nx-plus/vue');
   const libraryTarget = await generators.libraryGenerator(host, {
-    name: vueProjectName
+    name: vueProjectName,
+    publishable: options.publishable,
   });
 
   addDependenciesToPackageJson(

@@ -24,6 +24,7 @@ async function prepareReactLibrary(host: Tree, options: AddOutputtargetSchematic
     name: reactProjectName,
     style: 'css',
     publishable: options.publishable,
+    importPath: options.importPath,
     component: false,
     skipTsConfig: false,
     skipFormat: true,

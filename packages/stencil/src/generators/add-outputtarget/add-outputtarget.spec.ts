@@ -62,6 +62,14 @@ describe('schematics:add-outputtarget', () => {
         ).includes(`reactOutputTarget({`)
       ).toBeTruthy();
     });
+
+    it('should be able to generate a publishable lib', async () => {
+      await outputtargetGenerator(tree, {...reactOptions, publishable: true, importPath: '@proj/mylib'});
+
+      expect(
+        tree.exists(`libs/${projectName}/package.json`)
+      ).toBeTruthy();
+    });
   });
 
   describe('using angular', () => {
@@ -103,6 +111,14 @@ describe('schematics:add-outputtarget', () => {
         ).includes(`angularOutputTarget({`)
       ).toBeTruthy();
     });
+
+    it('should be able to generate a publishable lib', async () => {
+      await outputtargetGenerator(tree, {...angularOptions, publishable: true, importPath: '@proj/mylib'});
+
+      expect(
+        tree.exists(`libs/${projectName}/package.json`)
+      ).toBeTruthy();
+    });
   });
 
   describe('using vue', () => {
@@ -131,6 +147,14 @@ describe('schematics:add-outputtarget', () => {
         tree.read(
           `libs/${projectName}/stencil.config.ts`
         ).includes(`vueOutputTarget({`)
+      ).toBeTruthy();
+    });
+
+    it('should be able to generate a publishable lib', async () => {
+      await outputtargetGenerator(tree, {...vueOptions, publishable: true});
+
+      expect(
+        tree.exists(`libs/${projectName}/package.json`)
       ).toBeTruthy();
     });
   });
