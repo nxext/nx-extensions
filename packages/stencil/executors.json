@@ -15,6 +15,11 @@
       "implementation": "./src/executors/e2e/compat",
       "schema": "./src/executors/e2e/schema.json",
       "description": "stencil e2e"
+    },
+    "serve": {
+      "implementation": "./src/executors/serve/compat",
+      "schema": "./src/executors/serve/schema.json",
+      "description": "serve executor"
     }
   },
   "executors": {
@@ -32,6 +37,11 @@
       "implementation": "./src/executors/e2e/executor",
       "schema": "./src/executors/e2e/schema.json",
       "description": "stencil e2e"
+    },
+    "serve": {
+      "implementation": "./src/executors/serve/executor",
+      "schema": "./src/executors/serve/schema.json",
+      "description": "serve executor"
     }
   }
 }

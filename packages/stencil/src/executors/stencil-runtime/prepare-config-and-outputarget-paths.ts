@@ -121,7 +121,8 @@ export async function prepareConfigAndOutputargetPaths(
       root: config.devServer.root.replace(
         pathCollection.projectRoot,
         pathCollection.distDir
-      )
+      ),
+      openBrowser: config.flags.open
     }
   );
 
