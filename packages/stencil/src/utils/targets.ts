@@ -101,15 +101,13 @@ export function getServeTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
   return {
-    executor: `@nxext/stencil:build`,
+    executor: `@nxext/stencil:serve`,
     outputs: ['{options.outputPath}'],
     options: {
       projectType,
       tsConfig: `${options.projectRoot}/tsconfig.${tsconfigAddition}.json`,
       configPath: `${options.projectRoot}/stencil.config.ts`,
-      outputPath: `dist/${options.projectRoot}`,
-      serve: true,
-      watch: true
+      outputPath: `dist/${options.projectRoot}`
     }
   };
 }

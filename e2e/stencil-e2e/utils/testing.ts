@@ -2,10 +2,8 @@ import { projectRootDir, ProjectType } from '@nrwl/workspace';
 import {
   checkFilesExist,
   readJson,
-  tmpProjPath,
 } from '@nrwl/nx-plugin/testing';
 import { normalize } from '@angular-devkit/core';
-import { readFileSync, writeFileSync } from 'fs';
 
 export function testProject(
   projectName: string,
