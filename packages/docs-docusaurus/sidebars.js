@@ -71,5 +71,33 @@ module.exports = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'SolidJS',
+      items: [
+        'solid/overview',
+        'solid/installation',
+        {
+          type: 'category',
+          label: 'Generators',
+          items: [
+            'solid/generators/init',
+            'solid/generators/application',
+            'solid/generators/library',
+            'solid/generators/component',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Executors',
+          items: [
+            'solid/executors/build',
+            'solid/executors/test',
+            'solid/executors/e2e',
+            'solid/executors/serve',
+          ],
+        },
+      ],
+    },
   ],
 };

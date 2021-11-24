@@ -40,6 +40,13 @@ const features = [
       </>
     ),
   },
+  {
+    title: <>SolidJS</>,
+    imageUrl: 'img/solidjs-logo.png',
+    description: (
+      <>Simple and performant reactivity for building user interfaces.</>
+    ),
+  },
 ];
 
 function Feature({ imageUrl, title, description }) {
