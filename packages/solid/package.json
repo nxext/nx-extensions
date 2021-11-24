@@ -1,0 +1,50 @@
+{
+  "name": "@nxext/solid",
+  "version": "13.0.1",
+  "license": "MIT",
+  "author": "Kristian Mandrup",
+  "description": "Nx plugin for solid",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "solid",
+    "pwa",
+    "web components"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
+  "main": "src/index.js",
+  "schematics": "./generators.json",
+  "builders": "./builders.json",
+  "peerDependencies": {
+    "solid-js": "^1.2.5",
+    "@nrwl/workspace": "^13.0.1",
+    "@nrwl/cypress": "^13.0.1",
+    "@nrwl/linter": "^13.0.1"
+  },
+  "dependencies": {
+    "@nxext/vite": "13.0.0",
+    "@nrwl/devkit": "^13.0.1",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.2.3",
+    "rollup": "^2.58.1",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-serve-proxy": "^1.1.4",
+    "rollup-plugin-css-only": "^3.0.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-solid": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "@rollup/plugin-image": "^2.1.1",
+    "rollup-plugin-local-resolve": "^1.0.7"
+  },
+  "nx-migrate": {
+    "migrations": "./migrations.json"
+  }
+}

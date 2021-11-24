@@ -1,0 +1,16 @@
+{
+  "projectType": "application",
+  "root": "e2e/solid-e2e",
+  "sourceRoot": "e2e/solid-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "./tools/executors/e2e:e2e",
+      "options": {
+        "targets": ["vite:build", "solid:build"],
+        "jestConfig": "e2e/solid-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["solid", "vite"]
+}

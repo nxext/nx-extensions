@@ -1,0 +1,26 @@
+module.exports = {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["solid", "@typescript-eslint"],
+  "extends": ["<%= offsetFromRoot %>.eslintrc.json"],
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.js", "*.svelte"],
+      "parserOptions": {
+        "project": ["<%= projectRoot %>/tsconfig.*?.json"]
+      },
+      "rules": {}
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ],
+  "settings": {
+    'solid/typescript': require('typescript')
+  }
+}

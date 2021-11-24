@@ -4,6 +4,7 @@
 
 [StencilJS](https://stenciljs.com) plugin for NX
 [Svelte](https://svelte.dev/) plugin for NX
+[SolidJS](https://https://www.solidjs.com//) plugin for NX
 
 ## Install and usage
 
@@ -22,6 +23,7 @@ PRs, ideas and discussions accepted.
 MIT © 2020 - 2021 Dominik Pieper
 
 ## Core Team
+
 <table>
   <tr>
     <td align="center"><a href="https://github.com/DominikPieper"><img src="https://avatars.githubusercontent.com/u/77470?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dominik Pieper</b></sub></a></td>

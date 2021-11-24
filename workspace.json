@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "docs-docusaurus": "packages/docs-docusaurus",
+    "solid": "packages/solid",
+    "solid-e2e": "e2e/solid-e2e",
     "stencil": "packages/stencil",
     "stencil-e2e": "e2e/stencil-e2e",
     "svelte": "packages/svelte",
