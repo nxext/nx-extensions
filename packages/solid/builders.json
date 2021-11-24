@@ -1,0 +1,16 @@
+{
+  "builders": {
+    "build": {
+      "implementation": "./src/executors/build/compat",
+      "schema": "./src/executors/build/schema.json",
+      "description": "build builder"
+    }
+  },
+  "executors": {
+    "build": {
+      "implementation": "./src/executors/build/builder",
+      "schema": "./src/executors/build/schema.json",
+      "description": "build executor"
+    }
+  }
+}

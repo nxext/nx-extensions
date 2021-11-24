@@ -1,0 +1,93 @@
+import {
+  checkFilesExist,
+  readJson,
+  runNxCommandAsync,
+  uniq,
+} from '@nrwl/nx-plugin/testing';
+import { ensureNxProjectWithDeps } from '../utils/testing';
+
+describe('solid e2e', () => {
+  beforeAll(() => {
+    ensureNxProjectWithDeps('@nxext/solid', 'dist/packages/solid', [
+      ['@nxext/vite', 'dist/packages/vite'],
+    ]);
+  });
+
+  describe('solid app', () => {
+    it('should build solid application', async () => {
+      const plugin = uniq('solid');
+      await runNxCommandAsync(`generate @nxext/solid:app ${plugin}`);
+
+      const result = await runNxCommandAsync(`build ${plugin}`);
+      expect(result.stdout).toContain('Bundle complete');
+
+      expect(() =>
+        checkFilesExist(`dist/apps/${plugin}/index.html`)
+      ).not.toThrow();
+    });
+
+    it('should add tags to project', async () => {
+      const plugin = uniq('solidtags');
+      await runNxCommandAsync(
+        `generate @nxext/solid:app ${plugin} --tags e2etag,e2ePackage`
+      );
+      const project = readJson(`apps/${plugin}/project.json`);
+      expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
+    });
+
+    it('should generate app into directory', async () => {
+      await runNxCommandAsync(`generate @nxext/solid:app project/ui`);
+      expect(() =>
+        checkFilesExist(`apps/project/ui/src/main.ts`)
+      ).not.toThrow();
+    });
+
+    it('should be able to run linter', async () => {
+      const plugin = uniq('solidlint');
+      await runNxCommandAsync(`generate @nxext/solid:app ${plugin}`);
+
+      const result = await runNxCommandAsync(`lint ${plugin}`);
+      expect(result.stdout).toContain('All files pass linting');
+    });
+  });
+
+  describe('solid lib', () => {
+    it('should create solid library', async () => {
+      const plugin = uniq('solidlib');
+      await runNxCommandAsync(`generate @nxext/solid:lib ${plugin}`);
+
+      expect(() =>
+        checkFilesExist(`libs/${plugin}/src/index.ts`)
+      ).not.toThrow();
+    });
+
+    it('should generate lib into directory', async () => {
+      await runNxCommandAsync(`generate @nxext/solid:lib project/uilib`);
+      expect(() =>
+        checkFilesExist(`libs/project/uilib/src/index.ts`)
+      ).not.toThrow();
+    });
+
+    it('should be able to run linter', async () => {
+      const plugin = uniq('solidliblint');
+      await runNxCommandAsync(`generate @nxext/solid:lib ${plugin}`);
+
+      const result = await runNxCommandAsync(`lint ${plugin}`);
+      expect(result.stdout).toContain('All files pass linting');
+    });
+
+    it('should be able build lib if buildable', async () => {
+      const plugin = uniq('solidlib');
+      await runNxCommandAsync(
+        `generate @nxext/solid:lib ${plugin} --buildable`
+      );
+
+      const result = await runNxCommandAsync(`build ${plugin}`);
+      expect(result.stdout).toContain('Bundle complete');
+
+      expect(() =>
+        checkFilesExist(`dist/libs/${plugin}/bundle.js`)
+      ).not.toThrow();
+    });
+  });
+});
