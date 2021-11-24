@@ -3,7 +3,6 @@ import { ProjectType } from '@nrwl/workspace';
 import {
   addProjectConfiguration,
   getWorkspaceLayout,
-  joinPathFragments,
   TargetConfiguration,
   Tree,
 } from '@nrwl/devkit';
@@ -11,7 +10,6 @@ import {
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const targets: { [key: string]: TargetConfiguration } = {
     lint: createLintTarget(options),
-    check: createsolidCheckTarget(options),
   };
 
   if (options.buildable || options.publishable) {
@@ -39,7 +37,6 @@ function createBuildTarget(
       outputPath: `dist/${libsDir}/${options.projectDirectory}`,
       entryFile: `${options.projectRoot}/src/index.ts`,
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,
-      solidConfig: joinPathFragments(options.projectRoot, 'vite.config.js'),
       assets: [{ glob: '/*', input: './public/**', output: './' }],
     },
     configurations: {
@@ -57,18 +54,6 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
       linter: 'eslint',
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,
       exclude: ['**/node_modules/**', `!${options.projectRoot}/**/*`],
-    },
-  };
-}
-
-function createsolidCheckTarget(
-  options: NormalizedSchema
-): TargetConfiguration {
-  return {
-    executor: '@nrwl/workspace:run-commands',
-    options: {
-      command: 'solid-check',
-      cwd: options.projectRoot,
     },
   };
 }
