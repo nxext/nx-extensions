@@ -10,7 +10,6 @@ export interface SolidApplicationSchema {
   directory?: string;
   host?: string;
   port?: number;
-  bundler?: 'vite';
 }
 
 export interface NormalizedSchema extends SolidApplicationSchema {
