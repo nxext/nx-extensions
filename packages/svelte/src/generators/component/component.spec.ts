@@ -1,6 +1,5 @@
 import componentGenerator, { SvelteComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
-import { ProjectType } from '@nrwl/workspace';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { names, Tree } from '@nrwl/devkit';
 
@@ -33,7 +32,7 @@ describe('component schematic', () => {
   });
 
   it('should add file to barrel', async () => {
-    const tree = await createTestProject(projectName, ProjectType.Library);
+    const tree = await createTestProject(projectName, 'library');
     await componentGenerator(tree, options);
     const name = names(componentName);
 

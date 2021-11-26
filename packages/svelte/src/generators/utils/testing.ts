@@ -1,13 +1,12 @@
-import { ProjectType } from '@nrwl/workspace';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import applicationGenerator from '../application/application';
-import { Tree } from '@nrwl/devkit';
+import { Tree, ProjectType } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import { libraryGenerator } from '../library/library';
 
 export async function createTestProject(
   name: string,
-  type: ProjectType = ProjectType.Application,
+  type: ProjectType = 'application',
   unitTestrunner: 'none' | 'jest' = 'none',
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
@@ -25,7 +24,7 @@ export async function createTestProject(
     `
   );
 
-  if (type === ProjectType.Application) {
+  if (type === 'application') {
     await applicationGenerator(tree, {
       name: name,
       linter: Linter.EsLint,
@@ -33,7 +32,7 @@ export async function createTestProject(
       e2eTestRunner: e2eTestrunner,
     });
   }
-  if (type === ProjectType.Library) {
+  if (type === 'library') {
     await libraryGenerator(tree, {
       name: name,
       linter: Linter.EsLint,

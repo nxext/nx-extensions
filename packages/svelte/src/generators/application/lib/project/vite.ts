@@ -58,14 +58,3 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
     },
   };
 }
-
-function createTestTarget(options: NormalizedSchema): TargetConfiguration {
-  return {
-    executor: '@nrwl/jest:jest',
-    options: {
-      outputPath: joinPathFragments('dist', options.projectRoot),
-      jestConfig: joinPathFragments(options.projectRoot, 'jest.config.js'),
-      passWithNoTests: true,
-    },
-  };
-}
