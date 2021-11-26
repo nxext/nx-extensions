@@ -21,7 +21,7 @@
   },
   "main": "src/index.js",
   "schematics": "./generators.json",
-  "builders": "./builders.json",
+  "executors": "./executors.json",
   "peerDependencies": {
     "solid-js": "^1.2.5",
     "@nrwl/workspace": "^13.0.1",

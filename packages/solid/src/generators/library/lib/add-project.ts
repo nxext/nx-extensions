@@ -31,7 +31,7 @@ function createBuildTarget(
 ): TargetConfiguration {
   const { libsDir } = getWorkspaceLayout(tree);
   return {
-    executor: '@nxext/solid:build',
+    executor: '@nxext/vite:build',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: `dist/${libsDir}/${options.projectDirectory}`,
