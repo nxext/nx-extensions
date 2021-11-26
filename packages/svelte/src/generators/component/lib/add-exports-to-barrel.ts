@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 
-import { ProjectType } from '@nrwl/workspace';
+import { findNodes } from '@nrwl/workspace';
 import { SvelteComponentSchema } from '../component';
 import {
   applyChangesToString,
@@ -11,7 +11,6 @@ import {
   StringChange,
   Tree,
 } from '@nrwl/devkit';
-import { findNodes } from '@nrwl/workspace/src/utils/ast-utils';
 
 export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);
@@ -20,7 +19,7 @@ export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
   const indexFilePath = joinPathFragments(projectConfig.sourceRoot, 'index.ts');
   const componentFile = `./components/${fileName}/${className}.svelte`;
 
-  if (projectConfig.projectType === ProjectType.Library) {
+  if (projectConfig.projectType === 'library') {
     const { content, source } = readSourceFile(tree, indexFilePath);
 
     const changes = applyChangesToString(

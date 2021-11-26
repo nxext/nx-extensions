@@ -4,7 +4,7 @@ import applicationGenerator from './application';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { readJson } from '@nrwl/devkit';
 
-describe('svelte app schematic', () => {
+describe('svelte app generator', () => {
   let tree;
   const options: SvelteApplicationSchema = {
     name: 'test',

@@ -1,13 +1,12 @@
 import { default as update } from './create-new-eslint-config';
 import { createTestProject } from '../../generators/utils/testing';
-import { ProjectType } from '@nrwl/workspace';
 import { readJson, readProjectConfiguration } from '@nrwl/devkit';
 
 describe('create-new-eslint-config', () => {
   let tree;
 
   beforeEach(async () => {
-    tree = await createTestProject('testproject', ProjectType.Application);
+    tree = await createTestProject('testproject', 'application');
     tree.overwrite(
       'package.json',
       `
