@@ -15,7 +15,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     tsConfigPaths: [
       joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
     ],
-    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,spec.ts}`],
+    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,spec.ts,tsx}`],
     skipFormat: true,
   });
 
