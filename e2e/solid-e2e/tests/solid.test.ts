@@ -38,7 +38,7 @@ describe('solid e2e', () => {
     it('should generate app into directory', async () => {
       await runNxCommandAsync(`generate @nxext/solid:app project/ui`);
       expect(() =>
-        checkFilesExist(`apps/project/ui/src/main.ts`)
+        checkFilesExist(`apps/project/ui/src/App.tsx`)
       ).not.toThrow();
     });
 
