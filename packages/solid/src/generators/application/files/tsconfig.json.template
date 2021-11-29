@@ -1,6 +1,5 @@
 {
   "extends": "<%= offsetFromRoot %>tsconfig.base.json",
-
   "compilerOptions": {
     "strict": true,
     "target": "ESNext",
