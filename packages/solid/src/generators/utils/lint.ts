@@ -7,7 +7,7 @@ export const extraEslintDependencies = {
   },
 };
 
-export const createSvelteEslintJson = (projectRoot: string) => `
+export const createSolidEslintJson = (projectRoot: string) => `
 module.exports = {
   "parser": "@typescript-eslint/parser",
   "plugins": ["solid", "@typescript-eslint"],
