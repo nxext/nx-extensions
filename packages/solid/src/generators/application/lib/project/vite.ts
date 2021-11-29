@@ -8,7 +8,6 @@ export function createViteTargets(options: NormalizedSchema): {
     build: createBuildTarget(options),
     serve: createServeTarget(options),
     lint: createLintTarget(options),
-    test: createTestTarget(options),
   };
 }
 
@@ -44,17 +43,6 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
         '**/node_modules/**',
         `!${joinPathFragments(options.projectRoot, '**/*')}`,
       ],
-    },
-  };
-}
-
-function createTestTarget(options: NormalizedSchema): TargetConfiguration {
-  return {
-    executor: '@nrwl/jest:jest',
-    options: {
-      outputPath: joinPathFragments('dist', options.projectRoot),
-      jestConfig: joinPathFragments(options.projectRoot, 'jest.config.js'),
-      passWithNoTests: true,
     },
   };
 }
