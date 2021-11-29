@@ -5,7 +5,7 @@ module.exports = {
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": ["*.ts", "*.js", "*.svelte"],
+      "files": ["*.ts", "*.js", "*.tsx"],
       "parserOptions": {
         "project": ["<%= projectRoot %>/tsconfig.*?.json"]
       },
