@@ -6,6 +6,6 @@
   "executors": "./executors.json",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nrwl/devkit": "^13.0.1"
+    "@nrwl/devkit": "13.2.3"
   }
 }
