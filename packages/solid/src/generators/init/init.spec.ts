@@ -31,7 +31,7 @@ describe('init schematic', () => {
     await initGenerator(tree, options);
 
     const packageJson = readJson(tree, 'package.json');
-    expect(packageJson.devDependencies['solid']).toBeDefined();
+    expect(packageJson.devDependencies['solid-js']).toBeDefined();
     expect(packageJson.devDependencies['solid-jest']).toBeDefined();
   });
 });
