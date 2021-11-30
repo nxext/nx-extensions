@@ -1,4 +1,3 @@
-import { ProjectType, readNxJson } from '@nrwl/workspace';
 import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
@@ -33,7 +32,7 @@ describe('schematic:ionic-pwa', () => {
     const fileList = fileListForAppType(
       options.name,
       SupportedStyles.css,
-      ProjectType.Application
+      'application'
     );
     fileList.forEach((file) => expect(host.exists(file)));
 
@@ -52,7 +51,7 @@ describe('schematic:ionic-pwa', () => {
     const fileList = fileListForAppType(
       options.name,
       SupportedStyles.css,
-      ProjectType.Application,
+      'application',
       'subdir'
     );
     fileList.forEach((file) => expect(host.exists(file)));

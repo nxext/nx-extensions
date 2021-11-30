@@ -1,4 +1,3 @@
-import { ProjectType } from '@nrwl/workspace';
 import {
   convertNxGenerator,
   generateFiles,
@@ -16,7 +15,7 @@ import { updateTsConfig } from './lib/update-tsconfig';
 import { join } from 'path';
 import { getBuildTarget, getE2eTarget, getLintTarget, getServeTarget } from '../../utils/targets';
 
-const projectType = ProjectType.Library;
+const projectType = 'library';
 
 interface MakeLibBuildableOptions extends MakeLibBuildableSchema {
   projectRoot: string;
