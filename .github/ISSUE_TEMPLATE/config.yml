@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Want to start a discussion?
+    about: "Want to start a thread to discuss an idea? Use the discussions feature provided by GitHub."
+    url: https://github.com/nxext/nx-extensions/discussions

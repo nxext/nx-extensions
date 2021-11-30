@@ -1,7 +1,7 @@
 ---
-name: Feature request
+name: "\U0001F680 Feature Request"
 about: Suggest an idea for this project
-title: ''
+title: '<Stencil | Svelte | Sveltekit | Solid | Vite>: <your title>'
 labels: feature request
 assignees: ''
 
