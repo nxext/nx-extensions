@@ -30,7 +30,7 @@ describe('Solid app schematic', () => {
 
   describe('Vite bundle', () => {
     it('should add vite specific files', async () => {
-      await applicationGenerator(tree, { ...options, bundler: 'vite' });
+      await applicationGenerator(tree, { ...options });
 
       expect(tree.exists(`apps/${options.name}/public/index.html`)).toBeFalsy();
       expect(tree.exists(`apps/${options.name}/vite.config.js`)).toBeTruthy();
