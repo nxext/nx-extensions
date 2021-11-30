@@ -1,0 +1,56 @@
+{
+  "title": "Web Application vite package solution",
+  "description": "Web vite package solution",
+  "cli": "nx",
+  "type": "object",
+  "properties": {
+    "entryFile": {
+      "type": "string",
+      "description": "The name of the main entry-point file."
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The output path of the generated files."
+    },
+    "assets": {
+      "type": "string",
+      "description": "The path for assets."
+    },
+    "packageJson": {
+      "type": "string",
+      "description": "The name of the package.json file"
+    },
+    "configFile": {
+      "type": "string",
+      "description": "Path to the vite config"
+    },
+    "external": {
+      "description": "external libs",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "globals": {
+      "description": "globals",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "library key"
+          },
+          "value": {
+            "type": "string",
+            "description": "library value"
+          }
+        },
+        "additionalProperties": false,
+        "required": ["replace", "with"]
+      },
+      "default": {}
+    }
+  }
+}
