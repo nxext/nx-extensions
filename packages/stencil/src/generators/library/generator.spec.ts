@@ -1,4 +1,3 @@
-import { ProjectType } from '@nrwl/workspace';
 import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
@@ -35,7 +34,7 @@ describe('library', () => {
     const fileList = fileListForAppType(
       options.name,
       SupportedStyles.css,
-      ProjectType.Library
+      'library'
     );
     fileList.forEach((file) => expect(host.exists(file)));
   });
@@ -68,7 +67,7 @@ describe('library', () => {
     const fileList = fileListForAppType(
       options.name,
       SupportedStyles.css,
-      ProjectType.Library,
+      'library',
       'subdir'
     );
     fileList.forEach((file) => expect(host.exists(file)));

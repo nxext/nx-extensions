@@ -3,7 +3,7 @@ import { LibrarySchema } from '../generators/library/schema';
 import { PWASchema } from '../generators/ionic-pwa/schema';
 import { ApplicationSchema } from '../generators/application/schema';
 import { MakeLibBuildableSchema } from '../generators/make-lib-buildable/schema';
-import { ProjectType } from '@nrwl/workspace';
+import { ProjectType } from '../utils/typings';
 
 export function getDefaultTargets(
   projectType: ProjectType,
@@ -30,7 +30,7 @@ export function getBuildTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
-  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
+  const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
     executor: '@nxext/stencil:build',
     outputs: ['{options.outputPath}'],
@@ -57,7 +57,7 @@ export function getTestTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
-  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
+  const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
     executor: '@nxext/stencil:test',
     outputs: ['{options.outputPath}'],
@@ -78,7 +78,7 @@ export function getE2eTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
-  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
+  const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
     executor: '@nxext/stencil:e2e',
     outputs: ['{options.outputPath}'],
@@ -99,7 +99,7 @@ export function getServeTarget(
     | ApplicationSchema
     | MakeLibBuildableSchema
 ): TargetConfiguration {
-  const tsconfigAddition = projectType === ProjectType.Application ? 'app' : 'lib';
+  const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
     executor: `@nxext/stencil:serve`,
     outputs: ['{options.outputPath}'],

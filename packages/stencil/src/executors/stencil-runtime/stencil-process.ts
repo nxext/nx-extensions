@@ -3,8 +3,6 @@ import { cleanupE2eTesting } from './e2e-testing';
 import { PathCollection } from './types';
 import type { Config } from '@stencil/core/compiler';
 import { DevServer } from '@stencil/core/dev-server';
-import { logger } from '@nrwl/devkit';
-import * as Process from 'process';
 
 type CoreCompiler = typeof import('@stencil/core/compiler');
 

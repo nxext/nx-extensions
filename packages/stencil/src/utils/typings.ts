@@ -16,6 +16,8 @@ export enum AppType {
   pwa = 'pwa'
 }
 
+export type ProjectType = 'application' | 'library';
+
 export interface PackageDependencies {
   dependencies: DependencyEntries;
   devDependencies: DependencyEntries;

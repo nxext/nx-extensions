@@ -2,7 +2,7 @@ import { SupportedStyles } from '../stencil-core-utils';
 import { Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '../generators/library/generator';
-import { ProjectType } from '@nrwl/workspace';
+import { ProjectType } from './typings';
 
 export async function createTestUILib(
   libName: string,
@@ -27,7 +27,7 @@ export function fileListForAppType(
   subDirectory?: string
 ): string[] {
   if (!subDirectory) {
-    if (projectType == ProjectType.Application) {
+    if (projectType == 'application') {
       return [
         `apps/${projectName}/src/global/app.${style}`,
         `apps/${projectName}/src/global/app.ts`,
@@ -46,7 +46,7 @@ export function fileListForAppType(
       ];
     }
 
-    if (projectType == ProjectType.Library) {
+    if (projectType == 'library') {
       return [
         `libs/${projectName}/stencil.config.ts`,
         `libs/${projectName}/tsconfig.json`,
@@ -59,7 +59,7 @@ export function fileListForAppType(
       ];
     }
   } else {
-    if (projectType == ProjectType.Application) {
+    if (projectType == 'application') {
       return [
         `apps/${subDirectory}/${projectName}/src/global/app.${style}`,
         `apps/${subDirectory}/${projectName}/src/global/app.ts`,
@@ -78,7 +78,7 @@ export function fileListForAppType(
       ];
     }
 
-    if (projectType == ProjectType.Library) {
+    if (projectType == 'library') {
       return [
         `libs/${subDirectory}/${projectName}/stencil.config.ts`,
         `libs/${subDirectory}/${projectName}/tsconfig.json`,
