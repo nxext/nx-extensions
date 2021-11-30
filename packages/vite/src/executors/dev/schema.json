@@ -4,6 +4,11 @@
   "title": "Dev executor",
   "description": "",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "configFile": {
+      "type": "string",
+      "description": "The path to vite.config.js file."
+    }
+  },
   "required": []
 }

@@ -1,1 +1,3 @@
-export interface DevExecutorSchema {} // eslint-disable-line
+export interface DevExecutorSchema {
+  configFile?: string;
+}
