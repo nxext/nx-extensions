@@ -99,5 +99,21 @@ module.exports = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'ViteJS',
+      items: [
+        'vite/overview',
+        'vite/installation',
+        {
+          type: 'category',
+          label: 'Executors',
+          items: [
+            'vite/executors/build',
+            'vite/executors/serve',
+          ],
+        },
+      ],
+    },
   ],
 };
