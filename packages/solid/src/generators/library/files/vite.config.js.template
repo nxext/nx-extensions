@@ -1,0 +1,16 @@
+import { defineConfig } from "vite";
+import solidPlugin from "vite-plugin-solid";
+
+export default defineConfig({
+  plugins: [solidPlugin()],
+  build: {
+    target: "esnext",
+    polyfillDynamicImport: false,
+    // https://vitejs.dev/guide/build.html#library-mode
+    lib: {
+      entry: `${options.projectRoot}/src/index.ts`,
+      name: options.name,
+      fileName: (format) => `${options.name}.${format}.js`,
+    },
+  },
+});
