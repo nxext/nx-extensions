@@ -1,11 +1,5 @@
 {
   "name": "<%= name %>",
   "version": "0.0.1",
-  "description": "Nx Solid App",
-  "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },  
+  "description": "Nx Solid <%= name %> app",
 }
