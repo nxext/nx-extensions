@@ -34,6 +34,12 @@ function createBuildTarget(
     executor: '@nxext/vite:build',
     outputs: ['{options.outputPath}'],
     options: {
+      // https://vitejs.dev/guide/build.html#library-mode
+      lib: {
+        entry: `${options.projectRoot}/src/index.ts`,
+        name: options.name,
+        fileName: (format) => `${options.name}.${format}.js`,
+      },
       outputPath: `dist/${libsDir}/${options.projectDirectory}`,
       entryFile: `${options.projectRoot}/src/index.ts`,
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,
