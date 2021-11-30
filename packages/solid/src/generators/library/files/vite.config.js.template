@@ -10,7 +10,7 @@ export default defineConfig({
     // https://vitejs.dev/guide/build.html#library-mode
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
-      name: options.name,
+      name: '<%= name %>',
       fileName: (format) => `${options.name}.${format}.js`,
     },
   },
