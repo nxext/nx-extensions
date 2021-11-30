@@ -86,7 +86,10 @@ describe('solid e2e', () => {
       expect(result.stdout).toContain('Bundle complete');
 
       expect(() =>
-        checkFilesExist(`dist/libs/${plugin}/bundle.js`)
+        checkFilesExist(
+          `dist/libs/${plugin}/${plugin}.es.js`,
+          `dist/libs/${plugin}/${plugin}.umd.js`
+        )
       ).not.toThrow();
     });
   });
