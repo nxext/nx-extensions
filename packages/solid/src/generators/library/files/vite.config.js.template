@@ -9,7 +9,7 @@ export default defineConfig({
     polyfillDynamicImport: false,
     // https://vitejs.dev/guide/build.html#library-mode
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: '<%= name %>',
       fileName: (format) => `${options.name}.${format}.js`,
     },
