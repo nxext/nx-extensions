@@ -10,6 +10,11 @@
       "implementation": "./src/executors/dev/executor",
       "schema": "./src/executors/dev/schema.json",
       "description": "dev executor"
+    },
+    "package": {
+      "implementation": "./src/executors/package/package.impl",
+      "schema": "./src/executors/preview/schema.json",
+      "description": "Build package"
     }
   }
 }
