@@ -21,6 +21,7 @@ module.exports = {
     { name: 'svelte', description: 'Svelte specific' },
     { name: 'sveltekit', description: 'Sveltekit specific' },
     { name: 'vite', description: 'Vite specific' },
+    { name: 'solid', description: 'SolidJS specific' },
   ],
 
   allowTicketNumber: true,
