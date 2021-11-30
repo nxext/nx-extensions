@@ -128,6 +128,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "kristianmandrup",
+      "name": "Kristian Mandrup",
+      "avatar_url": "https://avatars.githubusercontent.com/u/125005?v=4",
+      "profile": "https://github.com/kristianmandrup",
+      "contributions": [
+        "code",
+        "ideas",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
