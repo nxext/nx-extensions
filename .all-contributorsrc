@@ -11,6 +11,19 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "DominikPieper",
+      "name": "Dominik Pieper",
+      "avatar_url": "https://avatars.githubusercontent.com/u/77470?v=4",
+      "profile": "https://github.com/DominikPieper",
+      "contributions": [
+        "code",
+        "ideas",
+        "doc",
+        "infra",
+        "maintenance"
+      ]
+     },
+    {
       "login": "Mobiletainment",
       "name": "David Pertiller",
       "avatar_url": "https://avatars.githubusercontent.com/u/1514111?v=4",
