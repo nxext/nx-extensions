@@ -8,6 +8,30 @@
     "configFile": {
       "type": "string",
       "description": "The path to vite.config.js file."
+    },
+    "baseHref": {
+      "type": "string",
+      "description": "Base url for the application being built."
+    },
+    "fileReplacements": {
+      "description": "Replace files with other files in the build.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "replace": {
+            "type": "string",
+            "description": "The file to be replaced."
+          },
+          "with": {
+            "type": "string",
+            "description": "The file to replace with."
+          }
+        },
+        "additionalProperties": false,
+        "required": ["replace", "with"]
+      },
+      "default": []
     }
   },
   "required": []
