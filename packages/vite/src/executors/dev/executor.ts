@@ -42,7 +42,7 @@ export default async function runExecutor(
         ? false
         : options.configFile
         ? joinPathFragments(`${context.root}/${options.configFile}`)
-        : false,
+        : undefined,
     base: options.baseHref ?? '/',
     build: {
       ...viteBaseConfig.build,

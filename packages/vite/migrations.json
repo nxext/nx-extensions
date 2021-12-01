@@ -1,0 +1,16 @@
+{
+  "generators": {
+    "vite-explict-config-file": {
+      "version": "13.0.0",
+      "description": "vite-explict-config-file",
+      "cli": "nx",
+      "implementation": "./src/migrations/vite-explict-config-file/vite-explict-config-file"
+    }
+  },
+  "packageJsonUpdates": {
+    "13.0.0": {
+      "version": "13.0.0",
+      "packages": {}
+    }
+  }
+}

@@ -46,6 +46,11 @@
             "input": "./packages/vite",
             "glob": "executors.json",
             "output": "."
+          },
+          {
+            "input": "./packages/vite",
+            "glob": "migrations.json",
+            "output": "."
           }
         ]
       }
