@@ -13,6 +13,10 @@
       "type": "string",
       "description": "Base url for the application being built."
     },
+    "proxyConfig": {
+      "type": "string",
+      "description": "Path to the proxy configuration file."
+    },
     "fileReplacements": {
       "description": "Replace files with other files in the build.",
       "type": "array",

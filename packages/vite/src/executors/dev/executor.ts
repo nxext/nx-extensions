@@ -1,5 +1,5 @@
 import { DevExecutorSchema } from './schema';
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import {
   preview,
   InlineConfig,
@@ -7,11 +7,13 @@ import {
   UserConfig,
   UserConfigExport,
   resolveConfig,
+  ProxyOptions,
 } from 'vite';
-import { relative } from 'path';
+import { join, relative } from 'path';
 import { RollupWatcherEvent } from 'rollup';
 import baseConfig from '../../../plugins/vite';
 import { replaceFiles } from '../../../plugins/file-replacement';
+import { existsSync } from 'fs';
 
 async function ensureUserConfig(
   config: UserConfigExport,
@@ -34,6 +36,17 @@ export default async function runExecutor(
     baseConfig,
     context.configurationName
   );
+
+  // look for the proxy.conf.json
+  let proxyConfig: Record<string, string | ProxyOptions>;
+  const proxyConfigPath = options.proxyConfig
+    ? join(context.root, options.proxyConfig)
+    : join(projectRoot, 'proxy.conf.json');
+
+  if (existsSync(proxyConfigPath)) {
+    logger.info(`found proxy configuration at ${proxyConfigPath}`);
+    proxyConfig = require(proxyConfigPath);
+  }
 
   const serverConfig: InlineConfig = {
     ...viteBaseConfig,
@@ -60,6 +73,9 @@ export default async function runExecutor(
           replaceFiles(options.fileReplacements),
         ],
       },
+    },
+    server: {
+      proxy: proxyConfig,
     },
   };
 
