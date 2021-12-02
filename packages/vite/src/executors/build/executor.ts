@@ -49,7 +49,7 @@ export default async function runExecutor(
       },
     },
     configFile:
-      options.configFile === '@nxext/vite/plugin/vite'
+      options.configFile === '@nxext/vite/plugins/vite'
         ? false
         : options.configFile
         ? joinPathFragments(`${context.root}/${options.configFile}`)

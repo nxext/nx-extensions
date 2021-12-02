@@ -50,7 +50,7 @@ export default async function runExecutor(
   await build({
     ...viteBaseConfig,
     configFile:
-      options.configFile === '@nxext/vite/plugin/vite-package'
+      options.configFile === '@nxext/vite/plugins/vite-package'
         ? false
         : options.configFile
         ? joinPathFragments(`${context.root}/${options.configFile}`)
