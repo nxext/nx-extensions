@@ -3,6 +3,7 @@
   "version": "13.0.0",
   "main": "src/index.js",
   "executors": "./executors.json",
+  "generators": "./generators.json",
   "dependencies": {
     "vite": "^2.6.14",
     "@nrwl/devkit": "^13.0.1"

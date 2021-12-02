@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "NxViteLibrary",
+  "title": "Create a vite Library for Nx",
+  "type": "object",
+  "examples": [
+    {
+      "command": "g lib mylib --directory=myapp",
+      "description": "Generate libs/myapp/mylib"
+    },
+    {
+      "command": "g lib mylib --appProject=myapp",
+      "description": "Generate a library with routes and add them to myapp"
+    }
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Library name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the library?",
+      "pattern": "^[a-zA-Z].*$"
+    },
+    "directory": {
+      "type": "string",
+      "description": "A directory where the lib is placed.",
+      "alias": "dir"
+    },
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "tslint"],
+      "default": "eslint"
+    },
+    "unitTestRunner": {
+      "type": "string",
+      "enum": ["jest", "none"],
+      "description": "Test runner to use for unit tests.",
+      "default": "jest"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the library (used for linting).",
+      "alias": "t"
+    },
+    "skipFormat": {
+      "description": "Skip formatting files.",
+      "type": "boolean",
+      "default": false
+    },
+    "skipTsConfig": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not update tsconfig.json for development experience."
+    },
+    "pascalCaseFiles": {
+      "type": "boolean",
+      "description": "Use pascal case component file name (e.g. App.tsx).",
+      "alias": "P",
+      "default": false
+    },
+    "publishable": {
+      "type": "boolean",
+      "description": "Create a publishable library."
+    },
+    "buildable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Generate a buildable library."
+    },
+    "importPath": {
+      "type": "string",
+      "description": "The library name used to import it, like @myorg/my-awesome-lib"
+    },
+    "supportJSX": {
+      "type": "boolean",
+      "description": "Add JSX/TSX support",
+      "default": false
+    },
+    "setParserOptionsProject": {
+      "type": "boolean",
+      "description": "Whether or not to configure the ESLint \"parserOptions.project\" option. We do not do this by default for lint performance reasons.",
+      "default": false
+    },
+    "standaloneConfig": {
+      "description": "Split the project configuration into <projectRoot>/project.json rather than including it inside workspace.json",
+      "type": "boolean"
+    }
+  },
+  "required": ["name"]
+}
