@@ -8,6 +8,7 @@ import {
   UserConfigExport,
   resolveConfig,
   ProxyOptions,
+  createServer,
 } from 'vite';
 import { join, relative } from 'path';
 import { RollupWatcherEvent } from 'rollup';
@@ -51,12 +52,13 @@ export default async function runExecutor(
   const serverConfig: InlineConfig = {
     ...viteBaseConfig,
     configFile:
-      options.configFile === '@nxext/vite/plugin/vite-package'
+      options.configFile === '@nxext/vite/plugins/vite'
         ? false
         : options.configFile
         ? joinPathFragments(`${context.root}/${options.configFile}`)
         : undefined,
     base: options.baseHref ?? '/',
+    root: projectRoot,
     build: {
       ...viteBaseConfig.build,
       outDir: relative(
@@ -79,17 +81,17 @@ export default async function runExecutor(
     },
   };
 
-  const server = await preview(
-    await resolveConfig(serverConfig, 'serve', context.configurationName),
-    {}
-  );
+  const server = await createServer(serverConfig)
+  const devServer = await server.listen()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  printHttpServerUrls(server, serverConfig as any);
-
-  const devProcess = await server.listen();
+  if (typeof (devServer as unknown as {printUrls: unknown}).printUrls === 'function') {
+    (devServer as unknown as {printUrls: () => void}).printUrls()
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    printHttpServerUrls(devServer as any, serverConfig as any);
+  }
   await new Promise<void>((resolve, reject) => {
-    devProcess.on('event', (data: RollupWatcherEvent) => {
+    devServer.watcher.on('event', (data: RollupWatcherEvent) => {
       if (data.code === 'END') {
         resolve();
       } else if (data.code === 'ERROR') {
@@ -98,7 +100,7 @@ export default async function runExecutor(
     });
   });
 
-  await devProcess.close();
+  await server.close();
 
   return { success: true };
 }
