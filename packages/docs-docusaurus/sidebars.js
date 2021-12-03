@@ -87,16 +87,6 @@ module.exports = {
             'solid/generators/component',
           ],
         },
-        {
-          type: 'category',
-          label: 'Executors',
-          items: [
-            'solid/executors/build',
-            'solid/executors/test',
-            'solid/executors/e2e',
-            'solid/executors/serve',
-          ],
-        },
       ],
     },
     {
@@ -108,7 +98,11 @@ module.exports = {
         {
           type: 'category',
           label: 'Executors',
-          items: ['vite/executors/build', 'vite/executors/serve'],
+          items: [
+            'vite/executors/build',
+            'vite/executors/serve',
+            'vite/executors/package',
+          ],
         },
         {
           type: 'category',

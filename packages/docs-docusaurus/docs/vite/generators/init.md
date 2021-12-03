@@ -3,19 +3,18 @@ id: init
 title: Init
 ---
 
-# @nxext/react:init
+# @nxext/vite:init
 
-This schematic installs the following deendencies:
+This schematic installs the following deendency:
 
 ```
-react
-react-dom
+vite
 ```
 
 ## Usage
 
 ```
-nx g @nxext/react:init
+nx g @nxext/vite:init
 ```
 
 ## Options

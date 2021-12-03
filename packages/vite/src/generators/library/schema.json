@@ -8,10 +8,6 @@
     {
       "command": "g lib mylib --directory=myapp",
       "description": "Generate libs/myapp/mylib"
-    },
-    {
-      "command": "g lib mylib --appProject=myapp",
-      "description": "Generate a library with routes and add them to myapp"
     }
   ],
   "properties": {

@@ -22,3 +22,71 @@ yarn add -D @nxext/vite
 #npm
 npm install -D @nxext/vite
 ```
+
+## Proxying to a backend server
+
+Use the [proxying support](https://vitejs.dev/config/#server-proxy) in the `Vite createServer` development server to divert certain URLs to a backend server, by passing a file to the `--proxy-config` build option.
+For example, to divert all calls for `http://localhost:4200/api` to a server running on `http://localhost:3000/api`, take the following steps.
+
+1. Create a file `proxy.conf.json` in your project's `<project>/src/` folder.
+
+1. Add the following content to the new proxy file:
+
+   ```
+   {
+     "/api": {
+       "target": "http://jsonplaceholder.typicode.com"
+     }
+   }
+   ```
+
+1. In the CLI configuration file, `<project>/project.json` or `<root>/workspace.json`, add the `proxyConfig` option to the `serve` target:
+
+   ```
+   ...
+   "targets": {
+     "serve": {
+       "executor": "@nxext/vite:build",
+       ...
+       "options": {
+         "outputPath": "dist/apps/t",
+         "proxyConfig": "apps/my-react/src/proxy.conf.json",
+         ....
+       },
+   ...
+   ```
+
+1. To run the development server with this proxy configuration, call `nx serve`.
+
+Edit the proxy configuration file to add configuration options; following are some examples.
+For a description of all options, see [Vite CreateServer documentation](https://vitejs.dev/config/#server-proxy).
+
+Note that if you edit the proxy configuration file, you must relaunch the `nx serve` process to make your changes effective.
+
+If you need to access a backend that is not on `localhost`, set the `changeOrigin` option as well. For example:
+
+```
+{
+  "/api": {
+    "target": "http://npmjs.org",
+    "changeOrigin": true
+  }
+}
+```
+
+### Rewrite the URL path
+
+> Set the proxy configuration file to `proxy.conf.js` (instead of `proxy.conf.json`), and specify configuration files as in the following example.
+
+The `rewrite` proxy configuration option lets you rewrite the URL path at run time.
+For example, specify the following `rewrite` value to the proxy configuration to remove "api" from the end of a path.
+
+```
+export default {
+  '/api': {
+    target: 'http://jsonplaceholder.typicode.com',
+    changeOrigin: true,
+    rewrite: (path) => path.replace(/^\/api/, '')
+  },
+}
+```

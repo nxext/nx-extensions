@@ -3,37 +3,33 @@ id: application
 title: Application
 ---
 
-# @nxext/react:app
+# @nxext/vite:app
 
-Generates a React application
+Generates a vite application
 
-This schematic also executes the [Init](init) schematic and [Nrwl NX App](https://nx.dev/l/r/react/overview)
+This schematic also executes the [Init](init) schematic
 
 ## Usage
 
 ```
-nx g @nxext/react:app my-lib
+nx g @nxext/vite:app my-lib
 ```
 
 or
 
 ```
-nx g @nxext/react:application my-lib
+nx g @nxext/vite:application my-lib
 ```
 
 ## Options
 
-### classComponent
+### --name (_**required**_)
 
-Alias(es): C
+Type: `string`
 
-Default: `false`
+The name of the application.
 
-Type: `boolean`
-
-Use class components instead of functional component.
-
-### directory
+### --directory
 
 Alias(es): dir
 
@@ -41,23 +37,7 @@ Type: `string`
 
 The directory of the new application.
 
-### globalCss
-
-Default: `false`
-
-Type: `boolean`
-
-Default is false. When true, the component is generated with _.css/_.scss instead of _.module.css/_.module.scss
-
-### js
-
-Default: `false`
-
-Type: `boolean`
-
-Generate JavaScript files rather than TypeScript files.
-
-### linter
+### --linter
 
 Default: `eslint`
 
@@ -66,30 +46,6 @@ Type: `string`
 Possible values: `eslint`, `tslint`
 
 The tool to use for running lint checks.
-
-### name
-
-Type: `string`
-
-The name of the application.
-
-### pascalCaseFiles
-
-Alias(es): P
-
-Default: `false`
-
-Type: `boolean`
-
-Use pascal case component file name (e.g. App.tsx).
-
-### routing
-
-Default: `false`
-
-Type: `boolean`
-
-Generate application with routes.
 
 ### setParserOptionsProject
 
@@ -120,26 +76,6 @@ Skip updating workspace.json with default options based on values provided to th
 Type: `boolean`
 
 Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`
-
-### strict
-
-Default: `true`
-
-Type: `boolean`
-
-Creates an application with strict mode and strict type checking
-
-### style
-
-Alias(es): s
-
-Default: `css`
-
-Type: `string`
-
-Possible values: `css`, `scss`, `styl`, `less`, `styled-components`, `@emotion/styled`, `styled-jsx`, `none`
-
-The file extension to be used for style files.
 
 ### tags
 

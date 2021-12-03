@@ -5,18 +5,18 @@ title: Library
 
 # @nxext/react:lib
 
-Generates a React library
+Generates a vite library
 
 ## Usage
 
 ```
-nx g @nxext/react:lib my-lib
+nx g @nxext/vite:lib my-lib
 ```
 
 or
 
 ```
-nx g @nxext/react:library my-lib
+nx g @nxext/vite:library my-lib
 ```
 
 ## Options
@@ -27,14 +27,6 @@ Type: `string`
 
 Library name
 
-### appProject
-
-Alias(es): a
-
-Type: `string`
-
-The application project to add the library route to.
-
 ### buildable
 
 Default: `false`
@@ -42,14 +34,6 @@ Default: `false`
 Type: `boolean`
 
 Generate a buildable library.
-
-### component
-
-Default: `true`
-
-Type: `boolean`
-
-Generate a default component.
 
 ### directory
 
@@ -59,21 +43,13 @@ Type: `string`
 
 A directory where the lib is placed.
 
-### globalCss
-
-Default: `false`
-
-Type: `boolean`
-
-When true, the stylesheet is generated using global CSS instead of CSS modules (e.g. file is '_.css' rather than '_.module.css').
-
 ### importPath
 
 Type: `string`
 
 The library name used to import it, like @myorg/my-awesome-lib
 
-### js
+### supportTsx
 
 Default: `false`
 
@@ -107,12 +83,6 @@ Type: `boolean`
 
 Create a publishable library.
 
-### routing
-
-Type: `boolean`
-
-Generate library with routes.
-
 ### setParserOptionsProject
 
 Default: `false`
@@ -142,18 +112,6 @@ Default: `true`
 Type: `boolean`
 
 Whether to enable tsconfig strict mode or not.
-
-### style
-
-Alias(es): s
-
-Default: `css`
-
-Type: `string`
-
-Possible values: `css`, `scss`, `styl`, `less`, `styled-components`, `@emotion/styled`, `styled-jsx`, `none`
-
-The file extension to be used for style files.
 
 ### tags
 
