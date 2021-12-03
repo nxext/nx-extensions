@@ -26,7 +26,10 @@ export async function reactInitGenerator(tree: Tree, schema: Schema) {
     jestInstall = await jestInitGenerator(tree, {});
   }
 
-  await nxReactInitGenerator(tree, options);
+  await nxReactInitGenerator(tree, {
+    ...options,
+    e2eTestRunner: 'none',
+  }).then(() => setDefaultCollection(tree, '@nxext/react'));
   await viteInitGenerator(tree, options);
 
   if (!schema.skipFormat) {
@@ -37,7 +40,6 @@ export async function reactInitGenerator(tree: Tree, schema: Schema) {
     if (jestInstall) {
       await jestInstall();
     }
-    setDefaultCollection(tree, '@nxext/react');
   };
 }
 
