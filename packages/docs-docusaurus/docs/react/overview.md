@@ -30,8 +30,8 @@ npm install -D @nxext/react
 
 Our React applications are built using the executors from the [@nxext/vite](../vite/overview.md) plugin.
 
-- [build](../vite/executors/build) - Builds a web components application
-- [dev](..vite/executors/serve) - Builds and serves a web application
+- [build](../vite/executors/build.md) - Builds a web components application
+- [dev](..vite/executors/serve.md) - Builds and serves a web application
 - [package](../vite/executors/package.md) - Bundles artifacts for a buildable library that can be distributed as an NPM package.
 
 ## Generators
@@ -39,6 +39,6 @@ Our React applications are built using the executors from the [@nxext/vite](../v
 We have adapted the @nrwl/react plugin to create to create the scaffolding for the vite builds. For components and redux we still recommend using @nrwl/react
 
 - [application](./generators/application.md) - Create an React application
-- [library](./generators//library) - Create an React library
+- [library](./generators//library.md) - Create an React library
 
 [@nxext/react](https://github.com/nxext/nx-extensions/tree/master/packages/react) is a nx plugin to bring [react](https://reactjs.org/) vite builds to [Nx](https://nx.dev/).
