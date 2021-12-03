@@ -1,0 +1,53 @@
+{
+  "name": "Nxext React",
+  "version": "0.1",
+  "extends": ["@nrwl/workspace"],
+  "schematics": {
+    "application": {
+      "factory": "./src/generators/application/application#applicationSchematic",
+      "schema": "./src/generators/application/schema.json",
+      "aliases": ["app"],
+      "x-type": "application",
+      "description": "Create an application"
+    },
+    "library": {
+      "factory": "./src/generators/library/library#librarySchematic",
+      "schema": "./src/generators/library/schema.json",
+      "aliases": ["lib"],
+      "x-type": "library",
+      "description": "Create a library"
+    },
+    "init": {
+      "factory": "./src/generators/init/init",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initialize the react plugin",
+      "aliases": ["ng-add"],
+      "hidden": true
+    }
+  },
+  "generators": {
+    "application": {
+      "factory": "./src/generators/application/application#applicationGenerator",
+      "schema": "./src/generators/application/schema.json",
+      "aliases": ["app"],
+      "x-type": "application",
+      "description": "Create an application"
+    },
+
+    "library": {
+      "factory": "./src/generators/library/library#libraryGenerator",
+      "schema": "./src/generators/library/schema.json",
+      "aliases": ["lib"],
+      "x-type": "library",
+      "description": "Create a library"
+    },
+
+    "init": {
+      "factory": "./src/generators/init/init#reactSchematic",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initialize the react plugin",
+      "aliases": ["ng-add"],
+      "hidden": true
+    }
+  }
+}

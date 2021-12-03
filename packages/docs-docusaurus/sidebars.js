@@ -108,9 +108,41 @@ module.exports = {
         {
           type: 'category',
           label: 'Executors',
+          items: ['vite/executors/build', 'vite/executors/serve'],
+        },
+        {
+          type: 'category',
+          label: 'Generators',
           items: [
-            'vite/executors/build',
-            'vite/executors/serve',
+            'vite/generators/init',
+            'vite/generators/application',
+            'vite/generators/library',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Migrating from Nrwl/web to Nxext/vite',
+          items: [
+            'vite/migration/migrating-overview',
+            'vite/migration/migrating-from-react',
+            'vite/migration/migrating-from-web',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'React',
+      items: [
+        'react/overview',
+        'react/installation',
+        {
+          type: 'category',
+          label: 'Generators',
+          items: [
+            'react/generators/init',
+            'react/generators/application',
+            'react/generators/library',
           ],
         },
       ],

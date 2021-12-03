@@ -146,7 +146,7 @@ function addProject(host: Tree, options: NormalizedSchema) {
         outputPath: joinPathFragments('dist', options.appSourceRoot),
         packageJson: `${options.projectRoot}/package.json`,
         assets: `/assets`,
-        entryFile: `${options.projectRoot}/src/index.ts`,
+        entryFile: `src/index.ts`,
         viteConfig: `@nxext/vite/plugins/vite-package`,
       },
     };
@@ -239,14 +239,14 @@ function normalizeOptions(host: Tree, options: Schema): NormalizedSchema {
 }
 
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
-  const { libsDir } = getWorkspaceLayout(host);
   return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
-    (json.main = `dist/${libsDir}/${options.projectDirectory}/index.umd.js`),
-      (json.module = `dist/${libsDir}/${options.projectDirectory}/index.es.js`),
+    const name = names(options.name).fileName;
+    (json.main = `./${name}.umd.js`),
+      (json.module = `./${name}.es.js`),
       (json.exports = {
         '.': {
-          import: './dist/index.es.js',
-          require: './dist/index.umd.js',
+          import: `./${name}.es.js`,
+          require: `./${name}.umd.js`,
         },
       });
     json.name = options.importPath;

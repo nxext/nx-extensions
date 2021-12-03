@@ -9,6 +9,11 @@
       "type": "string",
       "description": "The path to vite.config.js file."
     },
+    "frameworkConfigFile": {
+      "type": "string",
+      "description": "The path to vite.config.js for the framework.",
+      "hidden": true
+    },
     "baseHref": {
       "type": "string",
       "description": "Base url for the application being built."

@@ -1,5 +1,11 @@
 import { BuildExecutorSchema } from './schema';
-import { build, InlineConfig, UserConfigExport, UserConfig } from 'vite';
+import {
+  build,
+  InlineConfig,
+  UserConfigExport,
+  UserConfig,
+  mergeConfig,
+} from 'vite';
 import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import { relative } from 'path';
 import baseConfig from '../../../plugins/vite';
@@ -27,34 +33,37 @@ export default async function runExecutor(
     context.configurationName
   );
 
-  const buildConfig: InlineConfig = {
-    root: projectRoot,
-    base: options.baseHref ?? '/',
-    ...viteBaseConfig,
-    build: {
-      ...viteBaseConfig.build,
-      outDir: relative(
-        projectRoot,
-        joinPathFragments(`${context.root}/dist/${projectDir}`)
-      ),
-      emptyOutDir: true,
-      reportCompressedSize: true,
-      cssCodeSplit: true,
-      rollupOptions: {
-        ...(viteBaseConfig.build?.rollupOptions || {}),
-        plugins: [
-          ...(viteBaseConfig.build?.rollupOptions?.plugins || []),
-          replaceFiles(options.fileReplacements),
-        ],
+  let frameworkConfig: UserConfigExport;
+  if (options.frameworkConfigFile) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    frameworkConfig = require(options.frameworkConfigFile)?.default;
+  }
+
+  const buildConfig: InlineConfig = mergeConfig(
+    mergeConfig(viteBaseConfig, frameworkConfig ?? {}, true),
+    {
+      root: projectRoot,
+      base: options.baseHref ?? '/',
+      build: {
+        outDir: relative(
+          projectRoot,
+          joinPathFragments(`${context.root}/dist/${projectDir}`)
+        ),
+        emptyOutDir: true,
+        reportCompressedSize: true,
+        cssCodeSplit: true,
+        rollupOptions: {
+          plugins: [replaceFiles(options.fileReplacements)],
+        },
       },
-    },
-    configFile:
-      options.configFile === '@nxext/vite/plugins/vite'
-        ? false
-        : options.configFile
-        ? joinPathFragments(`${context.root}/${options.configFile}`)
-        : undefined,
-  };
+      configFile:
+        options.configFile === '@nxext/vite/plugins/vite'
+          ? false
+          : options.configFile
+          ? joinPathFragments(`${context.root}/${options.configFile}`)
+          : undefined,
+    }
+  );
 
   try {
     await build(buildConfig);

@@ -20,6 +20,11 @@
       "type": "string",
       "description": "The name of the package.json file"
     },
+    "frameworkConfigFile": {
+      "type": "string",
+      "description": "The path to vite.config.js for the framework.",
+      "hidden": true
+    },
     "configFile": {
       "type": "string",
       "description": "Path to the vite config"
@@ -34,21 +39,16 @@
     },
     "globals": {
       "description": "globals",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "library key"
-          },
-          "value": {
-            "type": "string",
-            "description": "library value"
-          }
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "library key"
         },
-        "additionalProperties": false,
-        "required": ["replace", "with"]
+        "value": {
+          "type": "string",
+          "description": "library value"
+        }
       },
       "default": {}
     }

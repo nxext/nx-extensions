@@ -1,3 +1,5 @@
+import { logger } from '@nrwl/devkit';
+
 /**
  * @function replaceFiles
  * @param {({find: string, replacement: string})[]} replacements
@@ -21,7 +23,7 @@ export function replaceFiles(
       );
 
       if (foundReplace) {
-        console.info(
+        logger.info(
           `replace "${foundReplace.file}" with "${foundReplace.with}"`
         );
 
@@ -31,7 +33,7 @@ export function replaceFiles(
             id: foundReplace.with,
           };
         } catch (err) {
-          console.error(err);
+          logger.error(err);
 
           return null;
         }

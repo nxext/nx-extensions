@@ -13,7 +13,7 @@
     },
     "package": {
       "implementation": "./src/executors/package/package.impl",
-      "schema": "./src/executors/preview/schema.json",
+      "schema": "./src/executors/package/schema.json",
       "description": "Build package"
     }
   }

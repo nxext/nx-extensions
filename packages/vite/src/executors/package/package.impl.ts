@@ -1,5 +1,11 @@
 import { Schema } from './schema';
-import { build, UserConfig, UserConfigExport } from 'vite';
+import {
+  build,
+  InlineConfig,
+  mergeConfig,
+  UserConfig,
+  UserConfigExport,
+} from 'vite';
 import { ExecutorContext, joinPathFragments, names } from '@nrwl/devkit';
 import baseConfig from '../../../plugins/vite-package';
 import { copyFile } from 'fs/promises';
@@ -47,38 +53,49 @@ export default async function runExecutor(
     context.configurationName
   );
 
-  await build({
-    ...viteBaseConfig,
-    configFile:
-      options.configFile === '@nxext/vite/plugins/vite-package'
-        ? false
-        : options.configFile
-        ? joinPathFragments(`${context.root}/${options.configFile}`)
-        : false,
-    root: projectRoot,
-    build: {
-      ...viteBaseConfig.build,
-      outDir: relative(
-        projectRoot,
-        joinPathFragments(`${context.root}/dist/${projectDir}`)
-      ),
-      emptyOutDir: true,
-      reportCompressedSize: true,
-      cssCodeSplit: true,
-    },
-  });
+  let frameworkConfig: UserConfigExport;
+  if (options.frameworkConfigFile) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    frameworkConfig = require(options.frameworkConfigFile)?.default;
+  }
+
+  const buildConfig: InlineConfig = mergeConfig(
+    mergeConfig(viteBaseConfig, frameworkConfig ?? {}, true),
+    {
+      root: projectRoot,
+      build: {
+        outDir: relative(
+          projectRoot,
+          joinPathFragments(`${context.root}/dist/${projectDir}`)
+        ),
+        emptyOutDir: true,
+        reportCompressedSize: true,
+        cssCodeSplit: true,
+      },
+      configFile:
+        options.configFile === '@nxext/vite/plugins/vite-package'
+          ? false
+          : options.configFile
+          ? joinPathFragments(`${context.root}/${options.configFile}`)
+          : false,
+    }
+  );
+
+  await build(buildConfig);
 
   await copyFile(
+    joinPathFragments(options.packageJson ?? `${projectRoot}/package.json`),
     joinPathFragments(
-      `${context.root}/${options.packageJson ?? 'package.json'}`
-    ),
-    options.outputPath
+      `${context.root}/dist/${projectDir}/${
+        options.packageJson ?? 'package.json'
+      }`
+    )
   );
 
   if (options.assets) {
     copyRecursiveSync(
-      `${context.root}/${options.assets}`,
-      joinPathFragments(`${context.root}/${options.assets}`)
+      `${projectRoot}/${options.assets}`,
+      joinPathFragments(`${context.root}/dist/${projectDir}/${options.assets}`)
     );
   }
 
