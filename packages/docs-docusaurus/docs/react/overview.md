@@ -32,7 +32,7 @@ Our React applications are built using the executors from the [@nxext/vite](../v
 
 - [build](../vite/executors/build) - Builds a web components application
 - [dev](..vite/executors/serve) - Builds and serves a web application
-- [package](../vite/executors/package) - Bundles artifacts for a buildable library that can be distributed as an NPM package.
+- [package](../vite/executors/package.md) - Bundles artifacts for a buildable library that can be distributed as an NPM package.
 
 ## Generators
 
