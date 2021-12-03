@@ -38,7 +38,7 @@ Our React applications are built using the executors from the [@nxext/vite](../v
 
 We have adapted the @nrwl/react plugin to create to create the scaffolding for the vite builds. For components and redux we still recommend using @nrwl/react
 
-- [application](./generators/application) - Create an React application
+- [application](./generators/application.md) - Create an React application
 - [library](./generators//library) - Create an React library
 
 [@nxext/react](https://github.com/nxext/nx-extensions/tree/master/packages/react) is a nx plugin to bring [react](https://reactjs.org/) vite builds to [Nx](https://nx.dev/).
