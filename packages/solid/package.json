@@ -1,6 +1,6 @@
 {
   "name": "@nxext/solid",
-  "version": "13.0.0",
+  "version": "13.0.1",
   "license": "MIT",
   "author": "Kristian Mandrup",
   "description": "Nx plugin for solid",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "vite-plugin-solid": "^2.1.2",
-    "@nxext/vite": "^13.0.0",
+    "@nxext/vite": "^13.1.0",
     "@nrwl/devkit": "^13.0.1"
   },
   "nx-migrate": {
