@@ -17,6 +17,7 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
+      frameworkConfigFile: '@nxext/solid/plugins/vite',
     },
     configurations: {
       production: {},
@@ -29,6 +30,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
     executor: '@nxext/vite:dev',
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
+      frameworkConfigFile: '@nxext/solid/plugins/vite',
     },
   };
 }

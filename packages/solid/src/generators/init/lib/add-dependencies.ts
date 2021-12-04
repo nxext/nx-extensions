@@ -6,9 +6,12 @@ export function updateDependencies(tree: Tree) {
     'solid-js': '^1.2.5',
     'solid-testing-library': '^0.2.1',
     vite: '^2.5.7',
-    'vite-plugin-solid': '2.1.2',
     'eslint-plugin-solid': '0.1.2',
   };
 
-  return addDependenciesToPackageJson(tree, {}, devDependencies);
+  return addDependenciesToPackageJson(
+    tree,
+    { 'vite-plugin-solid': '2.1.2' },
+    devDependencies
+  );
 }

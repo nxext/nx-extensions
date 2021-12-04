@@ -1,14 +1,13 @@
 import { DevExecutorSchema } from './schema';
 import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import {
-  preview,
   InlineConfig,
   printHttpServerUrls,
   UserConfig,
   UserConfigExport,
-  resolveConfig,
   ProxyOptions,
   createServer,
+  mergeConfig,
 } from 'vite';
 import { join, relative } from 'path';
 import { RollupWatcherEvent } from 'rollup';
@@ -49,37 +48,39 @@ export default async function runExecutor(
     proxyConfig = require(proxyConfigPath);
   }
 
-  const serverConfig: InlineConfig = {
-    ...viteBaseConfig,
-    configFile:
-      options.configFile === '@nxext/vite/plugins/vite'
-        ? false
-        : options.configFile
-        ? joinPathFragments(`${context.root}/${options.configFile}`)
-        : undefined,
-    base: options.baseHref ?? '/',
-    root: projectRoot,
-    build: {
-      ...viteBaseConfig.build,
-      outDir: relative(
-        projectRoot,
-        joinPathFragments(`${context.root}/dist/${projectDir}`)
-      ),
-      emptyOutDir: true,
-      reportCompressedSize: true,
-      cssCodeSplit: true,
-      rollupOptions: {
-        ...(viteBaseConfig.build?.rollupOptions || {}),
-        plugins: [
-          ...(viteBaseConfig.build?.rollupOptions?.plugins || []),
-          replaceFiles(options.fileReplacements),
-        ],
+  let frameworkConfig: UserConfigExport;
+  if (options.frameworkConfigFile) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    frameworkConfig = require(options.frameworkConfigFile)?.default;
+  }
+  const serverConfig: InlineConfig = mergeConfig(
+    mergeConfig(viteBaseConfig, frameworkConfig ?? {}),
+    {
+      configFile:
+        options.configFile === '@nxext/vite/plugins/vite'
+          ? false
+          : options.configFile
+          ? joinPathFragments(`${context.root}/${options.configFile}`)
+          : undefined,
+      base: options.baseHref ?? '/',
+      root: projectRoot,
+      build: {
+        outDir: relative(
+          projectRoot,
+          joinPathFragments(`${context.root}/dist/${projectDir}`)
+        ),
+        emptyOutDir: true,
+        reportCompressedSize: true,
+        cssCodeSplit: true,
+        rollupOptions: {
+          plugins: [replaceFiles(options.fileReplacements)],
+        },
       },
-    },
-    server: {
-      proxy: proxyConfig,
-    },
-  };
+      server: {
+        proxy: proxyConfig,
+      },
+    } as InlineConfig
+  );
 
   const server = await createServer(serverConfig);
   const devServer = await server.listen();

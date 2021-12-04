@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "docs-docusaurus": "packages/docs-docusaurus",
+    "react": "packages/react",
+    "react-e2e": "e2e/react-e2e",
     "solid": "packages/solid",
     "solid-e2e": "e2e/solid-e2e",
     "stencil": "packages/stencil",
@@ -10,6 +12,7 @@
     "svelte-e2e": "e2e/svelte-e2e",
     "sveltekit": "packages/sveltekit",
     "sveltekit-e2e": "e2e/sveltekit-e2e",
-    "vite": "packages/vite"
+    "vite": "packages/vite",
+    "vite-e2e": "e2e/vite-e2e"
   }
 }

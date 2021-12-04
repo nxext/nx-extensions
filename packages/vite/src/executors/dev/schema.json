@@ -13,6 +13,11 @@
       "type": "string",
       "description": "Base url for the application being built."
     },
+    "frameworkConfigFile": {
+      "type": "string",
+      "description": "The path to vite.config.js for the framework.",
+      "hidden": true
+    },
     "proxyConfig": {
       "type": "string",
       "description": "Path to the proxy configuration file."

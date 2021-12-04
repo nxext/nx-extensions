@@ -47,6 +47,11 @@ const features = [
       <>Simple and performant reactivity for building user interfaces.</>
     ),
   },
+  {
+    title: <>React</>,
+    imageUrl: 'img/react.svg',
+    description: <>A JavaScript library for building user interfaces</>,
+  },
 ];
 
 function Feature({ imageUrl, title, description }) {

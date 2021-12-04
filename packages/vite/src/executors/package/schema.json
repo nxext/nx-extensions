@@ -13,12 +13,21 @@
       "description": "The output path of the generated files."
     },
     "assets": {
-      "type": "string",
-      "description": "The path for assets."
+      "type": "array",
+      "description": "List of static assets.",
+      "default": [],
+      "items": {
+        "$ref": "#/definitions/assetPattern"
+      }
     },
     "packageJson": {
       "type": "string",
       "description": "The name of the package.json file"
+    },
+    "frameworkConfigFile": {
+      "type": "string",
+      "description": "The path to vite.config.js for the framework.",
+      "hidden": true
     },
     "configFile": {
       "type": "string",
@@ -34,23 +43,47 @@
     },
     "globals": {
       "description": "globals",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "library key"
-          },
-          "value": {
-            "type": "string",
-            "description": "library value"
-          }
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "library key"
         },
-        "additionalProperties": false,
-        "required": ["replace", "with"]
+        "value": {
+          "type": "string",
+          "description": "library value"
+        }
       },
       "default": {}
+    }
+  },
+  "required": ["entryFile", "outputPath"],
+  "definitions": {
+    "assetPattern": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "glob": {
+              "type": "string",
+              "description": "The pattern to match."
+            },
+            "input": {
+              "type": "string",
+              "description": "The input directory path in which to apply 'glob'. Defaults to the project root."
+            },
+            "output": {
+              "type": "string",
+              "description": "Relative path within the output folder."
+            }
+          },
+          "additionalProperties": false,
+          "required": ["glob", "input", "output"]
+        },
+        {
+          "type": "string"
+        }
+      ]
     }
   }
 }

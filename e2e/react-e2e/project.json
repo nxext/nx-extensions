@@ -1,0 +1,16 @@
+{
+  "root": "e2e/react-e2e",
+  "projectType": "application",
+  "sourceRoot": "e2e/react-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "./tools/executors/e2e:e2e",
+      "options": {
+        "targets": ["react:build", "vite:build"],
+        "jestConfig": "e2e/react-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["react", "vite"]
+}

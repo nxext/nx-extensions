@@ -1,0 +1,38 @@
+---
+id: installation
+title: Installation
+---
+
+# Getting Started
+
+At this current moment we don't have an out of the back workspace setup. In order to use nxext/react you need to create a new NX workspace.
+
+```bash
+npx create-nx-workspace --preset=empty
+```
+
+After creating the blank workspace. Run the following commands
+
+```
+yarn add @nxext/react
+```
+
+or
+
+```
+npm install @nxext/react --save
+```
+
+## Generating scaffolding
+
+### Application
+
+```bash
+npx nx g @nxext/react:app [name]
+```
+
+### Library
+
+```bash
+npx nx g @nxext/react:lib [name]
+```

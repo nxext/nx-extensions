@@ -30,14 +30,16 @@ function createBuildTarget(
   options: NormalizedSchema
 ): TargetConfiguration {
   const { libsDir } = getWorkspaceLayout(tree);
+
   return {
-    executor: '@nxext/vite:build',
+    executor: '@nxext/vite:package',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: `dist/${libsDir}/${options.projectDirectory}`,
-      entryFile: `${options.projectRoot}/src/index.ts`,
+      entryFile: `src/index.ts`,
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,
       assets: [{ glob: '/*', input: './public/**', output: './' }],
+      frameworkConfigFile: '@nxext/solid/plugins/vite',
     },
     configurations: {
       production: {
