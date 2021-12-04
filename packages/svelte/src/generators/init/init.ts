@@ -25,7 +25,7 @@ export async function initGenerator(host: Tree, schema: Schema) {
 
   const linterTask = addLinterPlugin(host);
   tasks.push(linterTask);
-  const installTask = updateDependencies(host, schema);
+  const installTask = updateDependencies(host);
   tasks.push(installTask);
 
   if (!schema.skipFormat) {

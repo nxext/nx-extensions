@@ -6,7 +6,12 @@ import {
   UserConfig,
   UserConfigExport,
 } from 'vite';
-import { ExecutorContext, joinPathFragments, names } from '@nrwl/devkit';
+import {
+  ExecutorContext,
+  joinPathFragments,
+  logger,
+  names,
+} from '@nrwl/devkit';
 import baseConfig from '../../../plugins/vite-package';
 import { copyFile } from 'fs/promises';
 import { relative } from 'path';
@@ -86,6 +91,7 @@ export default async function runExecutor(
     );
   }
 
+  logger.info('Bundle complete.');
   return {
     success: true,
   };
