@@ -47,6 +47,11 @@ const features = [
       <>Simple and performant reactivity for building user interfaces.</>
     ),
   },
+  {
+    title: <>Vite</>,
+    imageUrl: 'img/vite.svg',
+    description: <>Next Generation Frontend Tooling</>,
+  },
   /*{
     title: <>React</>,
     imageUrl: 'img/react.svg',
