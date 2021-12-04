@@ -12,6 +12,7 @@
     "svelte-e2e": "e2e/svelte-e2e",
     "sveltekit": "packages/sveltekit",
     "sveltekit-e2e": "e2e/sveltekit-e2e",
-    "vite": "packages/vite"
+    "vite": "packages/vite",
+    "vite-e2e": "e2e/vite-e2e"
   }
 }

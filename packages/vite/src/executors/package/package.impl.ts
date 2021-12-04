@@ -14,6 +14,7 @@ import { join, relative } from 'path';
 
 function copyRecursiveSync(src: string, dest: string) {
   const exists = existsSync(src);
+  if (!exists) return;
   const stats = exists && statSync(src);
   const isDirectory = exists && stats.isDirectory();
   if (isDirectory) {

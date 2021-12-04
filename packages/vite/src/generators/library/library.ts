@@ -28,11 +28,9 @@ export interface NormalizedSchema extends Schema {
   name: string;
   fileName: string;
   projectRoot: string;
-  routePath: string;
   projectDirectory: string;
   parsedTags: string[];
   appMain?: string;
-  appSourceRoot?: string;
 }
 
 export async function libraryGenerator(host: Tree, schema: Schema) {
@@ -143,9 +141,9 @@ function addProject(host: Tree, options: NormalizedSchema) {
       executor: '@nxext/vite:package',
       outputs: ['{options.outputPath}'],
       options: {
-        outputPath: joinPathFragments('dist', options.appSourceRoot),
-        packageJson: `${options.projectRoot}/package.json`,
-        assets: `/assets`,
+        outputPath: joinPathFragments('dist', options.projectRoot),
+        packageJson: `package.json`,
+        assets: `assets`,
         entryFile: `src/index.ts`,
         viteConfig: `@nxext/vite/plugins/vite-package`,
       },
@@ -227,7 +225,6 @@ function normalizeOptions(host: Tree, options: Schema): NormalizedSchema {
   const normalized: NormalizedSchema = {
     ...options,
     fileName,
-    routePath: `/${name}`,
     name: projectName,
     projectRoot,
     projectDirectory,
