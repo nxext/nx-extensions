@@ -52,26 +52,23 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
 
-  const projectConfig = readProjectConfiguration(tree, options.name);
-  updateProjectConfiguration(tree, options.name, {
+  const projectConfig = readProjectConfiguration(tree, appProjectName);
+  updateProjectConfiguration(tree, appProjectName, {
     ...projectConfig,
     targets: {
       ...projectConfig.targets,
       build: {
         ...projectConfig.targets.build,
-        executor: options.publishable
-          ? '@nxext/vite:package'
-          : '@nxext/vite:build',
+        executor:
+          options.publishable || options.buildable
+            ? '@nxext/vite:package'
+            : '@nxext/vite:build',
         outputs: ['{options.outputPath}'],
         options: {
           outputPath: joinPathFragments('dist', libProjectRoot),
-          configFile: options.publishable
-            ? '@nxext/vite/plugins/vite-package'
-            : '@nxext/vite/plugins/vite',
+          configFile: '@nxext/vite/plugins/vite-package',
           frameworkConfigFile: '@nxext/react/plugins/vite',
-          ...(options.publishable
-            ? { entryFile: joinPathFragments('src', 'index.ts') }
-            : {}),
+          entryFile: joinPathFragments('src', 'index.ts'),
         },
       },
     },
@@ -98,7 +95,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     }
   );
 
-  if (options.publishable) {
+  if (options.publishable || options.buildable) {
     updateLibPackageNpmScope(tree, libProjectRoot, appProjectName);
   }
   if (!options.skipFormat) {

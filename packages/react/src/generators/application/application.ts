@@ -45,8 +45,8 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
       `${fileName}.${options.js ? 'jsx' : 'tsx'}`
     )
   );
-  const projectConfig = readProjectConfiguration(tree, options.name);
-  updateProjectConfiguration(tree, options.name, {
+  const projectConfig = readProjectConfiguration(tree, appProjectName);
+  updateProjectConfiguration(tree, appProjectName, {
     ...projectConfig,
     targets: {
       ...projectConfig.targets,

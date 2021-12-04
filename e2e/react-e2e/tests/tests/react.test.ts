@@ -38,7 +38,7 @@ describe('react e2e', () => {
     it('should generate app into directory', async () => {
       await runNxCommandAsync(`generate @nxext/react:app project/ui`);
       expect(() =>
-        checkFilesExist(`apps/project/ui/src/App.tsx`)
+        checkFilesExist(`apps/project/ui/src/main.tsx`)
       ).not.toThrow();
     });
 
