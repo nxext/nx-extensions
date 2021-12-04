@@ -13,7 +13,7 @@ module.exports = {
       logo: {
         alt: 'Nxext Logo',
         src: 'img/logo-dark.svg',
-        srcDark: 'img/logo-light.svg'
+        srcDark: 'img/logo-light.svg',
       },
       items: [
         {
@@ -42,14 +42,18 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/nxext/nx-extensions/edit/master/packages/docs/docs',
+          editUrl: 'https://github.com/nxext/nx-extensions/edit/master/packages/docs/docs',
+          remarkPlugins: [
+            [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+          ],
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/nxext/nx-extensions/edit/master/packages/docs/blog/',
+          editUrl: 'https://github.com/nxext/nx-extensions/edit/master/packages/docs/blog/',
+          remarkPlugins: [
+            [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+          ],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

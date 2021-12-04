@@ -1,12 +1,12 @@
 ---
-id: build
-title: Build
+id: serve
+title: Serve
 ---
 
 ## Usage
 
 ```
-nx build my-app
+nx serve my-app
 ```
 
 ## Options
@@ -68,7 +68,6 @@ Default: `false`
 Type: `boolean`
 
 Stencil doesn't prerender components by default. However, the build can be made to prerender using the --prerender flag
-
 
 ### --open
 

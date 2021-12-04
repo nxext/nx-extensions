@@ -25,7 +25,7 @@ autoprefixer
 
 ## Usage
 
-*Not meant to be used by the users*
+_Not meant to be used by the users_
 
 ## Options
 

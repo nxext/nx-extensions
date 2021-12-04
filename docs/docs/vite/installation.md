@@ -13,13 +13,7 @@ npx create-nx-workspace --preset=empty
 
 After creating the blank workspace. Run the following commands
 
-```
-yarn add @nxext/vite
-```
-
-or
-
-```
+```bash npm2yarn
 npm install @nxext/vite --save
 ```
 

@@ -1,13 +1,12 @@
 ---
-id: serve
-title: Serve
+id: build
+title: Build
 ---
-
 
 ## Usage
 
 ```
-nx serve my-app
+nx build my-app
 ```
 
 ## Options
@@ -29,6 +28,28 @@ The name of the Typescript configuration file.
 Type: `string`
 
 The name of the main entry-point file.
+
+### --rollupConfig
+
+Default: `null`
+
+Type: `string`
+
+Path to a function which takes a rollup config and SvelteBuildOptions object and returns an updated rollup config
+
+### --svelteConfig
+
+Default: `null`
+
+Type: `string`
+
+Path to a svelte.config.js file, which exports a svelte config for the svelte-rollup-plugin.
+
+### --sveltePreprocessConfig
+
+Default: `null`
+
+Path to a function which takes SvelteBuildOptions object and returns an new sveltePreprocessor options object.
 
 ### --assets
 
@@ -62,14 +83,6 @@ Type: `boolean`
 
 Is prod build
 
-### --prerender
-
-Default: `false`
-
-Type: `boolean`
-
-Stencil doesn't prerender components by default. However, the build can be made to prerender using the --prerender flag
-
 ### --open
 
 Default: `false`
@@ -94,8 +107,17 @@ Type: `string`
 
 Host to listen on.
 
-### --tsConfig
+### --headers
 
-Type: `string`
+Default: '[]'
 
-The path to tsconfig file.
+Type: `array`
+
+List of http headers for the dev-server. The entries, as an object like:
+
+```
+{
+  key: 'Access-Control-Allow-Origin',
+  value: '*'
+}
+```
