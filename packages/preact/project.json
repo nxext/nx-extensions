@@ -1,0 +1,68 @@
+{
+  "root": "packages/preact",
+  "sourceRoot": "packages/preact/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/preact/**/*.ts",
+          "packages/preact/**/*.spec.ts",
+          "packages/preact/**/*.spec.tsx",
+          "packages/preact/**/*.spec.js",
+          "packages/preact/**/*.spec.jsx",
+          "packages/preact/**/*.d.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "packages/preact/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/packages/preact"]
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "options": {
+        "outputPath": "dist/packages/preact",
+        "tsConfig": "packages/preact/tsconfig.lib.json",
+        "packageJson": "packages/preact/package.json",
+        "main": "packages/preact/src/index.ts",
+        "assets": [
+          "packages/preact/*.md",
+          {
+            "input": "./packages/preact/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/preact/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/preact",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/preact",
+            "glob": "builders.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/preact",
+            "glob": "migrations.json",
+            "output": "."
+          }
+        ]
+      },
+      "outputs": ["{options.outputPath}"]
+    }
+  },
+  "tags": []
+}
