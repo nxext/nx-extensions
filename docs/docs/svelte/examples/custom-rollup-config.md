@@ -7,13 +7,14 @@ The build option `rollupConfig` takes the path to a function which takes a rollu
 
 ```js
 module.exports = (config, options) => {
-
   const production = options.prod;
   const predefinedPluginsToExclude = ['svelte'];
 
-  config.output.file = 'some/output/path/file.js'
-  
-  let filteredPredefinedPlugins = config.plugins.filter(plugin => !predefinedPluginsToExclude.includes(plugin?.name));
+  config.output.file = 'some/output/path/file.js';
+
+  let filteredPredefinedPlugins = config.plugins.filter(
+    (plugin) => !predefinedPluginsToExclude.includes(plugin?.name)
+  );
 
   let myPlugins = [
     ...filteredPredefinedPlugins,
@@ -21,16 +22,14 @@ module.exports = (config, options) => {
       preprocess: sveltePreprocess({ sourceMap: !production }),
       compilerOptions: {
         dev: !production,
-        customElement: true
-      }
+        customElement: true,
+      },
     }),
   ];
-    
+
   return {
     ...config,
     plugins: myPlugins,
   };
-}
-
+};
 ```
-

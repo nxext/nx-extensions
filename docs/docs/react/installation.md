@@ -13,13 +13,7 @@ npx create-nx-workspace --preset=empty
 
 After creating the blank workspace. Run the following commands
 
-```
-yarn add @nxext/react
-```
-
-or
-
-```
+```bash npm2yarn
 npm install @nxext/react --save
 ```
 

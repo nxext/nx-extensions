@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "docs-docusaurus": "packages/docs-docusaurus",
+    "docs": "docs",
     "react": "packages/react",
     "react-e2e": "e2e/react-e2e",
     "solid": "packages/solid",

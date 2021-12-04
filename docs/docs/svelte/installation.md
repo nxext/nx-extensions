@@ -5,12 +5,6 @@ title: Installation
 
 Add this plugin to an Nx workspace:
 
-```
-yarn add @nxext/svelte
-```
-
-or
-
-```
+```bash npm2yarn
 npm install @nxext/svelte --save
 ```
