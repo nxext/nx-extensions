@@ -124,7 +124,7 @@ module.exports = {
         },
       ],
     },
-    /*{
+    {
       type: 'category',
       label: 'React',
       items: [
@@ -140,6 +140,6 @@ module.exports = {
           ],
         },
       ],
-    },*/
+    },
   ],
 };

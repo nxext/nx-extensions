@@ -52,11 +52,11 @@ const features = [
     imageUrl: 'img/vite.svg',
     description: <>Next Generation Frontend Tooling</>,
   },
-  /*{
+  {
     title: <>React</>,
     imageUrl: 'img/react.svg',
     description: <>A JavaScript library for building user interfaces</>,
-  },*/
+  },
 ];
 
 function Feature({ imageUrl, title, description }) {
