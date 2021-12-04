@@ -83,8 +83,6 @@ describe('solid e2e', () => {
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain('Bundle complete');
-
       expect(() =>
         checkFilesExist(
           `dist/libs/${plugin}/${plugin}.es.js`,
