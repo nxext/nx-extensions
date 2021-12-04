@@ -3,10 +3,10 @@ import {
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
-  joinPathFragments, logger,
+  joinPathFragments,
   names,
-  offsetFromRoot, stripIndents,
-  Tree
+  offsetFromRoot,
+  Tree,
 } from '@nrwl/devkit';
 import { NormalizedSchema, SvelteApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
@@ -55,13 +55,6 @@ function createFiles(host: Tree, options: NormalizedSchema) {
       offsetFromRoot: offsetFromRoot(options.projectRoot),
     }
   );
-
-  if (options?.bundler === 'vite') {
-    host.delete(joinPathFragments(`${options.projectRoot}/public/index.html`));
-  } else {
-    host.delete(joinPathFragments(options.projectRoot,'index.html'));
-    host.delete(joinPathFragments(options.projectRoot,'vite.config.js'));
-  }
 }
 
 export async function applicationGenerator(
@@ -82,14 +75,6 @@ export async function applicationGenerator(
 
   if (!options.skipFormat) {
     await formatFiles(tree);
-  }
-
-  if(options.bundler === 'vite') {
-    logger.info(stripIndents`
-    ****************************************************
-    **  The Vite feature is experimental, be aware!!  **
-    ****************************************************
-    `);
   }
 
   return runTasksInSerial(initTask, lintTask, jestTask, cypressTask);

@@ -10,7 +10,6 @@ export interface SvelteApplicationSchema {
   directory?: string;
   host?: string;
   port?: number;
-  bundler?: 'rollup' | 'vite';
 }
 
 export interface NormalizedSchema extends SvelteApplicationSchema {

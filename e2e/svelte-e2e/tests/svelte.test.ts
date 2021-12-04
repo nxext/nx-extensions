@@ -106,63 +106,11 @@ describe('svelte e2e', () => {
       expect(result.stdout).toContain('Bundle complete');
 
       expect(() =>
-        checkFilesExist(`dist/libs/${plugin}/bundle.js`)
+        checkFilesExist(
+          `dist/libs/${plugin}/${plugin}.es.js`,
+          `dist/libs/${plugin}/${plugin}.umd.js`
+        )
       ).not.toThrow();
-    });
-  });
-
-  describe('Svelte vite app', () => {
-    it('should build svelte application', async () => {
-      const plugin = uniq('svelte');
-      await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --bundler=vite`
-      );
-
-      const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain('Bundle complete');
-
-      expect(() =>
-        checkFilesExist(`dist/apps/${plugin}/index.html`)
-      ).not.toThrow();
-    });
-
-    it('should add tags to project', async () => {
-      const plugin = uniq('sveltetags');
-      await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --tags e2etag,e2ePackage --bundler=vite`
-      );
-      const project = readJson(`apps/${plugin}/project.json`);
-      expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
-    });
-
-    it('should generate app into directory', async () => {
-      await runNxCommandAsync(
-        `generate @nxext/svelte:app project/uivite --bundler=vite`
-      );
-      expect(() =>
-        checkFilesExist(`apps/project/ui/src/main.ts`)
-      ).not.toThrow();
-    });
-
-    it('should be able to run linter', async () => {
-      const plugin = uniq('sveltelint');
-      await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --bundler=vite`
-      );
-
-      const result = await runNxCommandAsync(`lint ${plugin}`);
-      expect(result.stdout).toContain('All files pass linting');
-    });
-
-    it('should add a experimental note', async () => {
-      const plugin = uniq('sveltenote');
-      const result = await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --bundler=vite`
-      );
-
-      expect(result.stdout).toContain(
-        'The Vite feature is experimental, be aware!!'
-      );
     });
   });
 });

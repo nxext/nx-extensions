@@ -10,6 +10,12 @@
       "description": "update-11-3-0",
       "cli": "nx",
       "implementation": "./src/migrations/update-11-3-0/add-dependencies-installed-automatically-now"
+    },
+    "update-13-1-0": {
+      "version": "13.1.0",
+      "description": "update-13-1-0",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-13-1-0/update-13-1-0"
     }
   }
 }
