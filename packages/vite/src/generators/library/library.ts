@@ -143,7 +143,7 @@ function addProject(host: Tree, options: NormalizedSchema) {
       options: {
         outputPath: joinPathFragments('dist', options.projectRoot),
         packageJson: `package.json`,
-        assets: `assets`,
+        assets: [`assets`],
         entryFile: `src/index.ts`,
         viteConfig: `@nxext/vite/plugins/vite-package`,
       },

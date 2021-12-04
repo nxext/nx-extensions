@@ -56,3 +56,9 @@ make sure to externalize deps that shouldn't be bundled into your library
 Type: `string`
 
 This is the framework vite.config.js file. This property is hidden from the schema requirements, but should be use when building an extention ontop of `@nxext/vite`. For reference checkout our react plugin
+
+### --assets
+
+Type: `array`
+
+List of static assets.

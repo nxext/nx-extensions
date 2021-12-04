@@ -9,23 +9,8 @@ import {
 import { ExecutorContext, joinPathFragments, names } from '@nrwl/devkit';
 import baseConfig from '../../../plugins/vite-package';
 import { copyFile } from 'fs/promises';
-import { existsSync, statSync, mkdirSync, readdirSync, copyFileSync } from 'fs';
-import { join, relative } from 'path';
-
-function copyRecursiveSync(src: string, dest: string) {
-  const exists = existsSync(src);
-  if (!exists) return;
-  const stats = exists && statSync(src);
-  const isDirectory = exists && stats.isDirectory();
-  if (isDirectory) {
-    mkdirSync(dest);
-    readdirSync(src).forEach(function (childItemName) {
-      copyRecursiveSync(join(src, childItemName), join(dest, childItemName));
-    });
-  } else {
-    copyFileSync(src, dest);
-  }
-}
+import { relative } from 'path';
+import { copyAssets } from '@nrwl/workspace/src/utilities/assets';
 
 async function ensureUserConfig(
   config: UserConfigExport,
@@ -94,9 +79,10 @@ export default async function runExecutor(
   );
 
   if (options.assets) {
-    copyRecursiveSync(
-      `${projectRoot}/${options.assets}`,
-      joinPathFragments(`${context.root}/dist/${projectDir}/${options.assets}`)
+    copyAssets(
+      options.assets,
+      context.root,
+      joinPathFragments(context.root, 'dist', projectDir)
     );
   }
 

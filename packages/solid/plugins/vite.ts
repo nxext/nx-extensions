@@ -1,10 +1,10 @@
-import { defineConfig } from "vite";
-import solidPlugin from "vite-plugin-solid";
+// vite.config.js
+import { defineConfig } from 'vite';
+const solidPlugin = require('vite-plugin-solid');
 
 export default defineConfig({
   plugins: [solidPlugin()],
   build: {
-    target: "esnext",
     polyfillDynamicImport: false,
   },
 });

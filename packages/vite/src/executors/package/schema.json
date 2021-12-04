@@ -13,8 +13,12 @@
       "description": "The output path of the generated files."
     },
     "assets": {
-      "type": "string",
-      "description": "The path for assets."
+      "type": "array",
+      "description": "List of static assets.",
+      "default": [],
+      "items": {
+        "$ref": "#/definitions/assetPattern"
+      }
     },
     "packageJson": {
       "type": "string",
@@ -51,6 +55,35 @@
         }
       },
       "default": {}
+    }
+  },
+  "required": ["entryFile", "outputPath"],
+  "definitions": {
+    "assetPattern": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "glob": {
+              "type": "string",
+              "description": "The pattern to match."
+            },
+            "input": {
+              "type": "string",
+              "description": "The input directory path in which to apply 'glob'. Defaults to the project root."
+            },
+            "output": {
+              "type": "string",
+              "description": "Relative path within the output folder."
+            }
+          },
+          "additionalProperties": false,
+          "required": ["glob", "input", "output"]
+        },
+        {
+          "type": "string"
+        }
+      ]
     }
   }
 }
