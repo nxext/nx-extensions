@@ -1,9 +1,18 @@
 {
   "name": "@nxext/react",
-  "version": "0.0.1",
+  "version": "13.0.0",
+  "author": "Jordan Hall",
+  "description": "Nx plugin for solid",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "react"
+  ],
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
+    "@nxext/vite": "^13.1.0",
     "@nrwl/react": "^13.2.3",
     "@vitejs/plugin-react": "^1.1.0"
   },
