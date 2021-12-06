@@ -1,6 +1,5 @@
 import * as ts from 'typescript';
 
-import { ProjectType } from '@nrwl/workspace';
 import { SolidComponentSchema } from '../component';
 import {
   applyChangesToString,
@@ -20,7 +19,7 @@ export function addExportsToBarrel(tree: Tree, options: SolidComponentSchema) {
   const indexFilePath = joinPathFragments(projectConfig.sourceRoot, 'index.ts');
   const componentFile = `./components/${fileName}/${className}.ts`;
 
-  if (projectConfig.projectType === ProjectType.Library) {
+  if (projectConfig.projectType === "library") {
     const { content, source } = readSourceFile(tree, indexFilePath);
 
     const changes = applyChangesToString(

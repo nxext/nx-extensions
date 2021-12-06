@@ -1,5 +1,4 @@
 import { NormalizedSchema } from '../schema';
-import { ProjectType } from '@nrwl/workspace';
 import {
   addProjectConfiguration,
   getWorkspaceLayout,
@@ -19,7 +18,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
   addProjectConfiguration(tree, options.name, {
     root: options.projectRoot,
     sourceRoot: `${options.projectRoot}/src`,
-    projectType: ProjectType.Library,
+    projectType: "library",
     tags: options.parsedTags,
     targets,
   });
