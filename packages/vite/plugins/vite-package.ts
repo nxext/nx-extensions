@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
 export default ({
   name,
   external,
@@ -12,7 +14,7 @@ export default ({
 }) =>
   defineConfig(() => {
     return {
-      plugins: [],
+      plugins: [tsconfigPaths({ projects: ['tsconfig.lib.json'] })],
       build: {
         target: 'esnext',
         lib: {
