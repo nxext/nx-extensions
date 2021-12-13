@@ -62,7 +62,10 @@ export default async function runExecutor(
           : options.configFile
           ? joinPathFragments(`${context.root}/${options.configFile}`)
           : undefined,
-    }
+      esbuild: {
+        tsconfigRaw: joinPathFragments(projectRoot, 'tsconfig.app.json'),
+      },
+    } as InlineConfig
   );
 
   try {
