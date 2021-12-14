@@ -6,6 +6,7 @@ export function updateDependencies(tree: Tree) {
     vite: '^2.5.7',
     '@testing-library/preact': '^2.0.1',
     '@preact/preset-vite': '^2.1.5',
+    'eslint-plugin-preact': '^1.2.0',
   };
 
   return addDependenciesToPackageJson(tree, {}, devDependencies);
