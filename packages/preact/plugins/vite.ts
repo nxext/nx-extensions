@@ -1,9 +1,7 @@
 // vite.config.js
 import { defineConfig } from 'vite';
 
-// using import {} changes on build to solidPlugin.default when it shouldn't be
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import preact from '@vitejs/plugin-react';
+import preact from '@preact/preset-vite';
 
 export default defineConfig({
   plugins: [preact()],
