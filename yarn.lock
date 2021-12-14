@@ -2337,18 +2337,6 @@
     yargs "15.4.1"
     yargs-parser "20.0.0"
 
-"@nrwl/cli@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-13.2.3.tgz#a0cf0d0d8f7e3c5475b4bed6c6d4c4c16d889b84"
-  integrity sha512-4hrOYQ9MqhWOdjQTwuQqHTfPu8lYgdFCE39PVWAcePtoi67mUeba54HkyT6nkTHI1TbO7q8Kf+R73dRhhxDlpA==
-  dependencies:
-    "@nrwl/tao" "13.2.3"
-    chalk "4.1.0"
-    enquirer "~2.3.6"
-    v8-compile-cache "2.3.0"
-    yargs "15.4.1"
-    yargs-parser "20.0.0"
-
 "@nrwl/cypress@13.1.4":
   version "13.1.4"
   resolved "https://registry.npmjs.org/@nrwl/cypress/-/cypress-13.1.4.tgz"
@@ -2380,18 +2368,6 @@
     rxjs "^6.5.4"
     semver "7.3.4"
     tslib "^2.0.0"
-
-"@nrwl/devkit@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-13.2.3.tgz#34c8cda7ef5d0e618a7522dbbed6ac37a961302b"
-  integrity sha512-/cp8hFclOXSAjj9pwb6bOU8yw593HfelcCBi8o8Jhb0Luhn1RzLCOpmHNsOf2hWzSUPEr0BuI0R55ubCEB+k6A==
-  dependencies:
-    "@nrwl/tao" "13.2.3"
-    ejs "^3.1.5"
-    ignore "^5.0.4"
-    rxjs "^6.5.4"
-    semver "7.3.4"
-    tslib "^2.3.0"
 
 "@nrwl/devkit@^12.6.0":
   version "12.10.0"
@@ -2433,23 +2409,6 @@
     rxjs "^6.5.4"
     tslib "^2.0.0"
 
-"@nrwl/jest@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-13.2.3.tgz#0902a9637d4d1a5ec6c07ad9c9091fda77603686"
-  integrity sha512-M9/x0uZNSVKkcyNHcA2+Muj23KRo9SDiCsTb7HnkHhtSbhIWMd1knKP45bOr8CjeeiKNPeervx7uiN5516z8JA==
-  dependencies:
-    "@jest/reporters" "27.2.2"
-    "@jest/test-result" "27.2.2"
-    "@nrwl/devkit" "13.2.3"
-    chalk "4.1.0"
-    identity-obj-proxy "3.0.0"
-    jest-config "27.2.2"
-    jest-resolve "27.2.2"
-    jest-util "27.2.0"
-    resolve.exports "1.1.0"
-    rxjs "^6.5.4"
-    tslib "^2.3.0"
-
 "@nrwl/linter@13.1.4":
   version "13.1.4"
   resolved "https://registry.npmjs.org/@nrwl/linter/-/linter-13.1.4.tgz"
@@ -2462,19 +2421,6 @@
     minimatch "3.0.4"
     tmp "~0.2.1"
     tslib "^2.0.0"
-
-"@nrwl/linter@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/linter/-/linter-13.2.3.tgz#39afeff12cf5d5678d521efb52b3fb11a80da77b"
-  integrity sha512-kdzPWYzR96XYghJ5yIaYSybDrtcAcSxgcscwP1UWvME19O2W8DHbhIj3AzBgjSG0X6hBEh6k9kpyQ49jNkUMCw==
-  dependencies:
-    "@nrwl/devkit" "13.2.3"
-    "@nrwl/jest" "13.2.3"
-    eslint "7.32.0"
-    glob "7.1.4"
-    minimatch "3.0.4"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
 
 "@nrwl/node@13.1.4":
   version "13.1.4"
@@ -2504,38 +2450,10 @@
     webpack-merge "^5.8.0"
     webpack-node-externals "^3.0.0"
 
-"@nrwl/node@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/node/-/node-13.2.3.tgz#b8592308fc7ff5ce40dc64ae26e91eb66a9a835e"
-  integrity sha512-wBNRsiKbnV0o115Osi4WRpGYgvgcTd6zSNbk5bKGDil0wxXO0mFaLdDNvsAocGE/FjWKlOpeq26QG8w/do7zrQ==
-  dependencies:
-    "@nrwl/devkit" "13.2.3"
-    "@nrwl/jest" "13.2.3"
-    "@nrwl/linter" "13.2.3"
-    "@nrwl/workspace" "13.2.3"
-    chalk "4.1.0"
-    copy-webpack-plugin "^9.0.1"
-    enhanced-resolve "^5.8.3"
-    fork-ts-checker-webpack-plugin "6.2.10"
-    fs-extra "^9.1.0"
-    glob "7.1.4"
-    license-webpack-plugin "2.3.15"
-    rxjs "^6.5.4"
-    rxjs-for-await "0.0.2"
-    source-map-support "0.5.19"
-    tree-kill "1.2.2"
-    ts-loader "^9.2.6"
-    tsconfig-paths "^3.9.0"
-    tsconfig-paths-webpack-plugin "3.4.1"
-    tslib "^2.3.0"
-    webpack "^5.58.1"
-    webpack-merge "^5.8.0"
-    webpack-node-externals "^3.0.0"
-
-"@nrwl/nx-cloud@12.5.4":
-  version "12.5.4"
-  resolved "https://registry.npmjs.org/@nrwl/nx-cloud/-/nx-cloud-12.5.4.tgz"
-  integrity sha512-FHNTF0S1dMPddDstY6MUjZ30f99wVnZ46Q8r5plASxBPUvPAqPI8TRYzYTcPSAcf7s5NB3lAnLXw0wvN+8+4Ig==
+"@nrwl/nx-cloud@13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx-cloud/-/nx-cloud-13.0.0.tgz#24d01bc8c20ee6eeb66fd6b0499d3396cc5e5993"
+  integrity sha512-zx212AYO5Goz7QPPbjYcS+pXaoNXbTJi8ahgW5Q7r7E9wDTZhHbZZ++ds2qMB3WHWP63soq98VmDlxYRFV7lGA==
   dependencies:
     axios "^0.21.1"
     chalk "4.1.0"
@@ -2544,18 +2462,18 @@
     strip-json-comments "^3.1.1"
     tar "6.1.11"
 
-"@nrwl/nx-plugin@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx-plugin/-/nx-plugin-13.2.3.tgz#da01bbea9a21235a7175b4237eb454c3a7af9d37"
-  integrity sha512-xYpkcR1ff5Z5L20Da3KyHl9V32Kts8CvVrnNmS/+w9cv4NQ73qzBsS4ko0BkpNoyNgG+l8B3IezoCXJB/nOh1A==
+"@nrwl/nx-plugin@13.1.4":
+  version "13.1.4"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx-plugin/-/nx-plugin-13.1.4.tgz#e1b49832870cf7020cc46271b206616dad96d34c"
+  integrity sha512-c1/bRup/viZGRGe0zThR4H4Cd5pa7dfd2bikANYv2pGGoId9WdwH3Yusd229uzHBY9ZZ4YkvqP6NXiQz4sZaPw==
   dependencies:
-    "@nrwl/devkit" "13.2.3"
-    "@nrwl/jest" "13.2.3"
-    "@nrwl/linter" "13.2.3"
-    "@nrwl/node" "13.2.3"
+    "@nrwl/devkit" "13.1.4"
+    "@nrwl/jest" "13.1.4"
+    "@nrwl/linter" "13.1.4"
+    "@nrwl/node" "13.1.4"
     fs-extra "^9.1.0"
     rxjs "^6.5.4"
-    tslib "^2.3.0"
+    tslib "^2.0.0"
     yargs "15.4.1"
 
 "@nrwl/react@13.1.4":
@@ -2632,23 +2550,6 @@
     semver "7.3.4"
     tmp "~0.2.1"
     tslib "^2.0.0"
-    yargs-parser "20.0.0"
-
-"@nrwl/tao@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-13.2.3.tgz#f0ca4b08258bbc280d67dae039a2d4fda5830557"
-  integrity sha512-vn+GqvFVinqAXzvbHznPBtCg9OCfirh3hF68sZgY2C6jZ3m47XwST3mLTRSDTtSDy9QfUrSZ6p4uAk2Iht0yBQ==
-  dependencies:
-    chalk "4.1.0"
-    enquirer "~2.3.6"
-    fs-extra "^9.1.0"
-    jsonc-parser "3.0.0"
-    nx "13.2.3"
-    rxjs "^6.5.4"
-    rxjs-for-await "0.0.2"
-    semver "7.3.4"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
     yargs-parser "20.0.0"
 
 "@nrwl/web@13.1.4":
@@ -2768,37 +2669,6 @@
     strip-ansi "6.0.0"
     tmp "~0.2.1"
     tslib "^2.0.0"
-    yargs "15.4.1"
-    yargs-parser "20.0.0"
-
-"@nrwl/workspace@13.2.3":
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/@nrwl/workspace/-/workspace-13.2.3.tgz#f778bd77901f06f86bde644151a140917c015761"
-  integrity sha512-dFB6XXDLP4Nmh/Sw8Euwdt7f0tg1O6JxJNvXV2BfWG1rK3dmhTz4Q+8fgxl7AxsrToVrXDAh16mPyfAzpqH4pw==
-  dependencies:
-    "@nrwl/cli" "13.2.3"
-    "@nrwl/devkit" "13.2.3"
-    "@nrwl/jest" "13.2.3"
-    "@nrwl/linter" "13.2.3"
-    "@parcel/watcher" "2.0.0-alpha.11"
-    chalk "4.1.0"
-    chokidar "^3.5.1"
-    cosmiconfig "^4.0.0"
-    dotenv "~10.0.0"
-    enquirer "~2.3.6"
-    flat "^5.0.2"
-    fs-extra "^9.1.0"
-    glob "7.1.4"
-    ignore "^5.0.4"
-    minimatch "3.0.4"
-    npm-run-all "^4.1.5"
-    npm-run-path "^4.0.1"
-    open "^7.4.2"
-    rxjs "^6.5.4"
-    semver "7.3.4"
-    strip-ansi "6.0.0"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
     yargs "15.4.1"
     yargs-parser "20.0.0"
 
@@ -10149,13 +10019,6 @@ nx@13.1.4:
   dependencies:
     "@nrwl/cli" "*"
 
-nx@13.2.3:
-  version "13.2.3"
-  resolved "https://registry.yarnpkg.com/nx/-/nx-13.2.3.tgz#d571206b0ad5f8d34aa1aec644d75cbf15b6c097"
-  integrity sha512-aNRbPjArROZazOKAiUhG5uZAZmL1uXdsGoA3p5mDt5fCLSj/CX1V/myuRx+Js0qsAV78W6dSf2z6TiQeIgieXg==
-  dependencies:
-    "@nrwl/cli" "*"
-
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.9.0.tgz"
@@ -11926,7 +11789,7 @@ resolve-url@^0.2.1:
   resolved "https://registry.npmjs.org/resolve-url/-/resolve-url-0.2.1.tgz"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve.exports@1.1.0, resolve.exports@^1.1.0:
+resolve.exports@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/resolve.exports/-/resolve.exports-1.1.0.tgz"
   integrity sha512-J1l+Zxxp4XK3LUDZ9m60LRJF/mAe4z6a4xyabPHk7pvK5t35dACV32iIjJDFeWZFfZlO29w6SZ67knR0tHzJtQ==
@@ -13427,7 +13290,7 @@ tslib@^1.10.0, tslib@^1.13.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0, tslib@^2.3.1:
+tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.1:
   version "2.3.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.3.1.tgz"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
