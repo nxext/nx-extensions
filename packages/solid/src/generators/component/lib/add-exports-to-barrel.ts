@@ -19,7 +19,7 @@ export function addExportsToBarrel(tree: Tree, options: SolidComponentSchema) {
   const indexFilePath = joinPathFragments(projectConfig.sourceRoot, 'index.ts');
   const componentFile = `./components/${fileName}/${className}.ts`;
 
-  if (projectConfig.projectType === "library") {
+  if (projectConfig.projectType === 'library') {
     const { content, source } = readSourceFile(tree, indexFilePath);
 
     const changes = applyChangesToString(

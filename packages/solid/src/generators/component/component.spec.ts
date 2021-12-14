@@ -32,7 +32,7 @@ describe('component schematic', () => {
   });
 
   it('should add file to barrel', async () => {
-    const tree = await createTestProject(projectName, "library");
+    const tree = await createTestProject(projectName, 'library');
     await componentGenerator(tree, options);
     const name = names(componentName);
 
