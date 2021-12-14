@@ -1,5 +1,5 @@
 import { default as update } from './change-targets-to-vite';
-import { joinPathFragments, readJson, readProjectConfiguration, updateProjectConfiguration } from '@nrwl/devkit';
+import { readProjectConfiguration, updateProjectConfiguration } from '@nrwl/devkit';
 import { createTestProject } from '../../generators/utils/testing';
 
 describe('change-targets-to-vite', () => {
