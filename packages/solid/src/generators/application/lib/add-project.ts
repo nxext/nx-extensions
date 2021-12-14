@@ -8,7 +8,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
   addProjectConfiguration(tree, options.name, {
     root: options.projectRoot,
     sourceRoot: `${options.projectRoot}/src`,
-    projectType: "application",
+    projectType: 'application',
     tags: options.parsedTags,
     targets,
   });

@@ -18,7 +18,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
   addProjectConfiguration(tree, options.name, {
     root: options.projectRoot,
     sourceRoot: `${options.projectRoot}/src`,
-    projectType: "library",
+    projectType: 'library',
     tags: options.parsedTags,
     targets,
   });
