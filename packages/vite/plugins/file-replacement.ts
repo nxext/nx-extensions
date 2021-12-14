@@ -18,24 +18,26 @@ export function replaceFiles(
     async resolveId(source, importer) {
       const resolved = await this.resolve(source, importer, { skipSelf: true });
 
-      const foundReplace = replacements.find(
-        (replacement) => replacement.file === resolved.id
-      );
-
-      if (foundReplace) {
-        logger.info(
-          `replace "${foundReplace.file}" with "${foundReplace.with}"`
+      if (resolved?.id) {
+        const foundReplace = replacements.find(
+          (replacement) => replacement.file === resolved.id
         );
 
-        try {
-          // return new file content
-          return {
-            id: foundReplace.with,
-          };
-        } catch (err) {
-          logger.error(err);
+        if (foundReplace) {
+          logger.info(
+            `replace "${foundReplace.file}" with "${foundReplace.with}"`
+          );
 
-          return null;
+          try {
+            // return new file content
+            return {
+              id: foundReplace.with,
+            };
+          } catch (err) {
+            logger.error(err);
+
+            return null;
+          }
         }
       }
 
