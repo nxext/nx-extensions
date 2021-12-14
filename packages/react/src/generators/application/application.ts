@@ -36,6 +36,14 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.spec.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'src', 'index.html'));
+  tree.delete(
+    joinPathFragments(
+      appProjectRoot,
+      'src',
+      'app',
+      `nx-welcome.${options.js ? 'jsx' : 'tsx'}`
+    )
+  );
   const fileName = options.pascalCaseFiles ? 'App' : 'app';
   tree.delete(
     joinPathFragments(
