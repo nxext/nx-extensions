@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { joinPathFragments, logger, ProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
+import { ProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
 import { getSvelteLegacyTargetProjects } from '../utils/migration-utils';
 
 export default function update(host: Tree) {
