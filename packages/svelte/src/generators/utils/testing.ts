@@ -7,10 +7,10 @@ import { libraryGenerator } from '../library/library';
 export async function createTestProject(
   name: string,
   type: ProjectType = 'application',
+  tree: Tree = createTreeWithEmptyWorkspace(),
   unitTestrunner: 'none' | 'jest' = 'none',
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
-  const tree = createTreeWithEmptyWorkspace();
   tree.write(
     'package.json',
     `
