@@ -31,7 +31,6 @@ const sveltepkgs = [
   'svelte-preprocess',
   '@tsconfig/svelte',
   '@testing-library/svelte',
-  'rollup-plugin-local-resolve',
   '@sveltejs/vite-plugin-svelte'
 ];
 
