@@ -5,6 +5,7 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { ensureNxProjectWithDeps } from '../utils/testing';
+import { logger } from '@nrwl/devkit';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
@@ -59,6 +60,17 @@ describe('svelte e2e', () => {
         'svelte-check found 0 errors, 0 warnings and 0 hints'
       );
     });
+
+    it('should be able to run tests', async () => {
+      const plugin = uniq('svelteapptests');
+      await runNxCommandAsync(`generate @nxext/svelte:app ${plugin}`);
+      await runNxCommandAsync(`generate @nxext/svelte:component test --project=${plugin}`);
+
+      const result = await runNxCommandAsync(`test ${plugin}`);
+      expect(`${result.stdout}${result.stderr}`).toContain(
+        'Ran all test suites'
+      );
+    });
   });
 
   describe('Svelte lib', () => {
@@ -111,6 +123,17 @@ describe('svelte e2e', () => {
           `dist/libs/${plugin}/${plugin}.umd.js`
         )
       ).not.toThrow();
+    });
+
+    it('should be able to run tests', async () => {
+      const plugin = uniq('sveltelibtests');
+      await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin}`);
+      await runNxCommandAsync(`generate @nxext/svelte:component test --project=${plugin}`);
+
+      const result = await runNxCommandAsync(`test ${plugin}`);
+      expect(`${result.stdout}${result.stderr}`).toContain(
+        'Ran all test suites'
+      );
     });
   });
 });
