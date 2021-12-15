@@ -1,15 +1,28 @@
 {
   "generators": {
-    "update-10-1-0": {
-      "version": "10.1.0",
-      "description": "update-10-1-0",
-      "factory": "./src/migrations/update-10-1-0/update-10-1-0"
-    },
     "update-11-3-0": {
       "version": "11.3.0",
       "description": "update-11-3-0",
       "cli": "nx",
       "implementation": "./src/migrations/update-11-3-0/add-dependencies-installed-automatically-now"
+    },
+    "change-targets-to-vite": {
+      "version": "13.1.0",
+      "description": "Change targets to Vite",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-13-1-0/change-targets-to-vite"
+    },
+    "add-checkjs-option-to-tsconfig": {
+      "version": "13.1.0",
+      "description": "Add checkjs option to tsconfig",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-13-1-0/add-checkjs-option-to-tsconfig"
+    },
+    "check-for-svelte-config": {
+      "version": "13.1.0",
+      "description": "Add svelte config if it doesnt exist",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-13-1-0/check-for-svelte-config"
     }
   }
 }

@@ -21,7 +21,9 @@
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    /** Needed for the vite-tsconfig-paths vite plugin. */
+    "checkJs": true
   },
   "files": [],
   "include": [],
