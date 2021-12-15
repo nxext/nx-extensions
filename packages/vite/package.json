@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vite",
-  "version": "13.1.1",
+  "version": "13.1.2",
   "main": "src/index.js",
   "executors": "./executors.json",
   "generators": "./generators.json",
