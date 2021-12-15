@@ -38,6 +38,7 @@ export async function createTestProject(
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
       e2eTestRunner: e2eTestrunner,
+      buildable: true,
       skipFormat: false
     });
   }

@@ -9,9 +9,9 @@ export function updateDependencies(tree: Tree) {
       svelte: '^3.44.2',
       'svelte-check': '^1.4.0',
       'svelte-preprocess': '^4.9.8',
-      '@tsconfig/svelte': '^1.0.10',
+      '@tsconfig/svelte': '^2.0.1',
       '@testing-library/svelte': '^3.0.3',
-      '@sveltejs/vite-plugin-svelte': '^1.0.0-next.10',
+      '@sveltejs/vite-plugin-svelte': '^1.0.0-next.32',
     }
   );
 }
