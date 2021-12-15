@@ -7,16 +7,17 @@ export function updateJestConfig(host: Tree, options: NormalizedSchema) {
   }
 
   const configPath = `${options.projectRoot}/jest.config.js`;
+  const svelteConfigPath = `${options.projectRoot}/svelte.config.cjs`;
   const originalContent = host.read(configPath).toString();
-  const content = updateJestConfigContent(originalContent);
+  const content = updateJestConfigContent(originalContent, svelteConfigPath);
   host.write(configPath, content);
 }
 
-function updateJestConfigContent(content: string) {
+function updateJestConfigContent(content: string, svelteConfigPath: string) {
   return content
     .replace('moduleFileExtensions: [', "moduleFileExtensions: ['svelte', ")
     .replace(
       'transform: {',
-      "transform: {\n    '^(.+\\\\.svelte$)': 'svelte-jester',"
+      `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      'preprocess': '${svelteConfigPath}'\n    }\n    ],`
     );
 }
