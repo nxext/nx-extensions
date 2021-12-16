@@ -28,7 +28,7 @@
       "version": "13.1.2",
       "description": "update-13-1-2",
       "cli": "nx",
-      "implementation": "./src/migrations/update-13-1-2/update-13-1-2"
+      "implementation": "./src/migrations/update-13-1-2/check-for-index-html"
     }
   },
   "packageJsonUpdates": {
