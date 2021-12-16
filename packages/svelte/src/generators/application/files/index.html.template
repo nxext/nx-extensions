@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/public/favicon.ico" />
+    <link rel="stylesheet" href="/public/global.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Svelte + TS + Vite App</title>
   </head>
