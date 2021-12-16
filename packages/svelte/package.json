@@ -1,6 +1,6 @@
 {
   "name": "@nxext/svelte",
-  "version": "13.0.3",
+  "version": "13.1.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",
@@ -29,7 +29,7 @@
     "@nrwl/linter": "^13.1.4"
   },
   "dependencies": {
-    "@nxext/vite": "13.0.0",
+    "@nxext/vite": "13.1.1",
     "@nrwl/devkit": "^13.1.4"
   },
   "nx-migrate": {
