@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Nxext',
-  tagline: 'Nxext brings StencilJs and Svelte to Nx',
+  tagline: 'Nxext brings different tools Nx',
   url: 'https://nxext.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
