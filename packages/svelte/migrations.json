@@ -24,5 +24,24 @@
       "cli": "nx",
       "implementation": "./src/migrations/update-13-1-0/check-for-svelte-config"
     }
+  },
+  "packageJsonUpdates": {
+    "13.1.1": {
+      "version": "13.1.1",
+      "packages": {
+        "@sveltejs/vite-plugin-svelte": {
+          "version": "^1.0.0-next.32",
+          "alwaysAddToPackageJson": true
+        },
+        "@nxext/vite": {
+          "version": "^13.1.3",
+          "alwaysAddToPackageJson": true
+        },
+        "vite": {
+          "version": "^2.6.4",
+          "alwaysAddToPackageJson": true
+        }
+      }
+    }
   }
 }
