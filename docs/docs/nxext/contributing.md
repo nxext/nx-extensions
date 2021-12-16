@@ -2,6 +2,7 @@
 id: contributing
 title: Contributing
 sidebar_label: Contributing
+sidebar_position: 3
 ---
 
 PR's, ideas and discussions are welcome.

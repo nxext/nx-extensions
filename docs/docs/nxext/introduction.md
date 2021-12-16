@@ -2,6 +2,7 @@
 id: introduction
 title: Introduction
 sidebar_label: Introduction
+sidebar_position: 1
 ---
 
 [Nx](https://nx.dev/) is a set of extensible dev tools for monorepos and allows for [third-party plugins](https://nx.dev/nx-community) to add support for other technologies. [Nxext](https://github.com/nxext/nx-extensions) is a collection of plugins for an Nx workspace.
