@@ -88,6 +88,7 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
+
           <div className={styles.buttons}>
             <Link
               className={clsx(
@@ -113,6 +114,10 @@ function Home() {
             </div>
           </section>
         )}
+
+        <div className={clsx('community', styles.community)}>
+          Join <a href="https://discord.gg/PzncPdj3">the community</a> and get involved.
+        </div>
       </main>
     </Layout>
   );
