@@ -23,6 +23,12 @@
       "description": "Add svelte config if it doesnt exist",
       "cli": "nx",
       "implementation": "./src/migrations/update-13-1-0/check-for-svelte-config"
+    },
+    "update-13-1-2": {
+      "version": "13.1.2",
+      "description": "update-13-1-2",
+      "cli": "nx",
+      "implementation": "./src/migrations/update-13-1-2/update-13-1-2"
     }
   },
   "packageJsonUpdates": {
