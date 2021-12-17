@@ -18,6 +18,7 @@
     "paths": {
       "@nxext/lib": ["dist/packages/lib"],
       "@nxext/lib/loader": ["dist/packages/lib/loader"],
+      "@nxext/preact": ["packages/preact/src/index.ts"],
       "@nxext/react": ["packages/react/src/index.ts"],
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
