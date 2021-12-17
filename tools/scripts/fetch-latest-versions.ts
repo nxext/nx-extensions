@@ -14,7 +14,7 @@ const stencilpkgs = [
   '@stencil/svelte-output-target',
 
   'puppeteer',
-  '@types/puppeteer'
+  '@types/puppeteer',
 ];
 
 console.log('======================================');
@@ -31,7 +31,7 @@ const sveltepkgs = [
   'svelte-preprocess',
   '@tsconfig/svelte',
   '@testing-library/svelte',
-  '@sveltejs/vite-plugin-svelte'
+  '@sveltejs/vite-plugin-svelte',
 ];
 
 console.log('======================================');
@@ -41,9 +41,7 @@ sveltepkgs.forEach((pkg) => {
   checkVersion(pkg);
 });
 
-const vitePkgs = [
-  'vite'
-];
+const vitePkgs = ['vite'];
 
 console.log('======================================');
 console.log('Vite:');
@@ -55,6 +53,6 @@ vitePkgs.forEach((pkg) => {
 function checkVersion(pkg: string) {
   console.log(`${pkg}: `);
   execSync(`npm show ${pkg} version`, {
-    stdio: [0, 1, 2]
-  })
+    stdio: [0, 1, 2],
+  });
 }

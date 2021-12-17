@@ -42,17 +42,19 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/nxext/nx-extensions/edit/master/packages/docs/docs',
+          editUrl:
+            'https://github.com/nxext/nx-extensions/edit/master/packages/docs/docs',
           remarkPlugins: [
-            [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+            [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
           ],
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/nxext/nx-extensions/edit/master/packages/docs/blog/',
+          editUrl:
+            'https://github.com/nxext/nx-extensions/edit/master/packages/docs/blog/',
           remarkPlugins: [
-            [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+            [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
           ],
         },
         theme: {

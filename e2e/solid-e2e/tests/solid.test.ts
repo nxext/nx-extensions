@@ -16,7 +16,9 @@ describe('solid e2e', () => {
   describe('solid app', () => {
     it('should build solid application', async () => {
       const plugin = uniq('solid');
-      await runNxCommandAsync(`generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
       expect(result.stdout).toContain('Bundle complete');
@@ -36,7 +38,9 @@ describe('solid e2e', () => {
     });
 
     it('should generate app into directory', async () => {
-      await runNxCommandAsync(`generate @nxext/solid:app project/ui --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/solid:app project/ui --e2eTestRunner='none' --junitTestRunner='none'`
+      );
       expect(() =>
         checkFilesExist(`apps/project/ui/src/App.tsx`)
       ).not.toThrow();
@@ -44,7 +48,9 @@ describe('solid e2e', () => {
 
     it('should be able to run linter', async () => {
       const plugin = uniq('solidlint');
-      await runNxCommandAsync(`generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
       expect(result.stdout).toContain('All files pass linting');
@@ -54,7 +60,9 @@ describe('solid e2e', () => {
   describe('solid lib', () => {
     it('should create solid library', async () => {
       const plugin = uniq('solidlib');
-      await runNxCommandAsync(`generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
       expect(() =>
         checkFilesExist(`libs/${plugin}/src/index.ts`)
@@ -62,7 +70,9 @@ describe('solid e2e', () => {
     });
 
     it('should generate lib into directory', async () => {
-      await runNxCommandAsync(`generate @nxext/solid:lib project/uilib --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/solid:lib project/uilib --e2eTestRunner='none' --junitTestRunner='none'`
+      );
       expect(() =>
         checkFilesExist(`libs/project/uilib/src/index.ts`)
       ).not.toThrow();
@@ -70,7 +80,9 @@ describe('solid e2e', () => {
 
     it('should be able to run linter', async () => {
       const plugin = uniq('solidliblint');
-      await runNxCommandAsync(`generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
       expect(result.stdout).toContain('All files pass linting');

@@ -2,7 +2,7 @@ import {
   ensureNxProject,
   renameFile,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
 describe('buildoptions e2e', () => {

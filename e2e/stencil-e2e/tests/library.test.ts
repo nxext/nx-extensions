@@ -2,7 +2,7 @@ import {
   checkFilesExist,
   ensureNxProject,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
 describe('library e2e', () => {

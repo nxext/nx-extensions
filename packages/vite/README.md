@@ -32,9 +32,9 @@ nx g @nxext/vite:library my-lib
 
 #Use your project
 
-* Run ``nx build my-app`` to build the app
-* Run ``nx test my-app`` to test the app
-* Run ``nx lint my-app`` to run ESLint on the app
+- Run `nx build my-app` to build the app
+- Run `nx test my-app` to test the app
+- Run `nx lint my-app` to run ESLint on the app
 
 #Documentation
 

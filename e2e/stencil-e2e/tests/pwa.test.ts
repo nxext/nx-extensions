@@ -1,7 +1,7 @@
 import {
   ensureNxProject,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
 describe('pwa e2e', () => {

@@ -1,24 +1,36 @@
-import { ProjectConfiguration, Tree, updateProjectConfiguration } from '@nrwl/devkit';
+import {
+  ProjectConfiguration,
+  Tree,
+  updateProjectConfiguration,
+} from '@nrwl/devkit';
 import { getSvelteLegacyTargetProjects } from '../utils/migration-utils';
 
 export default function update(host: Tree) {
   const svelteProjects = getSvelteLegacyTargetProjects(host);
 
-  svelteProjects.forEach((projectConfiguration: ProjectConfiguration, appName: string) => {
-    if(projectConfiguration.targets.build) {
-      if(projectConfiguration.projectType === 'application') {
-        projectConfiguration.targets.build = createBuildTarget(projectConfiguration.targets.build);
+  svelteProjects.forEach(
+    (projectConfiguration: ProjectConfiguration, appName: string) => {
+      if (projectConfiguration.targets.build) {
+        if (projectConfiguration.projectType === 'application') {
+          projectConfiguration.targets.build = createBuildTarget(
+            projectConfiguration.targets.build
+          );
+        }
+        if (projectConfiguration.projectType === 'library') {
+          projectConfiguration.targets.build = createPackageTarget(
+            projectConfiguration.targets.build
+          );
+        }
       }
-      if(projectConfiguration.projectType === 'library') {
-        projectConfiguration.targets.build = createPackageTarget(projectConfiguration.targets.build);
-      }
-    }
 
-    if(projectConfiguration.targets.serve) {
-      projectConfiguration.targets.serve = createServeTarget(projectConfiguration.targets.serve);
+      if (projectConfiguration.targets.serve) {
+        projectConfiguration.targets.serve = createServeTarget(
+          projectConfiguration.targets.serve
+        );
+      }
+      updateProjectConfiguration(host, appName, projectConfiguration);
     }
-    updateProjectConfiguration(host, appName,  projectConfiguration)
-  })
+  );
 }
 
 function createBuildTarget(buildTarget: any) {

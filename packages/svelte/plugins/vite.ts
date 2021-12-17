@@ -6,10 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 const sveltePlugin = require('@sveltejs/vite-plugin-svelte').svelte;
 
 export default defineConfig({
-  plugins: [
-    tsconfigPaths(),
-    sveltePlugin()
-  ],
+  plugins: [tsconfigPaths(), sveltePlugin()],
   build: {
     polyfillDynamicImport: false,
   },
