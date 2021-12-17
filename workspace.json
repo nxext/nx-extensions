@@ -13,6 +13,8 @@
     "sveltekit": "packages/sveltekit",
     "sveltekit-e2e": "e2e/sveltekit-e2e",
     "vite": "packages/vite",
-    "vite-e2e": "e2e/vite-e2e"
+    "vite-e2e": "e2e/vite-e2e",
+    "preact": "packages/preact",
+    "preact-e2e": "e2e/preact-e2e"
   }
 }
