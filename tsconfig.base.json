@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nxext/angular": ["packages/angular/src/index.ts"],
       "@nxext/lib": ["dist/packages/lib"],
       "@nxext/lib/loader": ["dist/packages/lib/loader"],
       "@nxext/react": ["packages/react/src/index.ts"],

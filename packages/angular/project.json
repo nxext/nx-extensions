@@ -1,0 +1,56 @@
+{
+  "root": "packages/angular",
+  "sourceRoot": "packages/angular/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/angular/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/angular"],
+      "options": {
+        "jestConfig": "packages/angular/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/angular",
+        "tsConfig": "packages/angular/tsconfig.lib.json",
+        "packageJson": "packages/angular/package.json",
+        "main": "packages/angular/src/index.ts",
+        "assets": [
+          "packages/angular/*.md",
+          {
+            "input": "./packages/angular/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/angular/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/angular",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/angular",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}
