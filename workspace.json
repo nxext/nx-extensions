@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "angular": "packages/angular",
+    "angular-e2e": "e2e\\angular-e2e",
     "docs": "docs",
     "preact": "packages/preact",
     "preact-e2e": "e2e/preact-e2e",
