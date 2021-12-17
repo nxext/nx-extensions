@@ -1,0 +1,16 @@
+{
+  "projectType": "application",
+  "root": "e2e/preact-e2e",
+  "sourceRoot": "e2e/preact-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "./tools/executors/e2e:e2e",
+      "options": {
+        "targets": ["vite:build", "preact:build"],
+        "jestConfig": "e2e/preact-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["preact", "vite"]
+}

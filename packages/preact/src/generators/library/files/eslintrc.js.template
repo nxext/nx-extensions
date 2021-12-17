@@ -1,0 +1,23 @@
+module.exports = {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["preact", "@typescript-eslint"],
+  "extends": ["<%= offsetFromRoot %>.eslintrc.json"],
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.js", "*.tsx"],
+      "parserOptions": {
+        "project": ["<%= projectRoot %>/tsconfig.*?.json"]
+      },
+      "rules": {}
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ]
+}
