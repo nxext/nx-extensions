@@ -52,11 +52,14 @@
     "@docusaurus/core": "2.0.0-beta.14",
     "@docusaurus/preset-classic": "2.0.0-beta.14",
     "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-beta.14",
+    "@angular-devkit/build-angular": "^13.1.2",
+    "@angular-devkit/build-optimizer": "^0.1301.2",
     "@angular/compiler-cli": "^13.1.1",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "source-map": "^0.7.3",
     "tslib": "^2.1.0"
   },
   "devDependencies": {
