@@ -5,7 +5,7 @@
   "executors": "./executors.json",
   "generators": "./generators.json",
   "dependencies": {
-    "vite": "^2.7.2",
+    "vite": "^2.7.4",
     "vite-tsconfig-paths": "3.3.17"
   },
   "peerDependencies": {

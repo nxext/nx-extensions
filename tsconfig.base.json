@@ -24,7 +24,8 @@
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
       "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"],
       "@nxext/tailwind": ["packages/tailwind/src/index.ts"],
-      "@nxext/vite": ["packages/vite/src/index.ts"]
+      "@nxext/vite": ["packages/vite/src/index.ts"],
+      "@nxext/vitest": ["packages/vitest/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

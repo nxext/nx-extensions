@@ -1,0 +1,56 @@
+{
+  "root": "packages/vitest",
+  "sourceRoot": "packages/vitest/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/vitest/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/vitest"],
+      "options": {
+        "jestConfig": "packages/vitest/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/vitest",
+        "tsConfig": "packages/vitest/tsconfig.lib.json",
+        "packageJson": "packages/vitest/package.json",
+        "main": "packages/vitest/src/index.ts",
+        "assets": [
+          "packages/vitest/*.md",
+          {
+            "input": "./packages/vitest/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/vitest/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/vitest",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/vitest",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}
