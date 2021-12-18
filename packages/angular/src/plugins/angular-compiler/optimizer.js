@@ -1,43 +1,30 @@
-import { buildOptimizer } from '@angular-devkit/build-optimizer';
-import { readdirSync } from 'fs';
-import { join, relative } from 'path';
-import { RawSourceMap } from 'source-map';
-import { EsbuildExecutor } from '@angular-devkit/build-angular/src/webpack/plugins/esbuild-executor';
-import { CompilerOptions } from 'typescript';
+const { buildOptimizer } = require('@angular-devkit/build-optimizer');
+const { readdirSync } = require('fs');
+const { join, relative } = require('path');
+const {
+  EsbuildExecutor,
+} = require('@angular-devkit/build-angular/src/webpack/plugins/esbuild-executor');
+const compile = require('./compile');
 
 const DEBUG = false;
 
 const esbuild = new EsbuildExecutor(true);
 
-export interface Options {
-  sideEffectFreeModules?: string[];
-  angularCoreModules?: string[];
-}
-
-export const defautSideEffects = (sideEffectFreeModules?: string[]) => {
+const defautSideEffects = (sideEffectFreeModules) => {
   const sideEffects = readdirSync('node_modules/@angular').map((effect) =>
     join('node_modules/@angular', effect)
   );
   return [
     ...sideEffects,
     'node_modules/rxjs',
-    'node_modules/zonejs',
+    'node_modules/zone.js',
     ...(sideEffectFreeModules ?? []),
   ].map((p) => p.replace(/\\/g, '/'));
 };
 
-export interface OptimizerOptions extends CompilerOptions {
-  sideEffectFreeModules?: string[];
-  angularCoreModules?: string[];
-}
-
 /// this is original code from
 /// https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_optimizer/src/build-optimizer/rollup-plugin.ts
-export async function optimizer(
-  content: string,
-  id: string,
-  options: OptimizerOptions
-) {
+async function optimizer(content, id, options) {
   if (options.sideEffectFreeModules) {
     options.sideEffectFreeModules = options.sideEffectFreeModules.map((p) =>
       p.replace(/\\/g, '/')
@@ -51,7 +38,7 @@ export async function optimizer(
   const isAngularCoreFile =
     options.angularCoreModules &&
     options.angularCoreModules.some((m) => normalizedId.indexOf(m) >= 0);
-  const { content: optCode } = buildOptimizer({
+  const { content: optCode, sourceMap: ngMaps } = buildOptimizer({
     content,
     inputFilePath: id,
     emitSourceMap: true,
@@ -70,7 +57,16 @@ export async function optimizer(
     return null;
   }
 
-  const { code, map } = await esbuild.transform(optCode, options as unknown);
+  // if (!id.includes('node_modules')) {
+  //   const { code, map } = await esbuild.transform(optCode, {...options.compile, moduleResolution: undefined });
 
-  return { code, map };
+  //   return { code, map };
+  // } else {
+  return { map: ngMaps, code: optCode };
+  // }
 }
+
+module.exports = {
+  optimizer,
+  defautSideEffects,
+};
