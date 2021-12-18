@@ -46,6 +46,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/compiler-cli": "^13.1.1",
     "@docusaurus/core": "2.0.0-beta.13",
     "@docusaurus/preset-classic": "2.0.0-beta.13",
     "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-beta.13",
