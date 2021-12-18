@@ -13,7 +13,7 @@ import {
   updateJson,
 } from '@nrwl/devkit';
 import { Schema } from './schema';
-import LibraryGenerator from '@nrwl/angular/src/generators/library/library';
+import { libraryGenerator as NxLibraryGenerator } from '@nrwl/angular/generators';
 
 function updateLibPackageNpmScope(
   host: Tree,
@@ -45,7 +45,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
 
   await (
-    await LibraryGenerator(tree, { ...options })
+    await NxLibraryGenerator(tree, { ...options })
   )();
 
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));

@@ -5,7 +5,7 @@ import {
   GeneratorCallback,
 } from '@nrwl/devkit';
 import { jestInitGenerator } from '@nrwl/jest';
-import { angularInitGenerator as nxAngularInitGenerator } from '@nrwl/angular/src/generators/init/init';
+import { angularInitGenerator as nxAngularInitGenerator } from '@nrwl/angular/generators';
 import { viteInitGenerator } from '@nxext/vite';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 
