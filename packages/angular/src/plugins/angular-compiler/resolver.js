@@ -1,10 +1,10 @@
-import { join, dirname } from 'path';
-import { existsSync, statSync } from 'fs';
+const { join, dirname } = require('path');
+const { existsSync, statSync } = require('fs');
 
-export function resolver(extensions?: string[]) {
+function resolver(extensions) {
   const _extensions = ['ts', ...(extensions ?? [])];
 
-  const resolveFile = (resolved: string, index: boolean = false) => {
+  const resolveFile = (resolved, index = false) => {
     for (const extension of _extensions) {
       const file = index
         ? join(resolved, `index.${extension}`)
@@ -13,7 +13,7 @@ export function resolver(extensions?: string[]) {
     }
   };
 
-  return function resolveId(id: string, origin: string | undefined) {
+  return function resolveId(id, origin) {
     if (!origin || id.includes('node_modules')) return id;
     const resolved = join(dirname(origin), id);
     const file = resolveFile(resolved);
@@ -24,3 +24,5 @@ export function resolver(extensions?: string[]) {
     }
   };
 }
+
+module.exports = resolver;

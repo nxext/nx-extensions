@@ -3,9 +3,16 @@
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
+    "allowJs": true,
     "declaration": true,
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts"],
-  "include": ["**/*.ts"]
+  "include": [
+    "**/*.ts",
+    "src/plugins/angular-compiler/resolver.js",
+    "src/plugins/angular-compiler/optimizer.js",
+    "src/plugins/angular-compiler/index.js",
+    "src/plugins/angular-compiler/compile.js"
+  ]
 }
