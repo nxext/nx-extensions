@@ -52,6 +52,7 @@
     "@docusaurus/core": "2.0.0-beta.14",
     "@docusaurus/preset-classic": "2.0.0-beta.14",
     "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-beta.14",
+    "@angular/compiler-cli": "^13.1.1",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "react": "17.0.2",
