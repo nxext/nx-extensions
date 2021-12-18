@@ -4,6 +4,8 @@
     "angular": "packages/angular",
     "angular-e2e": "e2e\\angular-e2e",
     "docs": "docs",
+    "preact": "packages/preact",
+    "preact-e2e": "e2e/preact-e2e",
     "react": "packages/react",
     "react-e2e": "e2e/react-e2e",
     "solid": "packages/solid",
