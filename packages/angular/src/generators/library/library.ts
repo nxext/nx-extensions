@@ -45,7 +45,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
 
   await (
-    await LibraryGenerator(tree, { ...options, skipTsConfig: false })
+    await LibraryGenerator(tree, { ...options })
   )();
 
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
