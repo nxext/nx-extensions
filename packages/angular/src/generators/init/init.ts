@@ -10,6 +10,7 @@ import { viteInitGenerator } from '@nxext/vite';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 
 import { Schema } from './schema';
+import { UnitTestRunner } from '@nrwl/angular/src/utils/test-runners';
 
 function normalizeOptions(schema: Schema) {
   return {
@@ -28,8 +29,9 @@ export async function angularInitGenerator(tree: Tree, schema: Schema) {
 
   await nxAngularInitGenerator(tree, {
     ...options,
+    unitTestRunner: UnitTestRunner.Jest,
   }).then(() => setDefaultCollection(tree, '@nxext/angular'));
-  await viteInitGenerator(tree, options);
+  await viteInitGenerator(tree, { ...options, unitTestRunner: 'jest' });
 
   if (!schema.skipFormat) {
     await formatFiles(tree);
