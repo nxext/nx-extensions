@@ -2,5 +2,9 @@
   "name": "@nxext/angular",
   "version": "0.0.1",
   "main": "src/index.js",
-  "executors": "./executors.json"
+  "executors": "./executors.json",
+  "dependencies": {
+    "@angular/compiler-cli": "~13.1.1",
+    "typescript": "~4.5.4"
+  }
 }
