@@ -4,9 +4,10 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "@angular/compiler-cli": "~13.1.1",
     "@angular-devkit/build-optimizer": "~0.1301.2",
     "@angular-devkit/build-angular": "~13.1.2",
+    "@angular/compiler": "13.1.1",
+    "@angular/compiler-cli": "13.1.1",
     "tsconfig-paths": "~3.12.0",
     "recrawl-sync": "~2.2.1",
     "@nrwl/angular": "~13.3.8",
