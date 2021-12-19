@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const { resolve } = require('path');
-const { ModuleResolutionKind } = require('typescript');
+const {
+  ModuleResolutionKind,
+  ModuleKind,
+  ScriptTarget,
+} = require('typescript');
 
 const resolver = require('./resolver');
 const compile = require('./compile');
@@ -9,19 +13,26 @@ const { optimizer, defautSideEffects } = require('./optimizer');
 function ngcPlugin(options = {}) {
   let host, sideEffectFreeModules;
   const files = new Map();
-  const { target = 'es2018', rootDir = 'src', sourceMap = true } = options;
+  const {
+    target = ScriptTarget.ES2017,
+    rootDir = 'src',
+    sourceMap = true,
+  } = options;
 
   const opts = {
-    target: target.toLocaleUpperCase(),
-    module: 'ESNext',
-    lib: ['dom', 'es2015', 'es2017', 'es2018', 'es2019'],
-    rootDir: resolve(rootDir),
+    target,
+    module: ModuleKind.ESNext,
     moduleResolution: ModuleResolutionKind.NodeJs,
-    esModuleInterop: true,
+    lib: ['es2017', 'es2018', 'esnext', 'dom'],
+    types: ['vite/client'],
+    rootDir: resolve(rootDir),
     declaration: false,
     experimentalDecorators: true,
     emitDecoratorMetadata: true,
     sourceMap,
+    strict: true,
+    resolveJsonModule: true,
+    esModuleInterop: true,
   };
   let configResolved;
 

@@ -58,7 +58,7 @@ async function optimizer(content, id, options) {
   }
 
   // if (!id.includes('node_modules')) {
-  //   const { code, map } = await esbuild.transform(optCode, {...options.compile, moduleResolution: undefined });
+  //   const { code, map } = await esbuild.transform(optCode, {...options.compile });
 
   //   return { code, map };
   // } else {
