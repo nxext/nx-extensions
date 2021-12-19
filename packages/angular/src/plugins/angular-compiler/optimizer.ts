@@ -1,16 +1,10 @@
-const { buildOptimizer } = require('@angular-devkit/build-optimizer');
-const { readdirSync } = require('fs');
-const { join, relative } = require('path');
-const {
-  EsbuildExecutor,
-} = require('@angular-devkit/build-angular/src/webpack/plugins/esbuild-executor');
-const compile = require('./compile');
+import { buildOptimizer } from '@angular-devkit/build-optimizer';
+import { readdirSync } from 'fs';
+import { join, relative } from 'path';
 
 const DEBUG = false;
 
-const esbuild = new EsbuildExecutor(true);
-
-const defautSideEffects = (sideEffectFreeModules) => {
+export const defautSideEffects = (sideEffectFreeModules?: string[]) => {
   const sideEffects = readdirSync('node_modules/@angular').map((effect) =>
     join('node_modules/@angular', effect)
   );
@@ -22,9 +16,18 @@ const defautSideEffects = (sideEffectFreeModules) => {
   ].map((p) => p.replace(/\\/g, '/'));
 };
 
+export interface OptimizerOptions {
+  sideEffectFreeModules?: string[];
+  angularCoreModules?: string[];
+}
+
 /// this is original code from
 /// https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_optimizer/src/build-optimizer/rollup-plugin.ts
-async function optimizer(content, id, options) {
+export async function optimizer(
+  content: string,
+  id: string,
+  options: OptimizerOptions
+) {
   if (options.sideEffectFreeModules) {
     options.sideEffectFreeModules = options.sideEffectFreeModules.map((p) =>
       p.replace(/\\/g, '/')
@@ -57,16 +60,5 @@ async function optimizer(content, id, options) {
     return null;
   }
 
-  // if (!id.includes('node_modules')) {
-  //   const { code, map } = await esbuild.transform(optCode, {...options.compile });
-
-  //   return { code, map };
-  // } else {
   return { map: ngMaps, code: optCode };
-  // }
 }
-
-module.exports = {
-  optimizer,
-  defautSideEffects,
-};
