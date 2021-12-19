@@ -1,4 +1,5 @@
 const { loadConfig, findProjects } = require('./load-tsconfig');
+const { join } = require('path');
 /* eslint-disable @typescript-eslint/no-explicit-any */
 async function compile(opts) {
   const projects = findProjects(opts.configResolved.root);
@@ -11,25 +12,23 @@ async function compile(opts) {
   );
 
   opts.options = { ...userTsConfig, ...opts.options };
+  opts.options.rootDir = opts.options.baseUrl;
   const { id, options, files } = opts;
 
   const host = createCompilerHost({
     options: opts,
   });
-  const originalWriteFile = host.writeFile;
-  host.writeFile = (
-    fileName,
-    data,
-    writeByteOrderMark,
-    onError,
-    sourceFiles
-  ) => {
+  host.writeFile = (fileName, data) => {
     files.set(fileName, data);
-    originalWriteFile(fileName, data, writeByteOrderMark, onError, sourceFiles);
   };
 
+  const rootNames = [];
+  if (id === `${opts.configResolved.root}/src/main.ts`) {
+    rootNames.push(`${opts.configResolved.root}/src/${join('polyfills.ts')}`);
+  }
+  rootNames.push(id);
   const programm = createProgram({
-    rootNames: [id],
+    rootNames,
     options: options,
     host,
   });
