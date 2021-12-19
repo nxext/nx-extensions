@@ -70,9 +70,9 @@ export function loadConfig(cwd: string, basePath: string) {
       allowEmptyCodegenFiles: false,
       annotationsAs: 'decorators',
       enableResourceInlining: false,
-      baseUrl: 'C:/dev/nx-extensions/tmp/nx-playground/proj',
-      pathsBasePath: 'C:/dev/nx-extensions/tmp/nx-playground/proj',
-      rootDir: 'C:/dev/nx-extensions/tmp/nx-playground/proj',
+      baseUrl: process.cwd(),
+      pathsBasePath: process.cwd(),
+      rootDir: process.cwd(),
     };
   }
 }
