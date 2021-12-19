@@ -14,7 +14,7 @@ function ngcPlugin(options = {}) {
   let host, sideEffectFreeModules;
   const files = new Map();
   const {
-    target = ScriptTarget.ES2017,
+    target = ScriptTarget.ESNext,
     rootDir = 'src',
     sourceMap = true,
   } = options;
@@ -22,7 +22,6 @@ function ngcPlugin(options = {}) {
   const opts = {
     target,
     module: ModuleKind.ESNext,
-    moduleResolution: ModuleResolutionKind.NodeJs,
     lib: ['es2017', 'es2018', 'esnext', 'dom'],
     types: ['vite/client'],
     rootDir: resolve(rootDir),
