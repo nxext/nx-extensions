@@ -1,19 +1,24 @@
-const {
+import {
   loadTsconfig,
   walkForTsConfig,
-} = require('tsconfig-paths/lib/tsconfig-loader.js');
-const { normalizePath } = require('vite');
-const path = require('path');
-const os = require('os');
-const { statSync } = require('fs');
-const { crawl } = require('recrawl-sync');
+} from 'tsconfig-paths/lib/tsconfig-loader.js';
+import { normalizePath } from 'vite';
+import * as path from 'path';
+import { platform } from 'os';
+import { statSync } from 'fs';
+import { crawl } from 'recrawl-sync';
 
-const isWindows = os.platform() == 'win32';
+const isWindows = platform() == 'win32';
 const resolve = isWindows
-  ? (...paths) => normalizePath(path.win32.resolve(...paths))
+  ? (...paths: string[]) => normalizePath(path.win32.resolve(...paths))
   : path.posix.resolve;
 
-function findProjects(viteRoot, opts = { projects: ['tsconfig.app.json'] }) {
+export function findProjects(
+  viteRoot: string,
+  opts: { projects: string[]; root?: string } = {
+    projects: ['tsconfig.app.json'],
+  }
+) {
   const root = opts.root
     ? resolve(viteRoot, normalizePath(opts.root))
     : viteRoot;
@@ -39,7 +44,7 @@ function findProjects(viteRoot, opts = { projects: ['tsconfig.app.json'] }) {
   return projects.sort((a, b) => depthMap[b] - depthMap[a]);
 }
 
-function loadConfig(cwd, basePath) {
+export function loadConfig(cwd: string, basePath: string) {
   const configPath = resolveConfigPath(cwd);
   if (configPath) {
     const config = loadTsconfig(configPath);
@@ -47,7 +52,8 @@ function loadConfig(cwd, basePath) {
       ...config,
       excludes: undefined,
       extends: undefined,
-      ...(config?.angularCompilerOptions ?? {}),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...((config as any)?.angularCompilerOptions ?? {}),
       basePath,
       genDir: basePath,
       strictInjectionParameters: true,
@@ -55,7 +61,8 @@ function loadConfig(cwd, basePath) {
       strictTemplates: true,
       declarationMap: false,
       preserveSymlinks: false,
-      enableIvy: config?.angularCompilerOptions?.enableIvy ?? true,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      enableIvy: (config as any)?.angularCompilerOptions?.enableIvy ?? true,
       noEmitOnError: false,
       suppressOutputPathCheck: true,
       inlineSources: true,
@@ -71,7 +78,7 @@ function loadConfig(cwd, basePath) {
 }
 
 // Adapted from https://github.com/dividab/tsconfig-paths/blob/0b259d4cf6cffbc03ad362cfc6bb129d040375b7/src/tsconfig-loader.ts#L65
-function resolveConfigPath(cwd) {
+function resolveConfigPath(cwd: string) {
   if (statSync(cwd).isFile()) {
     return cwd;
   }
@@ -80,8 +87,3 @@ function resolveConfigPath(cwd) {
     return configPath;
   }
 }
-
-module.exports = {
-  loadConfig,
-  findProjects,
-};
