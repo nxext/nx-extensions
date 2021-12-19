@@ -39,6 +39,11 @@ function ngcPlugin(options = {}) {
     name: 'nxext-angular',
     configResolved(config) {
       configResolved = config;
+      return {
+        esbuild: {
+          exclude: /\.ts$/,
+        },
+      };
     },
     buildStart: async () => {
       sideEffectFreeModules = defautSideEffects(
