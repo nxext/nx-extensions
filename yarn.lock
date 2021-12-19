@@ -3615,6 +3615,11 @@
     "@webassemblyjs/ast" "1.11.1"
     "@xtuc/long" "4.2.2"
 
+"@wessberg/stringutil@^1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@wessberg/stringutil/-/stringutil-1.0.19.tgz#baadcb6f4471fe2d46462a7d7a8294e4b45b29ad"
+  integrity sha512-9AZHVXWlpN8Cn9k5BC/O0Dzb9E9xfEMXzYrNunwvkUTvuK7xgQPVRZpLo+jWCOZ5r8oBa8NIrHuPEu1hzbb6bg==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -5332,6 +5337,13 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crosspath@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/crosspath/-/crosspath-0.0.8.tgz#0a9f9ff99e2b88262d3afb87503b933a394e72aa"
+  integrity sha512-IKlS3MpP0fhJ50M6ltyLO7Q4NzwfhafpmolMH0EDKyyaY81HutF2mH4hLpCdm3fKZ/TSTW5qPIdTy62YnefEyQ==
+  dependencies:
+    "@types/node" "^15.6.1"
 
 crypto-random-string@^2.0.0:
   version "2.0.0"
@@ -7852,6 +7864,11 @@ he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+helpertypes@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/helpertypes/-/helpertypes-0.0.2.tgz#8427cb93dc558079be302ef1cd9f0d3d648ca062"
+  integrity sha512-PKVtWnJ+dcvPeUJRiqtbraN/Hr2rNEnS14T/IxDBb0KgHkAL5w4YwVxMEPowA9vyoMP0DrwO0TxJ+KH3UF/6YA==
 
 history@^4.9.0:
   version "4.10.1"
@@ -12442,6 +12459,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+reserved-words@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/reserved-words/-/reserved-words-0.1.2.tgz#00a0940f98cd501aeaaac316411d9adc52b31ab1"
+  integrity sha1-AKCUD5jNUBrqqsMWQR2a3FKzGrE=
 
 resolve-cwd@^3.0.0:
   version "3.0.0"
