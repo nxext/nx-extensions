@@ -1,14 +1,16 @@
 {
   "extends": "<%= offsetFromRoot %>tsconfig.base.json",
-  "compilerOptions": {
-    "target": "ESNext",
+   "compilerOptions": {
+    "target": "ES2017",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
     "module": "ESNext",
+    "lib": ["es2018", "esnext", "dom"],
     "types": ["vite/client"]
   },
   "angularCompilerOptions": {
