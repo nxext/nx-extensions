@@ -45,7 +45,7 @@ function loadConfig(cwd, basePath) {
     const config = loadTsconfig(configPath);
     return {
       ...config,
-      excludes: false,
+      excludes: undefined,
       extends: undefined,
       ...(config?.angularCompilerOptions ?? {}),
       basePath,
@@ -63,6 +63,9 @@ function loadConfig(cwd, basePath) {
       allowEmptyCodegenFiles: false,
       annotationsAs: 'decorators',
       enableResourceInlining: false,
+      baseUrl: 'C:/dev/nx-extensions/tmp/nx-playground/proj',
+      pathsBasePath: 'C:/dev/nx-extensions/tmp/nx-playground/proj',
+      rootDir: 'C:/dev/nx-extensions/tmp/nx-playground/proj',
     };
   }
 }
