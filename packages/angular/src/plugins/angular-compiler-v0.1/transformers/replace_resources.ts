@@ -10,14 +10,13 @@
 import * as ts from 'typescript';
 // import { InlineAngularResourceLoaderPath } from '../loaders/inline-resource';
 
-export const NG_COMPONENT_RESOURCE_QUERY = 'ngResource';
-
 export function replaceResources(
   shouldTransform: (fileName: string) => boolean,
   getTypeChecker: () => ts.TypeChecker,
   inlineStyleFileExtension?: string
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context: ts.TransformationContext) => {
+    debugger;
     const typeChecker = getTypeChecker();
     const resourceImportDeclarations: ts.ImportDeclaration[] = [];
     const moduleKind = context.getCompilerOptions().module;
@@ -33,7 +32,8 @@ export function replaceResources(
                 typeChecker,
                 resourceImportDeclarations,
                 moduleKind,
-                inlineStyleFileExtension
+                inlineStyleFileExtension,
+                context
               )
             : node
         );
@@ -83,7 +83,8 @@ function visitDecorator(
   typeChecker: ts.TypeChecker,
   resourceImportDeclarations: ts.ImportDeclaration[],
   moduleKind?: ts.ModuleKind,
-  inlineStyleFileExtension?: string
+  inlineStyleFileExtension?: string,
+  context?: ts.TransformationContext
 ): ts.Decorator {
   if (!isComponentDecorator(node, typeChecker)) {
     return node;
@@ -112,7 +113,8 @@ function visitDecorator(
           styleReplacements,
           resourceImportDeclarations,
           moduleKind,
-          inlineStyleFileExtension
+          inlineStyleFileExtension,
+          context
         )
       : node
   );
@@ -144,7 +146,8 @@ function visitComponentMetadata(
   styleReplacements: ts.Expression[],
   resourceImportDeclarations: ts.ImportDeclaration[],
   moduleKind: ts.ModuleKind = ts.ModuleKind.ES2015,
-  inlineStyleFileExtension?: string
+  inlineStyleFileExtension?: string,
+  context?: ts.TransformationContext
 ): ts.ObjectLiteralElementLike | undefined {
   if (!ts.isPropertyAssignment(node) || ts.isComputedPropertyName(node.name)) {
     return node;
@@ -163,10 +166,11 @@ function visitComponentMetadata(
 
       const importName = createResourceImport(
         nodeFactory,
-        url,
+        `${url}`,
         resourceImportDeclarations,
         moduleKind
       );
+      debugger;
       if (!importName) {
         return node;
       }
@@ -191,21 +195,7 @@ function visitComponentMetadata(
           return node;
         }
 
-        let url;
-        if (isInlineStyle) {
-          if (inlineStyleFileExtension) {
-            const data = Buffer.from(node.text).toString('base64');
-            const containingFile = node.getSourceFile().fileName;
-            // app.component.ts.css?ngResource!=!@ngtools/webpack/src/loaders/inline-resource.js?data=...!app.component.ts
-            url =
-              `${containingFile}.${inlineStyleFileExtension}?${NG_COMPONENT_RESOURCE_QUERY}` +
-              `!?data=${encodeURIComponent(data)}!${containingFile}`;
-          } else {
-            return nodeFactory.createStringLiteral(node.text);
-          }
-        } else {
-          url = getResourceUrl(node);
-        }
+        const url = getResourceUrl(node);
 
         if (!url) {
           return node;
@@ -237,10 +227,8 @@ export function getResourceUrl(node: ts.Node): string | null {
   if (!ts.isStringLiteral(node) && !ts.isNoSubstitutionTemplateLiteral(node)) {
     return null;
   }
-
-  return `${/^\.?\.\//.test(node.text) ? '' : './'}${
-    node.text
-  }?${NG_COMPONENT_RESOURCE_QUERY}`;
+  debugger;
+  return `${/^\.?\.\//.test(node.text) ? '' : './'}${node.text}`;
 }
 
 function isComponentDecorator(
@@ -279,7 +267,7 @@ function createResourceImport(
     );
   } else {
     const importName = nodeFactory.createIdentifier(
-      `__NG_CLI_RESOURCE__${resourceImportDeclarations.length}`
+      `${resourceImportDeclarations.length}`
     );
     resourceImportDeclarations.push(
       nodeFactory.createImportDeclaration(
