@@ -16,7 +16,6 @@ export function replaceResources(
   inlineStyleFileExtension?: string
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context: ts.TransformationContext) => {
-    debugger;
     const typeChecker = getTypeChecker();
     const resourceImportDeclarations: ts.ImportDeclaration[] = [];
     const moduleKind = context.getCompilerOptions().module;
@@ -166,11 +165,10 @@ function visitComponentMetadata(
 
       const importName = createResourceImport(
         nodeFactory,
-        `${url}`,
+        `${url}?raw`,
         resourceImportDeclarations,
         moduleKind
       );
-      debugger;
       if (!importName) {
         return node;
       }
@@ -227,7 +225,6 @@ export function getResourceUrl(node: ts.Node): string | null {
   if (!ts.isStringLiteral(node) && !ts.isNoSubstitutionTemplateLiteral(node)) {
     return null;
   }
-  debugger;
   return `${/^\.?\.\//.test(node.text) ? '' : './'}${node.text}`;
 }
 
@@ -266,9 +263,9 @@ function createResourceImport(
       [urlLiteral]
     );
   } else {
-    const importName = nodeFactory.createIdentifier(
-      `${resourceImportDeclarations.length}`
-    );
+    const importName = nodeFactory.createIdentifier(`
+     _NG_VITE_RESOURCE_${resourceImportDeclarations.length}
+    `);
     resourceImportDeclarations.push(
       nodeFactory.createImportDeclaration(
         undefined,
