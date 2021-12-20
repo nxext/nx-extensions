@@ -1,5 +1,6 @@
 import {
   loadTsconfig,
+  Tsconfig,
   walkForTsConfig,
 } from 'tsconfig-paths/lib/tsconfig-loader.js';
 import { normalizePath } from 'vite';
@@ -44,10 +45,17 @@ export function findProjects(
   return projects.sort((a, b) => depthMap[b] - depthMap[a]);
 }
 
-export function loadConfig(cwd: string, basePath: string) {
+export function loadConfig(
+  cwd: string,
+  basePath: string,
+  justLoadedConfig = false
+) {
   const configPath = resolveConfigPath(cwd);
   if (configPath) {
     const config = loadTsconfig(configPath);
+    if (justLoadedConfig) {
+      return config;
+    }
     return {
       ...config,
       excludes: undefined,
