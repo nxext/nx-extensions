@@ -23,6 +23,7 @@ module.exports = {
     { name: 'vite', description: 'Vite specific' },
     { name: 'solid', description: 'SolidJS specific' },
     { name: 'react', description: 'ReactJS specific' },
+    { name: 'angular', description: 'Angular specific' },
   ],
 
   allowTicketNumber: true,
