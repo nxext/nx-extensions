@@ -1,5 +1,5 @@
 import type { CompilerOptions } from '@angular/compiler-cli';
-import { OptimizerOptions } from '../angular-compiler/optimizer';
+import { OptimizerOptions } from './utils/optimizer';
 
 export interface AngularVitePluginOptions {
   tsconfig: string;
