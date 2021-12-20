@@ -48,11 +48,11 @@ export function createJitTransformers(
 
   return {
     before: [
-      // replaceResources(
-      //   () => true,
-      //   getTypeChecker,
-      //   options.inlineStyleFileExtension
-      // ),
+      replaceResources(
+        () => true,
+        getTypeChecker,
+        options.inlineStyleFileExtension
+      ),
       compilerCli.constructorParametersDownlevelTransform(builder.getProgram()),
     ],
   };
