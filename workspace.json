@@ -2,7 +2,7 @@
   "version": 2,
   "projects": {
     "angular": "packages/angular",
-    "angular-e2e": "e2e\\angular-e2e",
+    "angular-e2e": "e2e/angular-e2e",
     "docs": "docs",
     "react": "packages/react",
     "react-e2e": "e2e/react-e2e",
