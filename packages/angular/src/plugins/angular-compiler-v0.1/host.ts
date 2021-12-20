@@ -102,7 +102,6 @@ export function augmentHostWithDependencyCollection(
             );
           }
         }
-
         return result;
       });
     };
@@ -111,7 +110,7 @@ export function augmentHostWithDependencyCollection(
 
 export function augmentHostWithCaching(
   host: CompilerHost,
-  cache: Map<string, SourceFile>
+  cache: Map<string, string>
 ): void {
   const baseGetSourceFile = host.getSourceFile;
   host.getSourceFile = function (

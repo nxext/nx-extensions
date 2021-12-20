@@ -9,6 +9,7 @@
 import * as ts from 'typescript';
 import { elideImports } from './transformers/elide_imports';
 import { removeIvyJitSupportCalls } from './transformers/remove-ivy-jit-support-calls';
+import { replaceResources } from './transformers/replace_resources';
 
 export function createAotTransformers(
   builder: ts.BuilderProgram,
@@ -38,15 +39,20 @@ export function createAotTransformers(
 
 export function createJitTransformers(
   builder: ts.BuilderProgram,
-  compilerCli: typeof import('@angular/compiler-cli')
-  // options: {
-  //   inlineStyleFileExtension?: string;
-  // },
+  compilerCli: typeof import('@angular/compiler-cli'),
+  options: {
+    inlineStyleFileExtension?: string;
+  }
 ): ts.CustomTransformers {
-  // const getTypeChecker = () => builder.getProgram().getTypeChecker();
+  const getTypeChecker = () => builder.getProgram().getTypeChecker();
 
   return {
     before: [
+      replaceResources(
+        () => true,
+        getTypeChecker,
+        options.inlineStyleFileExtension
+      ),
       compilerCli.constructorParametersDownlevelTransform(builder.getProgram()),
     ],
   };
