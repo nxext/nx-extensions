@@ -21,9 +21,7 @@ import {
   createSourceFile,
   ScriptTarget,
   SourceFile,
-  SyntaxKind,
 } from 'typescript';
-import { findNodes } from '@nrwl/workspace';
 
 export function addImport(
   source: SourceFile,
@@ -69,7 +67,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   );
   const changes = applyChangesToString(source, [
     ...addImport(mainTsSourceFile, `import '@angular/compiler';`),
-    ...addImport(mainTsSourceFile, `zone.js';`),
+    ...addImport(mainTsSourceFile, `import 'zone.js';`),
   ]);
 
   tree.write(mainTsFilePath, changes);
