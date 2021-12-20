@@ -1,15 +1,15 @@
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const ngcPlugin = require('./angular-compiler');
+const ngcPlugin = require('./angular-compiler');
 
 import { AngularPlugin } from './angular-compiler-v0.1';
 
 export default defineConfig({
   plugins: [
     AngularPlugin({
-      tsconfig: 'tsconfig.json',
+      tsconfig: 'tsconfig.app.json',
       substitutions: undefined,
       directTemplateLoading: false,
       emitClassMetadata: false,
@@ -18,4 +18,8 @@ export default defineConfig({
     }),
   ],
   esbuild: false,
+});
+
+export const original = defineConfig({
+  plugins: [ngcPlugin()],
 });
