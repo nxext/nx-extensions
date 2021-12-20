@@ -1,7 +1,10 @@
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 
-import { AngularPlugin } from './angular-vite-compiler';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ngcPlugin = require('./angular-compiler');
+
+import { AngularPlugin } from './angular-compiler-v0.1';
 
 export default defineConfig({
   plugins: [
@@ -15,4 +18,8 @@ export default defineConfig({
     }),
   ],
   esbuild: false,
+});
+
+export const original = defineConfig({
+  plugins: [ngcPlugin()],
 });
