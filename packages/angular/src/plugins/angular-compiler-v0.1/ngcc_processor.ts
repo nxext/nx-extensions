@@ -22,6 +22,8 @@ import * as ts from 'typescript';
 import { time, timeEnd } from './benchmark';
 import { resolver } from './resolver';
 
+// Extract Resolver type from Webpack types since it is not directly exported
+
 // We cannot create a plugin for this, because NGTSC requires addition type
 // information which ngcc creates when processing a package which was compiled with NGC.
 
@@ -50,7 +52,7 @@ export class NgccProcessor {
       this.compilationErrors,
       compilerNgcc.LogLevel.info
     );
-    this._nodeModulesDirectory = this.findNodeModulesDirectory(this.basePath);
+    this._nodeModulesDirectory = this.findNodeModulesDirectory(process.cwd());
   }
 
   /** Process the entire node modules tree. */
@@ -59,7 +61,7 @@ export class NgccProcessor {
     if (process.env.BAZEL_TARGET) {
       return;
     }
-    debugger;
+
     // Skip if node_modules are read-only
     const corePackage = this.tryResolvePackage(
       '@angular/core',
@@ -217,6 +219,7 @@ export class NgccProcessor {
     });
     timeEnd(timeLabel);
 
+    // which are unknown in the cached file.
     this._processedModules.add(resolvedFileName);
   }
 

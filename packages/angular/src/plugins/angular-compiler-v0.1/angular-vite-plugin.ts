@@ -17,6 +17,7 @@ import {
   CustomTransformers,
   Diagnostic,
   EmitAndSemanticDiagnosticsBuilderProgram,
+  ScriptTarget,
   SourceFile,
 } from 'typescript';
 import { externalizePath, normalizePath } from './path';
@@ -30,23 +31,30 @@ import {
 import { NgccProcessor } from './ngcc_processor';
 import { AngularVitePluginOptions } from './plugin-options';
 import { EmitFileResult, FileEmitter } from './symbol';
-import { createAotTransformers, mergeTransformers } from './transformation';
-import { join, resolve } from 'path';
+import {
+  createAotTransformers,
+  createJitTransformers,
+  mergeTransformers,
+} from './transformation';
+import { join } from 'path';
 import { ResolvedConfig } from 'vite';
-
-interface FileEmitHistoryItem {
-  length: number;
-  hash: Uint8Array;
-}
+import { findProjects, loadConfig } from '../angular-compiler/load-tsconfig';
 
 function initializeNgccProcessor(
-  mainFields: string[],
-  rootPath: string,
+  target: ScriptTarget,
+  root: string,
   tsconfig: string,
   compilerNgccModule: typeof import('@angular/compiler-cli/ngcc') | undefined
 ): { processor: NgccProcessor; errors: string[]; warnings: string[] } {
+  const mainFields = ['es2015', 'browser', 'module', 'main'];
+
+  if (target >= ScriptTarget.ES2020) {
+    mainFields.unshift('es2020');
+  }
+
   const errors: string[] = [];
   const warnings: string[] = [];
+
   // The compilerNgccModule field is guaranteed to be defined during a compilation
   // due to the `beforeCompile` hook. Usage of this property accessor prior to the
   // hook execution is an implementation error.
@@ -60,11 +68,16 @@ function initializeNgccProcessor(
     mainFields,
     warnings,
     errors,
-    rootPath,
+    root,
     tsconfig
   );
 
   return { processor, errors, warnings };
+}
+
+interface FileEmitHistoryItem {
+  length: number;
+  hash: Uint8Array;
 }
 
 export class AngularVitePlugin {
@@ -132,7 +145,7 @@ export class AngularVitePlugin {
       rootNames,
       errors,
     } = this.compilerCli.readConfiguration(
-      this.pluginOptions.tsconfig,
+      join(this.viteResolvedConfig.root, this.pluginOptions.tsconfig),
       this.pluginOptions.compilerOptions
     ) as unknown as {
       options: CompilerOptions;
@@ -152,6 +165,42 @@ export class AngularVitePlugin {
     compilerOptions.enableResourceInlining = false;
 
     return { compilerOptions, rootNames, errors };
+  }
+
+  private updateJitProgram(
+    compilerOptions: CompilerOptions,
+    rootNames: readonly string[],
+    host: NgCompilerHost
+  ) {
+    let builder;
+    if (this.watchMode) {
+      builder = this.builder = createEmitAndSemanticDiagnosticsBuilderProgram(
+        rootNames,
+        compilerOptions,
+        host as CompilerHost,
+        this.builder
+      );
+    } else {
+      // When not in watch mode, the startup cost of the incremental analysis can be avoided by
+      // using an abstract builder that only wraps a TypeScript program.
+      builder = createAbstractBuilder(
+        rootNames,
+        compilerOptions,
+        host as CompilerHost
+      );
+    }
+
+    const transformers = createJitTransformers(
+      builder,
+      this.compilerCli,
+      this.pluginOptions
+    );
+
+    return {
+      fileEmitter: this.createFileEmitter(builder, transformers, () => []),
+      builder,
+      internalFiles: undefined,
+    };
   }
 
   private updateAotProgram(
@@ -246,7 +295,6 @@ export class AngularVitePlugin {
       for (const resourcePath of angularCompiler.getResourceDependencies(
         sourceFile
       )) {
-        debugger;
         // dependencies.push(
         //   resourcePath,
         //   // Retrieve all dependencies of the resource (stylesheet imports, etc.)
@@ -295,7 +343,7 @@ export class AngularVitePlugin {
             optimizeDiagnosticsFor
           );
           this.sourceFileCache?.updateAngularDiagnostics(
-            affectedFile,
+            affectedFile.getText(),
             angularDiagnostics
           );
         }
@@ -412,13 +460,22 @@ export class AngularVitePlugin {
   async transform(code: string, id: string) {
     // Initialize and process eager ngcc if not already setup
     if (!this.ngccProcessor) {
+      const projects = findProjects(this.viteResolvedConfig.root);
+      const tsConfig = loadConfig(projects[0], undefined, true);
+
+      const target =
+        tsConfig?.compilerOptions?.target ?? tsConfig?.target ?? 'ES2017';
+      const tsTarget: ScriptTarget = ScriptTarget[
+        target.toLocaleUpperCase()
+      ] as unknown as ScriptTarget;
+
       const {
         processor,
         errors: NgccError,
         warnings,
       } = initializeNgccProcessor(
-        [resolve(id).replace(/\\/g, '/')],
-        process.cwd(),
+        tsTarget,
+        this.viteResolvedConfig.root,
         join(this.viteResolvedConfig.root, this.pluginOptions.tsconfig),
         this.compilerNgccModule
       );
@@ -438,10 +495,10 @@ export class AngularVitePlugin {
     if (errors?.length) {
       errors.forEach((er) => console.error(er));
     }
+
     const host = createIncrementalCompilerHost(
       compilerOptions as CompilerOptions
     );
-    const usingRootName = rootNames.filter((rn) => rn === id);
 
     let cache = this.sourceFileCache;
     // let changedFiles;
@@ -483,15 +540,19 @@ export class AngularVitePlugin {
     // Setup on demand ngcc
     augmentHostWithNgcc(host, this.ngccProcessor, moduleResolutionCache);
 
-    const { fileEmitter, builder, internalFiles } =
-      // this.pluginOptions.jitMode
-      //     ? this.updateJitProgram(compilerOptions, rootNames, host, diagnosticsReporter)
-      //     :
-      this.updateAotProgram(
-        compilerOptions as NgCompilerOptions,
-        rootNames,
-        host as NgCompilerHost
-      );
+    const { fileEmitter, builder, internalFiles } = this.pluginOptions.jitMode
+      ? this.updateJitProgram(
+          compilerOptions,
+          // rootNames,
+          [id],
+          host as NgCompilerHost
+        )
+      : this.updateAotProgram(
+          compilerOptions as NgCompilerOptions,
+          // rootNames,
+          [id],
+          host as NgCompilerHost
+        );
 
     // Set of files used during the unused TypeScript file analysis
     const currentUnused = new Set<string>();
@@ -512,7 +573,12 @@ export class AngularVitePlugin {
       }
     }
 
-    const { map, content } = await fileEmitter(id);
-    return { map, code: content };
+    const result = await fileEmitter(id);
+    if (result) {
+      return {
+        map: result.map,
+        code: result.content.replace(/\/\/# sourceMappingURL.*/, ''),
+      };
+    }
   }
 }
