@@ -145,7 +145,7 @@ export class AngularVitePlugin {
       rootNames,
       errors,
     } = this.compilerCli.readConfiguration(
-      this.pluginOptions.tsconfig,
+      join(this.viteResolvedConfig.root, this.pluginOptions.tsconfig),
       this.pluginOptions.compilerOptions
     ) as unknown as {
       options: CompilerOptions;
@@ -295,7 +295,6 @@ export class AngularVitePlugin {
       for (const resourcePath of angularCompiler.getResourceDependencies(
         sourceFile
       )) {
-        debugger;
         // dependencies.push(
         //   resourcePath,
         //   // Retrieve all dependencies of the resource (stylesheet imports, etc.)
@@ -476,7 +475,7 @@ export class AngularVitePlugin {
         warnings,
       } = initializeNgccProcessor(
         tsTarget,
-        process.cwd(),
+        this.viteResolvedConfig.root,
         join(this.viteResolvedConfig.root, this.pluginOptions.tsconfig),
         this.compilerNgccModule
       );
@@ -500,7 +499,6 @@ export class AngularVitePlugin {
     const host = createIncrementalCompilerHost(
       compilerOptions as CompilerOptions
     );
-    const usingRootName = rootNames.filter((rn) => rn === id);
 
     let cache = this.sourceFileCache;
     // let changedFiles;
@@ -545,12 +543,14 @@ export class AngularVitePlugin {
     const { fileEmitter, builder, internalFiles } = this.pluginOptions.jitMode
       ? this.updateJitProgram(
           compilerOptions,
-          rootNames,
+          // rootNames,
+          [id],
           host as NgCompilerHost
         )
       : this.updateAotProgram(
           compilerOptions as NgCompilerOptions,
-          rootNames,
+          // rootNames,
+          [id],
           host as NgCompilerHost
         );
 
@@ -573,7 +573,12 @@ export class AngularVitePlugin {
       }
     }
 
-    const { map, content } = await fileEmitter(id);
-    return { map, code: content };
+    const result = await fileEmitter(id);
+    if (result) {
+      return {
+        map: result.map,
+        code: result.content.replace(/\/\/# sourceMappingURL.*/, ''),
+      };
+    }
   }
 }

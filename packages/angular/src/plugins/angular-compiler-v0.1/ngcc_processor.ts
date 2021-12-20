@@ -52,7 +52,7 @@ export class NgccProcessor {
       this.compilationErrors,
       compilerNgcc.LogLevel.info
     );
-    this._nodeModulesDirectory = this.findNodeModulesDirectory(this.basePath);
+    this._nodeModulesDirectory = this.findNodeModulesDirectory(process.cwd());
   }
 
   /** Process the entire node modules tree. */
