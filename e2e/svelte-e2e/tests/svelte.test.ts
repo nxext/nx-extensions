@@ -4,8 +4,7 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../utils/testing';
-import { logger } from '@nrwl/devkit';
+import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('svelte e2e', () => {
   beforeAll(() => {

@@ -4,7 +4,7 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../utils/testing';
+import { ensureNxProjectWithDeps } from '../../../utils/testing';
 
 describe('react e2e', () => {
   beforeAll(() => {
