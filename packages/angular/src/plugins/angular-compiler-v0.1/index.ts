@@ -15,7 +15,6 @@ export function AngularPlugin(options?: AngularVitePluginOptions): Plugin {
     name: 'vite-angular-by-nxext',
     configResolved(config: ResolvedConfig) {
       configResolved = config;
-      console.log(configResolved);
     },
     buildStart: async () => {
       sideEffectFreeModules = defautSideEffects(
