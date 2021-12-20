@@ -1,7 +1,7 @@
-import { SourceFile, Diagnostic } from 'typescript';
+import { Diagnostic } from 'typescript';
 
-export class SourceFileCache extends Map<string, SourceFile> {
-  private readonly angularDiagnostics = new Map<SourceFile, Diagnostic[]>();
+export class SourceFileCache extends Map<string, string> {
+  private readonly angularDiagnostics = new Map<string, Diagnostic[]>();
 
   invalidate(file: string): void {
     const sourceFile = this.get(file);
@@ -12,7 +12,7 @@ export class SourceFileCache extends Map<string, SourceFile> {
   }
 
   updateAngularDiagnostics(
-    sourceFile: SourceFile,
+    sourceFile: string,
     diagnostics: Diagnostic[]
   ): void {
     if (diagnostics.length > 0) {
@@ -22,7 +22,7 @@ export class SourceFileCache extends Map<string, SourceFile> {
     }
   }
 
-  getAngularDiagnostics(sourceFile: SourceFile): Diagnostic[] | undefined {
+  getAngularDiagnostics(sourceFile: string): Diagnostic[] | undefined {
     return this.angularDiagnostics.get(sourceFile);
   }
 }

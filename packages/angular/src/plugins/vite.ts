@@ -9,12 +9,13 @@ import { AngularPlugin } from './angular-compiler-v0.1';
 export default defineConfig({
   plugins: [
     AngularPlugin({
-      tsconfig: 'tsconfig.app.json',
+      tsconfig: 'tsconfig.json',
       substitutions: undefined,
       directTemplateLoading: false,
       emitClassMetadata: false,
       emitNgModuleScope: false,
-      jitMode: false,
+      jitMode: true,
     }),
   ],
+  esbuild: false,
 });
