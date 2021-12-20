@@ -38,7 +38,7 @@ import {
 } from './transformation';
 import { join } from 'path';
 import { ResolvedConfig } from 'vite';
-import { findProjects, loadConfig } from '../angular-compiler/load-tsconfig';
+import { findProjects, loadConfig } from './utils/load-tsconfig';
 
 function initializeNgccProcessor(
   target: ScriptTarget,

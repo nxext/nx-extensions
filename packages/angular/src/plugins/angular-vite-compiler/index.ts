@@ -2,7 +2,7 @@ import type { Plugin, ResolvedConfig } from 'vite';
 import { AngularVitePluginOptions } from './plugin-options';
 import { AngularVitePlugin } from './angular-vite-plugin';
 import { resolver } from './resolver';
-import { defautSideEffects, optimizer } from '../angular-compiler/optimizer';
+import { defautSideEffects, optimizer } from './utils/optimizer';
 
 export function AngularPlugin(options?: AngularVitePluginOptions): Plugin {
   console.log('options', options);
