@@ -1,7 +1,7 @@
 {
-  "root": "e2e\\angular-e2e",
+  "root": "e2e/angular-e2e",
   "projectType": "application",
-  "sourceRoot": "e2e\\angular-e2e/src",
+  "sourceRoot": "e2e/angular-e2e/src",
   "targets": {
     "e2e": {
       "executor": "@nrwl/nx-plugin:e2e",
