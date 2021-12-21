@@ -13,11 +13,11 @@ describe('angular application e2e', () => {
   });
 
 
-  xit('should create angular application', async () => {
+  it('should create angular application', async () => {
     const plugin = uniq('angular');
     await runNxCommandAsync(`generate @nxext/angular:app ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain('Executor ran');
+    expect(result.stdout).toContain('Bundle complete');
   }, 120000);
 });

@@ -11,6 +11,7 @@ import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-
 
 import { Schema } from './schema';
 import { UnitTestRunner } from '@nrwl/angular/src/utils/test-runners';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 function normalizeOptions(schema: Schema) {
   return {
@@ -21,27 +22,27 @@ function normalizeOptions(schema: Schema) {
 
 export async function angularInitGenerator(tree: Tree, schema: Schema) {
   const options = normalizeOptions(schema);
-
-  let jestInstall: GeneratorCallback;
+  const tasks: GeneratorCallback[] = [];
   if (options.unitTestRunner === 'jest') {
-    jestInstall = await jestInitGenerator(tree, {});
+    const jestTask = await jestInitGenerator(tree, {});
+    tasks.push(jestTask);
   }
 
-  await nxAngularInitGenerator(tree, {
+  const angularTask = await nxAngularInitGenerator(tree, {
     ...options,
     unitTestRunner: UnitTestRunner.Jest,
-  }).then(() => setDefaultCollection(tree, '@nxext/angular'));
-  await viteInitGenerator(tree, { ...options, unitTestRunner: 'jest' });
+  });
+  tasks.push(angularTask);
+
+  setDefaultCollection(tree, '@nxext/angular');
+  const viteTask = await viteInitGenerator(tree, { ...options, unitTestRunner: 'jest' });
+  tasks.push(viteTask);
 
   if (!schema.skipFormat) {
     await formatFiles(tree);
   }
 
-  return async () => {
-    if (jestInstall) {
-      await jestInstall();
-    }
-  };
+  return runTasksInSerial(...tasks);
 }
 
 export default angularInitGenerator;
