@@ -12,7 +12,7 @@ import {
   offsetFromRoot,
   StringChange,
   ChangeType,
-  applyChangesToString,
+  applyChangesToString, GeneratorCallback
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/angular/generators';
@@ -46,12 +46,11 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   const { appsDir } = getWorkspaceLayout(tree);
   const appProjectRoot = normalizePath(`${appsDir}/${appDirectory}`);
 
-  await (
-    await nxApplicationGenerator(tree, {
-      ...options,
-      e2eTestRunner: E2eTestRunner.None,
-    })
-  )();
+
+  const angularAppTask = await nxApplicationGenerator(tree, {
+    ...options,
+    e2eTestRunner: E2eTestRunner.None,
+  });
 
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.app.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.spec.json'));
@@ -104,6 +103,8 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   if (!options.skipFormat) {
     await formatFiles(tree);
   }
+
+  return angularAppTask;
 }
 
 export default applicationGenerator;
