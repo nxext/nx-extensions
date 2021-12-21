@@ -57,20 +57,6 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.spec.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'src', 'index.html'));
-  const mainTsFilePath = joinPathFragments(appProjectRoot, 'src', 'main.ts');
-  const source = tree.read(mainTsFilePath, 'utf-8');
-  const mainTsSourceFile = createSourceFile(
-    joinPathFragments(appProjectRoot, 'src', 'main.ts'),
-    source,
-    ScriptTarget.Latest,
-    true
-  );
-  const changes = applyChangesToString(source, [
-    ...addImport(mainTsSourceFile, `import '@angular/compiler';`),
-    ...addImport(mainTsSourceFile, `import 'zone.js';`),
-  ]);
-
-  tree.write(mainTsFilePath, changes);
 
   const projectConfig = readProjectConfiguration(tree, appProjectName);
   updateProjectConfiguration(tree, appProjectName, {
