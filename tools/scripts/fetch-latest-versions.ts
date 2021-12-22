@@ -1,27 +1,34 @@
 import { execSync } from 'child_process';
+import {
+  ionicVersion, puppeteer, puppeteerType,
+  STENCIL_OUTPUTTARGET_VERSION,
+  STENCIL_STYLE_PLUGIN_VERSION, stencilRouterVersion,
+  stencilVersion
+} from '../../packages/stencil/src/utils/versions';
+
 const stencilpkgs = [
-  '@stencil/core',
-  '@stencil/sass',
-  '@stencil/less',
-  '@stencil/postcss',
-  '@stencil/stylus',
-  '@ionic/core',
-  '@stencil/router',
+  { pkg: '@stencil/core', version: stencilVersion },
+  { pkg: '@stencil/sass', version: STENCIL_STYLE_PLUGIN_VERSION['scss'] },
+  { pkg: '@stencil/less', version: STENCIL_STYLE_PLUGIN_VERSION['less'] },
+  { pkg: '@stencil/postcss', version: STENCIL_STYLE_PLUGIN_VERSION['pcss'] },
+  { pkg: '@stencil/stylus', version: STENCIL_STYLE_PLUGIN_VERSION['styl'] },
+  { pkg: '@ionic/core', version: ionicVersion },
+  { pkg: '@stencil/router', version: stencilRouterVersion },
 
-  '@stencil/react-output-target',
-  '@stencil/vue-output-target',
-  '@stencil/angular-output-target',
-  '@stencil/svelte-output-target',
+  { pkg: '@stencil/react-output-target', version: STENCIL_OUTPUTTARGET_VERSION['react'] },
+  { pkg: '@stencil/vue-output-target', version: STENCIL_OUTPUTTARGET_VERSION['vue'] },
+  { pkg: '@stencil/angular-output-target', version: STENCIL_OUTPUTTARGET_VERSION['angular'] },
+  { pkg: '@stencil/svelte-output-target', version: STENCIL_OUTPUTTARGET_VERSION['svelte'] },
 
-  'puppeteer',
-  '@types/puppeteer'
+  { pkg: 'puppeteer', version: puppeteer },
+  { pkg: '@types/puppeteer', version: puppeteerType },
 ];
 
 console.log('======================================');
 console.log('Stencil:');
 console.log('======================================');
-stencilpkgs.forEach((pkg) => {
-  checkVersion(pkg);
+stencilpkgs.forEach(({ pkg, version }) => {
+  checkVersion(pkg, version);
 });
 
 const sveltepkgs = [
@@ -52,9 +59,13 @@ vitePkgs.forEach((pkg) => {
   checkVersion(pkg);
 });
 
-function checkVersion(pkg: string) {
-  console.log(`${pkg}: `);
+function checkVersion(pkg: string, version: string = '') {
+  if(version !== '') {
+    console.log(`${pkg}: (${version})`);
+  } else {
+    console.log(`${pkg}: `);
+  }
   execSync(`npm show ${pkg} version`, {
     stdio: [0, 1, 2]
-  })
+  });
 }
