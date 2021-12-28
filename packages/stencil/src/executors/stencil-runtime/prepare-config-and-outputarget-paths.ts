@@ -1,13 +1,12 @@
-import { copyFile, readJsonFile } from '@nrwl/workspace';
+import { copyFile } from '@nrwl/workspace';
 import { OutputTarget } from '@stencil/core/internal';
 import { prepareE2eTesting } from './e2e-testing';
 import { PathCollection } from './types';
 import {
   createDirectory,
-  fileExists,
-  writeJsonFile
+  fileExists
 } from '@nrwl/workspace/src/utilities/fileutils';
-import { joinPathFragments } from '@nrwl/devkit';
+import { joinPathFragments, readJsonFile, writeJsonFile } from '@nrwl/devkit';
 import { existsSync } from 'fs';
 import type { Config } from '@stencil/core/compiler';
 

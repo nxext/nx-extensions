@@ -121,7 +121,7 @@ describe('schematics:add-outputtarget', () => {
     });
   });
 
-  describe('using vue', () => {
+  xdescribe('using vue', () => {
     const vueOptions: AddOutputtargetSchematicSchema = {
       ...options,
       unitTestRunner: 'none',

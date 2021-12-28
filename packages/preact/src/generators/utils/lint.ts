@@ -1,4 +1,4 @@
-import { offsetFromRoot } from '@nrwl/workspace';
+import { offsetFromRoot } from '@nrwl/devkit';
 
 export const extraEslintDependencies = {
   dependencies: {},

@@ -1,8 +1,6 @@
 import { AddExecutorSchema } from './schema';
 import { default as runCommands } from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
-import { ExecutorContext, getPackageManagerCommand, joinPathFragments } from '@nrwl/devkit';
-import { readJsonFile } from '@nrwl/workspace';
-import { writeJsonFile } from '@nrwl/workspace/src/utilities/fileutils';
+import { ExecutorContext, getPackageManagerCommand, joinPathFragments, readJsonFile, writeJsonFile } from '@nrwl/devkit';
 import { sortObjectByKeys } from '@nrwl/workspace/src/utils/ast-utils';
 
 export default async function runExecutor(
