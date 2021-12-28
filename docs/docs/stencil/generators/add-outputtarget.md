@@ -19,7 +19,7 @@ With the `--outputType='react'`, `--outputType='angular'` or `--outputType='vue'
 
 Type: `enum`
 
-Possible values: angular, react, vue
+Possible values: angular, react
 
 Select what kind of library you want to generate.
 

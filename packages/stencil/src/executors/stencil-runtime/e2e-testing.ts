@@ -1,8 +1,8 @@
 import { deleteFile } from '../../utils/fileutils';
-import { fileExists, writeJsonFile } from '@nrwl/workspace/src/utilities/fileutils';
+import { fileExists } from '@nrwl/workspace/src/utilities/fileutils';
 import { PathCollection } from './types';
 import { relative } from 'path';
-import { joinPathFragments } from '@nrwl/devkit';
+import { joinPathFragments, writeJsonFile } from '@nrwl/devkit';
 
 export function prepareE2eTesting(pathCollection: PathCollection) {
 

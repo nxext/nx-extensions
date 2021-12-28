@@ -2,11 +2,10 @@ import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { PathCollection } from './types';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext, readJsonFile } from '@nrwl/devkit';
 import { join } from 'path';
 import {
-  fileExists,
-  readJsonFile
+  fileExists
 } from '@nrwl/workspace/src/utilities/fileutils';
 import { normalizePath } from '../../utils/normalize-path';
 import type { Config } from '@stencil/core/compiler';

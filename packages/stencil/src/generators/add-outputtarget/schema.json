@@ -16,7 +16,7 @@
     },
     "outputType": {
       "type": "string",
-      "enum": ["angular", "react", "vue"],
+      "enum": ["angular", "react"],
       "description": "Select what kind of library you want to generate.",
       "x-prompt": "Which framework do you use?"
     },
