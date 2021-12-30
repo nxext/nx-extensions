@@ -42,7 +42,8 @@
     "help": "nx help",
     "commit": "git-cz",
     "workspace-generator": "nx workspace-generator",
-    "fetch-latest-versions": "ts-node tools/scripts/fetch-latest-versions.ts"
+    "fetch-latest-versions": "ts-node tools/scripts/fetch-latest-versions.ts",
+    "prepare": "is-ci || husky install"
   },
   "private": true,
   "dependencies": {
@@ -76,6 +77,7 @@
     "@stencil/core": "2.11.0",
     "@sveltejs/kit": "^1.0.0-next.55",
     "@types/jest": "27.0.3",
+    "@types/is-ci": "^3.0.0",
     "@types/node": "14.14.37",
     "@typescript-eslint/eslint-plugin": "5.8.1",
     "@typescript-eslint/parser": "5.8.1",
@@ -89,7 +91,8 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-svelte3": "^3.2.1",
-    "husky": "^4.3.8",
+    "husky": "^6.0.0",
+    "is-ci": "^3.0.0",
     "ignore": "^5.1.9",
     "jest": "27.3.1",
     "lint-staged": "11.2.6",
@@ -108,12 +111,6 @@
   },
   "resolutions": {
     "terser": "^4.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn format:check"
-    }
   },
   "lint-staged": {
     "nx.json": [
