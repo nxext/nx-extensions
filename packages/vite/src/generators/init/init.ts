@@ -1,16 +1,16 @@
 import {
-  addDependenciesToPackageJson,
   Tree,
   updateJson,
   formatFiles,
   convertNxGenerator,
   GeneratorCallback,
 } from '@nrwl/devkit';
-import { jestInitGenerator } from '@nrwl/jest';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 
-import { viteVersion } from '../../utils/version';
 import { Schema } from './schema';
+import { addJestPlugin } from './lib/add-jest-plugin';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { updateDependencies } from './lib/add-dependencies';
 
 function normalizeOptions(schema: Schema) {
   return {
@@ -22,38 +22,31 @@ function normalizeOptions(schema: Schema) {
 function removeViteFromDeps(tree: Tree) {
   updateJson(tree, 'package.json', (json) => {
     delete json.dependencies['@nxext/vite'];
+    delete json.dependencies['vite']
     return json;
   });
 }
 
-export async function viteInitGenerator(tree: Tree, schema: Schema) {
+export async function viteInitGenerator(host: Tree, schema: Schema) {
+  const tasks: GeneratorCallback[] = [];
   const options = normalizeOptions(schema);
-  setDefaultCollection(tree, '@nxext/vite');
+  setDefaultCollection(host, '@nxext/vite');
 
-  let jestInstall: GeneratorCallback;
   if (options.unitTestRunner === 'jest') {
-    jestInstall = await jestInitGenerator(tree, {});
+    const jestTask = addJestPlugin(host);
+    tasks.push(jestTask);
   }
 
-  removeViteFromDeps(tree);
+  removeViteFromDeps(host);
 
-  const installTask = addDependenciesToPackageJson(
-    tree,
-    {
-      vite: viteVersion,
-    },
-    {}
-  );
+  const installTask = updateDependencies(host);
+  tasks.push(installTask);
+
   if (!schema.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
 
-  return async () => {
-    if (jestInstall) {
-      await jestInstall();
-    }
-    await installTask();
-  };
+  return runTasksInSerial(...tasks);
 }
 
 export default viteInitGenerator;

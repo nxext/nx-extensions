@@ -14,30 +14,34 @@ describe('init', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
+    tree.write(
+      'package.json',
+      `
+      {
+        "name": "test-name",
+        "dependencies": {},
+        "devDependencies": {
+          "@nrwl/workspace": "0.0.0"
+        }
+      }
+    `
+    );
   });
 
   it('should add dependencies', async () => {
-    const existing = 'existing';
-    const existingVersion = '1.0.0';
-
     addDependenciesToPackageJson(
       tree,
       {
-        [existing]: existingVersion,
         vite: viteVersion,
       },
-      {
-        [existing]: existingVersion,
-      }
+      {}
     );
     await viteInitGenerator(tree, {});
 
     const packageJson = readJson(tree, 'package.json');
-    expect(packageJson.dependencies['vite']).toBeDefined();
+    expect(packageJson.dependencies['vite']).toBeUndefined();
     expect(packageJson.dependencies['tslib']).toBeDefined();
-    expect(packageJson.dependencies[existing]).toBeDefined();
-    expect(packageJson.devDependencies['vite']).toBeUndefined();
-    expect(packageJson.devDependencies[existing]).toBeDefined();
+    expect(packageJson.devDependencies['vite']).toBeDefined();
   });
 
   describe('defaultCollection', () => {

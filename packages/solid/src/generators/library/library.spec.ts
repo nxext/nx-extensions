@@ -1,11 +1,11 @@
 import { SolidLibrarySchema } from './schema';
 import { Linter } from '@nrwl/linter';
-import { readJson } from '@nrwl/devkit';
+import { readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from './library';
 
 describe('solid library schematic', () => {
-  let tree;
+  let tree: Tree;
   const options: SolidLibrarySchema = {
     name: 'test',
     linter: Linter.EsLint,
@@ -16,7 +16,7 @@ describe('solid library schematic', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
-    tree.overwrite(
+    tree.write(
       'package.json',
       `
       {

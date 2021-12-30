@@ -6,7 +6,7 @@
     "e2e": {
       "executor": "./tools/executors/e2e:e2e",
       "options": {
-        "targets": ["vite:build", "solid:build"],
+        "targets": ["solid:build", "vite:build"],
         "jestConfig": "e2e/solid-e2e/jest.config.js"
       }
     }
