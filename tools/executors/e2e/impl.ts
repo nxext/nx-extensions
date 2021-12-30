@@ -1,40 +1,63 @@
+import 'dotenv/config';
+
+import type { ExecutorContext } from '@nrwl/devkit';
+
 import {
-  BuilderContext,
-  createBuilder,
-  scheduleTargetAndForget,
-  targetFromTargetString,
-} from '@angular-devkit/architect';
-import { from, forkJoin } from 'rxjs';
-import { concatMap, map, switchMap } from 'rxjs/operators';
+  logger,
+  parseTargetString,
+  readTargetOptions,
+  runExecutor,
+} from '@nrwl/devkit';
+import { jestExecutor } from '@nrwl/jest/src/executors/jest/jest.impl';
 import { Schema } from './schema';
+export type NxPluginE2EExecutorOptions = Schema;
 
-try {
-  require('dotenv').config();
-  // eslint-disable-next-line no-empty
-} catch (e) {}
+export async function* nxPluginE2EExecutor(
+  options: NxPluginE2EExecutorOptions,
+  context: ExecutorContext
+): AsyncGenerator<{ success: boolean }> {
+  let success: boolean;
+  for await (const _ of options.targets.map(target => runBuildTarget(target, context))) {
+    try {
+      success = await runTests(options.jestConfig, context);
+    } catch (e) {
+      logger.error(e.message);
+      success = false;
+    }
+  }
 
-export type NxPluginE2EBuilderOptions = Schema;
-
-function buildTarget(context: BuilderContext, targets: string[]) {
-  return forkJoin(
-    targets.map(target => scheduleTargetAndForget(context, targetFromTargetString(target)))
-  ).pipe(map(results => ({success: !results.includes({success: false})})));
+  return { success };
 }
 
-export function runNxPluginE2EBuilder(
-  options: NxPluginE2EBuilderOptions,
-  context: BuilderContext
-) {
-  return buildTarget(context, options.targets).pipe(
-    switchMap(() => {
-      return from(
-        context.scheduleBuilder('@nrwl/jest:jest', {
-          jestConfig: options.jestConfig,
-          watch: false,
-        })
-      ).pipe(concatMap((run) => run.output));
-    })
+async function* runBuildTarget(
+  buildTarget: string,
+  context: ExecutorContext
+): AsyncGenerator<boolean> {
+  const { project, target, configuration } = parseTargetString(buildTarget);
+  const buildTargetOptions = readTargetOptions(
+    { project, target, configuration },
+    context
   );
+  const targetSupportsWatch = Object.keys(buildTargetOptions).includes('watch');
+
+  for await (const output of await runExecutor<{ success: boolean }>(
+    { project, target, configuration },
+    targetSupportsWatch ? { watch: false } : {},
+    context
+  )) {
+    if (!output.success)
+      throw new Error('Could not compile application files.');
+    yield output.success;
+  }
 }
 
-export default createBuilder(runNxPluginE2EBuilder);
+async function runTests(
+  jestConfig: string,
+  context: ExecutorContext
+): Promise<boolean> {
+  const { success } = await jestExecutor({ jestConfig, watch: false }, context);
+
+  return success;
+}
+
+export default nxPluginE2EExecutor;

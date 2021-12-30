@@ -1,10 +1,10 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson } from '@nrwl/devkit';
+import { readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 describe('init schematic', () => {
-  let tree;
+  let tree: Tree;
   const options: Schema = {
     skipFormat: true,
     unitTestRunner: 'jest',
@@ -13,7 +13,7 @@ describe('init schematic', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
-    tree.overwrite(
+    tree.write(
       'package.json',
       `
       {

@@ -1,16 +1,33 @@
 {
   "name": "@nxext/vite",
   "version": "13.1.3",
+  "license": "MIT",
+  "author": "Dominik Pieper",
+  "description": "Nx plugin for ViteJs",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "viteJs",
+    "vite"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
   "main": "src/index.js",
   "executors": "./executors.json",
   "generators": "./generators.json",
   "dependencies": {
-    "vite": "^2.7.4",
     "vite-tsconfig-paths": "3.3.17"
   },
   "peerDependencies": {
     "@nrwl/devkit": "^13.0.1",
-    "@nrwl/workspace": "^13.0.1"
+    "@nrwl/workspace": "^13.0.1",
+    "vite": "^2.7.4"
   },
   "nx-migrations": {
     "migrations": "./migrations.json"

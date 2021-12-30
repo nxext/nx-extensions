@@ -2,9 +2,10 @@ import { SolidApplicationSchema } from './schema';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from './application';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree } from '@nrwl/devkit';
 
 describe('Solid app schematic', () => {
-  let tree;
+  let tree: Tree;
   const options: SolidApplicationSchema = {
     name: 'test',
     linter: Linter.EsLint,
@@ -14,7 +15,7 @@ describe('Solid app schematic', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
-    tree.overwrite(
+    tree.write(
       'package.json',
       `
       {

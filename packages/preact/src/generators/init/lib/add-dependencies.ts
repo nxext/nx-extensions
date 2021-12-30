@@ -1,13 +1,15 @@
 import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 
-export function updateDependencies(tree: Tree) {
-  const devDependencies = {
-    preact: '^10.6.2',
-    vite: '^2.5.7',
-    '@testing-library/preact': '^2.0.1',
-    '@preact/preset-vite': '^2.1.5',
-    'eslint-plugin-preact': '^0.1.0',
-  };
+export const preactVersion = '^10.6.2';
+export const testingLibraryPreactVersion = '^2.0.1';
+export const vitePluginPreactVersion = '^2.1.5';
+export const eslintPluginPreactVersion = '^0.1.0';
 
-  return addDependenciesToPackageJson(tree, {}, devDependencies);
+export function updateDependencies(tree: Tree) {
+  return addDependenciesToPackageJson(tree, {}, {
+    preact: preactVersion,
+    '@testing-library/preact': testingLibraryPreactVersion,
+    '@preact/preset-vite': vitePluginPreactVersion,
+    'eslint-plugin-preact': eslintPluginPreactVersion,
+  });
 }

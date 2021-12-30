@@ -4,12 +4,14 @@ import {
   convertNxGenerator,
   GeneratorCallback,
 } from '@nrwl/devkit';
-import { jestInitGenerator } from '@nrwl/jest';
 import { reactInitGenerator as nxReactInitGenerator } from '@nrwl/react';
 import { viteInitGenerator } from '@nxext/vite';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 
 import { Schema } from './schema';
+import { addJestPlugin } from './lib/add-jest-plugin';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { updateDependencies } from './lib/add-dependencies';
 
 function normalizeOptions(schema: Schema) {
   return {
@@ -18,29 +20,33 @@ function normalizeOptions(schema: Schema) {
   };
 }
 
-export async function reactInitGenerator(tree: Tree, schema: Schema) {
+export async function reactInitGenerator(host: Tree, schema: Schema) {
+  const tasks: GeneratorCallback[] = [];
   const options = normalizeOptions(schema);
 
-  let jestInstall: GeneratorCallback;
   if (options.unitTestRunner === 'jest') {
-    jestInstall = await jestInitGenerator(tree, {});
+    const jestTask = addJestPlugin(host);
+    tasks.push(jestTask);
   }
 
-  await nxReactInitGenerator(tree, {
+  const reactTask = await nxReactInitGenerator(host, {
     ...options,
     e2eTestRunner: 'none',
-  }).then(() => setDefaultCollection(tree, '@nxext/react'));
-  await viteInitGenerator(tree, options);
+  });
+  tasks.push(reactTask);
+  const viteTask = await viteInitGenerator(host, options);
+  tasks.push(viteTask);
+
+  const installTask = updateDependencies(host);
+  tasks.push(installTask);
+
+  setDefaultCollection(host, '@nxext/react');
 
   if (!schema.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
 
-  return async () => {
-    if (jestInstall) {
-      await jestInstall();
-    }
-  };
+  return runTasksInSerial(...tasks);
 }
 
 export default reactInitGenerator;

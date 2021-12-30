@@ -1,14 +1,14 @@
 {
-  "name": "@nxext/react",
+  "name": "@nxext/preact",
   "version": "13.0.1",
   "license": "MIT",
   "author": "Jordan Hall",
-  "description": "Nx plugin for react",
+  "description": "Nx plugin for preact",
   "homepage": "https://nxext.dev/",
   "keywords": [
     "nx",
     "nx-plugin",
-    "react",
+    "preact",
     "pwa",
     "web components"
   ],
