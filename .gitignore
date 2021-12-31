@@ -48,3 +48,7 @@ e2e/stencil-e2e/tests/dev.test.ts
 
 # Generated Sveltekit files
 /**/.svelte/
+
+# verdaccio
+/build
+/.verdaccio/htpasswd
