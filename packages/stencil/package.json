@@ -25,16 +25,16 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "^13.4.1",
-    "ignore": "^5.1.8"
+    "@nrwl/devkit": "^13.4.0",
+    "ignore": "^5.2.0"
   },
   "peerDependencies": {
-    "@nrwl/storybook": "^13.0.1",
-    "@nrwl/linter": "^13.0.1",
-    "@nrwl/react": "^13.0.1",
-    "@nrwl/angular": "^13.0.1",
-    "@nrwl/jest": "^13.0.1",
-    "@nrwl/workspace": "^13.0.1",
+    "@nrwl/storybook": "^13.4.0",
+    "@nrwl/linter": "^13.4.0",
+    "@nrwl/react": "^13.4.0",
+    "@nrwl/angular": "^13.4.0",
+    "@nrwl/jest": "^13.4.0",
+    "@nrwl/workspace": "^13.4.0",
     "@stencil/core": "^2.11.0"
   },
   "nx-migrate": {

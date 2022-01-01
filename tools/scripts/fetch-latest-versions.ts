@@ -1,15 +1,25 @@
 import { execSync } from 'child_process';
 import {
-  ionicVersion, puppeteer, puppeteerType,
+  ionicVersion,
+  puppeteer,
+  puppeteerType,
   STENCIL_OUTPUTTARGET_VERSION,
-  STENCIL_STYLE_PLUGIN_VERSION, stencilRouterVersion,
-  stencilVersion
+  STENCIL_STYLE_PLUGIN_VERSION,
+  stencilRouterVersion,
+  stencilVersion,
 } from '../../packages/stencil/src/utils/versions';
-import { vitestVersion } from '../../packages/vitest/src/utils/versions';
+import {
+  c8Version,
+  vitestVersion,
+} from '../../packages/vitest/src/utils/versions';
 import {
   svelteCheckVersion,
-  svelteJesterVersion, sveltePreprocessVersion,
-  svelteVersion, testingLibrarySvelteVersion, tsconfigSvelteVersion, vitePluginSvelteVersion
+  svelteJesterVersion,
+  sveltePreprocessVersion,
+  svelteVersion,
+  testingLibrarySvelteVersion,
+  tsconfigSvelteVersion,
+  vitePluginSvelteVersion,
 } from '../../packages/svelte/src/generators/utils/versions';
 import { viteVersion } from '../../packages/vite/src/utils/version';
 import { vitePluginReactVersion } from '../../packages/react/src/generators/utils/versions';
@@ -17,13 +27,15 @@ import {
   eslintPluginSolidVersion,
   solidJestVersion,
   solidTestingLibraryVersion,
-  solidVersion, vitePluginSolidVersion
+  solidVersion,
+  vitePluginSolidVersion,
 } from '../../packages/solid/src/generators/utils/versions';
 import {
   eslintPluginPreactVersion,
   preactVersion,
-  testingLibraryPreactVersion, vitePluginPreactVersion
-} from '../../packages/preact/src/generators/init/lib/add-dependencies';
+  testingLibraryPreactVersion,
+  vitePluginPreactVersion,
+} from '../../packages/preact/src/generators/utils/versions';
 
 console.log('======================================');
 console.log('Stencil:');
@@ -38,10 +50,22 @@ const stencilpkgs = [
   { pkg: '@ionic/core', version: ionicVersion },
   { pkg: '@stencil/router', version: stencilRouterVersion },
 
-  { pkg: '@stencil/react-output-target', version: STENCIL_OUTPUTTARGET_VERSION['react'] },
-  { pkg: '@stencil/vue-output-target', version: STENCIL_OUTPUTTARGET_VERSION['vue'] },
-  { pkg: '@stencil/angular-output-target', version: STENCIL_OUTPUTTARGET_VERSION['angular'] },
-  { pkg: '@stencil/svelte-output-target', version: STENCIL_OUTPUTTARGET_VERSION['svelte'] },
+  {
+    pkg: '@stencil/react-output-target',
+    version: STENCIL_OUTPUTTARGET_VERSION['react'],
+  },
+  {
+    pkg: '@stencil/vue-output-target',
+    version: STENCIL_OUTPUTTARGET_VERSION['vue'],
+  },
+  {
+    pkg: '@stencil/angular-output-target',
+    version: STENCIL_OUTPUTTARGET_VERSION['angular'],
+  },
+  {
+    pkg: '@stencil/svelte-output-target',
+    version: STENCIL_OUTPUTTARGET_VERSION['svelte'],
+  },
 
   { pkg: 'puppeteer', version: puppeteer },
   { pkg: '@types/puppeteer', version: puppeteerType },
@@ -62,7 +86,7 @@ const sveltepkgs = [
   { pkg: 'svelte-preprocess', version: sveltePreprocessVersion },
   { pkg: '@tsconfig/svelte', version: tsconfigSvelteVersion },
   { pkg: '@testing-library/svelte', version: testingLibrarySvelteVersion },
-  { pkg: '@sveltejs/vite-plugin-svelte', version: vitePluginSvelteVersion }
+  { pkg: '@sveltejs/vite-plugin-svelte', version: vitePluginSvelteVersion },
 ];
 
 sveltepkgs.forEach(({ pkg, version }) => {
@@ -75,7 +99,7 @@ console.log('======================================');
 
 const vitePkgs = [
   { pkg: 'vite', version: viteVersion },
-  { pkg: 'vite-tsconfig-paths', version: '3.3.17' }
+  { pkg: 'vite-tsconfig-paths', version: '3.3.17' },
 ];
 
 vitePkgs.forEach(({ pkg, version }) => {
@@ -87,7 +111,7 @@ console.log('React:');
 console.log('======================================');
 
 const reactPkgs = [
-  { pkg: '@vitejs/plugin-react', version: vitePluginReactVersion }
+  { pkg: '@vitejs/plugin-react', version: vitePluginReactVersion },
 ];
 
 reactPkgs.forEach(({ pkg, version }) => {
@@ -102,13 +126,12 @@ const preactPkgs = [
   { pkg: 'preact', version: preactVersion },
   { pkg: '@testing-library/preact', version: testingLibraryPreactVersion },
   { pkg: '@preact/preset-vite', version: vitePluginPreactVersion },
-  { pkg: 'eslint-plugin-preact', version: eslintPluginPreactVersion }
+  { pkg: 'eslint-plugin-preact', version: eslintPluginPreactVersion },
 ];
 
 preactPkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
-
 
 console.log('======================================');
 console.log('Solid:');
@@ -119,7 +142,7 @@ const solidPkgs = [
   { pkg: 'solid-js', version: solidVersion },
   { pkg: 'solid-testing-library', version: solidTestingLibraryVersion },
   { pkg: 'eslint-plugin-solid', version: eslintPluginSolidVersion },
-  { pkg: 'vite-plugin-solid', version: vitePluginSolidVersion }
+  { pkg: 'vite-plugin-solid', version: vitePluginSolidVersion },
 ];
 
 solidPkgs.forEach(({ pkg, version }) => {
@@ -131,7 +154,8 @@ console.log('Vitest:');
 console.log('======================================');
 
 const vitestPkgs = [
-  { pkg: 'vitest', version: vitestVersion }
+  { pkg: 'vitest', version: vitestVersion },
+  { pkg: 'c8', version: c8Version },
 ];
 
 vitestPkgs.forEach(({ pkg, version }) => {
@@ -139,12 +163,12 @@ vitestPkgs.forEach(({ pkg, version }) => {
 });
 
 function checkVersion(pkg: string, version: string = '') {
-  if(version !== '') {
+  if (version !== '') {
     console.log(`${pkg}: (${version})`);
   } else {
     console.log(`${pkg}: `);
   }
   execSync(`npm show ${pkg} version`, {
-    stdio: [0, 1, 2]
+    stdio: [0, 1, 2],
   });
 }
