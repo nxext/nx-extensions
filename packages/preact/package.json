@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@nxext/vite": "^13.1.0",
-    "@nrwl/devkit": "^13.0.1"
+    "@nrwl/devkit": "^13.4.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"
