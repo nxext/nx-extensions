@@ -6,7 +6,6 @@
 const yargsParser = require('yargs-parser');
 const childProcess = require('child_process');
 const fs = require('fs');
-const path = require('path');
 
 const parsedArgs = yargsParser(process.argv, {
   boolean: ['dry-run', 'local'],
@@ -37,13 +36,6 @@ if (parsedArgs.help) {
 
     `);
   process.exit(0);
-}
-
-if (!parsedArgs.local) {
-  console.log('> git fetch --all');
-  childProcess.execSync('git fetch --all', {
-    stdio: [0, 1, 2],
-  });
 }
 
 function updatePackageJsonFiles(parsedVersion, isLocal) {

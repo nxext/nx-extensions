@@ -22,11 +22,11 @@
   "executors": "./executors.json",
   "generators": "./generators.json",
   "dependencies": {
-    "vite-tsconfig-paths": "3.3.17"
+    "vite-tsconfig-paths": "3.3.17",
+    "@nrwl/devkit": "^13.4.0"
   },
   "peerDependencies": {
-    "@nrwl/devkit": "^13.0.1",
-    "@nrwl/workspace": "^13.0.1",
+    "@nrwl/workspace": "^13.4.0",
     "vite": "^2.7.4"
   },
   "nx-migrations": {

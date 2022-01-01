@@ -3713,10 +3713,10 @@
     url "^0.11.0"
     webpack-sources "^1.4.3"
 
-"@stencil/core@2.11.0":
-  version "2.11.0"
-  resolved "https://registry.npmjs.org/@stencil/core/-/core-2.11.0.tgz"
-  integrity sha512-/IubCWhVXCguyMUp/3zGrg3c882+RJNg/zpiKfyfJL3kRCOwe+/MD8OoAXVGdd+xAohZKIi1Ik+EHFlsptsjLg==
+"@stencil/core@2.12.0":
+  version "2.12.0"
+  resolved "http://localhost:4873/@stencil%2fcore/-/core-2.12.0.tgz#5b12517dd367908026692d3b00fa1aab39638ab9"
+  integrity sha512-hQlQKh5CUJe8g3L5avLLsfgVu95HMS2LToTtS7gpvvP0eKes1VvAC56uhI+vH4u44GZl9ck/g1rJBVRmMWu0LA==
 
 "@storybook/node-logger@6.1.20":
   version "6.1.20"

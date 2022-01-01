@@ -76,7 +76,7 @@
     "@nx-plus/docusaurus": "12.2.0",
     "@nx-plus/vue": "12.2.0",
     "@preact/preset-vite": "^2.1.5",
-    "@stencil/core": "2.11.0",
+    "@stencil/core": "2.12.0",
     "@sveltejs/kit": "^1.0.0-next.55",
     "@types/is-ci": "^3.0.0",
     "@types/jest": "27.0.3",
