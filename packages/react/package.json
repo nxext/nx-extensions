@@ -1,6 +1,6 @@
 {
   "name": "@nxext/react",
-  "version": "13.0.0",
+  "version": "13.0.3",
   "author": "Jordan Hall",
   "description": "Nx plugin for react",
   "homepage": "https://nxext.dev/",
@@ -17,6 +17,11 @@
     "@nrwl/react": "^13.4.0"
   },
   "files": [
-    "client.d.ts"
+    "client.d.ts",
+    "plugins",
+    "src",
+    "generators.json",
+    "migrations.json",
+    "README.md"
   ]
 }
