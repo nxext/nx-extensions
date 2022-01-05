@@ -3,9 +3,10 @@ import {
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
+  joinPathFragments,
   names,
   offsetFromRoot,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { LibrarySchema, RawLibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
@@ -13,12 +14,14 @@ import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../../generators/init/init';
 import { MakeLibBuildableSchema } from '../../generators/make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
-import { join } from 'path';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 import makeLibBuildableGenerator from '../../generators/make-lib-buildable/make-lib-buildable';
 
-function normalizeOptions(host: Tree, options: RawLibrarySchema): LibrarySchema {
+function normalizeOptions(
+  host: Tree,
+  options: RawLibrarySchema
+): LibrarySchema {
   const { libsDir, npmScope } = getWorkspaceLayout(host);
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
@@ -42,27 +45,29 @@ function normalizeOptions(host: Tree, options: RawLibrarySchema): LibrarySchema 
     parsedTags,
     style,
     appType,
-    importPath
+    importPath,
   } as LibrarySchema;
 }
 
 function createFiles(host: Tree, options: LibrarySchema) {
   generateFiles(
     host,
-    join(__dirname, './files/lib'),
+    joinPathFragments(__dirname, './files/lib'),
     options.projectRoot,
     {
       ...options,
       ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot)
+      offsetFromRoot: offsetFromRoot(options.projectRoot),
     }
   );
 
-  if(options.unitTestRunner === 'none') {
-    host.delete(`${options.projectRoot}/src/components/my-component/my-component.spec.ts`);
+  if (options.unitTestRunner === 'none') {
+    host.delete(
+      `${options.projectRoot}/src/components/my-component/my-component.spec.ts`
+    );
   }
 
-  if(!options.component) {
+  if (!options.component) {
     host.delete(`${options.projectRoot}/src/components/my-component`);
   }
 }
@@ -85,7 +90,7 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
     await makeLibBuildableGenerator(host, {
       name: options.projectName,
       importPath: options.importPath,
-      style: options.style
+      style: options.style,
     } as MakeLibBuildableSchema);
   }
 

@@ -6,16 +6,19 @@ import {
   readProjectConfiguration,
   updateProjectConfiguration,
   formatFiles,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { MakeLibBuildableSchema } from './schema';
 import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { addToOutputTargets } from '../../stencil-core-utils';
 import { updateTsConfig } from './lib/update-tsconfig';
-import { join } from 'path';
-import { getBuildTarget, getE2eTarget, getLintTarget, getServeTarget } from '../../utils/targets';
-
-const projectType = 'library';
+import {
+  getBuildTarget,
+  getE2eTarget,
+  getLintTarget,
+  getServeTarget,
+} from '../../utils/targets';
+import { AppType } from '../../utils/typings';
 
 interface MakeLibBuildableOptions extends MakeLibBuildableSchema {
   projectRoot: string;
@@ -31,7 +34,7 @@ function normalize(
 function createFiles(host: Tree, options: MakeLibBuildableOptions) {
   generateFiles(
     host,
-    join(__dirname, './files/lib'),
+    joinPathFragments(__dirname, './files/lib'),
     options.projectRoot,
     options
   );
@@ -41,15 +44,21 @@ function updateProjectConfig(host: Tree, options: MakeLibBuildableOptions) {
   const projectConfig = readProjectConfiguration(host, options.name);
 
   projectConfig.targets = projectConfig.targets || {};
-  projectConfig.targets.build = getBuildTarget(projectType, options);
-  projectConfig.targets.serve = getServeTarget(projectType, options);
-  projectConfig.targets.e2e = getE2eTarget(projectType, options);
-  projectConfig.targets.lint = getLintTarget(projectType, options.projectRoot);
+  projectConfig.targets.build = getBuildTarget(AppType.library, options);
+  projectConfig.targets.serve = getServeTarget(AppType.library, options);
+  projectConfig.targets.e2e = getE2eTarget(AppType.library, options);
+  projectConfig.targets.lint = getLintTarget(
+    AppType.library,
+    options.projectRoot
+  );
 
   updateProjectConfiguration(host, options.name, projectConfig);
 }
 
-export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuildableSchema) {
+export async function makeLibBuildableGenerator(
+  host: Tree,
+  schema: MakeLibBuildableSchema
+) {
   const stencilProjectConfig = readProjectConfiguration(host, schema.name);
   const options = normalize(schema, stencilProjectConfig.root);
   const offset = offsetFromRoot(options.projectRoot);
@@ -73,7 +82,7 @@ export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuild
         type: 'www',
         dir: '${offset}dist/${options.projectRoot}/www',
         serviceWorker: null // disable service workers
-      }`
+      }`,
     ],
     joinPathFragments(options.projectRoot, 'stencil.config.ts')
   );
@@ -83,4 +92,6 @@ export async function makeLibBuildableGenerator(host: Tree, schema: MakeLibBuild
 }
 
 export default makeLibBuildableGenerator;
-export const makeLibBuildableSchematic = convertNxGenerator(makeLibBuildableGenerator);
+export const makeLibBuildableSchematic = convertNxGenerator(
+  makeLibBuildableGenerator
+);

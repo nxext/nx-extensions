@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 import { ChangeType, StringChange, Tree } from '@nrwl/devkit';
-import { findNodes } from '@nrwl/workspace/src/utils/ast-utils';
+import { findNodes } from '@nrwl/workspace/src/utilities/typescript';
 
 export function readTsSourceFile(host: Tree, path: string): ts.SourceFile {
   if (!host.exists(path)) {
@@ -30,16 +30,16 @@ function addAfterLastImport(
   const allImports = findNodes(source, ts.SyntaxKind.ImportDeclaration);
   if (allImports.length > 0) {
     const lastImport = allImports[allImports.length - 1];
-    return ({
+    return {
       type: ChangeType.Insert,
       index: lastImport.end + 1,
-      text: `\n${statement}\n`
-    });
+      text: `\n${statement}\n`,
+    };
   } else {
-    return ({
+    return {
       type: ChangeType.Insert,
       index: 0,
-      text: `\n${statement}\n`
-    });
+      text: `\n${statement}\n`,
+    };
   }
 }
