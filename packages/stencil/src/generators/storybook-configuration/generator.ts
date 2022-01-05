@@ -10,7 +10,8 @@ import {
   updateProjectConfiguration,
   writeJson,
   generateFiles,
-  offsetFromRoot, stripIndents
+  offsetFromRoot,
+  stripIndents,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { Linter } from '@nrwl/linter';
@@ -49,16 +50,12 @@ export async function storybookConfigurationGenerator(
   }
 
   const initTask = await initGenerator(tree, {
-    uiFramework: uiFramework
+    uiFramework: uiFramework,
   });
   tasks.push(initTask);
 
   createRootStorybookDir(tree);
-  createProjectStorybookDir(
-    tree,
-    options.name,
-    uiFramework
-  );
+  createProjectStorybookDir(tree, options.name, uiFramework);
   configureTsProjectConfig(tree, options);
   configureTsSolutionConfig(tree, options);
   updateLintConfig(tree, options);
@@ -70,7 +67,7 @@ export async function storybookConfigurationGenerator(
         js: false,
         linter: options.linter,
         directory: options.cypressDirectory,
-        standaloneConfig: options.standaloneConfig
+        standaloneConfig: options.standaloneConfig,
       });
       tasks.push(cypressTask);
     } else {
@@ -86,11 +83,11 @@ export async function storybookConfigurationGenerator(
 function normalizeSchema(schema: StorybookConfigureSchema) {
   const defaults = {
     configureCypress: true,
-    linter: Linter.EsLint
+    linter: Linter.EsLint,
   };
   return {
     ...defaults,
-    ...schema
+    ...schema,
   };
 }
 
@@ -122,10 +119,7 @@ export function createProjectStorybookDir(
     return;
   }
 
-  const templatePath = join(
-    __dirname,
-    './project-files'
-  );
+  const templatePath = join(__dirname, './project-files');
   const offset = offsetFromRoot(root);
 
   generateFiles(tree, templatePath, root, {
@@ -134,13 +128,11 @@ export function createProjectStorybookDir(
     uiFramework,
     offsetFromRoot: offset,
     projectType: projectDirectory,
-    loaderDir: `${offset}../dist/${root}/loader`
+    loaderDir: `${offset}../dist/${root}/loader`,
   });
 }
 
-export function createRootStorybookDir(
-  tree: Tree
-) {
+export function createRootStorybookDir(tree: Tree) {
   if (tree.exists('.storybook')) {
     return;
   }
@@ -176,7 +168,7 @@ function configureTsProjectConfig(
     '**/*.stories.ts',
     '**/*.stories.js',
     '**/*.stories.jsx',
-    '**/*.stories.tsx'
+    '**/*.stories.tsx',
   ];
 
   writeJson(tree, tsConfigPath, tsConfigContent);
@@ -195,8 +187,8 @@ function configureTsSolutionConfig(
   tsConfigContent.references = [
     ...(tsConfigContent.references || []),
     {
-      path: './.storybook/tsconfig.json'
-    }
+      path: './.storybook/tsconfig.json',
+    },
   ];
 
   writeJson(tree, tsConfigPath, tsConfigContent);
@@ -209,19 +201,29 @@ function addStorybookTask(
 ) {
   const projectConfig = readProjectConfiguration(tree, projectName);
   projectConfig.targets['storybook'] = {
+    executor: '@nrwl/workspace:run-commands',
+    options: {
+      commands: [
+        `nx run ${projectName}:serve`,
+        `nx run ${projectName}:serve-storybook`,
+      ],
+      parallel: true,
+    },
+  };
+  projectConfig.targets['serve-storybook'] = {
     executor: '@nrwl/storybook:storybook',
     options: {
       uiFramework,
       port: 4400,
       config: {
-        configFolder: `${projectConfig.root}/.storybook`
-      }
+        configFolder: `${projectConfig.root}/.storybook`,
+      },
     },
     configurations: {
       ci: {
-        quiet: true
-      }
-    }
+        quiet: true,
+      },
+    },
   };
   projectConfig.targets['build-storybook'] = {
     executor: '@nrwl/storybook:build',
@@ -230,14 +232,14 @@ function addStorybookTask(
       uiFramework,
       outputPath: joinPathFragments('dist/storybook', projectName),
       config: {
-        configFolder: `${projectConfig.root}/.storybook`
-      }
+        configFolder: `${projectConfig.root}/.storybook`,
+      },
     },
     configurations: {
       ci: {
-        quiet: true
-      }
-    }
+        quiet: true,
+      },
+    },
   };
 
   updateProjectConfiguration(tree, projectName, projectConfig);
