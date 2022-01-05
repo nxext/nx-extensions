@@ -1,13 +1,10 @@
-import { addProjectConfiguration, NxJsonProjectConfiguration, Tree } from '@nrwl/devkit';
+import { addProjectConfiguration, Tree } from '@nrwl/devkit';
 import { getTestTarget } from '../../../utils/targets';
 import { LibrarySchema } from '../schema';
 
 export function addProject(tree: Tree, options: LibrarySchema) {
   const targets = {
-    test: getTestTarget('library', options)
-  };
-  const nxConfig: NxJsonProjectConfiguration = {
-    tags: options.parsedTags
+    test: getTestTarget('library', options),
   };
 
   addProjectConfiguration(tree, options.name, {
@@ -16,10 +13,10 @@ export function addProject(tree: Tree, options: LibrarySchema) {
     projectType: 'library',
     generators: {
       '@nxext/stencil:component': {
-        style: options.style
-      }
+        style: options.style,
+      },
     },
-    ...nxConfig,
-    targets
+    tags: options.parsedTags,
+    targets,
   });
 }

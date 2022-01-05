@@ -1,5 +1,4 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "name": "stencil",
   "version": "0.0.1",
   "schematics": {
@@ -7,43 +6,32 @@
       "factory": "./src/generators/init/init#initSchematic",
       "schema": "./src/generators/init/schema.json",
       "description": "Core features for collections",
-      "aliases": [
-        "ng-add"
-      ],
+      "aliases": ["ng-add"],
       "hidden": true
     },
     "application": {
       "factory": "./src/generators/application/generator#applicationSchematic",
       "schema": "./src/generators/application/schema.json",
       "description": "Generate Stencil application",
-      "aliases": [
-        "app"
-      ]
+      "aliases": ["app"]
     },
     "ionic-pwa": {
       "factory": "./src/generators/ionic-pwa/generator#ionicPwaSchematic",
       "schema": "./src/generators/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
-      "aliases": [
-        "pwa"
-      ]
+      "aliases": ["pwa"]
     },
     "library": {
       "factory": "./src/generators/library/generator#librarySchematic",
       "schema": "./src/generators/library/schema.json",
       "description": "Generate Stencil Library",
-      "aliases": [
-        "lib",
-        "collection"
-      ]
+      "aliases": ["lib", "collection"]
     },
     "component": {
       "factory": "./src/generators/component/component#componentSchematic",
       "schema": "./src/generators/component/schema.json",
       "description": "Add a component to a ui library",
-      "aliases": [
-        "c"
-      ]
+      "aliases": ["c"]
     },
     "add-outputtarget": {
       "factory": "./src/generators/add-outputtarget/add-outputtarget#outputtargetSchematic",
@@ -81,43 +69,32 @@
       "factory": "./src/generators/init/init#initGenerator",
       "schema": "./src/generators/init/schema.json",
       "description": "Core features for collections",
-      "aliases": [
-        "ng-add"
-      ],
+      "aliases": ["ng-add"],
       "hidden": true
     },
     "application": {
       "factory": "./src/generators/application/generator#applicationGenerator",
       "schema": "./src/generators/application/schema.json",
       "description": "Generate Stencil application",
-      "aliases": [
-        "app"
-      ]
+      "aliases": ["app"]
     },
     "ionic-pwa": {
       "factory": "./src/generators/ionic-pwa/generator#ionicPwaGenerator",
       "schema": "./src/generators/ionic-pwa/schema.json",
       "description": "Generate Stencil ionic pwa",
-      "aliases": [
-        "pwa"
-      ]
+      "aliases": ["pwa"]
     },
     "library": {
       "factory": "./src/generators/library/generator#libraryGenerator",
       "schema": "./src/generators/library/schema.json",
       "description": "Generate Stencil Library",
-      "aliases": [
-        "lib",
-        "collection"
-      ]
+      "aliases": ["lib", "collection"]
     },
     "component": {
       "factory": "./src/generators/component/component#componentGenerator",
       "schema": "./src/generators/component/schema.json",
       "description": "Add a component to a ui library",
-      "aliases": [
-        "c"
-      ]
+      "aliases": ["c"]
     },
     "add-outputtarget": {
       "factory": "./src/generators/add-outputtarget/add-outputtarget#outputtargetGenerator",

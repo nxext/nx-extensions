@@ -1,7 +1,12 @@
 import * as ts from 'typescript';
 import { readTsSourceFile } from '../../utils/ast-utils';
-import { applyChangesToString, ChangeType, StringChange, Tree } from '@nrwl/devkit';
-import { findNodes } from '@nrwl/workspace/src/utils/ast-utils';
+import {
+  applyChangesToString,
+  ChangeType,
+  StringChange,
+  Tree,
+} from '@nrwl/devkit';
+import { findNodes } from '@nrwl/workspace/src/utilities/typescript';
 
 function addCodeIntoArray(
   source: ts.SourceFile,
@@ -10,8 +15,13 @@ function addCodeIntoArray(
 ): StringChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
   let node = nodes[0];
-  const matchingProperties: ts.ObjectLiteralElement[] = (node as ts.ObjectLiteralExpression).properties
-    .filter((prop: ts.ObjectLiteralElementLike) => prop.kind == ts.SyntaxKind.PropertyAssignment)
+  const matchingProperties: ts.ObjectLiteralElement[] = (
+    node as ts.ObjectLiteralExpression
+  ).properties
+    .filter(
+      (prop: ts.ObjectLiteralElementLike) =>
+        prop.kind == ts.SyntaxKind.PropertyAssignment
+    )
     .filter((prop: ts.PropertyAssignment) => {
       if (prop.name.kind === ts.SyntaxKind.Identifier) {
         return (prop.name as ts.Identifier).getText(source) == identifier;
@@ -49,8 +59,8 @@ function addCodeIntoArray(
       {
         type: ChangeType.Insert,
         index: position,
-        text: `\n${toInsert2}\n`
-      }
+        text: `\n${toInsert2}\n`,
+      },
     ];
   }
 
@@ -70,8 +80,8 @@ function addCodeIntoArray(
     {
       type: ChangeType.Insert,
       index: lastItem.getEnd(),
-      text: `\n${toInsert2}\n`
-    }
+      text: `\n${toInsert2}\n`,
+    },
   ];
 }
 
@@ -102,10 +112,10 @@ export function addToOutputTargets(
     stencilConfigPath
   );
 
-  const changes = applyChangesToString(stencilConfigSource.text, addOutputTarget(
-    stencilConfigSource,
-    outputTargets.join(',')
-  ));
+  const changes = applyChangesToString(
+    stencilConfigSource.text,
+    addOutputTarget(stencilConfigSource, outputTargets.join(','))
+  );
 
   host.write(stencilConfigPath, changes);
 }
