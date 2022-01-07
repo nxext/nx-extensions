@@ -1,4 +1,4 @@
-export const eslintPluginSvelteVersion = '^3.2.1';
+export const eslintPluginSvelteVersion = '^3.3.0';
 export const svelteVersion = '^3.44.3';
 export const svelteJesterVersion = '^1.3.2';
 export const svelteCheckVersion = '^1.4.0';

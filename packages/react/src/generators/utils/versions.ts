@@ -1,1 +1,1 @@
-export const vitePluginReactVersion = '^1.1.3';
+export const vitePluginReactVersion = '^1.1.4';
