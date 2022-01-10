@@ -64,7 +64,7 @@ export default async function runExecutor(
   }
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
-  const { config, pathCollection } = await initializeStencilConfig(
+  const { loadedConfig, pathCollection } = await initializeStencilConfig(
     taskCommand,
     options,
     context,
@@ -73,7 +73,7 @@ export default async function runExecutor(
   );
 
   const stencilConfig = await prepareConfigAndOutputargetPaths(
-    config,
+    loadedConfig,
     pathCollection
   );
 
