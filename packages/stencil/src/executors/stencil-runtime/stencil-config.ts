@@ -1,12 +1,15 @@
-import { CompilerSystem, ConfigFlags, Logger, TaskCommand } from '@stencil/core/cli';
+import {
+  CompilerSystem,
+  ConfigFlags,
+  Logger,
+  TaskCommand,
+} from '@stencil/core/cli';
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { PathCollection } from './types';
 import { ExecutorContext, readJsonFile } from '@nrwl/devkit';
 import { join } from 'path';
-import {
-  fileExists
-} from '@nrwl/workspace/src/utilities/fileutils';
+import { fileExists } from '@nrwl/workspace/src/utilities/fileutils';
 import { normalizePath } from '../../utils/normalize-path';
 import type { Config } from '@stencil/core/compiler';
 import { hasError } from '../../utils/utillities';
@@ -21,15 +24,17 @@ export interface StencilBaseConfigOptions {
   tsConfig?: string;
 }
 
-export async function initializeStencilConfig<T extends StencilBaseConfigOptions>(
+export async function initializeStencilConfig<
+  T extends StencilBaseConfigOptions
+>(
   taskCommand: TaskCommand,
   options: T,
   context: ExecutorContext,
   flags: ConfigFlags,
   dependencies = []
 ): Promise<{
-  pathCollection: PathCollection
-  config: Config
+  pathCollection: PathCollection;
+  loadedConfig: Config;
 }> {
   const logger: Logger = createNodeLogger({ process });
   const sys: CompilerSystem = createNodeSys({ process });
@@ -48,13 +53,13 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
   const configPath = normalizePath(join(context.root, options.configPath));
 
   let config = {
-    flags
+    flags,
   };
   if (options.tsConfig) {
     const tsconfig = join(context.root, options.tsConfig);
     config = {
       ...config,
-      ...{ tsconfig: tsconfig }
+      ...{ tsconfig: tsconfig },
     };
   }
 
@@ -62,29 +67,35 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
     config,
     configPath,
     logger,
-    sys
+    sys,
   });
   const loadedConfig = loadConfigResults.config;
 
   if (loadedConfig.flags.task === 'build') {
     loadedConfig.rootDir = distDir;
-    loadedConfig.packageJsonFilePath = normalizePath(join(distDir, 'package.json'));
+    loadedConfig.packageJsonFilePath = normalizePath(
+      join(distDir, 'package.json')
+    );
   }
   dependencies = dependencies
-    .filter(dep => dep.node.type == 'lib')
-    .map(dep => {
+    .filter((dep) => dep.node.type == 'lib')
+    .map((dep) => {
       const pkgJsonPath = `${dep.outputs[0]}/package.json`;
-      if(fileExists(pkgJsonPath)) {
+      if (fileExists(pkgJsonPath)) {
         const pkgJson = readJsonFile(pkgJsonPath);
         return {
           name: pkgJson.name,
           version: pkgJson.name,
-          main: pkgJson.main
-        }
+          main: pkgJson.main,
+        };
       }
     });
 
-  await sys.ensureResources({ rootDir: loadedConfig.rootDir, logger, dependencies: dependencies as any });
+  await sys.ensureResources({
+    rootDir: loadedConfig.rootDir,
+    logger,
+    dependencies: dependencies as any,
+  });
 
   const ensureDepsResults = await sys.ensureDependencies({
     rootDir: loadedConfig.rootDir,
@@ -103,8 +114,8 @@ export async function initializeStencilConfig<T extends StencilBaseConfigOptions
       projectName: context.projectName,
       projectRoot: projectRoot,
       distDir: distDir,
-      pkgJson: join(projectRoot, 'package.json')
+      pkgJson: join(projectRoot, 'package.json'),
     },
-    config: loadedConfig
+    loadedConfig: loadedConfig,
   };
 }

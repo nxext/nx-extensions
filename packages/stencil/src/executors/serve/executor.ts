@@ -3,16 +3,16 @@ import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {
   prepareConfigAndOutputargetPaths,
   initializeStencilConfig,
+  createStencilProcess,
 } from '../stencil-runtime';
 import { createProjectGraphAsync } from '@nrwl/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies,
 } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
-import { createStencilWatchProcess } from '../stencil-runtime/stencil-process';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -36,11 +36,12 @@ function createStencilCompilerOptions(
   runOptions.push('--serve');
   runOptions.push('--watch');
 
-
   return parseFlags(runOptions);
 }
 
-export default async function runExecutor(
+export const isString = (v: any): v is string => typeof v === 'string';
+
+export default async function* runExecutor(
   options: StencilServeOptions,
   context: ExecutorContext
 ) {
@@ -63,11 +64,11 @@ export default async function runExecutor(
       dependencies
     )
   ) {
-    return { success: false };
+    yield { success: false };
   }
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
-  const { config, pathCollection } = await initializeStencilConfig(
+  const { loadedConfig, pathCollection } = await initializeStencilConfig(
     taskCommand,
     options,
     context,
@@ -75,8 +76,8 @@ export default async function runExecutor(
     dependencies
   );
 
-  const stencilConfig = await prepareConfigAndOutputargetPaths(
-    config,
+  const config = await prepareConfigAndOutputargetPaths(
+    loadedConfig,
     pathCollection
   );
 
@@ -89,5 +90,13 @@ export default async function runExecutor(
     dependencies
   );
 
-  return createStencilWatchProcess(stencilConfig);
+  try {
+    await createStencilProcess(config, pathCollection);
+
+    return { success: true };
+  } catch (err) {
+    logger.error(err.message);
+
+    return { success: false, error: err.message };
+  }
 }
