@@ -1,6 +1,22 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "13.0.0-next.01",
+  "version": "13.0.0-next.02",
+  "license": "MIT",
+  "author": "Dominik Pieper",
+  "description": "Nx plugin for Svelte",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "sveltekit"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
