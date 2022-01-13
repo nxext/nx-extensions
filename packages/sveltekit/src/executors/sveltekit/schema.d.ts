@@ -1,4 +1,4 @@
 export interface SveltekitExecutorOptions {
   command: string;
-  port: number;
+  port?: number;
 }
