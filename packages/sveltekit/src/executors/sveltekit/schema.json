@@ -15,7 +15,5 @@
       "default": 3000
     }
   },
-  "required": [
-    "command"
-  ]
+  "required": ["command"]
 }
