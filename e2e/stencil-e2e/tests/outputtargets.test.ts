@@ -21,10 +21,7 @@ describe('outputtargets e2e', () => {
     await runNxCommandAsync(`build ${plugin}`);
 
     expect(() =>
-      checkFilesExist(
-        `libs/${plugin}-react/src/index.ts`,
-        `libs/${plugin}-react/src/generated/react-component-lib/index.ts`
-      )
+      checkFilesExist(`libs/${plugin}-react/src/index.ts`)
     ).not.toThrow();
   });
 
@@ -37,14 +34,6 @@ describe('outputtargets e2e', () => {
       `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=angular`
     );
     await runNxCommandAsync(`build ${plugin}`);
-
-    expect(() =>
-      checkFilesExist(
-        `libs/${plugin}-angular/src/index.ts`,
-        `libs/${plugin}-angular/src/lib/${plugin}-angular.module.ts`,
-        `libs/${plugin}-angular/src/generated/directives/proxies.ts`
-      )
-    ).not.toThrow();
 
     expect(() =>
       checkFilesExist(
