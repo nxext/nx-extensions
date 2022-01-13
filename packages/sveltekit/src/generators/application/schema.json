@@ -24,6 +24,11 @@
       "description": "A directory where the project is placed",
       "alias": "d"
     },
+    "port": {
+      "type": "number",
+      "description": "Port to listen on.",
+      "default": 3000
+    },
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",

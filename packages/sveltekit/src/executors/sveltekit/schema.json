@@ -8,6 +8,11 @@
     "command": {
       "type": "string",
       "description": "Sveltekit command to run"
+    },
+    "port": {
+      "type": "number",
+      "description": "Port to listen on.",
+      "default": 3000
     }
   },
   "required": [

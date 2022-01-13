@@ -4,6 +4,7 @@ export interface SveltekitGeneratorSchema {
   name: string;
   tags?: string;
   directory?: string;
+  port?: number;
   skipFormat: boolean;
   linter: Linter;
 }
