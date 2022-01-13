@@ -8,10 +8,11 @@ export default async function runExecutor(
 ) {
   const projectDir = context.workspace.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
+  const portOption = options.command === 'dev' ? ` --port ${options.port}` : '';
 
   const result = await runCommands(
     {
-      command: `svelte-kit ${options.command} -p ${options.port}`,
+      command: `svelte-kit ${options.command}${portOption}`,
       cwd: projectRoot,
       parallel: false,
       color: true,
