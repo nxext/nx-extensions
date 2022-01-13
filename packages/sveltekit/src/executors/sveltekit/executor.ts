@@ -9,14 +9,17 @@ export default async function runExecutor(
   const projectDir = context.workspace.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
 
-  const result = await runCommands({
-    command: `svelte-kit ${options.command} -p ${options.port}`,
-    cwd: projectRoot,
-    parallel: false,
-    color: true
-  }, context);
+  const result = await runCommands(
+    {
+      command: `svelte-kit ${options.command} -p ${options.port}`,
+      cwd: projectRoot,
+      parallel: false,
+      color: true,
+    },
+    context
+  );
 
-  if(result.success) {
+  if (result.success) {
     logger.info('Build executed...');
   } else {
     logger.error('Error while building...');
@@ -24,4 +27,3 @@ export default async function runExecutor(
 
   return result;
 }
-
