@@ -25,6 +25,7 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
+    "@nxext/svelte": "^13.1.3",
     "@nrwl/devkit": "^13.4.0",
     "ignore": "^5.2.0"
   },

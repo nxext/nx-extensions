@@ -43,6 +43,20 @@ describe('outputtargets e2e', () => {
     ).not.toThrow();
   });
 
+  it(`should generate svelte lib`, async () => {
+    const plugin = uniq('lib');
+    await runNxCommandAsync(
+      `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
+    );
+    await runNxCommandAsync(
+      `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=svelte`
+    );
+
+    expect(() =>
+      checkFilesExist(`libs/${plugin}-svelte/src/index.ts`)
+    ).not.toThrow();
+  });
+
   it(`should stop if lib not buildable`, async () => {
     const plugin = uniq('lib');
     await runNxCommandAsync(
