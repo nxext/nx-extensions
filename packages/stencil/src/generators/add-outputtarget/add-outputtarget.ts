@@ -1,12 +1,23 @@
-import { convertNxGenerator, formatFiles, logger, readProjectConfiguration, stripIndents, Tree } from '@nrwl/devkit';
+import {
+  convertNxGenerator,
+  formatFiles,
+  logger,
+  readProjectConfiguration,
+  stripIndents,
+  Tree,
+} from '@nrwl/devkit';
 import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import addAngularGenerator from './add-angular/generator';
 import addReactGenerator from './add-react/generator';
 import addVueGenerator from './add-vue/generator';
+import addSvelteGenerator from './add-svelte/generator';
 
-export async function outputtargetGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
+export async function outputtargetGenerator(
+  host: Tree,
+  options: AddOutputtargetSchematicSchema
+) {
   const projectConfig = readProjectConfiguration(host, options.projectName);
   const tasks = [];
 
@@ -21,6 +32,10 @@ export async function outputtargetGenerator(host: Tree, options: AddOutputtarget
 
     if (options.outputType === 'vue') {
       tasks.push(await addVueGenerator(host, options));
+    }
+
+    if (options.outputType === 'svelte') {
+      tasks.push(await addSvelteGenerator(host, options));
     }
 
     if (!options.skipFormat) {

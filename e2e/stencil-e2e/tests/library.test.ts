@@ -10,7 +10,7 @@ describe('library e2e', () => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });
 
-  it(`should build lib with scss`, async () => {
+  it(`should build app with scss`, async () => {
     const plugin = uniq('lib');
     await runNxCommandAsync(
       `generate @nxext/stencil:lib ${plugin} --style='scss' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
