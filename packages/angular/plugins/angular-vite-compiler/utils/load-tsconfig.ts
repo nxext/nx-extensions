@@ -1,6 +1,5 @@
 import {
   loadTsconfig,
-  Tsconfig,
   walkForTsConfig,
 } from 'tsconfig-paths/lib/tsconfig-loader.js';
 import { normalizePath } from 'vite';

@@ -10,7 +10,6 @@ import {
 import Visitor from '@swc/core/Visitor';
 import {
   createIdentifer,
-  createMemberExpression,
   createSpan,
   isCallExpression,
   isIdentifer,

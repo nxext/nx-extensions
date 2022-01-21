@@ -1,7 +1,6 @@
 import type {
   CompilerHost as NgCompilerHost,
   CompilerOptions as NgCompilerOptions,
-  CustomTransformers as NgCustomTransformers,
   NgtscProgram,
 } from '@angular/compiler-cli';
 import * as assert from 'assert';
@@ -290,21 +289,6 @@ export class AngularVitePlugin {
 
     const transformers = createAotTransformers(builder, this.pluginOptions);
 
-    const getDependencies = (sourceFile: SourceFile) => {
-      const dependencies = [];
-      for (const resourcePath of angularCompiler.getResourceDependencies(
-        sourceFile
-      )) {
-        // dependencies.push(
-        //   resourcePath,
-        //   // Retrieve all dependencies of the resource (stylesheet imports, etc.)
-        //   ...resourceLoader.getResourceDependencies(resourcePath),
-        // );
-      }
-
-      return dependencies;
-    };
-
     // Required to support asynchronous resource loading
     // Must be done before creating transformers or getting template diagnostics
     const pendingAnalysis = angularCompiler
@@ -491,7 +475,7 @@ export class AngularVitePlugin {
 
     this.watchMode = this.viteResolvedConfig.command === 'serve';
 
-    const { compilerOptions, rootNames, errors } = this.loadConfiguration();
+    const { compilerOptions, errors } = this.loadConfiguration();
     if (errors?.length) {
       errors.forEach((er) => console.error(er));
     }

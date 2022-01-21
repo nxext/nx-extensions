@@ -1,6 +1,5 @@
 import { Linter } from '@nrwl/linter';
 import {
-  E2eTestRunner,
   UnitTestRunner,
 } from '@nrwl/angular/src/utils/test-runners';
 import type { Styles } from '@nrwl/angular/src/generators/utils/types';
