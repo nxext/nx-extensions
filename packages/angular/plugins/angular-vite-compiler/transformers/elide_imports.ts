@@ -93,6 +93,7 @@ export function elideImports(
     } else {
       switch (node.kind) {
         case ts.SyntaxKind.Identifier:
+          // eslint-disable-next-line no-case-declarations
           const parent = node.parent;
           if (parent && ts.isShorthandPropertyAssignment(parent)) {
             const shorthandSymbol =

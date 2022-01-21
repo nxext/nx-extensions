@@ -7,7 +7,7 @@ import { normalizePath } from './path';
 export function augmentProgramWithVersioning(program: ts.Program): void {
   const baseGetSourceFiles = program.getSourceFiles;
   program.getSourceFiles = function (...parameters) {
-    const files: readonly (ts.SourceFile & { version?: string })[] =
+    const files: readonly (SourceFile & { version?: string })[] =
       baseGetSourceFiles(...parameters);
 
     for (const file of files) {
