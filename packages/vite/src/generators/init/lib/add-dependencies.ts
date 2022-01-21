@@ -6,7 +6,7 @@ export function updateDependencies(tree: Tree) {
     tree,
     {},
     {
-      vite: viteVersion
+      vite: viteVersion,
     }
   );
 }

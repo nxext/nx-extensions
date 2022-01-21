@@ -1,17 +1,12 @@
-import {
-  runNxCommandAsync,
-  uniq,
-} from '@nrwl/nx-plugin/testing';
+import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('angular application e2e', () => {
-
   beforeAll(async () => {
     ensureNxProjectWithDeps('@nxext/angular', 'dist/packages/angular', [
-      ['@nxext/vite', 'dist/packages/vite']
+      ['@nxext/vite', 'dist/packages/vite'],
     ]);
   });
-
 
   it('should create angular application', async () => {
     const plugin = uniq('angular');

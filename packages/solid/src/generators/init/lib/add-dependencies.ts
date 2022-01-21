@@ -3,7 +3,8 @@ import {
   eslintPluginSolidVersion,
   solidJestVersion,
   solidTestingLibraryVersion,
-  solidVersion, vitePluginSolidVersion
+  solidVersion,
+  vitePluginSolidVersion,
 } from '../../utils/versions';
 
 export function updateDependencies(tree: Tree) {
@@ -15,7 +16,7 @@ export function updateDependencies(tree: Tree) {
       'solid-js': solidVersion,
       'solid-testing-library': solidTestingLibraryVersion,
       'eslint-plugin-solid': eslintPluginSolidVersion,
-      'vite-plugin-solid': vitePluginSolidVersion
+      'vite-plugin-solid': vitePluginSolidVersion,
     }
   );
 }

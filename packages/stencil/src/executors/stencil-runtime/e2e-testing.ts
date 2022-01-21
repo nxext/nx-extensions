@@ -5,7 +5,6 @@ import { relative } from 'path';
 import { joinPathFragments, writeJsonFile } from '@nrwl/devkit';
 
 export function prepareE2eTesting(pathCollection: PathCollection) {
-
   const libPackageJson = {
     name: pathCollection.projectName,
     version: '1',
@@ -43,8 +42,8 @@ export function prepareE2eTesting(pathCollection: PathCollection) {
     )}/dist/${pathCollection.projectName}/${pathCollection.projectName}.js`,
     files: [
       `${relative(pathCollection.projectRoot, pathCollection.distDir)}/dist/`,
-      `${relative(pathCollection.projectRoot, pathCollection.distDir)}/loader/`
-    ]
+      `${relative(pathCollection.projectRoot, pathCollection.distDir)}/loader/`,
+    ],
   };
 
   writeJsonFile(
@@ -54,7 +53,9 @@ export function prepareE2eTesting(pathCollection: PathCollection) {
 }
 
 export function cleanupE2eTesting(pathCollection: PathCollection) {
-  const pkgJsonPath = joinPathFragments(`${pathCollection.projectRoot}/package.e2e.json`);
+  const pkgJsonPath = joinPathFragments(
+    `${pathCollection.projectRoot}/package.e2e.json`
+  );
   if (fileExists(pkgJsonPath)) {
     deleteFile(pkgJsonPath);
   }

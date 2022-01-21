@@ -35,7 +35,10 @@ export async function angularInitGenerator(tree: Tree, schema: Schema) {
   tasks.push(angularTask);
 
   setDefaultCollection(tree, '@nxext/angular');
-  const viteTask = await viteInitGenerator(tree, { ...options, unitTestRunner: 'jest' });
+  const viteTask = await viteInitGenerator(tree, {
+    ...options,
+    unitTestRunner: 'jest',
+  });
   tasks.push(viteTask);
 
   if (!schema.skipFormat) {

@@ -1,7 +1,7 @@
 import {
   ensureNxProject,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
 describe('storybook e2e', () => {
@@ -14,8 +14,12 @@ describe('storybook e2e', () => {
     await runNxCommandAsync(
       `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
     );
-    await runNxCommandAsync(`generate @nxext/stencil:storybook-configuration ${plugin} --configureCypress=false`);
-    await runNxCommandAsync(`generate @nxext/stencil:component test-comp --project=${plugin}`);
+    await runNxCommandAsync(
+      `generate @nxext/stencil:storybook-configuration ${plugin} --configureCypress=false`
+    );
+    await runNxCommandAsync(
+      `generate @nxext/stencil:component test-comp --project=${plugin}`
+    );
     await runNxCommandAsync(`build ${plugin}`);
 
     const result = await runNxCommandAsync(`build-storybook ${plugin}`);

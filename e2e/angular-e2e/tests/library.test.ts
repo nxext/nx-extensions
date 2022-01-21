@@ -6,13 +6,11 @@ import {
 import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('angular library e2e', () => {
-
   beforeAll(async () => {
     ensureNxProjectWithDeps('@nxext/angular', 'dist/packages/angular', [
-      ['@nxext/vite', 'dist/packages/vite']
+      ['@nxext/vite', 'dist/packages/vite'],
     ]);
   });
-
 
   xit('should create angular library', async () => {
     const plugin = uniq('angular');

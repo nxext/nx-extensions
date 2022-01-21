@@ -17,7 +17,9 @@ export async function* nxPluginE2EExecutor(
   context: ExecutorContext
 ): AsyncGenerator<{ success: boolean }> {
   let success: boolean;
-  for await (const _ of options.targets.map(target => runBuildTarget(target, context))) {
+  for await (const _ of options.targets.map((target) =>
+    runBuildTarget(target, context)
+  )) {
     try {
       success = await runTests(options.jestConfig, context);
     } catch (e) {
