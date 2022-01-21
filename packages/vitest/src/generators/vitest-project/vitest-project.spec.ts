@@ -7,7 +7,10 @@ import { libraryGenerator } from '@nrwl/workspace';
 
 describe('vitest-project generator', () => {
   let host: Tree;
-  const options: VitestProjectGeneratorSchema = { project: 'test', framework: 'generic' };
+  const options: VitestProjectGeneratorSchema = {
+    project: 'test',
+    framework: 'generic',
+  };
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace();
@@ -19,5 +22,5 @@ describe('vitest-project generator', () => {
 
     const config = readProjectConfiguration(host, 'test');
     expect(config).toBeDefined();
-  })
+  });
 });

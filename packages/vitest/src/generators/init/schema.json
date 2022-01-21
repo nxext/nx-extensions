@@ -4,7 +4,6 @@
   "$id": "Init",
   "title": "",
   "type": "object",
-  "properties": {
-  },
+  "properties": {},
   "required": []
 }

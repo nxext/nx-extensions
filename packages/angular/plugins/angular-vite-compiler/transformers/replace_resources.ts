@@ -110,7 +110,7 @@ function visitDecorator(
           node,
           styleReplacements,
           resourceImportDeclarations,
-          moduleKind,
+          moduleKind
         )
       : node
   );
@@ -141,7 +141,7 @@ function visitComponentMetadata(
   node: ts.ObjectLiteralElementLike,
   styleReplacements: ts.Expression[],
   resourceImportDeclarations: ts.ImportDeclaration[],
-  moduleKind: ts.ModuleKind = ts.ModuleKind.ES2015,
+  moduleKind: ts.ModuleKind = ts.ModuleKind.ES2015
 ): ts.ObjectLiteralElementLike | undefined {
   if (!ts.isPropertyAssignment(node) || ts.isComputedPropertyName(node.name)) {
     return node;

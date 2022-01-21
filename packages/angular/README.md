@@ -6,5 +6,5 @@ The goal here is for a angular without webpack and compromises to build.
 
 ## Shoutout
 
-[] @aelbore and the community NGC rollup which this code which inspired the first "play" of this  before rewrite on https://github.com/aelbore/rollup-plugin-ngc/
+[] @aelbore and the community NGC rollup which this code which inspired the first "play" of this before rewrite on https://github.com/aelbore/rollup-plugin-ngc/
 [] @aelbore for the amazing work with SWC-ast-helper which allowed to clean up the code base a lot quicker for alpha release

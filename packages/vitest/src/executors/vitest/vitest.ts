@@ -9,14 +9,17 @@ export default async function runExecutor(
   const projectDir = context.workspace.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
 
-  const result = await runCommands({
-    command: `vitest ${options.command}`,
-    cwd: projectRoot,
-    parallel: false,
-    color: true
-  }, context);
+  const result = await runCommands(
+    {
+      command: `vitest ${options.command}`,
+      cwd: projectRoot,
+      parallel: false,
+      color: true,
+    },
+    context
+  );
 
-  if(result.success) {
+  if (result.success) {
     logger.info('Tests executed...');
   } else {
     logger.error('Error while testing...');
@@ -24,4 +27,3 @@ export default async function runExecutor(
 
   return result;
 }
-

@@ -1,9 +1,16 @@
 import {
-  addDependenciesToPackageJson, convertNxGenerator, stripIndents,
-  Tree, updateJson
+  addDependenciesToPackageJson,
+  convertNxGenerator,
+  stripIndents,
+  Tree,
+  updateJson,
 } from '@nrwl/devkit';
 import { InitGeneratorSchema } from './schema';
-import { c8Version, nxextVitestVersion, vitestVersion } from '../../utils/versions';
+import {
+  c8Version,
+  nxextVitestVersion,
+  vitestVersion,
+} from '../../utils/versions';
 
 function removeNxextVitestFromDeps(host: Tree) {
   updateJson(host, 'package.json', (json) => {
@@ -18,15 +25,15 @@ function removeNxextVitestFromDeps(host: Tree) {
 function updateDependencies(host: Tree, options: InitGeneratorSchema) {
   const devDeps = {
     '@nxext/vitest': nxextVitestVersion,
-    'vitest': vitestVersion,
-    'c8': c8Version
-  }
+    vitest: vitestVersion,
+    c8: c8Version,
+  };
 
   return addDependenciesToPackageJson(host, {}, devDeps);
 }
 
 function createVitestConfig(host: Tree) {
-  if(!host.exists('vitest.config.ts')) {
+  if (!host.exists('vitest.config.ts')) {
     host.write(
       'vitest.config.ts',
       stripIndents`
@@ -40,7 +47,7 @@ export default defineConfig({
   },
 })
 `
-      );
+    );
   }
 }
 
