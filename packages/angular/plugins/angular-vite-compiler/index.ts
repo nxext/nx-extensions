@@ -12,7 +12,7 @@ export function AngularPlugin(options?: AngularVitePluginOptions): Plugin {
   let angularVite: AngularVitePlugin;
 
   return {
-    name: 'vite-angular-by-nxext',
+    name: 'vite-plugin-angular-vite-host-by-nxext',
     configResolved(config: ResolvedConfig) {
       configResolved = config;
     },
