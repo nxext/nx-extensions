@@ -1,7 +1,7 @@
 import {
   checkFilesExist,
   uniq,
-  runNxCommandAsync
+  runNxCommandAsync,
 } from '@nrwl/nx-plugin/testing';
 import { ensureNxProjectWithDeps } from '../../utils/testing';
 
@@ -16,17 +16,19 @@ describe('vitest e2e', () => {
   it('should create vitest', async () => {
     await runNxCommandAsync(`generate @nxext/vitest:init`);
 
-    expect(() =>
-      checkFilesExist(`vitest.config.ts`)
-    ).not.toThrow();
+    expect(() => checkFilesExist(`vitest.config.ts`)).not.toThrow();
   }, 120000);
 
   it('should initialice vitest project', async () => {
     const libraryName = uniq('vitest');
     await runNxCommandAsync(`generate @nxext/svelte:lib ${libraryName}`);
-    await runNxCommandAsync(`generate @nxext/svelte:c my-comp --project=${libraryName}`);
+    await runNxCommandAsync(
+      `generate @nxext/svelte:c my-comp --project=${libraryName}`
+    );
 
-    await runNxCommandAsync(`generate @nxext/vitest:vitest-project ${libraryName} --framework=svelte`);
+    await runNxCommandAsync(
+      `generate @nxext/vitest:vitest-project ${libraryName} --framework=svelte`
+    );
 
     const result = await runNxCommandAsync(`test ${libraryName}`);
 

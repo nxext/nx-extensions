@@ -16,7 +16,9 @@ describe('svelte e2e', () => {
   describe('Svelte lib', () => {
     it('should create svelte library', async () => {
       const plugin = uniq('sveltelib');
-      await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
       expect(() =>
         checkFilesExist(`libs/${plugin}/src/index.ts`)
@@ -24,7 +26,9 @@ describe('svelte e2e', () => {
     }, 120000);
 
     it('should generate lib into directory', async () => {
-      await runNxCommandAsync(`generate @nxext/svelte:lib project/uilib --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib project/uilib --e2eTestRunner='none' --junitTestRunner='none'`
+      );
       expect(() =>
         checkFilesExist(`libs/project/uilib/src/index.ts`)
       ).not.toThrow();
@@ -32,7 +36,9 @@ describe('svelte e2e', () => {
 
     it('should be able to run linter', async () => {
       const plugin = uniq('svelteliblint');
-      await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
       expect(result.stdout).toContain('All files pass linting');
@@ -40,7 +46,9 @@ describe('svelte e2e', () => {
 
     it('should be able to run check', async () => {
       const plugin = uniq('sveltelibcheck');
-      await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+      );
 
       const result = await runNxCommandAsync(`check ${plugin}`);
       expect(result.stdout).toContain(
@@ -68,7 +76,9 @@ describe('svelte e2e', () => {
     it('should be able to run tests', async () => {
       const plugin = uniq('sveltelibtests');
       await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin}`);
-      await runNxCommandAsync(`generate @nxext/svelte:component test --project=${plugin} --e2eTestRunner='none'`);
+      await runNxCommandAsync(
+        `generate @nxext/svelte:component test --project=${plugin} --e2eTestRunner='none'`
+      );
 
       const result = await runNxCommandAsync(`test ${plugin}`);
       expect(`${result.stdout}${result.stderr}`).toContain(

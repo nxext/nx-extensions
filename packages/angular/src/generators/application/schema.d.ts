@@ -1,7 +1,5 @@
 import { Linter } from '@nrwl/linter';
-import {
-  UnitTestRunner,
-} from '@nrwl/angular/src/utils/test-runners';
+import { UnitTestRunner } from '@nrwl/angular/src/utils/test-runners';
 import type { Styles } from '@nrwl/angular/src/generators/utils/types';
 
 type AngularLinter = Exclude<Linter, Linter.TsLint>;

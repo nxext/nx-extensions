@@ -18,11 +18,11 @@ describe('Vitest init generator', () => {
     const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['vitest']).toBeDefined();
     expect(packageJson.devDependencies['@nxext/vitest']).toBeDefined();
-  })
+  });
 
   it('should generate the base config', async () => {
     await vitestInitGenerator(host, options);
 
     expect(host.exists('vitest.config.ts')).toBeTruthy();
-  })
+  });
 });

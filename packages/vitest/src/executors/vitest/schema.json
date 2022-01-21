@@ -10,7 +10,5 @@
       "description": "Sveltekit command to run"
     }
   },
-  "required": [
-    "command"
-  ]
+  "required": ["command"]
 }
