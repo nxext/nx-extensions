@@ -8,7 +8,6 @@
 //  */
 
 import * as ts from 'typescript';
-// import { InlineAngularResourceLoaderPath } from '../loaders/inline-resource';
 
 export function replaceResources(
   shouldTransform: (fileName: string) => boolean,
@@ -145,8 +144,6 @@ function visitComponentMetadata(
   styleReplacements: ts.Expression[],
   resourceImportDeclarations: ts.ImportDeclaration[],
   moduleKind: ts.ModuleKind = ts.ModuleKind.ES2015,
-  inlineStyleFileExtension?: string,
-  context?: ts.TransformationContext
 ): ts.ObjectLiteralElementLike | undefined {
   if (!ts.isPropertyAssignment(node) || ts.isComputedPropertyName(node.name)) {
     return node;

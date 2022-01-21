@@ -51,9 +51,4 @@ describe('init', () => {
       expect(nxJson.cli.defaultCollection).toEqual('@nxext/vite');
     });
   });
-
-  it('should not add jest config if unitTestRunner is none', async () => {
-    await viteInitGenerator(tree, { unitTestRunner: 'none' });
-    expect(tree.exists('jest.config.js')).toEqual(false);
-  });
 });
