@@ -22,7 +22,7 @@ function normalizeOptions(schema: Schema) {
 function removeViteFromDeps(tree: Tree) {
   updateJson(tree, 'package.json', (json) => {
     delete json.dependencies['@nxext/vite'];
-    delete json.dependencies['vite']
+    delete json.dependencies['vite'];
     return json;
   });
 }

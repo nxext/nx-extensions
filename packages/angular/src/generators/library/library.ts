@@ -44,7 +44,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   const { libsDir } = getWorkspaceLayout(tree);
   const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
 
-  const libraryTask = await NxLibraryGenerator(tree, { ...options })
+  const libraryTask = await NxLibraryGenerator(tree, { ...options });
 
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
