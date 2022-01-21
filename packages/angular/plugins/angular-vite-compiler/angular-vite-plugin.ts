@@ -339,7 +339,7 @@ export class AngularVitePlugin {
               angularCompiler.prepareEmit().transformers,
               transformers
             ),
-            getDependencies,
+            () => [],
             (sourceFile) => {
               this.requiredFilesToEmit.delete(
                 normalizePath(sourceFile.fileName)

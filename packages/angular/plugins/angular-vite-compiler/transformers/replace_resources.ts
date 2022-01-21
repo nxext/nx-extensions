@@ -111,8 +111,6 @@ function visitDecorator(
           styleReplacements,
           resourceImportDeclarations,
           moduleKind,
-          inlineStyleFileExtension,
-          context
         )
       : node
   );
