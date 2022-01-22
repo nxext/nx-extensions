@@ -14,9 +14,6 @@ export function ViteAngularPlugin(
   return {
     name: 'vite-plugin-angular-by-nxext',
     enforce: 'pre',
-    config(config) {
-      config.esbuild = false;
-    },
     transform: (code, id) => {
       const [filepath, querystring = ''] = id.split('?');
       const [extension = ''] =
