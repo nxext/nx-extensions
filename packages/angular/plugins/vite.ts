@@ -17,6 +17,5 @@ export default defineConfig({
       jitMode: true,
       target: 'es2020',
     }),
-  ],
-  esbuild: false,
+  ]
 });
