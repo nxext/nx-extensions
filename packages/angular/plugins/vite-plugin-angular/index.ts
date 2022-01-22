@@ -2,27 +2,36 @@ import { AngularVitePluginOptions } from './plugin-options';
 import { Plugin } from 'vite';
 import { transform, plugins } from '@swc/core';
 import { AngularComponents } from './swc-plugin/components';
-import { resolver } from './resolver';
 import { AngularInjector } from './swc-plugin/injector';
 
 export function ViteAngularPlugin(
   angularOptions?: AngularVitePluginOptions
 ): Plugin {
-  let isDevelopment = false;
   let angularComponentPlugin: AngularComponents;
   let angularInjectorPlugin: AngularInjector;
+  // eslint-disable-next-line no-useless-escape
+  const fileExtensionRE = /\.[^\/\s\?]+$/;
   return {
     name: 'vite-plugin-angular-by-nxext',
     enforce: 'pre',
-    config(config, env) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      isDevelopment = env.mode === 'development';
-      // Disable esbuild for transforming
+    config(config) {
       config.esbuild = false;
     },
-    resolveId: resolver(),
     transform: (code, id) => {
-      if (id.includes('node_modules') && !id.includes('node_modules/vite/')) {
+      const [filepath, querystring = ''] = id.split('?');
+      const [extension = ''] =
+        querystring.match(fileExtensionRE) ||
+        filepath.match(fileExtensionRE) ||
+        [];
+
+      if (/\.(html?)$/.test(extension)) {
+        return;
+      }
+
+      if (
+        (id.includes('node_modules') && !id.includes('node_modules/vite/')) ||
+        !/\.(mjs|[tj]s?)$/.test(extension)
+      ) {
         return {
           code,
         };
