@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "main": "src/index.js",
   "generators": "./generators.json",
-  "files": [
-    "html.d.ts"
-  ],
   "dependencies": {
     "@angular-devkit/build-optimizer": "~0.1301.2",
     "@angular-devkit/build-angular": "~13.1.2",
