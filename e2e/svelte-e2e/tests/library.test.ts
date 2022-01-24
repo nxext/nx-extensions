@@ -52,7 +52,7 @@ describe('svelte e2e', () => {
 
       const result = await runNxCommandAsync(`check ${plugin}`);
       expect(result.stdout).toContain(
-        'svelte-check found 0 errors, 0 warnings and 0 hints'
+        'svelte-check found 0 errors, 0 warnings, and 0 hints'
       );
     }, 120000);
 

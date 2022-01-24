@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import {
   ionicVersion,
   puppeteer,
@@ -13,6 +13,7 @@ import {
   vitestVersion,
 } from '../../packages/vitest/src/utils/versions';
 import {
+  eslintPluginSvelteVersion,
   svelteCheckVersion,
   svelteJesterVersion,
   sveltePreprocessVersion,
@@ -87,6 +88,7 @@ const sveltepkgs = [
   { pkg: '@tsconfig/svelte', version: tsconfigSvelteVersion },
   { pkg: '@testing-library/svelte', version: testingLibrarySvelteVersion },
   { pkg: '@sveltejs/vite-plugin-svelte', version: vitePluginSvelteVersion },
+  { pkg: 'eslint-plugin-svelte3', version: eslintPluginSvelteVersion },
 ];
 
 sveltepkgs.forEach(({ pkg, version }) => {
@@ -163,12 +165,14 @@ vitestPkgs.forEach(({ pkg, version }) => {
 });
 
 function checkVersion(pkg: string, version: string = '') {
-  if (version !== '') {
-    console.log(`${pkg}: (${version})`);
-  } else {
-    console.log(`${pkg}: `);
+  const show = spawnSync(`npm`, ['show', pkg, 'version']);
+  const currentVersion = show.stdout
+    .toString()
+    .replace('^', '')
+    .replace('~', '')
+    .trim();
+  version = version.replace('^', '').replace('~', '').trim();
+  if (version !== currentVersion) {
+    console.log(`${pkg}: ${version} -> ${currentVersion}`);
   }
-  execSync(`npm show ${pkg} version`, {
-    stdio: [0, 1, 2],
-  });
 }
