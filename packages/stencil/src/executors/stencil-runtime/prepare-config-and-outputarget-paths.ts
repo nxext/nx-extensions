@@ -6,15 +6,9 @@ import {
   createDirectory,
   fileExists,
 } from '@nrwl/workspace/src/utilities/fileutils';
-import {
-  joinPathFragments,
-  logger,
-  readJsonFile,
-  writeJsonFile,
-} from '@nrwl/devkit';
+import { joinPathFragments, readJsonFile, writeJsonFile } from '@nrwl/devkit';
 import { existsSync } from 'fs';
 import type { Config } from '@stencil/core/compiler';
-import { inspect } from 'util';
 
 function copyOrCreatePackageJson(pathCollection: PathCollection) {
   const libPackageJson = {
@@ -126,12 +120,6 @@ export async function prepareConfigAndOutputargetPaths(
     pathCollection,
     pathVariables
   );
-  outputTargets.forEach((outputTarget) => {
-    logger.info(inspect(outputTarget));
-    if (outputTarget.type === 'custom') {
-      logger.info(outputTarget.generator);
-    }
-  });
   const devServerConfig = Object.assign(config.devServer, {
     root: config.devServer.root.replace(
       pathCollection.projectRoot,
