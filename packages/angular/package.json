@@ -1,6 +1,23 @@
 {
   "name": "@nxext/angular",
   "version": "0.0.1",
+  "license": "MIT",
+  "author": "Jordan Hall",
+  "description": "Nx plugin for Angular vite",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "angular",
+    "vite"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
