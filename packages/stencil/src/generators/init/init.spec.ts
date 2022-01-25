@@ -16,13 +16,6 @@ describe('init', () => {
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
   });
 
-  it('should add jest 26 dependencies', async () => {
-    await initGenerator(host, { name: 'test', appType: AppType.library });
-    const packageJson = readJson(host, 'package.json');
-    expect(packageJson.devDependencies['jest']).toEqual('26.6.3');
-    expect(packageJson.devDependencies['ts-jest']).toEqual('26.5.6');
-  });
-
   it('should add stencil app dependencies', async () => {
     await initGenerator(host, { name: 'test', appType: AppType.application });
     const packageJson = readJson(host, 'package.json');
