@@ -3,17 +3,23 @@ import { Plugin } from 'vite';
 import { transform, plugins } from '@swc/core';
 import { AngularComponents } from './swc-plugin/components';
 import { AngularInjector } from './swc-plugin/injector';
+import { AngularImportCompilerComponents } from './swc-plugin/auto-import-compilier';
+import { AngularSwapPlatformDynamic } from './swc-plugin/swap-dynamic-import';
 
 export function ViteAngularPlugin(
   angularOptions?: AngularVitePluginOptions
 ): Plugin {
   let angularComponentPlugin: AngularComponents;
   let angularInjectorPlugin: AngularInjector;
+  let isProduction = true;
   // eslint-disable-next-line no-useless-escape
   const fileExtensionRE = /\.[^\/\s\?]+$/;
   return {
     name: 'vite-plugin-angular-by-nxext',
     enforce: 'pre',
+    configResolved(config) {
+      isProduction = config.isProduction;
+    },
     transform: (code, id) => {
       const [filepath, querystring = ''] = id.split('?');
       const [extension = ''] =
@@ -57,16 +63,16 @@ export function ViteAngularPlugin(
             angularInjectorPlugin = new AngularInjector();
             return angularInjectorPlugin.visitProgram(m);
           },
+          (m) => {
+            return new AngularImportCompilerComponents().visitProgram(m);
+          },
+          ...(isProduction
+            ? [(m) => new AngularSwapPlatformDynamic().visitProgram(m)]
+            : []),
         ]),
       }).then((res) => {
         return {
           code: `
-            ${
-              !angularInjectorPlugin.hasInjectorImport &&
-              angularInjectorPlugin.hasInjectedConstructor
-                ? "import { Injector } from '@angular/core';\r\n"
-                : ''
-            }
             ${angularComponentPlugin.getMissingImports().join('\r\n')}
             ${res.code}
           `,
