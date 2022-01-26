@@ -18,7 +18,7 @@ export function ViteAngularPlugin(
     name: 'vite-plugin-angular-by-nxext',
     enforce: 'pre',
     configResolved(config) {
-      isProduction = config.isProduction
+      isProduction = config.isProduction;
     },
     transform: (code, id) => {
       const [filepath, querystring = ''] = id.split('?');
@@ -66,7 +66,9 @@ export function ViteAngularPlugin(
           (m) => {
             return new AngularImportCompilerComponents().visitProgram(m);
           },
-          ...(isProduction ? [(m) => new AngularSwapPlatformDynamic().visitProgram(m)] : []),
+          ...(isProduction
+            ? [(m) => new AngularSwapPlatformDynamic().visitProgram(m)]
+            : []),
         ]),
       }).then((res) => {
         return {

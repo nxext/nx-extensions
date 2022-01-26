@@ -37,7 +37,6 @@ export class AngularComponents extends Visitor {
   //   return m;
   // }
 
-
   visitDecorator(decorator: Decorator) {
     if (
       decorator.expression.type === 'CallExpression' &&
