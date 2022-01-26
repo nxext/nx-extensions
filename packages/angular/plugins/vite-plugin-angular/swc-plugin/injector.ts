@@ -3,6 +3,7 @@ import {
   CallExpression,
   Identifier,
   MemberExpression,
+  ModuleItem,
   NamedImportSpecifier,
   TsParameterProperty,
   TsType,
@@ -10,9 +11,11 @@ import {
 import Visitor from '@swc/core/Visitor';
 import {
   createIdentifer,
+  createImportSpecifier,
   createSpan,
   isCallExpression,
   isIdentifer,
+  isImportDeclaration,
   isTsTypeAnnotation,
   isTsTypeReference,
 } from 'swc-ast-helpers';
@@ -31,8 +34,26 @@ function createCallExpression(
 }
 
 export class AngularInjector extends Visitor {
-  hasInjectorImport = false;
-  hasInjectedConstructor = false;
+  private hasInjectorImport = false;
+  private hasInjectedConstructor = false;
+
+  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+    const result = items.flatMap(item => this.visitModuleItem(item));
+
+    if (!this.hasInjectorImport && this.hasInjectedConstructor) {
+      return result.map(res => {
+        if (isImportDeclaration(res)) {
+          if (!this.hasInjectorImport && res.source.value === '@angular/core') {
+            res.specifiers.push(createImportSpecifier('Inject'));
+            this.hasInjectorImport = true;
+          }
+        }
+        return res;
+      })
+    }
+    return result
+  }
+
   visitConstructorParameter(node: TsParameterProperty): TsParameterProperty {
     if (
       (node.decorators?.length &&

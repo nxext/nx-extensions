@@ -72,10 +72,7 @@ export function ViteAngularPlugin(
         ]),
       }).then((res) => {
         return {
-          code: `
-            ${angularComponentPlugin.getMissingImports().join('\r\n')}
-            ${res.code}
-          `,
+          code: res.code,
           map: res.map,
         };
       });
