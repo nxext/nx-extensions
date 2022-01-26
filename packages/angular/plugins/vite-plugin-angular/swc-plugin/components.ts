@@ -19,23 +19,23 @@ import {
   createSpan,
   createStringLiteral,
   isDecorator,
-  createImportDefaultSpecifier
+  createImportDefaultSpecifier,
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 
 export class AngularComponents extends Visitor {
-  private missingImport: {tmpl: string, from: string}[] = [];
+  private missingImport: { tmpl: string; from: string }[] = [];
   private importDefaultCount = 1;
   constructor(private sourceUrl: string) {
     super();
   }
 
   visitModuleItems(items: ModuleItem[]): ModuleItem[] {
-    const result = items.flatMap(item => this.visitModuleItem(item));
+    const result = items.flatMap((item) => this.visitModuleItem(item));
     if (this.missingImport.length) {
       return [
-        ...this.missingImport.map(mimport => {
+        ...this.missingImport.map((mimport) => {
           return {
             type: 'ImportDeclaration',
             span: createSpan(),
@@ -45,9 +45,9 @@ export class AngularComponents extends Visitor {
           } as ImportDeclaration;
         }),
         ...result,
-      ]
+      ];
     }
-    return result
+    return result;
   }
 
   visitDecorator(decorator: Decorator) {
@@ -74,12 +74,10 @@ export class AngularComponents extends Visitor {
                     if ((prop.key as Identifier).value === 'templateUrl') {
                       const tmplName = `template${this.importDefaultCount}`;
                       this.importDefaultCount += 1;
-                      this.missingImport.push( {
-                        from: `${
-                          (prop.value as Identifier).value
-                        }?raw`,
-                        tmpl: tmplName
-                      })
+                      this.missingImport.push({
+                        from: `${(prop.value as Identifier).value}?raw`,
+                        tmpl: tmplName,
+                      });
 
                       return {
                         ...prop,

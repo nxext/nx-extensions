@@ -38,10 +38,10 @@ export class AngularInjector extends Visitor {
   private hasInjectedConstructor = false;
 
   visitModuleItems(items: ModuleItem[]): ModuleItem[] {
-    const result = items.flatMap(item => this.visitModuleItem(item));
+    const result = items.flatMap((item) => this.visitModuleItem(item));
 
     if (!this.hasInjectorImport && this.hasInjectedConstructor) {
-      return result.map(res => {
+      return result.map((res) => {
         if (isImportDeclaration(res)) {
           if (!this.hasInjectorImport && res.source.value === '@angular/core') {
             res.specifiers.push(createImportSpecifier('Inject'));
@@ -49,9 +49,9 @@ export class AngularInjector extends Visitor {
           }
         }
         return res;
-      })
+      });
     }
-    return result
+    return result;
   }
 
   visitConstructorParameter(node: TsParameterProperty): TsParameterProperty {
