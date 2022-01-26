@@ -7,6 +7,8 @@ import {
   TsType,
   ArrayExpression,
   StringLiteral,
+  ModuleItem,
+  Module,
 } from '@swc/core';
 import { Visitor } from '@swc/core/Visitor.js';
 import {
@@ -24,6 +26,17 @@ export class AngularComponents extends Visitor {
   constructor(private sourceUrl: string) {
     super();
   }
+
+  // visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+  //   debugger;
+  //   return items;
+  // }
+
+  // visitModule(m: Module): Module {
+  //   debugger;
+  //   return m;
+  // }
+
 
   visitDecorator(decorator: Decorator) {
     if (

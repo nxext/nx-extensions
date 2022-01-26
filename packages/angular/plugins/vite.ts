@@ -9,12 +9,6 @@ export default defineConfig({
   plugins: [
     Inspect(),
     ViteAngularPlugin({
-      tsconfig: 'tsconfig.app.json',
-      substitutions: undefined,
-      directTemplateLoading: false,
-      emitClassMetadata: false,
-      emitNgModuleScope: false,
-      jitMode: true,
       target: 'es2020',
     }),
   ],
