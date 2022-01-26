@@ -9,33 +9,46 @@ import {
   StringLiteral,
   ModuleItem,
   Module,
+  ImportDeclaration,
 } from '@swc/core';
 import { Visitor } from '@swc/core/Visitor.js';
 import {
   createArrayExpression,
   createExpressionStatement,
   createIdentifer,
+  createSpan,
   createStringLiteral,
+  isDecorator,
+  createImportDefaultSpecifier,
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 
 export class AngularComponents extends Visitor {
-  private missingImport: string[] = [];
+  private missingImport: { tmpl: string; from: string }[] = [];
   private importDefaultCount = 1;
   constructor(private sourceUrl: string) {
     super();
   }
 
-  // visitModuleItems(items: ModuleItem[]): ModuleItem[] {
-  //   debugger;
-  //   return items;
-  // }
-
-  // visitModule(m: Module): Module {
-  //   debugger;
-  //   return m;
-  // }
+  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+    const result = items.flatMap((item) => this.visitModuleItem(item));
+    if (this.missingImport.length) {
+      return [
+        ...this.missingImport.map((mimport) => {
+          return {
+            type: 'ImportDeclaration',
+            span: createSpan(),
+            typeOnly: false,
+            specifiers: [createImportDefaultSpecifier(mimport.tmpl)],
+            source: createStringLiteral(mimport.from),
+          } as ImportDeclaration;
+        }),
+        ...result,
+      ];
+    }
+    return result;
+  }
 
   visitDecorator(decorator: Decorator) {
     if (
@@ -61,11 +74,11 @@ export class AngularComponents extends Visitor {
                     if ((prop.key as Identifier).value === 'templateUrl') {
                       const tmplName = `template${this.importDefaultCount}`;
                       this.importDefaultCount += 1;
-                      this.missingImport.push(
-                        `import ${tmplName} from '${
-                          (prop.value as Identifier).value
-                        }?raw'`
-                      );
+                      this.missingImport.push({
+                        from: `${(prop.value as Identifier).value}?raw`,
+                        tmpl: tmplName,
+                      });
+
                       return {
                         ...prop,
                         key: {
