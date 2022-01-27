@@ -105,6 +105,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     if (!options.skipFormat) {
       await formatFiles(tree);
     }
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const callback: GeneratorCallback = () => {};
 
     return Promise.resolve(callback);

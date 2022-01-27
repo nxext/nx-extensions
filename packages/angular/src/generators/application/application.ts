@@ -111,6 +111,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
       await formatFiles(tree);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const callback: GeneratorCallback = () => {};
 
     return Promise.resolve(callback);
