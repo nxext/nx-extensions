@@ -23,12 +23,16 @@
   "dependencies": {
     "@angular-devkit/build-optimizer": "~0.1301.2",
     "@angular-devkit/build-angular": "~13.1.2",
-    "@angular/compiler": "13.1.1",
-    "@angular/compiler-cli": "13.1.1",
+    "@angular/compiler": "~13.1.1",
+    "@angular/compiler-cli": "~13.1.1",
     "tsconfig-paths": "~3.12.0",
     "recrawl-sync": "~2.2.1",
     "@nrwl/angular": "~13.3.8",
     "source-map": "~0.7.3",
-    "typescript": "~4.5.4"
+    "typescript": "~4.5.4",
+    "@swc/core": "1.2.133",
+    "swc-ast-helpers": "^0.0.7",
+    "@schematics/angular": "~13.1.1",
+    "@nxext/vite": "^13.1.1"
   }
 }

@@ -26,7 +26,8 @@
     "@nrwl/workspace": "^13.0.1",
     "@nrwl/cypress": "^13.0.1",
     "@nrwl/linter": "^13.0.1",
-    "@preact/preset-vite": "^2.1.5"
+    "@preact/preset-vite": "^2.1.5",
+    "@nxext/vite": "^13.1.1"
   },
   "dependencies": {
     "@nxext/vite": "^13.1.0",
