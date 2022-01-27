@@ -11,9 +11,14 @@ import {
   readProjectConfiguration,
   offsetFromRoot,
   updateJson,
+  GeneratorCallback,
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { libraryGenerator as NxLibraryGenerator } from '@nrwl/angular/generators';
+import { angularInitGenerator } from '../init/init';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
+
 
 function updateLibPackageNpmScope(
   host: Tree,
@@ -39,6 +44,15 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     ? `${names(options.directory).fileName}/${names(options.name).fileName}`
     : names(options.name).fileName;
 
+    const initTask = await angularInitGenerator(tree, {
+      linter: options.linter,
+      unitTestRunner: options.unitTestRunner,
+      skipFormat: true,
+      e2eTestRunner: E2eTestRunner.Cypress,
+      skipInstall: false,
+      style: 'css'
+     });
+
   const appProjectName = appDirectory.replace(new RegExp('/', 'g'), '-');
 
   const { libsDir } = getWorkspaceLayout(tree);
@@ -46,53 +60,61 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
 
   const libraryTask = await NxLibraryGenerator(tree, { ...options });
 
-  tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
-  tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
+  const completeEditing = async () => {
+    tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
+    tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
 
-  const projectConfig = readProjectConfiguration(tree, appProjectName);
-  updateProjectConfiguration(tree, appProjectName, {
-    ...projectConfig,
-    targets: {
-      ...projectConfig.targets,
-      build: {
-        ...projectConfig.targets.build,
-        executor:
-          options.publishable || options.buildable
-            ? '@nxext/vite:package'
-            : '@nxext/vite:build',
-        outputs: ['{options.outputPath}'],
-        options: {
-          outputPath: joinPathFragments('dist', libProjectRoot),
-          configFile: '@nxext/vite/plugins/vite-package',
-          frameworkConfigFile: '@nxext/angular/plugins/vite',
-          entryFile: joinPathFragments('src', 'index.ts'),
+    const projectConfig = readProjectConfiguration(tree, appProjectName);
+    updateProjectConfiguration(tree, appProjectName, {
+      ...projectConfig,
+      targets: {
+        ...projectConfig.targets,
+        build: {
+          ...projectConfig.targets.build,
+          executor:
+            options.publishable || options.buildable
+              ? '@nxext/vite:package'
+              : '@nxext/vite:build',
+          outputs: ['{options.outputPath}'],
+          options: {
+            outputPath: joinPathFragments('dist', libProjectRoot),
+            configFile: '@nxext/vite/plugins/vite-package',
+            frameworkConfigFile: '@nxext/angular/plugins/vite',
+            entryFile: joinPathFragments('src', 'index.ts'),
+          },
         },
       },
-    },
-  });
-  const templateVariables = {
-    ...names(options.name),
-    ...options,
-    tmpl: '',
-    offsetFromRoot: offsetFromRoot(libProjectRoot),
-    projectName: appProjectName,
-  };
+    });
+    const templateVariables = {
+      ...names(options.name),
+      ...options,
+      tmpl: '',
+      offsetFromRoot: offsetFromRoot(libProjectRoot),
+      projectName: appProjectName,
+    };
 
-  generateFiles(
-    tree,
-    joinPathFragments(__dirname, './files'),
-    libProjectRoot,
-    templateVariables
-  );
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, './files'),
+      libProjectRoot,
+      templateVariables
+    );
 
-  if (options.publishable || options.buildable) {
-    updateLibPackageNpmScope(tree, libProjectRoot, appProjectName);
+    if (options.publishable || options.buildable) {
+      updateLibPackageNpmScope(tree, libProjectRoot, appProjectName);
+    }
+    if (!options.skipFormat) {
+      await formatFiles(tree);
+    }
+    const callback: GeneratorCallback = () => {};
+
+    return Promise.resolve(callback);
   }
-  if (!options.skipFormat) {
-    await formatFiles(tree);
-  }
 
-  return libraryTask;
+  const finished = await completeEditing()
+
+
+  return runTasksInSerial(initTask, libraryTask, finished)
 }
 
 export default libraryGenerator;
