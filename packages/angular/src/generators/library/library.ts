@@ -19,7 +19,6 @@ import { angularInitGenerator } from '../init/init';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
 
-
 function updateLibPackageNpmScope(
   host: Tree,
   projectRoot: string,
@@ -44,14 +43,14 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     ? `${names(options.directory).fileName}/${names(options.name).fileName}`
     : names(options.name).fileName;
 
-    const initTask = await angularInitGenerator(tree, {
-      linter: options.linter,
-      unitTestRunner: options.unitTestRunner,
-      skipFormat: true,
-      e2eTestRunner: E2eTestRunner.Cypress,
-      skipInstall: false,
-      style: 'css'
-     });
+  const initTask = await angularInitGenerator(tree, {
+    linter: options.linter,
+    unitTestRunner: options.unitTestRunner,
+    skipFormat: true,
+    e2eTestRunner: E2eTestRunner.Cypress,
+    skipInstall: false,
+    style: 'css',
+  });
 
   const appProjectName = appDirectory.replace(new RegExp('/', 'g'), '-');
 
@@ -109,12 +108,11 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     const callback: GeneratorCallback = () => {};
 
     return Promise.resolve(callback);
-  }
+  };
 
-  const finished = await completeEditing()
+  const finished = await completeEditing();
 
-
-  return runTasksInSerial(initTask, libraryTask, finished)
+  return runTasksInSerial(initTask, libraryTask, finished);
 }
 
 export default libraryGenerator;
