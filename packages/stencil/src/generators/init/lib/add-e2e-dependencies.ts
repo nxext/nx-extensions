@@ -1,21 +1,18 @@
 import { PROJECT_TYPE_DEPENDENCIES } from '../../../utils/typings';
-import { addDependenciesToPackageJson, GeneratorCallback, Tree } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
+import { InitSchema } from '../schema';
 
-export function addE2eTestDependencies(
-  tree: Tree
-): GeneratorCallback[] {
-  const testDependencies = PROJECT_TYPE_DEPENDENCIES['puppeteer'];
-  const tasks: GeneratorCallback[] = [];
-
-  if (testDependencies) {
-    tasks.push(
-      addDependenciesToPackageJson(
-        tree,
-        testDependencies.dependencies,
-        testDependencies.devDependencies
-      )
-    );
+export async function addPuppeteer(tree: Tree, options: InitSchema) {
+  if (options.e2eTestRunner !== 'puppeteer') {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return () => {};
   }
 
-  return tasks;
+  const testDependencies = PROJECT_TYPE_DEPENDENCIES['puppeteer'];
+
+  return addDependenciesToPackageJson(
+    tree,
+    testDependencies.dependencies,
+    testDependencies.devDependencies
+  );
 }
