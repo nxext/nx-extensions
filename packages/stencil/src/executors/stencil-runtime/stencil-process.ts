@@ -51,10 +51,10 @@ export async function createStencilWatchProcess(config: Config) {
   console.log(`${config.logger.cyan('   Server:')} ${devServer.browserUrl}`);
   console.log(``);
 
-  config.sys.onProcessInterrupt(() => {
+  config.sys.onProcessInterrupt(async () => {
     if (devServer) {
       config.logger.debug(`dev server close: ${devServer.browserUrl}`);
-      devServer.close();
+      await devServer.close();
     }
   });
 
