@@ -9,19 +9,17 @@ import {
 export function addStyledDependencies<T extends InitSchema>(
   tree: Tree,
   options: T
-): GeneratorCallback[] {
+) {
   const styleDependencies = STYLE_PLUGIN_DEPENDENCIES[options.style];
-  const tasks: GeneratorCallback[] = [];
 
-  if (styleDependencies) {
-    tasks.push(
-      addDependenciesToPackageJson(
-        tree,
-        styleDependencies.dependencies,
-        styleDependencies.devDependencies
-      )
-    );
+  if (!styleDependencies) {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return () => {};
   }
 
-  return tasks;
+  return addDependenciesToPackageJson(
+    tree,
+    styleDependencies.dependencies,
+    styleDependencies.devDependencies
+  );
 }
