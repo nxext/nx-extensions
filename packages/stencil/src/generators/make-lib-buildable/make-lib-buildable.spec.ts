@@ -22,7 +22,7 @@ describe('make-lib-buildable schematic', () => {
       style: SupportedStyles.css,
       importPath: options.importPath,
       buildable: false,
-      publishable: false
+      publishable: false,
     });
   });
 
@@ -39,11 +39,13 @@ describe('make-lib-buildable schematic', () => {
       ,
         outputTargets: [{
               type: 'dist',
-              esmLoaderPath: '../loader',
-              dir: '../../dist/libs/${name}/dist',
+              esmLoaderPath: '../loader'
+            },{
+              type: 'dist-custom-elements',
+            },{
+              type: 'docs-readme',
             },{
               type: 'www',
-              dir: '../../dist/libs/${name}/www',
               serviceWorker: null // disable service workers
             }]
 
@@ -63,8 +65,8 @@ describe('make-lib-buildable schematic', () => {
     await makeLibBuildableGenerator(host, options);
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
-    expect(
-      tsConfig.compilerOptions.paths['@my/lib']
-    ).toEqual([`dist/libs/${name}`]);
+    expect(tsConfig.compilerOptions.paths['@my/lib']).toEqual([
+      `dist/libs/${name}`,
+    ]);
   });
 });
