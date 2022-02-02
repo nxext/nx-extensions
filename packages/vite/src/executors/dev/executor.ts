@@ -2,15 +2,14 @@ import { DevExecutorSchema } from './schema';
 import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import {
   InlineConfig,
-  printHttpServerUrls,
   UserConfig,
   UserConfigExport,
   ProxyOptions,
   createServer,
   mergeConfig,
+  ViteDevServer,
 } from 'vite';
 import { join, relative } from 'path';
-import { RollupWatcherEvent } from 'rollup';
 import baseConfig from '../../../plugins/vite';
 import { replaceFiles } from '../../../plugins/file-replacement';
 import { existsSync } from 'fs';
@@ -25,7 +24,7 @@ async function ensureUserConfig(
   return await Promise.resolve(config);
 }
 
-export default async function runExecutor(
+export default async function* runExecutor(
   options: DevExecutorSchema,
   context: ExecutorContext
 ) {
@@ -83,28 +82,53 @@ export default async function runExecutor(
   );
 
   const server = await createServer(serverConfig);
-  const devServer = await server.listen();
+  return yield* runVite(server);
+}
 
-  if (
-    typeof (devServer as unknown as { printUrls: unknown }).printUrls ===
-    'function'
-  ) {
-    (devServer as unknown as { printUrls: () => void }).printUrls();
-  } else {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    printHttpServerUrls(devServer as any, serverConfig as any);
+async function* runVite(server: ViteDevServer) {
+  let devServer: ViteDevServer;
+
+  try {
+    devServer = await server.listen();
+    const protocol = devServer.config.server.https ? 'https' : 'http';
+    const hostname = resolveHostname(devServer.config.server.host);
+    const serverBase =
+      hostname.host === '127.0.0.1' ? hostname.name : hostname.host;
+    const baseUrl = `${protocol}://${serverBase}:${devServer.config.server.port}`;
+    server.printUrls();
+
+    yield { success: true, baseUrl };
+
+    return async () => await devServer.close();
+  } catch (err) {
+    throw new Error('Could not start dev server');
   }
-  await new Promise<void>((resolve, reject) => {
-    devServer.watcher.on('event', (data: RollupWatcherEvent) => {
-      if (data.code === 'END') {
-        resolve();
-      } else if (data.code === 'ERROR') {
-        reject();
-      }
-    });
-  });
+}
 
-  await devServer.close();
+export function resolveHostname(optionsHost: string | boolean | undefined) {
+  let host: string | undefined;
+  if (
+    optionsHost === undefined ||
+    optionsHost === false ||
+    optionsHost === 'localhost'
+  ) {
+    // Use a secure default
+    host = '127.0.0.1';
+  } else if (optionsHost === true) {
+    // If passed --host in the CLI without arguments
+    host = undefined; // undefined typically means 0.0.0.0 or :: (listen on all IPs)
+  } else {
+    host = optionsHost;
+  }
 
-  return { success: true };
+  // Set host name to localhost when possible, unless the user explicitly asked for '127.0.0.1'
+  const name =
+    (optionsHost !== '127.0.0.1' && host === '127.0.0.1') ||
+    host === '0.0.0.0' ||
+    host === '::' ||
+    host === undefined
+      ? 'localhost'
+      : host;
+
+  return { host, name };
 }
