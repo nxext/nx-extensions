@@ -61,7 +61,6 @@ export async function makeLibBuildableGenerator(
 ) {
   const stencilProjectConfig = readProjectConfiguration(host, schema.name);
   const options = normalize(schema, stencilProjectConfig.root);
-  const offset = offsetFromRoot(options.projectRoot);
 
   updateProjectConfig(host, options);
   createFiles(host, options);
@@ -75,12 +74,16 @@ export async function makeLibBuildableGenerator(
     [
       `{
         type: 'dist',
-        esmLoaderPath: '../loader',
-        dir: '${offset}dist/${options.projectRoot}/dist',
+        esmLoaderPath: '../loader'
+      }`,
+      `{
+        type: 'dist-custom-elements',
+      }`,
+      `{
+        type: 'docs-readme',
       }`,
       `{
         type: 'www',
-        dir: '${offset}dist/${options.projectRoot}/www',
         serviceWorker: null // disable service workers
       }`,
     ],
