@@ -35,7 +35,7 @@ export function ViteAngularPlugin(
         (id.includes('node_modules') && !id.includes('node_modules/vite/')) ||
         !/\.(mjs|[tj]s?)$/.test(extension)
       ) {
-        return { code}
+        return { code };
       }
       return transform(code, {
         sourceMaps: true,

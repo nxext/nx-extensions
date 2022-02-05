@@ -57,53 +57,52 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   const { libsDir } = getWorkspaceLayout(tree);
   const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
 
-   await NxLibraryGenerator(tree, { ...options });
-    tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
-    tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
+  await NxLibraryGenerator(tree, { ...options });
+  tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
+  tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
 
-    const projectConfig = readProjectConfiguration(tree, appProjectName);
-    updateProjectConfiguration(tree, appProjectName, {
-      ...projectConfig,
-      targets: {
-        ...projectConfig.targets,
-        build: {
-          ...projectConfig.targets.build,
-          executor:
-            options.publishable || options.buildable
-              ? '@nxext/vite:package'
-              : '@nxext/vite:build',
-          outputs: ['{options.outputPath}'],
-          options: {
-            outputPath: joinPathFragments('dist', libProjectRoot),
-            configFile: '@nxext/vite/plugins/vite-package',
-            frameworkConfigFile: '@nxext/angular/plugins/vite',
-            entryFile: joinPathFragments('src', 'index.ts'),
-          },
+  const projectConfig = readProjectConfiguration(tree, appProjectName);
+  updateProjectConfiguration(tree, appProjectName, {
+    ...projectConfig,
+    targets: {
+      ...projectConfig.targets,
+      build: {
+        ...projectConfig.targets.build,
+        executor:
+          options.publishable || options.buildable
+            ? '@nxext/vite:package'
+            : '@nxext/vite:build',
+        outputs: ['{options.outputPath}'],
+        options: {
+          outputPath: joinPathFragments('dist', libProjectRoot),
+          configFile: '@nxext/vite/plugins/vite-package',
+          frameworkConfigFile: '@nxext/angular/plugins/vite',
+          entryFile: joinPathFragments('src', 'index.ts'),
         },
       },
-    });
-    const templateVariables = {
-      ...names(options.name),
-      ...options,
-      tmpl: '',
-      offsetFromRoot: offsetFromRoot(libProjectRoot),
-      projectName: appProjectName,
-    };
+    },
+  });
+  const templateVariables = {
+    ...names(options.name),
+    ...options,
+    tmpl: '',
+    offsetFromRoot: offsetFromRoot(libProjectRoot),
+    projectName: appProjectName,
+  };
 
-    generateFiles(
-      tree,
-      joinPathFragments(__dirname, './files'),
-      libProjectRoot,
-      templateVariables
-    );
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, './files'),
+    libProjectRoot,
+    templateVariables
+  );
 
-    if (options.publishable || options.buildable) {
-      updateLibPackageNpmScope(tree, libProjectRoot, appProjectName);
-    }
-    if (!options.skipFormat) {
-      await formatFiles(tree);
-    }
-
+  if (options.publishable || options.buildable) {
+    updateLibPackageNpmScope(tree, libProjectRoot, appProjectName);
+  }
+  if (!options.skipFormat) {
+    await formatFiles(tree);
+  }
 }
 
 export default libraryGenerator;
