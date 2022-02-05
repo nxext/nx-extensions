@@ -10,37 +10,21 @@ import {
   updateProjectConfiguration,
   readProjectConfiguration,
   offsetFromRoot,
-  StringChange,
-  ChangeType,
-  GeneratorCallback,
+  installPackagesTask,
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/angular/generators';
 import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
-import { SourceFile } from 'typescript';
 import { angularInitGenerator } from '../init/init';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-
-export function addImport(
-  source: SourceFile,
-  statement: string
-): StringChange[] {
-  return [
-    {
-      type: ChangeType.Insert,
-      index: 0,
-      text: `\n${statement}\n`,
-    },
-  ];
-}
 
 export async function applicationGenerator(tree: Tree, options: Schema) {
-  const initTask = await angularInitGenerator(tree, {
+
+  await angularInitGenerator(tree, {
     linter: options.linter,
     unitTestRunner: options.unitTestRunner,
     skipFormat: true,
     e2eTestRunner: E2eTestRunner.Cypress,
-    skipInstall: false,
+    skipInstall: true,
     style: 'css',
   });
 
@@ -53,73 +37,63 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   const { appsDir } = getWorkspaceLayout(tree);
   const appProjectRoot = normalizePath(`${appsDir}/${appDirectory}`);
 
-  const angularAppTask = await nxApplicationGenerator(tree, {
+  await nxApplicationGenerator(tree, {
     ...options,
     e2eTestRunner: E2eTestRunner.None,
+    skipFormat: true,
   });
 
-  const completeEditing = async () => {
-    tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.app.json'));
-    tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.spec.json'));
-    tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.json'));
-    tree.delete(joinPathFragments(appProjectRoot, 'src', 'index.html'));
+  tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.app.json'));
+  tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.spec.json'));
+  tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.json'));
+  tree.delete(joinPathFragments(appProjectRoot, 'src', 'index.html'));
 
-    const projectConfig = readProjectConfiguration(tree, appProjectName);
-    updateProjectConfiguration(tree, appProjectName, {
-      ...projectConfig,
-      targets: {
-        ...projectConfig.targets,
-        build: {
-          ...projectConfig.targets.build,
-          executor: '@nxext/vite:build',
-          outputs: ['{options.outputPath}'],
-          defaultConfiguration: 'production',
-          options: {
-            outputPath: joinPathFragments('dist', appProjectRoot),
-            baseHref: '/',
-            configFile: '@nxext/vite/plugins/vite',
-            frameworkConfigFile: '@nxext/angular/plugins/vite',
-          },
-        },
-        serve: {
-          ...projectConfig.targets.serve,
-          executor: '@nxext/vite:dev',
-          options: {
-            outputPath: joinPathFragments('dist', appProjectRoot),
-            baseHref: '/',
-            configFile: '@nxext/vite/plugins/vite',
-            frameworkConfigFile: '@nxext/angular/plugins/vite',
-          },
+  const projectConfig = readProjectConfiguration(tree, appProjectName);
+  updateProjectConfiguration(tree, appProjectName, {
+    ...projectConfig,
+    targets: {
+      ...projectConfig.targets,
+      build: {
+        ...projectConfig.targets.build,
+        executor: '@nxext/vite:build',
+        outputs: ['{options.outputPath}'],
+        defaultConfiguration: 'production',
+        options: {
+          outputPath: joinPathFragments('dist', appProjectRoot),
+          baseHref: '/',
+          configFile: '@nxext/vite/plugins/vite',
+          frameworkConfigFile: '@nxext/angular/plugins/vite',
         },
       },
-    });
-    const templateVariables = {
-      ...names(options.name),
-      ...options,
-      tmpl: '',
-      offsetFromRoot: offsetFromRoot(appProjectRoot),
-      projectName: appProjectName,
-    };
-
-    generateFiles(
-      tree,
-      joinPathFragments(__dirname, './files'),
-      appProjectRoot,
-      templateVariables
-    );
-    if (!options.skipFormat) {
-      await formatFiles(tree);
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const callback: GeneratorCallback = () => {};
-
-    return Promise.resolve(callback);
+      serve: {
+        ...projectConfig.targets.serve,
+        executor: '@nxext/vite:dev',
+        options: {
+          outputPath: joinPathFragments('dist', appProjectRoot),
+          baseHref: '/',
+          configFile: '@nxext/vite/plugins/vite',
+          frameworkConfigFile: '@nxext/angular/plugins/vite',
+        },
+      },
+    },
+  });
+  const templateVariables = {
+    ...names(options.name),
+    ...options,
+    tmpl: '',
+    offsetFromRoot: offsetFromRoot(appProjectRoot),
+    projectName: appProjectName,
   };
 
-  const finished = await completeEditing();
-
-  return runTasksInSerial(initTask, angularAppTask, finished);
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, './files'),
+    appProjectRoot,
+    templateVariables
+  );
+  return () => {
+    formatFiles(tree);
+  };
 }
 
 export default applicationGenerator;
