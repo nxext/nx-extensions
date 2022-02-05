@@ -43,7 +43,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     ? `${names(options.directory).fileName}/${names(options.name).fileName}`
     : names(options.name).fileName;
 
-  const initTask = await angularInitGenerator(tree, {
+  await angularInitGenerator(tree, {
     linter: options.linter,
     unitTestRunner: options.unitTestRunner,
     skipFormat: true,
@@ -57,9 +57,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   const { libsDir } = getWorkspaceLayout(tree);
   const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
 
-  const libraryTask = await NxLibraryGenerator(tree, { ...options });
-
-  const completeEditing = async () => {
+   await NxLibraryGenerator(tree, { ...options });
     tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
     tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
 
@@ -105,15 +103,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     if (!options.skipFormat) {
       await formatFiles(tree);
     }
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const callback: GeneratorCallback = () => {};
 
-    return Promise.resolve(callback);
-  };
-
-  const finished = await completeEditing();
-
-  return runTasksInSerial(initTask, libraryTask, finished);
 }
 
 export default libraryGenerator;

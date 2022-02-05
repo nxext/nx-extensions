@@ -7,49 +7,23 @@ import {
   TsType,
   ArrayExpression,
   StringLiteral,
-  ModuleItem,
-  Module,
-  ImportDeclaration,
 } from '@swc/core';
 import { Visitor } from '@swc/core/Visitor.js';
 import {
   createArrayExpression,
   createExpressionStatement,
   createIdentifer,
-  createSpan,
   createStringLiteral,
-  isDecorator,
-  createImportDefaultSpecifier,
+  createKeyValueProperty
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 
 export class AngularComponents extends Visitor {
-  private missingImport: { tmpl: string; from: string }[] = [];
-  private importDefaultCount = 1;
+
   constructor(private sourceUrl: string) {
     super();
   }
-
-  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
-    const result = items.flatMap((item) => this.visitModuleItem(item));
-    if (this.missingImport.length) {
-      return [
-        ...this.missingImport.map((mimport) => {
-          return {
-            type: 'ImportDeclaration',
-            span: createSpan(),
-            typeOnly: false,
-            specifiers: [createImportDefaultSpecifier(mimport.tmpl)],
-            source: createStringLiteral(mimport.from),
-          } as ImportDeclaration;
-        }),
-        ...result,
-      ];
-    }
-    return result;
-  }
-
   visitDecorator(decorator: Decorator) {
     if (
       decorator.expression.type === 'CallExpression' &&
@@ -72,32 +46,23 @@ export class AngularComponents extends Visitor {
                     arg.expression as ObjectExpression
                   ).properties.map((prop: KeyValueProperty) => {
                     if ((prop.key as Identifier).value === 'templateUrl') {
-                      const tmplName = `template${this.importDefaultCount}`;
-                      this.importDefaultCount += 1;
-                      this.missingImport.push({
-                        from: `${(prop.value as Identifier).value}?raw`,
-                        tmpl: tmplName,
-                      });
 
-                      return {
-                        ...prop,
-                        key: {
-                          ...prop.key,
-                          value: 'template',
-                        },
-                        value: {
-                          ...prop.value,
-                          type: 'Identifier',
-                          value: tmplName,
-                        },
-                      };
+                      const actualImportPath = join(
+                        dirname(this.sourceUrl),
+                        (prop.value as Identifier).value
+                      );
+                      const templateContent = readFileSync(actualImportPath, 'utf8');
+
+                      return createKeyValueProperty(
+                        createIdentifer('template'),
+                        createStringLiteral(templateContent)
+                      )
                     }
 
                     if ((prop.key as Identifier).value === 'styleUrls') {
                       const contents = (
                         prop.value as ArrayExpression
                       ).elements.map((el) => {
-                        this.importDefaultCount += 1;
                         const actualImportPath = join(
                           dirname(this.sourceUrl),
                           (el.expression as StringLiteral).value
@@ -124,10 +89,6 @@ export class AngularComponents extends Visitor {
       };
     }
     return decorator;
-  }
-
-  getMissingImports() {
-    return this.missingImport;
   }
 
   visitTsTypes(nodes: TsType[]): TsType[] {
