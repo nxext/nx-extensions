@@ -18,7 +18,6 @@ import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
 import { angularInitGenerator } from '../init/init';
 
 export async function applicationGenerator(tree: Tree, options: Schema) {
-
   await angularInitGenerator(tree, {
     linter: options.linter,
     unitTestRunner: options.unitTestRunner,

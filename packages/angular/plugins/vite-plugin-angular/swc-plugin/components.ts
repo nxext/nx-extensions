@@ -14,13 +14,12 @@ import {
   createExpressionStatement,
   createIdentifer,
   createStringLiteral,
-  createKeyValueProperty
+  createKeyValueProperty,
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 
 export class AngularComponents extends Visitor {
-
   constructor(private sourceUrl: string) {
     super();
   }
@@ -46,17 +45,19 @@ export class AngularComponents extends Visitor {
                     arg.expression as ObjectExpression
                   ).properties.map((prop: KeyValueProperty) => {
                     if ((prop.key as Identifier).value === 'templateUrl') {
-
                       const actualImportPath = join(
                         dirname(this.sourceUrl),
                         (prop.value as Identifier).value
                       );
-                      const templateContent = readFileSync(actualImportPath, 'utf8');
+                      const templateContent = readFileSync(
+                        actualImportPath,
+                        'utf8'
+                      );
 
                       return createKeyValueProperty(
                         createIdentifer('template'),
                         createStringLiteral(templateContent)
-                      )
+                      );
                     }
 
                     if ((prop.key as Identifier).value === 'styleUrls') {
