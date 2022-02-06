@@ -17,7 +17,7 @@ import {
   createStringLiteral,
   createKeyValueProperty,
   createTemplateLiteral,
-  createTemplateElement
+  createTemplateElement,
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
@@ -64,7 +64,7 @@ export class AngularComponents extends Visitor {
                       return createKeyValueProperty(
                         createIdentifer('template'),
                         createTemplateLiteral([
-                          createTemplateElement(templateContent)
+                          createTemplateElement(templateContent),
                         ])
                       );
                     }
