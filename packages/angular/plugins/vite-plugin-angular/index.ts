@@ -5,6 +5,8 @@ import { AngularComponents } from './swc-plugin/components';
 import { AngularInjector } from './swc-plugin/injector';
 import { AngularImportCompilerComponents } from './swc-plugin/auto-import-compilier';
 import { AngularSwapPlatformDynamic } from './swc-plugin/swap-dynamic-import';
+import { defautSideEffects, optimizer } from './utils/optimizer';
+import { resolver } from './utils/resolver';
 
 export function ViteAngularPlugin(
   angularOptions?: AngularVitePluginOptions
@@ -12,6 +14,8 @@ export function ViteAngularPlugin(
   let angularComponentPlugin: AngularComponents;
   let angularInjectorPlugin: AngularInjector;
   let isProduction = true;
+  let isBuild = false;
+  let sideEffectFreeModules: string[];
   // eslint-disable-next-line no-useless-escape
   const fileExtensionRE = /\.[^\/\s\?]+$/;
   return {
@@ -19,6 +23,12 @@ export function ViteAngularPlugin(
     enforce: 'pre',
     configResolved(config) {
       isProduction = config.isProduction;
+      isBuild = config.command === 'build';
+    },
+    buildStart: async () => {
+      sideEffectFreeModules = defautSideEffects(
+        angularOptions?.buildOptimizer?.sideEffectFreeModules
+      );
     },
     transform: (code, id) => {
       const [filepath, querystring = ''] = id.split('?');
@@ -27,16 +37,17 @@ export function ViteAngularPlugin(
         filepath.match(fileExtensionRE) ||
         [];
 
+      // if (id.includes('node_modules')) {
+      //   return isBuild ? optimizer(code, id, {
+      //     sideEffectFreeModules,
+      //     angularCoreModules: angularOptions?.buildOptimizer?.angularCoreModules,
+      //   }) : { code };
+      // }
+
       if (/\.(html?)$/.test(extension)) {
         return;
       }
 
-      if (
-        (id.includes('node_modules') && !id.includes('node_modules/vite/')) ||
-        !/\.(mjs|[tj]s?)$/.test(extension)
-      ) {
-        return { code };
-      }
       return transform(code, {
         sourceMaps: true,
         jsc: {

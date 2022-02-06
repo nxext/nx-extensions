@@ -11,11 +11,28 @@ import {
   readProjectConfiguration,
   offsetFromRoot,
   installPackagesTask,
+  StringChange,
+  ChangeType,
+  applyChangesToString,
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/angular/generators';
 import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
 import { angularInitGenerator } from '../init/init';
+import { createSourceFile, ScriptTarget, SourceFile } from 'typescript';
+
+export function addImport(
+  source: SourceFile,
+  statement: string
+): StringChange[] {
+  return [
+    {
+      type: ChangeType.Insert,
+      index: 0,
+      text: `\n${statement}\n`,
+    },
+  ];
+}
 
 export async function applicationGenerator(tree: Tree, options: Schema) {
   await angularInitGenerator(tree, {
@@ -46,6 +63,23 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.spec.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'src', 'index.html'));
+
+  const polyfillPath = joinPathFragments(appProjectRoot, 'src', 'polyfills.ts');
+  const sourceText = tree.read(polyfillPath, 'utf-8');
+  const sourceFile = createSourceFile(
+    polyfillPath,
+    sourceText,
+    ScriptTarget.Latest,
+    true
+  );
+
+  tree.write(
+    polyfillPath,
+    applyChangesToString(
+      sourceText,
+      addImport(sourceFile, `import 'reflect-metadata';`)
+    )
+  );
 
   const projectConfig = readProjectConfiguration(tree, appProjectName);
   updateProjectConfiguration(tree, appProjectName, {
@@ -90,8 +124,10 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     appProjectRoot,
     templateVariables
   );
+
+  await formatFiles(tree);
   return () => {
-    formatFiles(tree);
+    installPackagesTask(tree);
   };
 }
 

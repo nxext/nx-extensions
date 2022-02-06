@@ -7,6 +7,7 @@ import {
   TsType,
   ArrayExpression,
   StringLiteral,
+  ModuleItem,
 } from '@swc/core';
 import { Visitor } from '@swc/core/Visitor.js';
 import {
@@ -15,6 +16,8 @@ import {
   createIdentifer,
   createStringLiteral,
   createKeyValueProperty,
+  createTemplateLiteral,
+  createTemplateElement
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
@@ -23,6 +26,10 @@ export class AngularComponents extends Visitor {
   constructor(private sourceUrl: string) {
     super();
   }
+  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+    return items.flatMap((item) => this.visitModuleItem(item));
+  }
+
   visitDecorator(decorator: Decorator) {
     if (
       decorator.expression.type === 'CallExpression' &&
@@ -56,7 +63,9 @@ export class AngularComponents extends Visitor {
 
                       return createKeyValueProperty(
                         createIdentifer('template'),
-                        createStringLiteral(templateContent)
+                        createTemplateLiteral([
+                          createTemplateElement(templateContent)
+                        ])
                       );
                     }
 
