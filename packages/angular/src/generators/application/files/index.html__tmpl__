@@ -8,7 +8,7 @@
     <base href="/" />
   </head>
   <body>
-    <proj-root></proj-root>
+    <<%= prefix %>-root></<%= prefix %>-root>
     <script type="module" src="/src/polyfills.ts"></script>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -110,12 +110,14 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
       },
     },
   });
+
   const templateVariables = {
     ...names(options.name),
     ...options,
     tmpl: '',
     offsetFromRoot: offsetFromRoot(appProjectRoot),
     projectName: appProjectName,
+    prefix: options.prefix || 'app',
   };
 
   generateFiles(
