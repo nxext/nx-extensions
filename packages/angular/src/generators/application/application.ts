@@ -10,6 +10,7 @@ import {
   updateProjectConfiguration,
   readProjectConfiguration,
   offsetFromRoot,
+  installPackagesTask,
   StringChange,
   ChangeType,
   applyChangesToString,
@@ -17,6 +18,7 @@ import {
 import { Schema } from './schema';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/angular/generators';
 import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
+import { angularInitGenerator } from '../init/init';
 import { createSourceFile, ScriptTarget, SourceFile } from 'typescript';
 
 export function addImport(
@@ -33,6 +35,15 @@ export function addImport(
 }
 
 export async function applicationGenerator(tree: Tree, options: Schema) {
+  await angularInitGenerator(tree, {
+    linter: options.linter,
+    unitTestRunner: options.unitTestRunner,
+    skipFormat: true,
+    e2eTestRunner: E2eTestRunner.Cypress,
+    skipInstall: true,
+    style: 'css',
+  });
+
   const appDirectory = options.directory
     ? `${names(options.directory).fileName}/${names(options.name).fileName}`
     : names(options.name).fileName;
@@ -42,9 +53,10 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   const { appsDir } = getWorkspaceLayout(tree);
   const appProjectRoot = normalizePath(`${appsDir}/${appDirectory}`);
 
-  const angularAppTask = await nxApplicationGenerator(tree, {
+  await nxApplicationGenerator(tree, {
     ...options,
     e2eTestRunner: E2eTestRunner.None,
+    skipFormat: true,
   });
 
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.app.json'));
@@ -112,11 +124,11 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     appProjectRoot,
     templateVariables
   );
-  if (!options.skipFormat) {
-    await formatFiles(tree);
-  }
 
-  return angularAppTask;
+  await formatFiles(tree);
+  return () => {
+    installPackagesTask(tree);
+  };
 }
 
 export default applicationGenerator;
