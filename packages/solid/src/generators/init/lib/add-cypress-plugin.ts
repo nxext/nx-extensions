@@ -22,7 +22,7 @@ export function addCypressPlugin(tree: Tree): GeneratorCallback {
     tasks.push(installTask);
   }
 
-  const cypressTask = cypressInitGenerator(tree);
+  const cypressTask = cypressInitGenerator(tree, {});
   tasks.push(cypressTask);
 
   return runTasksInSerial(...tasks);
