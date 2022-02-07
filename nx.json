@@ -23,7 +23,6 @@
         "cacheableOperations": ["build", "test", "lint", "e2e"],
         "canTrackAnalytics": true,
         "showUsageWarnings": true,
-        "scan": true,
         "parallel": 1
       }
     }

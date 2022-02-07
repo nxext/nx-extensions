@@ -8,5 +8,5 @@ export async function addCypress(host: Tree, options: InitSchema) {
     return () => {};
   }
 
-  return cypressInitGenerator(host);
+  return cypressInitGenerator(host, {});
 }

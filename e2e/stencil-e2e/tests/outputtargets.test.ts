@@ -1,13 +1,16 @@
 import {
   checkFilesExist,
-  ensureNxProject,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('outputtargets e2e', () => {
   beforeAll(() => {
-    ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+    ensureNxProjectWithDeps('@nxext/stencil', 'dist/packages/stencil', [
+      ['@nxext/vite', 'dist/packages/vite'],
+      ['@nxext/svelte', 'dist/packages/svelte'],
+    ]);
   });
 
   it(`should generate react lib`, async () => {
