@@ -35,6 +35,10 @@ export function addImport(
   ];
 }
 
+interface AngularProject extends ProjectConfiguration {
+  prefix?: string;
+}
+
 export async function applicationGenerator(tree: Tree, options: Schema) {
   await angularInitGenerator(tree, {
     linter: options.linter,
@@ -82,7 +86,10 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     )
   );
 
-  const projectConfig = readProjectConfiguration(tree, appProjectName) as { prefix: string } extends ProjectConfiguration;
+  const projectConfig = readProjectConfiguration(
+    tree,
+    appProjectName
+  ) as AngularProject;
   updateProjectConfiguration(tree, appProjectName, {
     ...projectConfig,
     targets: {
