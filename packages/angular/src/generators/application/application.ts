@@ -14,6 +14,7 @@ import {
   StringChange,
   ChangeType,
   applyChangesToString,
+  ProjectConfiguration,
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/angular/generators';
@@ -81,7 +82,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     )
   );
 
-  const projectConfig = readProjectConfiguration(tree, appProjectName);
+  const projectConfig = readProjectConfiguration(tree, appProjectName) as { prefix: string } extends ProjectConfiguration;
   updateProjectConfiguration(tree, appProjectName, {
     ...projectConfig,
     targets: {
@@ -117,7 +118,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     tmpl: '',
     offsetFromRoot: offsetFromRoot(appProjectRoot),
     projectName: appProjectName,
-    prefix: options.prefix || 'app',
+    prefix: options.prefix || projectConfig?.prefix || 'app',
   };
 
   generateFiles(
