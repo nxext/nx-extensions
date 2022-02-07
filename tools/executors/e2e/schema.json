@@ -1,7 +1,8 @@
 {
   "title": "Nx Plugin Playground Target",
-  "description": "Creates a playground for a Nx Plugin",
+  "description": "Runs the e2e tests with dependencies",
   "type": "object",
+  "cli": "nx",
   "properties": {
     "targets": {
       "type": "array",

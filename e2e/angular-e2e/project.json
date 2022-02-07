@@ -4,9 +4,9 @@
   "sourceRoot": "e2e/angular-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "./tools/executors/e2e:e2e",
       "options": {
-        "target": "angular:build",
+        "targets": ["vite:build", "angular:build"],
         "jestConfig": "e2e/angular-e2e/jest.config.js"
       }
     }
