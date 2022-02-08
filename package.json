@@ -87,7 +87,7 @@
     "@stencil/core": "2.13.0",
     "@sveltejs/kit": "^1.0.0-next.55",
     "@types/is-ci": "^3.0.0",
-    "@types/jest": "27.0.3",
+    "@types/jest": "27.4.0",
     "@types/node": "14.14.37",
     "@typescript-eslint/eslint-plugin": "5.10.2",
     "@typescript-eslint/parser": "5.10.2",
