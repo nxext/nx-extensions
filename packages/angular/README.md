@@ -1,3 +1,5 @@
+<p style="text-align: center;"><img src="https://nxext.dev/img/viteangular.png" width="300" alt="Nxext Angular - Angular meets Vite"></p>
+
 # Angular Vite builder with SWC
 
 This project is in alpha stages and should be used for local development only until release.
