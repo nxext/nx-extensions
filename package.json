@@ -122,7 +122,7 @@
     "vite-tsconfig-paths": "^3.3.17",
     "vite": "2.7.13",
     "vite-plugin-inspect": "^0.3.13",
-    "vitest": "^0.2.1"
+    "vitest": "^0.2.8"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"
