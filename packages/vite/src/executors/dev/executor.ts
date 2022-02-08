@@ -6,13 +6,14 @@ import {
   UserConfigExport,
   ProxyOptions,
   createServer,
-  mergeConfig,
-  ViteDevServer,
+  mergeConfig, ViteDevServer
 } from 'vite';
 import { join, relative } from 'path';
 import baseConfig from '../../../plugins/vite';
 import { replaceFiles } from '../../../plugins/file-replacement';
 import { existsSync } from 'fs';
+import { Observable } from 'rxjs';
+import { eachValueFrom } from 'rxjs-for-await';
 
 async function ensureUserConfig(
   config: UserConfigExport,
@@ -59,8 +60,8 @@ export default async function* runExecutor(
         options.configFile === '@nxext/vite/plugins/vite'
           ? false
           : options.configFile
-          ? joinPathFragments(`${context.root}/${options.configFile}`)
-          : undefined,
+            ? joinPathFragments(`${context.root}/${options.configFile}`)
+            : undefined,
       base: options.baseHref ?? '/',
       root: projectRoot,
       build: {
@@ -72,40 +73,48 @@ export default async function* runExecutor(
         reportCompressedSize: true,
         cssCodeSplit: true,
         rollupOptions: {
-          plugins: [replaceFiles(options.fileReplacements)],
-        },
+          plugins: [replaceFiles(options.fileReplacements)]
+        }
       },
       server: {
-        proxy: proxyConfig,
-      },
+        proxy: proxyConfig
+      }
     } as InlineConfig
   );
 
   const server = await createServer(serverConfig);
-  return yield* runVite(server);
+  return yield* eachValueFrom(runViteDevServer(server));
 }
 
-async function* runVite(server: ViteDevServer) {
-  let devServer: ViteDevServer;
+export function runViteDevServer(server: ViteDevServer): Observable<{ success: boolean, baseUrl: string }> {
+  return new Observable(subscriber => {
+    let devServer: ViteDevServer;
 
-  try {
-    devServer = await server.listen();
-    const protocol = devServer.config.server.https ? 'https' : 'http';
-    const hostname = resolveHostname(devServer.config.server.host);
-    const serverBase =
-      hostname.host === '127.0.0.1' ? hostname.name : hostname.host;
-    const baseUrl = `${protocol}://${serverBase}:${devServer.config.server.port}`;
-    server.printUrls();
+    try {
+      server.listen().then(dev => {
+        devServer = dev;
+        const protocol = devServer.config.server.https ? 'https' : 'http';
+        const hostname = resolveHostname(devServer.config.server.host);
+        const serverBase = hostname.host === '127.0.0.1' ? hostname.name : hostname.host;
+        const baseUrl = `${protocol}://${serverBase}:${devServer.config.server.port}`;
+        server.printUrls();
 
-    yield { success: true, baseUrl };
+        subscriber.next({ success: true, baseUrl });
+      }).catch(err => {
+        subscriber.error(err);
+      });
 
-    return async () => await devServer.close();
-  } catch (err) {
-    throw new Error('Could not start dev server');
-  }
+      return async () => await devServer.close();
+    } catch (err) {
+      subscriber.error(err);
+      throw new Error('Could not start dev server');
+    }
+  });
 }
 
-export function resolveHostname(optionsHost: string | boolean | undefined) {
+export function resolveHostname(
+  optionsHost: string | boolean | undefined
+) {
   let host: string | undefined;
   if (
     optionsHost === undefined ||
