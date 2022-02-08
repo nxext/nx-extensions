@@ -102,7 +102,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-svelte3": "^3.4.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.4",
     "ignore": "^5.2.0",
     "is-ci": "^3.0.1",
     "jest": "27.3.1",
