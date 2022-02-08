@@ -3825,10 +3825,10 @@
   resolved "https://registry.yarnpkg.com/@verdaccio/streams/-/streams-10.1.0.tgz#574fa404bec59fd34324a1b7ffca6510f7f19aff"
   integrity sha512-19FebNvwNiJkk68fFEq/kNOcPNKYX/NoPFqOlZH6mGUGUo3htHh4tD5k2WepAZpBeK9SC868UiPbMizdIXquSg==
 
-"@verdaccio/ui-theme@6.0.0-6-next.15":
-  version "6.0.0-6-next.15"
-  resolved "https://registry.yarnpkg.com/@verdaccio/ui-theme/-/ui-theme-6.0.0-6-next.15.tgz#ad3e2bf5a40a8d5ec9d245b662b4500a0df068a4"
-  integrity sha512-qKqsk3OUIG1VJh2cgkA8H1nSyB1ybMw9VAiWkBarv8uriRkwG+cIcEMUXZuG1pnr6ieNLsYtLRGKbnlBhIpSaA==
+"@verdaccio/ui-theme@6.0.0-6-next.16":
+  version "6.0.0-6-next.16"
+  resolved "https://registry.yarnpkg.com/@verdaccio/ui-theme/-/ui-theme-6.0.0-6-next.16.tgz#f88f555b502636c37ec1722d832c6fd826b63892"
+  integrity sha512-FbYl3273qaA0/fRwrvE876/HuvU81zjsnR70rCEojBelDuddl3xbY1LVdvthCjUGuIj2SUNpTzGhyROdqHJUCg==
 
 "@vitejs/plugin-react@^1.1.4":
   version "1.1.4"
@@ -10626,11 +10626,6 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
-marked@2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-2.1.3.tgz#bd017cef6431724fd4b27e0657f5ceb14bff3753"
-  integrity sha512-/Q+7MGzaETqifOMWYEA7HVMaZb4XbcRfaOzcSsHZEith83KGlvaSG33u0SKu89Mj5h+T8V2hM+8O45Qc5XTgwA==
-
 marked@4.0.10:
   version "4.0.10"
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.10.tgz#423e295385cc0c3a70fa495e0df68b007b879423"
@@ -10783,10 +10778,10 @@ mime@1.6.0, mime@^1.4.1, mime@^1.6.0:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-mime@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.6.0.tgz#a2a682a95cd4d0cb1d6257e28f83da7e35800367"
-  integrity sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==
+mime@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-3.0.0.tgz#b374550dca3a0c18443b0c950a6a58f1931cf7a7"
+  integrity sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==
 
 mimic-fn@^1.0.0:
   version "1.2.0"
@@ -15441,16 +15436,16 @@ verdaccio-htpasswd@10.1.0:
     http-errors "1.8.1"
     unix-crypt-td-js "1.1.4"
 
-verdaccio@^5.5.0:
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/verdaccio/-/verdaccio-5.5.0.tgz#eb59b3a11aacf74494a7375d8b1566743674592b"
-  integrity sha512-isHIHRpjoT0cUXQyH1wAAHnO0E5Ky+pMVaaYThrzsjlkQHS2rp04xj7VPQrVHTJFIbv2VTIHRjWriw0J2Ilt8g==
+verdaccio@^5.5.2:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/verdaccio/-/verdaccio-5.5.2.tgz#82d21c0ad1329a248efb8fa2d8a35d51b43800ae"
+  integrity sha512-SU107gfxE8FLrwp5GezhmWE0otWTAb7xIcz/m931vqOPjeH2MwbMf0+WuCDQ5O80XxdwurlK/JFNRYzDzqUrMA==
   dependencies:
     "@verdaccio/commons-api" "10.1.0"
     "@verdaccio/local-storage" "10.1.1"
     "@verdaccio/readme" "10.2.1"
     "@verdaccio/streams" "10.1.0"
-    "@verdaccio/ui-theme" "6.0.0-6-next.15"
+    "@verdaccio/ui-theme" "6.0.0-6-next.16"
     JSONStream "1.3.5"
     async "3.2.3"
     body-parser "1.19.1"
@@ -15473,9 +15468,9 @@ verdaccio@^5.5.0:
     lodash "4.17.21"
     lru-cache "6.0.0"
     lunr-mutable-indexes "2.3.2"
-    marked "2.1.3"
+    marked "4.0.10"
     memoizee "0.4.15"
-    mime "2.6.0"
+    mime "3.0.0"
     minimatch "3.0.4"
     mkdirp "1.0.4"
     mv "2.1.1"
