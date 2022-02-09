@@ -11,7 +11,7 @@ You're able to generate angular/react libraries for yout stencil libraries using
 nx g @nxext/stencil:add-outputtarget my-lib
 ```
 
-With the `--outputType='react'`, `--outputType='angular'` or `--outputType='vue'` you can define the kind of library.
+With the `--outputType='react'`, `--outputType='angular'` or `--outputType='svelte'` you can define the kind of library.
 
 ## Options
 
@@ -19,7 +19,7 @@ With the `--outputType='react'`, `--outputType='angular'` or `--outputType='vue'
 
 Type: `enum`
 
-Possible values: angular, react
+Possible values: angular, react, svelte
 
 Select what kind of library you want to generate.
 
