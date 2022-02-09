@@ -4,7 +4,7 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../../utils/testing';
+import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('react e2e', () => {
   beforeAll(() => {
@@ -82,7 +82,7 @@ describe('react e2e', () => {
         `generate @nxext/react:lib ${plugin} --buildable`
       );
 
-      const result = await runNxCommandAsync(`build ${plugin}`);
+      await runNxCommandAsync(`build ${plugin}`);
 
       expect(() =>
         checkFilesExist(

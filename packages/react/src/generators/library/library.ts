@@ -15,6 +15,7 @@ import {
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { libraryGenerator as nxLibraryGenerator } from '@nrwl/react';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 function updateLibPackageNpmScope(
   host: Tree,
@@ -45,34 +46,35 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   const { libsDir } = getWorkspaceLayout(tree);
   const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
 
-  await (
-    await nxLibraryGenerator(tree, { ...options, skipTsConfig: false })
-  )();
+  const libraryTask = await nxLibraryGenerator(tree, {
+    ...options,
+    skipTsConfig: false,
+  });
 
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
   tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
 
-  const projectConfig = readProjectConfiguration(tree, appProjectName);
-  updateProjectConfiguration(tree, appProjectName, {
-    ...projectConfig,
-    targets: {
-      ...projectConfig.targets,
-      build: {
-        ...projectConfig.targets.build,
-        executor:
-          options.publishable || options.buildable
-            ? '@nxext/vite:package'
-            : '@nxext/vite:build',
-        outputs: ['{options.outputPath}'],
-        options: {
-          outputPath: joinPathFragments('dist', libProjectRoot),
-          configFile: '@nxext/vite/plugins/vite-package',
-          frameworkConfigFile: '@nxext/react/plugins/vite',
-          entryFile: joinPathFragments('src', 'index.ts'),
+  if (options.publishable || options.buildable) {
+    const projectConfig = readProjectConfiguration(tree, appProjectName);
+    updateProjectConfiguration(tree, appProjectName, {
+      ...projectConfig,
+      targets: {
+        ...projectConfig.targets,
+        build: {
+          ...projectConfig.targets.build,
+          executor: '@nxext/vite:package',
+          outputs: ['{options.outputPath}'],
+          options: {
+            outputPath: joinPathFragments('dist', libProjectRoot),
+            configFile: '@nxext/vite/plugins/vite-package',
+            frameworkConfigFile: '@nxext/react/plugins/vite',
+            entryFile: joinPathFragments('src', 'index.ts'),
+          },
         },
       },
-    },
-  });
+    });
+  }
+
   const templateVariables = {
     ...names(options.name),
     ...options,
@@ -101,6 +103,8 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
   if (!options.skipFormat) {
     await formatFiles(tree);
   }
+
+  return runTasksInSerial(libraryTask);
 }
 
 export default libraryGenerator;
