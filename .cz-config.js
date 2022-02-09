@@ -20,6 +20,7 @@ module.exports = {
     { name: 'svelte', description: 'Svelte specific' },
     { name: 'sveltekit', description: 'Sveltekit specific' },
     { name: 'vite', description: 'Vite specific' },
+    { name: 'vitest', description: 'Vitest specific' },
     { name: 'solid', description: 'SolidJS specific' },
     { name: 'react', description: 'ReactJS specific' },
     { name: 'angular', description: 'Angular specific' },
