@@ -1,6 +1,6 @@
-export const stencilVersion = '^2.12.1';
+export const stencilVersion = '^2.13.0';
 export const stencilRouterVersion = '^1.0.1';
-export const ionicVersion = '^6.0.3';
+export const ionicVersion = '^6.0.6';
 
 export const autoprefixerVersion = '^9.7.6';
 export const autoprefixerTypesVersion = '^9.7.2';
@@ -14,7 +14,7 @@ export const eslintPluginStencilVersion = '0.3.1';
 export const STENCIL_OUTPUTTARGET_VERSION: {
   [style: string]: string;
 } = {
-  react: '^0.2.1',
+  react: '^0.3.1',
   angular: '^0.4.0',
   vue: '^0.6.0',
   svelte: '^0.0.3',
