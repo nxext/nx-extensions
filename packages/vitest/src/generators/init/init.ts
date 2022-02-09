@@ -6,11 +6,7 @@ import {
   updateJson,
 } from '@nrwl/devkit';
 import { InitGeneratorSchema } from './schema';
-import {
-  c8Version,
-  nxextVitestVersion,
-  vitestVersion,
-} from '../../utils/versions';
+import { c8Version, vitestVersion } from '../../utils/versions';
 
 function removeNxextVitestFromDeps(host: Tree) {
   updateJson(host, 'package.json', (json) => {
@@ -22,9 +18,17 @@ function removeNxextVitestFromDeps(host: Tree) {
   });
 }
 
-function updateDependencies(host: Tree, options: InitGeneratorSchema) {
+function updateDependencies(host: Tree) {
+  updateJson(host, 'package.json', (json) => {
+    if (json.dependencies && json.dependencies['@nxext/vitest']) {
+      json.devDependencies['@nxext/vitest'] =
+        json.dependencies['@nxext/vitest'];
+      delete json.dependencies['@nxext/vitest'];
+    }
+    return json;
+  });
+
   const devDeps = {
-    '@nxext/vitest': nxextVitestVersion,
     vitest: vitestVersion,
     c8: c8Version,
   };
@@ -53,7 +57,7 @@ export default defineConfig({
 
 function vitestInitGenerator(host: Tree, options: InitGeneratorSchema) {
   createVitestConfig(host);
-  const installTask = updateDependencies(host, options);
+  const installTask = updateDependencies(host);
   removeNxextVitestFromDeps(host);
 
   return installTask;
