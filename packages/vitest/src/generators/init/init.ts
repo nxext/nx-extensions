@@ -21,8 +21,10 @@ function removeNxextVitestFromDeps(host: Tree) {
 function updateDependencies(host: Tree) {
   updateJson(host, 'package.json', (json) => {
     if (json.dependencies && json.dependencies['@nxext/vitest']) {
-      json.devDependencies['@nxext/vitest'] =
-        json.dependencies['@nxext/vitest'];
+      if (json.dependencies['@nxext/vitest']) {
+        json.devDependencies['@nxext/vitest'] =
+          json.dependencies['@nxext/vitest'];
+      }
       delete json.dependencies['@nxext/vitest'];
     }
     return json;
