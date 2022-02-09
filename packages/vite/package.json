@@ -22,8 +22,8 @@
   "executors": "./executors.json",
   "generators": "./generators.json",
   "dependencies": {
-    "vite-tsconfig-paths": "3.3.17",
-    "@nrwl/devkit": "^13.4.0",
+    "vite-tsconfig-paths": "3.4.0",
+    "@nrwl/devkit": "^13.7.0",
     "rxjs": "^6.5.4",
     "rxjs-for-await": "1.0.0"
   },

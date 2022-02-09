@@ -1,12 +1,12 @@
 {
   "migrations": [
     {
-      "version": "13.6.0-beta.0",
-      "description": "Remove old options that are no longer used",
       "cli": "nx",
-      "implementation": "./src/migrations/update-13-6-0/remove-old-task-runner-options",
-      "package": "@nrwl/workspace",
-      "name": "13-6-0-remove-old-task-runner-options"
+      "version": "13.8.0-beta.1",
+      "description": "Add a postcss config option to apps to load a single config file for all libs",
+      "factory": "./src/migrations/update-13-8-0/add-postcss-config-option",
+      "package": "@nrwl/web",
+      "name": "add-postcss-config-option"
     }
   ]
 }
