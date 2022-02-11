@@ -4,11 +4,28 @@
   "sourceRoot": "e2e/svelte-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "./tools/executors/e2e:e2e",
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "targets": ["vite:build", "svelte:build"],
-        "jestConfig": "e2e/svelte-e2e/jest.config.js"
+        "commands": [
+          {
+            "command": "yarn nx build svelte"
+          },
+          {
+            "command": "yarn nx run-e2e-tests svelte-e2e"
+          }
+        ],
+        "parallel": false,
+        "color": true
       }
+    },
+    "run-e2e-tests": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "e2e/svelte-e2e/jest.config.js",
+        "passWithNoTests": true,
+        "runInBand": true
+      },
+      "outputs": ["coverage/e2e/svelte"]
     }
   },
   "tags": [],

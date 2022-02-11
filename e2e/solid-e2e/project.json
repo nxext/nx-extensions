@@ -4,9 +4,9 @@
   "sourceRoot": "e2e/solid-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "./tools/executors/e2e:e2e",
+      "executor": "@nrwl/nx-plugin:e2e",
       "options": {
-        "targets": ["solid:build", "vite:build"],
+        "target": "solid:build",
         "jestConfig": "e2e/solid-e2e/jest.config.js"
       }
     }

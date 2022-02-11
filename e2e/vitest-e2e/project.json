@@ -4,9 +4,9 @@
   "sourceRoot": "e2e/vitest-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "./tools/executors/e2e:e2e",
+      "executor": "@nrwl/nx-plugin:e2e",
       "options": {
-        "targets": ["vite:build", "svelte:build", "vitest:build"],
+        "target": "vitest:build",
         "jestConfig": "e2e/vitest-e2e/jest.config.js"
       }
     }
