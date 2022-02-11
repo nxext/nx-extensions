@@ -4,9 +4,9 @@
   "sourceRoot": "e2e/react-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "./tools/executors/e2e:e2e",
+      "executor": "@nrwl/nx-plugin:e2e",
       "options": {
-        "targets": ["react:build", "vite:build"],
+        "target": "react:build",
         "jestConfig": "e2e/react-e2e/jest.config.js"
       }
     }

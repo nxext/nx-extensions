@@ -12,5 +12,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["angular"]
+  "implicitDependencies": ["angular", "vite"]
 }
