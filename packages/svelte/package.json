@@ -19,14 +19,16 @@
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
-  "main": "src/index.js",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "schematics": "./generators.json",
   "peerDependencies": {
     "svelte": "^3.44.2",
     "svelte-preprocess": "^4.4.2",
     "@nrwl/workspace": "^13.7.0",
     "@nrwl/cypress": "^13.7.0",
-    "@nrwl/linter": "^13.7.0"
+    "@nrwl/linter": "^13.7.0",
+    "@nxext/vitest": "^13.0.0-beta.1"
   },
   "dependencies": {
     "@nxext/vite": "^13.2.0",

@@ -16,6 +16,7 @@ import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
+import { addVitest } from './lib/add-vitest';
 
 function normalizeOptions(
   tree: Tree,
@@ -70,6 +71,7 @@ export async function applicationGenerator(
 
   const lintTask = await addLinting(tree, options);
   const jestTask = await addJest(tree, options);
+  const vitestTask = await addVitest(tree, options);
   const cypressTask = await addCypress(tree, options);
   updateJestConfig(tree, options);
 
@@ -77,7 +79,13 @@ export async function applicationGenerator(
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(initTask, lintTask, jestTask, cypressTask);
+  return runTasksInSerial(
+    initTask,
+    lintTask,
+    jestTask,
+    vitestTask,
+    cypressTask
+  );
 }
 
 export default applicationGenerator;

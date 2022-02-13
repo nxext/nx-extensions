@@ -11,7 +11,7 @@ describe('svelte library schematic', () => {
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
-    skipFormat: false
+    skipFormat: false,
   };
 
   beforeEach(() => {
@@ -54,12 +54,21 @@ describe('svelte library schematic', () => {
     try {
       await libraryGenerator(tree, {
         ...options,
-        publishable: true
+        publishable: true,
       });
     } catch (error) {
       expect(error.message).toContain(
         'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)'
       );
     }
+  });
+
+  it('should add vitest dependencies', async () => {
+    await libraryGenerator(tree, { ...options, unitTestRunner: 'vitest' });
+    const packageJson = readJson(tree, 'package.json');
+
+    expect(tree.exists(`libs/${options.name}/vitest.config.ts`)).toBeTruthy();
+
+    expect(packageJson.devDependencies['vitest']).toBeDefined();
   });
 });

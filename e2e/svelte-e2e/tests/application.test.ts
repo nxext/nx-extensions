@@ -10,6 +10,7 @@ describe('svelte e2e', () => {
   beforeAll(() => {
     ensureNxProjectWithDeps('@nxext/svelte', 'dist/packages/svelte', [
       ['@nxext/vite', 'dist/packages/vite'],
+      ['@nxext/vitest', 'dist/packages/vitest'],
     ]);
   });
 
@@ -17,7 +18,7 @@ describe('svelte e2e', () => {
     it('should build svelte application', async () => {
       const plugin = uniq('svelte');
       await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none' --unitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
@@ -31,7 +32,7 @@ describe('svelte e2e', () => {
     it('should add tags to project', async () => {
       const plugin = uniq('sveltetags');
       await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --tags e2etag,e2ePackage --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:app ${plugin} --tags e2etag,e2ePackage --e2eTestRunner='none' --unitTestRunner='none'`
       );
       const project = readJson(`apps/${plugin}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
@@ -39,7 +40,7 @@ describe('svelte e2e', () => {
 
     it('should generate app into directory', async () => {
       await runNxCommandAsync(
-        `generate @nxext/svelte:app project/ui --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:app project/ui --e2eTestRunner='none' --unitTestRunner='none'`
       );
       expect(() =>
         checkFilesExist(`apps/project/ui/src/main.ts`)
@@ -49,7 +50,7 @@ describe('svelte e2e', () => {
     it('should be able to run linter', async () => {
       const plugin = uniq('sveltelint');
       await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none' --unitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
@@ -59,7 +60,7 @@ describe('svelte e2e', () => {
     it('should be able to run check', async () => {
       const plugin = uniq('svelteappcheck');
       await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none' --unitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`check ${plugin}`);
