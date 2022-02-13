@@ -10,6 +10,7 @@ describe('svelte e2e', () => {
   beforeAll(() => {
     ensureNxProjectWithDeps('@nxext/svelte', 'dist/packages/svelte', [
       ['@nxext/vite', 'dist/packages/vite'],
+      ['@nxext/vitest', 'dist/packages/vitest'],
     ]);
   });
 

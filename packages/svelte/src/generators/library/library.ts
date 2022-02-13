@@ -10,12 +10,14 @@ import {
   joinPathFragments,
   names,
   offsetFromRoot,
-  Tree, updateJson
+  Tree,
+  updateJson,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
+import { addVitest } from './lib/add-vitest';
 
 function normalizeOptions(
   tree: Tree,
@@ -41,7 +43,7 @@ function normalizeOptions(
     parsedTags,
     fileName,
     projectDirectory,
-    importPath
+    importPath,
   };
 }
 
@@ -87,6 +89,7 @@ export async function libraryGenerator(
 
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
+  const vitestTask = await addVitest(host, options);
 
   updateTsConfig(host, options);
   updateJestConfig(host, options);
@@ -99,7 +102,7 @@ export async function libraryGenerator(
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, lintTask, jestTask);
+  return runTasksInSerial(initTask, lintTask, jestTask, vitestTask);
 }
 
 export default libraryGenerator;

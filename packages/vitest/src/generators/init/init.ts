@@ -57,7 +57,7 @@ export default defineConfig({
   }
 }
 
-function vitestInitGenerator(host: Tree, options: InitGeneratorSchema) {
+export function vitestInitGenerator(host: Tree, options: InitGeneratorSchema) {
   createVitestConfig(host);
   const installTask = updateDependencies(host);
   removeNxextVitestFromDeps(host);
@@ -66,5 +66,4 @@ function vitestInitGenerator(host: Tree, options: InitGeneratorSchema) {
 }
 
 export default vitestInitGenerator;
-
 export const vitestInitSchematic = convertNxGenerator(vitestInitGenerator);

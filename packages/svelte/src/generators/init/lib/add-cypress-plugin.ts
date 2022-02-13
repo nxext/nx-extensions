@@ -6,8 +6,17 @@ import {
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from './util';
 import { cypressInitGenerator } from '@nrwl/cypress';
+import { Schema } from '../schema';
 
-export function addCypressPlugin(tree: Tree): GeneratorCallback {
+export function addCypressPlugin(
+  tree: Tree,
+  schema: Schema
+): GeneratorCallback {
+  if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return () => {};
+  }
+
   const tasks: GeneratorCallback[] = [];
   const hasNrwlCypressDependency: boolean = hasNxPackage(tree, '@nrwl/cypress');
 

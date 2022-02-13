@@ -72,5 +72,14 @@ describe('svelte app generator', () => {
         tree.exists(`apps/${options.name}/svelte.config.cjs`)
       ).toBeTruthy();
     });
+
+    it('should add vitest specific files', async () => {
+      await applicationGenerator(tree, {
+        ...options,
+        unitTestRunner: 'vitest',
+      });
+
+      expect(tree.exists(`apps/${options.name}/vitest.config.ts`)).toBeTruthy();
+    });
   });
 });

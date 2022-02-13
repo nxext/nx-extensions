@@ -5,7 +5,7 @@ export interface SvelteApplicationSchema {
   tags?: string;
 
   linter: Linter;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'jest' | 'vitest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
   directory?: string;
   host?: string;
