@@ -74,17 +74,32 @@ describe('svelte e2e', () => {
       ).not.toThrow();
     }, 120000);
 
-    it('should be able to run tests', async () => {
+    it('should be able to run tests with jest', async () => {
       const plugin = uniq('sveltelibtests');
-      await runNxCommandAsync(`generate @nxext/svelte:lib ${plugin}`);
       await runNxCommandAsync(
-        `generate @nxext/svelte:component test --project=${plugin} --e2eTestRunner='none'`
+        `generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/svelte:component test --project=${plugin}`
       );
 
       const result = await runNxCommandAsync(`test ${plugin}`);
       expect(`${result.stdout}${result.stderr}`).toContain(
         'Ran all test suites'
       );
+    }, 120000);
+
+    it('should be able to run tests with vitest', async () => {
+      const plugin = uniq('sveltelibtests');
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib ${plugin} --unitTestRunner='vitest' --e2eTestRunner='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/svelte:component test --project=${plugin}`
+      );
+
+      const result = await runNxCommandAsync(`test ${plugin}`);
+      expect(`${result.stdout}${result.stderr}`).toContain('1 passed');
     }, 120000);
   });
 });

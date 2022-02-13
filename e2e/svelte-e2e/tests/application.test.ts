@@ -69,7 +69,7 @@ describe('svelte e2e', () => {
       );
     });
 
-    it('should be able to run tests', async () => {
+    it('should be able to run tests with jest', async () => {
       const plugin = uniq('svelteapptests');
       await runNxCommandAsync(
         `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none'`
@@ -82,6 +82,19 @@ describe('svelte e2e', () => {
       expect(`${result.stdout}${result.stderr}`).toContain(
         'Ran all test suites'
       );
+    });
+
+    it('should be able to run tests with vitest', async () => {
+      const plugin = uniq('svelteapptests');
+      await runNxCommandAsync(
+        `generate @nxext/svelte:app ${plugin} --unitTestRunner='vitest' --e2eTestRunner='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/svelte:component test --project=${plugin}`
+      );
+
+      const result = await runNxCommandAsync(`test ${plugin}`);
+      expect(`${result.stdout}${result.stderr}`).toContain('1 passed');
     });
   });
 });

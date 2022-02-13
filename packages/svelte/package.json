@@ -28,12 +28,14 @@
     "@nrwl/workspace": "^13.7.0",
     "@nrwl/cypress": "^13.7.0",
     "@nrwl/linter": "^13.7.0",
-    "@nxext/vitest": "^13.0.0-beta.1"
+    "@nxext/vitest": "^13.0.0"
   },
   "dependencies": {
-    "@nxext/vite": "^13.2.0",
+    "@nxext/vite": "^13.2.2",
     "@nrwl/devkit": "^13.7.0",
-    "@nrwl/cypress": "^13.7.0"
+    "@nrwl/cypress": "^13.7.0",
+    "@nrwl/jest": "^13.7.0",
+    "@nxext/vitest": "^13.0.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"
