@@ -92,7 +92,7 @@
     "@typescript-eslint/eslint-plugin": "5.10.2",
     "@typescript-eslint/parser": "5.10.2",
     "@vitejs/plugin-react": "^1.1.4",
-    "@swc/core": "^1.2.133",
+    "@swc/core": "^1.2.139",
     "all-contributors-cli": "^6.20.0",
     "autoprefixer": "^10.4.2",
     "commitizen": "^4.2.4",
