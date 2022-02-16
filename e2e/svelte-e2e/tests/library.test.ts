@@ -101,5 +101,23 @@ describe('svelte e2e', () => {
       const result = await runNxCommandAsync(`test ${plugin}`);
       expect(`${result.stdout}${result.stderr}`).toContain('1 passed');
     }, 120000);
+
+    it('should be able to run storybook', async () => {
+      const plugin = uniq('sveltestories');
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib ${plugin} --unitTestRunner='none' --e2eTestRunner='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/svelte:storybook-configuration ${plugin}`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/svelte:component test --project=${plugin}`
+      );
+
+      const result = await runNxCommandAsync(`build-storybook ${plugin}`);
+      expect(`${result.stdout}${result.stderr}`).toContain(
+        'Storybook builder finished'
+      );
+    }, 120000);
   });
 });

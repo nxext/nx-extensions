@@ -1,0 +1,12 @@
+import { action } from '@storybook/addon-actions';
+import <%= className %> from './<%= className %>.svelte';
+
+export default {
+  title: '<%= className %>',
+  component: <%= className %>,
+};
+
+export const Text = () => ({
+  Component: <%= className %>,
+  props: { }
+});

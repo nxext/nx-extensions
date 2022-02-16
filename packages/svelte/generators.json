@@ -51,6 +51,11 @@
       "schema": "./src/generators/init/schema.json",
       "description": "init schematic",
       "hidden": true
+    },
+    "storybook-configuration": {
+      "factory": "./src/generators/storybook-configuration/configuration",
+      "schema": "./src/generators/storybook-configuration/schema.json",
+      "description": "storybook-configuration generator"
     }
   }
 }
