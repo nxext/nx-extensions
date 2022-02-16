@@ -69,7 +69,7 @@
     "@angular/compiler": "13.2.1",
     "@nrwl/angular": "13.8.0",
     "@nrwl/cli": "13.8.0",
-    "@nrwl/cypress": "13.8.0",
+    "@nrwl/cypress": "13.8.1",
     "@nrwl/devkit": "13.8.0",
     "@nrwl/eslint-plugin-nx": "13.8.0",
     "@nrwl/jest": "13.8.0",
