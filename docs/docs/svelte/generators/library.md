@@ -1,52 +1,112 @@
 ---
-id: library
-title: Library
+title: '@nxext/svelte:library generator'
+description: 'Svelte library schematic'
 ---
 
-Generates a Svelte library
+# @nxext/svelte:library
+
+Svelte library schematic
 
 ## Usage
 
-```
-nx g @nxext/svelte:lib my-lib
+```bash
+nx generate library ...
 ```
 
-or
-
+```bash
+nx g lib ... # same
 ```
-nx g @nxext/svelte:library my-lib
+
+By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/svelte:library ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g library ... --dry-run
 ```
 
 ## Options
 
-### --directory
+### name (_**required**_)
+
+Type: `string`
+
+### buildable
+
+Default: `false`
+
+Type: `boolean`
+
+Generate a buildable library.
+
+### directory
 
 Alias(es): d
 
 Type: `string`
 
-A directory where the project is placed
+A directory where the lib is placed.
 
-### --unitTestRunner
+### e2eTestRunner
 
-Default: `jest`
+Default: `cypress`
 
-Possible values: jest, none
+Type: `string`
 
-Type: `enum`
+Possible values: `cypress`, `none`
 
-Adds the specified unit test runner.
+Test runner to use for end to end (e2e) tests.
 
-## --buildable
+### importPath
 
-Default: false
+Type: `string`
+
+The library name used to import it, like @myorg/my-awesome-lib
+
+### linter
+
+Default: `eslint`
+
+Type: `string`
+
+Possible values: `eslint`
+
+The tool to use for running lint checks.
+
+### publishable
 
 Type: `boolean`
 
-Generate the build command and be able to build and redistribute the library independently.
+Create a publishable library.
 
-### --skipFormat
+### skipFormat
 
 Default: `false`
 
 Type: `boolean`
+
+Skip formatting files.
+
+### tags
+
+Alias(es): t
+
+Type: `string`
+
+Add tags to the project (used for linting)
+
+### unitTestRunner
+
+Default: `jest`
+
+Type: `string`
+
+Possible values: `jest`, `vitest`, `none`
+
+Test runner to use for unit tests.

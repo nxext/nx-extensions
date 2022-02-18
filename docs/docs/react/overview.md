@@ -32,7 +32,7 @@ npm install -D @nxext/react
 Our React applications are built using the executors from the [@nxext/vite](../vite/overview.md) plugin.
 
 - [build](../vite/executors/build.md) - Builds a web components application
-- [dev](../vite/executors/serve.md) - Builds and serves a web application
+- [dev](../vite/executors/dev.md) - Builds and serves a web application
 - [package](../vite/executors/package.md) - Bundles artifacts for a buildable library that can be distributed as an NPM package.
 
 ## Generators

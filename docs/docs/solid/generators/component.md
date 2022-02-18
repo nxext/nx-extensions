@@ -1,25 +1,43 @@
 ---
-id: component
-title: Component
+title: '@nxext/solid:component generator'
+description: 'Add component'
 ---
 
-Generates a Solid component
+# @nxext/solid:component
+
+Add component
 
 ## Usage
 
-```
-nx g @nxext/solid:c my-app
+```bash
+nx generate component ...
 ```
 
-or
-
+```bash
+nx g c ... # same
 ```
-nx g @nxext/solid:component my-app
+
+By default, Nx will search for `component` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/solid:component ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g component ... --dry-run
 ```
 
 ## Options
 
-### --project
+### name (_**required**_)
+
+Type: `string`
+
+### project (_**required**_)
 
 Alias(es): p
 
@@ -27,18 +45,12 @@ Type: `string`
 
 Project where the component is generated
 
-### --unitTestRunner
+### unitTestRunner
 
 Default: `jest`
 
-Possible values: jest, none
+Type: `string`
 
-Type: `enum`
+Possible values: `jest`, `none`
 
-Adds the specified unit test runner.
-
-### --skipFormat
-
-Default: `false`
-
-Type: `boolean`
+Test runner to use for unit tests.

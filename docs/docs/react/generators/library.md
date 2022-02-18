@@ -1,22 +1,48 @@
 ---
-id: library
-title: Library
+title: '@nxext/react:library generator'
+description: 'Create a library'
 ---
 
-# @nxext/react:lib
+# @nxext/react:library
 
-Generates a React library
+Create a library
 
 ## Usage
 
-```
-nx g @nxext/react:lib my-lib
+```bash
+nx generate library ...
 ```
 
-or
-
+```bash
+nx g lib ... # same
 ```
-nx g @nxext/react:library my-lib
+
+By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/react:library ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g library ... --dry-run
+```
+
+### Examples
+
+Generate libs/myapp/mylib:
+
+```bash
+nx g lib mylib --directory=myapp
+```
+
+Generate a library with routes and add them to myapp:
+
+```bash
+nx g lib mylib --appProject=myapp
 ```
 
 ## Options
@@ -87,7 +113,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint` - try and avoid tslint
+Possible values: `eslint`, `tslint`
 
 The tool to use for running lint checks.
 
@@ -129,11 +155,19 @@ Type: `boolean`
 
 Skip formatting files.
 
+### skipTsConfig
+
+Default: `false`
+
+Type: `boolean`
+
+Do not update tsconfig.json for development experience.
+
 ### standaloneConfig
 
 Type: `boolean`
 
-Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`
+Split the project configuration into `<projectRoot>/project.json` rather than including it inside workspace.json
 
 ### strict
 

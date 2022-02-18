@@ -1,30 +1,52 @@
 ---
-id: make-lib-buildable
-title: Make lib buildable
+title: '@nxext/stencil:make-lib-buildable generator'
+description: 'Make a library buildable'
 ---
 
-Adds build and e2e executors to a not yet buildable library:
+# @nxext/stencil:make-lib-buildable
+
+Make a library buildable
 
 ## Usage
 
-```
-nx g @nxext/stencil:make-lib-buildable my-lib
+```bash
+nx generate make-lib-buildable ...
 ```
 
-or
+By default, Nx will search for `make-lib-buildable` in the default collection provisioned in `workspace.json`.
 
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/stencil:make-lib-buildable ...
 ```
-ng g @nxext/stencil:make-lib-buildable my-lib
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g make-lib-buildable ... --dry-run
 ```
 
 ## Options
 
-### --style
+### importPath (_**required**_)
+
+Type: `string`
+
+The library name used to import it, like @myorg/my-awesome-lib
+
+### name (_**required**_)
+
+Type: `string`
+
+### style
+
+Alias(es): s
 
 Default: `css`
 
-Possible values: css, scss, styl, less, pcss
+Type: `string`
 
-Type: `list`
+Possible values: `css`, `scss`, `styl`, `less`, `pcss`
 
 The file extension to be used for style files.

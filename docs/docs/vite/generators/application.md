@@ -1,35 +1,47 @@
 ---
-id: application
-title: Application
+title: '@nxext/vite:application generator'
+description: 'Create a vite application'
 ---
 
-# @nxext/vite:app
+# @nxext/vite:application
 
-Generates a vite application
-
-This schematic also executes the [Init](init) schematic
+Create a vite application
 
 ## Usage
 
-```
-nx g @nxext/vite:app my-lib
+```bash
+nx generate application ...
 ```
 
-or
-
+```bash
+nx g app ... # same
 ```
-nx g @nxext/vite:application my-lib
+
+By default, Nx will search for `application` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/vite:application ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g application ... --dry-run
+```
+
+### Examples
+
+Generate apps/myorg/myapp:
+
+```bash
+nx g app myapp --directory=myorg
 ```
 
 ## Options
 
-### --name (_**required**_)
-
-Type: `string`
-
-The name of the application.
-
-### --directory
+### directory
 
 Alias(es): dir
 
@@ -37,7 +49,7 @@ Type: `string`
 
 The directory of the new application.
 
-### --linter
+### linter
 
 Default: `eslint`
 
@@ -46,6 +58,22 @@ Type: `string`
 Possible values: `eslint`, `tslint`
 
 The tool to use for running lint checks.
+
+### name
+
+Type: `string`
+
+The name of the application.
+
+### pascalCaseFiles
+
+Alias(es): P
+
+Default: `false`
+
+Type: `boolean`
+
+Use pascal case component file name (e.g. App.tsx).
 
 ### setParserOptionsProject
 
@@ -75,7 +103,15 @@ Skip updating workspace.json with default options based on values provided to th
 
 Type: `boolean`
 
-Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`
+Split the project configuration into `<projectRoot>/project.json` rather than including it inside workspace.json
+
+### supportJSX
+
+Default: `true`
+
+Type: `boolean`
+
+Add support for JSX/TSX
 
 ### tags
 

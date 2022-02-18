@@ -1,35 +1,57 @@
 ---
-id: library
-title: Library
+title: '@nxext/stencil:library generator'
+description: 'Generate Stencil Library'
 ---
 
-Generates a Stencil library
+# @nxext/stencil:library
 
-This schematic also executes the [Init](init) schematic
+Generate Stencil Library
 
 ## Usage
 
-```
-nx g @nxext/stencil:lib my-app
+```bash
+nx generate library ...
 ```
 
-or
-
+```bash
+nx g lib ... # same
 ```
-nx g @nxext/stencil:library my-app
+
+By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/stencil:library ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g library ... --dry-run
 ```
 
 ## Options
 
-### --tags
-
-Alias(es): t
+### name (_**required**_)
 
 Type: `string`
 
-Add tags to the project (used for linting)
+### buildable
 
-### --directory
+Default: `false`
+
+Type: `boolean`
+
+### component
+
+Default: `true`
+
+Type: `boolean`
+
+Generate a default component.
+
+### directory
 
 Alias(es): d
 
@@ -37,40 +59,70 @@ Type: `string`
 
 A directory where the project is placed
 
-### --style
+### e2eTestRunner
 
-Default: `css`
-
-Possible values: css, scss, styl, less, pcss
-
-Type: `list`
-
-The file extension to be used for style files.
-
-## --buildable
-
-Default: false
-
-Type: `boolean`
-
-Generate the build and e2e commands and be able to build and redistribute the library independently.
-
-## --publishable
-
-Default: false
-
-Type: `boolean`
-
-Set the importPath, generate the build and e2e commands and be able to build and redistribute the library independently.
-
-## --importPath
+Default: `puppeteer`
 
 Type: `string`
 
-ImportPath used for publishable libraries and set into the package.json
+Possible values: `puppeteer`, `none`
 
-### --skipFormat
+Test runner to use for end to end (e2e) tests
+
+### importPath
+
+Type: `string`
+
+The library name used to import it, like @myorg/my-awesome-lib
+
+### linter
+
+Default: `eslint`
+
+Type: `string`
+
+Possible values: `eslint`, `tslint`
+
+The tool to use for running lint checks.
+
+### publishable
+
+Type: `boolean`
+
+Create a publishable library.
+
+### skipFormat
 
 Default: `false`
 
 Type: `boolean`
+
+### style
+
+Alias(es): s
+
+Default: `css`
+
+Type: `string`
+
+Possible values: `css`, `scss`, `styl`, `less`, `pcss`
+
+The file extension to be used for style files.
+
+### tags
+
+Alias(es): t
+
+Type: `string`
+
+Add tags to the project (used for linting)
+
+### unitTestRunner
+
+Default: `jest`
+
+Type: `string`
+
+Possible values: `jest`, `none`
+
+Test runner to use for unit tests.

@@ -1,64 +1,54 @@
 ---
-id: package
-title: package
+title: '@nxext/vite:package executor'
+description: 'Build package'
 ---
 
 # @nxext/vite:package
 
-Bundle your Vite library
+Build package
 
-## Usage
+Options can be configured in `workspace.json` when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
 
-```
-nx build my-lib
-```
+## Options
 
-### --entryFile
+### entryFile (_**required**_)
 
 Type: `string`
 
-The path to the entry file, relative to project.
+The name of the main entry-point file.
 
-### --outputPath (_**required**_)
-
-Type: `string`
-
-The output path of the generated files
-
-### --configFile
+### outputPath (_**required**_)
 
 Type: `string`
 
-The path to vite.config.js file.
+The output path of the generated files.
 
-### --packageJson
-
-Type: `string`
-
-path to package.json file
-
-Usage: this is when your library is set to build and publish
-
-### --globals:
-
-Type: `Record<string, string>`
-
-Provide global variables to use in the UMD build for externalized deps
-
-### --external
-
-Type: `string[]`
-
-make sure to externalize deps that shouldn't be bundled into your library
-
-### --frameworkConfigFile
-
-Type: `string`
-
-This is the framework vite.config.js file. This property is hidden from the schema requirements, but should be use when building an extention ontop of `@nxext/vite`. For reference checkout our react plugin
-
-### --assets
+### assets
 
 Type: `array`
 
 List of static assets.
+
+### configFile
+
+Type: `string`
+
+Path to the vite config
+
+### external
+
+Type: `array`
+
+external libs
+
+### frameworkConfigFile (**hidden**)
+
+Type: `string`
+
+The path to vite.config.js for the framework.
+
+### packageJson
+
+Type: `string`
+
+The name of the package.json file
