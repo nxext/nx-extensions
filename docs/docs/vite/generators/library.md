@@ -1,22 +1,42 @@
 ---
-id: library
-title: Library
+title: '@nxext/vite:library generator'
+description: 'Create a vite library'
 ---
 
-# @nxext/react:lib
+# @nxext/vite:library
 
-Generates a vite library
+Create a vite library
 
 ## Usage
 
-```
-nx g @nxext/vite:lib my-lib
+```bash
+nx generate library ...
 ```
 
-or
-
+```bash
+nx g lib ... # same
 ```
-nx g @nxext/vite:library my-lib
+
+By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/vite:library ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g library ... --dry-run
+```
+
+### Examples
+
+Generate libs/myapp/mylib:
+
+```bash
+nx g lib mylib --directory=myapp
 ```
 
 ## Options
@@ -49,21 +69,13 @@ Type: `string`
 
 The library name used to import it, like @myorg/my-awesome-lib
 
-### supportTsx
-
-Default: `false`
-
-Type: `boolean`
-
-Generate JavaScript files rather than TypeScript files.
-
 ### linter
 
 Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint` - try and avoid tslint
+Possible values: `eslint`, `tslint`
 
 The tool to use for running lint checks.
 
@@ -99,19 +111,27 @@ Type: `boolean`
 
 Skip formatting files.
 
+### skipTsConfig
+
+Default: `false`
+
+Type: `boolean`
+
+Do not update tsconfig.json for development experience.
+
 ### standaloneConfig
 
 Type: `boolean`
 
-Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`
+Split the project configuration into `<projectRoot>/project.json` rather than including it inside workspace.json
 
-### strict
+### supportJSX
 
-Default: `true`
+Default: `false`
 
 Type: `boolean`
 
-Whether to enable tsconfig strict mode or not.
+Add JSX/TSX support
 
 ### tags
 

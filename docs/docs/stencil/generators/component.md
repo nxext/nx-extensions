@@ -1,27 +1,43 @@
 ---
-id: component
-title: Component
+title: '@nxext/stencil:component generator'
+description: 'Add a component to a ui library'
 ---
 
-Generates a Stencil application
+# @nxext/stencil:component
 
-This schematic also executes the [Init](init) schematic
+Add a component to a ui library
 
 ## Usage
 
-```
-nx g @nxext/stencil:c my-app
+```bash
+nx generate component ...
 ```
 
-or
-
+```bash
+nx g c ... # same
 ```
-nx g @nxext/stencil:component my-app
+
+By default, Nx will search for `component` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/stencil:component ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g component ... --dry-run
 ```
 
 ## Options
 
-### --project
+### name (_**required**_)
+
+Type: `string`
+
+### project (_**required**_)
 
 Alias(es): p
 
@@ -29,7 +45,7 @@ Type: `string`
 
 Project where the component is generated
 
-### --directory
+### directory
 
 Alias(es): d
 
@@ -37,15 +53,7 @@ Type: `string`
 
 A directory where the project is placed
 
-### --storybook
-
-Default: `false`
-
-Type: `boolean`
-
-Storybook option for generating stories file
-
-### --skipFormat
+### skipFormat
 
 Default: `false`
 

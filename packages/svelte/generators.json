@@ -20,6 +20,11 @@
       "description": "Add component",
       "aliases": ["c"]
     },
+    "storybook-configuration": {
+      "factory": "./src/generators/storybook-configuration/configuration#configurationSchematic",
+      "schema": "./src/generators/storybook-configuration/schema.json",
+      "description": "storybook-configuration generator"
+    },
     "init": {
       "factory": "./src/generators/init/init#initSchematic",
       "schema": "./src/generators/init/schema.json",
@@ -46,16 +51,16 @@
       "description": "Add component",
       "aliases": ["c"]
     },
+    "storybook-configuration": {
+      "factory": "./src/generators/storybook-configuration/configuration",
+      "schema": "./src/generators/storybook-configuration/schema.json",
+      "description": "storybook-configuration generator"
+    },
     "init": {
       "factory": "./src/generators/init/init#initGenerator",
       "schema": "./src/generators/init/schema.json",
       "description": "init schematic",
       "hidden": true
-    },
-    "storybook-configuration": {
-      "factory": "./src/generators/storybook-configuration/configuration",
-      "schema": "./src/generators/storybook-configuration/schema.json",
-      "description": "storybook-configuration generator"
     }
   }
 }

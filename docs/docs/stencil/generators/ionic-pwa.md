@@ -1,35 +1,43 @@
 ---
-id: ionic-pwa
-title: Ionic PWA
+title: '@nxext/stencil:ionic-pwa generator'
+description: 'Generate Stencil ionic pwa'
 ---
 
-Generates a Ionic Progressive Web App
+# @nxext/stencil:ionic-pwa
 
-This schematic also executes the [Init](init) schematic
+Generate Stencil ionic pwa
 
 ## Usage
 
-```
-nx g @nxext/stencil:pwa my-app
+```bash
+nx generate ionic-pwa ...
 ```
 
-or
-
+```bash
+nx g pwa ... # same
 ```
-nx g @nxext/stencil:ionic-pwa my-app
+
+By default, Nx will search for `ionic-pwa` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/stencil:ionic-pwa ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g ionic-pwa ... --dry-run
 ```
 
 ## Options
 
-### --tags
-
-Alias(es): t
+### name (_**required**_)
 
 Type: `string`
 
-Add tags to the project (used for linting)
-
-### --directory
+### directory
 
 Alias(es): d
 
@@ -37,28 +45,58 @@ Type: `string`
 
 A directory where the project is placed
 
-### --e2eTestRunner
+### e2eTestRunner
 
-Default: `cypress`
+Default: `puppeteer`
 
-Possible values: cypress, none
+Type: `string`
 
-Type: `enum`
+Possible values: `puppeteer`, `none`
 
-Adds the specified e2e test runner.
+Test runner to use for end to end (e2e) tests
 
-### --style
+### linter
 
-Default: `css`
+Default: `eslint`
 
-Possible values: css, scss, styl, less, pcss
+Type: `string`
 
-Type: `list`
+Possible values: `eslint`, `none`
 
-The file extension to be used for style files.
+The tool to use for running lint checks.
 
-### --skipFormat
+### skipFormat
 
 Default: `false`
 
 Type: `boolean`
+
+### style
+
+Alias(es): s
+
+Default: `css`
+
+Type: `string`
+
+Possible values: `css`, `scss`, `styl`, `less`, `pcss`
+
+The file extension to be used for style files.
+
+### tags
+
+Alias(es): t
+
+Type: `string`
+
+Add tags to the project (used for linting)
+
+### unitTestRunner
+
+Default: `jest`
+
+Type: `string`
+
+Possible values: `jest`, `none`
+
+Test runner to use for unit tests.

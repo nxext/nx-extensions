@@ -1,21 +1,95 @@
 ---
-id: application
-title: Application
+title: '@nxext/svelte:application generator'
+description: 'Svelte application schematic'
 ---
 
-Generates a Svelte application
+# @nxext/svelte:application
 
-This schematic also executes the [Init](init) schematic
+Svelte application schematic
 
 ## Usage
 
+```bash
+nx generate application ...
 ```
-nx g @nxext/svelte:app my-app
+
+```bash
+nx g app ... # same
+```
+
+By default, Nx will search for `application` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/svelte:application ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g application ... --dry-run
 ```
 
 ## Options
 
-### --tags
+### name (_**required**_)
+
+Type: `string`
+
+### directory
+
+Alias(es): d
+
+Type: `string`
+
+A directory where the lib is placed.
+
+### e2eTestRunner
+
+Default: `cypress`
+
+Type: `string`
+
+Possible values: `cypress`, `none`
+
+Test runner to use for end to end (e2e) tests.
+
+### host
+
+Default: `localhost`
+
+Type: `string`
+
+Host to listen on.
+
+### linter
+
+Default: `eslint`
+
+Type: `string`
+
+Possible values: `eslint`
+
+The tool to use for running lint checks.
+
+### port
+
+Default: `5000`
+
+Type: `number`
+
+Port to listen on.
+
+### skipFormat
+
+Default: `false`
+
+Type: `boolean`
+
+Skip formatting files.
+
+### tags
 
 Alias(es): t
 
@@ -23,48 +97,12 @@ Type: `string`
 
 Add tags to the project (used for linting)
 
-### --linter
-
-Default: `eslint`
-
-Possible values: eslint
-
-Type: `enum`
-
-Add tags to the project (used for linting)
-
-### --unitTestRunner
+### unitTestRunner
 
 Default: `jest`
 
-Possible values: jest, none
+Type: `string`
 
-Type: `enum`
+Possible values: `jest`, `vitest`, `none`
 
-Adds the specified unit test runner.
-
-### --e2eTestRunner
-
-Default: `cypress`
-
-Possible values: cypress, none
-
-Type: `enum`
-
-Adds the specified e2e test runner.
-
-### --port
-
-Default: `4200`
-
-Type: `number`
-
-Port to listen on.
-
-### --host
-
-Default: `localhost`
-
-Type: `number`
-
-Host to listen on.
+Test runner to use for unit tests.

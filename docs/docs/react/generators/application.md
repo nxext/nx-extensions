@@ -1,24 +1,54 @@
 ---
-id: application
-title: Application
+title: '@nxext/react:application generator'
+description: 'Create an application'
 ---
 
-# @nxext/react:app
+# @nxext/react:application
 
-Generates a React application
-
-This schematic also executes the [Init](init) schematic and [Nrwl NX App](https://nx.dev/l/r/react/overview)
+Create an application
 
 ## Usage
 
-```
-nx g @nxext/react:app my-lib
+```bash
+nx generate application ...
 ```
 
-or
-
+```bash
+nx g app ... # same
 ```
-nx g @nxext/react:application my-lib
+
+By default, Nx will search for `application` in the default collection provisioned in `workspace.json`.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/react:application ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g application ... --dry-run
+```
+
+### Examples
+
+Generate apps/myorg/myapp:
+
+```bash
+nx g app myapp --directory=myorg
+```
+
+Use class components instead of functional components:
+
+```bash
+nx g app myapp --classComponent
+```
+
+Set up React Router:
+
+```bash
+nx g app myapp --routing
 ```
 
 ## Options
@@ -119,7 +149,7 @@ Skip updating workspace.json with default options based on values provided to th
 
 Type: `boolean`
 
-Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`
+Split the project configuration into `<projectRoot>/project.json` rather than including it inside workspace.json
 
 ### strict
 

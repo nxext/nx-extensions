@@ -1,52 +1,48 @@
 ---
-id: build
-title: Build
+title: '@nxext/vite:build executor'
+description: 'build executor'
 ---
 
 # @nxext/vite:build
 
-Build an application using vite
+build executor
 
-Options can be configured in workspace.json when defining the executor, or when invoking it.
-
-## Usage
-
-```
-nx build my-app
-```
+Options can be configured in `workspace.json` when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
 
 ## Options
 
-### --configFile
-
-Type: `string`
-
-The path to vite.config.js file.
-
-### --baseHref
+### baseHref
 
 Type: `string`
 
 Base url for the application being built.
 
-### --frameworkConfigFile
+### configFile
 
 Type: `string`
 
-This is the framework vite.config.js file. This property is hidden from the schema requirements, but should be use when building an extention ontop of `@nxext/vite`. For reference checkout our react plugin
+The path to vite.config.js file.
 
-### --fileReplacements
+### fileReplacements
 
 Type: `object[]`
 
 Replace files with other files in the build.
 
-replace
+#### replace
+
 Type: `string`
 
 The file to be replaced.
 
-with
+#### with
+
 Type: `string`
 
 The file to replace with.
+
+### frameworkConfigFile (**hidden**)
+
+Type: `string`
+
+The path to vite.config.js for the framework.

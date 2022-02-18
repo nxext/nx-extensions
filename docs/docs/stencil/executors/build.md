@@ -1,100 +1,130 @@
 ---
-id: build
-title: Build
+title: '@nxext/stencil:build executor'
+description: 'stencil build'
 ---
 
-## Usage
+# @nxext/stencil:build
 
-```
-nx build my-app
-```
+stencil build
+
+Options can be configured in `workspace.json` when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
 
 ## Options
 
-### --outputPath
+### ci
+
+Default: `false`
+
+Type: `boolean`
+
+Run a build using recommended settings for a Continuous Integration (CI) environment. Defaults the number of workers to 4.
+
+### configPath
 
 Type: `string`
 
-The output path of the generated files.
+Path to the stencil.config.ts file.
 
-### --tsConfig
-
-Type: `string`
-
-The name of the Typescript configuration file.
-
-### --entryFile
-
-Type: `string`
-
-The name of the main entry-point file.
-
-### --assets
-
-Default: `[]`
-
-Type: `array`
-
-List of static application assets.
-
-### --watch
+### debug
 
 Default: `false`
 
 Type: `boolean`
 
-Start watchmode
+Adds additional runtime code to help debug, and sets the log level for more verbose output.
 
-### --serve
-
-Default: `false`
-
-Type: `boolean`
-
-Serve on dev webserver
-
-### --prod
+### dev
 
 Default: `false`
 
 Type: `boolean`
 
-Is prod build
+Runs a development build.
 
-### --prerender
-
-Default: `false`
-
-Type: `boolean`
-
-Stencil doesn't prerender components by default. However, the build can be made to prerender using the --prerender flag
-
-### --open
+### docsReadme
 
 Default: `false`
 
 Type: `boolean`
 
-Open in browser
+### es5
 
-### --port
+Default: `false`
 
-Default: `4200`
+Type: `boolean`
+
+### log
+
+Default: `false`
+
+Type: `boolean`
+
+Write logs for the stencil build into stencil-build.log. The log file is written in the same location as the config.
+
+### maxWorkers
 
 Type: `number`
 
-Port to listen on.
+Max number of workers the compiler should use. Defaults to use the same number of CPUs the Operating System has available.
 
-### --host
+### noOpen
 
-Default: `localhost`
+Type: `boolean`
+
+By default the --serve command will open a browser window. Using the --noOpen command will no automatically open a browser window.
+
+### port
+
+Type: `number`
+
+Max number of workers the compiler should use. Defaults to use the same number of CPUs the Operating System has available.
+
+### prerender
+
+Default: `false`
+
+Type: `boolean`
+
+Prerender the application using the www output target after the build has completed.
+
+### prod
+
+Default: `false`
+
+Type: `boolean`
+
+Runs a production build which will optimize each file, improve bundling, remove unused code, minify, etc. A production build is the default, this flag is only used to override the --dev flag.
+
+### projectType
 
 Type: `string`
 
-Host to listen on.
+### serve
 
-### --tsConfig
+Type: `boolean`
+
+Starts the Integrated Dev Server.
+
+### ssr
+
+Type: `boolean`
+
+Starts the server side render process..
+
+### tsConfig
 
 Type: `string`
 
 The path to tsconfig file.
+
+### verbose
+
+Type: `boolean`
+
+Logs additional information about each step of the build.
+
+### watch
+
+Type: `boolean`
+
+Watches files during development and triggers a rebuild when files are updated.
