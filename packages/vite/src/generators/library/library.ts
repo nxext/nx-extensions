@@ -145,7 +145,7 @@ function addProject(host: Tree, options: NormalizedSchema) {
         packageJson: `package.json`,
         assets: [`assets`],
         entryFile: `src/index.ts`,
-        viteConfig: `@nxext/vite/plugins/vite-package`,
+        configFile: `@nxext/vite/plugins/vite-package`,
       },
     };
   }
