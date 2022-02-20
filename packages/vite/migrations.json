@@ -5,6 +5,12 @@
       "description": "vite-explict-config-file",
       "cli": "nx",
       "implementation": "./src/migrations/vite-explict-config-file/vite-explict-config-file"
+    },
+    "viteconfig-to-config-file": {
+      "version": "13.2.3",
+      "description": "'update",
+      "cli": "nx",
+      "implementation": "./src/migrations/viteconfig-to-config-file/viteconfig-to-config-file"
     }
   },
   "packageJsonUpdates": {
@@ -20,6 +26,10 @@
           "alwaysAddToPackageJson": false
         }
       }
+    },
+    "13.2.3": {
+      "version": "13.2.3",
+      "packages": {}
     }
   }
 }
