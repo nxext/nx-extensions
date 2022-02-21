@@ -50,7 +50,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-angular": "13.2.2",
+    "@angular-devkit/build-angular": "13.2.4",
     "@angular-devkit/build-optimizer": "0.1302.1",
     "@angular/compiler-cli": "13.2.1",
     "@angular/core": "~13.2.0",
@@ -78,7 +78,7 @@
     "@nrwl/node": "13.8.0",
     "@nrwl/nx-cloud": "13.1.4",
     "@nrwl/nx-plugin": "13.8.0",
-    "@nrwl/react": "13.8.0",
+    "@nrwl/react": "13.8.3",
     "@nrwl/storybook": "13.8.0",
     "@nrwl/web": "13.8.0",
     "@nrwl/workspace": "13.8.0",
