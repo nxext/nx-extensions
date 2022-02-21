@@ -2,12 +2,9 @@ import {
   readJson,
   readProjectConfiguration,
   Tree,
-  updateJson,
   writeJson,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-
-import { Linter } from '@nrwl/linter';
 import { libraryGenerator } from '@nrwl/workspace/generators';
 
 import configurationGenerator from './configuration';
@@ -152,56 +149,5 @@ describe('@nxext/svelte:storybook-configuration', () => {
 
     expect(tsconfigJson.exclude).toContain('**/*.stories.ts');
     expect(tsconfigJson.exclude).toContain('**/*.stories.js');
-  });
-
-  it('should update `tsconfig.json` file', async () => {
-    await configurationGenerator(tree, {
-      name: 'test-ui-lib',
-      standaloneConfig: false,
-    });
-    const tsconfigJson = readJson(tree, 'libs/test-ui-lib/tsconfig.json');
-
-    expect(tsconfigJson.references).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "path": "./tsconfig.lib.json",
-        },
-        Object {
-          "path": "./tsconfig.spec.json",
-        },
-        Object {
-          "path": "./.storybook/tsconfig.json",
-        },
-      ]
-    `);
-  });
-
-  it("should update the project's .eslintrc.json if config exists", async () => {
-    await libraryGenerator(tree, {
-      name: 'test-ui-lib2',
-      linter: Linter.EsLint,
-      standaloneConfig: false,
-    });
-
-    updateJson(tree, 'libs/test-ui-lib2/.eslintrc.json', (json) => {
-      json.parserOptions = {
-        project: [],
-      };
-      return json;
-    });
-
-    await configurationGenerator(tree, {
-      name: 'test-ui-lib2',
-      standaloneConfig: false,
-    });
-
-    expect(readJson(tree, 'libs/test-ui-lib2/.eslintrc.json').parserOptions)
-      .toMatchInlineSnapshot(`
-      Object {
-        "project": Array [
-          "libs/test-ui-lib2/.storybook/tsconfig.json",
-        ],
-      }
-    `);
   });
 });
