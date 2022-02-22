@@ -1,7 +1,7 @@
 ---
 name: "🐞 Bug Report"
 about: Create a report to help us improve
-title: '<Stencil | Svelte | Sveltekit | Solid | Vite>: <your title>'
+title: 'Stencil | Svelte | Sveltekit | Solid | Vite: <your title>'
 labels: bug
 assignees: ''
 
