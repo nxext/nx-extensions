@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vite",
-  "version": "13.2.3",
+  "version": "13.2.4",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for ViteJs",
@@ -25,7 +25,7 @@
   "dependencies": {
     "vite-tsconfig-paths": "3.4.0",
     "@nrwl/devkit": "^13.7.0",
-    "rxjs": "^6.5.4",
+    "rxjs": "^7.0.0",
     "rxjs-for-await": "1.0.0"
   },
   "peerDependencies": {

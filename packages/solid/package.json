@@ -22,7 +22,7 @@
   "main": "src/index.js",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nxext/vite": "^13.2.0",
+    "@nxext/vite": "^13.2.4",
     "@nrwl/devkit": "^13.7.0"
   },
   "peerDependencies": {

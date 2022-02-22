@@ -33,6 +33,6 @@
     "@swc/core": "1.2.133",
     "swc-ast-helpers": "^0.0.7",
     "@schematics/angular": "~13.1.1",
-    "@nxext/vite": "^13.2.0"
+    "@nxext/vite": "^13.2.4"
   }
 }
