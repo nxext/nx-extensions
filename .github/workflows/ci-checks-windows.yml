@@ -29,7 +29,7 @@ jobs:
         shell: powershell
       - run: yarn install --frozen-lockfile
         shell: powershell
-      - run: yarn affected:build --base=origin/main --head=HEAD --with-deps
+      - run: yarn affected:build --base=origin/main --head=HEAD
         shell: powershell
       - run: yarn affected:lint --base=origin/main --head=HEAD --parallel
         shell: powershell

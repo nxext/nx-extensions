@@ -101,7 +101,7 @@ console.log('======================================');
 
 const vitePkgs = [
   { pkg: 'vite', version: viteVersion },
-  { pkg: 'vite-tsconfig-paths', version: '3.3.17' },
+  { pkg: 'vite-tsconfig-paths', version: '3.4.0' },
 ];
 
 vitePkgs.forEach(({ pkg, version }) => {
