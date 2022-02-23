@@ -3,7 +3,7 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../../utils/testing';
+import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('vite lib e2e', () => {
   beforeAll(() => {
