@@ -96,7 +96,7 @@
     "@vitejs/plugin-react": "^1.1.4",
     "all-contributors-cli": "^6.20.0",
     "autoprefixer": "^10.4.2",
-    "chalk": "4.1.0",
+    "chalk": "5.0.0",
     "commitizen": "^4.2.4",
     "cz-customizable": "^6.3.0",
     "dotenv": "16.0.0",
