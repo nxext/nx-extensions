@@ -1,6 +1,7 @@
 ---
-title: '@nxext/svelte:application generator'
+title: '📦 @nxext/svelte:application generator'
 description: 'Svelte application schematic'
+sidebarDepth: 4
 ---
 
 # @nxext/svelte:application
@@ -17,7 +18,7 @@ nx generate application ...
 nx g app ... # same
 ```
 
-By default, Nx will search for `application` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `application` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

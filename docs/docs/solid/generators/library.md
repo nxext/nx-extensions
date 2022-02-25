@@ -1,6 +1,7 @@
 ---
-title: '@nxext/solid:library generator'
+title: '📦 @nxext/solid:library generator'
 description: 'Solid library schematic'
+sidebarDepth: 4
 ---
 
 # @nxext/solid:library
@@ -17,7 +18,7 @@ nx generate library ...
 nx g lib ... # same
 ```
 
-By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `library` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

@@ -1,6 +1,7 @@
 ---
-title: '@nxext/preact:library generator'
+title: '📦 @nxext/preact:library generator'
 description: 'preact library schematic'
+sidebarDepth: 4
 ---
 
 # @nxext/preact:library
@@ -17,7 +18,7 @@ nx generate library ...
 nx g lib ... # same
 ```
 
-By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `library` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

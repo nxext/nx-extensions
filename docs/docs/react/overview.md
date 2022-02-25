@@ -1,9 +1,3 @@
----
-id: overview
-title: Overview
-sidebar_position: 1
----
-
 # Overview of Nxext React
 
 The Nxext Plugin for React contains generators for managing React applications and libraries within an Nx workspace . It provides:

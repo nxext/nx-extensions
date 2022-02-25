@@ -1,8 +1,4 @@
----
-id: installation
-title: Installation
-sidebar_position: 1
----
+# Installation
 
 Add this plugin to an Nx workspace:
 

@@ -1,6 +1,7 @@
 ---
-title: '@nxext/vitest:init generator'
+title: '📦 @nxext/vitest:init generator'
 description: 'init generator'
+sidebarDepth: 4
 ---
 
 # @nxext/vitest:init
@@ -13,7 +14,7 @@ init generator
 nx generate init ...
 ```
 
-By default, Nx will search for `init` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `init` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

@@ -1,6 +1,7 @@
 ---
-title: '@nxext/vitest:vitest-project generator'
+title: '📦 @nxext/vitest:vitest-project generator'
 description: 'vitest-project generator'
+sidebarDepth: 4
 ---
 
 # @nxext/vitest:vitest-project
@@ -13,7 +14,7 @@ vitest-project generator
 nx generate vitest-project ...
 ```
 
-By default, Nx will search for `vitest-project` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `vitest-project` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

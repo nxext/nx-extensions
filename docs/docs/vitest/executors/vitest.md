@@ -1,13 +1,14 @@
 ---
 title: '@nxext/vitest:vitest executor'
 description: 'vitest executor'
+sidebarDepth: 4
 ---
 
 # @nxext/vitest:vitest
 
 vitest executor
 
-Options can be configured in `workspace.json` when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
+Options can be configured in the 'project.json' when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
 
 ## Options
 

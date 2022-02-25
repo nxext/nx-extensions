@@ -1,6 +1,7 @@
 ---
-title: '@nxext/preact:component generator'
+title: '📦 @nxext/preact:component generator'
 description: 'Add component'
+sidebarDepth: 4
 ---
 
 # @nxext/preact:component
@@ -17,7 +18,7 @@ nx generate component ...
 nx g c ... # same
 ```
 
-By default, Nx will search for `component` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `component` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

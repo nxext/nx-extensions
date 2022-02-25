@@ -44,7 +44,7 @@ module.exports = {
           // Please change this to your repo.
           editUrl: 'https://github.com/nxext/nx-extensions/edit/main/docs/docs',
           remarkPlugins: [
-            [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+            [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
           ],
         },
         blog: {
@@ -52,7 +52,7 @@ module.exports = {
           // Please change this to your repo.
           editUrl: 'https://github.com/nxext/nx-extensions/edit/main/docs/blog/',
           remarkPlugins: [
-            [require('@docusaurus/remark-plugin-npm2yarn'), {sync: true}],
+            [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
           ],
         },
         theme: {

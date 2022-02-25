@@ -1,6 +1,7 @@
 ---
-title: '@nxext/stencil:library generator'
+title: '📦 @nxext/stencil:library generator'
 description: 'Generate Stencil Library'
+sidebarDepth: 4
 ---
 
 # @nxext/stencil:library
@@ -17,7 +18,7 @@ nx generate library ...
 nx g lib ... # same
 ```
 
-By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `library` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

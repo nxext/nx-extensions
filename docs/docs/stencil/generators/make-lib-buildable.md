@@ -1,6 +1,7 @@
 ---
-title: '@nxext/stencil:make-lib-buildable generator'
+title: '📦 @nxext/stencil:make-lib-buildable generator'
 description: 'Make a library buildable'
+sidebarDepth: 4
 ---
 
 # @nxext/stencil:make-lib-buildable
@@ -13,7 +14,7 @@ Make a library buildable
 nx generate make-lib-buildable ...
 ```
 
-By default, Nx will search for `make-lib-buildable` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `make-lib-buildable` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 
