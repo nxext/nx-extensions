@@ -1,6 +1,7 @@
 ---
-title: '@nxext/stencil:storybook-configuration generator'
+title: '📦 @nxext/stencil:storybook-configuration generator'
 description: 'storybook-configuration generator'
+sidebarDepth: 4
 ---
 
 # @nxext/stencil:storybook-configuration
@@ -13,7 +14,7 @@ storybook-configuration generator
 nx generate storybook-configuration ...
 ```
 
-By default, Nx will search for `storybook-configuration` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `storybook-configuration` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

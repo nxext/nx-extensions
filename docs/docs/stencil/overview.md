@@ -1,8 +1,4 @@
----
-id: overview
-title: Overview
-sidebar_position: 1
----
+# Overview
 
 [@nxext/stencil](https://github.com/nxext/nx-extensions/tree/master/packages/stencil) is a nx plugin to bring [StencilJs](https://stenciljs.com/) to [Nx](https://nx.dev/).
 

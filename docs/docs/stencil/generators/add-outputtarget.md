@@ -1,6 +1,7 @@
 ---
-title: '@nxext/stencil:add-outputtarget generator'
+title: '📦 @nxext/stencil:add-outputtarget generator'
 description: 'Add react/angular libraries for the component library'
+sidebarDepth: 4
 ---
 
 # @nxext/stencil:add-outputtarget
@@ -13,7 +14,7 @@ Add react/angular libraries for the component library
 nx generate add-outputtarget ...
 ```
 
-By default, Nx will search for `add-outputtarget` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `add-outputtarget` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

@@ -1,6 +1,7 @@
 ---
-title: '@nxext/sveltekit:component generator'
+title: '📦 @nxext/sveltekit:component generator'
 description: 'component generator'
+sidebarDepth: 4
 ---
 
 # @nxext/sveltekit:component
@@ -13,7 +14,7 @@ component generator
 nx generate component ...
 ```
 
-By default, Nx will search for `component` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `component` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 
