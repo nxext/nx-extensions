@@ -1,5 +1,5 @@
 Add this plugin to an Nx workspace:
 
-```bash npm2yarn
+```bash
 npm install @nxext/svelte --save
 ```

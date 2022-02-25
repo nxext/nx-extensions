@@ -1,6 +1,4 @@
 import { defineConfig } from 'vitepress';
-import generators from '../docs/generators';
-import executors from '../docs/executors';
 
 export default defineConfig({
   title: 'Nxext',
@@ -19,8 +17,8 @@ export default defineConfig({
     editLinkText: 'Suggest changes to this page',
 
     nav: [
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Docs', link: '/docs/' },
+      //{ text: 'Guide', link: '/guide/' },
+      { text: 'Docs', link: '/docs/nxext/overview' },
       {
         text: 'Links',
         items: [
@@ -30,8 +28,8 @@ export default defineConfig({
           },
           {
             text: 'Discord Chat',
-            link: 'https://discord.gg/b3Kc39my',
-          }
+            link: 'https://discord.gg/Hqjp9NrZQ7',
+          },
         ],
       },
     ],
@@ -40,7 +38,20 @@ export default defineConfig({
       '/docs/': [
         {
           text: 'Nxext',
-          link: '/docs/',
+          children: [
+            {
+              text: 'Overview',
+              link: '/docs/nxext/overview',
+            },
+            {
+              text: 'Community',
+              link: '/docs/nxext/community',
+            },
+            {
+              text: 'Contributing',
+              link: '/docs/nxext/contributing',
+            },
+          ],
         },
         {
           text: 'Stencil',
@@ -55,11 +66,11 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.stencil,
+              link: '/docs/stencil/generators',
             },
             {
               text: 'Executors',
-              children: executors.stencil,
+              link: '/docs/stencil/executors',
             },
           ],
         },
@@ -76,11 +87,11 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.vite,
+              link: '/docs/vite/generators',
             },
             {
               text: 'Executors',
-              children: executors.vite,
+              link: '/docs/vite/executors',
             },
           ],
         },
@@ -97,7 +108,7 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.svelte,
+              link: '/docs/svelte/generators',
             },
           ],
         },
@@ -114,7 +125,7 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.react,
+              link: '/docs/react/generators',
             },
           ],
         },
@@ -131,7 +142,7 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.preact,
+              link: '/docs/preact/generators',
             },
           ],
         },
@@ -148,7 +159,7 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.solid,
+              link: '/docs/solid/generators',
             },
           ],
         },
@@ -165,11 +176,11 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.vitest,
+              link: '/docs/vitest/generators',
             },
             {
               text: 'Executors',
-              children: executors.vitest,
+              link: '/docs/vitest/executors',
             },
           ],
         },
@@ -186,7 +197,7 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.angular,
+              link: '/docs/angular/nx/generators',
             },
           ],
         },
@@ -203,17 +214,17 @@ export default defineConfig({
             },
             {
               text: 'Generators',
-              children: generators.sveltekit,
+              link: '/docs/sveltekit/generators',
             },
             {
               text: 'Executors',
-              children: executors.sveltekit,
+              link: '/docs/sveltekit/executors',
             },
           ],
         },
       ],
       // catch-all fallback
-      '/': [
+      /*'/': [
         {
           text: 'Guide',
           children: [
@@ -285,10 +296,10 @@ export default defineConfig({
             {
               text: 'JavaScript API',
               link: '/guide/api-javascript',
-            }
+            },
           ],
         },
-      ],
+      ],*/
     },
   },
 });
