@@ -1,6 +1,7 @@
 ---
-title: '@nxext/react:library generator'
+title: '📦 @nxext/react:library generator'
 description: 'Create a library'
+sidebarDepth: 4
 ---
 
 # @nxext/react:library
@@ -17,7 +18,7 @@ nx generate library ...
 nx g lib ... # same
 ```
 
-By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `library` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

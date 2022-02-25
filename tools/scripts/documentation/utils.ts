@@ -40,6 +40,17 @@ export async function generateMarkdownFile(
   );
 }
 
+export async function generateTsFile(
+  filePath: string,
+  content: unknown
+): Promise<void> {
+  const validated = await formatWithPrettier(
+    filePath,
+    `export default ${JSON.stringify(content)}`
+  );
+  outputFileSync(filePath, validated);
+}
+
 export async function generateJsonFile(
   filePath: string,
   json: unknown

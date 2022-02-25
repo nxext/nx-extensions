@@ -1,9 +1,3 @@
----
-id: installation
-title: Installation
-sidebar_position: 2
----
-
 # Getting Started
 
 At this current moment we don't have an out of the back workspace setup. In order to use nxext/vite you need to create a new NX workspace.

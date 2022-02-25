@@ -1,6 +1,7 @@
 ---
-title: '@nxext/vite:library generator'
+title: '📦 @nxext/vite:library generator'
 description: 'Create a vite library'
+sidebarDepth: 4
 ---
 
 # @nxext/vite:library
@@ -17,7 +18,7 @@ nx generate library ...
 nx g lib ... # same
 ```
 
-By default, Nx will search for `library` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `library` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

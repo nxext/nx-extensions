@@ -1,6 +1,7 @@
 ---
-title: '@nxext/stencil:ionic-pwa generator'
+title: '📦 @nxext/stencil:ionic-pwa generator'
 description: 'Generate Stencil ionic pwa'
+sidebarDepth: 4
 ---
 
 # @nxext/stencil:ionic-pwa
@@ -17,7 +18,7 @@ nx generate ionic-pwa ...
 nx g pwa ... # same
 ```
 
-By default, Nx will search for `ionic-pwa` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `ionic-pwa` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

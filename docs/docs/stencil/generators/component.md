@@ -1,6 +1,7 @@
 ---
-title: '@nxext/stencil:component generator'
+title: '📦 @nxext/stencil:component generator'
 description: 'Add a component to a ui library'
+sidebarDepth: 4
 ---
 
 # @nxext/stencil:component
@@ -17,7 +18,7 @@ nx generate component ...
 nx g c ... # same
 ```
 
-By default, Nx will search for `component` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `component` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

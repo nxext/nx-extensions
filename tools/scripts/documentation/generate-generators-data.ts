@@ -12,8 +12,8 @@ import {
 } from '@angular-devkit/schematics/src/formats';
 import {
   formatDeprecated,
-  generateJsonFile,
   generateMarkdownFile,
+  generateTsFile,
   sortAlphabeticallyFunction,
   sortByBooleanFunction,
 } from './utils';
@@ -23,6 +23,8 @@ import {
 } from './get-package-configurations';
 import { parseJsonSchemaToOptions } from './json-parser';
 import { createSchemaFlattener, SchemaFlattener } from './schema-flattener';
+import { inspect } from 'util';
+import { join, relative } from 'path';
 
 /**
  * @WhatItDoes: Generates default documentation from the schematics' schema.
@@ -33,7 +35,7 @@ import { createSchemaFlattener, SchemaFlattener } from './schema-flattener';
  */
 const flattener = createSchemaFlattener([pathFormat, htmlSelectorFormat]);
 
-function generateSchematicList(
+function generateGeneratorList(
   config: Configuration,
   flattener: SchemaFlattener
 ): Promise<FileSystemSchematicJsonDescription>[] {
@@ -65,52 +67,52 @@ function generateSchematicList(
   });
 }
 
-function generateTemplate(schematic): { name: string; template: string } {
+function generateTemplate(generator): { name: string; template: string } {
   const cliCommand = 'nx';
-  const filename = 'workspace.json';
   let template = dedent`
 ---
-title: "${schematic.collectionName}:${schematic.name} generator"
-description: "${schematic.description}"
+title: "📦 ${generator.collectionName}:${generator.name} generator"
+description: "${generator.description}"
+sidebarDepth: 4
 ---
-# ${schematic.collectionName}:${schematic.name} ${
-    schematic.hidden ? '[hidden]' : ''
+# ${generator.collectionName}:${generator.name} ${
+    generator.hidden ? '[hidden]' : ''
   }
 
-${schematic.description}
+${generator.description}
 
 ## Usage
 \`\`\`bash
-${cliCommand} generate ${schematic.name} ...
+${cliCommand} generate ${generator.name} ...
 \`\`\`
 `;
 
-  if (schematic.alias) {
+  if (generator.alias) {
     template += dedent`
     \`\`\`bash
-    ${cliCommand} g ${schematic.alias} ... # same
+    ${cliCommand} g ${generator.alias} ... # same
     \`\`\`
     `;
   }
 
   template += dedent`
-  By default, Nx will search for \`${schematic.name}\` in the default collection provisioned in \`${filename}\`.\n
+  By default, Nx will search for \`${generator.name}\` in the default collection provisioned in nx.json.\n
   You can specify the collection explicitly as follows:
   \`\`\`bash
-  ${cliCommand} g ${schematic.collectionName}:${schematic.name} ...
+  ${cliCommand} g ${generator.collectionName}:${generator.name} ...
   \`\`\`
   `;
 
   template += dedent`
     Show what will be generated without writing to disk:
     \`\`\`bash
-    ${cliCommand} g ${schematic.name} ... --dry-run
+    ${cliCommand} g ${generator.name} ... --dry-run
     \`\`\`\n
     `;
 
-  if (schematic.rawSchema.examples) {
+  if (generator.rawSchema.examples) {
     template += `### Examples`;
-    schematic.rawSchema.examples.forEach((example) => {
+    generator.rawSchema.examples.forEach((example) => {
       template += dedent`
       ${example.description}:
       \`\`\`bash
@@ -120,15 +122,15 @@ ${cliCommand} generate ${schematic.name} ...
     });
   }
 
-  if (Array.isArray(schematic.options) && !!schematic.options.length) {
+  if (Array.isArray(generator.options) && !!generator.options.length) {
     template += '## Options';
 
-    schematic.options
+    generator.options
       .sort((a, b) => sortAlphabeticallyFunction(a.name, b.name))
       .sort((a, b) => sortByBooleanFunction(a.required, b.required))
       .forEach((option) => {
         let enumValues = [];
-        const rawSchemaProp = schematic.rawSchema.properties[option.name];
+        const rawSchemaProp = generator.rawSchema.properties[option.name];
         if (
           rawSchemaProp &&
           rawSchemaProp['x-prompt'] &&
@@ -172,7 +174,7 @@ ${cliCommand} generate ${schematic.name} ...
       });
   }
 
-  return { name: schematic.name, template };
+  return { name: generator.name, template };
 }
 
 export async function generateGeneratorsDocumentation() {
@@ -183,11 +185,11 @@ export async function generateGeneratorsDocumentation() {
     configs
       .filter((item) => item.hasSchematics)
       .map(async (config) => {
-        const schematicList = await Promise.all(
-          generateSchematicList(config, flattener)
+        const generatorList = await Promise.all(
+          generateGeneratorList(config, flattener)
         );
 
-        const markdownList = schematicList
+        const markdownList = generatorList
           .filter((s) => s != null && !s['hidden'])
           .map((s_1) => generateTemplate(s_1));
 
@@ -206,15 +208,15 @@ export async function generateGeneratorsDocumentation() {
         );
       })
   );
-  await Promise.all(
+  const routes = await Promise.all(
     configs
       .filter((item) => item.hasSchematics)
       .map(async (config) => {
-        const schematicList = await Promise.all(
-          generateSchematicList(config, flattener)
+        const generatorList = await Promise.all(
+          generateGeneratorList(config, flattener)
         );
 
-        const markdownList = schematicList
+        const markdownList = generatorList
           .filter((s) => s != null && !s['hidden'])
           .map((s_1) => generateTemplate(s_1));
 
@@ -231,19 +233,27 @@ export async function generateGeneratorsDocumentation() {
             path.relative(process.cwd(), config.schematicOutput)
           )}`
         );
+
+        return {
+          [config.name]: markdownList.map((template) => {
+            const filePath = join(config.schematicOutput, `${template.name}`);
+            return {
+              text: `${template.name} generator`,
+              link: `/${relative(`${process.cwd()}/docs`, filePath)}`,
+            };
+          }),
+        };
       })
   );
 
-  const schematics = configs
-    .filter((item) => item.hasSchematics)
-    .map((item) => item.name);
-  await generateJsonFile(
-    path.join(__dirname, '../../../docs', 'docs', 'generators.json'),
-    schematics
+  const mergedRoutes = Object.assign({}, ...routes);
+  await generateTsFile(
+    join(__dirname, '../../../docs', 'docs', 'generators.ts'),
+    mergedRoutes
   ).then(() => {
     console.log(
-      `${chalk.green('✓')} Generated generators.json at ${chalk.grey(
-        `docs/docs/generators.json`
+      `${chalk.green('✓')} Generated generators.ts at ${chalk.grey(
+        `docs/docs/generators.ts`
       )}`
     );
   });

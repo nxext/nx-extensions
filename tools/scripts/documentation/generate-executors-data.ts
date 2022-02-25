@@ -13,8 +13,8 @@ import {
 } from '@angular-devkit/schematics/src/formats';
 import {
   formatDeprecated,
-  generateJsonFile,
   generateMarkdownFile,
+  generateTsFile,
   sortAlphabeticallyFunction,
   sortByBooleanFunction,
 } from './utils';
@@ -76,22 +76,22 @@ function generateSchematicList(
 }
 
 function generateTemplate(executor): { name: string; template: string } {
-  const filename = 'workspace.json';
   const cliCommand = 'nx';
 
   let template = dedent`
 ---
 title: "${executor.collectionName}:${executor.name} executor"
 description: "${executor.description}"
+sidebarDepth: 4
 ---
 # ${executor.collectionName}:${executor.name}
 ${executor.description}
 
-Options can be configured in \`${filename}\` when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
+Options can be configured in the 'project.json' when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
 \n`;
 
   if (executor.examplesFileFullPath) {
-    template += `## Examples\n`;
+    template += `# Examples\n`;
     let examples = readFileSync(executor.examplesFileFullPath)
       .toString()
       .replace(/<%= cli %>/gm, cliCommand);
@@ -149,7 +149,7 @@ Options can be configured in \`${filename}\` when defining the executor, or when
         if (option.arrayOfType && option.arrayOfValues) {
           option.arrayOfValues.forEach((optionValue) => {
             template += dedent`
-              #### ${optionValue.name} ${
+              ### ${optionValue.name} ${
               optionValue.required ? '(*__required__*)' : ''
             }
               Type: \`${optionValue.type}\` \n
@@ -168,7 +168,7 @@ export async function generateExecutorsDocumentation() {
 
   const { configs } = getPackageConfigurations();
 
-  await Promise.all(
+  const routes = await Promise.all(
     configs
       .filter((item) => item.hasBuilders)
       .map(async (config) => {
@@ -193,25 +193,30 @@ export async function generateExecutorsDocumentation() {
             relative(process.cwd(), config.builderOutput)
           )}`
         );
+
+        return {
+          [config.name]: markdownList.map((template) => {
+            const filePath = join(config.builderOutput, `${template.name}`);
+            return {
+              text: `${template.name} executor`,
+              link: `/${relative(`${process.cwd()}/docs`, filePath)}`,
+            };
+          }),
+        };
       })
   );
 
-  console.log();
-
-  const builders = configs
-    .filter((item) => item.hasBuilders)
-    .map((item) => item.name);
-
-  await generateJsonFile(
-    join(__dirname, '../../../docs', 'docs', 'executors.json'),
-    builders
-  );
-
-  console.log(
-    `${chalk.green('✓')} Generated executors.json at ${chalk.grey(
-      `docs/docs/executors.json`
-    )}`
-  );
+  const mergedRoutes = Object.assign({}, ...routes);
+  await generateTsFile(
+    join(__dirname, '../../../docs', 'docs', 'executors.ts'),
+    mergedRoutes
+  ).then(() => {
+    console.log(
+      `${chalk.green('✓')} Generated executors.ts at ${chalk.grey(
+        `docs/docs/executors.ts`
+      )}`
+    );
+  });
 
   console.log(`\n${chalk.green('✓')} Generated Documentation for Executors`);
 }

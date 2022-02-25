@@ -116,7 +116,8 @@ function Home() {
         )}
 
         <div className={clsx('community', styles.community)}>
-          Join <a href="https://discord.gg/Hqjp9NrZQ7">the community</a> and get involved.
+          Join <a href="https://discord.gg/Hqjp9NrZQ7">the community</a> and get
+          involved.
         </div>
       </main>
     </Layout>

@@ -1,6 +1,7 @@
 ---
-title: '@nxext/angular:application generator'
+title: '📦 @nxext/angular:application generator'
 description: 'Create an application'
+sidebarDepth: 4
 ---
 
 # @nxext/angular:application
@@ -17,7 +18,7 @@ nx generate application ...
 nx g app ... # same
 ```
 
-By default, Nx will search for `application` in the default collection provisioned in `workspace.json`.
+By default, Nx will search for `application` in the default collection provisioned in nx.json.
 
 You can specify the collection explicitly as follows:
 

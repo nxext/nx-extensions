@@ -1,13 +1,14 @@
 ---
 title: '@nxext/vite:dev executor'
 description: 'dev executor'
+sidebarDepth: 4
 ---
 
 # @nxext/vite:dev
 
 dev executor
 
-Options can be configured in `workspace.json` when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
+Options can be configured in the 'project.json' when defining the executor, or when invoking it. Read more about how to configure targets and executors here: https://nx.dev/configuration/projectjson#targets.
 
 ## Options
 
@@ -29,13 +30,13 @@ Type: `object[]`
 
 Replace files with other files in the build.
 
-#### replace
+### replace
 
 Type: `string`
 
 The file to be replaced.
 
-#### with
+### with
 
 Type: `string`
 
