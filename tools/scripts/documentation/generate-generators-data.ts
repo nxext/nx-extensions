@@ -70,18 +70,13 @@ function generateGeneratorList(
 function generateTemplate(generator): { name: string; template: string } {
   const cliCommand = 'nx';
   let template = dedent`
----
-title: "📦 ${generator.collectionName}:${generator.name} generator"
-description: "${generator.description}"
-sidebarDepth: 4
----
-# ${generator.collectionName}:${generator.name} ${
+## ${generator.collectionName}:${generator.name} ${
     generator.hidden ? '[hidden]' : ''
   }
 
 ${generator.description}
 
-## Usage
+### Usage
 \`\`\`bash
 ${cliCommand} generate ${generator.name} ...
 \`\`\`
@@ -123,7 +118,7 @@ ${cliCommand} generate ${generator.name} ...
   }
 
   if (Array.isArray(generator.options) && !!generator.options.length) {
-    template += '## Options';
+    template += '### Options';
 
     generator.options
       .sort((a, b) => sortAlphabeticallyFunction(a.name, b.name))
@@ -149,7 +144,7 @@ ${cliCommand} generate ${generator.name} ...
             : ``;
 
         template += dedent`
-          ### ${option.deprecated ? `~~${option.name}~~` : option.name} ${
+          #### ${option.deprecated ? `~~${option.name}~~` : option.name} ${
           option.required ? '(*__required__*)' : ''
         } ${option.hidden ? '(__hidden__)' : ''}
 
@@ -181,6 +176,7 @@ export async function generateGeneratorsDocumentation() {
   console.log(`\n${chalk.blue('i')} Generating Documentation for Generators\n`);
 
   const { configs } = getPackageConfigurations();
+
   await Promise.all(
     configs
       .filter((item) => item.hasSchematics)
@@ -193,11 +189,15 @@ export async function generateGeneratorsDocumentation() {
           .filter((s) => s != null && !s['hidden'])
           .map((s_1) => generateTemplate(s_1));
 
-        await Promise.all(
-          markdownList.map((template) =>
-            generateMarkdownFile(config.schematicOutput, template)
-          )
-        );
+        await generateMarkdownFile(config.builderOutput, {
+          name: '../generators',
+          template: dedent`
+---
+sidebarDepth: 3
+---
+${markdownList.map((template) => template.template).join('\n\n')}
+        `,
+        });
 
         console.log(
           ` - Documentation for ${chalk.magenta(
@@ -208,55 +208,6 @@ export async function generateGeneratorsDocumentation() {
         );
       })
   );
-  const routes = await Promise.all(
-    configs
-      .filter((item) => item.hasSchematics)
-      .map(async (config) => {
-        const generatorList = await Promise.all(
-          generateGeneratorList(config, flattener)
-        );
-
-        const markdownList = generatorList
-          .filter((s) => s != null && !s['hidden'])
-          .map((s_1) => generateTemplate(s_1));
-
-        await Promise.all(
-          markdownList.map((template) =>
-            generateMarkdownFile(config.schematicOutput, template)
-          )
-        );
-
-        console.log(
-          ` - Documentation for ${chalk.magenta(
-            path.relative(process.cwd(), config.root)
-          )} generated at ${chalk.grey(
-            path.relative(process.cwd(), config.schematicOutput)
-          )}`
-        );
-
-        return {
-          [config.name]: markdownList.map((template) => {
-            const filePath = join(config.schematicOutput, `${template.name}`);
-            return {
-              text: `${template.name} generator`,
-              link: `/${relative(`${process.cwd()}/docs`, filePath)}`,
-            };
-          }),
-        };
-      })
-  );
-
-  const mergedRoutes = Object.assign({}, ...routes);
-  await generateTsFile(
-    join(__dirname, '../../../docs', 'docs', 'generators.ts'),
-    mergedRoutes
-  ).then(() => {
-    console.log(
-      `${chalk.green('✓')} Generated generators.ts at ${chalk.grey(
-        `docs/docs/generators.ts`
-      )}`
-    );
-  });
 
   console.log(`\n${chalk.green('✓')} Generated Documentation for Generators`);
 }
