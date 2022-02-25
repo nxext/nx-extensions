@@ -28,12 +28,13 @@ export function getPackageConfigurations(
   const packagesDir = path.resolve(
     path.join(__dirname, '../../../', packagesDirectory)
   );
+
   const documentationDir = path.resolve(
     path.join(__dirname, '../../../', documentationsDirectory)
   );
 
   const configs = glob
-    .sync(`${packagesDir}/*`)
+    .sync(`${packagesDir}/**`)
     .map((folderPath): Configuration => {
       const folderName = folderPath.substring(packagesDir.length + 1);
       const itemList = glob
@@ -41,7 +42,7 @@ export function getPackageConfigurations(
         .map((item) => item.split(folderPath + '/')[1]);
       const output = path.join(documentationDir, 'docs', folderName);
       return {
-        name: folderName,
+        name: folderName === 'angular/nx' ? 'angular' : folderName,
         root: folderPath,
         source: path.join(folderPath, '/src'),
         output,

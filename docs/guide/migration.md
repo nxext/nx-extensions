@@ -10,12 +10,11 @@
 
 - `jsx` and `enableEsbuild` ha
 
-
-    - `rollupDedupe`
-    - `emitAssets`
-    - `emitIndex`
-    - `shouldPreload`
-    - `configureBuild`
+  - `rollupDedupe`
+  - `emitAssets`
+  - `emitIndex`
+  - `shouldPreload`
+  - `configureBuild`
 
 - All Vue specific options are removed; Pass options to the Vue plugin instead.
 

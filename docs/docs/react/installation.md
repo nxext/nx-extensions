@@ -11,17 +11,3 @@ After creating the blank workspace. Run the following commands
 ```bash npm2yarn
 npm install @nxext/react --save
 ```
-
-## Generating scaffolding
-
-### Application
-
-```bash
-npx nx g @nxext/react:app [name]
-```
-
-### Library
-
-```bash
-npx nx g @nxext/react:lib [name]
-```

@@ -2,6 +2,6 @@
 
 Add this plugin to an Nx workspace:
 
-```bash npm2yarn
+```bash
 npm add @nxext/stencil --save
 ```

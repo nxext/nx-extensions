@@ -173,8 +173,6 @@ import classes from './example.module.css';
 document.getElementById('foo').className = classes.red;
 ```
 
-
-
 If `css.modules.localsConvention` is set to enable camelCase locals (e.g. `localsConvention: 'camelCaseOnly'`), you can also use named imports:
 
 ```js
