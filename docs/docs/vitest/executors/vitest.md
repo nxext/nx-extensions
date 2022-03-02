@@ -15,7 +15,7 @@ Options can be configured in `workspace.json` when defining the executor, or whe
 
 Type: `string`
 
-Vitest command to run
+Sveltekit command to run
 
 ### passWithNoTests
 
