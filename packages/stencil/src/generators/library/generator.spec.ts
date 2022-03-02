@@ -197,6 +197,16 @@ describe('library', () => {
           .toContain(`import { ${plugin} } from '@stencil/${plugin}'`);
       });
     });
+
+    it('should import autoprefix along side postcss plugin', async () => {
+      await libraryGenerator(host, {
+        ...options,
+        style: SupportedStyles.pcss,
+      });
+
+      expect(host.read('libs/testlib/stencil.config.ts').toString('utf-8'))
+        .toContain("import autoprefixer from 'autoprefixer'");
+    });
   });
 
   describe('publishable libraries', () => {
