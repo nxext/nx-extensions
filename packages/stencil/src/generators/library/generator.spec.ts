@@ -153,6 +153,13 @@ describe('library', () => {
       component: true,
     };
 
+    const pluginForSupportedStyles = {
+      [SupportedStyles.less]: 'less',
+      [SupportedStyles.pcss]: 'postcss',
+      [SupportedStyles.scss]: 'sass',
+      [SupportedStyles.styl]: 'stylus',
+    };
+
     it('should create build targets', async () => {
       await libraryGenerator(host, options);
 
@@ -175,6 +182,20 @@ describe('library', () => {
 
       expect(host.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
       expect(host.exists('libs/testlib/src/components.d.ts')).toBeTruthy();
+    });
+
+    Object.keys(pluginForSupportedStyles).forEach((style) => {
+      const plugin = pluginForSupportedStyles[style];
+
+      it(`should import ${plugin} plugin`, async () => {
+        await libraryGenerator(host, {
+          ...options,
+          style: style as SupportedStyles,
+        });
+
+        expect(host.read('libs/testlib/stencil.config.ts').toString('utf-8'))
+          .toContain(`import { ${plugin} } from '@stencil/${plugin}'`);
+      });
     });
   });
 
