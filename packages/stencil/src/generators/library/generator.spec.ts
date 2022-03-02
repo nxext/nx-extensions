@@ -193,8 +193,9 @@ describe('library', () => {
           style: style as SupportedStyles,
         });
 
-        expect(host.read('libs/testlib/stencil.config.ts').toString('utf-8'))
-          .toContain(`import { ${plugin} } from '@stencil/${plugin}'`);
+        expect(
+          host.read('libs/testlib/stencil.config.ts').toString('utf-8')
+        ).toContain(`import { ${plugin} } from '@stencil/${plugin}'`);
       });
     });
 
@@ -204,8 +205,9 @@ describe('library', () => {
         style: SupportedStyles.pcss,
       });
 
-      expect(host.read('libs/testlib/stencil.config.ts').toString('utf-8'))
-        .toContain("import autoprefixer from 'autoprefixer'");
+      expect(
+        host.read('libs/testlib/stencil.config.ts').toString('utf-8')
+      ).toContain("import autoprefixer from 'autoprefixer'");
     });
   });
 

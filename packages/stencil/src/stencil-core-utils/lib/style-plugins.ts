@@ -8,7 +8,7 @@ export enum SupportedStyles {
   scss = 'scss',
   styl = 'styl',
   less = 'less',
-  pcss = 'pcss'
+  pcss = 'pcss',
 }
 
 export function addStylePlugin(
@@ -19,19 +19,28 @@ export function addStylePlugin(
     [SupportedStyles.css]: [],
     [SupportedStyles.scss]: [
       ...addImport(stencilConfigSource, `import { sass } from '@stencil/sass'`),
-      ...addToPlugins(stencilConfigSource, 'sass()')
+      ...addToPlugins(stencilConfigSource, 'sass()'),
     ],
     [SupportedStyles.styl]: [
-      ...addImport(stencilConfigSource, `import { stylus } from '@stencil/stylus'`),
-      ...addToPlugins(stencilConfigSource, 'stylus()')
+      ...addImport(
+        stencilConfigSource,
+        `import { stylus } from '@stencil/stylus'`
+      ),
+      ...addToPlugins(stencilConfigSource, 'stylus()'),
     ],
     [SupportedStyles.less]: [
       ...addImport(stencilConfigSource, `import { less } from '@stencil/less'`),
-      ...addToPlugins(stencilConfigSource, 'less()')
+      ...addToPlugins(stencilConfigSource, 'less()'),
     ],
     [SupportedStyles.pcss]: [
-      ...addImport(stencilConfigSource, `import { postcss } from '@stencil/postcss'`),
-      ...addImport(stencilConfigSource, `import autoprefixer from 'autoprefixer'`),
+      ...addImport(
+        stencilConfigSource,
+        `import { postcss } from '@stencil/postcss'`
+      ),
+      ...addImport(
+        stencilConfigSource,
+        `import autoprefixer from 'autoprefixer'`
+      ),
       ...addToPlugins(
         stencilConfigSource,
         `
@@ -39,8 +48,8 @@ export function addStylePlugin(
             plugins: [autoprefixer()]
           })
           `
-      )
-    ]
+      ),
+    ],
   };
 
   return styleImports[style];
@@ -56,7 +65,8 @@ export function addStylePluginToConfig(
     stencilConfigPath
   );
 
-  const changes = applyChangesToString(stencilConfigSource.text,
+  const changes = applyChangesToString(
+    stencilConfigSource.text,
     addStylePlugin(stencilConfigSource, style)
   );
 
