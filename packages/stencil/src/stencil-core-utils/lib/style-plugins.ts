@@ -31,7 +31,7 @@ export function addStylePlugin(
     ],
     [SupportedStyles.pcss]: [
       ...addImport(stencilConfigSource, `import { postcss } from '@stencil/postcss'`),
-      ...addImport(stencilConfigSource, `import autoprefixer from 'autoprefixer`),
+      ...addImport(stencilConfigSource, `import autoprefixer from 'autoprefixer'`),
       ...addToPlugins(
         stencilConfigSource,
         `
