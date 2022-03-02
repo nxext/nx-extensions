@@ -26,11 +26,11 @@ export function addStylePlugin(
       ...addToPlugins(stencilConfigSource, 'stylus()')
     ],
     [SupportedStyles.less]: [
-      ...addImport(stencilConfigSource, `import { less } from '@stencil/less`),
+      ...addImport(stencilConfigSource, `import { less } from '@stencil/less'`),
       ...addToPlugins(stencilConfigSource, 'less()')
     ],
     [SupportedStyles.pcss]: [
-      ...addImport(stencilConfigSource, `import { postcss } from '@stencil/postcss`),
+      ...addImport(stencilConfigSource, `import { postcss } from '@stencil/postcss'`),
       ...addImport(stencilConfigSource, `import autoprefixer from 'autoprefixer`),
       ...addToPlugins(
         stencilConfigSource,
