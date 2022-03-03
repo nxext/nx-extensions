@@ -37,6 +37,10 @@
         "required": ["replace", "with"]
       },
       "default": []
+    },
+    "outDir": {
+      "type": "string",
+      "description": "Path to the build output directory"
     }
   },
   "required": []

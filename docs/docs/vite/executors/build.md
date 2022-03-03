@@ -46,3 +46,9 @@ The file to replace with.
 Type: `string`
 
 The path to vite.config.js for the framework.
+
+### outDir
+
+Type: `string`
+
+Path to the build output directory

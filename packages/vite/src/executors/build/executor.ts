@@ -45,7 +45,7 @@ export default async function runExecutor(
       root: projectRoot,
       base: options.baseHref ?? '/',
       build: {
-        outDir: relative(
+        outDir:  joinPathFragments(`${context.root}/${options.outDir}`) ?? relative(
           projectRoot,
           joinPathFragments(`${context.root}/dist/${projectDir}`)
         ),
