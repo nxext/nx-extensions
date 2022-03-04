@@ -103,7 +103,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
           outputPath: joinPathFragments('dist', appProjectRoot),
           baseHref: '/',
           configFile: '@nxext/vite/plugins/vite',
-          frameworkConfigFile: '@nxext/angular/plugins/vite',
+          frameworkConfigFile: '@nxext/angular-vite/src/lib/vite',
         },
       },
       serve: {

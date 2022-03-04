@@ -1,0 +1,27 @@
+{
+  "name": "@nxext/angular-vite",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Jordan Hall",
+  "description": "A Vite plugin for Angular",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "angular",
+    "vite"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
+  "dependencies": {
+    "@angular-devkit/build-optimizer": "~0.1301.2",
+    "@angular-devkit/build-angular": "~13.1.2",
+    "@angular/compiler": "~13.1.1",
+    "@angular/compiler-cli": "~13.1.1",
+    "tsconfig-paths": "~3.12.0",
+    "recrawl-sync": "~2.2.1"
+  }
+}

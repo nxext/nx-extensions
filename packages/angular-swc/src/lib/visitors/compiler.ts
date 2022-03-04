@@ -7,7 +7,7 @@ import {
 } from 'swc-ast-helpers';
 
 export class AngularImportCompilerComponents extends Visitor {
-  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+  override visitModuleItems(items: ModuleItem[]): ModuleItem[] {
     return items.flatMap((item) => {
       if (isImportDeclaration(item)) {
         if (

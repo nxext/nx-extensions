@@ -3,11 +3,7 @@ import { defineConfig } from 'vite';
 import { ViteAngularPlugin } from './vite-plugin-angular';
 
 export default defineConfig({
-  plugins: [
-    ViteAngularPlugin({
-      target: 'es2020',
-    }),
-  ],
+  plugins: [ViteAngularPlugin()],
   resolve: {
     preserveSymlinks: true,
   },

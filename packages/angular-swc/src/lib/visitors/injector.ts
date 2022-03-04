@@ -7,12 +7,14 @@ import {
   NamedImportSpecifier,
   TsParameterProperty,
   TsType,
+  TsTypeAnnotation,
 } from '@swc/core';
 import Visitor from '@swc/core/Visitor';
 import {
   createIdentifer,
   createImportSpecifier,
   createSpan,
+  createStringLiteral,
   isCallExpression,
   isIdentifer,
   isImportDeclaration,
@@ -37,7 +39,7 @@ export class AngularInjector extends Visitor {
   private hasInjectorImport = false;
   private hasInjectedConstructor = false;
 
-  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+  override visitModuleItems(items: ModuleItem[]): ModuleItem[] {
     const result = items.flatMap((item) => this.visitModuleItem(item));
 
     if (!this.hasInjectorImport && this.hasInjectedConstructor) {
@@ -54,7 +56,9 @@ export class AngularInjector extends Visitor {
     return result;
   }
 
-  visitConstructorParameter(node: TsParameterProperty): TsParameterProperty {
+  override visitConstructorParameter(
+    node: TsParameterProperty
+  ): TsParameterProperty {
     if (
       (node.decorators?.length &&
         node.decorators.some(
@@ -63,7 +67,8 @@ export class AngularInjector extends Visitor {
             isIdentifer(dec.expression.callee) &&
             dec.expression.callee.value === 'Inject'
         )) ||
-      !node.param
+      !node.param ||
+      !node.param.typeAnnotation
     ) {
       return node;
     } else {
@@ -78,7 +83,7 @@ export class AngularInjector extends Visitor {
           span: createSpan(),
           expression: createCallExpression(createIdentifer('Inject'), [
             {
-              expression: createIdentifer(
+              expression: createStringLiteral(
                 node.param.typeAnnotation.typeAnnotation.typeName.value
               ),
             },
@@ -92,18 +97,20 @@ export class AngularInjector extends Visitor {
     }
   }
 
-  visitNamedImportSpecifier(node: NamedImportSpecifier): NamedImportSpecifier {
+  override visitNamedImportSpecifier(
+    node: NamedImportSpecifier
+  ): NamedImportSpecifier {
     if (!this.hasInjectorImport && node.local.value === 'Inject') {
       this.hasInjectorImport = true;
     }
     return node;
   }
 
-  visitTsTypes(nodes: TsType[]): TsType[] {
+  override visitTsTypes(nodes: TsType[]): TsType[] {
     return nodes;
   }
 
-  visitTsType(nodes: TsType): TsType {
+  override visitTsType(nodes: TsType): TsType {
     return nodes;
   }
 }

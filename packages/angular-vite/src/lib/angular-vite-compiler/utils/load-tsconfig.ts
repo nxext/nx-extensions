@@ -32,7 +32,7 @@ export function findProjects(
   }
 
   // Calculate the depth of each project path.
-  const depthMap = {};
+  const depthMap = {} as Record<string, number>;
   projects = projects.map((projectPath) => {
     projectPath = path.resolve(root, normalizePath(projectPath));
     depthMap[projectPath] =
@@ -46,7 +46,7 @@ export function findProjects(
 
 export function loadConfig(
   cwd: string,
-  basePath: string,
+  basePath: string | undefined,
   justLoadedConfig = false
 ) {
   const configPath = resolveConfigPath(cwd);
@@ -93,4 +93,5 @@ function resolveConfigPath(cwd: string) {
   if (configPath) {
     return configPath;
   }
+  return;
 }

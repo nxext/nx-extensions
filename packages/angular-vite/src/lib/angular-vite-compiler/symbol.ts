@@ -46,5 +46,6 @@ export class FileEmitterCollection {
         return result;
       }
     }
+    return;
   }
 }

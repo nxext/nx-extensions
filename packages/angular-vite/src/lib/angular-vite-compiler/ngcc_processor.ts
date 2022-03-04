@@ -58,7 +58,7 @@ export class NgccProcessor {
   /** Process the entire node modules tree. */
   process() {
     // Under Bazel when running in sandbox mode parts of the filesystem is read-only.
-    if (process.env.BAZEL_TARGET) {
+    if (process?.env['BAZEL_TARGET']) {
       return;
     }
 
