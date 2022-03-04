@@ -26,11 +26,11 @@ export class AngularComponents extends Visitor {
   constructor(private sourceUrl: string) {
     super();
   }
-  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+  override visitModuleItems(items: ModuleItem[]): ModuleItem[] {
     return items.flatMap((item) => this.visitModuleItem(item));
   }
 
-  visitDecorator(decorator: Decorator) {
+  override visitDecorator(decorator: Decorator) {
     if (
       decorator.expression.type === 'CallExpression' &&
       (
@@ -50,11 +50,14 @@ export class AngularComponents extends Visitor {
                   ...arg.expression,
                   properties: (
                     arg.expression as ObjectExpression
-                  ).properties.map((prop: KeyValueProperty) => {
-                    if ((prop.key as Identifier).value === 'templateUrl') {
+                  ).properties.map((prop) => {
+                    if (
+                      ((prop as KeyValueProperty).key as Identifier).value ===
+                      'templateUrl'
+                    ) {
                       const actualImportPath = join(
                         dirname(this.sourceUrl),
-                        (prop.value as Identifier).value
+                        ((prop as KeyValueProperty).value as Identifier).value
                       );
                       const templateContent = readFileSync(
                         actualImportPath,
@@ -69,13 +72,16 @@ export class AngularComponents extends Visitor {
                       );
                     }
 
-                    if ((prop.key as Identifier).value === 'styleUrls') {
+                    if (
+                      ((prop as KeyValueProperty).key as Identifier).value ===
+                      'styleUrls'
+                    ) {
                       const contents = (
-                        prop.value as ArrayExpression
+                        (prop as KeyValueProperty).value as ArrayExpression
                       ).elements.map((el) => {
                         const actualImportPath = join(
                           dirname(this.sourceUrl),
-                          (el.expression as StringLiteral).value
+                          (el?.expression as StringLiteral).value
                         );
                         return readFileSync(actualImportPath, 'utf8');
                       });
@@ -101,11 +107,11 @@ export class AngularComponents extends Visitor {
     return decorator;
   }
 
-  visitTsTypes(nodes: TsType[]): TsType[] {
+  override visitTsTypes(nodes: TsType[]): TsType[] {
     return nodes;
   }
 
-  visitTsType(nodes: TsType): TsType {
+  override visitTsType(nodes: TsType): TsType {
     return nodes;
   }
 }

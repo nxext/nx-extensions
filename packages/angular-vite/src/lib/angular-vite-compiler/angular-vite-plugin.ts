@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   CompilerHost as NgCompilerHost,
   CompilerOptions as NgCompilerOptions,
@@ -151,17 +152,17 @@ export class AngularVitePlugin {
       rootNames: string[];
       errors: Diagnostic[];
     };
-    compilerOptions.enableIvy = true;
+    (compilerOptions as any).enableIvy = true;
     compilerOptions.noEmitOnError = false;
-    compilerOptions.suppressOutputPathCheck = true;
+    (compilerOptions as any).suppressOutputPathCheck = true;
     compilerOptions.outDir = undefined;
     compilerOptions.inlineSources = compilerOptions.sourceMap;
     compilerOptions.inlineSourceMap = false;
     compilerOptions.mapRoot = undefined;
     compilerOptions.sourceRoot = undefined;
-    compilerOptions.allowEmptyCodegenFiles = false;
-    compilerOptions.annotationsAs = 'decorators';
-    compilerOptions.enableResourceInlining = false;
+    (compilerOptions as any).allowEmptyCodegenFiles = false;
+    (compilerOptions as any).annotationsAs = 'decorators';
+    (compilerOptions as any).enableResourceInlining = false;
 
     return { compilerOptions, rootNames, errors };
   }
@@ -438,10 +439,13 @@ export class AngularVitePlugin {
   private async getFileEmitHistory(
     filePath: string
   ): Promise<FileEmitHistoryItem> {
-    return this.fileEmitHistory.get(filePath);
+    return this.fileEmitHistory.get(filePath) as FileEmitHistoryItem;
   }
 
-  async transform(code: string, id: string) {
+  async transform(
+    code: string,
+    id: string
+  ): Promise<{ map: string | undefined; code: string } | undefined> {
     // Initialize and process eager ngcc if not already setup
     if (!this.ngccProcessor) {
       const projects = findProjects(this.viteResolvedConfig.root);
@@ -561,8 +565,9 @@ export class AngularVitePlugin {
     if (result) {
       return {
         map: result.map,
-        code: result.content.replace(/\/\/# sourceMappingURL.*/, ''),
+        code: result?.content?.replace(/\/\/# sourceMappingURL.*/, '') ?? '',
       };
     }
+    return;
   }
 }

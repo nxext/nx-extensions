@@ -1,8 +1,7 @@
-import { Module, ModuleItem } from '@swc/core';
+import { ModuleItem } from '@swc/core';
 import { Visitor } from '@swc/core/Visitor.js';
 import {
   createImportSpecifier,
-  createSpan,
   createStringLiteral,
   isCallExpression,
   isImportDeclaration,
@@ -14,7 +13,7 @@ import {
 } from 'swc-ast-helpers';
 
 export class AngularSwapPlatformDynamic extends Visitor {
-  visitModuleItems(items: ModuleItem[]): ModuleItem[] {
+  override visitModuleItems(items: ModuleItem[]): ModuleItem[] {
     let hasChangedPlatformBrowserDynamic = false;
     return items.flatMap((item) => {
       if (isImportDeclaration(item)) {

@@ -121,7 +121,7 @@ export function augmentHostWithCaching(
     ...parameters
   ) {
     if (!shouldCreateNewSourceFile && cache.has(fileName)) {
-      return cache.get(fileName);
+      return cache.get(fileName) as unknown as SourceFile;
     }
 
     const file = baseGetSourceFile.call(
@@ -134,7 +134,7 @@ export function augmentHostWithCaching(
     );
 
     if (file) {
-      cache.set(fileName, file);
+      cache.set(fileName, file as unknown as string);
     }
 
     return file;

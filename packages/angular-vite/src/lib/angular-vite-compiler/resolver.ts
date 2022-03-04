@@ -11,6 +11,7 @@ export function resolver(extensions?: string[]) {
         : `${resolved}.${extension}`;
       if (existsSync(file)) return file;
     }
+    return;
   };
 
   return function resolveId(id: string, origin: string | undefined) {
@@ -22,5 +23,6 @@ export function resolver(extensions?: string[]) {
       const coreFile = resolveFile(resolved, true);
       if (coreFile) return coreFile;
     }
+    return;
   };
 }
