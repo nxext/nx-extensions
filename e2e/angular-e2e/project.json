@@ -8,7 +8,7 @@
       "options": {
         "commands": [
           {
-            "command": "yarn nx build angular"
+            "command": "yarn nx build angular-nx"
           },
           {
             "command": "yarn nx run-e2e-tests angular-e2e"
@@ -29,5 +29,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["angular", "vite"]
+  "implicitDependencies": ["angular-nx", "vite"]
 }

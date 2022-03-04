@@ -1,20 +1,20 @@
 {
-  "root": "packages/angular",
-  "sourceRoot": "packages/angular/src",
+  "root": "packages/angular/nx",
+  "sourceRoot": "packages/angular/nx/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/angular/**/*.ts"]
+        "lintFilePatterns": ["packages/angular/nx/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/angular"],
+      "outputs": ["coverage/packages/angular/nx"],
       "options": {
-        "jestConfig": "packages/angular/jest.config.js",
+        "jestConfig": "packages/angular/nx/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -22,29 +22,29 @@
       "executor": "@nrwl/node:package",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/angular",
-        "tsConfig": "packages/angular/tsconfig.lib.json",
-        "packageJson": "packages/angular/package.json",
-        "main": "packages/angular/src/index.ts",
+        "outputPath": "dist/packages/angular/nx",
+        "tsConfig": "packages/angular/nx/tsconfig.lib.json",
+        "packageJson": "packages/angular/nx/package.json",
+        "main": "packages/angular/nx/src/index.ts",
         "assets": [
-          "packages/angular/*.md",
+          "packages/angular/nx/*.md",
           {
-            "input": "./packages/angular/src",
+            "input": "./packages/angular/nx/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
           },
           {
-            "input": "./packages/angular/src",
+            "input": "./packages/angular/nx/src",
             "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
-            "input": "./packages/angular",
+            "input": "./packages/angular/nx",
             "glob": "generators.json",
             "output": "."
           },
           {
-            "input": "./packages/angular",
+            "input": "./packages/angular/nx",
             "glob": "executors.json",
             "output": "."
           }
