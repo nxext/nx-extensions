@@ -1,2 +1,2 @@
-import AngularVite from '../plugins/vite';
+import AngularVite from './generators/application/application';
 export default AngularVite;
