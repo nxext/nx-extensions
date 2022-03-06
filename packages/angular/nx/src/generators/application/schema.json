@@ -23,7 +23,7 @@
       "description": "The file extension to be used for style files.",
       "type": "string",
       "default": "css",
-      "enum": ["css", "scss", "sass", "less"],
+      "enum": ["css"],
       "x-prompt": {
         "message": "Which stylesheet format would you like to use?",
         "type": "list",
@@ -31,18 +31,6 @@
           {
             "value": "css",
             "label": "CSS"
-          },
-          {
-            "value": "scss",
-            "label": "SASS(.scss)  [ http://sass-lang.com   ]"
-          },
-          {
-            "value": "sass",
-            "label": "SASS(.sass)  [ http://sass-lang.com   ]"
-          },
-          {
-            "value": "less",
-            "label": "LESS         [ http://lesscss.org     ]"
           }
         ]
       }

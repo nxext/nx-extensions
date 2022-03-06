@@ -20,10 +20,16 @@ import {
   createTemplateElement,
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
-import { dirname, join } from 'path';
+import { dirname, extname, join } from 'path';
+
+export interface AngularComponentOptions {
+  sourceUrl: string;
+  templateUrl?: (filePath: unknown, ext: string) => string;
+  styleUrls?: (filePath: unknown, ext: string) => string;
+}
 
 export class AngularComponents extends Visitor {
-  constructor(private sourceUrl: string) {
+  constructor(private options: AngularComponentOptions) {
     super();
   }
   override visitModuleItems(items: ModuleItem[]): ModuleItem[] {
@@ -56,13 +62,28 @@ export class AngularComponents extends Visitor {
                       'templateUrl'
                     ) {
                       const actualImportPath = join(
-                        dirname(this.sourceUrl),
+                        dirname(this.options.sourceUrl),
                         ((prop as KeyValueProperty).value as Identifier).value
                       );
-                      const templateContent = readFileSync(
-                        actualImportPath,
-                        'utf8'
-                      );
+                      let templateContent: string;
+                      if (this.options.templateUrl) {
+                        templateContent = this.options.templateUrl(
+                          actualImportPath,
+                          extname(actualImportPath)
+                        );
+                      } else if (extname(actualImportPath) === '.html') {
+                        templateContent = readFileSync(
+                          actualImportPath,
+                          'utf8'
+                        );
+                      } else {
+                        console.error(
+                          `HTML type ${extname(
+                            actualImportPath
+                          )} is not supported. Please use a custom templateUrl option`
+                        );
+                        return '';
+                      }
 
                       return createKeyValueProperty(
                         createIdentifer('template'),
@@ -80,10 +101,24 @@ export class AngularComponents extends Visitor {
                         (prop as KeyValueProperty).value as ArrayExpression
                       ).elements.map((el) => {
                         const actualImportPath = join(
-                          dirname(this.sourceUrl),
+                          dirname(this.options.sourceUrl),
                           (el?.expression as StringLiteral).value
                         );
-                        return readFileSync(actualImportPath, 'utf8');
+                        if (this.options.styleUrls) {
+                          return this.options.styleUrls(
+                            actualImportPath,
+                            extname(actualImportPath)
+                          );
+                        } else if (extname(actualImportPath) === '.css') {
+                          return readFileSync(actualImportPath, 'utf8');
+                        } else {
+                          console.error(
+                            `Style type ${extname(
+                              actualImportPath
+                            )} is not supported. Please use a custom styleUrls option`
+                          );
+                          return '';
+                        }
                       });
                       return {
                         ...prop,

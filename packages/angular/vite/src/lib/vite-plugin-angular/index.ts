@@ -39,13 +39,16 @@ export function ViteAngularPlugin(
         [];
 
       // if (id.includes('node_modules')) {
-      //   return isBuild ? optimizer(code, id, {
-      //     sideEffectFreeModules,
-      //     angularCoreModules: angularOptions?.buildOptimizer?.angularCoreModules,
-      //   }) : { code };
+      //   return isBuild
+      //     ? optimizer(code, id, {
+      //         sideEffectFreeModules,
+      //         angularCoreModules:
+      //           angularOptions?.buildOptimizer?.angularCoreModules,
+      //       })
+      //     : { code };
       // }
 
-      if (/\.(html|css?)$/.test(extension)) {
+      if (!/\.(js|ts|tsx|jsx?)$/.test(extension)) {
         return;
       }
 
@@ -60,13 +63,17 @@ export function ViteAngularPlugin(
             dynamicImport: true,
           },
           transform: {
-            decoratorMetadata: false,
+            decoratorMetadata: true,
             legacyDecorator: true,
           },
         },
         plugin: plugins([
           (m: Program) => {
-            angularComponentPlugin = new AngularComponents(id);
+            angularComponentPlugin = new AngularComponents({
+              sourceUrl: id,
+              styleUrls: angularOptions?.component?.styleUrls,
+              templateUrl: angularOptions?.component?.templateUrl,
+            });
             return angularComponentPlugin.visitProgram(m);
           },
           (m: Program) => {
@@ -76,6 +83,7 @@ export function ViteAngularPlugin(
           (m: Program) => {
             return new AngularImportCompilerComponents().visitProgram(m);
           },
+          ...(angularOptions?.swc?.plugins ?? []),
           ...(isProduction
             ? [(m: Program) => new AngularSwapPlatformDynamic().visitProgram(m)]
             : []),
