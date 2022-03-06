@@ -11,7 +11,7 @@ import * as ts from 'typescript';
 
 export function replaceResources(
   shouldTransform: (fileName: string) => boolean,
-  getTypeChecker: () => ts.TypeChecker,
+  getTypeChecker: () => ts.TypeChecker
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context: ts.TransformationContext) => {
     const typeChecker = getTypeChecker();
@@ -28,7 +28,7 @@ export function replaceResources(
                 node,
                 typeChecker,
                 resourceImportDeclarations,
-                moduleKind,
+                moduleKind
               )
             : node
         );
@@ -77,7 +77,7 @@ function visitDecorator(
   node: ts.Decorator,
   typeChecker: ts.TypeChecker,
   resourceImportDeclarations: ts.ImportDeclaration[],
-  moduleKind?: ts.ModuleKind,
+  moduleKind?: ts.ModuleKind
 ): ts.Decorator {
   if (!isComponentDecorator(node, typeChecker)) {
     return node;
