@@ -76,7 +76,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
         options: {
           outputPath: joinPathFragments('dist', libProjectRoot),
           configFile: '@nxext/vite/plugins/vite-package',
-          frameworkConfigFile: '@nxext/angular/plugins/vite',
+          frameworkConfigFile: '@nxext/angular-vite/src/lib/vite',
           entryFile: joinPathFragments('src', 'index.ts'),
         },
       },
