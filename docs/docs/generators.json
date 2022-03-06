@@ -1,11 +1,1 @@
-[
-  "angular",
-  "preact",
-  "react",
-  "solid",
-  "stencil",
-  "svelte",
-  "sveltekit",
-  "vite",
-  "vitest"
-]
+["preact", "react", "solid", "stencil", "svelte", "sveltekit", "vite", "vitest"]

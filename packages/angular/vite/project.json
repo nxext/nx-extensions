@@ -3,6 +3,31 @@
   "sourceRoot": "packages/angular/vite/src",
   "targets": {
     "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/angular/vite",
+        "tsConfig": "packages/angular/vite/tsconfig.lib.json",
+        "packageJson": "packages/angular/vite/package.json",
+        "main": "packages/angular/vite/src/index.ts",
+        "assets": [
+          "packages/angular/vite/*.md",
+          {
+            "input": "./packages/angular/vite/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/angular/vite/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          }
+        ]
+      }
+    },
+    "swc": {
       "executor": "@nrwl/js:swc",
       "outputs": ["{options.outputPath}"],
       "options": {
