@@ -1,6 +1,7 @@
 {
   "root": "packages/angular/vite",
   "sourceRoot": "packages/angular/vite/src",
+  "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nrwl/node:package",

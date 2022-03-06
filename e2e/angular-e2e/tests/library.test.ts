@@ -7,8 +7,10 @@ import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('angular library e2e', () => {
   beforeAll(async () => {
-    ensureNxProjectWithDeps('@nxext/angular', 'dist/packages/angular', [
+    ensureNxProjectWithDeps('@nxext/angular', 'dist/packages/angular/nx', [
       ['@nxext/vite', 'dist/packages/vite'],
+      ['@nxext/angular-vite', 'dist/packages/angular/vite'],
+      ['@nxext/angular-swc', 'dist/packages/angular/swc'],
     ]);
   });
 
