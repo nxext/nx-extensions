@@ -39,16 +39,13 @@ export function createAotTransformers(
 
 export function createJitTransformers(
   builder: ts.BuilderProgram,
-  compilerCli: typeof import('@angular/compiler-cli'),
+  compilerCli: typeof import('@angular/compiler-cli')
 ): ts.CustomTransformers {
   const getTypeChecker = () => builder.getProgram().getTypeChecker();
 
   return {
     before: [
-      replaceResources(
-        () => true,
-        getTypeChecker,
-      ),
+      replaceResources(() => true, getTypeChecker),
       compilerCli.constructorParametersDownlevelTransform(builder.getProgram()),
     ],
   };
