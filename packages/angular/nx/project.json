@@ -5,14 +5,20 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["packages/angular/nx/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/angular/nx/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/angular/nx"],
+      "outputs": [
+        "coverage/packages/angular/nx"
+      ],
       "options": {
         "jestConfig": "packages/angular/nx/jest.config.js",
         "passWithNoTests": true
@@ -20,7 +26,9 @@
     },
     "build": {
       "executor": "@nrwl/node:package",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/packages/angular/nx",
         "tsConfig": "packages/angular/nx/tsconfig.lib.json",
@@ -46,6 +54,11 @@
           {
             "input": "./packages/angular/nx",
             "glob": "executors.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/angular/nx",
+            "glob": "migrations.json",
             "output": "."
           }
         ]
