@@ -3,6 +3,31 @@
   "sourceRoot": "packages/angular/swc/src",
   "targets": {
     "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/angular/swc",
+        "tsConfig": "packages/angular/swc/tsconfig.lib.json",
+        "packageJson": "packages/angular/swc/package.json",
+        "main": "packages/angular/swc/src/index.ts",
+        "assets": [
+          "packages/angular/swc/*.md",
+          {
+            "input": "./packages/angular/swc/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/angular/swc/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          }
+        ]
+      }
+    },
+    "swc": {
       "executor": "@nrwl/js:swc",
       "outputs": ["{options.outputPath}"],
       "options": {
