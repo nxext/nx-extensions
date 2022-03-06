@@ -4,9 +4,7 @@
   "targets": {
     "build": {
       "executor": "@nrwl/node:package",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/angular/vite",
         "tsConfig": "packages/angular/vite/tsconfig.lib.json",
