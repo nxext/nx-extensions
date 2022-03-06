@@ -7,7 +7,6 @@ import {
   NamedImportSpecifier,
   TsParameterProperty,
   TsType,
-  TsTypeAnnotation,
 } from '@swc/core';
 import Visitor from '@swc/core/Visitor';
 import {

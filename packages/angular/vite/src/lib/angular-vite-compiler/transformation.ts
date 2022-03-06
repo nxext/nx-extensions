@@ -40,9 +40,6 @@ export function createAotTransformers(
 export function createJitTransformers(
   builder: ts.BuilderProgram,
   compilerCli: typeof import('@angular/compiler-cli'),
-  options: {
-    inlineStyleFileExtension?: string;
-  }
 ): ts.CustomTransformers {
   const getTypeChecker = () => builder.getProgram().getTypeChecker();
 
@@ -51,7 +48,6 @@ export function createJitTransformers(
       replaceResources(
         () => true,
         getTypeChecker,
-        options.inlineStyleFileExtension
       ),
       compilerCli.constructorParametersDownlevelTransform(builder.getProgram()),
     ],

@@ -11,12 +11,10 @@ import {
   readProjectConfiguration,
   offsetFromRoot,
   updateJson,
-  GeneratorCallback,
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { libraryGenerator as NxLibraryGenerator } from '@nrwl/angular/generators';
 import { angularInitGenerator } from '../init/init';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';
 
 function updateLibPackageNpmScope(
