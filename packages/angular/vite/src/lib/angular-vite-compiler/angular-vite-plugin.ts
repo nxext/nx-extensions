@@ -190,11 +190,7 @@ export class AngularVitePlugin {
       );
     }
 
-    const transformers = createJitTransformers(
-      builder,
-      this.compilerCli,
-      this.pluginOptions
-    );
+    const transformers = createJitTransformers(builder, this.compilerCli);
 
     return {
       fileEmitter: this.createFileEmitter(builder, transformers, () => []),
