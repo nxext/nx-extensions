@@ -16,5 +16,22 @@
       "schema": "./src/executors/package/schema.json",
       "description": "Build package"
     }
+  },
+  "builders": {
+    "build": {
+      "implementation": "./src/executors/build/compat",
+      "schema": "./src/executors/build/schema.json",
+      "description": "build executor"
+    },
+    "dev": {
+      "implementation": "./src/executors/dev/compat",
+      "schema": "./src/executors/dev/schema.json",
+      "description": "dev executor"
+    },
+    "package": {
+      "implementation": "./src/executors/package/compat",
+      "schema": "./src/executors/package/schema.json",
+      "description": "Build package"
+    }
   }
 }
