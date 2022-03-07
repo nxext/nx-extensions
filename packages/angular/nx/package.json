@@ -24,8 +24,8 @@
     "@nrwl/angular": "~13.3.8",
     "typescript": "~4.5.4",
     "@schematics/angular": "~13.1.1",
-    "@nxext/vite": "^13.2.4",
-    "@nxext/angular-vite": "*"
+    "@nxext/angular-vite": "*",
+    "@nxext/vite": "*"
   },
   "nx-migrations": {
     "migrations": "./migrations.json"
