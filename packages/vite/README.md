@@ -30,12 +30,12 @@ Or a library with:
 nx g @nxext/vite:library my-lib
 ```
 
-#Use your project
+# Use your project
 
 * Run ``nx build my-app`` to build the app
 * Run ``nx test my-app`` to test the app
 * Run ``nx lint my-app`` to run ESLint on the app
 
-#Documentation
+# Documentation
 
 The full docs are found [here](https://nxext.dev/docs/vite/overview)
