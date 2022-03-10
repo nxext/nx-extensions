@@ -6,5 +6,12 @@
       "schema": "./src/executors/vitest/schema.json",
       "description": "vitest executor"
     }
+  },
+  "builders": {
+    "vitest": {
+      "implementation": "./src/executors/vitest/compat",
+      "schema": "./src/executors/vitest/schema.json",
+      "description": "vitest executor"
+    }
   }
 }
