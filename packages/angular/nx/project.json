@@ -54,7 +54,13 @@
             "output": "."
           }
         ]
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ]
     }
   },
   "tags": []

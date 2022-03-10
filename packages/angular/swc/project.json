@@ -24,7 +24,13 @@
             "output": "./src"
           }
         ]
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ]
     },
     "swc": {
       "executor": "@nrwl/js:swc",
