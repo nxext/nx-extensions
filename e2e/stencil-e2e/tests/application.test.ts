@@ -2,10 +2,10 @@ import {
   checkFilesExist,
   ensureNxProject,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
-describe('application e2e', () => {
+xdescribe('application e2e', () => {
   beforeAll(() => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });

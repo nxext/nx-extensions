@@ -1,10 +1,10 @@
 import {
   ensureNxProject,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
-describe('pwa e2e', () => {
+xdescribe('pwa e2e', () => {
   beforeAll(() => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });

@@ -4,7 +4,7 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 
-describe('storybook e2e', () => {
+xdescribe('storybook e2e', () => {
   beforeAll(() => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });

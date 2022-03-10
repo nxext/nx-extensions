@@ -2,10 +2,10 @@ import {
   ensureNxProject,
   renameFile,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
 
-describe('buildoptions e2e', () => {
+xdescribe('buildoptions e2e', () => {
   beforeAll(() => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });

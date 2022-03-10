@@ -5,7 +5,7 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 
-describe('library e2e', () => {
+xdescribe('library e2e', () => {
   beforeAll(() => {
     ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
   });
