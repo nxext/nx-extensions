@@ -66,6 +66,20 @@ export function ViteAngularPlugin(
             decoratorMetadata: true,
             legacyDecorator: true,
           },
+          minify: {
+            compress: {
+              unused: true,
+              dead_code: true,
+            },
+            ecma: '2016',
+            module: true,
+            mangle: true,
+          },
+        },
+        minify: true,
+        module: {
+          type: 'es6',
+          lazy: true,
         },
         plugin: plugins([
           (m: Program) => {
