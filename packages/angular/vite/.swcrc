@@ -15,8 +15,9 @@
     "loose": true
   },
   "module": {
-    "type": "commonjs",
+    "type": "es6",
     "strict": true,
-    "noInterop": true
+    "noInterop": true,
+    "lazy": true
   }
 }
