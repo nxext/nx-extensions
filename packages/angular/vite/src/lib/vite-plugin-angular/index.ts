@@ -6,30 +6,24 @@ import {
   AngularImportCompilerComponents,
   AngularInjector,
   AngularSwapPlatformDynamic,
+  FileSystem
 } from '@nxext/angular-swc';
-// import { defautSideEffects, optimizer } from './utils/optimizer';
 
 export function ViteAngularPlugin(
   angularOptions?: AngularVitePluginOptions
 ): Plugin {
-  let angularComponentPlugin: AngularComponents;
-  let angularInjectorPlugin: AngularInjector;
-  let isProduction = true;
-  // let isBuild = false;
-  // let sideEffectFreeModules: string[];
-  // eslint-disable-next-line no-useless-escape
+
+  let fileSystem: FileSystem;
+  let isProduction = false;
   const fileExtensionRE = /\.[^\/\s\?]+$/;
   return {
     name: 'vite-plugin-angular-by-nxext',
     enforce: 'pre',
     configResolved(config) {
       isProduction = config.isProduction;
-      // isBuild = config.command === 'build';
     },
     buildStart: async () => {
-      // sideEffectFreeModules = defautSideEffects(
-      //   angularOptions?.buildOptimizer?.sideEffectFreeModules
-      // );
+      fileSystem = new FileSystem();
     },
     transform: (code, id) => {
       const [filepath, querystring = ''] = id.split('?');
@@ -38,22 +32,20 @@ export function ViteAngularPlugin(
         filepath.match(fileExtensionRE) ||
         [];
 
-      // if (id.includes('node_modules')) {
-      //   return isBuild
-      //     ? optimizer(code, id, {
-      //         sideEffectFreeModules,
-      //         angularCoreModules:
-      //           angularOptions?.buildOptimizer?.angularCoreModules,
-      //       })
-      //     : { code };
-      // }
+      if (id.includes('node_modules')) {
+        return code;
+      }
 
       if (!/\.(js|ts|tsx|jsx?)$/.test(extension)) {
+        const internalFile = fileSystem.findFileByInternalFile(code)
+        if (internalFile) {
+          fileSystem.touchFile(internalFile);
+        }
         return;
       }
 
       return transform(code, {
-        sourceMaps: true,
+        sourceMaps: !isProduction,
         jsc: {
           target: angularOptions?.target ?? 'es2020',
           parser: {
@@ -67,31 +59,32 @@ export function ViteAngularPlugin(
             legacyDecorator: true,
           },
           minify: {
-            compress: {
+            compress: isProduction ? {
               unused: true,
               dead_code: true,
-            },
+            } : false,
             ecma: '2016',
             module: true,
-            mangle: true,
+            mangle: isProduction,
           },
         },
-        minify: true,
+        minify: isProduction,
         module: {
           type: 'es6',
           lazy: true,
         },
         plugin: plugins([
           (m: Program) => {
-            angularComponentPlugin = new AngularComponents({
+            const angularComponentPlugin = new AngularComponents({
               sourceUrl: id,
               styleUrls: angularOptions?.component?.styleUrls,
               templateUrl: angularOptions?.component?.templateUrl,
+              fileSystem: fileSystem,
             });
             return angularComponentPlugin.visitProgram(m);
           },
           (m: Program) => {
-            angularInjectorPlugin = new AngularInjector();
+            const angularInjectorPlugin = new AngularInjector();
             return angularInjectorPlugin.visitProgram(m);
           },
           (m: Program) => {
