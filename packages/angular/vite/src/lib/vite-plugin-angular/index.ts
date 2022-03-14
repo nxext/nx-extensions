@@ -6,13 +6,12 @@ import {
   AngularImportCompilerComponents,
   AngularInjector,
   AngularSwapPlatformDynamic,
-  FileSystem
+  FileSystem,
 } from '@nxext/angular-swc';
 
 export function ViteAngularPlugin(
   angularOptions?: AngularVitePluginOptions
 ): Plugin {
-
   let fileSystem: FileSystem;
   let isProduction = false;
   const fileExtensionRE = /\.[^\/\s\?]+$/;
@@ -37,7 +36,7 @@ export function ViteAngularPlugin(
       }
 
       if (!/\.(js|ts|tsx|jsx?)$/.test(extension)) {
-        const internalFile = fileSystem.findFileByInternalFile(code)
+        const internalFile = fileSystem.findFileByInternalFile(code);
         if (internalFile) {
           fileSystem.touchFile(internalFile);
         }
@@ -59,10 +58,12 @@ export function ViteAngularPlugin(
             legacyDecorator: true,
           },
           minify: {
-            compress: isProduction ? {
-              unused: true,
-              dead_code: true,
-            } : false,
+            compress: isProduction
+              ? {
+                  unused: true,
+                  dead_code: true,
+                }
+              : false,
             ecma: '2016',
             module: true,
             mangle: isProduction,

@@ -21,9 +21,9 @@ import {
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, extname, join } from 'path';
-import { FileRecord, FileSystem } from '../utils/file-system'
+import { FileRecord, FileSystem } from '../utils/file-system';
 
-type  LazyComponentUrls ={ styles ?: boolean; template ?: boolean }
+type LazyComponentUrls = { styles?: boolean; template?: boolean };
 
 export interface AngularComponentOptions {
   sourceUrl: string;
@@ -33,8 +33,7 @@ export interface AngularComponentOptions {
   fileSystem?: FileSystem;
 }
 export class AngularComponents extends Visitor {
-
-  #fileSystem: FileSystem
+  #fileSystem: FileSystem;
 
   get fs() {
     return this.#fileSystem;
@@ -57,8 +56,8 @@ export class AngularComponents extends Visitor {
       ).value === 'Component'
     ) {
       const fileRecord: FileRecord = {
-        internalFiles: []
-      }
+        internalFiles: [],
+      };
       const newDecorator = {
         ...decorator,
         expression: {
@@ -74,10 +73,9 @@ export class AngularComponents extends Visitor {
                   ).properties.map((prop) => {
                     if (
                       ((prop as KeyValueProperty).key as Identifier).value ===
-                      'templateUrl' && (
-                        !this.options.lazyLoad
-                        || !(this.options.lazyLoad as LazyComponentUrls)?.template
-                      )
+                        'templateUrl' &&
+                      (!this.options.lazyLoad ||
+                        !(this.options.lazyLoad as LazyComponentUrls)?.template)
                     ) {
                       const actualImportPath = join(
                         dirname(this.options.sourceUrl),
@@ -114,10 +112,9 @@ export class AngularComponents extends Visitor {
 
                     if (
                       ((prop as KeyValueProperty).key as Identifier).value ===
-                      'styleUrls' && (
-                        !this.options.lazyLoad
-                        || !(this.options.lazyLoad as LazyComponentUrls)?.styles
-                      )
+                        'styleUrls' &&
+                      (!this.options.lazyLoad ||
+                        !(this.options.lazyLoad as LazyComponentUrls)?.styles)
                     ) {
                       const contents = (
                         (prop as KeyValueProperty).value as ArrayExpression
