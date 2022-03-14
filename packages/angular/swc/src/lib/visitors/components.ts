@@ -21,16 +21,25 @@ import {
 } from 'swc-ast-helpers';
 import { readFileSync } from 'fs';
 import { dirname, extname, join } from 'path';
+import { FileRecord, FileSystem } from '../utils/file-system'
 
 export interface AngularComponentOptions {
   sourceUrl: string;
   templateUrl?: (filePath: unknown, ext: string) => string;
   styleUrls?: (filePath: unknown, ext: string) => string;
+  fileSystem?: FileSystem;
 }
-
 export class AngularComponents extends Visitor {
+
+  #fileSystem: FileSystem
+
+  get fs() {
+    return this.#fileSystem;
+  }
+
   constructor(private options: AngularComponentOptions) {
     super();
+    this.#fileSystem = options.fileSystem ?? new FileSystem();
   }
   override visitModuleItems(items: ModuleItem[]): ModuleItem[] {
     return items.flatMap((item) => this.visitModuleItem(item));
@@ -44,7 +53,10 @@ export class AngularComponents extends Visitor {
           ?.callee as Identifier
       ).value === 'Component'
     ) {
-      return {
+      const fileRecord: FileRecord = {
+        internalFiles: []
+      }
+      const newDecorator = {
         ...decorator,
         expression: {
           ...(decorator.expression as CallExpression),
@@ -65,6 +77,7 @@ export class AngularComponents extends Visitor {
                         dirname(this.options.sourceUrl),
                         ((prop as KeyValueProperty).value as Identifier).value
                       );
+                      fileRecord.internalFiles.push(actualImportPath);
                       let templateContent: string;
                       if (this.options.templateUrl) {
                         templateContent = this.options.templateUrl(
@@ -104,6 +117,7 @@ export class AngularComponents extends Visitor {
                           dirname(this.options.sourceUrl),
                           (el?.expression as StringLiteral).value
                         );
+                        fileRecord.internalFiles.push(actualImportPath);
                         if (this.options.styleUrls) {
                           return this.options.styleUrls(
                             actualImportPath,
@@ -138,6 +152,8 @@ export class AngularComponents extends Visitor {
           ),
         },
       };
+      this.#fileSystem.addFile(this.options.sourceUrl, fileRecord);
+      return newDecorator;
     }
     return decorator;
   }
