@@ -1,13 +1,13 @@
-import { closeSync, openSync, utimesSync } from "fs";
+import { closeSync, openSync, utimesSync } from 'fs';
 
 export type FileRecord = {
   internalFiles: string[];
-}
-type FileRecords = Record<string, FileRecord>
-type FileBelongsTo = Record<string, string>
-export class FileSystem  {
+};
+type FileRecords = Record<string, FileRecord>;
+type FileBelongsTo = Record<string, string>;
+export class FileSystem {
   private fileRecords: FileRecords = {};
-  private belongsTo: FileBelongsTo = {}
+  private belongsTo: FileBelongsTo = {};
 
   addFile(file: string, record: FileRecord) {
     this.fileRecords[file] = record;
@@ -23,7 +23,7 @@ export class FileSystem  {
 
   touchFile(file: string) {
     try {
-      const date = new Date()
+      const date = new Date();
       utimesSync(file, date, date);
     } catch (err) {
       closeSync(openSync(file, 'w'));
