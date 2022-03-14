@@ -1,17 +1,13 @@
-import {
-  ensureNxProject,
-  runNxCommandAsync,
-  uniq,
-} from '@nrwl/nx-plugin/testing';
+import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { ensureNxProjectWithDeps } from '../../utils/testing';
 
 describe('angular library e2e', () => {
   beforeAll(async () => {
-    ensureNxProjectWithDeps('@nxext/angular', 'dist/packages/angular/nx', [
+    /*ensureNxProjectAndPrepareDeps('@nxext/angular', 'dist/packages/angular/nx', [
       ['@nxext/vite', 'dist/packages/vite'],
       ['@nxext/angular-vite', 'dist/packages/angular/vite'],
-      ['@nxext/angular-swc', 'dist/packages/angular/swc'],
-    ]);
+      ['@nxext/angular-swc', 'dist/packages/angular/swc']
+    ]);*/
   });
 
   xit('should create angular library', async () => {
