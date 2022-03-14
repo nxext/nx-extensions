@@ -23,10 +23,13 @@ import { readFileSync } from 'fs';
 import { dirname, extname, join } from 'path';
 import { FileRecord, FileSystem } from '../utils/file-system'
 
+type  LazyComponentUrls ={ styles ?: boolean; template ?: boolean }
+
 export interface AngularComponentOptions {
   sourceUrl: string;
   templateUrl?: (filePath: unknown, ext: string) => string;
   styleUrls?: (filePath: unknown, ext: string) => string;
+  lazyLoad?: boolean | LazyComponentUrls;
   fileSystem?: FileSystem;
 }
 export class AngularComponents extends Visitor {
@@ -71,7 +74,10 @@ export class AngularComponents extends Visitor {
                   ).properties.map((prop) => {
                     if (
                       ((prop as KeyValueProperty).key as Identifier).value ===
-                      'templateUrl'
+                      'templateUrl' && (
+                        !this.options.lazyLoad
+                        || !(this.options.lazyLoad as LazyComponentUrls)?.template
+                      )
                     ) {
                       const actualImportPath = join(
                         dirname(this.options.sourceUrl),
@@ -108,7 +114,10 @@ export class AngularComponents extends Visitor {
 
                     if (
                       ((prop as KeyValueProperty).key as Identifier).value ===
-                      'styleUrls'
+                      'styleUrls' && (
+                        !this.options.lazyLoad
+                        || !(this.options.lazyLoad as LazyComponentUrls)?.styles
+                      )
                     ) {
                       const contents = (
                         (prop as KeyValueProperty).value as ArrayExpression
@@ -152,7 +161,9 @@ export class AngularComponents extends Visitor {
           ),
         },
       };
-      this.#fileSystem.addFile(this.options.sourceUrl, fileRecord);
+      if (this.options.lazyLoad) {
+        this.#fileSystem.addFile(this.options.sourceUrl, fileRecord);
+      }
       return newDecorator;
     }
     return decorator;
