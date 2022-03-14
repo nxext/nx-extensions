@@ -14,7 +14,7 @@ export function ViteAngularPlugin(
 ): Plugin {
   let fileSystem: FileSystem;
   let isProduction = false;
-  const fileExtensionRE = /\.[^\/\s\?]+$/;
+  const fileExtensionRE = /\.[^/\s?]+$/;
   return {
     name: 'vite-plugin-angular-by-nxext',
     enforce: 'pre',
