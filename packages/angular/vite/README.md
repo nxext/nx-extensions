@@ -1,11 +1,19 @@
-# angular-vite
+# Angular Vite plugin
 
-This library was generated with [Nx](https://nx.dev).
+This project is in alpha stages and should be carefule of using in production. This is built onto of our angular-swc compiler/plugin
 
-## Building
+## Example
 
-Run `nx build angular-vite` to build the library.
+```
+// vite.config.js
+import { defineConfig } from 'vite';
+import { ViteAngularPlugin } from '@nxext/angular-vite';
 
-## Running unit tests
+export default defineConfig({
+  plugins: [ViteAngularPlugin()],
+  resolve: {
+    preserveSymlinks: true,
+  },
+});
 
-Run `nx test angular-vite` to execute the unit tests via [Jest](https://jestjs.io).
+```
