@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: git fetch --no-tags --prune --depth=5 origin main
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --prefer-offline --frozen-lockfile --non-interactive
       - run: yarn affected:build --base=origin/main --head=HEAD
       - run: yarn affected:lint --base=origin/main --head=HEAD --parallel
       - run: yarn affected:test --base=origin/main --head=HEAD --parallel

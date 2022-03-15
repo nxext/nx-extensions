@@ -27,7 +27,7 @@ jobs:
           cache: 'yarn'
       - run: git fetch --no-tags --prune --depth=5 origin main
         shell: powershell
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --prefer-offline --frozen-lockfile --non-interactive
         shell: powershell
       - run: yarn affected:build --base=origin/main --head=HEAD
         shell: powershell
