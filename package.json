@@ -55,7 +55,7 @@
     "@angular/compiler-cli": "13.2.1",
     "@angular/core": "~13.2.3",
     "@docusaurus/core": "2.0.0-beta.15",
-    "@docusaurus/preset-classic": "2.0.0-beta.15",
+    "@docusaurus/preset-classic": "2.0.0-beta.17",
     "@docusaurus/remark-plugin-npm2yarn": "^2.0.0-beta.15",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
