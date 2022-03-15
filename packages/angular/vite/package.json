@@ -1,6 +1,6 @@
 {
   "name": "@nxext/angular-vite",
-  "version": "0.0.1",
+  "version": "13.0.0-alpha.2",
   "license": "MIT",
   "author": "Jordan Hall",
   "description": "A Vite plugin for Angular",
@@ -17,6 +17,7 @@
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "dependencies": {
+    "@nxext/angular-swc": "13.0.0-alpha.2",
     "@angular-devkit/build-optimizer": "~0.1301.2",
     "@angular-devkit/build-angular": "~13.1.2",
     "@angular/compiler": "~13.1.1",
