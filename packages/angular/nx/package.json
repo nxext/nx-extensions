@@ -1,6 +1,6 @@
 {
   "name": "@nxext/angular",
-  "version": "13.0.0-alpha.1",
+  "version": "13.0.0-alpha.2",
   "license": "MIT",
   "author": "Jordan Hall",
   "description": "Nx plugin for Angular vite",
@@ -24,7 +24,7 @@
     "@nrwl/angular": "~13.3.8",
     "typescript": "~4.5.4",
     "@schematics/angular": "~13.1.1",
-    "@nxext/angular-vite": "^13.2.4"
+    "@nxext/angular-vite": "13.0.0-alpha.2"
   },
   "nx-migrations": {
     "migrations": "./migrations.json"
