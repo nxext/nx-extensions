@@ -1,0 +1,25 @@
+{
+  "root": "packages/nxextjs/ioc-models",
+  "sourceRoot": "packages/nxextjs/ioc-models/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nxextjs/ioc-models",
+        "main": "packages/nxextjs/ioc-models/src/index.ts",
+        "tsConfig": "packages/nxextjs/ioc-models/tsconfig.lib.json",
+        "assets": ["packages/nxextjs/ioc-models/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nxextjs/ioc-models/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

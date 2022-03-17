@@ -1,0 +1,33 @@
+{
+  "root": "packages/nxextjs/storage",
+  "sourceRoot": "packages/nxextjs/storage/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nxextjs/storage",
+        "main": "packages/nxextjs/storage/src/index.ts",
+        "tsConfig": "packages/nxextjs/storage/tsconfig.lib.json",
+        "assets": ["packages/nxextjs/storage/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nxextjs/storage/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nxextjs/storage"],
+      "options": {
+        "jestConfig": "packages/nxextjs/storage/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["'nxext."]
+}

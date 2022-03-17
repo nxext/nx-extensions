@@ -1,0 +1,33 @@
+{
+  "root": "packages/nxextjs/router",
+  "sourceRoot": "packages/nxextjs/router/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nxextjs/router",
+        "main": "packages/nxextjs/router/src/index.ts",
+        "tsConfig": "packages/nxextjs/router/tsconfig.lib.json",
+        "assets": ["packages/nxextjs/router/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nxextjs/router/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nxextjs/router"],
+      "options": {
+        "jestConfig": "packages/nxextjs/router/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["'nxext."]
+}

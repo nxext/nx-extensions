@@ -1,0 +1,25 @@
+{
+  "root": "packages/helpers/observables",
+  "sourceRoot": "packages/helpers/observables/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/helpers/observables",
+        "main": "packages/helpers/observables/src/index.ts",
+        "tsConfig": "packages/helpers/observables/tsconfig.lib.json",
+        "assets": ["packages/helpers/observables/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/helpers/observables/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["'interfaces", ""]
+}

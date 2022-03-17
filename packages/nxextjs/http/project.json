@@ -1,0 +1,33 @@
+{
+  "root": "packages/nxextjs/http",
+  "sourceRoot": "packages/nxextjs/http/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nxextjs/http",
+        "main": "packages/nxextjs/http/src/index.ts",
+        "tsConfig": "packages/nxextjs/http/tsconfig.lib.json",
+        "assets": ["packages/nxextjs/http/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nxextjs/http/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nxextjs/http"],
+      "options": {
+        "jestConfig": "packages/nxextjs/http/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

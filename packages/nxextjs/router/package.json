@@ -1,0 +1,8 @@
+{
+  "name": "@nxextjs/router",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "dependencies": {
+    "path-to-regexp": "^6.2.0"
+  }
+}

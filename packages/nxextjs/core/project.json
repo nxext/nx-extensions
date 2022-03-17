@@ -1,0 +1,33 @@
+{
+  "root": "packages/nxextjs/core",
+  "sourceRoot": "packages/nxextjs/core/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nxextjs/core",
+        "main": "packages/nxextjs/core/src/index.ts",
+        "tsConfig": "packages/nxextjs/core/tsconfig.lib.json",
+        "assets": ["packages/nxextjs/core/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nxextjs/core/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nxextjs/core"],
+      "options": {
+        "jestConfig": "packages/nxextjs/core/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["'nxext."]
+}

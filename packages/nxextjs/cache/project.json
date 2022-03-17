@@ -1,0 +1,33 @@
+{
+  "root": "packages/nxextjs/cache",
+  "sourceRoot": "packages/nxextjs/cache/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nxextjs/cache",
+        "main": "packages/nxextjs/cache/src/index.ts",
+        "tsConfig": "packages/nxextjs/cache/tsconfig.lib.json",
+        "assets": ["packages/nxextjs/cache/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/nxextjs/cache/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nxextjs/cache"],
+      "options": {
+        "jestConfig": "packages/nxextjs/cache/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["'nxext."]
+}
