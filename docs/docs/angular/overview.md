@@ -2,7 +2,7 @@
 
 The Nxext Plugin for Angular contains generators for managing Angular applications and libraries within an Nx workspace . It provides:
 
-- Vite alterntive to webpack (@nrwl/web)
+- Vite alternative to webpack (@nrwl/angular) && (@nrwl/web) && (@angular-devkit/build-angular:browser)
 - Quicker and smaller builds
 
 ## Adding the Angular plugin
