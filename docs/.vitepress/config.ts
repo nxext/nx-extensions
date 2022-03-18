@@ -17,7 +17,7 @@ export default defineConfig({
     editLinkText: 'Suggest changes to this page',
 
     nav: [
-      //{ text: 'Guide', link: '/guide/' },
+      { text: 'Guide', link: '/guide/' },
       { text: 'Docs', link: '/docs/nxext/overview' },
       {
         text: 'Links',
@@ -224,82 +224,26 @@ export default defineConfig({
         },
       ],
       // catch-all fallback
-      /*'/': [
+      '/': [
         {
           text: 'Guide',
           children: [
             {
-              text: 'Why Vite',
-              link: '/guide/why',
-            },
-            {
               text: 'Getting Started',
               link: '/guide/',
-            },
-            {
-              text: 'Features',
-              link: '/guide/features',
-            },
-            {
-              text: 'Using Plugins',
-              link: '/guide/using-plugins',
-            },
-            {
-              text: 'Dependency Pre-Bundling',
-              link: '/guide/dep-pre-bundling',
-            },
-            {
-              text: 'Static Asset Handling',
-              link: '/guide/assets',
-            },
-            {
-              text: 'Building for Production',
-              link: '/guide/build',
-            },
-            {
-              text: 'Deploying a Static Site',
-              link: '/guide/static-deploy',
-            },
-            {
-              text: 'Env Variables and Modes',
-              link: '/guide/env-and-mode',
-            },
-            {
-              text: 'Server-Side Rendering (SSR)',
-              link: '/guide/ssr',
-            },
-            {
-              text: 'Backend Integration',
-              link: '/guide/backend-integration',
-            },
-            {
-              text: 'Comparisons',
-              link: '/guide/comparisons',
-            },
-            {
-              text: 'Migration from v1',
-              link: '/guide/migration',
             },
           ],
         },
         {
-          text: 'APIs',
+          text: 'Vite',
           children: [
             {
-              text: 'Plugin API',
-              link: '/guide/api-plugin',
-            },
-            {
-              text: 'HMR API',
-              link: '/guide/api-hmr',
-            },
-            {
-              text: 'JavaScript API',
-              link: '/guide/api-javascript',
+              text: 'Environment variables',
+              link: '/guide/vite/environment-variables',
             },
           ],
         },
-      ],*/
+      ],
     },
   },
 });
