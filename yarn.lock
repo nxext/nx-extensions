@@ -2524,10 +2524,10 @@
     npmlog "^4.1.2"
     pretty-hrtime "^1.0.3"
 
-"@sveltejs/kit@^1.0.0-next.55":
-  version "1.0.0-next.292"
-  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.292.tgz#2930726b73cca25adbb037d25be1eb67d442e8df"
-  integrity sha512-sWLuN7/rOsV3xX0VtT562PXhGqkuU9np03Gv3k0v+MKh+NW59TUGgQTWIe0LP6ImHiZaMt0Uaw4oYfIn0wsTmQ==
+"@sveltejs/kit@^1.0.0-next.301":
+  version "1.0.0-next.301"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.301.tgz#d5c6b3fde3682bbab835d31d9acf2470248b210f"
+  integrity sha512-F/XP1VEu+fpvgY04JekNxAFupccNMKOyXtbox0LwNJvBulL15/Tzy6tf4g+9t2Jy7mprwI3h0ZC9G/nVujRFnQ==
   dependencies:
     "@sveltejs/vite-plugin-svelte" "^1.0.0-next.32"
     sade "^1.7.4"
