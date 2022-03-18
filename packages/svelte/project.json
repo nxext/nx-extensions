@@ -26,7 +26,7 @@
       "outputs": ["coverage/packages/svelte"]
     },
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "outputPath": "dist/packages/svelte",
         "tsConfig": "packages/svelte/tsconfig.lib.json",
