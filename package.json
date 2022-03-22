@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@angular/compiler": "13.2.1",
-    "@nrwl/angular": "13.8.3",
+    "@nrwl/angular": "13.9.4",
     "@nrwl/cli": "13.8.3",
     "@nrwl/cypress": "13.8.3",
     "@nrwl/devkit": "13.8.3",
