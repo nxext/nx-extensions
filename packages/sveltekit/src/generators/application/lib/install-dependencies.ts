@@ -5,6 +5,7 @@ import {
   svelteKitVersion,
   sveltePreprocessVersion,
   svelteVersion,
+  svelteKitAdapertAutoVersion,
 } from '../../utils/versions';
 
 export function installDependencies(host: Tree) {
@@ -18,6 +19,7 @@ export function installDependencies(host: Tree) {
       '@sveltejs/kit': svelteKitVersion,
       svelte: svelteVersion,
       'svelte-preprocess': sveltePreprocessVersion,
+      '@sveltejs/adapter-auto': svelteKitAdapertAutoVersion,
     }
   );
 }

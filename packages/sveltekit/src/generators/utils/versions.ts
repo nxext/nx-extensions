@@ -3,4 +3,4 @@ export const svelteVersion = '^3.44.0';
 export const svelteKitVersion = 'next';
 export const svelteKitAdapterVersion = 'next';
 export const sveltePreprocessVersion = '^4.9.4';
-export const angularSchematicsVersion = '^13.0.0';
+export const svelteKitAdapertAutoVersion = 'next';
