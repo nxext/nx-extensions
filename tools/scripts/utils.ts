@@ -13,7 +13,7 @@ export function getPublishableLibNames(workspaceJson = readWorkspaceJson()) {
   return Object.keys(projects).filter(
     (key) =>
       projects[key].projectType === 'library' &&
-      projects[key].targets?.build?.executor === '@nrwl/node:package'
+      projects[key].targets?.build?.executor === '@nrwl/js:tsc'
   );
 }
 

@@ -15,7 +15,7 @@ import {
 import baseConfig from '../../../plugins/vite-package';
 import { copyFile } from 'fs/promises';
 import { relative } from 'path';
-import { copyAssets } from '@nrwl/workspace/src/utilities/assets';
+import { copyAssets } from '../../utils/assets';
 
 async function ensureUserConfig(
   config: UserConfigExport,

@@ -23,6 +23,6 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "^13.7.0"
+    "@nrwl/devkit": "^13.9.0"
   }
 }

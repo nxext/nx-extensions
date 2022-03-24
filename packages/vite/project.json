@@ -18,12 +18,12 @@
       }
     },
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/vite",
         "tsConfig": "packages/vite/tsconfig.lib.json",
-        "packageJson": "packages/vite/package.json",
+        "packageJson": "./packages/vite/package.json",
         "main": "packages/vite/src/index.ts",
         "assets": [
           "packages/vite/*.md",

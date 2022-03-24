@@ -26,7 +26,7 @@
       "outputs": ["coverage/packages/solid"]
     },
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "outputPath": "dist/packages/solid",
         "tsConfig": "packages/solid/tsconfig.lib.json",

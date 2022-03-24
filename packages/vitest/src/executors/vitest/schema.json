@@ -7,7 +7,7 @@
   "properties": {
     "command": {
       "type": "string",
-      "description": "Sveltekit command to run"
+      "description": "Vitest command to run"
     },
     "passWithNoTests": {
       "type": "boolean",
