@@ -1,8 +1,5 @@
 import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import {
-  ensureNxProjectAndPrepareDeps,
-  ensureNxProjectWithDeps,
-} from '../../utils/testing';
+import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('angular application e2e', () => {
   beforeAll(async () => {
@@ -17,7 +14,7 @@ describe('angular application e2e', () => {
     );
   });
 
-  it('should create angular application', async () => {
+  xit('should create angular application', async () => {
     const plugin = uniq('angular');
     await runNxCommandAsync(`generate @nxext/angular:app ${plugin}`);
 

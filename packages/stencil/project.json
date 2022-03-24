@@ -26,7 +26,7 @@
       "outputs": ["coverage/packages/stencil"]
     },
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "outputPath": "dist/packages/stencil",
         "tsConfig": "packages/stencil/tsconfig.lib.json",

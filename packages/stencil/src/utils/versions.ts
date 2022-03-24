@@ -1,4 +1,4 @@
-export const stencilVersion = '^2.14.0';
+export const stencilVersion = '^2.14.2';
 export const stencilRouterVersion = '^1.0.1';
 export const ionicVersion = '^6.0.8';
 

@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@nxext/vite": "^13.2.4",
-    "@nrwl/devkit": "^13.7.0",
+    "@nrwl/devkit": "^13.9.0",
     "@nrwl/cypress": "^13.7.0",
     "@nrwl/jest": "^13.7.0",
     "@nxext/vitest": "^13.0.0"

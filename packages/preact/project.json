@@ -26,7 +26,7 @@
       "outputs": ["coverage/packages/preact"]
     },
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "options": {
         "outputPath": "dist/packages/preact",
         "tsConfig": "packages/preact/tsconfig.lib.json",

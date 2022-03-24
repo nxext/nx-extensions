@@ -14,7 +14,7 @@ Options can be configured in the 'project.json' when defining the executor, or w
 
 Type: `string`
 
-Sveltekit command to run
+Vitest command to run
 
 #### passWithNoTests
 

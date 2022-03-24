@@ -23,7 +23,7 @@
   "schematics": "./generators.json",
   "dependencies": {
     "@nxext/vite": "^13.2.4",
-    "@nrwl/devkit": "^13.7.0"
+    "@nrwl/devkit": "^13.9.0"
   },
   "peerDependencies": {
     "solid-js": "^1.2.5",
