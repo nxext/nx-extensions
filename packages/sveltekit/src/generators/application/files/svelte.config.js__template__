@@ -9,13 +9,12 @@ const config = {
   preprocess: preprocess(),
 
   kit: {
-    adapter: adapter({ out: '../../dist/packages/skit' }),
-    outDir: resolve('./../../dist/packages/skit'),
+    adapter: adapter({ out: '../../dist/packages/<%= fileName %>' }),
+    outDir: resolve('./../../dist/packages/<%= fileName %>'),
     vite: {
       resolve: {
         alias: {
           // these are the aliases and paths to them
-          '@components': resolve('./../uikit/src'),
           '@lib': resolve('./src/lib'),
           '@utils': resolve('./src/lib/utils'),
         },
