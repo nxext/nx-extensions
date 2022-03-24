@@ -14,6 +14,7 @@ import {
 } from '@nrwl/devkit';
 import { Schema } from './schema';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/react';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 export async function applicationGenerator(tree: Tree, options: Schema) {
   const appDirectory = options.directory
@@ -25,12 +26,10 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   const { appsDir } = getWorkspaceLayout(tree);
   const appProjectRoot = normalizePath(`${appsDir}/${appDirectory}`);
 
-  await (
-    await nxApplicationGenerator(tree, {
-      ...options,
-      e2eTestRunner: 'none',
-    })
-  )();
+  const appTask = await nxApplicationGenerator(tree, {
+    ...options,
+    e2eTestRunner: 'none',
+  });
 
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.app.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.spec.json'));
@@ -97,7 +96,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     appProjectRoot,
     templateVariables
   );
-  addDependenciesToPackageJson(
+  const installTask = addDependenciesToPackageJson(
     tree,
     {},
     {
@@ -107,6 +106,8 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   if (!options.skipFormat) {
     await formatFiles(tree);
   }
+
+  return runTasksInSerial(appTask, installTask);
 }
 
 export default applicationGenerator;
