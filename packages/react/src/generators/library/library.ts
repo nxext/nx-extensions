@@ -89,7 +89,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     libProjectRoot,
     templateVariables
   );
-  addDependenciesToPackageJson(
+  const installTask = addDependenciesToPackageJson(
     tree,
     {},
     {
@@ -104,7 +104,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(libraryTask);
+  return runTasksInSerial(libraryTask, installTask);
 }
 
 export default libraryGenerator;
