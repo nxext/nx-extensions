@@ -12,7 +12,16 @@ export default async function runExecutor(
 
   const result = await runCommands(
     {
-      command: `svelte-kit ${options.command}${portOption}`,
+      commands: [
+        {
+          command: 'cp package.json ../../dist/packages/' + context.projectName,
+          description: 'coppying the package.json to dist',
+        },
+        {
+          command: `svelte-kit ${options.command}${portOption}`,
+          description: 'Executing svelte-kit command',
+        },
+      ],
       cwd: projectRoot,
       parallel: false,
       color: true,
