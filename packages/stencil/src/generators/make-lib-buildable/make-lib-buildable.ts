@@ -2,7 +2,6 @@ import {
   convertNxGenerator,
   generateFiles,
   joinPathFragments,
-  offsetFromRoot,
   readProjectConfiguration,
   updateProjectConfiguration,
   formatFiles,

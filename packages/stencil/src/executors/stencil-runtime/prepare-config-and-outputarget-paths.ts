@@ -6,7 +6,7 @@ import {
   fileExists,
   copyFile,
 } from '@nrwl/workspace/src/utilities/fileutils';
-import { joinPathFragments, readJsonFile, writeJsonFile } from '@nrwl/devkit';
+import { joinPathFragments, writeJsonFile } from '@nrwl/devkit';
 import { existsSync } from 'fs';
 import type { Config } from '@stencil/core/compiler';
 
@@ -27,19 +27,6 @@ function copyOrCreatePackageJson(pathCollection: PathCollection) {
 
   if (fileExists(pathCollection.pkgJson)) {
     copyFile(pathCollection.pkgJson, pathCollection.distDir);
-    const packageJson = readJsonFile(pathCollection.pkgJson);
-    packageJson['main'] ??= libPackageJson.main;
-    packageJson['module'] ??= libPackageJson.module;
-    packageJson['es2015'] ??= libPackageJson.es2015;
-    packageJson['es2017'] ??= libPackageJson.es2017;
-    packageJson['types'] ??= libPackageJson.types;
-    packageJson['collection'] ??= libPackageJson.collection;
-    packageJson['collection:main'] ??= libPackageJson['collection:main'];
-    packageJson['unpkg'] ??= libPackageJson.unpkg;
-    packageJson['files'] = packageJson.files
-      ? [...new Set([...packageJson.files, ...libPackageJson.files])]
-      : libPackageJson.files;
-    writeJsonFile(pathCollection.pkgJson, packageJson);
   } else {
     writeJsonFile(
       joinPathFragments(pathCollection.distDir, 'package.json'),
@@ -53,7 +40,7 @@ function calculateOutputTargetPathVariables(
   pathCollection: PathCollection,
   pathVariables: string[]
 ) {
-  return config.outputTargets.map((outputTarget) => {
+  return config.outputTargets.map((outputTarget: OutputTarget) => {
     // don't change the angular, react, vue or svelte output targets
     if (outputTarget.type === 'custom') {
       return outputTarget;
