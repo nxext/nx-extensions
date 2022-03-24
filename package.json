@@ -73,7 +73,7 @@
     "@nrwl/node": "13.8.3",
     "@nrwl/nx-cloud": "13.1.5",
     "@nrwl/nx-plugin": "13.8.3",
-    "@nrwl/react": "13.8.3",
+    "@nrwl/react": "13.9.4",
     "@nrwl/storybook": "13.8.3",
     "@nrwl/web": "13.8.3",
     "@nrwl/workspace": "13.8.3",
