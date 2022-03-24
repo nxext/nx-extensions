@@ -1,10 +1,27 @@
+import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
+import { resolve } from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: preprocess()
+  // Consult https://github.com/sveltejs/svelte-preprocess
+  // for more information about preprocessors
+  preprocess: preprocess(),
+
+  kit: {
+    adapter: adapter({ out: '../../dist/packages/skit' }),
+    outDir: resolve('./../../dist/packages/skit'),
+    vite: {
+      resolve: {
+        alias: {
+          // these are the aliases and paths to them
+          '@components': resolve('./../uikit/src'),
+          '@lib': resolve('./src/lib'),
+          '@utils': resolve('./src/lib/utils'),
+        },
+      },
+    },
+  },
 };
 
 export default config;
