@@ -3,8 +3,8 @@
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 [StencilJS](https://stenciljs.com) plugin for NX
-[Svelte](https://svelte.dev/) plugin for NX
-[SolidJS](https://https://www.solidjs.com//) plugin for NX
+[SvelteJS](https://svelte.dev) plugin for NX
+[SolidJS](https://www.solidjs.com) plugin for NX
 
 ## Install and usage
 
