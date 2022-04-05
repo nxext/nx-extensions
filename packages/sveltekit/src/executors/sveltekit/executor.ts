@@ -1,6 +1,25 @@
 import { SveltekitExecutorOptions } from './schema';
-import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
+import {
+  ExecutorContext,
+  joinPathFragments,
+  logger,
+  readJsonFile,
+} from '@nrwl/devkit';
 import { default as runCommands } from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
+import { writeToFile } from '@nrwl/workspace/src/utilities/fileutils';
+
+export function extendTsBaseConfig(projectOutput: string, projectRoot: string) {
+  const tsExtension = {
+    extends: joinPathFragments(projectRoot, 'tsconfig.base.json'),
+  };
+  const generatedTsConfig = joinPathFragments(projectOutput, 'tsconfig.json');
+
+  const file = {
+    ...tsExtension,
+    ...readJsonFile(generatedTsConfig),
+  };
+  writeToFile(generatedTsConfig, JSON.stringify(file));
+}
 
 export default async function runExecutor(
   options: SveltekitExecutorOptions,
@@ -9,11 +28,7 @@ export default async function runExecutor(
   const projectDir = context.workspace.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
   const portOption = options.command === 'dev' ? ` --port ${options.port}` : '';
-  const projectOutput = joinPathFragments(
-    context.root,
-    'dist/packages/',
-    context.projectName
-  );
+  const projectOutput = joinPathFragments(context.root, 'dist/', projectDir);
 
   const result = await runCommands(
     {
@@ -25,8 +40,12 @@ export default async function runExecutor(
           command: `mkdir -p ${projectOutput}`,
           description: 'Creating output folder',
         },
+        // Copies package.json to dist folder,
+        // otherwise sveltekit will look to the closest
+        // package.json (parent) and it might cause errors
+        // because by default nx does not set it as type : module
         {
-          command: 'cp package.json ../../dist/packages/' + context.projectName,
+          command: 'cp package.json ' + projectOutput,
           description: 'coppying the package.json to dist',
         },
         // svelte-kit on serving, looks to the nearest parent package.json
@@ -41,6 +60,7 @@ export default async function runExecutor(
     context
   );
 
+  // Extend generated config to base config
   if (result.success) {
     logger.info('Build executed...');
   } else {
