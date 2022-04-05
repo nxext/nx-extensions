@@ -1,5 +1,5 @@
 {
-  "extends": "<%= offsetFromRoot %>tsconfig.base.json",
+  "extends": "<%= sveltekitGeneratedConfig %>",
 
   "compilerOptions": {
     "moduleResolution": "node",

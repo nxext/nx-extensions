@@ -9,8 +9,8 @@ const config = {
   preprocess: preprocess(),
 
   kit: {
-    adapter: adapter({ out: '../../dist/packages/<%= fileName %>' }),
-    outDir: resolve('./../../dist/packages/<%= fileName %>'),
+    adapter: adapter({ out: './<%= distDir %>' }),
+    outDir: resolve('./<%= distDir %>'),
     vite: {
       resolve: {
         alias: {
