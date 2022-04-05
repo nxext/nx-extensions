@@ -80,7 +80,7 @@
     "@nx-plus/vue": "^12.2.0",
     "@preact/preset-vite": "^2.1.7",
     "@stencil/core": "2.14.0",
-    "@sveltejs/kit": "^1.0.0-next.301",
+    "@sveltejs/kit": "^1.0.0-next.306",
     "@swc/cli": "~0.1.55",
     "@swc/core": "^1.2.147",
     "@swc/helpers": "~0.3.3",
