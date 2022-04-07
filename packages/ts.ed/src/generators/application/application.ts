@@ -77,12 +77,7 @@ export async function applicationGenerator(
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(
-    initTask,
-    lintTask,
-    jestTask,
-    cypressTask
-  );
+  return runTasksInSerial(initTask, lintTask, jestTask, cypressTask);
 }
 
 export default applicationGenerator;

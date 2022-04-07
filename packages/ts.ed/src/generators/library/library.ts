@@ -70,10 +70,7 @@ function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
   });
 }
 
-export async function libraryGenerator(
-  host: Tree,
-  schema: TsEdLibrarySchema
-) {
+export async function libraryGenerator(host: Tree, schema: TsEdLibrarySchema) {
   const options = normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(

@@ -4,10 +4,7 @@ import {
   TargetConfiguration,
   Tree,
 } from '@nrwl/devkit';
-import {
-  createLintTarget,
-  createPackageTarget,
-} from '../../utils/targets';
+import { createLintTarget, createPackageTarget } from '../../utils/targets';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const targets: { [key: string]: TargetConfiguration } = {

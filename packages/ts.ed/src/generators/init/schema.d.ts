@@ -1,4 +1,3 @@
-
 //removed bundler?: 'vite
 export interface Schema {
   unitTestRunner: 'jest' | 'none';
