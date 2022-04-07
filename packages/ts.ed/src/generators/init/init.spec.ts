@@ -28,16 +28,16 @@ describe('init schematic', () => {
   });
 
   it('should add Ts.ED dependencies', async () => {
-      await initGenerator(tree, options);
-      const packageJson = readJson(tree, 'package.json');
+    await initGenerator(tree, options);
+    const packageJson = readJson(tree, 'package.json');
 
-      expect(packageJson.dependencies['@tsed/ajv']).toBeDefined();
-      expect(packageJson.dependencies['@tsed/common']).toBeDefined();
-      expect(packageJson.dependencies['@tsed/core']).toBeDefined();
-      expect(packageJson.dependencies['@tsed/di']).toBeDefined();
-      expect(packageJson.dependencies['@tsed/engines']).toBeDefined();
-      expect(packageJson.dependencies['@tsed/exceptions']).toBeDefined();
-      expect(packageJson.dependencies['@tsed/json-mapper']).toBeDefined();
-      expect(packageJson.dependencies['@tsed/platform-express']).toBeDefined();
-    });
+    expect(packageJson.dependencies['@tsed/ajv']).toBeDefined();
+    expect(packageJson.dependencies['@tsed/common']).toBeDefined();
+    expect(packageJson.dependencies['@tsed/core']).toBeDefined();
+    expect(packageJson.dependencies['@tsed/di']).toBeDefined();
+    expect(packageJson.dependencies['@tsed/engines']).toBeDefined();
+    expect(packageJson.dependencies['@tsed/exceptions']).toBeDefined();
+    expect(packageJson.dependencies['@tsed/json-mapper']).toBeDefined();
+    expect(packageJson.dependencies['@tsed/platform-express']).toBeDefined();
+  });
 });

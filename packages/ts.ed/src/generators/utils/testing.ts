@@ -39,7 +39,7 @@ export async function createTestProject(
       unitTestRunner: unitTestrunner,
       e2eTestRunner: e2eTestrunner,
       buildable: true,
-      skipFormat: false
+      skipFormat: false,
     });
   }
 

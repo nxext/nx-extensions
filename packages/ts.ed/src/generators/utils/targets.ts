@@ -2,7 +2,10 @@ import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
 import { NormalizedSchema as LibrarySchema } from '../library/schema';
 import { NormalizedSchema as ApplicationSchema } from '../application/schema';
 
-export function createTargets(projectType: ProjectType, options: LibrarySchema | ApplicationSchema): {
+export function createTargets(
+  projectType: ProjectType,
+  options: LibrarySchema | ApplicationSchema
+): {
   [key: string]: TargetConfiguration;
 } {
   return {
@@ -42,16 +45,16 @@ export function createBuildTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: "@nrwl/node:build",
-    outputs: ["{options.outputPath}"],
+    executor: '@nrwl/node:build',
+    outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
       main: `${options.projectRoot}/src/index.ts`,
-      tsConfig: `${options.projectRoot}/tsconfig.build.json`
+      tsConfig: `${options.projectRoot}/tsconfig.build.json`,
     },
     configurations: {
-      production: {}
-    }
+      production: {},
+    },
   };
 }
 
@@ -61,10 +64,10 @@ export function createServeTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: "@nrwl/node:execute",
+    executor: '@nrwl/node:execute',
     options: {
-      buildTarget: `${options.name}:build`
-    }
+      buildTarget: `${options.name}:build`,
+    },
   };
 }
 
@@ -91,7 +94,7 @@ export function createTestTarget(
     executor: '@nrwl/jest:jest',
     options: {
       jestConfig: joinPathFragments(options.projectRoot, 'jest.config.js'),
-      passwithNoTests: true
+      passwithNoTests: true,
     },
   };
 }

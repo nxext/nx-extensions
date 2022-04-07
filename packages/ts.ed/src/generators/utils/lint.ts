@@ -1,12 +1,16 @@
 import { offsetFromRoot } from '@nrwl/devkit';
-import { eslintConfigPrettierVersion, eslintPluginPrettierVersion, prettierVersion } from './versions';
+import {
+  eslintConfigPrettierVersion,
+  eslintPluginPrettierVersion,
+  prettierVersion,
+} from './versions';
 
 export const extraEslintDependencies = {
   dependencies: {},
   devDependencies: {
-    "prettier": prettierVersion,
-    "eslint-config-prettier": eslintConfigPrettierVersion,
-    "eslint-plugin-prettier": eslintPluginPrettierVersion
+    prettier: prettierVersion,
+    'eslint-config-prettier': eslintConfigPrettierVersion,
+    'eslint-plugin-prettier': eslintPluginPrettierVersion,
   },
 };
 
