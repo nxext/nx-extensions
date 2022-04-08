@@ -19,6 +19,7 @@ import {
   expressTypesVersion,
   methodOverrideTypesVersion,
   tsedLoggerVersion,
+  nrwlVersion,
 } from '../../utils/versions';
 
 export function updateDependencies(tree: Tree) {
@@ -44,6 +45,8 @@ export function updateDependencies(tree: Tree) {
       '@tsed/platform-response-filter': tsedVersion,
       '@tsed/platform-views': tsedVersion,
       '@tsed/schema': tsedVersion,
+      '@nrwl/js': nrwlVersion,
+      "@nrwl/node": nrwlVersion,
       compression: compressionVersion,
       'cookie-parser': cookieParserVersion,
       'method-override': methodOverrideVersion,

@@ -24,14 +24,12 @@ export function createPackageTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nxext/vite:package',
+     executor: '@nrwl/js:tsc',
     outputs: ['{options.outputPath}'],
     options: {
-      entryFile: `src/index.ts`,
-      frameworkConfigFile: '@nxext/svelte/plugins/vite',
       outputPath: joinPathFragments('dist', options.projectRoot),
-      assets: [{ glob: '/*', input: './public/**', output: './' }],
-      tsConfig: `${options.projectRoot}/tsconfig.${tsconfigAddition}.json`,
+      main: `${options.projectRoot}/src/index.ts`,
+      tsConfig: `${options.projectRoot}/tsconfig.build.json`,
     },
     configurations: {
       production: {},
@@ -45,7 +43,7 @@ export function createBuildTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nrwl/node:build',
+    executor: '@nrwl/js:tsc',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
@@ -64,10 +62,10 @@ export function createServeTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nrwl/node:execute',
+    executor: "@nrwl/node:node",
     options: {
-      buildTarget: `${options.name}:build`,
-    },
+      "buildTarget": `${options.name}:build`
+    }
   };
 }
 
