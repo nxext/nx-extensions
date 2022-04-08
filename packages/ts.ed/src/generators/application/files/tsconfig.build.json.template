@@ -2,7 +2,6 @@
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "./dist",
     "moduleResolution": "node",
     "declaration": true,
     "noResolve": false,

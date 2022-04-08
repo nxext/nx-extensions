@@ -27,12 +27,9 @@
       "es7",
       "dom",
       "ESNext.AsyncIterable"
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
     ]
   },
 
   "include": ["src/**/*"],
-  "exclude": ["**/*.spec.ts", "**/*_spec.ts", "public/*", "dist", "test"],
+  "exclude": ["**/*.spec.ts", "**/*_spec.ts", "public/*"],
 }
