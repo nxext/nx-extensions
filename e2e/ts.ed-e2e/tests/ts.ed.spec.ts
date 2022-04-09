@@ -23,7 +23,7 @@ describe('ts.ed e2e', () => {
         `generate @nxext/ts.ed:app ${plugin} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
+        checkFilesExist(`apps/subdir/${plugin}/src/index.ts`)
       ).not.toThrow();
     }, 120000);
   });
@@ -35,7 +35,7 @@ describe('ts.ed e2e', () => {
       await runNxCommandAsync(
         `generate @nxext/ts.ed:app ${plugin} --tags e2etag,e2ePackage`
       );
-      const project = readJson(`libs/${plugin}/project.json`);
+      const project = readJson(`appss/${plugin}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     }, 120000);
   });
