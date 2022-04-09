@@ -12,7 +12,7 @@ describe('ts.ed e2e', () => {
     await runNxCommandAsync(`generate @nxext/ts.ed:app ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain('Executor ran');
+    expect(result.stdout).toContain(`Done compiling TypeScript files for project "${plugin}".`);
   }, 120000);
 
   describe('--directory', () => {
