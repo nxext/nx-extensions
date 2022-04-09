@@ -12,7 +12,9 @@ describe('ts.ed e2e', () => {
     await runNxCommandAsync(`generate @nxext/ts.ed:app ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain(`Done compiling TypeScript files for project "${plugin}".`);
+    expect(result.stdout).toContain(
+      `Done compiling TypeScript files for project "${plugin}".`
+    );
   }, 120000);
 
   describe('--directory', () => {
@@ -35,7 +37,7 @@ describe('ts.ed e2e', () => {
       await runNxCommandAsync(
         `generate @nxext/ts.ed:app ${plugin} --tags e2etag,e2ePackage`
       );
-      const project = readJson(`appss/${plugin}/project.json`);
+      const project = readJson(`apps/${plugin}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     }, 120000);
   });
