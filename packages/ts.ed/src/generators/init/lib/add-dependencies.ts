@@ -46,7 +46,7 @@ export function updateDependencies(tree: Tree) {
       '@tsed/platform-views': tsedVersion,
       '@tsed/schema': tsedVersion,
       '@nrwl/js': nrwlVersion,
-      "@nrwl/node": nrwlVersion,
+      '@nrwl/node': nrwlVersion,
       compression: compressionVersion,
       'cookie-parser': cookieParserVersion,
       'method-override': methodOverrideVersion,

@@ -24,7 +24,7 @@ export function createPackageTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-     executor: '@nrwl/js:tsc',
+    executor: '@nrwl/js:tsc',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
@@ -62,10 +62,10 @@ export function createServeTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: "@nrwl/node:node",
+    executor: '@nrwl/node:node',
     options: {
-      "buildTarget": `${options.name}:build`
-    }
+      buildTarget: `${options.name}:build`,
+    },
   };
 }
 
