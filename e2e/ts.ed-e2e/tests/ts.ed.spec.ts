@@ -12,9 +12,7 @@ describe('ts.ed e2e', () => {
     await runNxCommandAsync(`generate @nxext/ts.ed:app ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain(
-      `webpack compiled`
-    );
+    expect(result.stdout).toContain(`webpack compiled`);
   }, 120000);
 
   describe('--directory', () => {
