@@ -43,7 +43,7 @@ export function createBuildTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nrwl/js:tsc',
+    executor: '@nrwl/node:webpack',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
