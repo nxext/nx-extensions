@@ -1,5 +1,0 @@
-function doNothingLoudly()  {
-  console.log('empty lib');
-}
-
-doNothingLoudly();

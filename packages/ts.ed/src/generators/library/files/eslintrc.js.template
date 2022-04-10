@@ -18,10 +18,6 @@ module.exports = {
     {
       "files": ["*.js", "*.jsx"],
       "rules": {}
-    },
-    {
-      "files": ["*.svelte"],
-      "processor": "svelte3/svelte3"
     }
   ],
   "settings": {
