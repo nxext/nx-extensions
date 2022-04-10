@@ -24,12 +24,12 @@ export function createPackageTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nrwl/js:tsc',
+    executor: '@nrwl/node:execute',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
       main: `${options.projectRoot}/src/index.ts`,
-      tsConfig: `${options.projectRoot}/tsconfig.build.json`,
+      tsConfig: `${options.projectRoot}/tsconfig.${tsconfigAddition}.json`,
     },
     configurations: {
       production: {},
@@ -48,7 +48,7 @@ export function createBuildTarget(
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
       main: `${options.projectRoot}/src/index.ts`,
-      tsConfig: `${options.projectRoot}/tsconfig.build.json`,
+      tsConfig: `${options.projectRoot}/tsconfig.${tsconfigAddition}.json`,
     },
     configurations: {
       production: {},
