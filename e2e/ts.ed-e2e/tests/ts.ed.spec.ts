@@ -13,7 +13,7 @@ describe('ts.ed e2e', () => {
 
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(result.stdout).toContain(
-      `Done compiling TypeScript files for project "${plugin}".`
+      `webpack compiled`
     );
   }, 120000);
 
