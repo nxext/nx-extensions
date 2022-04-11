@@ -33,6 +33,27 @@ describe('add-outputtarget angular', () => {
       ).toBeTruthy();
     });
 
+    it('should add default directive definitions', async () => {
+      await outputtargetGenerator(tree, angularOptions);
+
+      const fileName = names(projectName + '-angular').fileName;
+      expect(
+        tree
+          .read(`libs/${projectName}-angular/src/lib/${fileName}.module.ts`)
+          .includes(`import { DIRECTIVES } from '../generated/directives';`)
+      ).toBeTruthy();
+      expect(
+        tree
+          .read(`libs/${projectName}-angular/src/lib/${fileName}.module.ts`)
+          .includes(`declarations: [...DIRECTIVES]`)
+      ).toBeTruthy();
+      expect(
+        tree
+          .read(`libs/${projectName}-angular/src/lib/${fileName}.module.ts`)
+          .includes(`exports: [...DIRECTIVES]`)
+      ).toBeTruthy();
+    });
+
     it('should add angularOutputTarget', async () => {
       await outputtargetGenerator(tree, angularOptions);
 
