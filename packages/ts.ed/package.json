@@ -2,5 +2,9 @@
   "name": "@nxext/ts.ed",
   "version": "0.0.1",
   "main": "src/index.js",
-  "generators": "./generators.json"
+  "generators": "./generators.json",
+  "devDependencies": {
+    "@nrwl/cypress": "^13.10.1",
+    "@nrwl/linter": "^13.10.1"
+  }
 }
