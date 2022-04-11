@@ -1,9 +1,11 @@
 import {
-  addDependenciesToPackageJson, applyChangesToString,
+  addDependenciesToPackageJson,
+  applyChangesToString,
   convertNxGenerator,
-  getWorkspaceLayout, joinPathFragments,
+  getWorkspaceLayout,
+  joinPathFragments,
   readProjectConfiguration,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
@@ -15,7 +17,10 @@ import { addOutputTarget } from '../../../stencil-core-utils';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 
-export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
+export async function prepareVueLibrary(
+  host: Tree,
+  options: AddOutputtargetSchematicSchema
+) {
   const vueProjectName = `${options.projectName}-vue`;
   const { libsDir } = getWorkspaceLayout(host);
 
@@ -23,13 +28,18 @@ export async function prepareVueLibrary(host: Tree, options: AddOutputtargetSche
   const libraryTarget = await generators.libraryGenerator(host, {
     name: vueProjectName,
     publishable: options.publishable,
+    vueVersion: 3,
+    unitTestRunner: 'jest',
+    skipTsConfig: false,
+    skipFormat: false,
+    babel: false,
   });
 
   addDependenciesToPackageJson(
     host,
     {},
     {
-      '@stencil/vue-output-target': STENCIL_OUTPUTTARGET_VERSION['vue']
+      '@stencil/vue-output-target': STENCIL_OUTPUTTARGET_VERSION['vue'],
     }
   );
 
@@ -52,15 +62,24 @@ function addVueOutputtarget(
   stencilConfigSource: ts.SourceFile,
   packageName: string
 ) {
-  const reactProjectConfig = readProjectConfiguration(host, `${projectName}-vue`);
+  const reactProjectConfig = readProjectConfiguration(
+    host,
+    `${projectName}-vue`
+  );
   const realtivePath = getRelativePath(
     getDistDir(stencilProjectConfig.root),
     reactProjectConfig.root
   );
-  const proxyPath = joinPathFragments(realtivePath, 'src/generated/components.ts')
+  const proxyPath = joinPathFragments(
+    realtivePath,
+    'src/generated/components.ts'
+  );
 
   const changes = applyChangesToString(stencilConfigSource.text, [
-    ...addImport(stencilConfigSource, `import { vueOutputTarget, ComponentModelConfig } from '@stencil/vue-output-target';`),
+    ...addImport(
+      stencilConfigSource,
+      `import { vueOutputTarget, ComponentModelConfig } from '@stencil/vue-output-target';`
+    ),
     ...addOutputTarget(
       stencilConfigSource,
       `
@@ -70,17 +89,30 @@ function addVueOutputtarget(
         componentModels: vueComponentModels,
       })
       `
-    )
+    ),
   ]);
   host.write(stencilConfigPath, changes);
 
-  addGlobal(host, stencilConfigSource, stencilConfigPath, 'const vueComponentModels: ComponentModelConfig[] = [];');
+  addGlobal(
+    host,
+    stencilConfigSource,
+    stencilConfigPath,
+    'const vueComponentModels: ComponentModelConfig[] = [];'
+  );
 }
 
-export async function addVueGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
+export async function addVueGenerator(
+  host: Tree,
+  options: AddOutputtargetSchematicSchema
+) {
   const libraryTarget = await prepareVueLibrary(host, options);
 
-  const { stencilProjectConfig, stencilConfigPath, stencilConfigSource, packageName } = calculateStencilSourceOptions(host, options.projectName);
+  const {
+    stencilProjectConfig,
+    stencilConfigPath,
+    stencilConfigSource,
+    packageName,
+  } = calculateStencilSourceOptions(host, options.projectName);
 
   addVueOutputtarget(
     host,
