@@ -2,7 +2,6 @@ import { spawn, spawnSync } from 'child_process';
 import {
   ionicVersion,
   puppeteer,
-  puppeteerType,
   STENCIL_OUTPUTTARGET_VERSION,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
@@ -69,7 +68,6 @@ const stencilpkgs = [
   },
 
   { pkg: 'puppeteer', version: puppeteer },
-  { pkg: '@types/puppeteer', version: puppeteerType },
 ];
 
 stencilpkgs.forEach(({ pkg, version }) => {
