@@ -3,7 +3,6 @@ import {
   autoprefixerVersion,
   ionicVersion,
   puppeteer,
-  puppeteerType,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
   stencilVersion,
@@ -13,7 +12,7 @@ import { SupportedStyles } from '../stencil-core-utils';
 export enum AppType {
   application = 'application',
   library = 'library',
-  pwa = 'pwa'
+  pwa = 'pwa',
 }
 
 export type ProjectType = 'application' | 'library';
@@ -31,7 +30,6 @@ const stencilDependencies = {
   '@stencil/core': stencilVersion,
 };
 const e2ePuppeteerDependencies = {
-  '@types/puppeteer': puppeteerType,
   puppeteer: puppeteer,
 };
 
