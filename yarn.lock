@@ -1945,7 +1945,7 @@
     jest-util "^27.5.1"
     slash "^3.0.0"
 
-"@jest/core@^27.3.1", "@jest/core@^27.5.1":
+"@jest/core@^27.5.1":
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/@jest/core/-/core-27.5.1.tgz#267ac5f704e09dc52de2922cbf3af9edcd64b626"
   integrity sha512-AK6/UTrvQD0Cd24NSqmIA6rKsu0tKIxfiCducZvqxYdmMisOYAsdItspT+fQDQYARPf8XgjAFZi0ogW2agH5nQ==
@@ -4293,10 +4293,10 @@
   resolved "https://registry.yarnpkg.com/@verdaccio/streams/-/streams-10.2.0.tgz#e01d2bfdcfe8aa2389f31bc6b72a602628bd025b"
   integrity sha512-FaIzCnDg0x0Js5kSQn1Le3YzDHl7XxrJ0QdIw5LrDUmLsH3VXNi4/NMlSHnw5RiTTMs4UbEf98V3RJRB8exqJA==
 
-"@verdaccio/ui-theme@6.0.0-6-next.22":
-  version "6.0.0-6-next.22"
-  resolved "https://registry.yarnpkg.com/@verdaccio/ui-theme/-/ui-theme-6.0.0-6-next.22.tgz#55a0cbcbee382195a31620d3968a1512eaea2a9e"
-  integrity sha512-MuuIcNLSjm8ZzibIXyzLae8Omsq7btha9JuRf1oBOA/oHRt+ZsUlVsHlJgA5w49FWa4WU74724USWD0ZpT7Y5w==
+"@verdaccio/ui-theme@6.0.0-6-next.23":
+  version "6.0.0-6-next.23"
+  resolved "https://registry.yarnpkg.com/@verdaccio/ui-theme/-/ui-theme-6.0.0-6-next.23.tgz#268da5091e1e9264fe87b8b94c0ac596e9e54879"
+  integrity sha512-GXpEPdZJm6o+2VAxzUsKaiDriS+5enqr7Gjrb2Bttcd+IkOuC8lDsoFHxIv0ib4JudZJ/aKsRYL3TN2AetPFjw==
 
 "@vitejs/plugin-react@^1.1.4":
   version "1.2.0"
@@ -7201,10 +7201,10 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-dayjs@1.10.8:
-  version "1.10.8"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.8.tgz#267df4bc6276fcb33c04a6735287e3f429abec41"
-  integrity sha512-wbNwDfBHHur9UOzNUjeKUOJ0fCb0a52Wx0xInmQ7Y8FstyajiV1NmK1e00cxsr9YrE9r7yAChE0VvpuY5Rnlow==
+dayjs@1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.0.tgz#009bf7ef2e2ea2d5db2e6583d2d39a4b5061e805"
+  integrity sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   version "2.6.9"
@@ -10915,7 +10915,7 @@ jest-circus@^27.2.2, jest-circus@^27.5.1:
     stack-utils "^2.0.3"
     throat "^6.0.1"
 
-jest-cli@^27.3.1:
+jest-cli@^27.5.1:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-27.5.1.tgz#278794a6e6458ea8029547e6c6cbf673bd30b145"
   integrity sha512-Hc6HOOwYq4/74/c62dEE3r5elx8wjYqxY0r0G/nFrLDPMFRu6RA/u8qINOIkvhxG7mMQ5EJsOGfRpI8L6eFUVw==
@@ -11341,14 +11341,14 @@ jest-worker@^27.0.2, jest-worker@^27.2.2, jest-worker@^27.4.5, jest-worker@^27.5
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-jest@27.3.1:
-  version "27.3.1"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-27.3.1.tgz#b5bab64e8f56b6f7e275ba1836898b0d9f1e5c8a"
-  integrity sha512-U2AX0AgQGd5EzMsiZpYt8HyZ+nSVIh5ujQ9CPp9EQZJMjXIiSZpJNweZl0swatKRoqHWgGKM3zaSwm4Zaz87ng==
+jest@27.5.1:
+  version "27.5.1"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-27.5.1.tgz#dadf33ba70a779be7a6fc33015843b51494f63fc"
+  integrity sha512-Yn0mADZB89zTtjkPJEXwrac3LHudkQMR+Paqa8uxJHCBr9agxztUifWCyiYrjhMPBoUVBjyny0I7XH6ozDr7QQ==
   dependencies:
-    "@jest/core" "^27.3.1"
+    "@jest/core" "^27.5.1"
     import-local "^3.0.2"
-    jest-cli "^27.3.1"
+    jest-cli "^27.5.1"
 
 js-message@1.0.7:
   version "1.0.7"
@@ -17415,24 +17415,24 @@ verdaccio-htpasswd@10.3.0:
     http-errors "2.0.0"
     unix-crypt-td-js "1.1.4"
 
-verdaccio@^5.8.0:
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/verdaccio/-/verdaccio-5.8.0.tgz#c6986f9fb9f92d4910cbb514d66474214ebe7b03"
-  integrity sha512-g8CWr57F8pn2Vio8MCO7kJuUNTp9cl6/exr7HR6fYmnhr+jv1Fcl5I7iR49UkD6YfDoYtZcWdFgdCBVy/hpDbg==
+verdaccio@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/verdaccio/-/verdaccio-5.9.0.tgz#bc3bc7107504eef9bfe3b85a859eb8cc7013e88f"
+  integrity sha512-Ah2xssdTIx2fzBdnYFc5Tnlq9AIb2M0V9IsK9axDvuT5IIxeaZi2EjRtvlP2zj1TH/hHMVyDnhjZ3o7qc22I5w==
   dependencies:
     "@verdaccio/commons-api" "10.2.0"
     "@verdaccio/local-storage" "10.2.0"
     "@verdaccio/readme" "10.3.2"
     "@verdaccio/streams" "10.2.0"
-    "@verdaccio/ui-theme" "6.0.0-6-next.22"
+    "@verdaccio/ui-theme" "6.0.0-6-next.23"
     JSONStream "1.3.5"
     async "3.2.3"
-    body-parser "1.19.1"
+    body-parser "1.19.2"
     clipanion "3.1.0"
     compression "1.7.4"
     cookies "0.8.0"
     cors "2.8.5"
-    dayjs "1.10.8"
+    dayjs "1.11.0"
     debug "^4.3.3"
     envinfo "7.8.1"
     eslint-import-resolver-node "0.3.6"
