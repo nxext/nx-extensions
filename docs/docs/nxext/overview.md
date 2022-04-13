@@ -8,6 +8,7 @@
 | [`@nxext/svelte`](../svelte/overview)       | An Nx plugin for development of [Svelte](https://svelte.dev/) applications.                     |
 | [`@nxext/solid`](../solid/overview)         | An Nx plugin for development of [SolidJS](https://www.solidjs.com/) applications.               |
 | [`@nxext/vite`](../vite/overview)           | An Nx plugin for development with [Vite](https://vitejs.dev/).                                  |
+| [`@nxext/vitest`](../vitest/overview)       | An Nx plugin for development with [Vitest](https://vitest.dev/).                                |
 | [`@nxext/react`](../react/overview)         | An Nx plugin for development with [React](https://reactjs.org/).                                |
 | [`@nxext/preact`](../preact/overview)       | An Nx plugin for development with [Preact](https://reactjs.org/).                               |
 | [`@nxext/sveltekit`](../sveltekit/overview) | (Beta) An NX plugin for development with [SvelteKit](https://kit.svelte.dev/) applications.     |
