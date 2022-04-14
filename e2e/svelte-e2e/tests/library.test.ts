@@ -77,7 +77,7 @@ describe('svelte e2e', () => {
     it('should be able to run tests with jest', async () => {
       const plugin = uniq('sveltelibtests');
       await runNxCommandAsync(
-        `generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none'`
+        `generate @nxext/svelte:lib ${plugin} --unitTestRunner=jest --e2eTestRunner='none'`
       );
       await runNxCommandAsync(
         `generate @nxext/svelte:component test --project=${plugin}`

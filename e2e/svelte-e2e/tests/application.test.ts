@@ -6,7 +6,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { ensureNxProjectWithDeps } from '../../utils/testing';
 
-describe('svelte e2e', () => {
+xdescribe('svelte e2e', () => {
   beforeAll(() => {
     ensureNxProjectWithDeps('@nxext/svelte', 'dist/packages/svelte', [
       ['@nxext/vite', 'dist/packages/vite'],
@@ -72,7 +72,7 @@ describe('svelte e2e', () => {
     it('should be able to run tests with jest', async () => {
       const plugin = uniq('svelteapptests');
       await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --e2eTestRunner='none'`
+        `generate @nxext/svelte:app ${plugin} --unitTestRunner=jest --e2eTestRunner='none'`
       );
       await runNxCommandAsync(
         `generate @nxext/svelte:component test --project=${plugin}`
