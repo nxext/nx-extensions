@@ -1,4 +1,4 @@
 export interface Schema {
-  unitTestRunner?: 'jest' | 'none';
+  unitTestRunner?: 'jest' | 'vitest' | 'none';
   skipFormat?: boolean;
 }

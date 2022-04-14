@@ -1,4 +1,4 @@
-export type FrameworkType = 'generic' | 'svelte';
+export type FrameworkType = 'generic' | 'svelte' | 'react';
 
 export interface VitestProjectGeneratorSchema {
   project: string;

@@ -10,7 +10,7 @@ export interface Schema {
   pascalCaseFiles?: boolean;
   routing?: boolean;
   appProject?: string;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'jest' | 'vitest' | 'none';
   linter: Linter;
   component?: boolean;
   publishable?: boolean;
@@ -21,4 +21,10 @@ export interface Schema {
   strict?: boolean;
   setParserOptionsProject?: boolean;
   standaloneConfig?: boolean;
+}
+
+export interface NormalizedSchema extends Schema {
+  projectName: string;
+  projectRoot: string;
+  parsedTags: string[];
 }

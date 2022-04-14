@@ -4,13 +4,14 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('react e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/react', 'dist/packages/react', [
-      ['@nxext/vite', 'dist/packages/vite'],
-    ]);
+    ensureNxProjectAndPrepareDeps('@nxext/react', 'dist/packages/react', {
+      '@nxext/vite': 'dist/packages/vite',
+      '@nxext/vitest': 'dist/packages/vitest',
+    });
   });
 
   describe('react app', () => {
@@ -48,6 +49,20 @@ describe('react e2e', () => {
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
       expect(result.stdout).toContain('All files pass linting');
+    });
+
+    it('should be able run the tests', async () => {
+      const plugin = uniq('reactapp');
+      await runNxCommandAsync(`generate @nxext/react:app ${plugin}`);
+
+      await runNxCommandAsync(
+        `generate @nrwl/react:c testcomp --project=${plugin} --export=false`
+      );
+
+      const result = await runNxCommandAsync(`test ${plugin}`);
+
+      expect(result.stdout).toContain('1 passed');
+      expect(result.stdout).toContain('Tests executed...');
     });
   });
 
@@ -90,6 +105,20 @@ describe('react e2e', () => {
           `dist/libs/${plugin}/${plugin}.umd.js`
         )
       ).not.toThrow();
+    });
+
+    it('should be able run the tests', async () => {
+      const plugin = uniq('reactlib');
+      await runNxCommandAsync(`generate @nxext/react:lib ${plugin}`);
+
+      await runNxCommandAsync(
+        `generate @nrwl/react:c testcomp --project=${plugin} --export=false`
+      );
+
+      const result = await runNxCommandAsync(`test ${plugin}`);
+
+      expect(result.stdout).toContain('1 passed');
+      expect(result.stdout).toContain('Tests executed...');
     });
   });
 });

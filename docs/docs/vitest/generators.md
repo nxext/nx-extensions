@@ -62,6 +62,6 @@ Default: `generic`
 
 Type: `string`
 
-Possible values: `generic`, `svelte`
+Possible values: `generic`, `svelte`, `react`
 
 Framework to use.

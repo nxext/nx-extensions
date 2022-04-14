@@ -1,4 +1,5 @@
 import {
+  addDependenciesToPackageJson,
   convertNxGenerator,
   formatFiles,
   generateFiles,
@@ -10,6 +11,7 @@ import {
 import * as path from 'path';
 import { VitestProjectGeneratorSchema } from './schema';
 import vitestInitGenerator from '../init/init';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 interface NormalizedSchema extends VitestProjectGeneratorSchema {
   projectRoot: string;
@@ -56,6 +58,13 @@ function addVitestExecutor(host: Tree, options: NormalizedSchema) {
   updateProjectConfiguration(host, options.project, projectConfiguration);
 }
 
+function addDependencies(host: Tree, options: NormalizedSchema) {
+  if (options.framework !== 'react') {
+    return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
+  }
+  return addDependenciesToPackageJson(host, {}, { 'happy-dom': '^2.55.0' });
+}
+
 export async function vitestProjectGenerator(
   host: Tree,
   options: VitestProjectGeneratorSchema
@@ -66,7 +75,9 @@ export async function vitestProjectGenerator(
   addVitestExecutor(host, normalizedOptions);
   await formatFiles(host);
 
-  return initTask;
+  const installTask = addDependencies(host, normalizedOptions);
+
+  return runTasksInSerial(initTask, installTask);
 }
 
 export default vitestProjectGenerator;

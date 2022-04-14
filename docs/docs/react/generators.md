@@ -180,11 +180,11 @@ Add tags to the application (used for linting).
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `jest`, `vitest`, `none`
 
 Test runner to use for unit tests.
 
@@ -384,10 +384,10 @@ Add tags to the library (used for linting).
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `jest`, `vitest`, `none`
 
 Test runner to use for unit tests.

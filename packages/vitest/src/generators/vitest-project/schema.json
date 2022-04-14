@@ -17,7 +17,7 @@
     "framework": {
       "description": "Framework to use.",
       "type": "string",
-      "enum": ["generic", "svelte"],
+      "enum": ["generic", "svelte", "react"],
       "default": "generic"
     }
   },

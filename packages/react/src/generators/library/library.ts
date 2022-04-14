@@ -13,9 +13,11 @@ import {
   addDependenciesToPackageJson,
   updateJson,
 } from '@nrwl/devkit';
-import { Schema } from './schema';
+import { NormalizedSchema, Schema } from './schema';
 import { libraryGenerator as nxLibraryGenerator } from '@nrwl/react';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { addVitest } from './lib/add-vitest';
+import { vitePluginReactVersion } from '../utils/versions';
 
 function updateLibPackageNpmScope(
   host: Tree,
@@ -36,27 +38,42 @@ function updateLibPackageNpmScope(
   });
 }
 
-export async function libraryGenerator(tree: Tree, options: Schema) {
-  const appDirectory = options.directory
+function normalizeOptions(tree: Tree, options: Schema): NormalizedSchema {
+  const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${names(options.name).fileName}`
     : names(options.name).fileName;
-
-  const appProjectName = appDirectory.replace(new RegExp('/', 'g'), '-');
-
   const { libsDir } = getWorkspaceLayout(tree);
-  const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
+  const projectRoot = normalizePath(`${libsDir}/${projectDirectory}`);
+  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
+  const parsedTags = options.tags
+    ? options.tags.split(',').map((s) => s.trim())
+    : [];
+
+  return {
+    ...options,
+    projectRoot,
+    projectName,
+    parsedTags,
+  };
+}
+
+export async function libraryGenerator(tree: Tree, schema: Schema) {
+  const options = normalizeOptions(tree, schema);
 
   const libraryTask = await nxLibraryGenerator(tree, {
     ...options,
+    unitTestRunner:
+      options.unitTestRunner === 'vitest' ? 'none' : options.unitTestRunner,
     skipTsConfig: false,
   });
+  const vitestTask = await addVitest(tree, options);
 
-  tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.lib.json'));
-  tree.delete(joinPathFragments(libProjectRoot, 'tsconfig.json'));
+  tree.delete(joinPathFragments(options.projectRoot, 'tsconfig.lib.json'));
+  tree.delete(joinPathFragments(options.projectRoot, 'tsconfig.json'));
 
   if (options.publishable || options.buildable) {
-    const projectConfig = readProjectConfiguration(tree, appProjectName);
-    updateProjectConfiguration(tree, appProjectName, {
+    const projectConfig = readProjectConfiguration(tree, options.projectName);
+    updateProjectConfiguration(tree, options.projectName, {
       ...projectConfig,
       targets: {
         ...projectConfig.targets,
@@ -65,7 +82,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
           executor: '@nxext/vite:package',
           outputs: ['{options.outputPath}'],
           options: {
-            outputPath: joinPathFragments('dist', libProjectRoot),
+            outputPath: joinPathFragments('dist', options.projectRoot),
             configFile: '@nxext/vite/plugins/vite-package',
             frameworkConfigFile: '@nxext/react/plugins/vite',
             entryFile: joinPathFragments('src', 'index.ts'),
@@ -79,32 +96,32 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     ...names(options.name),
     ...options,
     tmpl: '',
-    offsetFromRoot: offsetFromRoot(libProjectRoot),
-    projectName: appProjectName,
+    offsetFromRoot: offsetFromRoot(options.projectRoot),
+    projectName: options.projectName,
   };
 
   generateFiles(
     tree,
     joinPathFragments(__dirname, './files'),
-    libProjectRoot,
+    options.projectRoot,
     templateVariables
   );
   const installTask = addDependenciesToPackageJson(
     tree,
     {},
     {
-      '@vitejs/plugin-react': '^1.1.0',
+      '@vitejs/plugin-react': vitePluginReactVersion,
     }
   );
 
   if (options.publishable || options.buildable) {
-    updateLibPackageNpmScope(tree, libProjectRoot, appProjectName);
+    updateLibPackageNpmScope(tree, options.projectRoot, options.projectName);
   }
   if (!options.skipFormat) {
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(libraryTask, installTask);
+  return runTasksInSerial(libraryTask, installTask, vitestTask);
 }
 
 export default libraryGenerator;

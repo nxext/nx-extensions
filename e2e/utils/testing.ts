@@ -8,7 +8,7 @@ import { readJsonFile, writeJsonFile } from '@nrwl/devkit';
 import { dirname } from 'path';
 import { execSync } from 'child_process';
 import { ensureDirSync } from 'fs-extra';
-import { appRootPath } from '@nrwl/tao/src/utils/app-root';
+import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 
 interface PackageJson {
   name: string;
@@ -58,7 +58,7 @@ function patchPackageJsonFromDependencies(
     (acc, cur) => {
       if (cur.startsWith('@nxext/')) {
         if (optionalNpmPackages[cur]) {
-          acc[cur] = `file:${appRootPath}/${optionalNpmPackages[cur]}`;
+          acc[cur] = `file:${workspaceRoot}/${optionalNpmPackages[cur]}`;
           patchPackageJsonFromDependencies(
             cur,
             optionalNpmPackages[cur],

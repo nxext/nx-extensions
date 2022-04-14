@@ -7,7 +7,7 @@ export interface Schema {
   skipFormat: boolean;
   directory?: string;
   tags?: string;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'jest' | 'vitest' | 'none';
   babelJest: boolean;
   linter: Linter;
   pascalCaseFiles?: boolean;
@@ -23,10 +23,6 @@ export interface Schema {
 
 export interface NormalizedSchema extends Schema {
   projectName: string;
-  appProjectRoot: string;
-  e2eProjectName: string;
+  projectRoot: string;
   parsedTags: string[];
-  fileName: string;
-  styledModule: null | SupportedStyles;
-  hasStyles: boolean;
 }
