@@ -77,7 +77,7 @@
     "@nrwl/linter": "13.10.1",
     "@nrwl/node": "13.10.1",
     "@nrwl/nx-cloud": "13.2.2",
-    "@nrwl/nx-plugin": "13.10.1",
+    "@nrwl/nx-plugin": "13.10.2",
     "@nrwl/react": "13.10.1",
     "@nrwl/storybook": "13.10.1",
     "@nrwl/web": "13.10.1",
