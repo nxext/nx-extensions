@@ -98,7 +98,7 @@ Add tags to the project (used for linting)
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
@@ -206,7 +206,7 @@ Add tags to the project (used for linting)
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
