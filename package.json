@@ -97,7 +97,7 @@
     "@typescript-eslint/parser": "5.18.0",
     "@vitejs/plugin-react": "^1.3.1",
     "all-contributors-cli": "^6.20.0",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.4",
     "chalk": "4.1.0",
     "commitizen": "^4.2.4",
     "cz-customizable": "^6.3.0",
