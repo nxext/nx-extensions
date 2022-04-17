@@ -1,4 +1,4 @@
-export const tsedVersion = '^6.110.1';
+export const tsedVersion = '^6.113.0';
 export const tsedLoggerVersion = '6.1.1';
 export const tsedEnginesVersion = '^1.1.2';
 export const prettierVersion = '^2.6.2';
