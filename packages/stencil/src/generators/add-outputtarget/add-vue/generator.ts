@@ -5,8 +5,8 @@ import {
   getWorkspaceLayout,
   joinPathFragments,
   readProjectConfiguration,
-  Tree,
 } from '@nrwl/devkit';
+import type { GeneratorCallback, Tree } from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
@@ -20,7 +20,7 @@ import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-o
 export async function prepareVueLibrary(
   host: Tree,
   options: AddOutputtargetSchematicSchema
-) {
+): Promise<GeneratorCallback> {
   const vueProjectName = `${options.projectName}-vue`;
   const { libsDir } = getWorkspaceLayout(host);
 

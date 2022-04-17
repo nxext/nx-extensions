@@ -43,12 +43,12 @@ function createVitestConfig(host: Tree) {
     host.write(
       'vitest.config.ts',
       stripIndents`
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [],
   test: {
-    global: true,
+    globals: true,
     environment: 'jsdom',
   },
 })
