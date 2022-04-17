@@ -1,8 +1,27 @@
 {
   "name": "@nxext/ts.ed",
-  "version": "0.0.1",
-  "main": "src/index.js",
-  "generators": "./generators.json",
+  "version": "13.10.1",
+  "license": "MIT",
+  "author": "Nick Wiltshire",
+  "description": "Nx plugin for Ts.ED",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "ts.ed",
+    "api",
+    "framework",
+    "rest"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
+  "main": "./src/index.js",
+  "schematics": "./generators.json",
   "devDependencies": {
     "@nrwl/cypress": "^13.10.1",
     "@nrwl/linter": "^13.10.1"
