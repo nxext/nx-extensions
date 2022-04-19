@@ -6,12 +6,6 @@ Options can be configured in the 'project.json' when defining the executor, or w
 
 ### Options
 
-#### command (_**required**_)
-
-Type: `string`
-
-Vitest command to run
-
 #### passWithNoTests
 
 Default: `false`

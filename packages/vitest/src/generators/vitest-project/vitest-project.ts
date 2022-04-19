@@ -2,6 +2,7 @@ import {
   convertNxGenerator,
   formatFiles,
   generateFiles,
+  joinPathFragments,
   offsetFromRoot,
   readProjectConfiguration,
   Tree,
@@ -49,7 +50,10 @@ function addVitestExecutor(host: Tree, options: NormalizedSchema) {
     test: {
       executor: '@nxext/vitest:vitest',
       options: {
-        command: 'run',
+        vitestConfig: joinPathFragments(
+          options.projectRoot,
+          'vitest.config.ts'
+        ),
       },
     },
   };

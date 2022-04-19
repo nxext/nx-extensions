@@ -5,10 +5,6 @@
   "description": "",
   "type": "object",
   "properties": {
-    "command": {
-      "type": "string",
-      "description": "Vitest command to run"
-    },
     "passWithNoTests": {
       "type": "boolean",
       "description": "Pass the build if no tests are found",
@@ -19,5 +15,5 @@
       "description": "Pattern to match test names"
     }
   },
-  "required": ["command"]
+  "required": []
 }

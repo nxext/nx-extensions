@@ -6,7 +6,11 @@ import {
   updateJson,
 } from '@nrwl/devkit';
 import { InitGeneratorSchema } from './schema';
-import { c8Version, vitestVersion } from '../../utils/versions';
+import {
+  c8Version,
+  vitestUiVersion,
+  vitestVersion,
+} from '../../utils/versions';
 
 function removeNxextVitestFromDeps(host: Tree) {
   updateJson(host, 'package.json', (json) => {
@@ -33,6 +37,7 @@ function updateDependencies(host: Tree) {
   const devDeps = {
     vitest: vitestVersion,
     c8: c8Version,
+    '@vitest/ui': vitestUiVersion,
   };
 
   return addDependenciesToPackageJson(host, {}, devDeps);
