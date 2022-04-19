@@ -1,5 +1,7 @@
 export interface VitestExecutorOptions {
-  command: string;
-  testNamePattern?: string;
   passWithNoTests?: boolean;
+  watch?: boolean;
+  coverage?: boolean;
+  ui?: boolean;
+  vitestConfig: string;
 }
