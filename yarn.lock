@@ -3621,10 +3621,10 @@
     "@swc/core-win32-ia32-msvc" "1.2.168"
     "@swc/core-win32-x64-msvc" "1.2.168"
 
-"@swc/helpers@~0.3.3":
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.3.6.tgz#b41e77dbf14e9cb138988484563ad9680ae5dc3d"
-  integrity sha512-xVl7Sddrl9/eMjEMqkH9lT8fLOGCuWHH9VmR2IBKQ8xTcjA6UQw4O3/4oS3xnyZHLtL9vC3P+C0kLneHpiqeEg==
+"@swc/helpers@~0.3.8":
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.3.8.tgz#5b9ecf4ee480ca00f1ffbc2d1a5d4eed0d1afe81"
+  integrity sha512-aWItSZvJj4+GI6FWkjZR13xPNPctq2RRakzo+O6vN7bC2yjwdg5EFpgaSAUn95b7BGSgcflvzVDPoKmJv24IOg==
 
 "@swc/jest@0.2.15":
   version "0.2.15"
@@ -14764,10 +14764,10 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-recrawl-sync@^2.0.3, recrawl-sync@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/recrawl-sync/-/recrawl-sync-2.2.1.tgz#cb02c8084c22b3cea103abf46bb88734076ed6bb"
-  integrity sha512-A2yLDgeXNaduJJMlqyUdIN7fewopnNm/mVeeGytS1d2HLXKpS5EthQ0j8tWeX+as9UXiiwQRwfoslKC+/gjqxg==
+recrawl-sync@^2.0.3, recrawl-sync@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/recrawl-sync/-/recrawl-sync-2.2.2.tgz#a5a8664c77267d603d601825af544d6716d69e15"
+  integrity sha512-E2sI4F25Fu2nrfV+KsnC7/qfk/spQIYXlonfQoS4rwxeNK5BjxnLPbWiRXHVXPwYBOTWtPX5765kTm/zJiL+LQ==
   dependencies:
     "@cush/relative" "^1.0.0"
     glob-regex "^0.3.0"
