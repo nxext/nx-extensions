@@ -22,9 +22,9 @@ async function ensureUserConfig(
   mode: string
 ): Promise<UserConfig> {
   if (typeof config === 'function') {
-    return await Promise.resolve(config({ command: 'build', mode }));
+    return config({ command: 'build', mode });
   }
-  return await Promise.resolve(config);
+  return config;
 }
 
 export default async function runExecutor(
@@ -37,6 +37,7 @@ export default async function runExecutor(
   const viteBaseConfig = await ensureUserConfig(
     baseConfig({
       entry: options.entryFile,
+      workspaceRoot: context.root,
       external: options.external ?? [],
       globals: options.globals ?? {},
       name: names(context.projectName).fileName,
@@ -84,7 +85,7 @@ export default async function runExecutor(
   );
 
   if (options.assets) {
-    copyAssets(
+    await copyAssets(
       options.assets,
       context.root,
       joinPathFragments(context.root, 'dist', projectDir)
