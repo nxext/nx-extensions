@@ -23,10 +23,11 @@
   "executors": "./executors.json",
   "generators": "./generators.json",
   "dependencies": {
-    "vite-tsconfig-paths": "3.4.1",
     "@nrwl/devkit": "^13.9.0",
     "rxjs": "^7.0.0",
-    "rxjs-for-await": "1.0.0"
+    "rxjs-for-await": "1.0.0",
+    "tsconfig-paths": "^3.14.1",
+    "globrex": "^0.1.2"
   },
   "peerDependencies": {
     "@nrwl/workspace": "^13.4.0",

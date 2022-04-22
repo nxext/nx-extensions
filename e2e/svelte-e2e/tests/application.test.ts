@@ -3,10 +3,11 @@ import {
   readJson,
   runNxCommandAsync,
   uniq,
+  updateFile,
 } from '@nrwl/nx-plugin/testing';
 import { ensureNxProjectWithDeps } from '../../utils/testing';
 
-xdescribe('svelte e2e', () => {
+describe('svelte e2e', () => {
   beforeAll(() => {
     ensureNxProjectWithDeps('@nxext/svelte', 'dist/packages/svelte', [
       ['@nxext/vite', 'dist/packages/vite'],
@@ -95,6 +96,66 @@ xdescribe('svelte e2e', () => {
 
       const result = await runNxCommandAsync(`test ${plugin}`);
       expect(`${result.stdout}${result.stderr}`).toContain('1 passed');
+    });
+  });
+
+  describe('Svelte app', () => {
+    it('should build svelte application with dependencies', async () => {
+      const appName = uniq('svelte');
+      await runNxCommandAsync(
+        `generate @nxext/svelte:app ${appName} --e2eTestRunner='none' --unitTestRunner='none'`
+      );
+      const libName = uniq('sveltelib');
+      await runNxCommandAsync(
+        `generate @nxext/svelte:lib ${libName} --e2eTestRunner='none' --unitTestRunner='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/svelte:c testcomp --project=${libName}`
+      );
+      updateFile(
+        `apps/${appName}/src/App.svelte`,
+        `
+<script lang="ts">
+  export let name: string;
+  import { Testcomp } from '@proj/${libName}';
+</script>
+
+<main>
+  <h1>Welcome {name}!</h1>
+  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <Testcomp />
+</main>
+
+<style>
+main {
+  text-align: center;
+  padding: 1em;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #ff3e00;
+  text-transform: uppercase;
+  font-size: 4em;
+  font-weight: 100;
+}
+
+@media (min-width: 640px) {
+  main {
+    max-width: none;
+  }
+}
+</style>
+`
+      );
+
+      const result = await runNxCommandAsync(`build ${appName}`);
+      expect(result.stdout).toContain('Bundle complete');
+
+      expect(() =>
+        checkFilesExist(`dist/apps/${appName}/index.html`)
+      ).not.toThrow();
     });
   });
 });

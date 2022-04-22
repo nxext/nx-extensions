@@ -1,20 +1,22 @@
 import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import viteNxProjectPaths from '../src/executors/utils/nx-project-paths';
 
 export default ({
   name,
+  workspaceRoot,
   external,
   globals,
   entry,
 }: {
   entry: string;
+  workspaceRoot: string;
   name?: string;
   external?: string[];
   globals?: Record<string, string>;
 }) =>
   defineConfig(() => {
     return {
-      plugins: [tsconfigPaths({ projects: ['tsconfig.lib.json'] })],
+      plugins: [viteNxProjectPaths({ workspaceRoot })],
       build: {
         target: 'esnext',
         lib: {

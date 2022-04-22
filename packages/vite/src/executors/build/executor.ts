@@ -8,7 +8,7 @@ import {
 } from 'vite';
 import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import { relative } from 'path';
-import baseConfig from '../../../plugins/vite';
+import { defineBaseConfig } from '../../../plugins/vite';
 import { replaceFiles } from '../../../plugins/file-replacement';
 
 async function ensureUserConfig(
@@ -16,9 +16,9 @@ async function ensureUserConfig(
   mode: string
 ): Promise<UserConfig> {
   if (typeof config === 'function') {
-    return await Promise.resolve(config({ command: 'build', mode }));
+    return config({ command: 'build', mode });
   }
-  return await Promise.resolve(config);
+  return config;
 }
 
 export default async function runExecutor(
@@ -27,6 +27,7 @@ export default async function runExecutor(
 ) {
   const projectDir = context.workspace.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
+  const baseConfig = defineBaseConfig(context.root);
 
   const viteBaseConfig = await ensureUserConfig(
     baseConfig,

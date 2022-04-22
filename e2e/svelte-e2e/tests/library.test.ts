@@ -1,6 +1,5 @@
 import {
   checkFilesExist,
-  readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
