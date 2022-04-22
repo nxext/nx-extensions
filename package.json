@@ -54,7 +54,7 @@
     "@angular-devkit/build-optimizer": "0.1302.1",
     "@angular/compiler-cli": "13.3.2",
     "@angular/core": "13.3.2",
-    "@storybook/core-server": "~6.4.12",
+    "@storybook/core-server": "~6.4.22",
     "clsx": "^1.1.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
