@@ -70,7 +70,7 @@
     "@nrwl/angular": "13.10.2",
     "@nrwl/cli": "13.10.2",
     "@nrwl/cypress": "13.10.2",
-    "@nrwl/devkit": "13.10.2",
+    "@nrwl/devkit": "14.0.2",
     "@nrwl/eslint-plugin-nx": "13.10.2",
     "@nrwl/jest": "13.10.2",
     "@nrwl/js": "13.10.2",
