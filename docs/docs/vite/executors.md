@@ -46,6 +46,12 @@ Type: `string`
 
 The path to vite.config.js for the framework.
 
+#### outputPath
+
+Type: `string`
+
+The output path of the generated files.
+
 ## @nxext/vite:dev
 
 dev executor
@@ -89,6 +95,12 @@ The file to replace with.
 Type: `string`
 
 The path to vite.config.js for the framework.
+
+#### outputPath
+
+Type: `string`
+
+The output path of the generated files.
 
 #### proxyConfig
 

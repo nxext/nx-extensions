@@ -27,7 +27,7 @@ export function normalizeOptions(
     ...options,
     name: names(options.name).fileName,
     projectName: appProjectName,
-    appProjectRoot,
+    projectRoot: appProjectRoot,
     parsedTags,
     fileName,
   };

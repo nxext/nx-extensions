@@ -14,6 +14,10 @@
       "description": "The path to vite.config.js for the framework.",
       "hidden": true
     },
+    "outputPath": {
+      "type": "string",
+      "description": "The output path of the generated files."
+    },
     "baseHref": {
       "type": "string",
       "description": "Base url for the application being built."

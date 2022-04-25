@@ -7,25 +7,23 @@ export function createApplicationFiles(host: Tree, options: NormalizedSchema) {
     ...names(options.name),
     ...options,
     tmpl: '',
-    offsetFromRoot: offsetFromRoot(options.appProjectRoot),
+    offsetFromRoot: offsetFromRoot(options.projectRoot),
   };
 
   generateFiles(
     host,
     join(__dirname, '../files'),
-    options.appProjectRoot,
+    options.projectRoot,
     templateVariables
   );
 
   if (options.unitTestRunner === 'none') {
-    host.delete(
-      `${options.appProjectRoot}/src/app/${options.fileName}.spec.ts`
-    );
+    host.delete(`${options.projectRoot}/src/app/${options.fileName}.spec.ts`);
   }
   generateFiles(
     host,
     join(__dirname, '../files'),
-    options.appProjectRoot,
+    options.projectRoot,
     templateVariables
   );
 }
