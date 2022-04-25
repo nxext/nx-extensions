@@ -66,10 +66,7 @@ export default async function* runExecutor(
       base: options.baseHref ?? '/',
       root: projectRoot,
       build: {
-        outDir: relative(
-          projectRoot,
-          joinPathFragments(`${context.root}/dist/${projectDir}`)
-        ),
+        outDir: relative(projectRoot, options.outputPath),
         emptyOutDir: true,
         reportCompressedSize: true,
         cssCodeSplit: true,

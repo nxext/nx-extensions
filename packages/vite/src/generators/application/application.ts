@@ -31,24 +31,24 @@ async function addLinting(host: Tree, options: NormalizedSchema) {
     linter: options.linter,
     project: options.projectName,
     tsConfigPaths: [
-      joinPathFragments(options.appProjectRoot, 'tsconfig.app.json'),
+      joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
     ],
     eslintFilePatterns: [
-      `${options.appProjectRoot}/**/*.{${supportExt.join(',')}}`,
+      `${options.projectRoot}/**/*.{${supportExt.join(',')}}`,
     ],
     skipFormat: true,
   });
   tasks.push(lintTask);
 
   const viteEslintJson = createViteEslintJson(
-    options.appProjectRoot,
+    options.projectRoot,
     options.setParserOptionsProject,
     supportExt
   );
 
   updateJson(
     host,
-    joinPathFragments(options.appProjectRoot, '.eslintrc.json'),
+    joinPathFragments(options.projectRoot, '.eslintrc.json'),
     () => viteEslintJson
   );
 

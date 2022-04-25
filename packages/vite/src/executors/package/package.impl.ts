@@ -56,10 +56,7 @@ export default async function runExecutor(
     {
       root: projectRoot,
       build: {
-        outDir: relative(
-          projectRoot,
-          joinPathFragments(`${context.root}/dist/${projectDir}`)
-        ),
+        outDir: relative(projectRoot, options.outputPath),
         emptyOutDir: true,
         reportCompressedSize: true,
         cssCodeSplit: true,
@@ -78,18 +75,12 @@ export default async function runExecutor(
   await copyFile(
     joinPathFragments(options.packageJson ?? `${projectRoot}/package.json`),
     joinPathFragments(
-      `${context.root}/dist/${projectDir}/${
-        options.packageJson ?? 'package.json'
-      }`
+      `${options.outputPath}/${options.packageJson ?? 'package.json'}`
     )
   );
 
   if (options.assets) {
-    await copyAssets(
-      options.assets,
-      context.root,
-      joinPathFragments(context.root, 'dist', projectDir)
-    );
+    await copyAssets(options.assets, context.root, options.outputPath);
   }
 
   logger.info('Bundle complete.');
