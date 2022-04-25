@@ -9,8 +9,8 @@ import {
 
 export function addProject(host: Tree, options: NormalizedSchema) {
   const project: ProjectConfiguration = {
-    root: options.appProjectRoot,
-    sourceRoot: `${options.appProjectRoot}/src`,
+    root: options.projectRoot,
+    sourceRoot: `${options.projectRoot}/src`,
     projectType: 'application',
     targets: {
       build: createBuildTarget(options),
@@ -35,7 +35,7 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
     outputs: ['{options.outputPath}'],
     defaultConfiguration: 'production',
     options: {
-      outputPath: joinPathFragments('dist', options.appProjectRoot),
+      outputPath: joinPathFragments('dist', options.projectRoot),
       baseHref: '/',
       configFile: '@nxext/vite/plugins/vite',
     },
@@ -44,11 +44,11 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
         fileReplacements: [
           {
             replace: joinPathFragments(
-              options.appProjectRoot,
+              options.projectRoot,
               `src/environments/environment.ts`
             ),
             with: joinPathFragments(
-              options.appProjectRoot,
+              options.projectRoot,
               `src/environments/environment.prod.ts`
             ),
           },
@@ -62,7 +62,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
   return {
     executor: '@nxext/vite:dev',
     options: {
-      outputPath: joinPathFragments('dist', options.appProjectRoot),
+      outputPath: joinPathFragments('dist', options.projectRoot),
       baseHref: '/',
       configFile: '@nxext/vite/plugins/vite',
     },
@@ -71,11 +71,11 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
         fileReplacements: [
           {
             replace: joinPathFragments(
-              options.appProjectRoot,
+              options.projectRoot,
               `src/environments/environment.ts`
             ),
             with: joinPathFragments(
-              options.appProjectRoot,
+              options.projectRoot,
               `src/environments/environment.prod.ts`
             ),
           },

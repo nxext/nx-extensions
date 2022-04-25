@@ -18,6 +18,10 @@
       "description": "The path to vite.config.js for the framework.",
       "hidden": true
     },
+    "outputPath": {
+      "type": "string",
+      "description": "The output path of the generated files."
+    },
     "proxyConfig": {
       "type": "string",
       "description": "Path to the proxy configuration file."

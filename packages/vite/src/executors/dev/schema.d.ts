@@ -4,4 +4,5 @@ export interface DevExecutorSchema {
   fileReplacements?: { file: string; with: string }[];
   proxyConfig?: string;
   frameworkConfigFile?: string;
+  outputPath: string;
 }
