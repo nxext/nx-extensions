@@ -24,6 +24,7 @@ module.exports = {
     { name: 'solid', description: 'SolidJS specific' },
     { name: 'react', description: 'ReactJS specific' },
     { name: 'angular', description: 'Angular specific' },
+    { name: 'ts.ed', description: 'ts.ed specific' },
   ],
 
   allowTicketNumber: true,
