@@ -1,4 +1,4 @@
-# @nxext/svelte
+# @nxext/ts.ed
 
 [![License](https://img.shields.io/npm/l/@nxext/svelte.svg?style=flat-square)]()
 [![nxext windows CI](https://github.com/DominikPieper/nx-extensions/workflows/nxext%20windows%20CI/badge.svg)]()
