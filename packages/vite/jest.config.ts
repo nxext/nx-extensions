@@ -1,15 +1,16 @@
 module.exports = {
-  displayName: 'react',
-  preset: '../../jest.preset.js',
+  displayName: 'vite',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/packages/react',
+  coverageDirectory: '../../coverage/packages/vite',
+  testEnvironment: 'node',
+  preset: '../../jest.preset.ts',
 };

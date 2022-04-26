@@ -6,9 +6,9 @@ export function updateJestConfig(host: Tree, options: NormalizedSchema) {
     return;
   }
 
-  const configPath = `${options.projectRoot}/jest.config.js`;
+  const configPath = `${options.projectRoot}/jest.config.ts`;
   const svelteConfigPath = `${options.projectRoot}/svelte.config.cjs`;
-  const originalContent = host.read(configPath).toString();
+  const originalContent = host.read(configPath)?.toString();
   const content = updateJestConfigContent(originalContent, svelteConfigPath);
   host.write(configPath, content);
 }

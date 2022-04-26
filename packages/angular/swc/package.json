@@ -1,6 +1,6 @@
 {
   "name": "@nxext/angular-swc",
-  "version": "13.0.0-alpha.2",
+  "version": "14.0.0-alpha.2",
   "license": "MIT",
   "author": "Jordan Hall",
   "description": "A series of SWC visitors to compile Angular",

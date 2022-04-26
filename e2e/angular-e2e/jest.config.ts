@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'solid-e2e',
-  preset: '../../jest.preset.js',
+  displayName: 'angular-e2e',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -10,6 +10,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/e2e/solid-e2e',
-  maxWorkers: 1,
+  coverageDirectory: '../../coverage/e2e/angular-e2e',
+  preset: '../../jest.preset.ts',
 };

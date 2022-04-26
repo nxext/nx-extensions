@@ -1,84 +1,33 @@
-name: Nxext CI
+name: Nx Linux CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-
-env:
-  NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
-  NODE_OPTIONS: '--max_old_space_size=4096'
-  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+    branches: [main]
 
 jobs:
-  agents:
-    name: Nx Cloud Agents
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
+  build:
+    runs-on: ubuntu-20.04
+
     strategy:
       matrix:
-        agent: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
         node-version: [16.x]
+    env:
+      NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn install
-      - name: Start Nx Agent ${{ matrix.agent }}
-        run: yarn nx-cloud start-agent
-
-  main:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
-    steps:
-      - uses: actions/checkout@v3
-        name: Checkout [main]
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - run: yarn install
-      - name: Run verification
-        uses: JamesHenry/parallel-bash-commands@v0.1
-        with:
-          cmd1: yarn nx affected --target=build --parallel=1
-          cmd2: yarn nx affected --target=test --parallel=3
-          cmd3: yarn nx affected --target=lint --parallel=3
-          cmd4: yarn nx affected --target=e2e --parallel=1
-      - run: yarn nx-cloud stop-all-agents
-      - name: Tag main branch if all jobs succeed
-        uses: nrwl/nx-tag-successful-ci-run@v1
-
-  pr:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - run: |
-          echo "BASE: ${{ env.NX_BASE }}"
-          echo "HEAD: ${{ env.NX_HEAD }}"
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn install
-      - name: Run verification
-        uses: JamesHenry/parallel-bash-commands@v0.1
-        with:
-          cmd1: yarn nx affected --target=build --parallel=1
-          cmd2: yarn nx affected --target=test --parallel=1
-          cmd3: yarn nx affected --target=lint --parallel=3
-          cmd4: yarn nx affected --target=e2e --parallel=1
-      - run: yarn nx-cloud stop-all-agents
+      - run: git fetch --no-tags --prune --depth=5 origin main
+      - run: yarn install --prefer-offline --frozen-lockfile --non-interactive
+      - run: yarn affected:build --base=origin/main --head=HEAD
+      - run: yarn affected:lint --base=origin/main --head=HEAD --parallel
+      - run: yarn affected:test --base=origin/main --head=HEAD --parallel
+      - run: yarn affected:e2e --base=origin/main --head=HEAD

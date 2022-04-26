@@ -18,7 +18,29 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        agent: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        agent:
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+          ]
         node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +48,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - run: yarn install
+      - run: yarn install --prefer-offline --frozen-lockfile --non-interactive
       - name: Start Nx Agent ${{ matrix.agent }}
         run: yarn nx-cloud start-agent
 
@@ -44,7 +66,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - run: yarn install
+      - run: yarn install --prefer-offline --frozen-lockfile --non-interactive
       - name: Run verification
         uses: JamesHenry/parallel-bash-commands@v0.1
         with:
@@ -73,7 +95,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - run: yarn install
+      - run: yarn install --prefer-offline --frozen-lockfile --non-interactive
       - name: Run verification
         uses: JamesHenry/parallel-bash-commands@v0.1
         with:
