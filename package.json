@@ -80,7 +80,7 @@
     "@nrwl/nx-plugin": "13.10.2",
     "@nrwl/react": "13.10.2",
     "@nrwl/storybook": "13.10.2",
-    "@nrwl/web": "13.10.2",
+    "@nrwl/web": "14.0.5",
     "@nrwl/workspace": "13.10.2",
     "@nx-plus/vue": "13.0.0",
     "@preact/preset-vite": "^2.1.7",
