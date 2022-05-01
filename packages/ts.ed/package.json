@@ -23,7 +23,7 @@
   "main": "./src/index.js",
   "schematics": "./generators.json",
   "devDependencies": {
-    "@nrwl/cypress": "^13.10.1",
-    "@nrwl/linter": "^13.10.1"
+    "@nrwl/cypress": "^14.0.5",
+    "@nrwl/linter": "^14.0.5"
   }
 }
