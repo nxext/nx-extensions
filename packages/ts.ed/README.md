@@ -32,10 +32,11 @@ nx g @nxext/ts.ed:library my-lib
 
 #Use your project
 
-- Run `nx serve my-app` to run the development server
-- Run `nx build my-app` to build the app
-- Run `nx test my-app` to test the app
-- Run `nx e2e my-app` to run the e2e tests
+
+* Run ``nx serve my-app`` to run the development server
+* Run ``nx build my-app`` to build the app
+* Run ``nx test my-app`` to test the app
+* Run ``nx e2e my-app`` to run the e2e tests
 
 #Documentation
 
