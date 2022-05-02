@@ -7,7 +7,7 @@
     "declaration": true,
     "types": ["node", "vite/client"]
   },
-  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"],
   "include": [
     "**/*.ts",
     "src/plugins/angular-compiler/resolver.js",

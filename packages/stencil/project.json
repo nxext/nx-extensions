@@ -20,7 +20,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "packages/stencil/jest.config.js",
+        "jestConfig": "packages/stencil/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/packages/stencil"]

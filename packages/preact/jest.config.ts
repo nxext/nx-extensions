@@ -1,15 +1,15 @@
 module.exports = {
-  displayName: 'vitest',
-  preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/packages/vitest',
+  coverageDirectory: '../../coverage/packages/preact',
+  displayName: 'preact',
+  testEnvironment: 'node',
+  preset: '../../jest.preset.ts',
 };

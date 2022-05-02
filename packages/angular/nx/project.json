@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/angular/nx"],
       "options": {
-        "jestConfig": "packages/angular/nx/jest.config.js",
+        "jestConfig": "packages/angular/nx/jest.config.ts",
         "passWithNoTests": true
       }
     },

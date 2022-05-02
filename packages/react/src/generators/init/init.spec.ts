@@ -12,6 +12,6 @@ describe('init', () => {
 
   it('should not add jest config if unitTestRunner is none', async () => {
     await reactInitGenerator(tree, { unitTestRunner: 'none' });
-    expect(tree.exists('jest.config.js')).toEqual(false);
+    expect(tree.exists('jest.config.ts')).toEqual(false);
   });
 });

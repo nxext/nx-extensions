@@ -91,7 +91,7 @@ export function createTestTarget(
   return {
     executor: '@nrwl/jest:jest',
     options: {
-      jestConfig: joinPathFragments(options.projectRoot, 'jest.config.js'),
+      jestConfig: joinPathFragments(options.projectRoot, 'jest.config.ts'),
       passwithNoTests: true,
     },
   };

@@ -13,7 +13,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/vite"],
       "options": {
-        "jestConfig": "packages/vite/jest.config.js",
+        "jestConfig": "packages/vite/jest.config.ts",
         "passWithNoTests": true
       }
     },

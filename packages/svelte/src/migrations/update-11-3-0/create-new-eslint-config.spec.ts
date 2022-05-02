@@ -125,7 +125,7 @@ describe('create-new-eslint-config', () => {
             executor: '@nrwl/jest:jest',
             outputs: ['coverage/apps/testproject'],
             options: {
-              jestConfig: 'apps/testproject/jest.config.js',
+              jestConfig: 'apps/testproject/jest.config.ts',
               passWithNoTests: true,
             },
           },

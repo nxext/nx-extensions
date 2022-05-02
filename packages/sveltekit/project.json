@@ -13,7 +13,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/sveltekit"],
       "options": {
-        "jestConfig": "packages/sveltekit/jest.config.js",
+        "jestConfig": "packages/sveltekit/jest.config.ts",
         "passWithNoTests": true
       }
     },

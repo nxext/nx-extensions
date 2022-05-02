@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/vitest"],
       "options": {
-        "jestConfig": "packages/vitest/jest.config.js",
+        "jestConfig": "packages/vitest/jest.config.ts",
         "passWithNoTests": true
       }
     },

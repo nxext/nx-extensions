@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'react-e2e',
-  preset: '../../jest.preset.js',
+  displayName: 'vitest-e2e',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -10,5 +10,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/e2e\react-e2e',
+  coverageDirectory: '../../coverage/e2e/vitest-e2e',
+  preset: '../../jest.preset.ts',
 };

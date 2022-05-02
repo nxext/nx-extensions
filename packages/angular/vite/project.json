@@ -53,7 +53,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/angular/vite"],
       "options": {
-        "jestConfig": "packages/angular/vite/jest.config.js",
+        "jestConfig": "packages/angular/vite/jest.config.ts",
         "passWithNoTests": true
       }
     }

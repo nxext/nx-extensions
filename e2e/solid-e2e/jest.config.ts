@@ -1,6 +1,6 @@
 module.exports = {
-  name: 'preact-e2e',
-  preset: '../../jest.preset.js',
+  name: 'solid-e2e',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -10,6 +10,7 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/e2e/preact-e2e',
+  coverageDirectory: '../../coverage/e2e/solid-e2e',
   maxWorkers: 1,
+  preset: '../../jest.preset.ts',
 };
