@@ -2575,10 +2575,10 @@
     yargs "^17.4.0"
     yargs-parser "21.0.1"
 
-"@nx-plus/vue@13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@nx-plus/vue/-/vue-13.0.0.tgz#0aa7ff12ac07a5fe4464e7fb0f056ef4ae1365a9"
-  integrity sha512-tNQmD7frgUSOqqWi2O7l/TFYeekq6MeFhsrezfq1GoveukvJAbncupiLF2SA2XzDA43OpDMtynm7nQ82NcDHEg==
+"@nx-plus/vue@13.0.1":
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/@nx-plus/vue/-/vue-13.0.1.tgz#5569864b7c833cd6d1ab8bf00702e19932df52eb"
+  integrity sha512-1/YVnA0oiR3t15/LVIzWCRKRp/Ui/PZhNC8TDI7ipoWCCpAODf8vRWhIqWh4fAAxlRMZoio3cTeSa1RezVtL+g==
   dependencies:
     "@nrwl/devkit" "^13.9.3"
     "@vue/cli-shared-utils" "~4.5.15"
@@ -2770,10 +2770,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stencil/core@2.15.0":
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.15.0.tgz#cc49f090a24906b28c926e2f6dc49e75c4adaedf"
-  integrity sha512-58+FPFpJCJScd5nmqVsZN+qk7aui57wFcMHWzySr1SQzoY8Efst9OPG7XRf27UsNj1DNeEdYWTtdrTfJyn3mZg==
+"@stencil/core@2.15.1":
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.15.1.tgz#ed308d2f48c086aec63c63c33b915702036b9aee"
+  integrity sha512-NYjRwQnjzscyFfqK+iIwRdr/dgYn33u6KE7kyQWdi7xsCkqMHalXYgJlN/QBQ9PN3qXmXKeBrJNG8EkNdCbK5g==
 
 "@storybook/addons@6.4.22":
   version "6.4.22"
@@ -16981,10 +16981,10 @@ typescript@4.5.5:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.5.tgz#d8c953832d28924a9e3d37c73d729c846c5896f3"
   integrity sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==
 
-typescript@4.6.3:
-  version "4.6.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.3.tgz#eefeafa6afdd31d725584c67a0eaba80f6fc6c6c"
-  integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==
+typescript@4.6.4:
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.4.tgz#caa78bbc3a59e6a5c510d35703f6a09877ce45e9"
+  integrity sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==
 
 typescript@^4.4.3, typescript@^4.5.3:
   version "4.6.2"
