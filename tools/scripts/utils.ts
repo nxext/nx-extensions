@@ -2,7 +2,6 @@ import { readWorkspaceJson } from '@nrwl/workspace';
 import {
   existsSync,
   lstatSync,
-  rmdirSync,
   copySync,
   renameSync,
 } from 'fs-extra';

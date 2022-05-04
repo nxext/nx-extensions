@@ -1,6 +1,6 @@
 import { readWorkspaceJson } from '@nrwl/workspace';
 // @ts-ignore
-import { appRootPath } from '@nrwl/tao/src/utils/app-root';
+import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import {
   ensureDirSync,
@@ -38,8 +38,8 @@ publishableLibNames.forEach((pubLibName) => {
   ]?.targets?.build.options;
   const p = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
   p.devDependencies[
-    require(`${appRootPath}/${packageJson}`).name
-  ] = `file:${appRootPath}/${outputPath}`;
+    require(`${workspaceRoot}/${packageJson}`).name
+  ] = `file:${workspaceRoot}/${outputPath}`;
   writeFileSync(tmpProjPath('package.json'), JSON.stringify(p, null, 2));
 });
 
