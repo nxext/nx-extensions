@@ -4,7 +4,6 @@ import {
   convertNxGenerator,
   getWorkspaceLayout,
   joinPathFragments,
-  logger,
   readProjectConfiguration,
   Tree,
 } from '@nrwl/devkit';
@@ -135,7 +134,7 @@ function addLibraryDirectives(
     '...DIRECTIVES'
   );
   sourceFile = addExportToModule(host, sourceFile, modulePath, '...DIRECTIVES');
-  logger.info(host.read(modulePath, 'utf-8'));
+  host.write(modulePath, sourceFile.getFullText());
 }
 
 export async function addAngularGenerator(

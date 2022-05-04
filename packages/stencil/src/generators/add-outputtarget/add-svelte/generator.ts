@@ -15,7 +15,6 @@ import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import { addImport } from '../../../utils/ast-utils';
 import { addOutputTarget } from '../../../stencil-core-utils';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
-import { libraryGenerator } from '@nxext/svelte';
 
 async function prepareSvelteLibrary(
   host: Tree,
@@ -24,7 +23,8 @@ async function prepareSvelteLibrary(
   const { libsDir } = getWorkspaceLayout(host);
   const svelteProjectName = `${options.projectName}-svelte`;
 
-  const libraryTarget = await libraryGenerator(host, {
+  const generators = await import('@nxext/svelte');
+  const libraryTarget = await generators.libraryGenerator(host, {
     name: svelteProjectName,
     publishable: options.publishable,
     importPath: options.importPath,
