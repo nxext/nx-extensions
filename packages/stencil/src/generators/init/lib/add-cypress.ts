@@ -1,4 +1,3 @@
-import { cypressInitGenerator, cypressProjectGenerator } from '@nrwl/cypress';
 import { Tree } from '@nrwl/devkit';
 import { InitSchema } from '../schema';
 
@@ -8,5 +7,6 @@ export async function addCypress(host: Tree, options: InitSchema) {
     return () => {};
   }
 
-  return cypressInitGenerator(host, {});
+  const generators = await import('@nrwl/cypress');
+  return generators.cypressInitGenerator(host, {});
 }
