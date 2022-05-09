@@ -19,12 +19,12 @@
       "@nxext/angular": ["packages/angular/nx/src/index.ts"],
       "@nxext/angular-swc": ["packages/angular/swc/src/index.ts"],
       "@nxext/angular-vite": ["packages/angular/vite/src/index.ts"],
+      "@nxext/capacitor": ["packages/capacitor/src/index.ts"],
       "@nxext/preact": ["packages/preact/src/index.ts"],
       "@nxext/react": ["packages/react/src/index.ts"],
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
       "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"],
-      "@nxext/tailwind": ["packages/tailwind/src/index.ts"],
       "@nxext/ts.ed": ["packages/ts.ed/src/index.ts"],
       "@nxext/vite": ["packages/vite/src/index.ts"],
       "@nxext/vitest": ["packages/vitest/src/index.ts"]

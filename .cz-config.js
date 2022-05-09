@@ -25,6 +25,9 @@ module.exports = {
     { name: 'react', description: 'ReactJS specific' },
     { name: 'angular', description: 'Angular specific' },
     { name: 'ts.ed', description: 'ts.ed specific' },
+    { name: 'capacitor', description: 'capacitor specific' },
+    { name: 'ionic-angular', description: 'ionic-angular specific' },
+    { name: 'ionic-react', description: 'ionic-react specific' },
   ],
 
   allowTicketNumber: true,
