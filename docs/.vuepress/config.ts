@@ -1,5 +1,4 @@
 import { defineUserConfig, defaultTheme } from 'vuepress';
-import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { searchPlugin } from '@vuepress/plugin-search';
 import generators from '../docs/generators';
 import executors from '../docs/executors';
@@ -20,12 +19,7 @@ export default defineUserConfig({
     ],
   ],
 
-  plugins: [
-    prismjsPlugin({
-      preloadLanguages: ['markdown', 'jsdoc', 'yaml', 'sh', 'tyescript'],
-    }),
-    searchPlugin(),
-  ],
+  plugins: [searchPlugin()],
 
   theme: defaultTheme({
     logo: '/logo.svg',
@@ -124,6 +118,54 @@ export default defineUserConfig({
                 {
                   text: 'Executors',
                   children: executors.stencil,
+                },
+              ],
+            },
+            {
+              text: 'Capacitor',
+              collapsible: true,
+              children: [
+                {
+                  text: 'Overview',
+                  link: '/docs/capacitor/overview',
+                },
+                {
+                  text: 'Getting started',
+                  link: '/docs/capacitor/getting-started',
+                },
+                {
+                  text: 'Generators',
+                  children: generators.capacitor,
+                },
+                {
+                  text: 'Executors',
+                  children: executors.capacitor,
+                },
+              ],
+            },
+            {
+              text: 'Ionic Angular',
+              collapsible: true,
+              children: [
+                {
+                  text: 'Overview',
+                  link: '/docs/ionic-angular/overview',
+                },
+                {
+                  text: 'Getting started',
+                  link: '/docs/ionic-angular/getting-started',
+                },
+                {
+                  text: 'Capacitor',
+                  link: '/docs/ionic-angular/capacitor',
+                },
+                {
+                  text: 'Generators',
+                  children: generators['ionic-angular'],
+                },
+                {
+                  text: 'Executors',
+                  children: executors['ionic-angular'],
                 },
               ],
             },

@@ -20,6 +20,7 @@
       "@nxext/angular-swc": ["packages/angular/swc/src/index.ts"],
       "@nxext/angular-vite": ["packages/angular/vite/src/index.ts"],
       "@nxext/capacitor": ["packages/capacitor/src/index.ts"],
+      "@nxext/ionic-angular": ["packages/ionic-angular/src/index.ts"],
       "@nxext/preact": ["packages/preact/src/index.ts"],
       "@nxext/react": ["packages/react/src/index.ts"],
       "@nxext/stencil": ["packages/stencil/src/index.ts"],

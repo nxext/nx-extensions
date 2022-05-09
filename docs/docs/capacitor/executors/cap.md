@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/capacitor:cap
 
 Run a Capacitor command
