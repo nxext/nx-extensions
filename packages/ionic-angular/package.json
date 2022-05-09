@@ -1,0 +1,34 @@
+{
+  "name": "@nxext/ionic-angular",
+  "version": "14.0.0",
+  "description": "An Nx plugin for developing Ionic React applications and libraries",
+  "author": {
+    "name": "Devin Shoemaker",
+    "email": "devinshoe@gmail.com"
+  },
+  "homepage": "https://nxtend.dev/docs/ionic-angular/getting-started",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nxtend-team/nxtend.git"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  },
+  "schematics": "./generators.json",
+  "builders": "./executors.json",
+  "ng-update": {
+    "requirements": {},
+    "migrations": "./migrations.json"
+  },
+  "dependencies": {
+    "@nrwl/devkit": "^14.1.4"
+  },
+  "peerDependencies": {
+    "@nrwl/angular": "^14.0.0",
+    "@nxtend/capacitor": "^14.0.0"
+  }
+}

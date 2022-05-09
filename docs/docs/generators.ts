@@ -9,6 +9,22 @@ export default {
       link: '/docs/angular/nx/generators/library',
     },
   ],
+  capacitor: [
+    {
+      text: '@nxext/capacitor:capacitor-project',
+      link: '/docs/capacitor/generators/capacitor-project',
+    },
+  ],
+  'ionic-angular': [
+    {
+      text: '@nxext/ionic-angular:application',
+      link: '/docs/ionic-angular/generators/application',
+    },
+    {
+      text: '@nxext/ionic-angular:page',
+      link: '/docs/ionic-angular/generators/page',
+    },
+  ],
   preact: [
     {
       text: '@nxext/preact:application',

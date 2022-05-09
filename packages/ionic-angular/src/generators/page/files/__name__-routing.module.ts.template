@@ -1,0 +1,17 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { <%= className %>Page } from './<%= fileName %>.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: <%= className %>Page
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class <%= className %>PageRoutingModule {}

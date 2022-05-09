@@ -1,7 +1,3 @@
----
-sidebarDepth: 3
----
-
 ## @nxext/capacitor:capacitor-project
 
 Add a Capacitor project

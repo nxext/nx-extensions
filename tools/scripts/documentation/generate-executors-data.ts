@@ -205,17 +205,6 @@ export async function generateExecutorsDocumentation() {
       })
   );
 
-  console.log();
-
-  const builders = configs
-    .filter((item) => item.hasBuilders)
-    .map((item) => item.name);
-
-  await generateJsonFile(
-    join(__dirname, '../../../docs', 'docs', 'executors.json'),
-    builders
-  );
-
   const mergedRoutes = Object.assign({}, ...routes);
   await generateTsFile(
     join(__dirname, '../../../docs', 'docs', 'executors.ts'),

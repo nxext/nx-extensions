@@ -1,0 +1,15 @@
+{
+  "projectType": "application",
+  "sourceRoot": "e2e/ionic-angular-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "ionic-angular:build",
+        "jestConfig": "e2e/ionic-angular-e2e/jest.config.ts"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["ionic-angular"]
+}
