@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "nxextCapacitor",
+  "version": "0.0.1",
+  "generators": {
+    "capacitor-project": {
+      "factory": "./src/generators/capacitor-project/generator",
+      "schema": "./src/generators/capacitor-project/schema.json",
+      "description": "Add a Capacitor project"
+    }
+  },
+  "schematics": {
+    "capacitor-project": {
+      "factory": "./src/generators/capacitor-project/generator#capacitorProjectSchematic",
+      "schema": "./src/generators/capacitor-project/schema.json",
+      "description": "Add a Capacitor project"
+    }
+  }
+}

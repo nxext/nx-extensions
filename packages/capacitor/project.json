@@ -1,0 +1,54 @@
+{
+  "sourceRoot": "packages/capacitor/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/capacitor",
+        "main": "packages/capacitor/src/index.ts",
+        "tsConfig": "packages/capacitor/tsconfig.lib.json",
+        "assets": [
+          "packages/capacitor/*.md",
+          {
+            "input": "./packages/capacitor/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/capacitor/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/capacitor",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/capacitor",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/capacitor/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/capacitor"],
+      "options": {
+        "jestConfig": "packages/capacitor/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
