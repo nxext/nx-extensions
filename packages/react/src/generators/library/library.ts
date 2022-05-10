@@ -16,6 +16,7 @@ import {
 import { Schema } from './schema';
 import { libraryGenerator as nxLibraryGenerator } from '@nrwl/react';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import reactInitGenerator from '../init/init';
 
 function updateLibPackageNpmScope(
   host: Tree,
@@ -45,6 +46,8 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
 
   const { libsDir } = getWorkspaceLayout(tree);
   const libProjectRoot = normalizePath(`${libsDir}/${appDirectory}`);
+
+  const initTask = await reactInitGenerator(tree, options);
 
   const libraryTask = await nxLibraryGenerator(tree, {
     ...options,
@@ -104,7 +107,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(libraryTask, installTask);
+  return runTasksInSerial(initTask, libraryTask, installTask);
 }
 
 export default libraryGenerator;
