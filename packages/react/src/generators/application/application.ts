@@ -13,6 +13,7 @@ import {
   addDependenciesToPackageJson,
 } from '@nrwl/devkit';
 import { Schema } from './schema';
+import { reactInitGenerator } from '../init/init';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/react';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
@@ -25,6 +26,8 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
 
   const { appsDir } = getWorkspaceLayout(tree);
   const appProjectRoot = normalizePath(`${appsDir}/${appDirectory}`);
+
+  const initTask = await reactInitGenerator(tree, options);
 
   const appTask = await nxApplicationGenerator(tree, {
     ...options,
@@ -107,7 +110,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(appTask, installTask);
+  return runTasksInSerial(initTask, appTask, installTask);
 }
 
 export default applicationGenerator;
