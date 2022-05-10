@@ -840,5 +840,7 @@ export function NxWelcome({ title }: { title: string }) {
     </>
   );
 }
+export default function App() {
+  return <NxWelcome title={'<%= projectName %>'} />;
+}
 
-export default NxWelcome;
