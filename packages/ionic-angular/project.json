@@ -8,6 +8,7 @@
       "options": {
         "outputPath": "dist/packages/ionic-angular",
         "main": "packages/ionic-angular/src/index.ts",
+        "packageJson": "packages/ionic-angular/package.json",
         "tsConfig": "packages/ionic-angular/tsconfig.lib.json",
         "assets": [
           "packages/ionic-angular/*.md",

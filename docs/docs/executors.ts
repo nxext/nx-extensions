@@ -3,6 +3,7 @@ export default {
     { text: '@nxext/capacitor:cap', link: '/docs/capacitor/executors/cap' },
   ],
   'ionic-angular': [],
+  'ionic-react': [],
   stencil: [
     { text: '@nxext/stencil:build', link: '/docs/stencil/executors/build' },
     { text: '@nxext/stencil:test', link: '/docs/stencil/executors/test' },

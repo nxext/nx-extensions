@@ -78,7 +78,6 @@
     "@nrwl/storybook": "14.1.7",
     "@nrwl/web": "14.1.7",
     "@nrwl/workspace": "14.1.7",
-    "@nx-plus/vue": "13.0.1",
     "@preact/preset-vite": "^2.1.7",
     "@stencil/core": "2.15.1",
     "@sveltejs/kit": "^1.0.0-next.338",

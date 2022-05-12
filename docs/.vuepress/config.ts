@@ -121,7 +121,7 @@ export default defineUserConfig({
                 },
               ],
             },
-            {
+            /*{
               text: 'Capacitor',
               collapsible: true,
               children: [
@@ -168,7 +168,7 @@ export default defineUserConfig({
                   children: executors['ionic-angular'],
                 },
               ],
-            },
+            },*/
           ],
         },
         {

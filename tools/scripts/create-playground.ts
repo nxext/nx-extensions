@@ -10,6 +10,7 @@ import {
 } from 'fs-extra';
 import { getPublishableLibNames, tmpProjPath } from './utils';
 import { dirname } from 'path';
+import { logger } from '@nrwl/devkit';
 
 console.log('\nCreating playground. This may take a few minutes.');
 
@@ -18,11 +19,13 @@ const publishableLibNames = getPublishableLibNames(workspaceJson);
 
 execSync(`npx nx run-many --target build --projects ${publishableLibNames}`);
 
+logger.info('Remove old playground workspace...');
+removeSync(tmpProjPath());
 ensureDirSync(tmpProjPath());
 
-removeSync(tmpProjPath());
-
 const localTmpDir = dirname(tmpProjPath());
+
+logger.info('Creating nx workspace...');
 execSync(
   `node ${require.resolve(
     '@nrwl/tao'
@@ -31,18 +34,21 @@ execSync(
     cwd: localTmpDir,
   }
 );
+logger.info('Nx wortkspace created!');
 
 publishableLibNames.forEach((pubLibName) => {
-  const { outputPath, packageJson } = workspaceJson.projects[
-    pubLibName
-  ]?.targets?.build.options;
+  logger.info(`Processing ${pubLibName} ...`);
+  const { outputPath, packageJson } =
+    workspaceJson.projects[pubLibName]?.targets?.build.options;
   const p = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
   p.devDependencies[
     require(`${workspaceRoot}/${packageJson}`).name
   ] = `file:${workspaceRoot}/${outputPath}`;
   writeFileSync(tmpProjPath('package.json'), JSON.stringify(p, null, 2));
 });
+logger.info(`All packages processed.`);
 
+logger.info(`Running yarn install....`);
 execSync('yarn install', {
   cwd: tmpProjPath(),
   stdio: ['ignore', 'ignore', 'ignore'],

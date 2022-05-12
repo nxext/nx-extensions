@@ -1,0 +1,35 @@
+{
+  "name": "@nxext/ionic-react",
+  "version": "13.0.0",
+  "description": "An Nx plugin for developing Ionic React applications and libraries",
+  "author": {
+    "name": "Devin Shoemaker",
+    "email": "devinshoe@gmail.com"
+  },
+  "homepage": "https://nxext.dev/docs/ionic-react/getting-started",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nxext-team/nxext.git"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  },
+  "schematics": "./generators.json",
+  "builders": "./executors.json",
+  "ng-update": {
+    "requirements": {},
+    "migrations": "./migrations.json"
+  },
+  "dependencies": {
+    "@nrwl/devkit": "^14.1.4"
+  },
+  "peerDependencies": {
+    "@nrwl/linter": "^14.0.0",
+    "@nrwl/react": "^14.0.0",
+    "@nxext/capacitor": "^14.0.0"
+  }
+}
