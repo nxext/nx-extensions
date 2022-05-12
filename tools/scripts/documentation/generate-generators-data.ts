@@ -12,6 +12,7 @@ import {
 } from '@angular-devkit/schematics/src/formats';
 import {
   formatDeprecated,
+  generateJsonFile,
   generateMarkdownFile,
   generateTsFile,
   sortAlphabeticallyFunction,
@@ -177,7 +178,7 @@ export async function generateGeneratorsDocumentation() {
 
   const { configs } = getPackageConfigurations();
 
-  await Promise.all(
+  const routes = await Promise.all(
     configs
       .filter((item) => item.hasSchematics)
       .map(async (config) => {
@@ -189,15 +190,11 @@ export async function generateGeneratorsDocumentation() {
           .filter((s) => s != null && !s['hidden'])
           .map((s_1) => generateTemplate(s_1));
 
-        await generateMarkdownFile(config.builderOutput, {
-          name: '../generators',
-          template: dedent`
----
-sidebarDepth: 3
----
-${markdownList.map((template) => template.template).join('\n\n')}
-        `,
-        });
+        await Promise.all(
+          markdownList.map((template) =>
+            generateMarkdownFile(config.schematicOutput, template)
+          )
+        );
 
         console.log(
           ` - Documentation for ${chalk.magenta(
@@ -206,8 +203,30 @@ ${markdownList.map((template) => template.template).join('\n\n')}
             path.relative(process.cwd(), config.schematicOutput)
           )}`
         );
+
+        return {
+          [config.name]: markdownList.map((template) => {
+            const filePath = join(config.schematicOutput, `${template.name}`);
+            return {
+              text: `@nxext/${config.name}:${template.name}`,
+              link: `/${relative(`${process.cwd()}/docs`, filePath)}`,
+            };
+          }),
+        };
       })
   );
+
+  const mergedRoutes = Object.assign({}, ...routes);
+  await generateTsFile(
+    join(__dirname, '../../../docs', 'docs', 'generators.ts'),
+    mergedRoutes
+  ).then(() => {
+    console.log(
+      `${chalk.green('✓')} Generated generators.ts at ${chalk.grey(
+        `docs/docs/generators.ts`
+      )}`
+    );
+  });
 
   console.log(`\n${chalk.green('✓')} Generated Documentation for Generators`);
 }
