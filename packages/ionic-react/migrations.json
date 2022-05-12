@@ -1,0 +1,257 @@
+{
+  "schematics": {
+    "update-0.1.1": {
+      "version": "0.1.1-beta.1",
+      "description": "Add Nrwl React library",
+      "factory": "./src/migrations/update-0-1-1/update-0-1-1"
+    },
+    "update-1.0.1": {
+      "version": "1.0.1-beta.1",
+      "description": "Upgrade Ionic to 5.0.5 and ionicons to 5.0.1",
+      "factory": "./src/migrations/update-1-0-1/update-1-0-1"
+    },
+    "update-1.0.2": {
+      "version": "1.0.2",
+      "description": "Upgrade Ionic to 5.0.7",
+      "factory": "./src/migrations/update-1-0-2/update-1-0-2"
+    },
+    "update-2.0.0": {
+      "version": "2.0.0",
+      "description": "Upgrade @testing-library/cypress to 6.0.0, @testing-library/jest-dom to 5.5.0, and @testing-library/user-event to 10.0.1",
+      "factory": "./src/migrations/update-2-0-0/update-2-0-0"
+    },
+    "default-collection-2.0.0": {
+      "version": "2.0.0",
+      "description": "Set default collection to @nxext/ionic-react if one does not exist",
+      "factory": "./src/migrations/update-2-0-0/default-collection-2-0-0"
+    },
+    "updated-templates-2.0.0": {
+      "version": "2.0.0",
+      "description": "Display information about updated Ionic templates",
+      "factory": "./src/migrations/update-2-0-0/updated-templates-2-0-0"
+    },
+    "upgrade-ionic-2.2.0": {
+      "version": "2.2.0",
+      "description": "Upgrade Ionic to 5.1.0",
+      "factory": "./src/migrations/update-2-2-0/upgrade-ionic-2-2-0"
+    },
+    "upgrade-testing-library-3.0.0": {
+      "version": "3.0.0",
+      "description": "Upgrade testing libraries",
+      "factory": "./src/migrations/update-3-0-0/upgrade-testing-library-3-0-0"
+    },
+    "upgrade-ionic-3.0.1": {
+      "version": "3.0.1",
+      "description": "Upgrade Ionic to 5.2.3",
+      "factory": "./src/migrations/update-3-0-1/upgrade-ionic-3-0-1"
+    },
+    "update-3.1.0": {
+      "version": "3.1.0",
+      "description": "Update libraries",
+      "factory": "./src/migrations/update-3-1-0/update-3-1-0"
+    },
+    "update-testing-library-cypress-tsconfig-types-3.1.0": {
+      "version": "3.1.0",
+      "description": "Update @testing-library/cypress tsconfig types",
+      "factory": "./src/migrations/update-3-1-0/update-testing-library-cypress-tsconfig-types-3-1-0"
+    },
+    "update-4.0.0": {
+      "version": "4.0.0",
+      "description": "Update libraries",
+      "factory": "./src/migrations/update-4-0-0/update-4-0-0"
+    },
+    "add-ionic-config-4.0.0": {
+      "version": "4.0.0",
+      "description": "Add Ionic config to Ionic React applications",
+      "factory": "./src/migrations/update-4-0-0/add-ionic-config-4-0-0"
+    },
+    "update-5.0.0": {
+      "version": "5.0.0-alpha.1",
+      "description": "Update libraries",
+      "factory": "./src/migrations/update-5-0-0/update-5-0-0"
+    },
+    "update-11.0.0": {
+      "version": "11.0.0-beta.1",
+      "description": "Update libraries",
+      "factory": "./src/migrations/update-11-0-0/update-11-0-0"
+    },
+    "update-webpack-config-11.0.0": {
+      "version": "11.0.0-beta.1",
+      "description": "Update Webpack config",
+      "factory": "./src/migrations/update-11-0-0/update-webpack-config-11-0-0"
+    },
+    "update-14.0.0": {
+      "version": "14.0.0",
+      "description": "Update to ionic 6",
+      "factory": "./src/migrations/update-14-0-0/ionic-6-migration-14-0-0"
+    }
+  },
+  "packageJsonUpdates": {
+    "1.0.1": {
+      "version": "1.0.1-beta.1",
+      "packages": {
+        "@ionic/react": {
+          "version": "5.0.5",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "5.0.5",
+          "alwaysAddToPackageJson": false
+        },
+        "ionicons": {
+          "version": "5.0.1",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "1.0.2": {
+      "version": "1.0.2",
+      "packages": {
+        "@ionic/react": {
+          "version": "5.0.7",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "5.0.7",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "2.0.0": {
+      "version": "2.0.0",
+      "packages": {
+        "@testing-library/cypress": {
+          "version": "6.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@testing-library/jest-dom": {
+          "version": "5.5.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@testing-library/user-event": {
+          "version": "10.0.1",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "2.2.0": {
+      "version": "2.2.0",
+      "packages": {
+        "@ionic/react": {
+          "version": "^5.2.2",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "^5.2.2",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "3.0.0": {
+      "version": "3.0.0",
+      "packages": {
+        "@testing-library/jest-dom": {
+          "version": "5.11.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@testing-library/user-event": {
+          "version": "12.0.11",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "3.0.1": {
+      "version": "3.0.0",
+      "packages": {
+        "@ionic/react": {
+          "version": "5.2.3",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "5.2.3",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "3.1.0": {
+      "version": "3.1.0",
+      "packages": {
+        "@ionic/react": {
+          "version": "5.3.2",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "5.3.2",
+          "alwaysAddToPackageJson": false
+        },
+        "@nxext/capacitor": {
+          "version": "1.1.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@testing-library/cypress": {
+          "version": "7.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@testing-library/jest-dom": {
+          "version": "5.11.4",
+          "alwaysAddToPackageJson": false
+        },
+        "@testing-library/user-event": {
+          "version": "12.1.5",
+          "alwaysAddToPackageJson": false
+        },
+        "ionicons": {
+          "version": "5.1.2",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "4.0.0": {
+      "version": "4.0.0",
+      "packages": {}
+    },
+    "5.0.0": {
+      "version": "5.0.0",
+      "packages": {
+        "@ionic/react": {
+          "version": "^5.5.1",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "^5.5.1",
+          "alwaysAddToPackageJson": false
+        },
+        "ionicons": {
+          "version": "^5.2.3",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "11.0.0": {
+      "version": "11.0.0",
+      "packages": {
+        "@ionic/react": {
+          "version": "^5.5.2",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "^5.5.2",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "12.0.0": {
+      "version": "12.0.0-beta.0",
+      "packages": {
+        "@ionic/react": {
+          "version": "^5.8.3",
+          "alwaysAddToPackageJson": false
+        },
+        "@ionic/react-router": {
+          "version": "^5.8.3",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
+}

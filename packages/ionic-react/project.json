@@ -1,0 +1,55 @@
+{
+  "sourceRoot": "packages/ionic-react/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/ionic-react",
+        "main": "packages/ionic-react/src/index.ts",
+        "packageJson": "packages/ionic-react/package.json",
+        "tsConfig": "packages/ionic-react/tsconfig.lib.json",
+        "assets": [
+          "packages/ionic-react/*.md",
+          {
+            "input": "./packages/ionic-react/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/ionic-react/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/ionic-react",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/ionic-react",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/ionic-react/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/ionic-react"],
+      "options": {
+        "jestConfig": "packages/ionic-react/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

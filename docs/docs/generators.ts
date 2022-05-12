@@ -25,6 +25,12 @@ export default {
       link: '/docs/ionic-angular/generators/page',
     },
   ],
+  'ionic-react': [
+    {
+      text: '@nxext/ionic-react:application',
+      link: '/docs/ionic-react/generators/application',
+    },
+  ],
   preact: [
     {
       text: '@nxext/preact:application',
