@@ -81,7 +81,7 @@
     "@nx-plus/vue": "13.0.1",
     "@preact/preset-vite": "^2.1.7",
     "@stencil/core": "2.15.1",
-    "@sveltejs/kit": "^1.0.0-next.301",
+    "@sveltejs/kit": "^1.0.0-next.328",
     "@swc/cli": "~0.1.57",
     "@swc/core": "^1.2.168",
     "@swc/helpers": "~0.3.8",
@@ -93,6 +93,8 @@
     "@typescript-eslint/eslint-plugin": "5.18.0",
     "@typescript-eslint/parser": "5.18.0",
     "@vitejs/plugin-react": "^1.3.1",
+    "@vuepress/plugin-back-to-top": "^2.0.0-beta.43",
+    "@vuepress/plugin-search": "^2.0.0-beta.43",
     "all-contributors-cli": "^6.20.0",
     "autoprefixer": "^10.4.4",
     "chalk": "4.1.0",
@@ -126,8 +128,8 @@
     "vite": "2.9.6",
     "vite-plugin-inspect": "^0.5.0",
     "vite-plugin-solid": "^2.2.6",
-    "vitepress": "^0.22.4",
-    "vitest": "^0.12.0"
+    "vitest": "^0.12.0",
+    "vuepress": "^2.0.0-beta.43"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"
