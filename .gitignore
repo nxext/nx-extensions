@@ -52,3 +52,7 @@ e2e/stencil-e2e/tests/dev.test.ts
 # verdaccio
 /build
 /.verdaccio/htpasswd
+
+# Vuepress
+/docs/.vuepress/.temp
+/docs/.vuepress/.cache

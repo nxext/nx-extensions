@@ -13,6 +13,7 @@ import {
 } from '@angular-devkit/schematics/src/formats';
 import {
   formatDeprecated,
+  generateJsonFile,
   generateMarkdownFile,
   generateTsFile,
   sortAlphabeticallyFunction,
@@ -163,7 +164,7 @@ export async function generateExecutorsDocumentation() {
 
   const { configs } = getPackageConfigurations();
 
-  await Promise.all(
+  const routes = await Promise.all(
     configs
       .filter((item) => item.hasBuilders)
       .map(async (config) => {
@@ -175,15 +176,14 @@ export async function generateExecutorsDocumentation() {
           .filter((b) => b != null && !b['hidden'])
           .map((b) => generateTemplate(b));
 
-        await generateMarkdownFile(config.builderOutput, {
-          name: '../executors',
-          template: dedent`
----
-sidebarDepth: 3
----
-${markdownList.map((template) => template.template).join('\n\n')}
-        `,
-        });
+        await Promise.all(
+          markdownList.map((template) =>
+            generateMarkdownFile(config.builderOutput, {
+              name: template.name,
+              template: template.template,
+            })
+          )
+        );
 
         console.log(
           ` - Documentation for ${chalk.magenta(
@@ -192,8 +192,41 @@ ${markdownList.map((template) => template.template).join('\n\n')}
             relative(process.cwd(), config.builderOutput)
           )}`
         );
+
+        return {
+          [config.name]: markdownList.map((template) => {
+            const filePath = join(config.builderOutput, `${template.name}`);
+            return {
+              text: `@nxext/${template.name}`,
+              link: `/${relative(`${process.cwd()}/docs`, filePath)}`,
+            };
+          }),
+        };
       })
   );
+
+  console.log();
+
+  const builders = configs
+    .filter((item) => item.hasBuilders)
+    .map((item) => item.name);
+
+  await generateJsonFile(
+    join(__dirname, '../../../docs', 'docs', 'executors.json'),
+    builders
+  );
+
+  const mergedRoutes = Object.assign({}, ...routes);
+  await generateTsFile(
+    join(__dirname, '../../../docs', 'docs', 'executors.ts'),
+    mergedRoutes
+  ).then(() => {
+    console.log(
+      `${chalk.green('✓')} Generated executors.ts at ${chalk.grey(
+        `docs/docs/executors.ts`
+      )}`
+    );
+  });
 
   console.log(`\n${chalk.green('✓')} Generated Documentation for Executors`);
 }
