@@ -19,5 +19,9 @@ function updateJestConfigContent(content: string, svelteConfigPath: string) {
     .replace(
       'transform: {',
       `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      'preprocess': '${svelteConfigPath}'\n    }\n    ],`
+    )
+    .replace(
+      'coverageDirectory',
+      `testEnvironment: 'jsdom',\n coverageDirectory`
     );
 }
