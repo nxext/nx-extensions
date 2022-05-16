@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'angular-swc',
 
   transform: {
@@ -6,5 +6,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../coverage/packages/angular/swc',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 };

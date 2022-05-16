@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'react-e2e',
 
   globals: {
@@ -10,6 +10,6 @@ module.exports = {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/e2e\react-e2e',
-  preset: '../../jest.preset.ts',
+  coverageDirectory: '../../coverage/e2e/react-e2e',
+  preset: '../../jest.preset.js',
 };

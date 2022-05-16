@@ -1,6 +1,6 @@
-module.exports = {
+export default {
   displayName: 'vite-e2e',
-  preset: '../../jest.preset.ts',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/vite-e2e',
-  maxWorkers: 1,
+  preset: '../../jest.preset.js',
 };

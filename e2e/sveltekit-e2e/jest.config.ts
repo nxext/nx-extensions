@@ -1,6 +1,6 @@
-module.exports = {
-  displayName: 'sveltekit-e2e',
-  preset: '../../jest.preset.ts',
+export default {
+  name: 'sveltekit-e2e',
+
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,4 +11,6 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/sveltekit-e2e',
+  maxWorkers: 1,
+  preset: '../../jest.preset.js',
 };
