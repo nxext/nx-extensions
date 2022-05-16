@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'angular-vite',
 
   transform: {
@@ -6,5 +6,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../coverage/packages/angular/vite',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
 };

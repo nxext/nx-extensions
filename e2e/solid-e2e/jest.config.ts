@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: 'solid-e2e',
 
   globals: {
@@ -12,5 +12,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/solid-e2e',
   maxWorkers: 1,
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 };

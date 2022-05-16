@@ -7,7 +7,7 @@
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
         "target": "ts.ed:build",
-        "jestConfig": "e2e/ts.ed-e2e/jest.config.js"
+        "jestConfig": "e2e/ts.ed-e2e/jest.config.ts"
       }
     }
   },

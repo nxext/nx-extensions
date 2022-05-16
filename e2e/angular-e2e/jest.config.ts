@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'angular-e2e',
 
   globals: {
@@ -11,5 +11,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/angular-e2e',
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 };

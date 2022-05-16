@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,5 @@ module.exports = {
   coverageDirectory: '../../coverage/packages/svelte',
   displayName: 'svelte',
   testEnvironment: 'node',
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 };
