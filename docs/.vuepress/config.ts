@@ -37,7 +37,6 @@ export default defineUserConfig({
 
     themePlugins: {
       backToTop: true,
-      prismjs: true,
     },
 
     navbar: [
@@ -66,6 +65,10 @@ export default defineUserConfig({
             {
               text: 'Getting Started',
               link: '/guide/',
+            },
+            {
+              text: 'Articles',
+              link: '/guide/articles',
             },
           ],
         },
