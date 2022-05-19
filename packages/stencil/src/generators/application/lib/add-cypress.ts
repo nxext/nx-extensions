@@ -1,4 +1,3 @@
-import { cypressProjectGenerator } from '@nrwl/cypress';
 import { Tree } from '@nrwl/devkit';
 import { ApplicationSchema } from '../schema';
 
@@ -8,7 +7,8 @@ export async function addCypress(host: Tree, options: ApplicationSchema) {
     return () => {};
   }
 
-  return await cypressProjectGenerator(host, {
+  const generators = await import('@nrwl/cypress');
+  return await generators.cypressProjectGenerator(host, {
     ...options,
     name: `${options.name}-e2e`,
     directory: options.directory,
