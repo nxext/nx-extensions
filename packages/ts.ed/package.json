@@ -1,6 +1,6 @@
 {
   "name": "@nxext/ts.ed",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "license": "MIT",
   "author": "Nick Wiltshire",
   "description": "Nx plugin for Ts.ED",
