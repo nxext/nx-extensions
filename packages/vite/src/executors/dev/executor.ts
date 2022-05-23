@@ -7,7 +7,7 @@ import {
   ProxyOptions,
   createServer,
   mergeConfig,
-  ViteDevServer,
+  ViteDevServer, searchForWorkspaceRoot
 } from 'vite';
 import { join, relative } from 'path';
 import { defineBaseConfig } from '../../../plugins/vite';
@@ -76,6 +76,12 @@ export default async function* runExecutor(
       },
       server: {
         proxy: proxyConfig,
+        fs: {
+          allow: [
+            searchForWorkspaceRoot(joinPathFragments(projectRoot)),
+            joinPathFragments(context.root, 'node_modules/vite')
+          ]
+        }
       },
     } as InlineConfig
   );
