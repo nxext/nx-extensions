@@ -4,4 +4,4 @@
 
 ## Executors / Builders
 
-Our React applications are built using the executors from the [@nxext/vite](../vite/overview.md) plugin.
+Our Svelte applications are built using the executors from the [@nxext/vite](../vite/overview.md) plugin.
