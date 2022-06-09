@@ -1,8 +1,17 @@
 import { SupportedStyles } from '../stencil-core-utils';
-import { Tree } from '@nrwl/devkit';
+import {
+  readWorkspaceConfiguration,
+  Tree,
+  updateWorkspaceConfiguration,
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '../generators/library/generator';
 import { ProjectType } from './typings';
+
+/**
+ * The value of `npmScope` in an nx.json file
+ */
+export const testNpmScope = 'test-workspace';
 
 export async function createTestUILib(
   libName: string,
@@ -10,11 +19,15 @@ export async function createTestUILib(
   buildable = true
 ): Promise<Tree> {
   const host = createTreeWithEmptyWorkspace();
+  const workspaceConfiguration = readWorkspaceConfiguration(host);
+  workspaceConfiguration.npmScope = testNpmScope;
+  updateWorkspaceConfiguration(host, workspaceConfiguration);
+
   await libraryGenerator(host, {
     name: libName,
     style: style,
     buildable,
-    publishable: false
+    publishable: false,
   });
 
   return host;

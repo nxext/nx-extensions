@@ -1,0 +1,55 @@
+// Imports the Storybook's configuration and options API
+import type { StorybookConfig, Options } from '@storybook/core-common';
+import type { Configuration } from 'webpack';
+import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
+import { logger } from "@storybook/node-logger";
+
+/**
+ * @see https://github.com/storybookjs/storybook/blob/main/docs/configure/overview.md#using-storybook-api
+ */
+export const config: StorybookConfig = {
+  addons: ['@storybook/addon-essentials'],
+  core: {
+    builder: {
+      name: 'webpack5',
+      options: {
+        fsCache: false,
+        lazyCompilation: false
+     },
+    },
+  },
+  // @see https://github.com/storybookjs/storybook/blob/main/docs/configure/overview.md#feature-flags
+  features: {
+    babelModeV7: true,
+    storyStoreV7: true,
+  },
+  stories: [],
+  webpackFinal: async (config: Configuration, options: Options) => {
+    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
+    // options.configType = 'DEVELOPMENT';
+
+    // You can change the configuration based on that.
+    // 'PRODUCTION' is used when building the static version of storybook.
+    const resolve = config?.resolve;
+    if(!resolve) {
+      logger.error(`No resolve object assigned to Webpack's config. This is needed for Storybook.`);
+      throw new Error();
+    }
+
+    const tsPaths = new TsconfigPathsPlugin({
+      configFile: './<%= rootTsConfigPath %>',
+      extensions: resolve?.extensions,
+      mainFields: resolve?.mainFields as string[],
+     });
+  
+    resolve?.plugins
+      ? resolve.plugins.push(tsPaths)
+      : (resolve.plugins = [tsPaths]);
+
+    const instance = (await options.presets.apply('webpackInstance')) as any;
+    logger.info(`=> Running in webpack instance: ${instance?.version}`);
+
+    // Return the altered config
+    return config;
+  },
+};
