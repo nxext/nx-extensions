@@ -1,19 +1,25 @@
 import { MakeLibBuildableSchema } from '../schema';
 import { Tree, updateJson } from '@nrwl/devkit';
+import { getRootTsConfigPathInTree } from '@nrwl/workspace/src/utilities/typescript';
+import { getProjectTsImportPath } from '../../storybook-configuration/generator';
 
 export function updateTsConfig(host: Tree, options: MakeLibBuildableSchema) {
-  updateJson(host, 'tsconfig.base.json', (json) => {
+  updateJson(host, getRootTsConfigPathInTree(host), (json) => {
     const c = json.compilerOptions;
-    delete c.paths[`${options.importPath}`];
-    c.paths[`${options.importPath}`] = [
-      `dist/${options.projectRoot}`
+    const tsBasePathKey =
+      options.importPath || getProjectTsImportPath(host, options.name);
+
+    delete c.paths[`${tsBasePathKey}`];
+    c.paths[`${tsBasePathKey}`] = [`dist/libs/${options.name}`];
+
+    delete c.paths[`${tsBasePathKey}/loader`];
+    c.paths[`${tsBasePathKey}/loader`] = [`dist/libs/${options.name}/loader`];
+
+    delete c.paths[`${tsBasePathKey}/*`];
+    c.paths[`${tsBasePathKey}/*`] = [
+      `dist/libs/${options.name}/dist/components/*`,
     ];
-    delete c.paths[
-      `${options.importPath}/loader`
-      ];
-    c.paths[
-      `${options.importPath}/loader`
-      ] = [`dist/${options.projectRoot}/loader`];
+
     return json;
   });
 }
