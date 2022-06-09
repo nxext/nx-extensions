@@ -1,12 +1,16 @@
 {
-  "root": "packages/sveltekit",
   "sourceRoot": "packages/sveltekit/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["packages/sveltekit/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/sveltekit/**/*.ts",
+          "packages/sveltekit/generators.json",
+          "packages/sveltekit/executors.json",
+          "packages/sveltekit/package.json"
+        ]
       }
     },
     "test": {

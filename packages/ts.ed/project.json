@@ -1,5 +1,4 @@
 {
-  "root": "packages/ts.ed",
   "sourceRoot": "packages/ts.ed/src",
   "projectType": "library",
   "targets": {
@@ -7,7 +6,11 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/ts.ed/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/ts.ed/**/*.ts",
+          "packages/ts.ed/generators.json",
+          "packages/ts.ed/package.json"
+        ]
       }
     },
     "test": {

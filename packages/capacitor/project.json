@@ -39,7 +39,13 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/capacitor/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/capacitor/**/*.ts",
+          "packages/capacitor/generators.json",
+          "packages/capacitor/executors.json",
+          "packages/capacitor/package.json",
+          "packages/capacitor/migrations.json"
+        ]
       }
     },
     "test": {

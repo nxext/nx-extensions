@@ -1,12 +1,17 @@
 {
-  "root": "packages/vite",
   "sourceRoot": "packages/vite/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["packages/vite/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/vite/**/*.ts",
+          "packages/vite/generators.json",
+          "packages/vite/executors.json",
+          "packages/vite/package.json",
+          "packages/vite/migrations.json"
+        ]
       }
     },
     "test": {
