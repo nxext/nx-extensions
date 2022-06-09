@@ -24,15 +24,15 @@ nx g make-lib-buildable ... --dry-run
 
 ### Options
 
-#### importPath (_**required**_)
+#### name (_**required**_)
+
+Type: `string`
+
+#### importPath
 
 Type: `string`
 
 The library name used to import it, like @myorg/my-awesome-lib
-
-#### name (_**required**_)
-
-Type: `string`
 
 #### style
 
