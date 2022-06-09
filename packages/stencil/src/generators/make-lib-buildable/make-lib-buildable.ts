@@ -18,19 +18,21 @@ import {
   getServeTarget,
 } from '../../utils/targets';
 import { AppType } from '../../utils/typings';
-
-interface MakeLibBuildableOptions extends MakeLibBuildableSchema {
-  projectRoot: string;
-}
+import { getProjectTsImportPath } from '../storybook-configuration/generator';
 
 function normalize(
-  options: MakeLibBuildableSchema,
-  projectRoot: string
-): MakeLibBuildableOptions {
-  return { ...options, projectRoot };
+  host: Tree,
+  options: MakeLibBuildableSchema
+): MakeLibBuildableSchema {
+  options.projectRoot = readProjectConfiguration(host, options.name).root;
+
+  options.importPath =
+    options.importPath || getProjectTsImportPath(host, options.name);
+
+  return { ...options } as MakeLibBuildableSchema;
 }
 
-function createFiles(host: Tree, options: MakeLibBuildableOptions) {
+function createFiles(host: Tree, options: MakeLibBuildableSchema) {
   generateFiles(
     host,
     joinPathFragments(__dirname, './files/lib'),
@@ -39,7 +41,7 @@ function createFiles(host: Tree, options: MakeLibBuildableOptions) {
   );
 }
 
-function updateProjectConfig(host: Tree, options: MakeLibBuildableOptions) {
+function updateProjectConfig(host: Tree, options: MakeLibBuildableSchema) {
   const projectConfig = readProjectConfiguration(host, options.name);
 
   projectConfig.targets = projectConfig.targets || {};
@@ -58,8 +60,7 @@ export async function makeLibBuildableGenerator(
   host: Tree,
   schema: MakeLibBuildableSchema
 ) {
-  const stencilProjectConfig = readProjectConfiguration(host, schema.name);
-  const options = normalize(schema, stencilProjectConfig.root);
+  const options = normalize(host, schema);
 
   updateProjectConfig(host, options);
   createFiles(host, options);
