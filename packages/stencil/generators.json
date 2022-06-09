@@ -48,11 +48,6 @@
       "schema": "./src/generators/add-outputtarget/schema.json",
       "hidden": true
     },
-    "add-outputtarget/add-vue": {
-      "factory": "./src/generators/add-outputtarget/add-vue/generator#addVueSchematic",
-      "schema": "./src/generators/add-outputtarget/schema.json",
-      "hidden": true
-    },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable#makeLibBuildableSchematic",
       "schema": "./src/generators/make-lib-buildable/schema.json",
@@ -108,11 +103,6 @@
     },
     "add-outputtarget/add-react": {
       "factory": "./src/generators/add-outputtarget/add-react/generator#addReactGenerator",
-      "schema": "./src/generators/add-outputtarget/schema.json",
-      "hidden": true
-    },
-    "add-outputtarget/add-vue": {
-      "factory": "./src/generators/add-outputtarget/add-vue/generator#addVueGenerator",
       "schema": "./src/generators/add-outputtarget/schema.json",
       "hidden": true
     },

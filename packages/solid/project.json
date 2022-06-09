@@ -1,5 +1,4 @@
 {
-  "root": "packages/solid",
   "sourceRoot": "packages/solid/src",
   "projectType": "library",
   "generators": {},
@@ -13,7 +12,9 @@
           "packages/solid/**/*.spec.tsx",
           "packages/solid/**/*.spec.js",
           "packages/solid/**/*.spec.jsx",
-          "packages/solid/**/*.d.ts"
+          "packages/solid/**/*.d.ts",
+          "packages/solid/generators.json",
+          "packages/solid/package.json"
         ]
       }
     },

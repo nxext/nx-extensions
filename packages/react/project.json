@@ -1,5 +1,4 @@
 {
-  "root": "packages/react",
   "sourceRoot": "packages/react/src",
   "projectType": "library",
   "targets": {
@@ -7,7 +6,11 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/react/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/react/**/*.ts",
+          "packages/react/generators.json",
+          "packages/react/package.json"
+        ]
       }
     },
     "test": {

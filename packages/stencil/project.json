@@ -1,5 +1,4 @@
 {
-  "root": "packages/stencil",
   "sourceRoot": "packages/stencil/src",
   "projectType": "library",
   "generators": {},
@@ -13,7 +12,11 @@
           "packages/stencil/**/*.spec.tsx",
           "packages/stencil/**/*.spec.js",
           "packages/stencil/**/*.spec.jsx",
-          "packages/stencil/**/*.d.ts"
+          "packages/stencil/**/*.d.ts",
+          "packages/stencil/generators.json",
+          "packages/stencil/executors.json",
+          "packages/stencil/package.json",
+          "packages/stencil/migrations.json"
         ]
       }
     },

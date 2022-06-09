@@ -1,5 +1,4 @@
 {
-  "root": "packages/svelte",
   "sourceRoot": "packages/svelte/src",
   "projectType": "library",
   "generators": {},
@@ -13,7 +12,10 @@
           "packages/svelte/**/*.spec.tsx",
           "packages/svelte/**/*.spec.js",
           "packages/svelte/**/*.spec.jsx",
-          "packages/svelte/**/*.d.ts"
+          "packages/svelte/**/*.d.ts",
+          "packages/svelte/generators.json",
+          "packages/svelte/package.json",
+          "packages/svelte/migrations.json"
         ]
       }
     },

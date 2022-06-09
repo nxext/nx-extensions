@@ -39,7 +39,13 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/ionic-angular/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/ionic-angular/**/*.ts",
+          "packages/ionic-angular/generators.json",
+          "packages/ionic-angular/executors.json",
+          "packages/ionic-angular/package.json",
+          "packages/ionic-angular/migrations.json"
+        ]
       }
     },
     "test": {

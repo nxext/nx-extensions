@@ -1,5 +1,4 @@
 {
-  "root": "packages/vitest",
   "sourceRoot": "packages/vitest/src",
   "projectType": "library",
   "targets": {
@@ -7,7 +6,12 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/vitest/**/*.ts"]
+        "lintFilePatterns": [
+          "packages/vitest/**/*.ts",
+          "packages/vitest/generators.json",
+          "packages/vitest/executors.json",
+          "packages/vitest/package.json"
+        ]
       }
     },
     "test": {

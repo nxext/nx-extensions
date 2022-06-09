@@ -1,5 +1,4 @@
 {
-  "root": "packages/preact",
   "sourceRoot": "packages/preact/src",
   "projectType": "library",
   "generators": {},
@@ -13,7 +12,9 @@
           "packages/preact/**/*.spec.tsx",
           "packages/preact/**/*.spec.js",
           "packages/preact/**/*.spec.jsx",
-          "packages/preact/**/*.d.ts"
+          "packages/preact/**/*.d.ts",
+          "packages/preact/generators.json",
+          "packages/preact/package.json"
         ]
       }
     },
