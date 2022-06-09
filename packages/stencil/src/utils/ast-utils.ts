@@ -24,7 +24,7 @@ export function addImport(
   return [addAfterLastImport(source, statement)];
 }
 
-function addAfterLastImport(
+export function addAfterLastImport(
   source: ts.SourceFile,
   statement: string
 ): StringChange {
