@@ -1,6 +1,5 @@
 import { renderVdom, registerHost, getHostRef } from '@stencil/core/internal/client';
-
-import { defineCustomElements } from '<%= loaderDir %>';
+import { defineCustomElements } from '<%= loaderDir %>/loader';
 
 defineCustomElements();
 
@@ -10,6 +9,10 @@ rootElement.parentElement.appendChild(storyRoot);
 
 registerHost(storyRoot, { $flags$: 0, $tagName$: 'story-root' })
 const hostRef = getHostRef(storyRoot);
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+}
 
 export const decorators = [
   (Story) => {

@@ -2,6 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "<%= offsetFromRoot %>dist/out-tsc",
+    "declaration": true,
+    "composite": true,
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts", "**/*.spec.tsx"],

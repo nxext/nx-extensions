@@ -17,7 +17,6 @@
     "jsx": "react",
     "jsxFactory": "h"
   },
-  "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"

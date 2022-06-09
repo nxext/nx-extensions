@@ -6,9 +6,12 @@ import {
   names,
   stripIndents,
   Tree,
-  readProjectConfiguration, formatFiles
+  readProjectConfiguration,
+  formatFiles,
 } from '@nrwl/devkit';
 import { join } from 'path';
+import { insertStatement } from '../../utils/insert-statement';
+import { getProjectTsImportPath } from '../storybook-configuration/generator';
 
 export interface ComponentSchema {
   name: string;
@@ -34,7 +37,9 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
     ? joinPathFragments(`${options.directory}/${componentFileName}`)
     : componentFileName;
 
-  const componentOptions = ((projectConfig || {}).generators || { '@nxext/stencil:component': {}, })['@nxext/stencil:component'];
+  const componentOptions = ((projectConfig || {}).generators || {
+    '@nxext/stencil:component': {},
+  })['@nxext/stencil:component'];
   if (!componentOptions) {
     logger.info(stripIndents`
         Style options for components not set, please run "nx migrate @nxext/stencil"
@@ -49,7 +54,9 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
   generateFiles(
     host,
     join(__dirname, './files/component'),
-    joinPathFragments(`${projectConfig.sourceRoot}/components/${componentDirectory}`),
+    joinPathFragments(
+      `${projectConfig.sourceRoot}/components/${componentDirectory}`
+    ),
     {
       componentFileName: componentFileName,
       className: className,
@@ -57,9 +64,18 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
     }
   );
 
+  const storiesPath = `${projectConfig.sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.tsx`;
   if (!host.exists('.storybook')) {
-    host.delete(
-      joinPathFragments(`${projectConfig.sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.jsx`)
+    host.delete(joinPathFragments(storiesPath));
+  } else {
+    const classPathValue = `${getProjectTsImportPath(
+      host,
+      options.project
+    )}/${componentFileName}`;
+    insertStatement(
+      host,
+      storiesPath,
+      `import { ${className} } from '${classPathValue}'`
     );
   }
 
