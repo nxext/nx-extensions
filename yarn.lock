@@ -17437,10 +17437,10 @@ svgo@^2.5.0, svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
-swc-ast-helpers@^0.0.8-beta.1:
-  version "0.0.8-beta.1"
-  resolved "https://registry.yarnpkg.com/swc-ast-helpers/-/swc-ast-helpers-0.0.8-beta.1.tgz#e347517534ac1783980804ca6c04b9be301e9fa8"
-  integrity sha512-omozpoJ9Ww2yX27OpuMe1UZg0R06jzVncKxHPY3mPDEaqvsfmZxY0VVl5VSQVJBN44Ft7EqyIry/AWAx3+bvyA==
+swc-ast-helpers@^0.0.8-beta.2:
+  version "0.0.8-beta.2"
+  resolved "https://registry.yarnpkg.com/swc-ast-helpers/-/swc-ast-helpers-0.0.8-beta.2.tgz#83212f6ced51c48e853001e11b0876ad6141c480"
+  integrity sha512-PbG6LECB8Jnpp59OAIuCHQQ/AY/6iPAlJ5ksIXm9Yt971/xGC3vObYSgvjWpU03d4NktppYOMAy4LhMfmoB/dw==
 
 symbol-tree@^3.2.2, symbol-tree@^3.2.4:
   version "3.2.4"
