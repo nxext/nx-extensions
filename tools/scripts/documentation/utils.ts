@@ -2,7 +2,7 @@
  * Originally from the Nx repo: https://github.com/nrwl/nx
  */
 import { outputFileSync, readJsonSync } from 'fs-extra';
-import { join } from 'path';
+import { join, relative } from 'path';
 import { format, resolveConfig } from 'prettier';
 const stripAnsi = require('strip-ansi');
 
@@ -115,4 +115,24 @@ export function formatDeprecated(
 
     ${description}
     `;
+}
+
+/**
+ * To be used to match all backslashes.
+ */
+const backslashSepPattern = new RegExp(/\\/, 'g');
+
+export function createDocLink(filePath: string): string {
+  const path = `/${relative(`${process.cwd()}/docs`, filePath)}`;
+  return !backslashSepPattern.test(path) ? path : convertSepsToForward(path);
+}
+
+/**
+ * Converts all backslash path seperators to a forwardslash.
+ *
+ * Using node.js `path` api uses platform-specific path segment separator.
+ */
+function convertSepsToForward(value: string): string {
+  const sep = '/';
+  return value.replace(backslashSepPattern, sep);
 }
