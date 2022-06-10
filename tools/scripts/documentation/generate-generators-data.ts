@@ -11,6 +11,7 @@ import {
   pathFormat,
 } from '@angular-devkit/schematics/src/formats';
 import {
+  createDocLink,
   formatDeprecated,
   generateJsonFile,
   generateMarkdownFile,
@@ -25,7 +26,7 @@ import {
 import { parseJsonSchemaToOptions } from './json-parser';
 import { createSchemaFlattener, SchemaFlattener } from './schema-flattener';
 import { inspect } from 'util';
-import { join, relative } from 'path';
+import { join } from 'path';
 
 /**
  * @WhatItDoes: Generates default documentation from the schematics' schema.
@@ -209,7 +210,7 @@ export async function generateGeneratorsDocumentation() {
             const filePath = join(config.schematicOutput, `${template.name}`);
             return {
               text: `@nxext/${config.name}:${template.name}`,
-              link: `/${relative(`${process.cwd()}/docs`, filePath)}`,
+              link: createDocLink(filePath),
             };
           }),
         };

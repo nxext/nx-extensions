@@ -12,6 +12,7 @@ import {
   pathFormat,
 } from '@angular-devkit/schematics/src/formats';
 import {
+  createDocLink,
   formatDeprecated,
   generateJsonFile,
   generateMarkdownFile,
@@ -198,7 +199,7 @@ export async function generateExecutorsDocumentation() {
             const filePath = join(config.builderOutput, `${template.name}`);
             return {
               text: `@nxext/${config.name}:${template.name}`,
-              link: `/${relative(`${process.cwd()}/docs`, filePath)}`,
+              link: createDocLink(filePath),
             };
           }),
         };
