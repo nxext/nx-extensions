@@ -16,6 +16,7 @@ export default async function runExecutor(
       cwd: projectRoot,
       parallel: false,
       color: true,
+      __unparsed__: [],
     },
     context
   );

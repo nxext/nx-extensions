@@ -33,6 +33,7 @@ export default async function runExecutor(
       cwd: projectRoot,
       parallel: false,
       color: true,
+      __unparsed__: [],
     },
     context
   );
@@ -57,6 +58,7 @@ export default async function runExecutor(
       command: getPackageManagerCommand().install,
       parallel: false,
       color: true,
+      __unparsed__: [],
     },
     context
   );
