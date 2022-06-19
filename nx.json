@@ -36,14 +36,6 @@
   "affected": {
     "defaultBase": "main"
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   },
@@ -101,6 +93,11 @@
       "library": {
         "linter": "eslint"
       }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
     }
   }
 }
