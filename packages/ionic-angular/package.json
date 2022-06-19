@@ -25,7 +25,7 @@
     "migrations": "./migrations.json"
   },
   "dependencies": {
-    "@nrwl/devkit": "^14.1.4"
+    "@nrwl/devkit": "^14.3.0"
   },
   "peerDependencies": {
     "@nrwl/angular": "^14.0.0",
