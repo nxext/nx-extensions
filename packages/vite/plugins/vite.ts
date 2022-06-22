@@ -7,6 +7,9 @@ export function defineBaseConfig(workspaceRoot: string) {
       plugins: [viteNxProjectPaths({ workspaceRoot })],
       build: {
         target: 'esnext',
+        commonjsOptions: {
+          transformMixedEsModules: true,
+        },
       },
     };
   });

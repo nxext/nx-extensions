@@ -16,6 +16,7 @@ import { Schema } from './schema';
 import { reactInitGenerator } from '../init/init';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/react';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { vitePluginReactVersion } from '../utils/versions';
 
 export async function applicationGenerator(tree: Tree, options: Schema) {
   const appDirectory = options.directory
@@ -103,7 +104,7 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
     tree,
     {},
     {
-      '@vitejs/plugin-react': '^1.1.0',
+      '@vitejs/plugin-react': vitePluginReactVersion,
     }
   );
   if (!options.skipFormat) {
