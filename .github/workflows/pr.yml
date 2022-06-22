@@ -1,0 +1,28 @@
+name: Run PR checks
+
+on: pull_request
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    name: Nx Cloud - Main Job
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.2
+    with:
+      main-branch-name: 'main'
+      parallel-commands: |
+        npx nx-cloud record yarn nx workspace-lint
+        npx nx-cloud record yarn nx format:check
+      parallel-commands-on-agents: |
+        yarn nx affected -- --target=lint --parallel 3
+        yarn nx affected -- --target=build --parallel 3
+        yarn nx affected -- --target=test --parallel 3
+      final-commands: |
+        yarn nx affected -- --target=e2e
+  agents:
+    name: Nx Cloud - Agents
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.2
+    with:
+      number-of-agents: 3

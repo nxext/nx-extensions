@@ -18485,10 +18485,10 @@ verdaccio-audit@10.2.2:
     https-proxy-agent "5.0.1"
     node-fetch "2.6.7"
 
-verdaccio-htpasswd@10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/verdaccio-htpasswd/-/verdaccio-htpasswd-10.3.1.tgz#bda843dde3752e0ae2d4d2a5ba03fe922eef219a"
-  integrity sha512-FakeVHTyunBGurCTvkZgm89EkA9bxmcbUWrJ1rlUCFg48XpUtgHnemfH3pXRgItTX+cgLWENzK0jIpzkf7qUPw==
+verdaccio-htpasswd@10.4.0:
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/verdaccio-htpasswd/-/verdaccio-htpasswd-10.4.0.tgz#f2da48b393e4aff5dd4668e2386a3a7351b44b2b"
+  integrity sha512-Q5b8nVxoUDBXgzc7yIclnIcrGoBRYno+SVcv8+ZLz3H1KfTqSfn4+UBbb2mHEix7KNvk1W3KhHBG6n1dYRpC7A==
   dependencies:
     "@verdaccio/file-locking" "10.3.0"
     apache-md5 "1.1.7"
@@ -18496,10 +18496,10 @@ verdaccio-htpasswd@10.3.1:
     http-errors "2.0.0"
     unix-crypt-td-js "1.1.4"
 
-verdaccio@^5.12.0:
-  version "5.12.0"
-  resolved "https://registry.yarnpkg.com/verdaccio/-/verdaccio-5.12.0.tgz#dca3e44247b40e82db0f31a95ebbd9fd1720f2c0"
-  integrity sha512-2G/HcN21pVyyNtv4LyWYcGyScRwLZsC/b+MCG7AUinfG7aWbJmnNjj7grrCxnfDK1I9CVL3OnTVfveN9xsNFFg==
+verdaccio@^5.13.0:
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/verdaccio/-/verdaccio-5.13.0.tgz#555205b36b44654e606433b218b17916272ca219"
+  integrity sha512-0IVlOfpltlYusmUb/y3oK6kY4QfSHdGzgc3HB6NUhVe7nrCKa6qznLdW+eG3fk167xVpu/3OV5ipxUk/G5teGw==
   dependencies:
     "@verdaccio/commons-api" "10.2.0"
     "@verdaccio/local-storage" "10.3.0"
@@ -18542,7 +18542,7 @@ verdaccio@^5.12.0:
     semver "7.3.7"
     validator "13.7.0"
     verdaccio-audit "10.2.2"
-    verdaccio-htpasswd "10.3.1"
+    verdaccio-htpasswd "10.4.0"
 
 verror@1.10.0:
   version "1.10.0"
