@@ -50,6 +50,7 @@ export default async function runExecutor(
         emptyOutDir: true,
         reportCompressedSize: true,
         cssCodeSplit: true,
+        sourcemap: options.sourcemaps ?? false,
         rollupOptions: {
           plugins: [replaceFiles(options.fileReplacements)],
         },
