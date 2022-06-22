@@ -4,4 +4,5 @@ export interface BuildExecutorSchema {
   frameworkConfigFile?: string;
   fileReplacements?: { file: string; with: string }[];
   outputPath: string;
+  sourcemaps: boolean;
 }
