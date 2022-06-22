@@ -87,7 +87,7 @@
     "@swc/cli": "~0.1.57",
     "@swc/core": "^1.2.168",
     "@swc/helpers": "~0.3.8",
-    "@swc/jest": "0.2.15",
+    "@swc/jest": "0.2.21",
     "@types/globrex": "^0.1.2",
     "@types/is-ci": "^3.0.0",
     "@types/jest": "27.4.1",
