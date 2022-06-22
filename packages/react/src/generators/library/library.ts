@@ -17,6 +17,7 @@ import { Schema } from './schema';
 import { libraryGenerator as nxLibraryGenerator } from '@nrwl/react';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import reactInitGenerator from '../init/init';
+import { vitePluginReactVersion } from '../utils/versions';
 
 function updateLibPackageNpmScope(
   host: Tree,
@@ -96,7 +97,7 @@ export async function libraryGenerator(tree: Tree, options: Schema) {
     tree,
     {},
     {
-      '@vitejs/plugin-react': '^1.1.0',
+      '@vitejs/plugin-react': vitePluginReactVersion,
     }
   );
 
