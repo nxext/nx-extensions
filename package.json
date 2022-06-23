@@ -50,10 +50,10 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-angular": "14.0.1",
+    "@angular-devkit/build-angular": "14.0.2",
     "@angular-devkit/build-optimizer": "0.1302.1",
-    "@angular/compiler-cli": "14.0.1",
-    "@angular/core": "14.0.1",
+    "@angular/compiler-cli": "14.0.3",
+    "@angular/core": "14.0.3",
     "@storybook/builder-webpack5": "6.5.9",
     "@storybook/core-server": "6.5.9",
     "@storybook/manager-webpack5": "6.5.9",
@@ -64,7 +64,7 @@
     "tslib": "^2.1.0"
   },
   "devDependencies": {
-    "@angular/compiler": "14.0.1",
+    "@angular/compiler": "14.0.3",
     "@nrwl/angular": "14.3.6",
     "@nrwl/cli": "14.3.6",
     "@nrwl/cypress": "14.3.6",
