@@ -2984,12 +2984,13 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
-"@preact/preset-vite@^2.1.7":
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/@preact/preset-vite/-/preset-vite-2.1.7.tgz#aa019d7c573debf92ced351f101554a770a0dc49"
-  integrity sha512-/Ii+aN1Jm8TK5YzDVrj5UOVRZ91F2Nik1P3FbmZyQ5VJAg1ZCkOBBkmLrz9YhiMbbGl+U35yaZNUDMcO8Xlp2g==
+"@preact/preset-vite@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@preact/preset-vite/-/preset-vite-2.2.0.tgz#ba46b3b211cc3e01d81c83d77fbeecd5c83d0b77"
+  integrity sha512-xOtPzyVSPphUF/tRnzjxkCR/ovbCS6O25ekdCw5MGKcaAkb6PDRo50tS1x2n0+O9qL7Z/qrHJKpyCVn29A4iMg==
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.14.9"
+    "@babel/plugin-transform-react-jsx-development" "^7.16.7"
     "@prefresh/vite" "^2.2.6"
     "@rollup/pluginutils" "^4.1.1"
     babel-plugin-transform-hook-names "^1.0.2"
@@ -7934,14 +7935,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.2, debug@^4.3.3:
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.3.tgz#04266e0b70a98d4462e6e288e38259213332b664"
-  integrity sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==
-  dependencies:
-    ms "2.1.2"
-
-debug@4.3.4, debug@^4.3.4:
+debug@4, debug@4.3.4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
