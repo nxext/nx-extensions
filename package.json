@@ -80,7 +80,7 @@
     "@nrwl/storybook": "14.3.6",
     "@nrwl/web": "14.3.6",
     "@nrwl/workspace": "14.3.6",
-    "@preact/preset-vite": "^2.1.7",
+    "@preact/preset-vite": "^2.3.0",
     "@stencil/core": "2.15.1",
     "@sveltejs/kit": "^1.0.0-next.338",
     "@swc-node/register": "^1.4.2",
