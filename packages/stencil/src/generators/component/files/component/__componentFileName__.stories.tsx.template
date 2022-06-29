@@ -1,13 +1,5 @@
 import { h } from '@stencil/core';
 
-// To satisfy Storybook when Webpack is building stories,
-// keep reference of `h` here. Otherwise it will be omitted
-// during compilation and runtime error will occurr. This is
-// a limitation of Stencil's compiler api and an alternative
-// to using 'lit-html' as stated here: 
-// https://github.com/ionic-team/stencil/issues/3104
-h;
-
 export default {
   title: '<%= className %>',
   component: <%= className %> 

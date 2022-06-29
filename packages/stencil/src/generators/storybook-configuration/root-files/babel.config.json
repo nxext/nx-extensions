@@ -1,7 +1,24 @@
 {
+  // @see https://babeljs.io/docs/en/options#sourcetype
+  "sourceType": "unambiguous",
+  // @see https://babeljs.io/docs/en/options#babelrcroots
+  "babelrcRoots": [
+    // Keep the root as a root
+    ".",
+
+    // Also consider monorepo packages "root" and load their .babelrc.json files.
+    "./libs/*"
+  ],
+  // @see https://babeljs.io/docs/en/options#presets
   "presets": [
     "@babel/preset-env",
-    "@babel/preset-typescript",
+    [
+      // @see https://babeljs.io/docs/en/babel-preset-typescript
+      "@babel/preset-typescript",
+      {
+        "onlyRemoveTypeImports": false
+      }
+    ],
     [
       // @see https://babeljs.io/docs/en/babel-preset-react
       "@babel/preset-react",
