@@ -8,7 +8,7 @@ import {
 /**
  * Insert a statement after the last import statement in a file.
  *
- * For orgin of this function, see link below.
+ * For origin of this function, see link below.
  *
  * @see https://github.com/nrwl/nx/blob/master/packages/workspace/src/generators/utils/insert-statement.ts
  */
