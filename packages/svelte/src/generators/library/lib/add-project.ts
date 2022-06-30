@@ -3,7 +3,7 @@ import {
   addProjectConfiguration,
   TargetConfiguration,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import {
   createLintTarget,
   createPackageTarget,

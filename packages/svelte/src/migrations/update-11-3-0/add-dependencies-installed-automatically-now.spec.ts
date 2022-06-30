@@ -1,4 +1,4 @@
-import { readJson } from '@nrwl/devkit';
+import { readJson } from '@nxext/devkit';
 import { default as update } from './add-dependencies-installed-automatically-now';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 

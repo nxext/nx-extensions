@@ -1,14 +1,22 @@
-import { addDependenciesToPackageJson, GeneratorCallback, joinPathFragments, Tree, updateJson } from '@nrwl/devkit';
+import {
+  addDependenciesToPackageJson,
+  GeneratorCallback,
+  joinPathFragments,
+  Tree,
+  updateJson,
+} from '@nxext/devkit';
 import { PWASchema } from '../schema';
 import { Linter, lintProjectGenerator } from '@nrwl/linter';
-import { createStencilEslintJson, extraEslintDependencies } from '../../../utils/lint';
+import {
+  createStencilEslintJson,
+  extraEslintDependencies,
+} from '../../../utils/lint';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 export async function addLinting(host: Tree, options: PWASchema) {
-
-  if(options.linter !== Linter.EsLint) {
+  if (options.linter !== Linter.EsLint) {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    return () => {}
+    return () => {};
   }
 
   const tasks: GeneratorCallback[] = [];
@@ -16,10 +24,10 @@ export async function addLinting(host: Tree, options: PWASchema) {
     linter: options.linter,
     project: options.projectName,
     tsConfigPaths: [
-      joinPathFragments(options.projectRoot, 'tsconfig.app.json')
+      joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
     ],
     eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,tsx}`],
-    skipFormat: true
+    skipFormat: true,
   });
   tasks.push(lintTask);
 

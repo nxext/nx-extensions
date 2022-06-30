@@ -11,7 +11,7 @@ import {
   readProjectConfiguration,
   offsetFromRoot,
   addDependenciesToPackageJson,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { Schema } from './schema';
 import { reactInitGenerator } from '../init/init';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/react';

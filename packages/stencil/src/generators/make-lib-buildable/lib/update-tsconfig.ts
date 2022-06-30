@@ -1,5 +1,5 @@
 import { MakeLibBuildableSchema } from '../schema';
-import { Tree, updateJson } from '@nrwl/devkit';
+import { Tree, updateJson } from '@nxext/devkit';
 import { getRootTsConfigPathInTree } from '@nrwl/workspace/src/utilities/typescript';
 import { getProjectTsImportPath } from '../../storybook-configuration/generator';
 

@@ -1,5 +1,5 @@
 import { cypressProjectGenerator } from '@nrwl/cypress';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { NormalizedSchema } from '../schema';
 
 export async function addCypress(tree: Tree, options: NormalizedSchema) {

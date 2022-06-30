@@ -1,5 +1,5 @@
 import { default as update } from './check-for-index-html';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { createTestProject } from '../../generators/utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 

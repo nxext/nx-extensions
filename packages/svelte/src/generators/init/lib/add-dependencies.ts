@@ -1,10 +1,12 @@
-import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nxext/devkit';
 import {
   svelteCheckVersion,
   svelteJesterVersion,
   sveltePreprocessVersion,
-  svelteVersion, testingLibrarySvelteVersion,
-  tsconfigSvelteVersion, vitePluginSvelteVersion
+  svelteVersion,
+  testingLibrarySvelteVersion,
+  tsconfigSvelteVersion,
+  vitePluginSvelteVersion,
 } from '../../utils/versions';
 
 export function updateDependencies(tree: Tree) {

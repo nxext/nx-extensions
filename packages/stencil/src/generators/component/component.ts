@@ -8,7 +8,7 @@ import {
   Tree,
   readProjectConfiguration,
   formatFiles,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { join } from 'path';
 import { insertStatement } from '../../utils/insert-statement';
 import { getProjectTsImportPath } from '../storybook-configuration/generator';

@@ -1,4 +1,4 @@
-import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nxext/devkit';
 import { capacitorVersion } from '../../../utils/versions';
 
 export function addDependencies(host: Tree) {

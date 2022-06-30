@@ -5,8 +5,8 @@ import {
   getWorkspaceLayout,
   names,
   Tree,
-  offsetFromRoot
-} from '@nrwl/devkit';
+  offsetFromRoot,
+} from '@nxext/devkit';
 import { PWASchema, RawPWASchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utillities';
@@ -39,27 +39,28 @@ function normalizeOptions(options: RawPWASchema, host: Tree): PWASchema {
     projectDirectory,
     parsedTags,
     style,
-    appType
+    appType,
   } as PWASchema;
 }
 
 function createFiles(host: Tree, options: PWASchema) {
-  generateFiles(
-    host,
-    join(__dirname, './files/pwa'),
-    options.projectRoot,
-    {
-      ...options,
-      ...names(options.name),
-      projectRoot: options.projectRoot,
-      offsetFromRoot: offsetFromRoot(options.projectRoot)
-    }
-  );
+  generateFiles(host, join(__dirname, './files/pwa'), options.projectRoot, {
+    ...options,
+    ...names(options.name),
+    projectRoot: options.projectRoot,
+    offsetFromRoot: offsetFromRoot(options.projectRoot),
+  });
 
-  if(options.unitTestRunner === 'none') {
-    host.delete(`${options.projectRoot}/src/components/app-home/app-home.spec.ts`);
-    host.delete(`${options.projectRoot}/src/components/app-root/app-root.spec.ts`);
-    host.delete(`${options.projectRoot}/src/components/app-profile/app-profile.spec.ts`);
+  if (options.unitTestRunner === 'none') {
+    host.delete(
+      `${options.projectRoot}/src/components/app-home/app-home.spec.ts`
+    );
+    host.delete(
+      `${options.projectRoot}/src/components/app-root/app-root.spec.ts`
+    );
+    host.delete(
+      `${options.projectRoot}/src/components/app-profile/app-profile.spec.ts`
+    );
   }
 }
 
@@ -71,10 +72,7 @@ function addStylePlugin(tree: Tree, normalizedOptions: PWASchema) {
   );
 }
 
-export async function ionicPwaGenerator(
-  host: Tree,
-  schema: RawPWASchema
-) {
+export async function ionicPwaGenerator(host: Tree, schema: RawPWASchema) {
   const options = normalizeOptions(schema, host);
   const initTask = await initGenerator(host, options);
   createFiles(host, options);

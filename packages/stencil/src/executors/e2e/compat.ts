@@ -1,4 +1,4 @@
-import { convertNxExecutor } from '@nrwl/devkit';
+import { convertNxExecutor } from '@nxext/devkit';
 
 import e2eExecutor from './executor';
 

@@ -2,12 +2,14 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getWorkspaceLayout, joinPathFragments,
+  getWorkspaceLayout,
+  joinPathFragments,
   names,
   getWorkspacePath,
   offsetFromRoot,
-  Tree, convertNxGenerator
-} from '@nrwl/devkit';
+  Tree,
+  convertNxGenerator,
+} from '@nxext/devkit';
 import * as path from 'path';
 import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
 import { ProjectType } from '@nrwl/workspace';
@@ -30,7 +32,10 @@ function normalizeOptions(
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
-  const distDir = relative(joinPathFragments(`${workspacePath}/${projectRoot}`), joinPathFragments(`${workspacePath}/dist/${projectRoot}`));
+  const distDir = relative(
+    joinPathFragments(`${workspacePath}/${projectRoot}`),
+    joinPathFragments(`${workspacePath}/dist/${projectRoot}`)
+  );
 
   return {
     ...options,
@@ -57,7 +62,10 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-export async function applicationGenerator(host: Tree, schema: SveltekitGeneratorSchema) {
+export async function applicationGenerator(
+  host: Tree,
+  schema: SveltekitGeneratorSchema
+) {
   const options = normalizeOptions(host, schema);
   addProjectConfiguration(host, options.projectName, {
     root: options.projectRoot,
@@ -67,25 +75,25 @@ export async function applicationGenerator(host: Tree, schema: SveltekitGenerato
       build: {
         executor: '@nxext/sveltekit:sveltekit',
         options: {
-          command: 'build'
-        }
+          command: 'build',
+        },
       },
       serve: {
         executor: '@nxext/sveltekit:sveltekit',
         options: {
-          command: 'dev'
-        }
+          command: 'dev',
+        },
       },
       add: {
         executor: '@nxext/sveltekit:add',
-      }
+      },
     },
     tags: options.parsedTags,
   });
   addFiles(host, options);
   const lintTask = await addLinting(host, options);
 
-  if(!options.skipFormat) {
+  if (!options.skipFormat) {
     await formatFiles(host);
   }
 
