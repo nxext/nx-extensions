@@ -6,7 +6,7 @@ import {
   joinPathFragments,
   readProjectConfiguration,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import {

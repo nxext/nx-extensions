@@ -4,7 +4,7 @@ import {
   stripIndents,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { InitGeneratorSchema } from './schema';
 import { c8Version, vitestVersion } from '../../utils/versions';
 

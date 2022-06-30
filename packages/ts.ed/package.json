@@ -22,6 +22,9 @@
   },
   "main": "./src/index.js",
   "schematics": "./generators.json",
+  "dependencies": {
+    "@nxext/devkit": "^14.0.0"
+  },
   "devDependencies": {
     "@nrwl/cypress": "^14.0.3",
     "@nrwl/linter": "^14.0.3"

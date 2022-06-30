@@ -6,7 +6,7 @@ import {
   fileExists,
   copyFile,
 } from '@nrwl/workspace/src/utilities/fileutils';
-import { joinPathFragments, writeJsonFile } from '@nrwl/devkit';
+import { joinPathFragments, writeJsonFile } from '@nxext/devkit';
 import { existsSync } from 'fs';
 import type { Config } from '@stencil/core/compiler';
 

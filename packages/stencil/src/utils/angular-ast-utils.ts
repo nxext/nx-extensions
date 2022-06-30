@@ -5,7 +5,7 @@ Originally from nrwl nx: packages/angular/src/utils/nx-devkit/ast-utils.ts
 import * as ts from 'typescript';
 import { findNodes } from '@nrwl/workspace/src/utilities/typescript/find-nodes';
 import { getSourceNodes } from '@nrwl/workspace/src/utilities/typescript/get-source-nodes';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { insertChange } from '@nrwl/workspace/src/utilities/ast-utils';
 
 function _angularImportsFromNode(

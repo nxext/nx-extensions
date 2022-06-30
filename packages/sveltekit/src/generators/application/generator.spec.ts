@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { readProjectConfiguration, Tree } from '@nxext/devkit';
 
 import generator from './generator';
 import { SveltekitGeneratorSchema } from './schema';

@@ -1,6 +1,6 @@
 import componentGenerator, { SvelteComponentSchema } from './component';
 import { uniq } from '@nrwl/nx-plugin/testing';
-import { names, Tree } from '@nrwl/devkit';
+import { names, Tree } from '@nxext/devkit';
 import { createTestProject } from '../utils/testing';
 
 describe('component schematic', () => {

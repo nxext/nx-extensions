@@ -1,5 +1,10 @@
 import { NormalizedSchema } from '../schema';
-import { getWorkspaceLayout, joinPathFragments, Tree, updateJson } from '@nrwl/devkit';
+import {
+  getWorkspaceLayout,
+  joinPathFragments,
+  Tree,
+  updateJson,
+} from '@nxext/devkit';
 
 export function updateTsConfig(tree: Tree, options: NormalizedSchema) {
   const { libsDir } = getWorkspaceLayout(tree);

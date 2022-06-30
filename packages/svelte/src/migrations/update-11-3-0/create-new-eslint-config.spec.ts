@@ -1,6 +1,6 @@
 import { default as update } from './create-new-eslint-config';
 import { createTestProject } from '../../generators/utils/testing';
-import { readJson, readProjectConfiguration } from '@nrwl/devkit';
+import { readJson, readProjectConfiguration } from '@nxext/devkit';
 
 describe('create-new-eslint-config', () => {
   let tree;

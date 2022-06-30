@@ -1,4 +1,4 @@
-import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nxext/devkit';
 import { storybookVersion } from '@nrwl/storybook';
 
 export function updateDependencies(tree: Tree) {

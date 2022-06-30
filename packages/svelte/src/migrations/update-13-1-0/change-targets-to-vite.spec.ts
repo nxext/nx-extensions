@@ -1,5 +1,8 @@
 import { default as update } from './change-targets-to-vite';
-import { readProjectConfiguration, updateProjectConfiguration } from '@nrwl/devkit';
+import {
+  readProjectConfiguration,
+  updateProjectConfiguration,
+} from '@nxext/devkit';
 import { createTestProject } from '../../generators/utils/testing';
 
 describe('change-targets-to-vite', () => {
@@ -23,10 +26,10 @@ describe('change-targets-to-vite', () => {
             {
               glob: '/*',
               input: 'apps/app/public/**',
-              output: './'
-            }
-          ]
-        }
+              output: './',
+            },
+          ],
+        },
       },
       serve: {
         executor: '@nxext/svelte:build',
@@ -39,13 +42,13 @@ describe('change-targets-to-vite', () => {
             {
               glob: '/*',
               input: 'apps/app/public/**',
-              output: './'
-            }
+              output: './',
+            },
           ],
           watch: true,
-          serve: true
-        }
-      }
+          serve: true,
+        },
+      },
     };
     updateProjectConfiguration(tree, 'app', appconfig);
 
@@ -63,10 +66,10 @@ describe('change-targets-to-vite', () => {
             {
               glob: '/*',
               input: 'libs/lib/public/**',
-              output: './'
-            }
-          ]
-        }
+              output: './',
+            },
+          ],
+        },
       },
       serve: {
         executor: '@nxext/svelte:serve',
@@ -79,13 +82,13 @@ describe('change-targets-to-vite', () => {
             {
               glob: '/*',
               input: 'libs/lib/public/**',
-              output: './'
-            }
+              output: './',
+            },
           ],
           watch: true,
-          serve: true
-        }
-      }
+          serve: true,
+        },
+      },
     };
     updateProjectConfiguration(tree, 'lib', libconfig);
   });
@@ -104,14 +107,14 @@ describe('change-targets-to-vite', () => {
           {
             glob: '/*',
             input: './public/**',
-            output: './'
-          }
+            output: './',
+          },
         ],
-        tsConfig: 'apps/app/tsconfig.app.json'
+        tsConfig: 'apps/app/tsconfig.app.json',
       },
       configurations: {
-        production: {}
-      }
+        production: {},
+      },
     });
 
     expect(config.targets.serve.executor).toEqual('@nxext/vite:dev');
@@ -129,11 +132,11 @@ describe('change-targets-to-vite', () => {
         frameworkConfigFile: '@nxext/svelte/plugins/vite',
         outputPath: 'dist/libs/lib',
         assets: [{ glob: '/*', input: './public/**', output: './' }],
-        tsConfig: 'libs/lib/tsconfig.lib.json'
+        tsConfig: 'libs/lib/tsconfig.lib.json',
       },
       configurations: {
-        production: {}
-      }
+        production: {},
+      },
     });
     expect(config.targets.serve.executor).toEqual('@nxext/vite:dev');
   });

@@ -1,6 +1,6 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import applicationGenerator from '../application/application';
-import { Tree, ProjectType } from '@nrwl/devkit';
+import { Tree, ProjectType } from '@nxext/devkit';
 import { Linter } from '@nrwl/linter';
 import { libraryGenerator } from '../library/library';
 
@@ -39,7 +39,7 @@ export async function createTestProject(
       unitTestRunner: unitTestrunner,
       e2eTestRunner: e2eTestrunner,
       buildable: true,
-      skipFormat: false
+      skipFormat: false,
     });
   }
 

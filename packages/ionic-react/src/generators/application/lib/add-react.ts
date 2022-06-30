@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { Linter } from '@nrwl/linter';
 import { applicationGenerator } from '@nrwl/react';
 import { ApplicationGeneratorSchema } from '../schema';

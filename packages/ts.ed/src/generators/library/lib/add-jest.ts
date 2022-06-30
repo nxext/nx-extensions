@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { jestProjectGenerator } from '@nrwl/jest';
 import { NormalizedSchema } from '../schema';
 

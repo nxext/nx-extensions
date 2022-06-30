@@ -1,4 +1,4 @@
-import { convertNxExecutor } from '@nrwl/devkit';
+import { convertNxExecutor } from '@nxext/devkit';
 
 import { default as viteExecutor } from './executor';
 

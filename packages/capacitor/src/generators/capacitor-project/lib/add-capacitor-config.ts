@@ -5,7 +5,7 @@ import {
   normalizePath,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function addCapacitorConfig(host: Tree, options: NormalizedSchema) {

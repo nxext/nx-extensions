@@ -1,7 +1,7 @@
 import componentGenerator, { SolidComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
-import { names, Tree } from '@nrwl/devkit';
+import { names, Tree } from '@nxext/devkit';
 
 describe('component schematic', () => {
   let tree: Tree;
@@ -32,7 +32,7 @@ describe('component schematic', () => {
   });
 
   it('should add file to barrel', async () => {
-    const tree = await createTestProject(projectName, "library");
+    const tree = await createTestProject(projectName, 'library');
     await componentGenerator(tree, options);
     const name = names(componentName);
 

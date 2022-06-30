@@ -7,7 +7,7 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { NormalizedSchema, PreactApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
