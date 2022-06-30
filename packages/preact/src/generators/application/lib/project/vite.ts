@@ -1,5 +1,5 @@
 import { NormalizedSchema } from '../../schema';
-import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
+import { joinPathFragments, TargetConfiguration } from '@nxext/devkit';
 
 export function createViteTargets(options: NormalizedSchema): {
   [key: string]: TargetConfiguration;

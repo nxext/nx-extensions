@@ -1,5 +1,5 @@
 import { applicationGenerator } from '@nrwl/angular/generators';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { Linter } from '@nrwl/linter';
 import { ApplicationGeneratorSchema } from '../schema';
 

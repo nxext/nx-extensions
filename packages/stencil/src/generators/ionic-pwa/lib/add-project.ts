@@ -1,5 +1,5 @@
 import { PWASchema } from '../schema';
-import { addProjectConfiguration, Tree } from '@nrwl/devkit';
+import { addProjectConfiguration, Tree } from '@nxext/devkit';
 import { getDefaultTargets } from '../../../utils/targets';
 
 export function addProject(tree: Tree, options: PWASchema) {

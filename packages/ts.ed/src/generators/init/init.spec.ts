@@ -1,6 +1,6 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, Tree } from '@nxext/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 describe('init schematic', () => {

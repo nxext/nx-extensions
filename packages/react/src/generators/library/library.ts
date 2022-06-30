@@ -12,7 +12,7 @@ import {
   offsetFromRoot,
   addDependenciesToPackageJson,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { Schema } from './schema';
 import { libraryGenerator as nxLibraryGenerator } from '@nrwl/react';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';

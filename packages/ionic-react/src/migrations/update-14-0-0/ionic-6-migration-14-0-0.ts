@@ -1,4 +1,4 @@
-import { logger, stripIndents } from '@nrwl/devkit';
+import { logger, stripIndents } from '@nxext/devkit';
 
 export default async function update() {
   logger.info(stripIndents`

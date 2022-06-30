@@ -1,6 +1,6 @@
 import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { outputtargetGenerator } from './add-outputtarget';
 import { AddOutputtargetSchematicSchema } from './schema';
 

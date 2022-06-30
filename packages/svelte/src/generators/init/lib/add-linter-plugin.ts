@@ -2,7 +2,7 @@ import {
   addDependenciesToPackageJson,
   GeneratorCallback,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { hasNxPackage, readNxVersion } from './util';
 
 export function addLinterPlugin(tree: Tree): GeneratorCallback {

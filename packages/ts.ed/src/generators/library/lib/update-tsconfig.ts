@@ -4,7 +4,7 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 
 export function updateTsConfig(tree: Tree, options: NormalizedSchema) {
   const { libsDir } = getWorkspaceLayout(tree);
