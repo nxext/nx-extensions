@@ -1,4 +1,4 @@
-import { ProjectConfiguration, Tree } from '@nrwl/devkit';
+import { ProjectConfiguration, Tree } from '@nxext/devkit';
 import { getSvelteProjects } from '../utils/migration-utils';
 
 export default function update(host: Tree) {

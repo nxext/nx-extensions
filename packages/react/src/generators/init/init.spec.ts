@@ -1,4 +1,4 @@
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, Tree } from '@nxext/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 import { reactInitGenerator } from './init';

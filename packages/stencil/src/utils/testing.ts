@@ -3,7 +3,7 @@ import {
   readWorkspaceConfiguration,
   Tree,
   updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '../generators/library/generator';
 import { ProjectType } from './typings';

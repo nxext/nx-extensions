@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readJson } from '@nrwl/devkit';
+import { Tree, readJson } from '@nxext/devkit';
 
 import vitestInitGenerator from './init';
 import { InitGeneratorSchema } from './schema';

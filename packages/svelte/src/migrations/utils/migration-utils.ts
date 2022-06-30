@@ -1,4 +1,4 @@
-import { getProjects, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import { getProjects, ProjectConfiguration, Tree } from '@nxext/devkit';
 
 export function getSvelteLegacyTargetProjects(tree: Tree) {
   const projects = getProjects(tree);

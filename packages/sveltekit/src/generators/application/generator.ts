@@ -9,7 +9,7 @@ import {
   offsetFromRoot,
   Tree,
   convertNxGenerator,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import * as path from 'path';
 import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
 import { ProjectType } from '@nrwl/workspace';

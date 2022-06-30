@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { NormalizedSchema } from '../schema';
 import ignore from 'ignore';
 

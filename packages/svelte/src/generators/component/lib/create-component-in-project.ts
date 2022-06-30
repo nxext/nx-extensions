@@ -4,7 +4,7 @@ import {
   names,
   readProjectConfiguration,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { SvelteComponentSchema } from '../component';
 
 export function createComponentInProject(

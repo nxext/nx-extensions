@@ -2,7 +2,7 @@ import { deleteFile } from '../../utils/fileutils';
 import { fileExists } from '@nrwl/workspace/src/utilities/fileutils';
 import { PathCollection } from './types';
 import { relative } from 'path';
-import { joinPathFragments, writeJsonFile } from '@nrwl/devkit';
+import { joinPathFragments, writeJsonFile } from '@nxext/devkit';
 
 export function prepareE2eTesting(pathCollection: PathCollection) {
   const libPackageJson = {

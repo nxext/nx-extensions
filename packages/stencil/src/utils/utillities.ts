@@ -1,5 +1,5 @@
 import ignore from 'ignore';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import type { Diagnostic } from '@stencil/core/compiler';
 import { SupportedStyles } from '../stencil-core-utils';
 

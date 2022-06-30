@@ -1,5 +1,5 @@
 import { DevExecutorSchema } from './schema';
-import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, logger } from '@nxext/devkit';
 import {
   InlineConfig,
   UserConfig,

@@ -2,7 +2,7 @@ import {
   readProjectConfiguration,
   Tree,
   updateProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function addProject(host: Tree, options: NormalizedSchema) {
