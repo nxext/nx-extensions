@@ -1,4 +1,8 @@
-import { getWorkspaceLayout, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import {
+  getWorkspaceLayout,
+  readProjectConfiguration,
+  Tree,
+} from '@nxext/devkit';
 import * as ts from 'typescript';
 import { readTsSourceFile } from '../../../utils/ast-utils';
 
@@ -13,5 +17,10 @@ export function calculateStencilSourceOptions(host: Tree, projectName: string) {
   );
 
   const packageName = `@${npmScope}/${projectName}`;
-  return { stencilProjectConfig, stencilConfigPath, stencilConfigSource, packageName };
+  return {
+    stencilProjectConfig,
+    stencilConfigPath,
+    stencilConfigSource,
+    packageName,
+  };
 }

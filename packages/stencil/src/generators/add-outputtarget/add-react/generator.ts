@@ -1,10 +1,11 @@
 import {
-  addDependenciesToPackageJson, applyChangesToString,
+  addDependenciesToPackageJson,
+  applyChangesToString,
   convertNxGenerator,
   getWorkspaceLayout,
   readProjectConfiguration,
-  Tree
-} from '@nrwl/devkit';
+  Tree,
+} from '@nxext/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { Linter } from '@nrwl/linter';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
@@ -15,7 +16,10 @@ import { addImport } from '../../../utils/ast-utils';
 import { addOutputTarget } from '../../../stencil-core-utils';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 
-async function prepareReactLibrary(host: Tree, options: AddOutputtargetSchematicSchema) {
+async function prepareReactLibrary(
+  host: Tree,
+  options: AddOutputtargetSchematicSchema
+) {
   const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
 
@@ -29,13 +33,16 @@ async function prepareReactLibrary(host: Tree, options: AddOutputtargetSchematic
     skipTsConfig: false,
     skipFormat: true,
     unitTestRunner: 'jest',
-    linter: Linter.EsLint
+    linter: Linter.EsLint,
   });
 
-  await addDependenciesToPackageJson(host, {},
+  await addDependenciesToPackageJson(
+    host,
+    {},
     {
-      '@stencil/react-output-target': STENCIL_OUTPUTTARGET_VERSION['react']
-    });
+      '@stencil/react-output-target': STENCIL_OUTPUTTARGET_VERSION['react'],
+    }
+  );
 
   host.write(
     `${libsDir}/${reactProjectName}/src/index.ts`,
@@ -55,33 +62,46 @@ function addReactOutputtarget(
   stencilConfigSource: ts.SourceFile,
   packageName: string
 ) {
-  const reactProjectConfig = readProjectConfiguration(tree, `${projectName}-react`);
+  const reactProjectConfig = readProjectConfiguration(
+    tree,
+    `${projectName}-react`
+  );
   const realtivePath = getRelativePath(
     getDistDir(stencilProjectConfig.root),
     reactProjectConfig.root
   );
 
-  const changes = applyChangesToString(
-    stencilConfigSource.text, [
-      ...addImport(stencilConfigSource, `import { reactOutputTarget } from '@stencil/react-output-target';`),
-      ...addOutputTarget(stencilConfigSource,
-        `
+  const changes = applyChangesToString(stencilConfigSource.text, [
+    ...addImport(
+      stencilConfigSource,
+      `import { reactOutputTarget } from '@stencil/react-output-target';`
+    ),
+    ...addOutputTarget(
+      stencilConfigSource,
+      `
       reactOutputTarget({
         componentCorePackage: '${packageName}',
         proxiesFile: '${realtivePath}/src/generated/components.ts',
         includeDefineCustomElements: true,
       })
       `
-      )
-    ]
-  );
+    ),
+  ]);
   tree.write(stencilConfigPath, changes);
 }
 
-export async function addReactGenerator(host: Tree, options: AddOutputtargetSchematicSchema) {
+export async function addReactGenerator(
+  host: Tree,
+  options: AddOutputtargetSchematicSchema
+) {
   const libraryTarget = await prepareReactLibrary(host, options);
 
-  const { stencilProjectConfig, stencilConfigPath, stencilConfigSource, packageName } = calculateStencilSourceOptions(host, options.projectName);
+  const {
+    stencilProjectConfig,
+    stencilConfigPath,
+    stencilConfigSource,
+    packageName,
+  } = calculateStencilSourceOptions(host, options.projectName);
 
   addReactOutputtarget(
     host,

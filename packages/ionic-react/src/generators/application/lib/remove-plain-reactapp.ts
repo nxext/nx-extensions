@@ -1,4 +1,4 @@
-import { joinPathFragments, Tree } from '@nrwl/devkit';
+import { joinPathFragments, Tree } from '@nxext/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function removePlainReactapp(host: Tree, options: NormalizedSchema) {

@@ -2,7 +2,7 @@ import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { RawLibrarySchema } from './schema';
-import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nxext/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from './generator';
 

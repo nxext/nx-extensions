@@ -7,7 +7,7 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { ApplicationSchema, RawApplicationSchema } from './schema';
 import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../init/init';

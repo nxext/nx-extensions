@@ -3,7 +3,7 @@ import {
   readProjectConfiguration,
   Tree,
   writeJson,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '@nrwl/workspace/generators';
 

@@ -10,7 +10,7 @@ import {
   readProjectConfiguration,
   StringChange,
   Tree,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { findNodes } from '@nrwl/workspace/src/utils/ast-utils';
 
 export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {

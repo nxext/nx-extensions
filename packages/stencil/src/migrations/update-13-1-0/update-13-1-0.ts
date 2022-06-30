@@ -1,4 +1,9 @@
-import { getProjects, joinPathFragments, Tree, updateProjectConfiguration } from '@nrwl/devkit';
+import {
+  getProjects,
+  joinPathFragments,
+  Tree,
+  updateProjectConfiguration,
+} from '@nxext/devkit';
 import { isStencilProject } from '../utils/migration-utils';
 import { ProjectType, updatePackagesInPackageJson } from '@nrwl/workspace';
 import { getLintTarget } from '../../utils/targets';
@@ -13,7 +18,10 @@ export default function update(host: Tree) {
 
   projects.forEach((project, name) => {
     if (isStencilProject(project)) {
-      project.targets.lint = getLintTarget(ProjectType[project.projectType], project.root);
+      project.targets.lint = getLintTarget(
+        ProjectType[project.projectType],
+        project.root
+      );
       updateProjectConfiguration(host, name, project);
     }
   });

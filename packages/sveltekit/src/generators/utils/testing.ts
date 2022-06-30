@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from '../application/generator';
 
@@ -25,7 +25,7 @@ export async function createTestProject(
   await applicationGenerator(tree, {
     name: name,
     linter: Linter.EsLint,
-    skipFormat: false
+    skipFormat: false,
   });
 
   return tree;

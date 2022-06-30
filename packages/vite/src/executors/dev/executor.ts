@@ -1,5 +1,5 @@
 import { DevExecutorSchema } from './schema';
-import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, logger } from '@nxext/devkit';
 import {
   InlineConfig,
   UserConfig,
@@ -7,7 +7,8 @@ import {
   ProxyOptions,
   createServer,
   mergeConfig,
-  ViteDevServer, searchForWorkspaceRoot
+  ViteDevServer,
+  searchForWorkspaceRoot,
 } from 'vite';
 import { join, relative } from 'path';
 import { defineBaseConfig } from '../../../plugins/vite';
@@ -79,9 +80,9 @@ export default async function* runExecutor(
         fs: {
           allow: [
             searchForWorkspaceRoot(joinPathFragments(projectRoot)),
-            joinPathFragments(context.root, 'node_modules/vite')
-          ]
-        }
+            joinPathFragments(context.root, 'node_modules/vite'),
+          ],
+        },
       },
     } as InlineConfig
   );

@@ -3,7 +3,7 @@ import {
   GeneratorCallback,
   Tree,
   addDependenciesToPackageJson,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from './util';
 

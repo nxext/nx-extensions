@@ -1,6 +1,6 @@
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { serializeJson } from '@nrwl/devkit';
+import { serializeJson } from '@nxext/devkit';
 import { createEmptyWorkspace } from '@nrwl/workspace/testing';
 import * as path from 'path';
 

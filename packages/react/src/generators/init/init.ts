@@ -3,7 +3,7 @@ import {
   formatFiles,
   convertNxGenerator,
   GeneratorCallback,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { reactInitGenerator as nxReactInitGenerator } from '@nrwl/react';
 import { viteInitGenerator } from '@nxext/vite';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';

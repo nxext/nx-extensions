@@ -11,7 +11,7 @@ import {
   joinPathFragments,
   logger,
   names,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import baseConfig from '../../../plugins/vite-package';
 import { copyFile } from 'fs/promises';
 import { relative } from 'path';

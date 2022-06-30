@@ -3,7 +3,7 @@ import {
   formatFiles,
   convertNxGenerator,
   GeneratorCallback,
-} from '@nrwl/devkit';
+} from '@nxext/devkit';
 import { jestInitGenerator } from '@nrwl/jest';
 import { angularInitGenerator as nxAngularInitGenerator } from '@nrwl/angular/generators';
 import { viteInitGenerator } from '@nxext/vite';

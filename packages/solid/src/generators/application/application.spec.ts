@@ -2,7 +2,7 @@ import { SolidApplicationSchema } from './schema';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from './application';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nxext/devkit';
 
 describe('Solid app schematic', () => {
   let tree: Tree;
