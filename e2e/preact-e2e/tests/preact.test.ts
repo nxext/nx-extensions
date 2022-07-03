@@ -4,13 +4,11 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '../../e2e/src';
 
 describe('preact e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/preact', 'dist/packages/preact', [
-      ['@nxext/vite', 'dist/packages/vite'],
-    ]);
+    newProject(['@nxext/preact']);
   });
 
   describe('preact app', () => {

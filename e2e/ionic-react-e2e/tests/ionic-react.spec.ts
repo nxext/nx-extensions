@@ -1,27 +1,13 @@
-import {
-  ensureNxProject,
-  patchPackageJsonForPlugin,
-  readJson,
-  runNxCommandAsync,
-  runPackageManagerInstall,
-  uniq,
-} from '@nrwl/nx-plugin/testing';
+import { readJson, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { ApplicationGeneratorSchema } from '@nxext/ionic-react';
-
-function ensureNxProjectWithDeps(
-  npmPackageName?: string,
-  pluginDistPath?: string,
-  optionalNpmPackages?: [npmPackageName: string, pluginDistPath: string][]
-): void {
-  ensureNxProject(npmPackageName, pluginDistPath);
-  optionalNpmPackages.forEach(([npmPackageName, pluginDistPath]) =>
-    patchPackageJsonForPlugin(npmPackageName, pluginDistPath)
-  );
-  runPackageManagerInstall();
-}
+import { newProject } from '@nxext/e2e';
 
 describe('application e2e', () => {
   const asyncTimeout = 300_000;
+
+  beforeAll(() => {
+    newProject(['@nxext/ionic-react']);
+  });
 
   const defaultOptions: ApplicationGeneratorSchema = {
     name: 'test',
@@ -51,11 +37,6 @@ describe('application e2e', () => {
       'blank',
       async () => {
         const appName = uniq('ionic-react');
-        ensureNxProjectWithDeps(
-          '@nxext/ionic-react',
-          'dist/packages/ionic-react',
-          [['@nxext/capacitor', 'dist/packages/capacitor']]
-        );
         await runNxCommandAsync(
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template blank`
         );
@@ -69,11 +50,6 @@ describe('application e2e', () => {
       'list',
       async () => {
         const appName = uniq('ionic-react');
-        ensureNxProjectWithDeps(
-          '@nxext/ionic-react',
-          'dist/packages/ionic-react',
-          [['@nxext/capacitor', 'dist/packages/capacitor']]
-        );
         await runNxCommandAsync(
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template list`
         );
@@ -87,11 +63,6 @@ describe('application e2e', () => {
       'sidemenu',
       async () => {
         const appName = uniq('ionic-react');
-        ensureNxProjectWithDeps(
-          '@nxext/ionic-react',
-          'dist/packages/ionic-react',
-          [['@nxext/capacitor', 'dist/packages/capacitor']]
-        );
         await runNxCommandAsync(
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template sidemenu`
         );
@@ -105,11 +76,6 @@ describe('application e2e', () => {
       'tabs',
       async () => {
         const appName = uniq('ionic-react');
-        ensureNxProjectWithDeps(
-          '@nxext/ionic-react',
-          'dist/packages/ionic-react',
-          [['@nxext/capacitor', 'dist/packages/capacitor']]
-        );
         await runNxCommandAsync(
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template tabs`
         );
@@ -129,12 +95,6 @@ describe('application e2e', () => {
           name: uniq('ionic-react'),
           directory: 'subdir',
         };
-
-        ensureNxProjectWithDeps(
-          '@nxext/ionic-react',
-          'dist/packages/ionic-react',
-          [['@nxext/capacitor', 'dist/packages/capacitor']]
-        );
         await runNxCommandAsync(
           `generate @nxext/ionic-react:app ${options.name} --directory ${options.directory} --capacitor false`
         );
@@ -153,12 +113,6 @@ describe('application e2e', () => {
           name: uniq('ionic-react'),
           tags: 'e2etag,e2ePackage',
         };
-
-        ensureNxProjectWithDeps(
-          '@nxext/ionic-react',
-          'dist/packages/ionic-react',
-          [['@nxext/capacitor', 'dist/packages/capacitor']]
-        );
         await runNxCommandAsync(
           `generate @nxext/ionic-react:app ${options.name} --tags ${options.tags} --capacitor false`
         );

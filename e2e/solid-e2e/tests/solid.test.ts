@@ -4,13 +4,11 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '../../e2e/src';
 
 describe('solid e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/solid', 'dist/packages/solid', [
-      ['@nxext/vite', 'dist/packages/vite'],
-    ]);
+    newProject(['@nxext/solid']);
   });
 
   describe('solid app', () => {

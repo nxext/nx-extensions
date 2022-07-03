@@ -20,13 +20,7 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "accessToken": "NTlhMGE3ZTYtYjk5OC00Mzc5LWE2ZTAtNzE4ODEzNDY5MjlmfHJlYWQ=",
-        "cacheableOperations": [
-          "build",
-          "test",
-          "lint",
-          "e2e",
-          "run-e2e-tests"
-        ],
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
         "canTrackAnalytics": true,
         "showUsageWarnings": true,
         "parallel": 1
@@ -35,9 +29,6 @@
   },
   "affected": {
     "defaultBase": "main"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
   },
   "generators": {
     "@nrwl/workspace": {
@@ -87,6 +78,14 @@
       }
     },
     "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nxext/vite": {
       "application": {
         "linter": "eslint"
       },

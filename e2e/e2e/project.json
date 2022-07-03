@@ -1,0 +1,60 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "e2e/e2e/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/e2e/e2e",
+        "main": "e2e/e2e/src/index.ts",
+        "tsConfig": "e2e/e2e/tsconfig.lib.json",
+        "assets": [
+          "e2e/e2e/*.md",
+          {
+            "input": "./e2e/e2e/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./e2e/e2e/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./e2e/e2e",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./e2e/e2e",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "e2e/e2e/**/*.ts",
+          "e2e/e2e/generators.json",
+          "e2e/e2e/executors.json",
+          "e2e/e2e/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/e2e/e2e"],
+      "options": {
+        "jestConfig": "e2e/e2e/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

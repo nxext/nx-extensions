@@ -40,7 +40,10 @@
     "setup-local-plugins": "ts-node tools/scripts/setup-local-plugins.ts",
     "local-registry": "./tools/scripts/local-registry.sh",
     "local-release": "node ./tools/scripts/local-release.js",
-    "documentation": "ts-node -P tools/scripts/tsconfig.scripts.json ./tools/scripts/documentation/documentation.ts",
+    "documentation": "ts-node -P ./tools/scripts/tsconfig.scripts.json ./tools/scripts/documentation/documentation.ts",
+    "e2e-start-local-registry": "node ./tools/scripts/e2e-start-local-registry.js",
+    "e2e-build-package-publish": "ts-node -P ./tools/scripts/tsconfig.e2e.json ./tools/scripts/e2e-build-package-publish.ts",
+    "nx-release": "ts-node -P ./tools/scripts/tsconfig.scripts.json ./tools/scripts/e2e-release",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "commit": "git-cz",
@@ -54,9 +57,6 @@
     "@angular-devkit/build-optimizer": "0.1302.1",
     "@angular/compiler-cli": "14.0.3",
     "@angular/core": "14.0.3",
-    "@storybook/builder-webpack5": "6.5.9",
-    "@storybook/core-server": "6.5.9",
-    "@storybook/manager-webpack5": "6.5.9",
     "clsx": "^1.1.1",
     "recrawl-sync": "^2.2.1",
     "source-map": "^0.7.3",
@@ -92,6 +92,7 @@
     "@types/is-ci": "^3.0.0",
     "@types/jest": "27.4.1",
     "@types/node": "18.0.0",
+    "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "5.24.0",
     "@typescript-eslint/parser": "5.24.0",
     "@vitejs/plugin-react": "^1.3.2",
@@ -99,6 +100,7 @@
     "@vuepress/plugin-search": "^2.0.0-beta.43",
     "all-contributors-cli": "^6.20.0",
     "autoprefixer": "^10.4.4",
+    "c8": "^7.11.3",
     "chalk": "4.1.0",
     "commitizen": "^4.2.4",
     "cz-customizable": "^6.3.0",
@@ -106,6 +108,7 @@
     "eslint": "8.15.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "2.25.2",
     "eslint-plugin-svelte3": "^3.4.1",
     "file-type": "^16.2.0",
     "fs-extra": "^10.0.1",
@@ -115,6 +118,8 @@
     "is-ci": "^3.0.1",
     "jest": "27.5.1",
     "jsonc-eslint-parser": "^2.1.0",
+    "kill-port": "^2.0.1",
+    "lerna": "5.0.0-alpha.2",
     "lint-staged": "12.3.7",
     "nx": "14.3.6",
     "prettier": "2.6.2",
@@ -123,6 +128,7 @@
     "svelte": "^3.48.0",
     "svelte-preprocess": "^4.10.6",
     "swc-ast-helpers": "^0.0.8-beta.2",
+    "tcp-port-used": "^1.0.2",
     "ts-jest": "27.1.4",
     "ts-node": "10.8.1",
     "tslib": "^2.1.0",
@@ -130,17 +136,20 @@
     "typescript": "4.7.3",
     "verdaccio": "^5.13.1",
     "vite": "2.9.9",
+    "vite-plugin-eslint": "1.3.0",
     "vite-plugin-inspect": "^0.5.0",
     "vite-plugin-solid": "^2.2.6",
     "vitest": "^0.12.6",
-    "vuepress": "^2.0.0-beta.43"
+    "vuepress": "^2.0.0-beta.43",
+    "yargs": "^17.5.1",
+    "yargs-parser": "^21.0.1"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"
   },
   "resolutions": {
     "terser": "^4.0.0",
-    "fast-glob": "3.2.7"
+    "yargs": "^17.5.0"
   },
   "lint-staged": {
     "nx.json": [

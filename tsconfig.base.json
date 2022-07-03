@@ -20,6 +20,8 @@
       "@nxext/angular-swc": ["packages/angular/swc/src/index.ts"],
       "@nxext/angular-vite": ["packages/angular/vite/src/index.ts"],
       "@nxext/capacitor": ["packages/capacitor/src/index.ts"],
+      "@nxext/devkit": ["packages/devkit/index.ts"],
+      "@nxext/e2e": ["e2e/e2e/src/index.ts"],
       "@nxext/ionic-angular": ["packages/ionic-angular/src/index.ts"],
       "@nxext/ionic-react": ["packages/ionic-react/src/index.ts"],
       "@nxext/preact": ["packages/preact/src/index.ts"],
@@ -29,8 +31,7 @@
       "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"],
       "@nxext/ts.ed": ["packages/ts.ed/src/index.ts"],
       "@nxext/vite": ["packages/vite/src/index.ts"],
-      "@nxext/vitest": ["packages/vitest/src/index.ts"],
-      "@nxext/devkit": ["packages/devkit/index.ts"]
+      "@nxext/vitest": ["packages/vitest/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

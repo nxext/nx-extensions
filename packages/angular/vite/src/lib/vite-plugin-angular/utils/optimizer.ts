@@ -1,6 +1,7 @@
 import { buildOptimizer } from '@angular-devkit/build-optimizer';
 import { readdirSync } from 'fs';
 import { join, relative } from 'path';
+import { RawSourceMap } from 'source-map';
 
 const DEBUG = false;
 
@@ -23,11 +24,13 @@ export interface OptimizerOptions {
 
 /// this is original code from
 /// https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_optimizer/src/build-optimizer/rollup-plugin.ts
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export async function optimizer(
   content: string,
   id: string,
   options: OptimizerOptions
-) {
+): Promise<{ map: RawSourceMap | null; code: string } | null> {
   if (options.sideEffectFreeModules) {
     options.sideEffectFreeModules = options.sideEffectFreeModules.map((p) =>
       p.replace(/\\/g, '/')

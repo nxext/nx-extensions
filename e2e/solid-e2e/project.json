@@ -4,28 +4,10 @@
   "sourceRoot": "e2e/solid-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nxext/e2e:e2e",
       "options": {
-        "commands": [
-          {
-            "command": "yarn nx build solid"
-          },
-          {
-            "command": "yarn nx run-e2e-tests solid-e2e"
-          }
-        ],
-        "parallel": false,
-        "color": true
+        "jestConfig": "e2e/solid-e2e/jest.config.ts"
       }
-    },
-    "run-e2e-tests": {
-      "executor": "@nrwl/jest:jest",
-      "options": {
-        "jestConfig": "e2e/solid-e2e/jest.config.ts",
-        "passWithNoTests": true,
-        "runInBand": true
-      },
-      "outputs": ["coverage/e2e/solid"]
     }
   },
   "tags": [],

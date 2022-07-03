@@ -7,6 +7,7 @@ import {
   updateFile,
 } from '@nrwl/nx-plugin/testing';
 import { CapacitorGeneratorSchema } from '@nxext/capacitor';
+import { newProject } from '@nxext/e2e';
 
 const asyncTimeout = 600_000;
 
@@ -17,8 +18,6 @@ const defaultCapacitorProjectOptions: CapacitorGeneratorSchema = {
 };
 
 async function generateApp(options: CapacitorGeneratorSchema) {
-  ensureNxProject('@nxext/capacitor', 'dist/packages/capacitor');
-
   const packageJson = JSON.parse(readFile('package.json'));
   packageJson.devDependencies['@nrwl/react'] = '*';
   updateFile('package.json', JSON.stringify(packageJson));
@@ -58,6 +57,10 @@ async function buildAndTestApp(plugin: string) {
 }
 
 describe('capacitor-project e2e', () => {
+  beforeAll(() => {
+    newProject(['@nxext/capacitor']);
+  });
+
   it(
     'should build and test successfully',
     async () => {

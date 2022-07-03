@@ -45,7 +45,6 @@ do
 
   PACKAGE_NAME=`node -e "console.log(require('./package.json').name)"`
 
-
   echo "Publishing ${PACKAGE_NAME}@${VERSION} --tag ${TAG}"
 
   npm publish --tag $TAG --access public --registry=$NPM_REGISTRY

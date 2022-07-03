@@ -4,9 +4,8 @@
   "sourceRoot": "e2e/sveltekit-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nxext/e2e:e2e",
       "options": {
-        "target": "sveltekit:build",
         "jestConfig": "e2e/sveltekit-e2e/jest.config.ts"
       }
     }

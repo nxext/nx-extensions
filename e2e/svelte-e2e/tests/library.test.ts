@@ -3,14 +3,11 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '../../e2e/src';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/svelte', 'dist/packages/svelte', [
-      ['@nxext/vite', 'dist/packages/vite'],
-      ['@nxext/vitest', 'dist/packages/vitest'],
-    ]);
+    newProject(['@nxext/svelte', '@nxext/vitest']);
   });
 
   describe('Svelte lib', () => {
@@ -117,6 +114,6 @@ describe('svelte e2e', () => {
       expect(`${result.stdout}${result.stderr}`).toContain(
         'Storybook builder finished'
       );
-    }, 120000);
+    }, 200000);
   });
 });

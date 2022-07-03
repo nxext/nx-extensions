@@ -5,11 +5,11 @@ import {
   updateFile,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '@nxext/e2e';
 
 describe('vite e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/vite', 'dist/packages/vite', []);
+    newProject(['@nxext/vite']);
   });
 
   describe('vite app', () => {
@@ -81,9 +81,7 @@ export function testFun() {
       );
 
       const result = await runNxCommandAsync(`build ${appName}`);
-      expect(result.stdout).toContain(
-        `Successfully ran target build for project ${appName}`
-      );
+      expect(result.stdout).toContain('Bundle complete');
     });
   });
 });

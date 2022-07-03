@@ -1,13 +1,13 @@
 import {
   checkFilesExist,
-  ensureNxProject,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { newProject } from '../../e2e/src';
 
 describe('library e2e', () => {
   beforeAll(() => {
-    ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+    newProject(['@nxext/stencil']);
   });
 
   it(`should build app with scss`, async () => {

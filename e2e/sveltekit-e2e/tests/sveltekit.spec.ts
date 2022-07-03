@@ -1,14 +1,17 @@
 import {
   checkFilesExist,
-  ensureNxProject,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { newProject } from '@nxext/e2e';
 describe('sveltekit e2e', () => {
+  beforeAll(() => {
+    newProject(['@nxext/sveltekit']);
+  });
+
   it('should create sveltekit app', async () => {
-    const plugin = uniq('sveltekit');
-    ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
+    const plugin = uniq('sveltekitapp');
     await runNxCommandAsync(`generate @nxext/sveltekit:app ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
@@ -17,9 +20,9 @@ describe('sveltekit e2e', () => {
   });
 
   it('should create sveltekit component', async () => {
-    const appName = uniq('app-sveltekit');
+    const appName = uniq('sveltekitcomp');
     const componentName = uniq('component-sveltekit');
-    ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
+
     await runNxCommandAsync(`generate @nxext/sveltekit:app ${appName}`);
     await runNxCommandAsync(
       `generate @nxext/sveltekit:component -p ${appName} ${componentName}`
@@ -33,8 +36,8 @@ describe('sveltekit e2e', () => {
   });
 
   it('should lint sveltekit app', async () => {
-    const plugin = uniq('sveltekit');
-    ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
+    const plugin = uniq('sveltekitlint');
+
     await runNxCommandAsync(`generate @nxext/sveltekit:app ${plugin}`);
 
     const result = await runNxCommandAsync(`lint ${plugin}`);
@@ -43,8 +46,8 @@ describe('sveltekit e2e', () => {
 
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
-      const plugin = uniq('sveltekit');
-      ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
+      const plugin = uniq('sveltekitdir');
+
       await runNxCommandAsync(
         `generate @nxext/sveltekit:app ${plugin} --directory subdir --linter none`
       );
@@ -56,8 +59,7 @@ describe('sveltekit e2e', () => {
 
   describe('--tags', () => {
     it('should add tags to project', async () => {
-      const plugin = uniq('sveltekit');
-      ensureNxProject('@nxext/sveltekit', 'dist/packages/sveltekit');
+      const plugin = uniq('sveltekittags');
       await runNxCommandAsync(
         `generate @nxext/sveltekit:app ${plugin} --tags e2etag,e2ePackage`
       );

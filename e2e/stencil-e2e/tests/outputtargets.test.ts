@@ -3,14 +3,14 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '../../e2e/src';
 
 describe('outputtargets e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/stencil', 'dist/packages/stencil', [
-      ['@nxext/vite', 'dist/packages/vite'],
-      ['@nxext/svelte', 'dist/packages/svelte'],
-    ]);
+    newProject(
+      ['@nxext/stencil', '@nxext/svelte'],
+      ['@nrwl/angular', '@nrwl/react']
+    );
   });
 
   it(`should generate react lib`, async () => {

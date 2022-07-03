@@ -4,9 +4,8 @@
   "sourceRoot": "e2e/vite-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nxext/e2e:e2e",
       "options": {
-        "target": "vite:build",
         "jestConfig": "e2e/vite-e2e/jest.config.ts"
       }
     }

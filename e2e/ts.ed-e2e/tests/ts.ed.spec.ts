@@ -1,14 +1,17 @@
 import {
   checkFilesExist,
-  ensureNxProject,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { newProject } from '@nxext/e2e';
 describe('ts.ed e2e', () => {
+  beforeAll(() => {
+    newProject(['@nxext/ts.ed']);
+  });
+
   it('should create ts.ed application', async () => {
     const plugin = uniq('ts.ed');
-    ensureNxProject('@nxext/ts.ed', 'dist/packages/ts.ed');
     await runNxCommandAsync(`generate @nxext/ts.ed:app ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
@@ -18,7 +21,6 @@ describe('ts.ed e2e', () => {
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
       const plugin = uniq('ts.ed');
-      ensureNxProject('@nxext/ts.ed', 'dist/packages/ts.ed');
       await runNxCommandAsync(
         `generate @nxext/ts.ed:app ${plugin} --directory subdir`
       );
@@ -31,7 +33,6 @@ describe('ts.ed e2e', () => {
   describe('--tags', () => {
     it('should add tags to the project', async () => {
       const plugin = uniq('ts.ed');
-      ensureNxProject('@nxext/ts.ed', 'dist/packages/ts.ed');
       await runNxCommandAsync(
         `generate @nxext/ts.ed:app ${plugin} --tags e2etag,e2ePackage`
       );

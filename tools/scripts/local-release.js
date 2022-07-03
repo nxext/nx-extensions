@@ -40,6 +40,10 @@ if (parsedArgs.help) {
 
 function updatePackageJsonFiles(parsedVersion, isLocal) {
   let pkgFiles = [
+    'dist/packages/capacitor/package.json',
+    'dist/packages/ionic-angular/package.json',
+    'dist/packages/devkit/package.json',
+    'dist/packages/ts.ed/package.json',
     'dist/packages/preact/package.json',
     'dist/packages/react/package.json',
     'dist/packages/solid/package.json',
