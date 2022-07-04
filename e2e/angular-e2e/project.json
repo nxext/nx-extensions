@@ -26,6 +26,12 @@
         "runInBand": true
       },
       "outputs": ["coverage/e2e/angular"]
+    },
+    "e2e-verdaccio": {
+      "executor": "@nxext/e2e:e2e",
+      "options": {
+        "jestConfig": "e2e/angular-e2e/jest.config.ts"
+      }
     }
   },
   "tags": [],

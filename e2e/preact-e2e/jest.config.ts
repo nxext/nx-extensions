@@ -11,6 +11,6 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/preact-e2e',
-  maxWorkers: 1,
   preset: '../../jest.preset.js',
+  maxWorkers: 1,
 };

@@ -3,10 +3,13 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+import { newProject } from '../../e2e/src';
+import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('storybook e2e', () => {
   beforeAll(() => {
-    ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+    //newProject(['@nxext/stencil'], ['@nrwl/storybook']);
+    ensureNxProjectAndPrepareDeps('@nxext/stencil', 'dist/packages/stencil');
   });
 
   it('should build', async () => {
@@ -24,5 +27,5 @@ describe('storybook e2e', () => {
 
     const result = await runNxCommandAsync(`build-storybook ${plugin}`);
     expect(result.stdout).toContain('Storybook builder finished ...');
-  });
+  }, 200000);
 });

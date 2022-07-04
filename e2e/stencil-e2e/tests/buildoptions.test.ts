@@ -1,13 +1,11 @@
-import {
-  ensureNxProject,
-  renameFile,
-  runNxCommandAsync,
-  uniq
-} from '@nrwl/nx-plugin/testing';
+import { renameFile, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import { newProject } from '../../e2e/src';
+import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('buildoptions e2e', () => {
   beforeAll(() => {
-    ensureNxProject('@nxext/stencil', 'dist/packages/stencil');
+    //newProject(['@nxext/stencil']);
+    ensureNxProjectAndPrepareDeps('@nxext/stencil', 'dist/packages/stencil');
   });
 
   it(`should build with custom stencil config naming`, async () => {

@@ -1,5 +1,4 @@
 import { readWorkspaceJson } from '@nrwl/workspace';
-// @ts-ignore
 import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import {

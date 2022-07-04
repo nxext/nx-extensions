@@ -29,6 +29,13 @@
         "runInBand": true
       },
       "outputs": ["coverage/e2e/vitest"]
+    },
+    "e2e-verdaccio": {
+      "executor": "@nxext/e2e:e2e",
+      "options": {
+        "jestConfig": "e2e/vitest-e2e/jest.config.ts"
+      },
+      "outputs": ["coverage/e2e/vitest"]
     }
   },
   "tags": [],

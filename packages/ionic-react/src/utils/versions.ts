@@ -1,4 +1,4 @@
-export const nxVersion = '^14.0.0';
+export const nxVersion = '^14.4.0';
 export const nxextCapacitorVersion = '^14.0.0';
 export const ionicReactVersion = '^6.1.5';
 export const ionicReactRouterVersion = '^6.1.5';

@@ -9,6 +9,12 @@
         "target": "sveltekit:build",
         "jestConfig": "e2e/sveltekit-e2e/jest.config.ts"
       }
+    },
+    "e2e-verdaccio": {
+      "executor": "@nxext/e2e:e2e",
+      "options": {
+        "jestConfig": "e2e/sveltekit-e2e/jest.config.ts"
+      }
     }
   },
   "tags": [],

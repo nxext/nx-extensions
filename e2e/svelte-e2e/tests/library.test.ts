@@ -3,14 +3,12 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '../../e2e/src';
+import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/svelte', 'dist/packages/svelte', [
-      ['@nxext/vite', 'dist/packages/vite'],
-      ['@nxext/vitest', 'dist/packages/vitest'],
-    ]);
+    ensureNxProjectAndPrepareDeps('@nxext/svelte', 'dist/packages/svelte');
   });
 
   describe('Svelte lib', () => {
