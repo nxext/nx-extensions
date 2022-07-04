@@ -1,9 +1,5 @@
 import { addDependenciesToPackageJson, Tree } from '@nxext/devkit';
-import {
-  ionicAngularVersion,
-  nxtendCapacitorVersion,
-  nxVersion,
-} from '../../../utils/versions';
+import { ionicAngularVersion, nxVersion } from '../../../utils/versions';
 
 export function addDependencies(host: Tree) {
   return addDependenciesToPackageJson(
@@ -11,6 +7,6 @@ export function addDependencies(host: Tree) {
     {
       '@ionic/angular': ionicAngularVersion,
     },
-    { '@nrwl/angular': nxVersion, '@nxext/capacitor': nxtendCapacitorVersion }
+    { '@nrwl/angular': nxVersion }
   );
 }

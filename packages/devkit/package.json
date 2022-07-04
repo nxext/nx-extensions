@@ -17,8 +17,8 @@
     "Cypress",
     "CLI"
   ],
-  "main": "./index.js",
-  "typings": "./index.d.ts",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "author": "Dominik Pieper",
   "license": "MIT",
   "bugs": {
@@ -31,7 +31,7 @@
     "rxjs": "^6.5.4",
     "semver": "7.3.4",
     "tslib": "^2.3.0",
-    "@nxext/devkit": "^14.3.6"
+    "@nrwl/devkit": "^14.3.6"
   },
   "peerDependencies": {
     "nx": ">= 13.10 <= 15"

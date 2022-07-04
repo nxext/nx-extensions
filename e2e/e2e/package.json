@@ -1,0 +1,6 @@
+{
+  "name": "@nxext/e2e",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "executors": "./executors.json"
+}

@@ -2,7 +2,6 @@ import { addDependenciesToPackageJson, Tree } from '@nxext/devkit';
 import {
   ionicReactRouterVersion,
   ionicReactVersion,
-  nxextCapacitorVersion,
   nxVersion,
   webVitalsVersion,
   workboxVersion,
@@ -28,6 +27,6 @@ export function addDependencies(host: Tree) {
       'workbox-strategies': workboxVersion,
       'workbox-streams': workboxVersion,
     },
-    { '@nrwl/react': nxVersion, '@nxext/capacitor': nxextCapacitorVersion }
+    { '@nrwl/react': nxVersion }
   );
 }

@@ -16,7 +16,7 @@
       "options": {
         "outputPath": "dist/packages/devkit",
         "tsConfig": "packages/devkit/tsconfig.lib.json",
-        "main": "packages/devkit/index.ts",
+        "main": "packages/devkit/src/index.ts",
         "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           {

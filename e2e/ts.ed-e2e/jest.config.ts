@@ -12,4 +12,5 @@ export default {
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/ts.ed-e2e',
   preset: '../../jest.preset.js',
+  maxWorkers: 1,
 };

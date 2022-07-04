@@ -3,9 +3,30 @@
   "sourceRoot": "e2e/ionic-angular-e2e/src",
   "targets": {
     "e2e": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "yarn nx build ionic-angular"
+          },
+          {
+            "command": "yarn nx run-e2e-tests ionic-angular-e2e"
+          }
+        ],
+        "parallel": false,
+        "color": true
+      }
+    },
+    "run-e2e-tests": {
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
         "target": "ionic-angular:build",
+        "jestConfig": "e2e/ionic-angular-e2e/jest.config.ts"
+      }
+    },
+    "e2e-verdaccio": {
+      "executor": "@nxext/e2e:e2e",
+      "options": {
         "jestConfig": "e2e/ionic-angular-e2e/jest.config.ts"
       }
     }

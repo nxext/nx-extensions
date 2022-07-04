@@ -7,8 +7,9 @@ import {
 import { readJsonFile, writeJsonFile } from '@nrwl/devkit';
 import { dirname } from 'path';
 import { execSync } from 'child_process';
-import { ensureDirSync } from 'fs-extra';
-import { appRootPath } from '@nrwl/tao/src/utils/app-root';
+import { ensureDirSync, readFileSync, writeFileSync } from 'fs-extra';
+import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
+import * as glob from 'glob';
 
 interface PackageJson {
   name: string;
@@ -20,17 +21,46 @@ interface PackageJson {
 export function ensureNxProjectAndPrepareDeps(
   npmPackageName?: string,
   pluginDistPath?: string,
-  optionalNpmPackages?: Record<string, string>
+  optionalDependencyNxextPackages?: [
+    npmPackageName: string,
+    pluginDistPath: string
+  ][],
+  optionalAdditionalNxPackages?: Array<string>
 ): void {
+  preparePkgJsonWithDistPaths();
   ensureNxProject(npmPackageName, pluginDistPath);
 
-  patchPackageJsonFromDependencies(
-    npmPackageName,
-    pluginDistPath,
-    optionalNpmPackages
+  optionalDependencyNxextPackages?.forEach(([npmPackageName, pluginDistPath]) =>
+    patchPackageJsonForPlugin(npmPackageName, pluginDistPath)
   );
 
   runPackageManagerInstall();
+}
+
+function preparePkgJsonWithDistPaths(): void {
+  const distPaths = getDistPaths();
+  let pkgFiles = glob.sync('dist/packages/**/package.json');
+
+  pkgFiles.forEach((p) => {
+    const content = JSON.parse(readFileSync(p).toString());
+    for (const key in content.dependencies) {
+      if (key.startsWith('@nxext/')) {
+        content.dependencies[key] = distPaths[key];
+      }
+    }
+    writeFileSync(p, JSON.stringify(content, null, 2));
+  });
+}
+
+function getDistPaths(): Record<string, string> {
+  const tsConfigBase = readJsonFile('./tsconfig.base.json');
+  return Object.entries(tsConfigBase.compilerOptions.paths).reduce<
+    Record<string, string>
+  >((acc, cur) => {
+    acc[cur[0]] = `file:${workspaceRoot}/dist/${cur[1][0].split('/src')[0]}`;
+
+    return acc;
+  }, {} as Record<string, string>);
 }
 
 export function ensureNxProjectWithDeps(
@@ -58,7 +88,7 @@ function patchPackageJsonFromDependencies(
     (acc, cur) => {
       if (cur.startsWith('@nxext/')) {
         if (optionalNpmPackages[cur]) {
-          acc[cur] = `file:${appRootPath}/${optionalNpmPackages[cur]}`;
+          acc[cur] = `file:${workspaceRoot}/${optionalNpmPackages[cur]}`;
           patchPackageJsonFromDependencies(
             cur,
             optionalNpmPackages[cur],
@@ -113,7 +143,7 @@ function runNxNewCommand(args?: string, silent?: boolean) {
   return execSync(
     `node ${require.resolve(
       '@nrwl/tao'
-    )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty ${
+    )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty --packageManager=yarn ${
       args || ''
     }`,
     {

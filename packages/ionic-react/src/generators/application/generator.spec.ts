@@ -56,7 +56,6 @@ describe('application', () => {
     expect(packageJson.dependencies['@ionic/react']).toBeDefined();
     expect(packageJson.dependencies['@ionic/react-router']).toBeDefined();
     expect(packageJson.devDependencies['@nrwl/react']).toBeDefined();
-    expect(packageJson.devDependencies['@nxext/capacitor']).toBeDefined();
   });
 
   it('should generate application', async () => {

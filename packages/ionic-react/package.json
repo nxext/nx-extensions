@@ -25,11 +25,11 @@
     "migrations": "./migrations.json"
   },
   "dependencies": {
-    "@nxext/devkit": "^14.0.0"
+    "@nxext/devkit": "^14.0.0",
+    "@nxext/capacitor": "^14.0.0"
   },
   "peerDependencies": {
-    "@nrwl/linter": "^14.0.0",
-    "@nrwl/react": "^14.0.0",
-    "@nxext/capacitor": "^14.0.0"
+    "@nrwl/linter": "^14.4.0",
+    "@nrwl/react": "^14.4.0"
   }
 }

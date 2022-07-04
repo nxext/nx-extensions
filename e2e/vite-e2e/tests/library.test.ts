@@ -3,11 +3,13 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { ensureNxProjectWithDeps } from '../../utils/testing';
+import { newProject } from '@nxext/e2e';
+import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('vite lib e2e', () => {
   beforeAll(() => {
-    ensureNxProjectWithDeps('@nxext/vite', 'dist/packages/vite', []);
+    //newProject(['@nxext/vite']);
+    ensureNxProjectAndPrepareDeps('@nxext/vite', 'dist/packages/vite');
   });
 
   describe('vite lib', () => {

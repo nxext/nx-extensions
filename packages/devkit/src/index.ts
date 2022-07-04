@@ -145,12 +145,12 @@ export { visitNotIgnoredFiles } from '@nrwl/devkit';
 export {
   parseTargetString,
   targetToTargetString,
-} from './src/executors/parse-target-string';
+} from './executors/parse-target-string';
 
 /**
  * @category Executors
  */
-export { readTargetOptions } from './src/executors/read-target-options';
+export { readTargetOptions } from './executors/read-target-options';
 
 /**
  * @category Project Graph
@@ -202,7 +202,7 @@ export { readJsonFile, writeJsonFile } from '@nrwl/devkit';
 export {
   addDependenciesToPackageJson,
   removeDependenciesFromPackageJson,
-} from './src/utils/package-json';
+} from './utils/package-json';
 
 /**
  * @category Utils
@@ -212,7 +212,7 @@ export { installPackagesTask } from '@nrwl/devkit';
 /**
  * @category Utils
  */
-export { names } from './src/utils/names';
+export { names } from './utils/names';
 
 /**
  * @category Utils
@@ -220,7 +220,7 @@ export { names } from './src/utils/names';
 export {
   getWorkspaceLayout,
   getWorkspacePath,
-} from './src/utils/get-workspace-layout';
+} from './utils/get-workspace-layout';
 
 /**
  * @category Utils
@@ -229,17 +229,17 @@ export type {
   StringChange,
   StringDeletion,
   StringInsertion,
-} from './src/utils/string-change';
+} from './utils/string-change';
 
 /**
  * @category Utils
  */
-export { applyChangesToString, ChangeType } from './src/utils/string-change';
+export { applyChangesToString, ChangeType } from './utils/string-change';
 
 /**
  * @category Utils
  */
-export { offsetFromRoot } from './src/utils/offset-from-root';
+export { offsetFromRoot } from './utils/offset-from-root';
 
 /**
  * @category Utils
@@ -264,7 +264,7 @@ export { joinPathFragments, normalizePath } from '@nrwl/devkit';
 /**
  * @category Utils
  */
-export { moveFilesToNewDirectory } from './src/utils/move-dir';
+export { moveFilesToNewDirectory } from './utils/move-dir';
 
 /**
  * @category Utils
