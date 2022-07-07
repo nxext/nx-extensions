@@ -14,7 +14,7 @@ export function installDependencies(host: Tree) {
     {
       // Resolves https://github.com/nxext/nx-extensions/issues/580
       '@angular-devkit/schematics': angularSchematicsVersion,
-      '@sveltejs/adapter-node': svelteKitAdapterVersion,
+      '@sveltejs/adapter-auto': svelteKitAdapterVersion,
       '@sveltejs/kit': svelteKitVersion,
       svelte: svelteVersion,
       'svelte-preprocess': sveltePreprocessVersion,
