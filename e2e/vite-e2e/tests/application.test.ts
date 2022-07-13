@@ -6,15 +6,12 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
-import {
-  ensureNxProjectAndPrepareDeps,
-  ensureNxProjectWithDeps,
-} from '../../utils/testing';
+import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('vite e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/vite']);
-    ensureNxProjectAndPrepareDeps('@nxext/vite', 'dist/packages/vite');
+    newProject(['@nxext/vite']);
+    //ensureNxProjectAndPrepareDeps('@nxext/vite', 'dist/packages/vite');
   });
 
   describe('vite app', () => {

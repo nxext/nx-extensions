@@ -8,8 +8,8 @@ import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('vite lib e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/vite']);
-    ensureNxProjectAndPrepareDeps('@nxext/vite', 'dist/packages/vite');
+    newProject(['@nxext/vite']);
+    //ensureNxProjectAndPrepareDeps('@nxext/vite', 'dist/packages/vite');
   });
 
   describe('vite lib', () => {

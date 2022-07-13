@@ -28,10 +28,10 @@ export async function* nxPluginE2EExecutor(
     logger.info(`Verdaccio already running...`);
   }
 
-  /*console.log('Authenticating to NPM');
-  execSync(`npm adduser --registry ${registry}`, {
+  console.log('Authenticating to NPM');
+  execSync(`npm adduser`, {
     stdio: [0, 1, 2],
-  });*/
+  });
 
   try {
     buildAllPackages();

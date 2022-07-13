@@ -3,14 +3,14 @@
   "projectType": "application",
   "sourceRoot": "e2e/vite-e2e/src",
   "targets": {
-    "e2e": {
+    "e2e-old": {
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
         "target": "vite:build",
         "jestConfig": "e2e/vite-e2e/jest.config.ts"
       }
     },
-    "e2e-verdaccio": {
+    "e2e": {
       "executor": "@nxext/e2e:e2e",
       "options": {
         "jestConfig": "e2e/vite-e2e/jest.config.ts"
