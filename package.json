@@ -130,7 +130,7 @@
     "vite-plugin-inspect": "^0.5.0",
     "vite-plugin-solid": "^2.2.6",
     "vitest": "^0.12.6",
-    "vuepress": "^2.0.0-beta.43",
+    "vuepress": "^2.0.0-beta.49",
     "yargs": "^17.5.1",
     "yargs-parser": "^21.0.1"
   },
