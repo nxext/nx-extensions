@@ -12,9 +12,7 @@ concurrency:
 jobs:
   main:
     name: Nx Cloud - Main Job
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.5
-    env:
-      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
     with:
       main-branch-name: 'main'
       parallel-commands: |
@@ -28,6 +26,6 @@ jobs:
         yarn nx affected -- --target=e2e
   agents:
     name: Nx Cloud - Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.5
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
     with:
       number-of-agents: 3
