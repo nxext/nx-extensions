@@ -54,7 +54,7 @@
     "@angular-devkit/build-optimizer": "0.1302.1",
     "@angular/compiler-cli": "14.0.3",
     "@angular/core": "14.0.3",
-    "clsx": "^1.1.1",
+    "clsx": "^1.2.1",
     "recrawl-sync": "^2.2.1",
     "source-map": "^0.7.3",
     "tsconfig-paths": "^3.12.0",
@@ -130,7 +130,7 @@
     "vite-plugin-inspect": "^0.5.0",
     "vite-plugin-solid": "^2.2.6",
     "vitest": "^0.12.6",
-    "vuepress": "^2.0.0-beta.43",
+    "vuepress": "^2.0.0-beta.49",
     "yargs": "^17.5.1",
     "yargs-parser": "^21.0.1"
   },
