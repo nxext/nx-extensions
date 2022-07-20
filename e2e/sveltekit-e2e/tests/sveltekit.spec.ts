@@ -7,7 +7,7 @@ import {
 import { newProject } from '@nxext/e2e';
 import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
-describe('sveltekit e2e', () => {
+xdescribe('sveltekit e2e', () => {
   beforeAll(() => {
     //newProject(['@nxext/sveltekit']);
     ensureNxProjectAndPrepareDeps(

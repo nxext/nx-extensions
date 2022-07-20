@@ -1,12 +1,10 @@
-import { readWorkspaceJson } from '@nrwl/workspace';
-import {
-  existsSync,
-  lstatSync,
-  copySync,
-  renameSync,
-} from 'fs-extra';
+import { existsSync, lstatSync, copySync, renameSync } from 'fs-extra';
+import { Workspaces } from 'nx/src/config/workspaces';
+import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 
-export function getPublishableLibNames(workspaceJson = readWorkspaceJson()) {
+export function getPublishableLibNames(
+  workspaceJson = new Workspaces(workspaceRoot).readWorkspaceConfiguration()
+) {
   const { projects } = workspaceJson;
 
   return Object.keys(projects).filter(
