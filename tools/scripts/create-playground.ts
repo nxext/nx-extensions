@@ -1,4 +1,3 @@
-import { readWorkspaceJson } from '@nrwl/workspace';
 import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import {
@@ -10,10 +9,13 @@ import {
 import { getPublishableLibNames, tmpProjPath } from './utils';
 import { dirname } from 'path';
 import { logger } from '@nrwl/devkit';
+import { Workspaces } from 'nx/src/config/workspaces';
 
 console.log('\nCreating playground. This may take a few minutes.');
 
-const workspaceJson = readWorkspaceJson();
+const workspaceJson = new Workspaces(
+  workspaceRoot
+).readWorkspaceConfiguration();
 const publishableLibNames = getPublishableLibNames(workspaceJson);
 
 execSync(`npx nx run-many --target build --projects ${publishableLibNames}`);

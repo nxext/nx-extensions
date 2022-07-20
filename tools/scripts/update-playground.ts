@@ -1,13 +1,15 @@
 // @ts-ignore
-import { appRootPath } from '@nrwl/tao/src/utils/app-root';
-import { readWorkspaceJson } from '@nrwl/workspace';
 import { execSync } from 'child_process';
 import { removeSync } from 'fs-extra';
 import { copyAndRename, getPublishableLibNames, tmpProjPath } from './utils';
+import { Workspaces } from 'nx/src/config/workspaces';
+import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 
 console.log('\nUpdating playground...');
 
-const workspaceJson = readWorkspaceJson();
+const workspaceJson = new Workspaces(
+  workspaceRoot
+).readWorkspaceConfiguration();
 
 const publishableLibNames = getPublishableLibNames(workspaceJson);
 
@@ -20,9 +22,9 @@ removeSync(tmpProjPath('node_modules/@nxext'));
 publishableLibNames.forEach((pubLibName) => {
   const { outputPath, packageJson } =
     workspaceJson.projects[pubLibName]?.targets?.build.options;
-  const packageName = require(`${appRootPath}/${packageJson}`).name;
+  const packageName = require(`${workspaceRoot}/${packageJson}`).name;
   copyAndRename(
-    `${appRootPath}/${outputPath}`,
+    `${workspaceRoot}/${outputPath}`,
     tmpProjPath(`node_modules/${packageName}`)
   );
 });
