@@ -4,7 +4,7 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { ApplicationSchema } from '../schema';
 import { Linter, lintProjectGenerator } from '@nrwl/linter';
 import {

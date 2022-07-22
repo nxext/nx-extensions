@@ -5,7 +5,7 @@ import {
   readProjectConfiguration,
   Tree,
   writeJson,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import generator from './generator';
 import { CapacitorGeneratorSchema } from './schema';

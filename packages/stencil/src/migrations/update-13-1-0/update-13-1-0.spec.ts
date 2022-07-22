@@ -1,4 +1,4 @@
-import { Tree, updateJson, readProjectConfiguration } from '@nxext/devkit';
+import { Tree, updateJson, readProjectConfiguration } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { default as update } from './update-13-1-0';
 

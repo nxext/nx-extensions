@@ -22,7 +22,7 @@
   "executors": "./executors.json",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nxext/devkit": "^14.0.0",
-    "@nxext/vite": "^14.0.0"
+    "@nxext/vite": "^14.0.0",
+    "@nrwl/devkit": "14.4.3"
   }
 }

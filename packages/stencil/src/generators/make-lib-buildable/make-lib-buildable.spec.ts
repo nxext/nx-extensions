@@ -6,7 +6,7 @@ import {
   readWorkspaceConfiguration,
   Tree,
   updateWorkspaceConfiguration,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { makeLibBuildableGenerator } from './make-lib-buildable';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '../library/generator';

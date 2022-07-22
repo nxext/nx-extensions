@@ -5,7 +5,7 @@ import {
   stripIndents,
   Tree,
   updateProjectConfiguration,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 
 export default async function update(host: Tree) {
   logger.info(stripIndents`

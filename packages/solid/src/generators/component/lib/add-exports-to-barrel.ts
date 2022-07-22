@@ -9,7 +9,7 @@ import {
   readProjectConfiguration,
   StringChange,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { findNodes } from '@nrwl/workspace/src/utils/ast-utils';
 
 export function addExportsToBarrel(tree: Tree, options: SolidComponentSchema) {

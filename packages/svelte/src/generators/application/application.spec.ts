@@ -2,7 +2,7 @@ import { SvelteApplicationSchema } from './schema';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from './application';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { readJson } from '@nxext/devkit';
+import { readJson } from '@nrwl/devkit';
 
 describe('svelte app generator', () => {
   let tree;

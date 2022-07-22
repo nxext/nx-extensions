@@ -1,4 +1,4 @@
-import { Tree } from '@nxext/devkit';
+import { Tree } from '@nrwl/devkit';
 import { InitSchema } from '../schema';
 
 export async function addCypress(host: Tree, options: InitSchema) {

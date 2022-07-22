@@ -23,7 +23,7 @@
   "main": "./src/index.js",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nxext/devkit": "^14.0.0"
+    "@nrwl/devkit": "14.4.3"
   },
   "devDependencies": {
     "@nrwl/cypress": "^14.0.3",

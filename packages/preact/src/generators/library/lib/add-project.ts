@@ -5,7 +5,7 @@ import {
   getWorkspaceLayout,
   TargetConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const targets: { [key: string]: TargetConfiguration } = {

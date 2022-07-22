@@ -5,7 +5,7 @@ import {
   ProjectConfiguration,
   TargetConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 
 export function addProject(host: Tree, options: NormalizedSchema) {
   const project: ProjectConfiguration = {

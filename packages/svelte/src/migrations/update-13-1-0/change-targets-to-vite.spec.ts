@@ -2,7 +2,7 @@ import { default as update } from './change-targets-to-vite';
 import {
   readProjectConfiguration,
   updateProjectConfiguration,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { createTestProject } from '../../generators/utils/testing';
 
 describe('change-targets-to-vite', () => {

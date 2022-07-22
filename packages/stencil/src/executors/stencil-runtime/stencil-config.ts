@@ -7,7 +7,7 @@ import {
 import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { PathCollection } from './types';
-import { ExecutorContext, readJsonFile } from '@nxext/devkit';
+import { ExecutorContext, readJsonFile } from '@nrwl/devkit';
 import { join } from 'path';
 import { fileExists } from '@nrwl/workspace/src/utilities/fileutils';
 import { normalizePath } from '../../utils/normalize-path';

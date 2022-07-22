@@ -1,4 +1,4 @@
-import { applyChangesToString, ChangeType, Tree } from '@nxext/devkit';
+import { applyChangesToString, ChangeType, Tree } from '@nrwl/devkit';
 import {
   createSourceFile,
   isImportDeclaration,
