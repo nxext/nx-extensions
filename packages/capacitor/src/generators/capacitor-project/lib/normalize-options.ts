@@ -3,7 +3,7 @@ import {
   offsetFromRoot,
   readProjectConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { CapacitorGeneratorSchema, NormalizedSchema } from '../schema';
 
 export function normalizeOptions(

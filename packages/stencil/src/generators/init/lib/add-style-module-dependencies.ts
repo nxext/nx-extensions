@@ -4,7 +4,7 @@ import {
   addDependenciesToPackageJson,
   GeneratorCallback,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 
 export function addStyledDependencies<T extends InitSchema>(
   tree: Tree,

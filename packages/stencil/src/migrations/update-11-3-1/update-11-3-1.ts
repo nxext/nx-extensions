@@ -1,4 +1,4 @@
-import { Tree, updateJson } from '@nxext/devkit';
+import { Tree, updateJson } from '@nrwl/devkit';
 import { isStencilProject } from '../utils/migration-utils';
 
 export default function update(host: Tree) {

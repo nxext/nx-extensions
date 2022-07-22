@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { addDependenciesToPackageJson, Tree } from '@nxext/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 import { readNxVersion } from '../../generators/init/lib/util';
 import { eslintPluginSvelteVersion } from '../../generators/utils/versions';
 

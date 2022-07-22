@@ -1,6 +1,6 @@
 import { AddExecutorSchema } from './schema';
 import executor from './executor';
-import { ExecutorContext } from '@nxext/devkit';
+import { ExecutorContext } from '@nrwl/devkit';
 
 const options: AddExecutorSchema = {
   package: 'tailwind',

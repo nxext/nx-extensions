@@ -3,7 +3,7 @@ import {
   NxJsonConfiguration,
   readJson,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 import { viteVersion } from '../../utils/version';

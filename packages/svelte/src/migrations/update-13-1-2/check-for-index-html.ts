@@ -1,9 +1,4 @@
-import {
-  logger,
-  ProjectConfiguration,
-  stripIndents,
-  Tree,
-} from '@nxext/devkit';
+import { logger, ProjectConfiguration, stripIndents, Tree } from '@nrwl/devkit';
 import { getSvelteProjects } from '../utils/migration-utils';
 
 export default function update(host: Tree) {

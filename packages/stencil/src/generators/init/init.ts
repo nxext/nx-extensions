@@ -3,7 +3,7 @@ import { InitSchema } from './schema';
 import { addStyledDependencies } from './lib/add-style-module-dependencies';
 import { addPuppeteer } from './lib/add-e2e-dependencies';
 import { addDependenciesByApptype } from './lib/add-dependencies-for-apptype';
-import { convertNxGenerator, formatFiles, Tree } from '@nxext/devkit';
+import { convertNxGenerator, formatFiles, Tree } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';

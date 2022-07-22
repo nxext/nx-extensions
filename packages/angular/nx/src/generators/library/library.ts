@@ -11,7 +11,7 @@ import {
   readProjectConfiguration,
   offsetFromRoot,
   updateJson,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { Schema } from './schema';
 import { libraryGenerator as NxLibraryGenerator } from '@nrwl/angular/generators';
 import { angularInitGenerator } from '../init/init';

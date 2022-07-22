@@ -3,7 +3,7 @@ import {
   eslintPluginStencilVersion,
 } from './versions';
 import type { Linter } from 'eslint';
-import { offsetFromRoot } from '@nxext/devkit';
+import { offsetFromRoot } from '@nrwl/devkit';
 
 export const extraEslintDependencies = {
   dependencies: {},

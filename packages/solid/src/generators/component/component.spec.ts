@@ -1,7 +1,7 @@
 import componentGenerator, { SolidComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
-import { names, Tree } from '@nxext/devkit';
+import { names, Tree } from '@nrwl/devkit';
 
 describe('component schematic', () => {
   let tree: Tree;

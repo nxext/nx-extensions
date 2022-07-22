@@ -1,5 +1,5 @@
 import { NormalizedSchema, Schema } from '../schema';
-import { names, Tree, normalizePath, getWorkspaceLayout } from '@nxext/devkit';
+import { names, Tree, normalizePath, getWorkspaceLayout } from '@nrwl/devkit';
 
 export function normalizeOptions(
   host: Tree,

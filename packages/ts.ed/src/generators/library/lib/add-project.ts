@@ -3,7 +3,7 @@ import {
   addProjectConfiguration,
   TargetConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { createLintTarget, createPackageTarget } from '../../utils/targets';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {

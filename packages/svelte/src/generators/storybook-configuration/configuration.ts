@@ -14,7 +14,7 @@ import {
   updateJson,
   updateProjectConfiguration,
   writeJson,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 
 import { Linter } from '@nrwl/linter';

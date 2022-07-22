@@ -4,7 +4,7 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';

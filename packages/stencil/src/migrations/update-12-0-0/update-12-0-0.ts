@@ -1,4 +1,4 @@
-import { joinPathFragments, Tree, updateJson } from '@nxext/devkit';
+import { joinPathFragments, Tree, updateJson } from '@nrwl/devkit';
 import { isStencilProject } from '../utils/migration-utils';
 import { updatePackagesInPackageJson } from '@nrwl/workspace';
 

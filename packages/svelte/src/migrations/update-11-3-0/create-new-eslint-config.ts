@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { formatFiles, getProjects, offsetFromRoot, Tree } from '@nxext/devkit';
+import { formatFiles, getProjects, offsetFromRoot, Tree } from '@nrwl/devkit';
 import { join } from 'path';
 
 export default async function update(host: Tree) {
