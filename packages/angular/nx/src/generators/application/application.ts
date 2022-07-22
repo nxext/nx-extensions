@@ -15,7 +15,7 @@ import {
   ChangeType,
   applyChangesToString,
   ProjectConfiguration,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { Schema } from './schema';
 import { applicationGenerator as nxApplicationGenerator } from '@nrwl/angular/generators';
 import { E2eTestRunner } from '@nrwl/angular/src/utils/test-runners';

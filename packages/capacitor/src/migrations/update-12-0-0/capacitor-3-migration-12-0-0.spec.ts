@@ -2,7 +2,7 @@ import {
   addProjectConfiguration,
   readProjectConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import capacitorMigartion from './capacitor-3-migration-12-0-0';
 

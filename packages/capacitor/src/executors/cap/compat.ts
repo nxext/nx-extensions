@@ -1,4 +1,4 @@
-import { convertNxExecutor } from '@nxext/devkit';
+import { convertNxExecutor } from '@nrwl/devkit';
 import runExecutor from './executor';
 
 export default convertNxExecutor(runExecutor);

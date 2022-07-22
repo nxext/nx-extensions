@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree } from '@nxext/devkit';
+import { Tree } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from '../application/generator';
 

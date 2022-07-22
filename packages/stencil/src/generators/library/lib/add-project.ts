@@ -1,4 +1,4 @@
-import { addProjectConfiguration, Tree } from '@nxext/devkit';
+import { addProjectConfiguration, Tree } from '@nrwl/devkit';
 import { getTestTarget } from '../../../utils/targets';
 import { LibrarySchema } from '../schema';
 

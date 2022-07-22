@@ -1,4 +1,4 @@
-import { readProjectConfiguration, Tree, updateJson } from '@nxext/devkit';
+import { readProjectConfiguration, Tree, updateJson } from '@nrwl/devkit';
 import { StorybookConfigureSchema } from '../schema';
 import { join } from 'path';
 

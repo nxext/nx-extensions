@@ -1,4 +1,4 @@
-import { logger } from '@nxext/devkit';
+import { logger } from '@nrwl/devkit';
 
 /**
  * @function replaceFiles

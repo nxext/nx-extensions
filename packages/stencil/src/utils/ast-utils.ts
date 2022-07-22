@@ -1,5 +1,5 @@
 import * as ts from 'typescript';
-import { ChangeType, StringChange, Tree } from '@nxext/devkit';
+import { ChangeType, StringChange, Tree } from '@nrwl/devkit';
 import { findNodes } from '@nrwl/workspace/src/utilities/typescript';
 import { insertChange } from '@nrwl/workspace/src/utilities/ast-utils';
 

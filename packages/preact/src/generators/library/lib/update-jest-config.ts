@@ -1,5 +1,5 @@
 import { NormalizedSchema } from '../schema';
-import { Tree } from '@nxext/devkit';
+import { Tree } from '@nrwl/devkit';
 
 export function updateJestConfig(host: Tree, options: NormalizedSchema) {
   if (options.unitTestRunner !== 'jest') {

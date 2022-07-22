@@ -5,7 +5,7 @@ import {
   getWorkspaceLayout,
   readProjectConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { Linter } from '@nrwl/linter';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';

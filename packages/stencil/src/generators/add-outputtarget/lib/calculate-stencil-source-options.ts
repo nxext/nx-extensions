@@ -2,7 +2,7 @@ import {
   getWorkspaceLayout,
   readProjectConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import * as ts from 'typescript';
 import { readTsSourceFile } from '../../../utils/ast-utils';
 

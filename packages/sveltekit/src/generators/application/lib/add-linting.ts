@@ -2,7 +2,7 @@ import {
   addDependenciesToPackageJson,
   joinPathFragments,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { lintProjectGenerator } from '@nrwl/linter';
 import { extraEslintDependencies } from '../../utils/lint';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';

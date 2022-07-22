@@ -3,7 +3,7 @@ import {
   joinPathFragments,
   names,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 
 function getParameters(options: NormalizedSchema) {

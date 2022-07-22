@@ -1,6 +1,6 @@
 import { SvelteLibrarySchema } from './schema';
 import { Linter } from '@nrwl/linter';
-import { readJson } from '@nxext/devkit';
+import { readJson } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from './library';
 

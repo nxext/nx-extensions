@@ -5,7 +5,7 @@ import {
   updateJson,
   logger,
   stripIndents,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { getSvelteLegacyTargetProjects } from '../utils/migration-utils';
 
 export default function update(host: Tree) {

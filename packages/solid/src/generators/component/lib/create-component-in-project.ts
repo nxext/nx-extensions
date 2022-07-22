@@ -4,7 +4,7 @@ import {
   names,
   readProjectConfiguration,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { SolidComponentSchema } from '../component';
 
 export function createComponentInProject(

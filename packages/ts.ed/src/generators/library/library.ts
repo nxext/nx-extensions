@@ -12,7 +12,7 @@ import {
   offsetFromRoot,
   Tree,
   updateJson,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';

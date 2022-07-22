@@ -1,8 +1,5 @@
-import { joinPathFragments, TargetConfiguration } from '@nxext/devkit';
-import {
-  NormalizedSchema,
-  NormalizedSchema as LibrarySchema,
-} from '../library/schema';
+import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
+import { NormalizedSchema as LibrarySchema } from '../library/schema';
 import { NormalizedSchema as ApplicationSchema } from '../application/schema';
 
 export function createViteTargets(

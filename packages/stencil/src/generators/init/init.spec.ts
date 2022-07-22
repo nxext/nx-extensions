@@ -1,5 +1,5 @@
 import { AppType } from '../../utils/typings';
-import { readJson, readWorkspaceConfiguration, Tree } from '@nxext/devkit';
+import { readJson, readWorkspaceConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { initGenerator } from './init';
 

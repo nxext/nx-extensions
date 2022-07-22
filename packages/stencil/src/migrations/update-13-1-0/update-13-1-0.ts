@@ -3,7 +3,7 @@ import {
   joinPathFragments,
   Tree,
   updateProjectConfiguration,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { isStencilProject } from '../utils/migration-utils';
 import { ProjectType, updatePackagesInPackageJson } from '@nrwl/workspace';
 import { getLintTarget } from '../../utils/targets';

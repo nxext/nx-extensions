@@ -1,4 +1,4 @@
-import { getWorkspaceLayout, names, normalizePath, Tree } from '@nxext/devkit';
+import { getWorkspaceLayout, names, normalizePath, Tree } from '@nrwl/devkit';
 import { ApplicationGeneratorSchema, NormalizedSchema } from '../schema';
 
 export function normalizeOptions(

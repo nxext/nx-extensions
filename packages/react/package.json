@@ -13,7 +13,7 @@
   "generators": "./generators.json",
   "dependencies": {
     "@nxext/vite": "^14.0.0",
-    "@nxext/devkit": "^14.0.0",
+    "@nrwl/devkit": "14.4.3",
     "@nrwl/react": "^14.3.0"
   },
   "files": [
