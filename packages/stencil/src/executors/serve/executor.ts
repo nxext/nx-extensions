@@ -7,7 +7,7 @@ import {
 } from '../stencil-runtime';
 import { createProjectGraphAsync } from '@nrwl/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext, logger } from '@nxext/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,

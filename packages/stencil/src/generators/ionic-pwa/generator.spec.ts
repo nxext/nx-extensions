@@ -1,7 +1,7 @@
 import { STYLE_PLUGIN_DEPENDENCIES } from '../../utils/typings';
 import { fileListForAppType } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { readJson, readProjectConfiguration, Tree } from '@nxext/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { ionicPwaGenerator } from './generator';
 import { applicationGenerator } from '../application/generator';

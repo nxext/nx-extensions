@@ -1,4 +1,4 @@
-import { offsetFromRoot } from '@nxext/devkit';
+import { offsetFromRoot } from '@nrwl/devkit';
 import {
   eslintConfigPrettierVersion,
   eslintPluginPrettierVersion,

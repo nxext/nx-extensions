@@ -3,7 +3,7 @@ import {
   readProjectConfiguration,
   Tree,
   updateProjectConfiguration,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function updateWorkspace(host: Tree, options: NormalizedSchema) {

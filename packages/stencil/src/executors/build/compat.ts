@@ -1,4 +1,4 @@
-import { convertNxExecutor } from '@nxext/devkit';
+import { convertNxExecutor } from '@nrwl/devkit';
 
 import buildExecutor from './executor';
 

@@ -1,5 +1,5 @@
 import { LibrarySchema } from '../schema';
-import { Tree, updateJson } from '@nxext/devkit';
+import { Tree, updateJson } from '@nrwl/devkit';
 
 export function updateTsConfig(host: Tree, options: LibrarySchema) {
   updateJson(host, 'tsconfig.base.json', (json) => {

@@ -4,7 +4,7 @@ import {
   formatFiles,
   convertNxGenerator,
   GeneratorCallback,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 
 import { Schema } from './schema';

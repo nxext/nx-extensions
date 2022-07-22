@@ -6,7 +6,7 @@ import {
   joinPathFragments,
   readJsonFile,
   writeJsonFile,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { sortObjectByKeys } from '@nrwl/workspace/src/utils/ast-utils';
 
 export default async function runExecutor(

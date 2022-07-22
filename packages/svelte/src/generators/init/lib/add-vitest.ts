@@ -1,4 +1,4 @@
-import { GeneratorCallback, Tree } from '@nxext/devkit';
+import { GeneratorCallback, Tree } from '@nrwl/devkit';
 import { vitestInitGenerator } from '@nxext/vitest';
 import { Schema } from '../schema';
 

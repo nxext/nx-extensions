@@ -1,7 +1,7 @@
 import componentGenerator, { ComponentSchema } from './component';
 import { createTestUILib, testNpmScope } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { names, Tree } from '@nxext/devkit';
+import { names, Tree } from '@nrwl/devkit';
 import storybookConfigurationGenerator from '../storybook-configuration/generator';
 
 describe('component schematic', () => {

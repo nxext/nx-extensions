@@ -6,7 +6,7 @@ import {
   initializeStencilConfig,
 } from '../stencil-runtime';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext, logger } from '@nxext/devkit';
+import { ExecutorContext, logger } from '@nrwl/devkit';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,

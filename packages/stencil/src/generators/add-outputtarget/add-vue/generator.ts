@@ -5,8 +5,8 @@
 //   getWorkspaceLayout,
 //   joinPathFragments,
 //   readProjectConfiguration,
-// } from '@nxext/devkit';
-// import type { GeneratorCallback, Tree } from '@nxext/devkit';
+// } from '@nrwl/devkit';
+// import type { GeneratorCallback, Tree } from '@nrwl/devkit';
 // import { AddOutputtargetSchematicSchema } from '../schema';
 // import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 // import { addToGitignore } from '../../../utils/utillities';

@@ -1,4 +1,4 @@
-import { Tree, updateJson } from '@nxext/devkit';
+import { Tree, updateJson } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function updateEslintConfig(host: Tree, options: NormalizedSchema) {

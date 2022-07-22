@@ -1,5 +1,5 @@
 import { ApplicationSchema } from '../schema';
-import { addProjectConfiguration, Tree } from '@nxext/devkit';
+import { addProjectConfiguration, Tree } from '@nrwl/devkit';
 import { getDefaultTargets } from '../../../utils/targets';
 import { addStylePluginToConfig } from '../../../stencil-core-utils';
 import { join } from 'path';

@@ -16,7 +16,7 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import viteInitGenerator from '../init/init';
 import { lintProjectGenerator } from '@nrwl/linter';

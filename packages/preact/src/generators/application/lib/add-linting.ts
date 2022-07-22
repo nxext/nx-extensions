@@ -2,7 +2,7 @@ import {
   addDependenciesToPackageJson,
   joinPathFragments,
   Tree,
-} from '@nxext/devkit';
+} from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 import { lintProjectGenerator } from '@nrwl/linter';
 import { extraEslintDependencies } from '../../utils/lint';
