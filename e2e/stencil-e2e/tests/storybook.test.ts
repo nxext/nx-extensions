@@ -28,4 +28,10 @@ describe('storybook e2e', () => {
     const result = await runNxCommandAsync(`build-storybook ${plugin}`);
     expect(result.stdout).toContain('Storybook builder finished ...');
   }, 200000);
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

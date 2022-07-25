@@ -15,4 +15,10 @@ describe('angular library e2e', () => {
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(result.stdout).toContain('Bundle complete');
   }, 120000);
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

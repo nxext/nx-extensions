@@ -83,4 +83,10 @@ describe('outputtargets e2e', () => {
       'Please use a buildable library for custom outputtargets'
     );
   });
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

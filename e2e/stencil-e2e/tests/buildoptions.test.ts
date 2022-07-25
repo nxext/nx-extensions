@@ -38,4 +38,10 @@ describe('buildoptions e2e', () => {
     );
     expect(result.stdout).toContain('build finished');
   });
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

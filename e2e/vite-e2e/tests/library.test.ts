@@ -51,4 +51,10 @@ describe('vite lib e2e', () => {
       ).not.toThrow();
     });
   });
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

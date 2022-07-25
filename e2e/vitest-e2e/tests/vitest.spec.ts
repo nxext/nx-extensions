@@ -14,4 +14,10 @@ describe('vitest e2e', () => {
 
     expect(() => checkFilesExist(`vitest.config.ts`)).not.toThrow();
   }, 120000);
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

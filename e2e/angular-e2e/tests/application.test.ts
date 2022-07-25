@@ -17,4 +17,10 @@ describe('angular application e2e', () => {
     );
     expect(result.stdout).toContain('Bundle complete');
   }, 120000);
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

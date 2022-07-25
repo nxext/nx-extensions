@@ -43,4 +43,10 @@ describe('ts.ed e2e', () => {
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     }, 120000);
   });
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });
