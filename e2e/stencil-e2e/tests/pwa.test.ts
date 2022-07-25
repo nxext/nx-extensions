@@ -17,4 +17,10 @@ describe('pwa e2e', () => {
     const result = await runNxCommandAsync(`build ${plugin} --dev`);
     expect(result.stdout).toContain('build finished');
   });
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });

@@ -38,4 +38,10 @@ describe('library e2e', () => {
       checkFilesExist(`libs/${plugin}/stencil.config.ts`)
     ).not.toThrow();
   });
+
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommandAsync('reset');
+  });
 });
