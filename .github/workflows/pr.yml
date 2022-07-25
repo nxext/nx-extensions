@@ -12,7 +12,8 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
     with:
       main-branch-name: 'main'
-      registry-url: http://localhost:4872
+      environment-variables: |
+        "npm_config_registry=http://localhost:4873"
       parallel-commands: |
         npx nx-cloud record yarn nx workspace-lint
         npx nx-cloud record yarn nx format:check
@@ -27,3 +28,5 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
     with:
       number-of-agents: 3
+      environment-variables: |
+        "npm_config_registry=http://localhost:4873"

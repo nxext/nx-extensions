@@ -1,5 +1,4 @@
 import { ChildProcess, fork, execSync } from 'child_process';
-import { registry } from './index';
 import * as glob from 'glob';
 import { logInfo } from './logger';
 
@@ -51,12 +50,9 @@ export function buildAllPackages() {
 
 export function runNpmPublish(path: string) {
   const tag = 'latest';
-  const buffer = execSync(
-    `npm publish -tag ${tag} --access public --registry=${registry} --json`,
-    {
-      cwd: path,
-    }
-  );
+  const buffer = execSync(`npm publish -tag ${tag} --access public --json`, {
+    cwd: path,
+  });
   return JSON.parse(buffer.toString());
 }
 
