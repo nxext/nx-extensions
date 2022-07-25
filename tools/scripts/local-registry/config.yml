@@ -3,38 +3,24 @@ storage: ../../../tmp/local-registry/storage
 
 listen: localhost:4873
 
-auth:
-  htpasswd:
-    file: ./htpasswd
-
 # a list of other known repositories we can talk to
-uplinks:
-  npmjs:
-    url: https://registry.npmjs.org/
-    max_fails: 100
-    maxage: 30m
-    fail_timeout: 10m
-    timeout: 600s
-    cache: false
+npmjs:
+  url: https://registry.npmjs.org/
+  max_fails: 100
+  maxage: 30m
+  fail_timeout: 10m
+  timeout: 600s
+  cache: false
 
 packages:
-  '@*/*':
-    # scoped packages
+  '@nxext/*':
     access: $all
     publish: $all
-    unpublish: $all
-    proxy: npmjs
 
   '**':
-    # allow all users (including non-authenticated users) to read and
-    # publish all packages
     access: $all
-
-    # allow all users (including non-authenticated users) to publish/publish packages
     publish: $all
     unpublish: $all
-
-    # if package is not available locally, proxy requests to 'yarn' registry
     proxy: npmjs
 
 # log settings

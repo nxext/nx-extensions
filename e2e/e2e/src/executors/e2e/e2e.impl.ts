@@ -11,7 +11,10 @@ import {
   publishPackages,
   startVerdaccio,
 } from '../../utils/registry';
-import { cleanupAll, registry, updatePackageJsonFiles } from '../../utils';
+import { cleanupAll, updatePackageJsonFiles } from '../../utils';
+import { logError, logInfo, logSuccess } from '../../utils/logger';
+import * as kill from 'kill-port';
+import { check as portCheck } from 'tcp-port-used';
 
 // eslint-disable-next-line require-yield
 export async function* nxPluginE2EExecutor(
@@ -28,10 +31,12 @@ export async function* nxPluginE2EExecutor(
     logger.info(`Verdaccio already running...`);
   }
 
-  /*console.log('Authenticating to NPM');
-  execSync(`npm adduser --registry ${registry}`, {
+  //if (options.ci) {
+  console.log('Authenticating to NPM');
+  execSync(`npm adduser`, {
     stdio: [0, 1, 2],
-  });*/
+  });
+  //}
 
   try {
     buildAllPackages();
@@ -42,9 +47,13 @@ export async function* nxPluginE2EExecutor(
   } catch (e) {
     logger.error(e.message);
     success = false;
-    child.kill();
   }
-  child.kill();
+
+  try {
+    child.kill();
+  } catch (e) {
+    await killPort(4873);
+  }
 
   return { success };
 }
@@ -65,6 +74,31 @@ async function runTests(
   );
 
   return success;
+}
+
+const KILL_PORT_DELAY = 5000;
+
+async function killPort(port: number): Promise<boolean> {
+  if (await portCheck(port)) {
+    try {
+      logInfo(`Attempting to close port ${port}`);
+      await kill(port);
+      await new Promise<void>((resolve) =>
+        setTimeout(() => resolve(), KILL_PORT_DELAY)
+      );
+      if (await portCheck(port)) {
+        logError(`Port ${port} still open`);
+      } else {
+        logSuccess(`Port ${port} successfully closed`);
+        return true;
+      }
+    } catch {
+      logError(`Port ${port} closing failed`);
+    }
+    return false;
+  } else {
+    return true;
+  }
 }
 
 export default nxPluginE2EExecutor;

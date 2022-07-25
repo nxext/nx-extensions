@@ -30,7 +30,6 @@ import * as treeKill from 'tree-kill';
 import { Workspaces } from 'nx/src/config/workspaces';
 import { PackageManager } from 'nx/src/utils/package-manager';
 import { tmpBackupProjPath, tmpProjPath } from '@nrwl/nx-plugin/testing';
-import { registry } from '../e2e/src/utils';
 
 export function getPublishedVersion(): string {
   process.env.PUBLISHED_VERSION =
@@ -706,7 +705,7 @@ export function getPackageManagerCommand({
       runNx: `npx nx`,
       runNxSilent: `npx nx`,
       runUninstalledPackage: `npx --yes`,
-      addDev: `npm install --legacy-peer-deps -D --registry=${registry}`,
+      addDev: `npm install --legacy-peer-deps -D `,
       list: 'npm ls --depth 10',
     },
     yarn: {

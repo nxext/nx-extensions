@@ -17,8 +17,7 @@ import * as path from 'path';
 import * as glob from 'glob';
 import { logError, logInfo } from './logger';
 
-export const registry = `http://localhost:4873/`;
-process.env.npm_config_registry = registry;
+process.env.npm_config_registry = `http://localhost:4873/`;
 process.env.YARN_REGISTRY = process.env.npm_config_registry;
 
 /**
@@ -156,7 +155,7 @@ export function getPackageManagerCommand({
       runNx: `npx nx`,
       runNxSilent: `npx nx`,
       runUninstalledPackage: `npx --yes`,
-      addDev: `npm install --legacy-peer-deps -D --registry=${registry}`,
+      addDev: `npm install --legacy-peer-deps -D `,
       list: 'npm ls --depth 10',
     },
     yarn: {
