@@ -86,7 +86,7 @@
     "@types/globrex": "^0.1.2",
     "@types/is-ci": "^3.0.0",
     "@types/jest": "27.4.1",
-    "@types/node": "18.0.6",
+    "@types/node": "18.6.1",
     "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "5.30.7",
     "@typescript-eslint/parser": "5.30.7",
