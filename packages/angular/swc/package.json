@@ -17,7 +17,7 @@
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "dependencies": {
-    "@swc/core": "^1.2.148",
-    "swc-ast-helpers": "^0.0.8-beta.1"
+    "@swc/core": "^1.2.220",
+    "swc-ast-helpers": "^0.2.2"
   }
 }
