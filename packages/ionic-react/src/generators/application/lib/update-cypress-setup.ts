@@ -40,9 +40,7 @@ function updateFiles(tree: Tree, options: NormalizedSchema) {
     `export const getGreeting = () => cy.get('${elem}');`
   );
 
-  tree.write(
-    joinPathFragments(e2eProjectRoot, 'src/integration/app.spec.ts'),
-    `
+  const testContent = `
 import { getGreeting } from '../support/app.po';
 
 describe('app-blank', () => {
@@ -56,6 +54,14 @@ describe('app-blank', () => {
     getGreeting().contains('${title}');
   });
 });
-  `
-  );
+  `;
+  const testFiles = [
+    joinPathFragments(e2eProjectRoot, 'src/integration/app.spec.ts'),
+    joinPathFragments(e2eProjectRoot, 'src/e2e/app.cy.ts'),
+  ];
+  for (const testFile of testFiles) {
+    if (tree.exists(testFile)) {
+      tree.write(testFile, testContent);
+    }
+  }
 }
