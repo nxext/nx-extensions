@@ -57,4 +57,18 @@ pkgFiles.forEach((p) => {
   writeFileSync(p, JSON.stringify(content, null, 2));
 });
 
+publishableLibNames.forEach((pubLibName) => {
+  try {
+    const { outputPath, packageJson } =
+      workspaceJson.projects[pubLibName]?.targets?.build.options;
+    const packageName = require(`${workspaceRoot}/${packageJson}`).name;
+    copyAndRename(
+      `${workspaceRoot}/${outputPath}`,
+      tmpProjPath(`node_modules/${packageName}`)
+    );
+  } catch (e) {
+    logger.info(`Problem with ${pubLibName}`);
+  }
+});
+
 console.log('\nUpdate complete.');
