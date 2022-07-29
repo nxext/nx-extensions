@@ -163,12 +163,31 @@ export default defineUserConfig({
                   text: 'Generators',
                   children: generators['ionic-angular'],
                 },
+              ],
+            },
+            {
+              text: 'Ionic React',
+              collapsible: true,
+              children: [
                 {
-                  text: 'Executors',
-                  children: executors['ionic-angular'],
+                  text: 'Overview',
+                  link: '/docs/ionic-react/overview',
+                },
+                {
+                  text: 'Getting started',
+                  link: '/docs/ionic-react/getting-started',
+                },
+                {
+                  text: 'Capacitor',
+                  link: '/docs/ionic-react/capacitor',
+                },
+                {
+                  text: 'Generators',
+                  children: generators['ionic-react'],
                 },
               ],
-            },*/
+            },
+            */
           ],
         },
         {

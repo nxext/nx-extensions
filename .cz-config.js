@@ -16,6 +16,7 @@ module.exports = {
 
   scopes: [
     { name: 'nxext', description: 'Whole repo' },
+    { name: 'docs', description: 'Docs specific' },
     { name: 'stencil', description: 'Stencil specific' },
     { name: 'svelte', description: 'Svelte specific' },
     { name: 'sveltekit', description: 'Sveltekit specific' },
