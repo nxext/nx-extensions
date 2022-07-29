@@ -10,7 +10,8 @@ export function getPublishableLibNames(
   return Object.keys(projects).filter(
     (key) =>
       projects[key].projectType === 'library' &&
-      projects[key].targets?.build?.executor === '@nrwl/js:tsc'
+      projects[key].targets?.build?.executor === '@nrwl/js:tsc' &&
+      projects[key].sourceRoot !== 'e2e/e2e/src'
   );
 }
 
