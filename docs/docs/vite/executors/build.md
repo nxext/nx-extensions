@@ -47,3 +47,11 @@ The path to vite.config.js for the framework.
 Type: `string`
 
 The output path of the generated files.
+
+#### sourcemaps
+
+Default: `false`
+
+Type: `boolean`
+
+enable sourcemap
