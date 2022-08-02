@@ -5,15 +5,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 xdescribe('sveltekit e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/sveltekit']);
-    ensureNxProjectAndPrepareDeps(
-      '@nxext/sveltekit',
-      'dist/packages/sveltekit'
-    );
+    newProject(['@nxext/sveltekit']);
   });
 
   it('should create sveltekit app', async () => {
@@ -72,11 +67,5 @@ xdescribe('sveltekit e2e', () => {
       const project = readJson(`apps/${plugin}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     });
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

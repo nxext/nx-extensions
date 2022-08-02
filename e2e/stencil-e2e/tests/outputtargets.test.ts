@@ -4,21 +4,11 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
-import {
-  ensureNxProjectAndPrepareDeps,
-  ensureNxProjectWithDeps,
-} from '../../utils/testing';
 
 describe('outputtargets e2e', () => {
   beforeAll(() => {
-    /*newProject(
+    newProject(
       ['@nxext/stencil', '@nxext/svelte'],
-      ['@nrwl/angular', '@nrwl/react']
-    );*/
-    ensureNxProjectAndPrepareDeps(
-      '@nxext/stencil',
-      'dist/packages/stencil',
-      [['@nxext/svelte', 'dist/packages/svelte']],
       ['@nrwl/angular', '@nrwl/react']
     );
   });
@@ -82,11 +72,5 @@ describe('outputtargets e2e', () => {
     expect(result.stdout).toContain(
       'Please use a buildable library for custom outputtargets'
     );
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

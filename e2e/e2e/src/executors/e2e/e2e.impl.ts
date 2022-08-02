@@ -1,20 +1,20 @@
 import 'dotenv/config';
 
 import type { ExecutorContext } from '@nrwl/devkit';
-
 import { logger } from '@nrwl/devkit';
 import { jestExecutor } from '@nrwl/jest/src/executors/jest/jest.impl';
 import type { NxPluginE2EExecutorOptions } from './schema';
-import { ChildProcess, execSync } from 'child_process';
+import { ChildProcess } from 'child_process';
 import {
   buildAllPackages,
+  login,
   publishPackages,
   startVerdaccio,
 } from '../../utils/registry';
-import { cleanupAll, updatePackageJsonFiles } from '../../utils';
-import { logError, logInfo, logSuccess } from '../../utils/logger';
-import * as kill from 'kill-port';
-import { check as portCheck } from 'tcp-port-used';
+import { cleanupAll, killPort, updatePackageJsonFiles } from '../../utils';
+import * as isCI from 'is-ci';
+import { ensureDirSync } from 'fs-extra';
+import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 
 // eslint-disable-next-line require-yield
 export async function* nxPluginE2EExecutor(
@@ -22,6 +22,7 @@ export async function* nxPluginE2EExecutor(
   context: ExecutorContext
 ): AsyncGenerator<{ success: boolean }> {
   let success: boolean;
+  ensureDirSync(tmpProjPath());
   cleanupAll();
 
   let child: ChildProcess;
@@ -31,12 +32,10 @@ export async function* nxPluginE2EExecutor(
     logger.info(`Verdaccio already running...`);
   }
 
-  //if (options.ci) {
-  console.log('Authenticating to NPM');
-  execSync(`npm adduser`, {
-    stdio: [0, 1, 2],
-  });
-  //}
+  if (isCI) {
+    console.log('Authenticating to NPM');
+    login('test', 'test', '4872');
+  }
 
   try {
     buildAllPackages();
@@ -52,7 +51,7 @@ export async function* nxPluginE2EExecutor(
   try {
     child.kill();
   } catch (e) {
-    await killPort(4873);
+    await killPort(4872);
   }
 
   return { success };
@@ -74,31 +73,6 @@ async function runTests(
   );
 
   return success;
-}
-
-const KILL_PORT_DELAY = 5000;
-
-async function killPort(port: number): Promise<boolean> {
-  if (await portCheck(port)) {
-    try {
-      logInfo(`Attempting to close port ${port}`);
-      await kill(port);
-      await new Promise<void>((resolve) =>
-        setTimeout(() => resolve(), KILL_PORT_DELAY)
-      );
-      if (await portCheck(port)) {
-        logError(`Port ${port} still open`);
-      } else {
-        logSuccess(`Port ${port} successfully closed`);
-        return true;
-      }
-    } catch {
-      logError(`Port ${port} closing failed`);
-    }
-    return false;
-  } else {
-    return true;
-  }
 }
 
 export default nxPluginE2EExecutor;

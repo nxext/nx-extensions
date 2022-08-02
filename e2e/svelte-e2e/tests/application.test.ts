@@ -6,12 +6,10 @@ import {
   updateFile,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/svelte']);
-    ensureNxProjectAndPrepareDeps('@nxext/svelte', 'dist/packages/svelte');
+    newProject(['@nxext/svelte']);
   });
 
   describe('Svelte app', () => {
@@ -156,11 +154,5 @@ h1 {
         checkFilesExist(`dist/apps/${appName}/index.html`)
       ).not.toThrow();
     });
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

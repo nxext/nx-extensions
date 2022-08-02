@@ -6,15 +6,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
-import {
-  ensureNxProjectAndPrepareDeps,
-  ensureNxProjectWithDeps,
-} from '../../utils/testing';
 
 describe('vite e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/vite']);
-    ensureNxProjectAndPrepareDeps('@nxext/vite', 'dist/packages/vite');
+    newProject(['@nxext/vite']);
   });
 
   describe('vite app', () => {
@@ -88,11 +83,5 @@ export function testFun() {
       const result = await runNxCommandAsync(`build ${appName}`);
       expect(result.stdout).toContain('Bundle complete');
     });
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

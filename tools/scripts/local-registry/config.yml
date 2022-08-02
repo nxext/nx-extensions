@@ -1,16 +1,21 @@
 # path to a directory with all packages
 storage: ../../../tmp/local-registry/storage
 
-listen: localhost:4873
+listen: localhost:4872
+
+auth:
+  htpasswd:
+    file: ./htpasswd
 
 # a list of other known repositories we can talk to
-npmjs:
-  url: https://registry.npmjs.org/
-  max_fails: 100
-  maxage: 30m
-  fail_timeout: 10m
-  timeout: 600s
-  cache: false
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+    max_fails: 100
+    maxage: 30m
+    fail_timeout: 10m
+    timeout: 600s
+    cache: false
 
 packages:
   '@nxext/*':

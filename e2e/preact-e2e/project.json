@@ -4,30 +4,6 @@
   "sourceRoot": "e2e/preact-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "yarn nx build preact"
-          },
-          {
-            "command": "yarn nx run-e2e-tests preact-e2e"
-          }
-        ],
-        "parallel": false,
-        "color": true
-      }
-    },
-    "run-e2e-tests": {
-      "executor": "@nrwl/jest:jest",
-      "options": {
-        "jestConfig": "e2e/preact-e2e/jest.config.ts",
-        "passWithNoTests": true,
-        "runInBand": true
-      },
-      "outputs": ["coverage/e2e/preact"]
-    },
-    "e2e-verdaccio": {
       "executor": "@nxext/e2e:e2e",
       "options": {
         "jestConfig": "e2e/preact-e2e/jest.config.ts"

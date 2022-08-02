@@ -1,1 +1,1 @@
-export { newProject, runCLI, cleanupProject } from './utils';
+export { newProject, cleanupProject } from './utils';

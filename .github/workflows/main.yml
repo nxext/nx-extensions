@@ -16,7 +16,7 @@ jobs:
     with:
       main-branch-name: 'main'
       environment-variables: |
-        "npm_config_registry=http://localhost:4873"
+        npm_config_registry=http://localhost:4872
       parallel-commands: |
         npx nx-cloud record npx nx workspace-lint
         npx nx-cloud record npx nx format:check
@@ -32,4 +32,4 @@ jobs:
     with:
       number-of-agents: 3
       environment-variables: |
-        "npm_config_registry=http://localhost:4873"
+        npm_config_registry=http://localhost:4872

@@ -3,13 +3,6 @@
   "sourceRoot": "e2e/capacitor-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
-      "options": {
-        "target": "capacitor:build",
-        "jestConfig": "e2e/capacitor-e2e/jest.config.ts"
-      }
-    },
-    "e2e-verdaccio": {
       "executor": "@nxext/e2e:e2e",
       "options": {
         "jestConfig": "e2e/capacitor-e2e/jest.config.ts"

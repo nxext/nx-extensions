@@ -1,17 +1,12 @@
 import { readJson, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { ApplicationGeneratorSchema } from '@nxext/ionic-react';
 import { newProject } from '@nxext/e2e';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('application e2e', () => {
   const asyncTimeout = 300_000;
 
   beforeAll(() => {
-    //newProject(['@nxext/ionic-react']);
-    ensureNxProjectAndPrepareDeps(
-      '@nxext/ionic-react',
-      'dist/packages/ionic-react'
-    );
+    newProject(['@nxext/ionic-react']);
   });
 
   const defaultOptions: ApplicationGeneratorSchema = {
@@ -131,11 +126,5 @@ describe('application e2e', () => {
       },
       asyncTimeout
     );
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

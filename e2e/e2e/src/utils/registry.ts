@@ -1,6 +1,6 @@
 import { ChildProcess, fork, execSync } from 'child_process';
 import * as glob from 'glob';
-import { logInfo } from './logger';
+import { logger } from '@nrwl/devkit';
 
 export function runRegistry(
   args: string[] = [],
@@ -26,7 +26,7 @@ export function runRegistry(
 }
 
 export async function startVerdaccio() {
-  const port = 4873;
+  const port = 4872;
   return runRegistry(
     [
       '-c',
@@ -38,8 +38,14 @@ export async function startVerdaccio() {
   );
 }
 
+export function login(user: string, password: string, port: string) {
+  execSync(
+    `npx npm-cli-login -u ${user} -p ${password} -e test@domain.test -r http://localhost:${port}`
+  );
+}
+
 export function buildAllPackages() {
-  logInfo('Build all....');
+  logger.info('Build all....');
   execSync(
     `npx nx run-many --target=build --all --parallel --exclude=e2e,docs || { echo 'Build failed' ; exit 1; }`,
     {
