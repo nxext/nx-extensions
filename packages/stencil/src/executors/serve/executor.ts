@@ -39,8 +39,6 @@ function createStencilCompilerOptions(
   return parseFlags(runOptions);
 }
 
-export const isString = (v: any): v is string => typeof v === 'string';
-
 export default async function* runExecutor(
   options: StencilServeOptions,
   context: ExecutorContext
