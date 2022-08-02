@@ -1,16 +1,11 @@
 import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('Ionic Angular Application', () => {
   const asyncTimeout = 600_000;
 
   beforeAll(() => {
-    //newProject(['@nxext/ionic-angular']);
-    ensureNxProjectAndPrepareDeps(
-      '@nxext/ionic-angular',
-      'dist/packages/ionic-angular'
-    );
+    newProject(['@nxext/ionic-angular']);
   });
 
   async function buildAndTestApp(
@@ -177,11 +172,5 @@ describe('Ionic Angular Application', () => {
         asyncTimeout
       );
     });
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

@@ -4,12 +4,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('vite lib e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/vite']);
-    ensureNxProjectAndPrepareDeps('@nxext/vite', 'dist/packages/vite');
+    newProject(['@nxext/vite']);
   });
 
   describe('vite lib', () => {
@@ -50,11 +48,5 @@ describe('vite lib e2e', () => {
         )
       ).not.toThrow();
     });
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

@@ -1,11 +1,9 @@
 import { renameFile, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('buildoptions e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/stencil']);
-    ensureNxProjectAndPrepareDeps('@nxext/stencil', 'dist/packages/stencil');
+    newProject(['@nxext/stencil']);
   });
 
   it(`should build with custom stencil config naming`, async () => {
@@ -37,11 +35,5 @@ describe('buildoptions e2e', () => {
       `build ${plugin} --configPath=libs/${plugin}/stencil.config.ts`
     );
     expect(result.stdout).toContain('build finished');
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

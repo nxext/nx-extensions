@@ -7,7 +7,6 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { CapacitorGeneratorSchema } from '@nxext/capacitor';
 import { newProject } from '@nxext/e2e';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 const asyncTimeout = 600_000;
 
@@ -58,11 +57,7 @@ async function buildAndTestApp(plugin: string) {
 
 describe('capacitor-project e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/capacitor']);
-    ensureNxProjectAndPrepareDeps(
-      '@nxext/capacitor',
-      'dist/packages/capacitor'
-    );
+    newProject(['@nxext/capacitor']);
   });
 
   it(
@@ -79,10 +74,4 @@ describe('capacitor-project e2e', () => {
     },
     asyncTimeout
   );
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
-  });
 });

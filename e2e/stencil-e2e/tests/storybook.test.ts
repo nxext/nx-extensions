@@ -4,12 +4,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('storybook e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/stencil'], ['@nrwl/storybook']);
-    ensureNxProjectAndPrepareDeps('@nxext/stencil', 'dist/packages/stencil');
+    newProject(['@nxext/stencil'], ['@nrwl/storybook']);
   });
 
   it('should build', async () => {
@@ -28,10 +26,4 @@ describe('storybook e2e', () => {
     const result = await runNxCommandAsync(`build-storybook ${plugin}`);
     expect(result.stdout).toContain('Storybook builder finished ...');
   }, 200000);
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
-  });
 });

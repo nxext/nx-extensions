@@ -5,12 +5,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
-describe('preact e2e', () => {
+xdescribe('preact e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/preact']);
-    ensureNxProjectAndPrepareDeps('@nxext/preact', 'dist/packages/preact');
+    newProject(['@nxext/preact']);
   });
 
   describe('preact app', () => {
@@ -90,11 +88,5 @@ describe('preact e2e', () => {
         )
       ).not.toThrow();
     });
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

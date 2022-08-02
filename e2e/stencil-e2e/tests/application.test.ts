@@ -4,12 +4,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
 describe('application e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/stencil']);
-    ensureNxProjectAndPrepareDeps('@nxext/stencil', 'dist/packages/stencil');
+    newProject(['@nxext/stencil']);
   });
 
   it(`should build app with css`, async () => {
@@ -26,11 +24,5 @@ describe('application e2e', () => {
         `dist/apps/${plugin}/www/host.config.json`
       );
     }).not.toThrow();
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });

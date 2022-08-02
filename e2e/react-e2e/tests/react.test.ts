@@ -5,12 +5,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
-import { ensureNxProjectAndPrepareDeps } from '../../utils/testing';
 
-describe('react e2e', () => {
+xdescribe('react e2e', () => {
   beforeAll(() => {
-    //newProject(['@nxext/react']);
-    ensureNxProjectAndPrepareDeps('@nxext/react', 'dist/packages/react');
+    newProject(['@nxext/react']);
   });
 
   describe('react app', () => {
@@ -91,11 +89,5 @@ describe('react e2e', () => {
         )
       ).not.toThrow();
     });
-  });
-
-  afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
   });
 });
