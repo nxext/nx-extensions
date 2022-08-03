@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vite",
-  "version": "14.0.2",
+  "version": "14.0.3",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for ViteJs",
@@ -30,7 +30,7 @@
     "globrex": "^0.1.2"
   },
   "peerDependencies": {
-    "@nrwl/workspace": "^14.0.3",
+    "@nrwl/workspace": "^14.5.0",
     "vite": "^2.9.14"
   },
   "nx-migrations": {

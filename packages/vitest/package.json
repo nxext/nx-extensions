@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vitest",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vitest",
@@ -23,6 +23,6 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "14.5.0"
+    "@nrwl/devkit": "14.5.2"
   }
 }
