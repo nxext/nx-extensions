@@ -121,13 +121,17 @@ export default defineUserConfig({
                 },
               ],
             },
-            /*{
+            {
               text: 'Capacitor',
               collapsible: true,
               children: [
                 {
                   text: 'Overview',
                   link: '/docs/capacitor/overview',
+                },
+                {
+                  text: 'Migrating from Nxtend',
+                  link: '/docs/capacitor/migrating-from-nxtend',
                 },
                 {
                   text: 'Getting started',
@@ -152,6 +156,10 @@ export default defineUserConfig({
                   link: '/docs/ionic-angular/overview',
                 },
                 {
+                  text: 'Migrating from Nxtend',
+                  link: '/docs/ionic-angular/migrating-from-nxtend',
+                },
+                {
                   text: 'Getting started',
                   link: '/docs/ionic-angular/getting-started',
                 },
@@ -174,6 +182,10 @@ export default defineUserConfig({
                   link: '/docs/ionic-react/overview',
                 },
                 {
+                  text: 'Migrating from Nxtend',
+                  link: '/docs/ionic-react/migrating-from-nxtend',
+                },
+                {
                   text: 'Getting started',
                   link: '/docs/ionic-react/getting-started',
                 },
@@ -187,7 +199,6 @@ export default defineUserConfig({
                 },
               ],
             },
-            */
           ],
         },
         {
