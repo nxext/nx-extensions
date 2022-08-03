@@ -1,6 +1,6 @@
 {
   "name": "@nxext/preact",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "license": "MIT",
   "author": "Jordan Hall",
   "description": "Nx plugin for preact",
@@ -23,15 +23,14 @@
   "schematics": "./generators.json",
   "peerDependencies": {
     "preact": "^10.6.2",
-    "@nrwl/workspace": "^14.0.3",
-    "@nrwl/cypress": "^14.0.3",
-    "@nrwl/linter": "^14.0.3",
-    "@preact/preset-vite": "^2.1.5",
-    "@nxext/vite": "^14.0.0"
+    "@nrwl/workspace": "^14.5.0",
+    "@nrwl/cypress": "^14.5.0",
+    "@nrwl/linter": "^14.5.0",
+    "@preact/preset-vite": "^2.1.5"
   },
   "dependencies": {
-    "@nxext/vite": "^14.0.0",
-    "@nrwl/devkit": "14.5.0"
+    "@nxext/vite": "^14.0.3",
+    "@nrwl/devkit": "14.5.2"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"
