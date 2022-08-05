@@ -21,7 +21,7 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "@nxext/vite": "~13.2.4",
+    "@nxext/vite": "~14.1.0",
     "@nrwl/angular": "^14.0.3",
     "typescript": "~4.5.4",
     "@schematics/angular": "~13.1.1",
