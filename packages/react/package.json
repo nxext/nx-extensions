@@ -12,7 +12,7 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "@nxext/vite": "^14.0.3",
+    "@nxext/vite": "^14.1.0",
     "@nrwl/devkit": "14.5.2",
     "@nrwl/react": "^14.5.2"
   },
