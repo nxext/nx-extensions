@@ -121,7 +121,7 @@
     "svelte-preprocess": "^4.10.7",
     "swc-ast-helpers": "^0.2.2",
     "tcp-port-used": "^1.0.2",
-    "ts-jest": "28.0.7",
+    "ts-jest": "27.1.5",
     "ts-node": "10.9.1",
     "tslib": "^2.1.0",
     "tslint": "6.1.3",
