@@ -49,7 +49,7 @@ export function buildAllPackages() {
   execSync(
     `npx nx run-many --target=build --all --parallel --exclude=e2e,docs || { echo 'Build failed' ; exit 1; }`,
     {
-      stdio: [0, 1, 2],
+      stdio: ['pipe', 'pipe', 'pipe'],
     }
   );
 }
@@ -58,6 +58,7 @@ export function runNpmPublish(path: string) {
   const tag = 'latest';
   const buffer = execSync(`npm publish -tag ${tag} --access public --json`, {
     cwd: path,
+    stdio: ['pipe', 'pipe', 'pipe'],
   });
   return JSON.parse(buffer.toString());
 }

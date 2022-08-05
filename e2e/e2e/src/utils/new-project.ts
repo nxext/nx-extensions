@@ -1,4 +1,4 @@
-import { getPackageManagerCommand, logger } from '@nrwl/devkit';
+import { getPackageManagerCommand } from '@nrwl/devkit';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 import {
   cleanupProject,
@@ -8,8 +8,7 @@ import {
   runCreateWorkspace,
 } from './index';
 import { execSync } from 'child_process';
-import { ensureDirSync } from 'fs-extra';
-import { dirname } from 'path';
+import { logError, logInfo } from './logger';
 
 /**
  * Sets up a new project in the temporary project path
@@ -31,10 +30,10 @@ export function newProject(
     addNxPackages(nxPackagesToInstall);
     packageInstall(packagesToInstall);
 
-    logger.info(`E2E test is creating a project: ${tmpProjPath()}`);
+    logInfo(`creating the test workspace...`);
     return name;
   } catch (e) {
-    logger.error(`Failed to set up project for e2e tests. ${e.message}`);
+    logError(`Failed to set up project for e2e tests.`, e.message);
     throw e;
   }
 }
