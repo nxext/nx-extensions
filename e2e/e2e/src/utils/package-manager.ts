@@ -1,11 +1,9 @@
 import { execSync } from 'child_process';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
-import {
-  detectPackageManager,
-  getNxVersion,
-  getPublishedVersion,
-} from './index';
+import { getNxVersion, getPublishedVersion } from './index';
 import { getPackageManagerCommand } from '@nrwl/devkit';
+import { existsSync } from 'fs-extra';
+import { join } from 'path';
 
 function getNpmMajorVersion(): string {
   const [npmMajorVersion] = execSync(`npm -v`).toString().split('.');
@@ -57,4 +55,18 @@ export function packageInstall(pkgs: string[], projName?: string) {
     encoding: 'utf-8',
   });
   return install ? install.toString() : '';
+}
+
+export function getSelectedPackageManager(): 'npm' | 'yarn' | 'pnpm' {
+  return (process.env.SELECTED_PM as 'npm' | 'yarn' | 'pnpm') || 'npm';
+}
+
+export declare type PackageManager = 'yarn' | 'pnpm' | 'npm';
+
+export function detectPackageManager(dir = ''): PackageManager {
+  return existsSync(join(dir, 'yarn.lock'))
+    ? 'yarn'
+    : existsSync(join(dir, 'pnpm-lock.yaml'))
+    ? 'pnpm'
+    : 'npm';
 }
