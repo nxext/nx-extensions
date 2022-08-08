@@ -1,6 +1,7 @@
 ---
 home: true
 heroImage: /logo.svg
+heroImageDark: /logo_light.svg
 tagline: Nxext brings different tools Nx
 actions:
   - text: Get Started
@@ -20,5 +21,6 @@ features:
     details: Next Generation Frontend Tooling
   - title: React
     details: A JavaScript library for building user interfaces.
-footer: MIT Licensed | Copyright © 2020-present Nxext Developers & Contributors
+footerHtml: true
+footer: MIT Licensed | Copyright © 2020-present Nxext Developers & Contributors <br/><br/><a href="https://www.netlify.com"> <img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /> </a>
 ---

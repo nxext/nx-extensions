@@ -23,6 +23,7 @@ export default defineUserConfig({
 
   theme: defaultTheme({
     logo: '/logo.svg',
+    logoDark: '/logo_light.svg',
     docsDir: 'docs',
     docsBranch: 'main',
     repo: 'nxext/nx-extensions',
