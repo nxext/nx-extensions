@@ -6,7 +6,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
-xdescribe('solid e2e', () => {
+describe('solid e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/solid']);
   });
