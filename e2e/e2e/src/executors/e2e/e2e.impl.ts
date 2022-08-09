@@ -21,6 +21,9 @@ export async function* nxPluginE2EExecutor(
   options: NxPluginE2EExecutorOptions,
   context: ExecutorContext
 ): AsyncGenerator<{ success: boolean }> {
+  process.env.npm_config_registry = `http://localhost:4872/`;
+  process.env.YARN_REGISTRY = process.env.npm_config_registry;
+
   let success: boolean;
   ensureDirSync(tmpProjPath());
   cleanupAll();
