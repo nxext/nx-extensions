@@ -6,7 +6,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
-xdescribe('preact e2e', () => {
+describe('preact e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/preact']);
   });

@@ -6,7 +6,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
 
-xdescribe('react e2e', () => {
+describe('react e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/react']);
   });
