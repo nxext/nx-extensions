@@ -1,9 +1,6 @@
-import {
-  ensureNxProject,
-  runNxCommandAsync,
-  uniq,
-} from '@nrwl/nx-plugin/testing';
+import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
+import { runNxCommandUntil } from '../../e2e/src/utils/run-commands';
 
 describe('storybook e2e', () => {
   beforeAll(() => {
@@ -11,7 +8,7 @@ describe('storybook e2e', () => {
   });
 
   it('should build', async () => {
-    const plugin = uniq('lib');
+    const plugin = uniq('build-storybook');
     await runNxCommandAsync(
       `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
     );
@@ -25,5 +22,22 @@ describe('storybook e2e', () => {
 
     const result = await runNxCommandAsync(`build-storybook ${plugin}`);
     expect(result.stdout).toContain('Storybook builder finished ...');
+  }, 200000);
+
+  it('should serve', async () => {
+    const plugin = uniq('storybook');
+    await runNxCommandAsync(
+      `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
+    );
+    await runNxCommandAsync(
+      `generate @nxext/stencil:storybook-configuration ${plugin} --configureCypress=false`
+    );
+    await runNxCommandAsync(
+      `generate @nxext/stencil:component test-comp --project=${plugin}`
+    );
+
+    await runNxCommandUntil(`storybook ${plugin}`, (output) => {
+      return /Storybook.*started/gi.test(output);
+    });
   }, 200000);
 });
