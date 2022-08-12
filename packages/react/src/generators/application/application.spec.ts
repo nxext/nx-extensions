@@ -1,5 +1,5 @@
 import { readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { createTestProject } from '../utils/testing';
 import { applicationGenerator } from './application';
 import { Linter } from '@nrwl/linter';
 
@@ -7,7 +7,7 @@ describe('application', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTestProject();
   });
 
   it('should add vite as a devDependency', async () => {
