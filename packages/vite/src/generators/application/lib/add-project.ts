@@ -43,7 +43,7 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
       production: {
         fileReplacements: [
           {
-            replace: joinPathFragments(
+            file: joinPathFragments(
               options.projectRoot,
               `src/environments/environment.ts`
             ),
@@ -70,7 +70,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
       production: {
         fileReplacements: [
           {
-            replace: joinPathFragments(
+            file: joinPathFragments(
               options.projectRoot,
               `src/environments/environment.ts`
             ),

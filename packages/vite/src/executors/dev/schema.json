@@ -32,7 +32,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "replace": {
+          "file": {
             "type": "string",
             "description": "The file to be replaced."
           },
@@ -42,7 +42,7 @@
           }
         },
         "additionalProperties": false,
-        "required": ["replace", "with"]
+        "required": ["file", "with"]
       },
       "default": []
     }

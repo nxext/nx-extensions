@@ -24,7 +24,7 @@ Type: `object[]`
 
 Replace files with other files in the build.
 
-#### replace
+#### file
 
 Type: `string`
 
