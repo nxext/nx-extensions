@@ -181,7 +181,7 @@ describe('application', () => {
   describe('--standaloneConfig', () => {
     describe('true', () => {
       it('should generate package.json', async () => {
-        appTree = createTreeWithEmptyWorkspace(2);
+        appTree = createTreeWithEmptyWorkspace();
         await applicationGenerator(appTree, {
           ...options,
           standaloneConfig: true,
@@ -193,7 +193,7 @@ describe('application', () => {
 
     describe('false', () => {
       it('should not generate package.json', async () => {
-        appTree = createTreeWithEmptyWorkspace(2);
+        appTree = createTreeWithEmptyWorkspace();
         await applicationGenerator(appTree, {
           ...options,
           standaloneConfig: false,
