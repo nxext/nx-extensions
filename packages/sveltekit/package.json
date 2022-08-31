@@ -22,6 +22,7 @@
   "executors": "./executors.json",
   "schematics": "./generators.json",
   "dependencies": {
+    "@angular-devkit/schematics": "^14.2.1",
     "@nxext/vite": "^14.1.0",
     "@nrwl/devkit": "14.5.2"
   }
