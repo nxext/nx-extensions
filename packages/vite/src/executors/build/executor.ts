@@ -1,4 +1,6 @@
 import { BuildExecutorSchema } from './schema';
+import { readJsonFile } from '@nrwl/devkit';
+
 import {
   build,
   InlineConfig,
@@ -10,6 +12,8 @@ import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import { relative } from 'path';
 import { defineBaseConfig } from '../../../plugins/vite';
 import { replaceFiles } from '../../../plugins/file-replacement';
+import { checkDependencies } from '../utils/check-dependencies';
+import { updatePackageJson } from '../utils/update-package-json';
 
 async function ensureUserConfig(
   config: UserConfigExport,
@@ -64,8 +68,17 @@ export default async function runExecutor(
     }
   );
 
+  const { target, dependencies } = checkDependencies(context);
+  // const externalPackages = dependencies
+  // .map((d) => d.name)
+  // .concat(options.external || [])
+  // .concat(Object.keys(packageJson.dependencies || {})
   try {
     await build(buildConfig);
+    const packageJson = readJsonFile(options.project);
+
+    updatePackageJson(options, context, target, dependencies, packageJson);
+
     logger.info('Bundle complete.');
   } catch (error) {
     logger.error(`Error during bundle: ${error}`);

@@ -5,4 +5,7 @@ export interface BuildExecutorSchema {
   fileReplacements?: { file: string; with: string }[];
   outputPath: string;
   sourcemaps: boolean;
+  updateBuildableProjectDepsInPackageJson?: boolean;
+  buildableProjectDepsInPackageJsonType: 'dependencies' | 'peerDependencies';
+  project: string;
 }

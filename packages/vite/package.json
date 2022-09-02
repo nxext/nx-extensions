@@ -1,6 +1,6 @@
 {
-  "name": "@nxext/vite",
-  "version": "14.1.0",
+  "name": "@alexkeating/vite-plugin",
+  "version": "14.1.5",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for ViteJs",

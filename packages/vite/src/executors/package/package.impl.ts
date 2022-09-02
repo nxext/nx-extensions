@@ -16,6 +16,9 @@ import baseConfig from '../../../plugins/vite-package';
 import { copyFile } from 'fs/promises';
 import { relative } from 'path';
 import { copyAssets } from '../../utils/assets';
+import { checkDependencies } from '../utils/check-dependencies';
+import { updatePackageJson } from '../utils/update-package-json';
+import { readJsonFile } from '@nrwl/devkit';
 
 async function ensureUserConfig(
   config: UserConfigExport,
@@ -71,13 +74,24 @@ export default async function runExecutor(
   );
 
   await build(buildConfig);
+  console.log(context);
+  const { target, dependencies } = checkDependencies(context);
+  console.log('target');
+  console.log(target);
+  console.log('dependencies');
+  console.log(dependencies);
+  const packageJson = readJsonFile(options.packageJson);
+  console.log('packageJson');
+  console.log(packageJson);
 
-  await copyFile(
-    joinPathFragments(options.packageJson ?? `${projectRoot}/package.json`),
-    joinPathFragments(
-      `${options.outputPath}/${options.packageJson ?? 'package.json'}`
-    )
-  );
+  updatePackageJson(options, context, target, dependencies, packageJson);
+
+  // await copyFile(
+  //   joinPathFragments(options.packageJson ?? `${projectRoot}/package.json`),
+  //   joinPathFragments(
+  //     `${options.outputPath}/${options.packageJson ?? 'package.json'}`
+  //   )
+  // );
 
   if (options.assets) {
     await copyAssets(options.assets, context.root, options.outputPath);

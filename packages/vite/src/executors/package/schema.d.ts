@@ -9,4 +9,7 @@ export interface Schema {
   frameworkConfigFile?: string;
   globals?: Record<string, string>;
   external?: string[];
+  updateBuildableProjectDepsInPackageJson?: boolean;
+  buildableProjectDepsInPackageJsonType: 'dependencies' | 'peerDependencies';
+  project: string;
 }
