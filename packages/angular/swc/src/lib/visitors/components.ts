@@ -105,7 +105,7 @@ export class AngularComponents extends Visitor {
                       return createKeyValueProperty(
                         createIdentifer('template'),
                         createTemplateLiteral([
-                          createTemplateElement(templateContent),
+                          createTemplateElement(templateContent, true),
                         ])
                       );
                     }
