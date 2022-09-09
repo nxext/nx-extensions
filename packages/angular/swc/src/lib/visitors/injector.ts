@@ -13,7 +13,6 @@ import {
   createIdentifer,
   createImportSpecifier,
   createSpan,
-  createStringLiteral,
   isCallExpression,
   isIdentifer,
   isImportDeclaration,
@@ -82,7 +81,7 @@ export class AngularInjector extends Visitor {
           span: createSpan(),
           expression: createCallExpression(createIdentifer('Inject'), [
             {
-              expression: createStringLiteral(
+              expression: createIdentifer(
                 node.param.typeAnnotation.typeAnnotation.typeName.value
               ),
             },
