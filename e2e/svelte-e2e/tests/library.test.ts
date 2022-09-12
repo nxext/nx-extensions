@@ -7,7 +7,7 @@ import { newProject } from '../../e2e/src';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
-    newProject(['@nxext/svelte']);
+    newProject(['@nxext/svelte', '@nxext/vitest']);
   });
 
   describe('Svelte lib', () => {

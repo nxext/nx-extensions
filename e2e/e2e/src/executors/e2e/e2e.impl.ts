@@ -35,10 +35,8 @@ export async function* nxPluginE2EExecutor(
     logger.info(`Verdaccio already running...`);
   }
 
-  if (isCI) {
-    console.log('Authenticating to NPM');
-    login('test', 'test', '4872');
-  }
+  console.log('Authenticating to NPM');
+  login('test', 'test', '4872');
 
   try {
     buildAllPackages();

@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@nxext/vite": "^14.1.0",
-    "@nrwl/devkit": "14.5.2",
+    "@nrwl/devkit": "14.7.4",
     "@nrwl/cypress": "^14.5.0",
     "@nrwl/jest": "^14.5.0",
     "@nxext/vitest": "^14.0.0"
