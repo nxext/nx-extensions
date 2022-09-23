@@ -1,5 +1,4 @@
 {
-  "root": "packages/angular/swc",
   "sourceRoot": "packages/angular/swc/src",
   "projectType": "library",
   "targets": {

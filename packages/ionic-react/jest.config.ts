@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'ionic-react',
   preset: '../../jest.preset.js',
