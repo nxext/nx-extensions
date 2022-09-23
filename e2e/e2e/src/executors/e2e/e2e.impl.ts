@@ -12,7 +12,6 @@ import {
   startVerdaccio,
 } from '../../utils/registry';
 import { cleanupAll, killPort, updatePackageJsonFiles } from '../../utils';
-import * as isCI from 'is-ci';
 import { ensureDirSync } from 'fs-extra';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 
@@ -35,10 +34,8 @@ export async function* nxPluginE2EExecutor(
     logger.info(`Verdaccio already running...`);
   }
 
-  if (isCI) {
-    console.log('Authenticating to NPM');
-    login('test', 'test', '4872');
-  }
+  console.log('Authenticating to Verdaccio');
+  login('test', 'test', '4872');
 
   try {
     buildAllPackages();
