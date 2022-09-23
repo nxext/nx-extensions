@@ -30,13 +30,13 @@
   },
   "peerDependencies": {
     "@nxext/svelte": "^14.0.0",
-    "@nrwl/storybook": "^14.5.0",
-    "@nrwl/cypress": "^14.5.0",
-    "@nrwl/linter": "^14.5.0",
-    "@nrwl/react": "^14.5.0",
-    "@nrwl/angular": "^14.5.0",
-    "@nrwl/jest": "^14.5.0",
-    "@nrwl/workspace": "^14.5.0",
+    "@nrwl/storybook": "14.5.2",
+    "@nrwl/cypress": "14.5.2",
+    "@nrwl/linter": "14.5.2",
+    "@nrwl/react": "14.5.2",
+    "@nrwl/angular": "14.5.2",
+    "@nrwl/jest": "14.5.2",
+    "@nrwl/workspace": "14.5.2",
     "@stencil/core": "^2.17.1"
   },
   "peerDependenciesMeta": {

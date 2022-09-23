@@ -26,7 +26,7 @@
     "@nrwl/devkit": "14.5.2"
   },
   "devDependencies": {
-    "@nrwl/cypress": "^14.5.0",
-    "@nrwl/linter": "^14.5.0"
+    "@nrwl/cypress": "14.5.2",
+    "@nrwl/linter": "14.5.2"
   }
 }
