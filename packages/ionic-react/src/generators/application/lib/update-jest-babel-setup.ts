@@ -36,7 +36,7 @@ function updateTransformProperty(fileContents: string) {
     'Identifier[name=transform] ~ ObjectLiteralExpression > PropertyAssignment:has(StringLiteral[value=babel-jest])';
 
   const TRANSFORMER_STRING =
-    "'^.+\\\\.[tj]sx?$': ['babel-jest', {configFile: path.resolve(__dirname, '.babelrc')}]";
+    "'^.+\\\\.[tj]sx?$': ['babel-jest', { presets: ['@nrwl/react/babel'] }]";
 
   const ast = tsquery.ast(fileContents);
   const transformerExpressionNode = tsquery(ast, JEST_PRESET_AST_QUERY, {
@@ -88,7 +88,7 @@ function updateTransformIgnorePattern(fileContents: string) {
     TRANSFORM_IGNORE_PATTERN_STRING = `,\n${TRANSFORM_IGNORE_PATTERN_STRING}`;
   }
 
-  return `import * as path from 'path';\n\n${fileContents.slice(
+  return `${fileContents.slice(
     0,
     transformEndIndex
   )}${TRANSFORM_IGNORE_PATTERN_STRING}${fileContents.slice(transformEndIndex)}`;
