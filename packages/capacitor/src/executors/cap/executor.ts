@@ -15,7 +15,7 @@ export default async function runExecutor(
 
   const runCommandsOptions: RunCommandsOptions = {
     cwd: projectRootPath,
-    command: `npx cap --package=@capacitor/cli ${cmd}`,
+    command: `npx --package=@capacitor/cli cap ${cmd}`,
     __unparsed__: [],
   };
 

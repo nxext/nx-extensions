@@ -1,4 +1,4 @@
-By default, [Capacitor](https://capacitorjs.com/) is configured for a newly generated project. Typically you execute Capacitor commands with `ionic capacitor ...` or `npx cap --package=@capacitor/cli ...`. However, due to the way that Nx works, the Capacitor commands go through the Nx CLI.
+By default, [Capacitor](https://capacitorjs.com/) is configured for a newly generated project. Typically you execute Capacitor commands with `ionic capacitor ...` or `npx --package=@capacitor/cli cap ...`. However, due to the way that Nx works, the Capacitor commands go through the Nx CLI.
 
 ## Add Native Platform
 
