@@ -1,5 +1,5 @@
 export default {
-  name: 'svelte-e2e',
+  displayName: 'svelte-e2e',
 
   globals: {
     'ts-jest': {

@@ -11,3 +11,4 @@ export { runCreateWorkspace } from './create-workspace';
 export { cleanupAll, cleanupProject } from './cleanup';
 export { getNxVersion, getPublishedVersion } from './get-versions';
 export { updatePackageJsonFiles } from './json-utils';
+export { readNxVersion } from './read-nx-version';

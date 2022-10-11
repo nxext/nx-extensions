@@ -1,12 +1,17 @@
 import {
-  readProjectConfiguration,
   Tree,
+  readProjectConfiguration,
   updateProjectConfiguration,
+  ProjectConfiguration,
 } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function addProject(host: Tree, options: NormalizedSchema) {
-  const projectConfiguration = readProjectConfiguration(host, options.project);
+  const { project: projectName } = options;
+  const projectConfiguration: ProjectConfiguration = readProjectConfiguration(
+    host,
+    projectName
+  );
   const commands = ['add', 'copy', 'open', 'run', 'sync', 'update'];
   const platforms = ['ios', 'android'];
 
@@ -34,5 +39,6 @@ export function addProject(host: Tree, options: NormalizedSchema) {
       };
     }
   }
-  updateProjectConfiguration(host, options.project, projectConfiguration);
+
+  updateProjectConfiguration(host, projectName, projectConfiguration);
 }

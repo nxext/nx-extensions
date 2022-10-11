@@ -1,5 +1,5 @@
 export default {
-  name: 'sveltekit-e2e',
+  displayName: 'sveltekit-e2e',
 
   globals: {
     'ts-jest': {

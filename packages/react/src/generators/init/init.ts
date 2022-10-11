@@ -6,7 +6,6 @@ import {
 } from '@nrwl/devkit';
 import { reactInitGenerator as nxReactInitGenerator } from '@nrwl/react';
 import { viteInitGenerator } from '@nxext/vite';
-import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
 
 import { Schema } from './schema';
 import { addJestPlugin } from './lib/add-jest-plugin';
@@ -39,8 +38,6 @@ export async function reactInitGenerator(host: Tree, schema: Schema) {
 
   const installTask = updateDependencies(host);
   tasks.push(installTask);
-
-  setDefaultCollection(host, '@nxext/react');
 
   if (!schema.skipFormat) {
     await formatFiles(host);
