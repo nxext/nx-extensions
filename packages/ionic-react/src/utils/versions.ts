@@ -1,4 +1,3 @@
-export const nxVersion = '14.5.2';
 export const ionicReactVersion = '^6.2.0';
 export const ionicReactRouterVersion = '^6.2.0';
 export const webVitalsVersion = '^0.2.4';

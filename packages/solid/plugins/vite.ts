@@ -7,7 +7,4 @@ const solidPlugin = require('vite-plugin-solid');
 
 export default defineConfig({
   plugins: [solidPlugin()],
-  build: {
-    polyfillDynamicImport: false,
-  },
 });

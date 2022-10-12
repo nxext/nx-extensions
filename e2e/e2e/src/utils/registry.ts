@@ -69,3 +69,9 @@ export function publishPackages(verdaccioUrl: string) {
     console.log(`📦  ${pkgInfo.name} published...`);
   });
 }
+
+export function login(user: string, password: string, port: string) {
+  execSync(
+    `npx npm-cli-login -u ${user} -p ${password} -e test@domain.test -r http://localhost:${port}`
+  );
+}

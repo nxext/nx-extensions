@@ -6,7 +6,4 @@ const sveltePlugin = require('@sveltejs/vite-plugin-svelte').svelte;
 
 export default defineConfig({
   plugins: [sveltePlugin()],
-  build: {
-    polyfillDynamicImport: false,
-  },
 });
