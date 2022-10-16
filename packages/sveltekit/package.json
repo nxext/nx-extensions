@@ -23,6 +23,6 @@
   "schematics": "./generators.json",
   "dependencies": {
     "@nxext/vite": "^14.1.0",
-    "@nrwl/devkit": "14.8.4"
+    "@nrwl/devkit": "14.8.5"
   }
 }

@@ -9,6 +9,7 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import generator from './generator';
 import { CapacitorGeneratorSchema } from './schema';
+import { inspect } from 'util';
 
 describe('capacitor-project', () => {
   let appTree: Tree;
@@ -26,7 +27,20 @@ describe('capacitor-project', () => {
     appTree = createTreeWithEmptyWorkspace();
     addProjectConfiguration(appTree, options.project, {
       root: projectRoot,
-      targets: {},
+      targets: {
+        build: {
+          executor: '@nrwl/webpack:webpack',
+        },
+        serve: {
+          executor: '@nrwl/webpack:dev-server',
+        },
+        lint: {
+          executor: '@nrwl/linter:eslint',
+        },
+        test: {
+          executor: '@nrwl/jest:jest',
+        },
+      },
     });
   });
 
@@ -75,7 +89,29 @@ describe('capacitor-project', () => {
     expect(capacitorConfigJson).toContain(`../../dist/apps/${options.project}`);
   });
 
-  it('should update workspace.json', async () => {
+  it('should keep defined targets', async () => {
+    await generator(appTree, options);
+    const projectConfiguration = readProjectConfiguration(
+      appTree,
+      options.project
+    );
+    console.log(inspect(projectConfiguration));
+
+    expect(projectConfiguration.targets.build.executor).toEqual(
+      '@nrwl/webpack:webpack'
+    );
+    expect(projectConfiguration.targets.serve.executor).toEqual(
+      '@nrwl/webpack:dev-server'
+    );
+    expect(projectConfiguration.targets.lint.executor).toEqual(
+      '@nrwl/linter:eslint'
+    );
+    expect(projectConfiguration.targets.test.executor).toEqual(
+      '@nrwl/jest:jest'
+    );
+  });
+
+  it('should add targets', async () => {
     await generator(appTree, options);
     const projectConfiguration = readProjectConfiguration(
       appTree,

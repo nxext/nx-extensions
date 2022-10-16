@@ -23,6 +23,6 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
-    "@nrwl/devkit": "14.8.4"
+    "@nrwl/devkit": "14.8.5"
   }
 }
