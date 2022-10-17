@@ -1,5 +1,5 @@
 # path to a directory with all packages
-storage: ../../../tmp/local-registry/storage
+storage: ../tmp/local-registry/storage
 
 listen: localhost:4872
 
