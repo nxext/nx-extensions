@@ -32,8 +32,8 @@
   "dependencies": {
     "@nxext/vite": "^14.1.0",
     "@nrwl/devkit": "14.5.2",
-    "@nrwl/cypress": "^14.5.0",
-    "@nrwl/jest": "^14.5.0",
+    "@nrwl/cypress": "14.5.2",
+    "@nrwl/jest": "14.5.2",
     "@nxext/vitest": "^14.0.0"
   },
   "nx-migrate": {

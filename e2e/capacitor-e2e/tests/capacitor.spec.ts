@@ -17,11 +17,6 @@ const defaultCapacitorProjectOptions: CapacitorGeneratorSchema = {
 };
 
 async function generateApp(options: CapacitorGeneratorSchema) {
-  const packageJson = JSON.parse(readFile('package.json'));
-  packageJson.devDependencies['@nrwl/react'] = '*';
-  updateFile('package.json', JSON.stringify(packageJson));
-  runPackageManagerInstall();
-
   await runNxCommandAsync(`generate @nrwl/react:app ${options.project}`);
   await runNxCommandAsync(
     `generate @nxext/capacitor:capacitor-project --project ${options.project}`
@@ -57,7 +52,7 @@ async function buildAndTestApp(plugin: string) {
 
 describe('capacitor-project e2e', () => {
   beforeAll(() => {
-    newProject(['@nxext/capacitor']);
+    newProject(['@nxext/capacitor'], ['@nrwl/react']);
   });
 
   it(

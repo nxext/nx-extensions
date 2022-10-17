@@ -5,7 +5,8 @@
     "e2e": {
       "executor": "@nxext/e2e:e2e",
       "options": {
-        "jestConfig": "e2e/capacitor-e2e/jest.config.ts"
+        "jestConfig": "e2e/capacitor-e2e/jest.config.ts",
+        "verdaccioConfig": ".verdaccio/config.yml"
       }
     }
   },

@@ -1,6 +1,6 @@
 import { ChildProcess, fork, execSync } from 'child_process';
 import * as glob from 'glob';
-import { logger } from '@nrwl/devkit';
+import { joinPathFragments, logger, workspaceRoot } from '@nrwl/devkit';
 
 export function runRegistry(
   args: string[] = [],
@@ -25,22 +25,17 @@ export function runRegistry(
   });
 }
 
-export async function startVerdaccio() {
+export async function startVerdaccio(verdaccioConfig: string) {
   const port = 4872;
   return runRegistry(
-    [
-      '-c',
-      `${process.cwd()}/tools/scripts/local-registry/config.yml`,
-      '-l',
-      `${port}`,
-    ],
+    ['-c', joinPathFragments(workspaceRoot, verdaccioConfig), '-l', `${port}`],
     {}
   );
 }
 
-export function login(user: string, password: string, port: string) {
+export function addUser(url: string) {
   execSync(
-    `npx npm-cli-login -u ${user} -p ${password} -e test@domain.test -r http://localhost:${port}`
+    `npx npm-cli-adduser -r ${url} -a -u verdacciouser -p passw0rd -e test@domain.test`
   );
 }
 
@@ -54,21 +49,23 @@ export function buildAllPackages() {
   );
 }
 
-export function runNpmPublish(path: string) {
-  const tag = 'latest';
-  const buffer = execSync(`npm publish -tag ${tag} --access public --json`, {
-    cwd: path,
-    stdio: ['pipe', 'pipe', 'pipe'],
-  });
+export function runNpmPublish(path: string, verdaccioUrl: string) {
+  const buffer = execSync(
+    `npm publish -tag latest --access public --json --registry ${verdaccioUrl}`,
+    {
+      cwd: path,
+      stdio: ['pipe', 'pipe', 'pipe'],
+    }
+  );
   return JSON.parse(buffer.toString());
 }
 
-export function publishPackages() {
+export function publishPackages(verdaccioUrl: string) {
   const pkgFiles = glob
     .sync('dist/packages/**/package.json')
     .map((pkgJsonPath) => pkgJsonPath.replace('package.json', ''));
   pkgFiles.forEach((distPath) => {
-    const pkgInfo = runNpmPublish(distPath);
+    const pkgInfo = runNpmPublish(distPath, verdaccioUrl);
     console.log(`📦  ${pkgInfo.name} published...`);
   });
 }

@@ -9,7 +9,7 @@ concurrency:
 jobs:
   main:
     name: Nx Cloud - Main Job
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
+    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
       main-branch-name: 'main'
       environment-variables: |
@@ -25,7 +25,7 @@ jobs:
         yarn nx affected -- --target=e2e --parallel 1
   agents:
     name: Nx Cloud - Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
+    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
     with:
       number-of-agents: 3
       environment-variables: |

@@ -20,4 +20,4 @@ export const cookieParserTypesVersion = '^1.4.2';
 export const corsTypesVersion = '^2.8.12';
 export const expressTypesVersion = '^4.17.13';
 export const methodOverrideTypesVersion = '^0.0.32';
-export const nrwlVersion = '^14.5.0';
+export const nrwlVersion = '14.5.2';

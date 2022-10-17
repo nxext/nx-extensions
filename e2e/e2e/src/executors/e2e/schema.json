@@ -8,6 +8,10 @@
       "type": "string",
       "description": "Jest config file."
     },
+    "verdaccioConfig": {
+      "type": "string",
+      "description": "Verdaccio config file."
+    },
     "tsSpecConfig": {
       "type": "string",
       "description": "The tsconfig file for specs.",

@@ -14749,6 +14749,13 @@ verdaccio-audit@10.2.2:
     https-proxy-agent "5.0.1"
     node-fetch "2.6.7"
 
+verdaccio-auth-memory@^10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/verdaccio-auth-memory/-/verdaccio-auth-memory-10.2.0.tgz#97eaa22fe9f4d0536469a9a16ba33817ba65df3d"
+  integrity sha512-HP8LHdNpHVFO4isL7VR8pNPoRzBlJUKQlNqma5xBPtSRKvKEc9Co3D6Sg2y9NofD8Yr1Q3dMBDDRtx8dxs9xZQ==
+  dependencies:
+    "@verdaccio/commons-api" "10.2.0"
+
 verdaccio-htpasswd@10.5.0:
   version "10.5.0"
   resolved "https://registry.yarnpkg.com/verdaccio-htpasswd/-/verdaccio-htpasswd-10.5.0.tgz#de9ea2967856af765178b08485dc8e83f544a12c"
