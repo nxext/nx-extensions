@@ -1,5 +1,4 @@
 {
-  "root": "packages/angular/nx",
   "sourceRoot": "packages/angular/nx/src",
   "projectType": "library",
   "targets": {

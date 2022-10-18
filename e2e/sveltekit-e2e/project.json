@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "e2e/sveltekit-e2e",
   "sourceRoot": "e2e/sveltekit-e2e/src",
   "targets": {
     "e2e": {
