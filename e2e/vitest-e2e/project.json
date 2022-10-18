@@ -1,5 +1,4 @@
 {
-  "root": "e2e/vitest-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/vitest-e2e/src",
   "targets": {

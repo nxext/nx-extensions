@@ -1,6 +1,5 @@
 {
   "projectType": "application",
-  "root": "e2e/preact-e2e",
   "sourceRoot": "e2e/preact-e2e/src",
   "targets": {
     "e2e": {

@@ -30,9 +30,6 @@
   "affected": {
     "defaultBase": "main"
   },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  },
   "generators": {
     "@nrwl/workspace": {
       "library": {
@@ -93,5 +90,6 @@
     "build": {
       "dependsOn": ["^build"]
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }
