@@ -16,11 +16,20 @@ uplinks:
     fail_timeout: 10m
     timeout: 600s
     cache: false
+  yarn:
+    url: https://registry.yarnpkg.com
+    max_fails: 100
+    maxage: 30m
+    fail_timeout: 10m
+    timeout: 600s
+    cache: false
 
 packages:
-  '@nxext/*':
+  '@*/*':
     access: $all
     publish: $all
+    unpublish: $all
+    proxy: npmjs
 
   '**':
     access: $all
