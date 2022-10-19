@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "scripts": {
-    "serve": "vuepress dev",
-    "build": "vuepress build"
+    "serve": "vitepress dev",
+    "build": "vitepress build"
   }
 }

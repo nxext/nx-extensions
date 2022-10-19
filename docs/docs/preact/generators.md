@@ -1,6 +1,6 @@
-## @nxext/ts.ed:application
+## @nxext/preact:application
 
-Ts.ED application schematic
+preact application schematic
 
 ### Usage
 
@@ -17,7 +17,7 @@ By default, Nx will search for `application` in the default collection provision
 You can specify the collection explicitly as follows:
 
 ```bash
-nx g @nxext/ts.ed:application ...
+nx g @nxext/preact:application ...
 ```
 
 Show what will be generated without writing to disk:
@@ -76,6 +76,14 @@ Type: `number`
 
 Port to listen on.
 
+#### skipFormat
+
+Default: `false`
+
+Type: `boolean`
+
+Skip formatting files.
+
 #### tags
 
 Alias(es): t
@@ -94,9 +102,9 @@ Possible values: `jest`, `none`
 
 Test runner to use for unit tests.
 
-## @nxext/ts.ed:library
+## @nxext/preact:library
 
-Ts.ED library schematic
+preact library schematic
 
 ### Usage
 
@@ -113,7 +121,7 @@ By default, Nx will search for `library` in the default collection provisioned i
 You can specify the collection explicitly as follows:
 
 ```bash
-nx g @nxext/ts.ed:library ...
+nx g @nxext/preact:library ...
 ```
 
 Show what will be generated without writing to disk:
@@ -198,6 +206,58 @@ Default: `jest`
 
 Type: `string`
 
-Possible values: `jest`, `vitest`, `none`
+Possible values: `jest`, `none`
+
+Test runner to use for unit tests.
+
+## @nxext/preact:component
+
+Add component
+
+### Usage
+
+```bash
+nx generate component ...
+```
+
+```bash
+nx g c ... # same
+```
+
+By default, Nx will search for `component` in the default collection provisioned in nx.json.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/preact:component ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g component ... --dry-run
+```
+
+### Options
+
+#### name (_**required**_)
+
+Type: `string`
+
+#### project (_**required**_)
+
+Alias(es): p
+
+Type: `string`
+
+Project where the component is generated
+
+#### unitTestRunner
+
+Default: `jest`
+
+Type: `string`
+
+Possible values: `jest`, `none`
 
 Test runner to use for unit tests.

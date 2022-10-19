@@ -2,4 +2,4 @@
 
 The goal of `@nxext/ionic-react` is to enabled developers to create and maintain cross-platform applications in an Nx monorepo with Ionic and React. The ability to develop cross-platform applications from a single codebase along with a monorepo that enables easy and effective sharing can be a powerful combination.
 
-Updates to `@nxext/ionic-react` will include migrations that will update the dependencies included with this plugin, as well as any code migrations if possible. For more information on how to properly upgrade this plugin, visit the [upgrades](../nxext/upgrades) documentation.
+Updates to `@nxext/ionic-react` will include migrations that will update the dependencies included with this plugin, as well as any code migrations if possible.

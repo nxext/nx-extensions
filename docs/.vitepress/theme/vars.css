@@ -1,0 +1,9 @@
+:root {
+  --vp-c-brand: rgb(215, 110, 5);
+  --vp-c-brand-light: rgb(205, 136, 86);
+  --vp-button-brand-bg: rgb(205, 110, 5);
+  --vp-button-brand-active-bg: rgb(205, 110, 5);
+  --vp-button-brand-hover-bg: rgb(205, 110, 5);
+  --vp-button-brand-hover-border: rgb(205, 110, 5);
+  --vp-button-brand-active-border: rgb(205, 110, 5);
+}
