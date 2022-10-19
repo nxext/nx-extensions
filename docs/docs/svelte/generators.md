@@ -1,6 +1,6 @@
-## @nxext/ts.ed:application
+## @nxext/svelte:application
 
-Ts.ED application schematic
+Svelte application schematic
 
 ### Usage
 
@@ -17,7 +17,7 @@ By default, Nx will search for `application` in the default collection provision
 You can specify the collection explicitly as follows:
 
 ```bash
-nx g @nxext/ts.ed:application ...
+nx g @nxext/svelte:application ...
 ```
 
 Show what will be generated without writing to disk:
@@ -76,6 +76,14 @@ Type: `number`
 
 Port to listen on.
 
+#### skipFormat
+
+Default: `false`
+
+Type: `boolean`
+
+Skip formatting files.
+
 #### tags
 
 Alias(es): t
@@ -86,17 +94,17 @@ Add tags to the project (used for linting)
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `jest`, `vitest`, `none`
 
 Test runner to use for unit tests.
 
-## @nxext/ts.ed:library
+## @nxext/svelte:library
 
-Ts.ED library schematic
+Svelte library schematic
 
 ### Usage
 
@@ -113,7 +121,7 @@ By default, Nx will search for `library` in the default collection provisioned i
 You can specify the collection explicitly as follows:
 
 ```bash
-nx g @nxext/ts.ed:library ...
+nx g @nxext/svelte:library ...
 ```
 
 Show what will be generated without writing to disk:
@@ -194,10 +202,130 @@ Add tags to the project (used for linting)
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
 Possible values: `jest`, `vitest`, `none`
 
 Test runner to use for unit tests.
+
+## @nxext/svelte:component
+
+Add component
+
+### Usage
+
+```bash
+nx generate component ...
+```
+
+```bash
+nx g c ... # same
+```
+
+By default, Nx will search for `component` in the default collection provisioned in nx.json.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/svelte:component ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g component ... --dry-run
+```
+
+### Options
+
+#### name (_**required**_)
+
+Type: `string`
+
+#### project (_**required**_)
+
+Alias(es): p
+
+Type: `string`
+
+Project where the component is generated
+
+#### unitTestRunner
+
+Default: `jest`
+
+Type: `string`
+
+Possible values: `jest`, `none`
+
+Test runner to use for unit tests.
+
+## @nxext/svelte:storybook-configuration
+
+storybook-configuration generator
+
+### Usage
+
+```bash
+nx generate storybook-configuration ...
+```
+
+By default, Nx will search for `storybook-configuration` in the default collection provisioned in nx.json.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/svelte:storybook-configuration ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g storybook-configuration ... --dry-run
+```
+
+### Options
+
+#### name (_**required**_)
+
+Type: `string`
+
+Library or application name
+
+#### configureCypress
+
+Type: `boolean`
+
+Run the cypress-configure generator
+
+#### cypressDirectory
+
+Type: `string`
+
+A directory where the Cypress project will be placed. Added at root by default.
+
+#### js
+
+Default: `false`
+
+Type: `boolean`
+
+Generate JavaScript files rather than TypeScript files
+
+#### linter
+
+Default: `eslint`
+
+Type: `string`
+
+Possible values: `eslint`, `tslint`, `none`
+
+The tool to use for running lint checks.
+
+#### standaloneConfig
+
+Type: `boolean`
+
+Split the project configuration into `<projectRoot>/project.json` rather than including it inside workspace.json

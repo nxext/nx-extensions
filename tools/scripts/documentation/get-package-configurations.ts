@@ -9,8 +9,6 @@ export interface Configuration {
   root: string;
   source: string;
   output: string;
-  builderOutput: string;
-  schematicOutput: string;
   hasBuilders: boolean;
   hasSchematics: boolean;
 }
@@ -46,8 +44,6 @@ export function getPackageConfigurations(
         root: folderPath,
         source: path.join(folderPath, '/src'),
         output,
-        builderOutput: path.join(output, 'executors'),
-        schematicOutput: path.join(output, 'generators'),
         hasBuilders: itemList.includes('executors.json'),
         hasSchematics: itemList.includes('generators.json'),
       };

@@ -8,4 +8,4 @@ Capacitor is a spiritual successor to Apache Cordova and Adobe PhoneGap, with in
 
 To learn more about Capacitor, visit https://capacitorjs.com/docs
 
-Updates to `@nxext/capacitor` will include migrations that will update the dependencies included with this plugin, as well as any code migrations if possible. For more information on how to properly upgrade this plugin, visit the [upgrades](../nxext/upgrades) documentation.
+Updates to `@nxext/capacitor` will include migrations that will update the dependencies included with this plugin, as well as any code migrations if possible.

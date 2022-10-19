@@ -44,11 +44,10 @@ function readPackageName(root: string) {
   return readJsonSync(join(root, 'package.json')).name;
 }
 
-function generateSchematicList(
+function generateBuilderList(
   config: Configuration,
   flattener: SchemaFlattener
 ): Promise<FileSystemSchematicJsonDescription>[] {
-  removeSync(config.builderOutput);
   const builderCollection = readExecutorsJson(config.root);
   const packageName = readPackageName(config.root);
 
@@ -165,58 +164,32 @@ export async function generateExecutorsDocumentation() {
 
   const { configs } = getPackageConfigurations();
 
-  const routes = await Promise.all(
+  await Promise.all(
     configs
       .filter((item) => item.hasBuilders)
       .map(async (config) => {
         const buildersList = await Promise.all(
-          generateSchematicList(config, flattener)
+          generateBuilderList(config, flattener)
         );
 
         const markdownList = buildersList
           .filter((b) => b != null && !b['hidden'])
           .map((b) => generateTemplate(b));
 
-        await Promise.all(
-          markdownList.map((template) =>
-            generateMarkdownFile(config.builderOutput, {
-              name: template.name,
-              template: template.template,
-            })
-          )
-        );
+        await generateMarkdownFile(config.output, {
+          name: 'executors',
+          template: markdownList
+            .map((template) => template.template)
+            .join('\n'),
+        });
 
         console.log(
           ` - Documentation for ${chalk.magenta(
             relative(process.cwd(), config.root)
-          )} generated at ${chalk.grey(
-            relative(process.cwd(), config.builderOutput)
-          )}`
+          )} generated at ${chalk.grey(relative(process.cwd(), config.output))}`
         );
-
-        return {
-          [config.name]: markdownList.map((template) => {
-            const filePath = join(config.builderOutput, `${template.name}`);
-            return {
-              text: `@nxext/${config.name}:${template.name}`,
-              link: createDocLink(filePath),
-            };
-          }),
-        };
       })
   );
-
-  const mergedRoutes = Object.assign({}, ...routes);
-  await generateTsFile(
-    join(__dirname, '../../../docs', 'docs', 'executors.ts'),
-    mergedRoutes
-  ).then(() => {
-    console.log(
-      `${chalk.green('✓')} Generated executors.ts at ${chalk.grey(
-        `docs/docs/executors.ts`
-      )}`
-    );
-  });
 
   console.log(`\n${chalk.green('✓')} Generated Documentation for Executors`);
 }

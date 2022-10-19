@@ -43,7 +43,6 @@ function generateGeneratorList(
 ): Promise<FileSystemSchematicJsonDescription>[] {
   const schematicCollectionFilePath = path.join(config.root, 'generators.json');
   const schematicCollectionFile = readJsonSync(schematicCollectionFilePath);
-  removeSync(config.schematicOutput);
   const schematicCollection =
     schematicCollectionFile.schematics || schematicCollectionFile.generators;
   return Object.keys(schematicCollection).map((schematicName) => {
@@ -179,7 +178,7 @@ export async function generateGeneratorsDocumentation() {
 
   const { configs } = getPackageConfigurations();
 
-  const routes = await Promise.all(
+  await Promise.all(
     configs
       .filter((item) => item.hasSchematics)
       .map(async (config) => {
@@ -191,43 +190,22 @@ export async function generateGeneratorsDocumentation() {
           .filter((s) => s != null && !s['hidden'])
           .map((s_1) => generateTemplate(s_1));
 
-        await Promise.all(
-          markdownList.map((template) =>
-            generateMarkdownFile(config.schematicOutput, template)
-          )
-        );
+        await generateMarkdownFile(config.output, {
+          name: 'generators',
+          template: markdownList
+            .map((template) => template.template)
+            .join('\n'),
+        });
 
         console.log(
           ` - Documentation for ${chalk.magenta(
             path.relative(process.cwd(), config.root)
           )} generated at ${chalk.grey(
-            path.relative(process.cwd(), config.schematicOutput)
+            path.relative(process.cwd(), config.output)
           )}`
         );
-
-        return {
-          [config.name]: markdownList.map((template) => {
-            const filePath = join(config.schematicOutput, `${template.name}`);
-            return {
-              text: `@nxext/${config.name}:${template.name}`,
-              link: createDocLink(filePath),
-            };
-          }),
-        };
       })
   );
-
-  const mergedRoutes = Object.assign({}, ...routes);
-  await generateTsFile(
-    join(__dirname, '../../../docs', 'docs', 'generators.ts'),
-    mergedRoutes
-  ).then(() => {
-    console.log(
-      `${chalk.green('✓')} Generated generators.ts at ${chalk.grey(
-        `docs/docs/generators.ts`
-      )}`
-    );
-  });
 
   console.log(`\n${chalk.green('✓')} Generated Documentation for Generators`);
 }
