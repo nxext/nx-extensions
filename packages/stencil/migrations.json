@@ -1,12 +1,5 @@
 {
-  "generators": {
-    "update-13-1-0": {
-      "version": "13.1.0",
-      "description": "update-13-1-0",
-      "cli": "nx",
-      "implementation": "./src/migrations/update-13-1-0/update-13-1-0"
-    }
-  },
+  "generators": {},
   "packageJsonUpdates": {
     "1.1.0": {
       "version": "1.1.0",

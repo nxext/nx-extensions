@@ -1,5 +1,5 @@
 export default {
-  name: 'preact-e2e',
+  displayName: 'preact-e2e',
 
   globals: {
     'ts-jest': {

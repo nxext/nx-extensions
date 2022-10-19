@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'ionic-react',
   preset: '../../jest.preset.js',
@@ -9,6 +10,6 @@ module.exports = {
   transform: {
     '^.+\\.[tj]s$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'js', 'html'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html', 'json'],
   coverageDirectory: '../../coverage/packages/ionic-react',
 };

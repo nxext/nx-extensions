@@ -1,10 +1,4 @@
-import {
-  readFile,
-  runNxCommandAsync,
-  runPackageManagerInstall,
-  uniq,
-  updateFile,
-} from '@nrwl/nx-plugin/testing';
+import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { CapacitorGeneratorSchema } from '@nxext/capacitor';
 import { newProject } from '@nxext/e2e';
 
@@ -15,13 +9,6 @@ const defaultCapacitorProjectOptions: CapacitorGeneratorSchema = {
   appId: 'test-id',
   skipFormat: true,
 };
-
-async function generateApp(options: CapacitorGeneratorSchema) {
-  await runNxCommandAsync(`generate @nrwl/react:app ${options.project}`);
-  await runNxCommandAsync(
-    `generate @nxext/capacitor:capacitor-project --project ${options.project}`
-  );
-}
 
 async function buildAndTestApp(plugin: string) {
   const buildResults = await runNxCommandAsync(`build ${plugin}`);
@@ -64,7 +51,12 @@ describe('capacitor-project e2e', () => {
         project: plugin,
       };
 
-      await generateApp(options);
+      await runNxCommandAsync(
+        `generate @nrwl/react:app ${options.project} --routing=false`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/capacitor:capacitor-project --project ${options.project}`
+      );
       await buildAndTestApp(plugin);
     },
     asyncTimeout
