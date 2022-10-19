@@ -1,5 +1,5 @@
 export default {
-  name: 'stencil-e2e',
+  displayName: 'stencil-e2e',
 
   globals: {
     'ts-jest': {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'capacitor',
   preset: '../../jest.preset.js',

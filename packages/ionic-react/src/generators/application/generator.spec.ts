@@ -47,6 +47,18 @@ describe('application', () => {
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
+    appTree.write(
+      'package.json',
+      `
+       {
+         "name": "test-name",
+         "dependencies": {},
+         "devDependencies": {
+           "@nrwl/workspace": "0.0.0"
+         }
+       }
+     `
+    );
   });
 
   it('should add dependencies to package.json', async () => {
@@ -181,25 +193,23 @@ describe('application', () => {
   describe('--standaloneConfig', () => {
     describe('true', () => {
       it('should generate package.json', async () => {
-        appTree = createTreeWithEmptyWorkspace(2);
         await applicationGenerator(appTree, {
           ...options,
           standaloneConfig: true,
         });
 
-        expect(appTree.exists(`${projectRoot}/project.json`)).toBeDefined();
+        expect(appTree.exists(`${projectRoot}/package.json`)).toBeDefined();
       });
     });
 
     describe('false', () => {
       it('should not generate package.json', async () => {
-        appTree = createTreeWithEmptyWorkspace(2);
         await applicationGenerator(appTree, {
           ...options,
           standaloneConfig: false,
         });
 
-        expect(appTree.exists(`${projectRoot}/project.json`)).toBeFalsy();
+        expect(appTree.exists(`${projectRoot}/package.json`)).toBeFalsy();
       });
     });
   });

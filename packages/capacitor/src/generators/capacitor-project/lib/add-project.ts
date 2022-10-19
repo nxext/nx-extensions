@@ -1,6 +1,6 @@
 import {
-  readProjectConfiguration,
   Tree,
+  readProjectConfiguration,
   updateProjectConfiguration,
 } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';

@@ -1,5 +1,5 @@
 export default {
-  name: 'solid-e2e',
+  displayName: 'solid-e2e',
 
   globals: {
     'ts-jest': {
