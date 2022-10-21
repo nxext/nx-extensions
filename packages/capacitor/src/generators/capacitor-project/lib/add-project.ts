@@ -6,11 +6,11 @@ import {
 import { NormalizedSchema } from '../schema';
 
 export function addProject(host: Tree, options: NormalizedSchema) {
-  const projectConfiguration = readProjectConfiguration(host, options.project);
+  const projectConfig = readProjectConfiguration(host, options.project);
   const commands = ['add', 'copy', 'open', 'run', 'sync', 'update'];
   const platforms = ['ios', 'android'];
 
-  projectConfiguration.targets.cap = {
+  projectConfig.targets.cap = {
     executor: '@nxext/capacitor:cap',
     options: {
       cmd: '--help',
@@ -20,7 +20,7 @@ export function addProject(host: Tree, options: NormalizedSchema) {
   let command: string, platform: string;
 
   for (command of commands) {
-    projectConfiguration.targets[command] = {
+    projectConfig.targets[command] = {
       executor: `@nxext/capacitor:cap`,
       options: {
         cmd: `${command}`,
@@ -29,10 +29,10 @@ export function addProject(host: Tree, options: NormalizedSchema) {
     };
 
     for (platform of platforms) {
-      projectConfiguration.targets[command].configurations[platform] = {
+      projectConfig.targets[command].configurations[platform] = {
         cmd: `${command} ${platform}`,
       };
     }
   }
-  updateProjectConfiguration(host, options.project, projectConfiguration);
+  updateProjectConfiguration(host, options.project, projectConfig);
 }

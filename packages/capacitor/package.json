@@ -28,6 +28,6 @@
     "@nrwl/devkit": "14.8.5"
   },
   "peerDependencies": {
-    "@nrwl/workspace": "^14.8.5"
+    "@nrwl/workspace": "14.8.5"
   }
 }
