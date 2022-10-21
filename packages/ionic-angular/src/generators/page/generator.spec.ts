@@ -23,6 +23,18 @@ describe('page generator', () => {
 
   beforeEach(async () => {
     appTree = createTreeWithEmptyWorkspace();
+    appTree.write(
+      'package.json',
+      `
+       {
+         "name": "test-name",
+         "dependencies": {},
+         "devDependencies": {
+           "@nrwl/workspace": "0.0.0"
+         }
+       }
+     `
+    );
     await applicationGenerator(appTree, projectOptions);
   });
 

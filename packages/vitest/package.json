@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vitest",
-  "version": "14.0.2",
+  "version": "14.1.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vitest",
