@@ -3,12 +3,11 @@ import { StorybookConfigureSchema } from '../schema';
 import { join } from 'path';
 
 /**
- * When adding storybook we need to inform TSLint or ESLint
+ * When adding storybook we need to inform ESLint
  * of the additional tsconfig.json file which will be the only tsconfig
  * which includes *.stories files.
  *
- * For TSLint this is done via the builder config, for ESLint this is
- * done within the .eslintrc.json file.
+ * For ESLint this is done within the .eslintrc.json file.
  */
 export function updateLintConfig(tree: Tree, schema: StorybookConfigureSchema) {
   const { name: projectName } = schema;

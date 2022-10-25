@@ -54,7 +54,7 @@
 
 - update application starter templates
 - support ESLint when generating applications
-- generate applications with ESLint by default instead of TSLint
+- generate applications with ESLint by default
 - support `jest` as a unit test config for the application schematic
 
 # 11.0.2

@@ -9,6 +9,8 @@ const defaultCapacitorProjectOptions: CapacitorGeneratorSchema = {
 };
 
 describe('capacitor-project e2e', () => {
+  const asyncTimeout = 600_000;
+
   const plugin = uniq('capacitor');
   const options: CapacitorGeneratorSchema = {
     ...defaultCapacitorProjectOptions,
@@ -24,7 +26,7 @@ describe('capacitor-project e2e', () => {
     await runNxCommandAsync(
       `generate @nxext/capacitor:capacitor-project --project ${options.project}`
     );
-  });
+  }, asyncTimeout);
 
   it('should build successfully', async () => {
     const buildResults = await runNxCommandAsync(`build ${plugin}`);

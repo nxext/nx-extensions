@@ -23,10 +23,10 @@
   "main": "./src/index.js",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nrwl/devkit": "14.8.5"
+    "@nrwl/devkit": "15.0.2"
   },
   "devDependencies": {
-    "@nrwl/cypress": "^14.8.5",
-    "@nrwl/linter": "^14.8.5"
+    "@nrwl/cypress": "^15.0.2",
+    "@nrwl/linter": "^15.0.2"
   }
 }

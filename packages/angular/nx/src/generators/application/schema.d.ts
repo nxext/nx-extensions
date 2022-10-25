@@ -2,8 +2,6 @@ import { Linter } from '@nrwl/linter';
 import { UnitTestRunner } from '@nrwl/angular/src/utils/test-runners';
 import type { Styles } from '@nrwl/angular/src/generators/utils/types';
 
-type AngularLinter = Exclude<Linter, Linter.TsLint>;
-
 export interface Schema {
   name: string;
   inlineStyle?: boolean;
@@ -15,7 +13,7 @@ export interface Schema {
   skipTests?: boolean;
   directory?: string;
   tags?: string;
-  linter?: AngularLinter;
+  linter?: Linter;
   unitTestRunner?: UnitTestRunner;
   backendProject?: string;
   strict?: boolean;

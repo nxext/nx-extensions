@@ -12,17 +12,14 @@ import {
   offsetFromRoot,
   TargetConfiguration,
   Tree,
-  updateJson,
+  updateJson
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import init from '../init/init';
 import { Linter, lintProjectGenerator } from '@nrwl/linter';
 import { jestProjectGenerator } from '@nrwl/jest';
 import { viteVersion } from '../../utils/version';
-import {
-  createViteEslintJson,
-  extraEslintDependencies,
-} from '../../utils/lint';
+import { createViteEslintJson, extraEslintDependencies } from '../../utils/lint';
 
 export interface NormalizedSchema extends Schema {
   name: string;
@@ -107,10 +104,6 @@ async function addLinting(host: Tree, options: NormalizedSchema) {
     ],
     skipFormat: true,
   });
-
-  if (options.linter === Linter.TsLint) {
-    return;
-  }
 
   const viteEslintJson = createViteEslintJson(
     options.projectRoot,
@@ -222,7 +215,7 @@ function normalizeOptions(host: Tree, options: Schema): NormalizedSchema {
 
   const importPath = options.importPath || `@${npmScope}/${projectDirectory}`;
 
-  const normalized: NormalizedSchema = {
+  return {
     ...options,
     fileName,
     name: projectName,
@@ -231,8 +224,6 @@ function normalizeOptions(host: Tree, options: Schema): NormalizedSchema {
     parsedTags,
     importPath,
   };
-
-  return normalized;
 }
 
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {

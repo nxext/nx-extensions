@@ -24,7 +24,7 @@
         "jestConfig": "packages/preact/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/packages/preact"]
+      "outputs": ["{workspaceRoot}/coverage/packages/preact"]
     },
     "build": {
       "executor": "@nrwl/js:tsc",

@@ -15,7 +15,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/sveltekit"],
+      "outputs": ["{workspaceRoot}/coverage/packages/sveltekit"],
       "options": {
         "jestConfig": "packages/sveltekit/jest.config.ts",
         "passWithNoTests": true
