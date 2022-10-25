@@ -171,7 +171,7 @@
 
 ## Features
 
-- generate applications with ESLint instead of TSLint by default
+- generate applications with ESLint by default
 
 # 2.0.0
 

@@ -16,7 +16,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/vitest"],
+      "outputs": ["{workspaceRoot}/coverage/packages/vitest"],
       "options": {
         "jestConfig": "packages/vitest/jest.config.ts",
         "passWithNoTests": true

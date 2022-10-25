@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "title": "Add executor",
@@ -8,10 +10,16 @@
     "package": {
       "description": "Package you want to install",
       "type": "string",
-      "enum": ["tailwindcss", "mdsvex", "graphql", "postcss", "bulma", "windicss", "firebase-hosting"]
+      "enum": [
+        "tailwindcss",
+        "mdsvex",
+        "graphql",
+        "postcss",
+        "bulma",
+        "windicss",
+        "firebase-hosting"
+      ]
     }
   },
-  "required": [
-    "package"
-  ]
+  "required": ["package"]
 }

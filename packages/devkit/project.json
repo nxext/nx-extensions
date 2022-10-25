@@ -9,7 +9,7 @@
         "jestConfig": "packages/devkit/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/packages/devkit"]
+      "outputs": ["{workspaceRoot}/coverage/packages/devkit"]
     },
     "build": {
       "executor": "@nrwl/js:tsc",

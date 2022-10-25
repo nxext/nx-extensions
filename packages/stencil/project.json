@@ -26,7 +26,7 @@
         "jestConfig": "packages/stencil/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/packages/stencil"]
+      "outputs": ["{workspaceRoot}/coverage/packages/stencil"]
     },
     "build": {
       "executor": "@nrwl/js:tsc",

@@ -50,7 +50,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/capacitor"],
+      "outputs": ["{workspaceRoot}/coverage/packages/capacitor"],
       "options": {
         "jestConfig": "packages/capacitor/jest.config.ts",
         "passWithNoTests": true

@@ -24,7 +24,7 @@
         "jestConfig": "packages/solid/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/packages/solid"]
+      "outputs": ["{workspaceRoot}/coverage/packages/solid"]
     },
     "build": {
       "executor": "@nrwl/js:tsc",
