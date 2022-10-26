@@ -13,7 +13,7 @@ export default async function runExecutor(
   const { startVitest } = await (Function(
     'return import("vitest/node")'
   )() as Promise<typeof import('vitest/node')>);
-  const result = await startVitest('test', [], {
+  const result = await startVitest(options.vitestMode, [], {
     ...options,
     root: projectRoot,
   } as any);

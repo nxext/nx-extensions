@@ -19,3 +19,11 @@ Pass the build if no tests are found
 Type: `string`
 
 Pattern to match test names
+
+#### vitestMode
+
+Default: `test`
+
+Type: `string`
+
+Possible values: `test`, `benchmark`

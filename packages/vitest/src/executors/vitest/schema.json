@@ -15,6 +15,11 @@
     "testNamePattern": {
       "type": "string",
       "description": "Pattern to match test names"
+    },
+    "vitestMode": {
+      "type": "string",
+      "enum": ["test", "benchmark"],
+      "default": "test"
     }
   },
   "required": []
