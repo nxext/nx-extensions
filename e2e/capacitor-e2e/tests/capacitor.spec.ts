@@ -2,29 +2,19 @@ import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { CapacitorGeneratorSchema } from '@nxext/capacitor';
 import { newProject } from '@nxext/e2e';
 
-const defaultCapacitorProjectOptions: CapacitorGeneratorSchema = {
-  project: 'test-app',
-  appId: 'test-id',
-  skipFormat: true,
-};
-
 describe('capacitor-project e2e', () => {
   const asyncTimeout = 600_000;
 
   const plugin = uniq('capacitor');
-  const options: CapacitorGeneratorSchema = {
-    ...defaultCapacitorProjectOptions,
-    project: plugin,
-  };
 
   beforeAll(async () => {
     newProject(['@nxext/capacitor'], ['@nrwl/react']);
 
     await runNxCommandAsync(
-      `generate @nrwl/react:app ${options.project} --routing=false`
+      `generate @nrwl/react:app ${plugin} --routing=false`
     );
     await runNxCommandAsync(
-      `generate @nxext/capacitor:capacitor-project --project ${options.project}`
+      `generate @nxext/capacitor:capacitor-project --project ${plugin}`
     );
   }, asyncTimeout);
 
