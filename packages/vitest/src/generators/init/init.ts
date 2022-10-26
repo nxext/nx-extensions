@@ -38,6 +38,7 @@ function updateDependencies(host: Tree) {
     vitest: vitestVersion,
     c8: c8Version,
     '@vitest/ui': vitestUiVersion,
+    'vitest-preview': 'latest',
   };
 
   return addDependenciesToPackageJson(host, {}, devDeps);
@@ -55,6 +56,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    css: true
   },
 })
 `
