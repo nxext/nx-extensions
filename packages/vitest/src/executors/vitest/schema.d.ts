@@ -4,4 +4,5 @@ export interface VitestExecutorOptions {
   coverage?: boolean;
   ui?: boolean;
   vitestConfig: string;
+  vitestMode: 'test' | 'benchmark';
 }
