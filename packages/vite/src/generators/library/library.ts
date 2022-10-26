@@ -12,14 +12,17 @@ import {
   offsetFromRoot,
   TargetConfiguration,
   Tree,
-  updateJson
+  updateJson,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import init from '../init/init';
 import { Linter, lintProjectGenerator } from '@nrwl/linter';
 import { jestProjectGenerator } from '@nrwl/jest';
 import { viteVersion } from '../../utils/version';
-import { createViteEslintJson, extraEslintDependencies } from '../../utils/lint';
+import {
+  createViteEslintJson,
+  extraEslintDependencies,
+} from '../../utils/lint';
 
 export interface NormalizedSchema extends Schema {
   name: string;

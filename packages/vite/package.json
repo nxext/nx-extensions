@@ -23,14 +23,14 @@
   "executors": "./executors.json",
   "generators": "./generators.json",
   "dependencies": {
-    "@nrwl/devkit": "15.0.2",
+    "@nrwl/devkit": "15.0.3",
     "rxjs": "^7.0.0",
     "rxjs-for-await": "1.0.0",
     "tsconfig-paths": "^3.14.1",
     "globrex": "^0.1.2"
   },
   "peerDependencies": {
-    "@nrwl/workspace": "^15.0.2",
+    "@nrwl/workspace": "^15.0.3",
     "vite": "^3.0.5"
   },
   "nx-migrations": {
