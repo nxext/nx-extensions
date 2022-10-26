@@ -50,7 +50,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 
@@ -198,7 +198,7 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`, `tslint`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 
