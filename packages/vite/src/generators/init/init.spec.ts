@@ -1,9 +1,4 @@
-import {
-  addDependenciesToPackageJson,
-  NxJsonConfiguration,
-  readJson,
-  Tree,
-} from '@nrwl/devkit';
+import { addDependenciesToPackageJson, readJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 import { viteVersion } from '../../utils/version';
@@ -29,6 +24,14 @@ describe('init', () => {
   });
 
   it('should add dependencies', async () => {
+    await viteInitGenerator(tree, {});
+
+    const packageJson = readJson(tree, 'package.json');
+    expect(packageJson.dependencies['vite']).toBeUndefined();
+    expect(packageJson.devDependencies['vite']).toBeDefined();
+  });
+
+  it('should add jest', async () => {
     addDependenciesToPackageJson(
       tree,
       {
@@ -36,19 +39,23 @@ describe('init', () => {
       },
       {}
     );
-    await viteInitGenerator(tree, {});
+    await viteInitGenerator(tree, { unitTestRunner: 'jest' });
 
     const packageJson = readJson(tree, 'package.json');
-    expect(packageJson.dependencies['vite']).toBeUndefined();
-    expect(packageJson.dependencies['tslib']).toBeDefined();
-    expect(packageJson.devDependencies['vite']).toBeDefined();
+    expect(packageJson.devDependencies['jest']).toBeDefined();
   });
 
-  describe('defaultCollection', () => {
-    it('should be set if none was set before', async () => {
-      await viteInitGenerator(tree, {});
-      const nxJson = readJson<NxJsonConfiguration>(tree, 'nx.json');
-      expect(nxJson.cli.defaultCollection).toEqual('@nxext/vite');
-    });
+  it('should add vitest', async () => {
+    addDependenciesToPackageJson(
+      tree,
+      {
+        vite: viteVersion,
+      },
+      {}
+    );
+    await viteInitGenerator(tree, { unitTestRunner: 'vitest' });
+
+    const packageJson = readJson(tree, 'package.json');
+    expect(packageJson.devDependencies['vitest']).toBeDefined();
   });
 });

@@ -23,6 +23,7 @@
   "executors": "./executors.json",
   "generators": "./generators.json",
   "dependencies": {
+    "@nxext/vitest": "^14.1.0",
     "@nrwl/devkit": "15.0.3",
     "rxjs-for-await": "1.0.0",
     "tsconfig-paths": "^4.1.0",

@@ -7,7 +7,7 @@ export interface Schema {
   skipFormat: boolean;
   tags?: string;
   pascalCaseFiles?: boolean;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'vitest' | 'jest' | 'none';
   linter: Linter;
   publishable?: boolean;
   buildable?: boolean;
