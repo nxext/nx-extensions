@@ -21,7 +21,7 @@ export function normalizeOptions(
   const fileName = options.pascalCaseFiles ? 'App' : 'app';
 
   options.supportJSX = options.supportJSX ?? true;
-  options.unitTestRunner = options.unitTestRunner ?? 'jest';
+  options.unitTestRunner = options.unitTestRunner ?? 'vitest';
 
   return {
     ...options,

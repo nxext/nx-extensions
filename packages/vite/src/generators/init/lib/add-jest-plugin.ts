@@ -4,26 +4,26 @@ import {
   Tree,
   addDependenciesToPackageJson,
 } from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from './util';
 
-export function addJestPlugin(tree: Tree): GeneratorCallback {
-  const tasks: GeneratorCallback[] = [];
-  const hasNrwlJestDependency: boolean = hasNxPackage(tree, '@nrwl/jest');
-
-  if (!hasNrwlJestDependency) {
-    const nxVersion = readNxVersion(tree);
-
-    const installTask = addDependenciesToPackageJson(
-      tree,
-      {},
-      { '@nrwl/jest': nxVersion }
-    );
-    tasks.push(installTask);
+export function addJestPlugin(tree: Tree, options): GeneratorCallback {
+  if (options.unitTestRunner !== 'jest') {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return () => {};
   }
 
-  const jestTask = jestInitGenerator(tree, {});
-  tasks.push(jestTask);
+  const hasNrwlJestDependency: boolean = hasNxPackage(tree, '@nrwl/jest');
+  const nxVersion = readNxVersion(tree);
 
-  return runTasksInSerial(...tasks);
+  const installTask: GeneratorCallback = hasNrwlJestDependency
+    ? // eslint-disable-next-line @typescript-eslint/no-empty-function
+      () => {}
+    : addDependenciesToPackageJson(tree, {}, { '@nrwl/jest': nxVersion });
+
+  const jestTask = jestInitGenerator(tree, {});
+
+  return async () => {
+    await installTask();
+    return jestTask();
+  };
 }

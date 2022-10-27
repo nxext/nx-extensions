@@ -17,12 +17,11 @@ import {
   Tree,
   updateJson,
 } from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import viteInitGenerator from '../init/init';
 import { lintProjectGenerator } from '@nrwl/linter';
+import { addVitest } from './lib/add-vitest';
 
 async function addLinting(host: Tree, options: NormalizedSchema) {
-  const tasks: GeneratorCallback[] = [];
   const supportExt: Array<'ts' | 'tsx' | 'js' | 'jsx'> = ['ts', 'js'];
   if (options.supportJSX) {
     supportExt.push('tsx', 'jsx');
@@ -38,7 +37,6 @@ async function addLinting(host: Tree, options: NormalizedSchema) {
     ],
     skipFormat: true,
   });
-  tasks.push(lintTask);
 
   const viteEslintJson = createViteEslintJson(
     options.projectRoot,
@@ -52,38 +50,44 @@ async function addLinting(host: Tree, options: NormalizedSchema) {
     () => viteEslintJson
   );
 
-  const installTask = await addDependenciesToPackageJson(
+  return lintTask;
+}
+
+async function addLintDependencies(host: Tree) {
+  return addDependenciesToPackageJson(
     host,
     extraEslintDependencies.dependencies,
     extraEslintDependencies.devDependencies
   );
-  tasks.push(installTask);
-
-  return runTasksInSerial(...tasks);
 }
 
 export async function applicationGenerator(host: Tree, schema: Schema) {
-  const options = normalizeOptions(host, schema),
-    tasks: GeneratorCallback[] = [];
+  const options = normalizeOptions(host, schema);
 
-  tasks.push(
-    await viteInitGenerator(host, {
-      ...options,
-      skipFormat: true,
-    })
-  );
+  const viteInitTask = await viteInitGenerator(host, {
+    ...options,
+    skipFormat: true,
+  });
 
   createApplicationFiles(host, options);
   addProject(host, options);
-  tasks.push(await addLinting(host, options));
-  tasks.push(await addJest(host, options));
+  const lintTask = await addLinting(host, options);
+  const lintDependenciesTask = await addLintDependencies(host);
+  const jestTask = await addJest(host, options);
+  const vitestTask = await addVitest(host, options);
   setDefaults(host, options);
 
   if (!options.skipFormat) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(...tasks);
+  return async () => {
+    await viteInitTask();
+    await lintTask();
+    await lintDependenciesTask();
+    await jestTask();
+    await vitestTask();
+  };
 }
 
 export default applicationGenerator;

@@ -5,7 +5,7 @@ import generator from './library';
 import { Schema } from './schema';
 import { Linter } from '@nrwl/linter';
 
-describe('vite generator', () => {
+describe('vite library generator', () => {
   let tree: Tree;
   const options = {
     name: 'test',

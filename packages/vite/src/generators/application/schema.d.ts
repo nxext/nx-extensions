@@ -5,7 +5,7 @@ export interface Schema {
   skipFormat: boolean;
   directory?: string;
   tags?: string;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'vitest' | 'jest' | 'none';
   linter: Linter;
   pascalCaseFiles?: boolean;
   skipWorkspaceJson?: boolean;

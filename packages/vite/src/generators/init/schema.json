@@ -8,8 +8,8 @@
     "unitTestRunner": {
       "description": "Adds the specified unit test runner",
       "type": "string",
-      "enum": ["jest", "none"],
-      "default": "jest"
+      "enum": ["vitest", "jest", "none"],
+      "default": "vitest"
     },
     "skipFormat": {
       "description": "Skip formatting files",
