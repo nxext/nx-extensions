@@ -5,6 +5,7 @@
 [StencilJS](https://stenciljs.com) plugin for NX
 [SvelteJS](https://svelte.dev) plugin for NX
 [SolidJS](https://www.solidjs.com) plugin for NX
+[Vite](https://www.vitejs.dev) plugin for NX
 
 ## Install and usage
 
