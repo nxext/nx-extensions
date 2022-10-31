@@ -22,7 +22,7 @@
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "peerDependencies": {
-    "@nrwl/devkit": "15.0.3"
+  "dependencies": {
+    "@nrwl/devkit": "15.0.4"
   }
 }

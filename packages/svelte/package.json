@@ -25,15 +25,15 @@
   "peerDependencies": {
     "svelte": "^3.44.2",
     "svelte-preprocess": "^4.4.2",
-    "@nrwl/workspace": "^15.0.3",
-    "@nrwl/cypress": "^15.0.3",
-    "@nrwl/linter": "^15.0.3"
+    "@nrwl/workspace": "^15.0.4",
+    "@nrwl/cypress": "^15.0.4",
+    "@nrwl/linter": "^15.0.4"
   },
   "dependencies": {
     "@nxext/vite": "^14.2.0",
-    "@nrwl/devkit": "15.0.3",
-    "@nrwl/cypress": "15.0.3",
-    "@nrwl/jest": "15.0.3",
+    "@nrwl/devkit": "15.0.4",
+    "@nrwl/cypress": "15.0.4",
+    "@nrwl/jest": "15.0.4",
     "@nxext/vitest": "^14.1.0"
   },
   "nx-migrate": {

@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "@nxext/capacitor": "^14.0.0",
-    "@nrwl/devkit": "15.0.3"
+    "@nrwl/devkit": "15.0.4"
   },
   "peerDependencies": {
-    "@nrwl/angular": "^15.0.3"
+    "@nrwl/angular": "^15.0.4"
   }
 }

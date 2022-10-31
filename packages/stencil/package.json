@@ -25,18 +25,18 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "15.0.3",
+    "@nrwl/devkit": "15.0.4",
     "ignore": "^5.2.0"
   },
   "peerDependencies": {
     "@nxext/svelte": "^14.0.0",
-    "@nrwl/storybook": "^15.0.3",
-    "@nrwl/cypress": "^15.0.3",
-    "@nrwl/linter": "^15.0.3",
-    "@nrwl/react": "^15.0.3",
-    "@nrwl/angular": "^15.0.3",
-    "@nrwl/jest": "^15.0.3",
-    "@nrwl/workspace": "^15.0.3",
+    "@nrwl/storybook": "^15.0.4",
+    "@nrwl/cypress": "^15.0.4",
+    "@nrwl/linter": "^15.0.4",
+    "@nrwl/react": "^15.0.4",
+    "@nrwl/angular": "^15.0.4",
+    "@nrwl/jest": "^15.0.4",
+    "@nrwl/workspace": "^15.0.4",
     "@stencil/core": "^2.17.1"
   },
   "peerDependenciesMeta": {
