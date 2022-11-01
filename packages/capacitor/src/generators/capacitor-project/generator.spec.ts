@@ -22,11 +22,15 @@ describe('capacitor-project', () => {
 
   const projectRoot = `apps/${options.project}`;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
     addProjectConfiguration(appTree, options.project, {
       root: projectRoot,
-      targets: {},
+      targets: {
+        test: {
+          executor: '@nrwl/jest:jest',
+        },
+      },
     });
   });
 
@@ -153,5 +157,18 @@ describe('capacitor-project', () => {
     expect(
       projectConfiguration.targets.update.configurations['android'].cmd
     ).toEqual('update android');
+  });
+
+  it('should not remove existing target configurations', async () => {
+    await generator(appTree, options);
+    const projectConfiguration = readProjectConfiguration(
+      appTree,
+      options.project
+    );
+
+    expect(projectConfiguration.targets.test).toBeTruthy();
+    expect(projectConfiguration.targets.test.executor).toEqual(
+      '@nrwl/jest:jest'
+    );
   });
 });
