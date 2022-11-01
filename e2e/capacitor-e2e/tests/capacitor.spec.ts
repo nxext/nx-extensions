@@ -1,8 +1,7 @@
 import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { CapacitorGeneratorSchema } from '@nxext/capacitor';
 import { newProject } from '@nxext/e2e';
 
-xdescribe('capacitor-project e2e', () => {
+describe('capacitor-project e2e', () => {
   const asyncTimeout = 600_000;
 
   const plugin = uniq('capacitor');
@@ -14,7 +13,7 @@ xdescribe('capacitor-project e2e', () => {
       `generate @nrwl/react:app ${plugin} --routing=false`
     );
     await runNxCommandAsync(
-      `generate @nxext/capacitor:capacitor-project --project ${plugin}`
+      `generate @nxext/capacitor:capacitor-project --project=${plugin}`
     );
   }, asyncTimeout);
 

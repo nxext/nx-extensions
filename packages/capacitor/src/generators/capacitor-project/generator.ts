@@ -14,9 +14,9 @@ export async function capacitorProjectGenerator(
   const normalizedOptions = normalizeOptions(host, options);
   const installTask = addDependencies(host);
   addCapacitorConfig(host, normalizedOptions);
-  updateProjectPackageJson(host, normalizedOptions);
   updateProjectGitignore(host, normalizedOptions);
   addProject(host, normalizedOptions);
+  updateProjectPackageJson(host, normalizedOptions);
 
   if (!options.skipFormat) {
     await formatFiles(host);
