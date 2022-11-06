@@ -13,6 +13,7 @@ import { fileExists } from '@nrwl/workspace/src/utilities/fileutils';
 import { normalizePath } from '../../utils/normalize-path';
 import type { Config } from '@stencil/core/compiler';
 import { hasError } from '../../utils/utillities';
+import { ValidatedConfig } from '@stencil/core/internal';
 
 function getCompilerExecutingPath(): string {
   return require.resolve('@stencil/core/compiler');
@@ -34,7 +35,7 @@ export async function initializeStencilConfig<
   dependencies = []
 ): Promise<{
   pathCollection: PathCollection;
-  loadedConfig: Config;
+  strictConfig: Config;
 }> {
   const logger: Logger = createNodeLogger({ process });
   const sys: CompilerSystem = createNodeSys({ process });
@@ -70,10 +71,19 @@ export async function initializeStencilConfig<
     sys,
   });
   const loadedConfig = loadConfigResults.config;
+  const strictConfig: ValidatedConfig = {
+    ...loadedConfig,
+    flags: flags,
+    logger,
+    outputTargets: loadedConfig.outputTargets ?? [],
+    rootDir: loadedConfig.rootDir ?? '/',
+    sys: sys ?? loadedConfig.sys,
+    testing: loadedConfig.testing ?? {},
+  };
 
-  if (loadedConfig.flags.task === 'build') {
-    loadedConfig.rootDir = distDir;
-    loadedConfig.packageJsonFilePath = normalizePath(
+  if (strictConfig.flags.task === 'build') {
+    strictConfig.rootDir = distDir;
+    strictConfig.packageJsonFilePath = normalizePath(
       join(distDir, 'package.json')
     );
   }
@@ -92,13 +102,13 @@ export async function initializeStencilConfig<
     });
 
   await sys.ensureResources({
-    rootDir: loadedConfig.rootDir,
+    rootDir: strictConfig.rootDir,
     logger,
     dependencies: dependencies as any,
   });
 
   const ensureDepsResults = await sys.ensureDependencies({
-    rootDir: loadedConfig.rootDir,
+    rootDir: strictConfig.rootDir,
     logger,
     dependencies: dependencies as any,
   });
@@ -116,6 +126,6 @@ export async function initializeStencilConfig<
       distDir: distDir,
       pkgJson: join(projectRoot, 'package.json'),
     },
-    loadedConfig: loadedConfig,
+    strictConfig: strictConfig,
   };
 }
