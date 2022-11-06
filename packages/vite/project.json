@@ -30,6 +30,7 @@
         "tsConfig": "packages/vite/tsconfig.lib.json",
         "packageJson": "./packages/vite/package.json",
         "main": "packages/vite/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/vite/*.md",
           {

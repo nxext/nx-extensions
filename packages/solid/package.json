@@ -23,13 +23,13 @@
   "schematics": "./generators.json",
   "dependencies": {
     "@nxext/vite": "^14.2.0",
-    "@nrwl/devkit": "15.0.3"
+    "@nrwl/devkit": "15.0.10"
   },
   "peerDependencies": {
     "solid-js": "^1.4.1",
-    "@nrwl/workspace": "^15.0.3",
-    "@nrwl/cypress": "^15.0.3",
-    "@nrwl/linter": "^15.0.3"
+    "@nrwl/workspace": "^15.0.10",
+    "@nrwl/cypress": "^15.0.10",
+    "@nrwl/linter": "^15.0.10"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"

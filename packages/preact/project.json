@@ -33,6 +33,7 @@
         "tsConfig": "packages/preact/tsconfig.lib.json",
         "packageJson": "packages/preact/package.json",
         "main": "packages/preact/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/preact/*.md",
           {

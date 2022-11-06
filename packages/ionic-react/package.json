@@ -26,10 +26,10 @@
   },
   "dependencies": {
     "@nxext/capacitor": "^15.0.0",
-    "@nrwl/devkit": "15.0.3"
+    "@nrwl/devkit": "15.0.10"
   },
   "peerDependencies": {
-    "@nrwl/linter": "^15.0.3",
-    "@nrwl/react": "^15.0.3"
+    "@nrwl/linter": "^15.0.10",
+    "@nrwl/react": "^15.0.10"
   }
 }

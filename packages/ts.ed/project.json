@@ -29,6 +29,7 @@
         "tsConfig": "packages/ts.ed/tsconfig.lib.json",
         "packageJson": "packages/ts.ed/package.json",
         "main": "packages/ts.ed/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/ts.ed/*.md",
           {
