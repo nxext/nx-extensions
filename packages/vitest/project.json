@@ -30,6 +30,7 @@
         "tsConfig": "packages/vitest/tsconfig.lib.json",
         "packageJson": "packages/vitest/package.json",
         "main": "packages/vitest/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/vitest/*.md",
           {

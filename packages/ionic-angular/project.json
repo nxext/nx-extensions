@@ -10,6 +10,7 @@
         "main": "packages/ionic-angular/src/index.ts",
         "packageJson": "packages/ionic-angular/package.json",
         "tsConfig": "packages/ionic-angular/tsconfig.lib.json",
+        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/ionic-angular/*.md",
           {
