@@ -13,6 +13,7 @@ import {
   checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies,
 } from '@nrwl/workspace/src/utilities/buildable-libs-utils';
+import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -66,7 +67,7 @@ export default async function* runExecutor(
   }
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
-  const { loadedConfig, pathCollection } = await initializeStencilConfig(
+  const { strictConfig, pathCollection } = await initializeStencilConfig(
     taskCommand,
     options,
     context,
@@ -75,7 +76,7 @@ export default async function* runExecutor(
   );
 
   const config = await prepareConfigAndOutputargetPaths(
-    loadedConfig,
+    strictConfig,
     pathCollection
   );
 
@@ -89,7 +90,11 @@ export default async function* runExecutor(
   );
 
   try {
-    await createStencilProcess(config, pathCollection);
+    await createStencilProcess(config);
+
+    if (config.flags.e2e) {
+      cleanupE2eTesting(pathCollection);
+    }
 
     return { success: true };
   } catch (err) {

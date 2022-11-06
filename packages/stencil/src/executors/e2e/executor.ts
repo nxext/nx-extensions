@@ -7,6 +7,7 @@ import {
 } from '../stencil-runtime';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 import { ExecutorContext, logger } from '@nrwl/devkit';
+import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -26,19 +27,23 @@ export default async function runExecutor(
   const taskCommand: TaskCommand = 'test';
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
-  const { loadedConfig, pathCollection } = await initializeStencilConfig(
+  const { strictConfig, pathCollection } = await initializeStencilConfig(
     taskCommand,
     options,
     context,
     flags
   );
   const stencilConfig = await prepareConfigAndOutputargetPaths(
-    loadedConfig,
+    strictConfig,
     pathCollection
   );
 
   try {
-    await createStencilProcess(stencilConfig, pathCollection);
+    await createStencilProcess(stencilConfig);
+
+    if (stencilConfig.flags.e2e) {
+      cleanupE2eTesting(pathCollection);
+    }
 
     return { success: true };
   } catch (err) {
