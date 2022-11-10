@@ -1,6 +1,6 @@
 import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
-import { NormalizedSchema as LibrarySchema } from '../library/schema';
 import { NormalizedSchema as ApplicationSchema } from '../application/schema';
+import { NormalizedSchema as LibrarySchema } from '../library/schema';
 
 export function createViteTargets(
   projectType: ProjectType,

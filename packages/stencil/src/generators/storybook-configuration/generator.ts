@@ -1,30 +1,30 @@
 import {
   convertNxGenerator,
   formatFiles,
+  generateFiles,
   GeneratorCallback,
+  getWorkspaceLayout,
   joinPathFragments,
   logger,
+  offsetFromRoot,
   readJson,
   readProjectConfiguration,
+  stripIndents,
   Tree,
   updateProjectConfiguration,
   writeJson,
-  generateFiles,
-  offsetFromRoot,
-  stripIndents,
-  getWorkspaceLayout,
 } from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { Linter } from '@nrwl/linter';
-import { join } from 'path';
 import { cypressProjectGenerator } from '@nrwl/storybook';
 import { initGenerator } from '@nrwl/storybook/src/generators/init/init';
 import { TsConfig } from '@nrwl/storybook/src/utils/utilities';
-import { StorybookConfigureSchema } from './schema';
-import { updateLintConfig } from './lib/update-lint-config';
-import { isBuildableStencilProject } from '../../utils/utillities';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { getRootTsConfigPathInTree } from '@nrwl/workspace/src/utilities/typescript';
+import { join } from 'path';
+import { isBuildableStencilProject } from '../../utils/utillities';
 import { updateDependencies } from './lib/add-dependencies';
+import { updateLintConfig } from './lib/update-lint-config';
+import { StorybookConfigureSchema } from './schema';
 
 /**
  * With Nx `npmScope` (eg: nx-workspace) and `projectName` (eg: nx-project), returns a path portion to be used for import statements or
