@@ -4,6 +4,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [main]
+  pull_request: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -14,18 +15,19 @@ jobs:
     name: Nx Cloud - Main Job
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.8
     with:
-      main-branch-name: 'main'
+      number-of-agents: 3
       environment-variables: |
         npm_config_registry=http://localhost:4872
       parallel-commands: |
         npx nx-cloud record npx nx workspace-lint
         npx nx-cloud record npx nx format:check
       parallel-commands-on-agents: |
-        yarn nx affected -- --target=lint --parallel 3
-        yarn nx affected -- --target=build --parallel 3
-        yarn nx affected -- --target=test --parallel 3
+        yarn nx affected --target=lint --parallel 3
+        yarn nx affected --target=build --parallel 3
+        yarn nx affected --target=test --parallel 3
       final-commands: |
-        yarn nx affected -- --target=e2e
+        yarn nx affected --target=e2e
+
   agents:
     name: Nx Cloud - Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
