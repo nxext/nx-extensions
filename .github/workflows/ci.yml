@@ -18,6 +18,8 @@ jobs:
       number-of-agents: 3
       environment-variables: |
         npm_config_registry=http://localhost:4872
+      node-version: 16.x
+      yarn-version: 1.x
       parallel-commands: |
         npx nx-cloud record npx nx workspace-lint
         npx nx-cloud record npx nx format:check
@@ -35,3 +37,5 @@ jobs:
       number-of-agents: 3
       environment-variables: |
         npm_config_registry=http://localhost:4872
+      node-version: 16.x
+      yarn-version: 1.x
