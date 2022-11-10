@@ -225,7 +225,7 @@ function addStorybookTask(
 ) {
   const projectConfig = readProjectConfiguration(tree, projectName);
   projectConfig.targets['storybook'] = {
-    executor: '@nrwl/workspace:run-commands',
+    executor: 'nx:run-commands',
     options: {
       commands: [
         `nx run ${projectName}:serve`,

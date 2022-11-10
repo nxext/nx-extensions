@@ -1,7 +1,7 @@
 import { ExecutorContext, normalizePath } from '@nrwl/devkit';
 import runCommands, {
   RunCommandsOptions,
-} from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
+} from 'nx/src/executors/run-commands/run-commands.impl';
 import { CommandExecutorSchema } from './schema';
 
 export default async function runExecutor(
