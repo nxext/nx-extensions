@@ -1,6 +1,6 @@
-import { SveltekitExecutorOptions } from './schema';
 import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
 import { default as runCommands } from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
+import { SveltekitExecutorOptions } from './schema';
 
 export default async function runExecutor(
   options: SveltekitExecutorOptions,
