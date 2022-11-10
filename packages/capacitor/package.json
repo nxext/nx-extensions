@@ -28,6 +28,7 @@
     "@nrwl/devkit": "15.0.10"
   },
   "peerDependencies": {
-    "@nrwl/workspace": "15.0.10"
+    "@nrwl/workspace": "15.0.10",
+    "nx": "15.0.10"
   }
 }
