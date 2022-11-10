@@ -5,8 +5,8 @@ import {
   readJsonFile,
   writeJsonFile,
 } from '@nrwl/devkit';
-import { default as runCommands } from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
 import { sortObjectByKeys } from '@nrwl/workspace/src/utils/ast-utils';
+import { default as runCommands } from 'nx/src/executors/run-commands/run-commands.impl';
 import { AddExecutorSchema } from './schema';
 
 export default async function runExecutor(

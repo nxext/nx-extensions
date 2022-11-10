@@ -49,7 +49,7 @@ export function createSvelteCheckTarget(
   options: NormalizedSchema
 ): TargetConfiguration {
   return {
-    executor: '@nrwl/workspace:run-commands',
+    executor: 'nx:run-commands',
     options: {
       command: 'svelte-check',
       cwd: options.projectRoot,
