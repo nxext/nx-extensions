@@ -1,6 +1,6 @@
 {
-  "projectName": "nxext",
-  "projectOwner": "Dominik Pieper",
+  "projectName": "nx-extensions",
+  "projectOwner": "nxext",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -171,6 +171,15 @@
       "contributions": [
         "code",
         "ideas"
+      ]
+    },
+    {
+      "login": "LayZeeDK",
+      "name": "Lars Gyrup Brink Nielsen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6364586?v=4",
+      "profile": "https://dev.to/layzee",
+      "contributions": [
+        "code"
       ]
     }
   ],
