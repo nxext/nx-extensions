@@ -1,7 +1,7 @@
 import { renameFile, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
-describe('buildoptions e2e', () => {
+xdescribe('buildoptions e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil']);
   });
