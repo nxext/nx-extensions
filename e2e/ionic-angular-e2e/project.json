@@ -1,4 +1,5 @@
 {
+  "name": "ionic-angular-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/ionic-angular-e2e/src",
   "targets": {

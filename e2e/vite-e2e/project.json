@@ -1,4 +1,5 @@
 {
+  "name": "vite-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/vite-e2e/src",
   "targets": {

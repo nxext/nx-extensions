@@ -1,4 +1,5 @@
 {
+  "name": "vite",
   "sourceRoot": "packages/vite/src",
   "projectType": "library",
   "targets": {

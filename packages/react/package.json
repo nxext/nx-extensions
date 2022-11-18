@@ -1,6 +1,6 @@
 {
   "name": "@nxext/react",
-  "version": "14.0.4",
+  "version": "15.010",
   "author": "Jordan Hall",
   "description": "Nx plugin for react",
   "homepage": "https://nxext.dev/",
@@ -12,9 +12,9 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "@nxext/vite": "^14.2.0",
-    "@nrwl/devkit": "15.0.10",
-    "@nrwl/react": "15.0.10"
+    "@nxext/vite": "^15.1.0",
+    "@nrwl/devkit": "15.2.0",
+    "@nrwl/react": "15.2.0"
   },
   "files": [
     "client.d.ts",

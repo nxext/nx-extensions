@@ -1,4 +1,5 @@
 {
+  "name": "vitest",
   "sourceRoot": "packages/vitest/src",
   "projectType": "library",
   "targets": {

@@ -1,4 +1,5 @@
 {
+  "name": "sveltekit",
   "sourceRoot": "packages/sveltekit/src",
   "projectType": "library",
   "targets": {

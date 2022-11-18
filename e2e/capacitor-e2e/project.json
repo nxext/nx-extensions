@@ -1,4 +1,5 @@
 {
+  "name": "capacitor-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/capacitor-e2e/src",
   "targets": {

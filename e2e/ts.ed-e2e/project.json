@@ -1,4 +1,5 @@
 {
+  "name": "ts.ed-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/ts.ed-e2e/src",
   "targets": {

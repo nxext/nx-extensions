@@ -1,4 +1,5 @@
 {
+  "name": "capacitor",
   "sourceRoot": "packages/capacitor/src",
   "projectType": "library",
   "targets": {

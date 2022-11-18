@@ -1,4 +1,5 @@
 {
+  "name": "svelte-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/svelte-e2e/src",
   "targets": {

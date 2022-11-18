@@ -1,4 +1,5 @@
 {
+  "name": "svelte",
   "sourceRoot": "packages/svelte/src",
   "projectType": "library",
   "generators": {},

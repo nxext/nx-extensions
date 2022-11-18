@@ -1,4 +1,5 @@
 {
+  "name": "stencil-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/stencil-e2e/src",
   "targets": {

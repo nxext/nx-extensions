@@ -1,4 +1,5 @@
 {
+  "name": "preact",
   "sourceRoot": "packages/preact/src",
   "projectType": "library",
   "generators": {},
