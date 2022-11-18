@@ -1,4 +1,5 @@
 {
+  "name": "solid-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/solid-e2e/src",
   "targets": {

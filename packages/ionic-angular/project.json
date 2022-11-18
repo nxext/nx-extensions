@@ -1,4 +1,5 @@
 {
+  "name": "ionic-angular",
   "sourceRoot": "packages/ionic-angular/src",
   "projectType": "library",
   "targets": {

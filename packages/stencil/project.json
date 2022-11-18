@@ -1,4 +1,5 @@
 {
+  "name": "stencil",
   "sourceRoot": "packages/stencil/src",
   "projectType": "library",
   "generators": {},

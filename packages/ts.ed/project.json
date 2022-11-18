@@ -1,4 +1,5 @@
 {
+  "name": "ts.ed",
   "sourceRoot": "packages/ts.ed/src",
   "projectType": "library",
   "targets": {

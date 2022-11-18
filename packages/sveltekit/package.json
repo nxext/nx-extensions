@@ -1,6 +1,6 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "14.0.0-next.2",
+  "version": "15.1.0-next.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",
@@ -22,7 +22,7 @@
   "executors": "./executors.json",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nxext/vite": "^14.2.0",
-    "@nrwl/devkit": "15.0.10"
+    "@nxext/vite": "^15.1.0",
+    "@nrwl/devkit": "15.2.0"
   }
 }

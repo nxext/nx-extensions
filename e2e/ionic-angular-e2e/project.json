@@ -1,15 +1,8 @@
 {
+  "name": "ionic-angular-e2e",
   "projectType": "application",
   "sourceRoot": "e2e/ionic-angular-e2e/src",
-  "targets": {
-    "e2e": {
-      "executor": "@nxext/e2e:e2e",
-      "options": {
-        "jestConfig": "e2e/ionic-angular-e2e/jest.config.ts",
-        "verdaccioConfig": ".verdaccio/config.yml"
-      }
-    }
-  },
+  "targets": {},
   "tags": [],
   "implicitDependencies": ["ionic-angular"]
 }

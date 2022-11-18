@@ -1,4 +1,5 @@
 {
+  "name": "ionic-react",
   "sourceRoot": "packages/ionic-react/src",
   "projectType": "library",
   "targets": {
