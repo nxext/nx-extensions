@@ -69,10 +69,9 @@ export async function applicationGenerator(tree: Tree, options: Schema) {
   tree.delete(joinPathFragments(appProjectRoot, 'tsconfig.json'));
   tree.delete(joinPathFragments(appProjectRoot, 'src', 'index.html'));
 
-
   // Angular 15 remove ployfill not sure if this is still needed. For now we will create it for NG 15
   const polyfillPath = joinPathFragments(appProjectRoot, 'src', 'polyfills.ts');
-  let sourceText = ''
+  let sourceText = '';
   if (tree.exists(polyfillPath)) {
     sourceText = tree.read(polyfillPath, 'utf-8');
   }
