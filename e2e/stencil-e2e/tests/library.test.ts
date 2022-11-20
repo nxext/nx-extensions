@@ -5,7 +5,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
-xdescribe('library e2e', () => {
+describe('library e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil']);
   });

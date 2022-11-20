@@ -5,7 +5,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
-xdescribe('outputtargets e2e', () => {
+describe('outputtargets e2e', () => {
   beforeAll(() => {
     newProject(
       ['@nxext/stencil', '@nxext/svelte'],

@@ -1,7 +1,7 @@
 import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
-xdescribe('pwa e2e', () => {
+describe('pwa e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil']);
   });
