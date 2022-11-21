@@ -96,7 +96,7 @@ Default: `jest`
 
 Type: `string`
 
-Possible values: `jest`, `karma`, `none`
+Possible values: `jest`, `none`
 
 Test runner to use for unit tests.
 
