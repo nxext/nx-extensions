@@ -10,7 +10,7 @@ describe('Ionic Angular Application', () => {
 
   async function buildAndTestApp(
     plugin: string,
-    unitTestRunner: 'jest' | 'karma' | 'none' = 'jest'
+    unitTestRunner: 'jest' | 'none' = 'jest'
   ) {
     const buildResults = await runNxCommandAsync(`build ${plugin}`);
     expect(buildResults.stdout).not.toContain('ERROR');
@@ -20,12 +20,6 @@ describe('Ionic Angular Application', () => {
 
     if (unitTestRunner === 'jest') {
       await runNxCommandAsync(`test ${plugin}`);
-    }
-    if (unitTestRunner === 'karma') {
-      const testResults = await runNxCommandAsync(
-        `test ${plugin} --browsers ChromeHeadless --watch false`
-      );
-      expect(testResults.stdout).toContain('SUCCESS');
     }
 
     const e2eResults = await runNxCommandAsync(`e2e ${plugin}-e2e`);
@@ -121,19 +115,6 @@ describe('Ionic Angular Application', () => {
       );
 
       await buildAndTestApp(appName, 'none');
-    },
-    asyncTimeout
-  );
-
-  it(
-    'should create with unitTestRunner=karma',
-    async () => {
-      const appName = uniq('ionic-angular');
-      await runNxCommandAsync(
-        `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --unitTestRunner karma`
-      );
-
-      await buildAndTestApp(appName, 'karma');
     },
     asyncTimeout
   );
