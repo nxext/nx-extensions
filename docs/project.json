@@ -1,0 +1,22 @@
+{
+  "name": "docs",
+  "sourceRoot": "packages/docs",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx vitepress build",
+        "cwd": "docs"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx vitepress dev",
+        "cwd": "docs"
+      }
+    }
+  },
+  "tags": []
+}
