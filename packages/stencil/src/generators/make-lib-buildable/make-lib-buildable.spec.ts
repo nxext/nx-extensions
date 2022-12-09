@@ -41,8 +41,14 @@ describe('make-lib-buildable schematic', () => {
 
       export const config: Config = {
         namespace: '${name}',
-        taskQueue: 'async'
+        taskQueue: 'async',
+        sourceMap: true,
+
+        extras: {
+          experimentalImportInjection: true,
+        }
       ,
+
         outputTargets: [{
               type: 'dist',
               esmLoaderPath: '../loader'
@@ -53,6 +59,13 @@ describe('make-lib-buildable schematic', () => {
             },{
               type: 'www',
               serviceWorker: null // disable service workers
+            },{
+              type: 'dist-hydrate-script',
+              dir: 'dist/hydrate',
+            },{
+              type: 'dist-custom-elements',
+              autoDefineCustomElements: true,
+              includeGlobalScripts: false,
             }]
 
       };

@@ -86,6 +86,15 @@ export async function makeLibBuildableGenerator(
         type: 'www',
         serviceWorker: null // disable service workers
       }`,
+      `{
+        type: 'dist-hydrate-script',
+        dir: 'dist/hydrate',
+      }`,
+      `{
+        type: 'dist-custom-elements',
+        autoDefineCustomElements: true,
+        includeGlobalScripts: false,
+      }`,
     ],
     joinPathFragments(options.projectRoot, 'stencil.config.ts')
   );
