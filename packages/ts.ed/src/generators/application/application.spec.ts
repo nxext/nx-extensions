@@ -14,7 +14,7 @@ describe('Ts.ED app schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     tree.write(
       'package.json',
       `

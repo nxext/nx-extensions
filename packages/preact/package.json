@@ -23,14 +23,14 @@
   "schematics": "./generators.json",
   "peerDependencies": {
     "preact": "^10.6.2",
-    "@nrwl/workspace": "^15.2.0",
-    "@nrwl/cypress": "^15.2.0",
-    "@nrwl/linter": "^15.2.0",
+    "@nrwl/workspace": "^15.3.0",
+    "@nrwl/cypress": "^15.3.0",
+    "@nrwl/linter": "^15.3.0",
     "@preact/preset-vite": "^2.1.5"
   },
   "dependencies": {
     "@nxext/vite": "^15.1.0",
-    "@nrwl/devkit": "15.2.0"
+    "@nrwl/devkit": "15.3.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"

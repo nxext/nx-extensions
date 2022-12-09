@@ -18,7 +18,7 @@ export async function createTestUILib(
   style: SupportedStyles = SupportedStyles.css,
   buildable = true
 ): Promise<Tree> {
-  const host = createTreeWithEmptyWorkspace();
+  const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   const workspaceConfiguration = readWorkspaceConfiguration(host);
   workspaceConfiguration.npmScope = testNpmScope;
   updateWorkspaceConfiguration(host, workspaceConfiguration);

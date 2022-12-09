@@ -16,7 +16,7 @@ describe('application schematic', () => {
   const projectRoot = `apps/${options.name}`;
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     appTree.write(
       'package.json',
       `

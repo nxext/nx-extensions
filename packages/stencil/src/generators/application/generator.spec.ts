@@ -12,7 +12,7 @@ describe('schematic:application', () => {
   const options: RawApplicationSchema = { name: 'test', linter: Linter.None };
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should add tags to nx.json', async () => {

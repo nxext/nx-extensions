@@ -14,7 +14,7 @@ describe('Solid app schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     tree.write(
       'package.json',
       `

@@ -15,7 +15,7 @@ describe('preact library schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     tree.overwrite(
       'package.json',
       `

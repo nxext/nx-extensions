@@ -11,7 +11,7 @@ export async function createTestProject(
   unitTestrunner: 'none' | 'jest' = 'none',
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
-  const tree = createTreeWithEmptyWorkspace();
+  const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   tree.write(
     'package.json',
     `

@@ -46,7 +46,7 @@ describe('application', () => {
   }
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     appTree.write(
       'package.json',
       `
