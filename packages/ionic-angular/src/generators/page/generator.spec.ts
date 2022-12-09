@@ -22,7 +22,7 @@ describe('page generator', () => {
   const projectRoot = `apps/${options.project}`;
 
   beforeEach(async () => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     appTree.write(
       'package.json',
       `

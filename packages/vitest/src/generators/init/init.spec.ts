@@ -9,7 +9,7 @@ describe('Vitest init generator', () => {
   const options: InitGeneratorSchema = {};
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should add necessary dependencies', async () => {

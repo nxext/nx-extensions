@@ -22,7 +22,7 @@ describe('make-lib-buildable schematic', () => {
   };
 
   beforeEach(async () => {
-    host = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     await libraryGenerator(host, {
       name: options.name,
       style: SupportedStyles.css,
@@ -86,7 +86,7 @@ describe('make-lib-buildable schematic using defaults', () => {
   };
 
   beforeEach(async () => {
-    host = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     const workspaceConfiguration = readWorkspaceConfiguration(host);
     workspaceConfiguration.npmScope = testNpmScope;
     updateWorkspaceConfiguration(host, workspaceConfiguration);

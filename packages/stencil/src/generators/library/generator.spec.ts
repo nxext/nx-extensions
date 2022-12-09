@@ -18,7 +18,7 @@ describe('library', () => {
   };
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should add tags to nx.json', async () => {

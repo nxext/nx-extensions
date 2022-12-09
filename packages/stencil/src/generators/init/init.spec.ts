@@ -7,7 +7,7 @@ describe('init', () => {
   let host: Tree;
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should add stencil dependencies', async () => {

@@ -10,7 +10,7 @@ describe('Add Capacitor 3 run target', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
 
     addProjectConfiguration(tree, 'cap-app-1', {
       root: 'apps/cap-app-1',

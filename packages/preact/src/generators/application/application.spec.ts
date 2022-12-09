@@ -13,7 +13,7 @@ describe('Preact app schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     tree.overwrite(
       'package.json',
       `

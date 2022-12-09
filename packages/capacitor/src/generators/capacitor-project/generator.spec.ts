@@ -23,7 +23,7 @@ describe('capacitor-project', () => {
   const projectRoot = `apps/${options.project}`;
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     addProjectConfiguration(appTree, options.project, {
       root: projectRoot,
       targets: {

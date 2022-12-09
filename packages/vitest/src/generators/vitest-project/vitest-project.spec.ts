@@ -13,7 +13,7 @@ describe('vitest-project generator', () => {
   };
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace();
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     libraryGenerator(host, { name: 'test' });
   });
 

@@ -16,7 +16,7 @@ describe('vite library generator', () => {
   } as Schema;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     tree.write(
       'package.json',
       `
