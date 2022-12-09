@@ -5,6 +5,8 @@ export const config: Config = {
   globalStyle: 'src/global/app.<%= style %>',
   globalScript: 'src/global/app.ts',
   taskQueue: 'async',
+  sourceMap: true,
+
   outputTargets: [
     {
       type: 'www',
@@ -12,5 +14,8 @@ export const config: Config = {
       serviceWorker: null,
       baseUrl: 'https://<% projectName %>.local/',
     },
-  ]
+  ],
+  extras: {
+    experimentalImportInjection: true,
+  }
 };
