@@ -14,14 +14,30 @@ export default {
     '../src/**/*.stories.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  framework: '@storybook/html',
+  core: {
+    builder: {
+      name: 'webpack5',
+      options: {
+        fsCache: false,
+        lazyCompilation: false,
+      },
+    },
+  },
+
+  framework: '@storybook/web-components',
+
   logLevel: 'warn',
+  features: {
+    babelModeV7: true,
+    storyStoreV7: true,
+    postcss: true,
+  },
   webpackFinal: async (config: Configuration, options: Options) => {
     // apply any global webpack configs that might have been specified in .storybook/main.ts
     if (rootMain.webpackFinal) {
       config = await rootMain.webpackFinal(config, options);
     }
-  
+
     // add your own webpack tweaks if needed
     return config;
   },
