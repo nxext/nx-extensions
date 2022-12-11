@@ -4,12 +4,14 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '@nxext/e2e';
+import { cleanupProject, newProject } from '@nxext/e2e';
 
 describe('ts.ed e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/ts.ed']);
   });
+
+  afterAll(() => cleanupProject());
 
   it('should create ts.ed application', async () => {
     const plugin = uniq('ts.ed');

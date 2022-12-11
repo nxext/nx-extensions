@@ -5,12 +5,14 @@ import {
   uniq,
   updateFile,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '../../e2e/src';
+import { cleanupProject, newProject } from '../../e2e/src';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/svelte']);
   });
+
+  afterAll(() => cleanupProject());
 
   describe('Svelte app', () => {
     it('should build svelte application', async () => {

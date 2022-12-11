@@ -1,5 +1,5 @@
 import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { newProject } from '@nxext/e2e';
+import { cleanupProject, newProject } from '@nxext/e2e';
 
 describe('capacitor-project e2e', () => {
   const asyncTimeout = 600_000;
@@ -16,6 +16,8 @@ describe('capacitor-project e2e', () => {
       `generate @nxext/capacitor:capacitor-project --project=${plugin}`
     );
   }, asyncTimeout);
+
+  afterAll(() => cleanupProject());
 
   it('should build successfully', async () => {
     const buildResults = await runNxCommandAsync(`build ${plugin}`);

@@ -1,5 +1,5 @@
-import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { newProject } from '@nxext/e2e';
+import { readJson, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import { cleanupProject, newProject } from '@nxext/e2e';
 
 describe('Ionic Angular Application', () => {
   const asyncTimeout = 600_000;
@@ -8,23 +8,7 @@ describe('Ionic Angular Application', () => {
     newProject(['@nxext/ionic-angular']);
   });
 
-  async function buildAndTestApp(
-    plugin: string,
-    unitTestRunner: 'jest' | 'none' = 'jest'
-  ) {
-    const buildResults = await runNxCommandAsync(`build ${plugin}`);
-    expect(buildResults.stdout).not.toContain('ERROR');
-
-    const lintResults = await runNxCommandAsync(`lint ${plugin}`);
-    expect(lintResults.stdout).not.toContain('ERROR');
-
-    if (unitTestRunner === 'jest') {
-      await runNxCommandAsync(`test ${plugin}`);
-    }
-
-    const e2eResults = await runNxCommandAsync(`e2e ${plugin}-e2e`);
-    expect(e2eResults.stdout).toContain('All specs passed!');
-  }
+  afterAll(() => cleanupProject());
 
   describe('--template', () => {
     it(
@@ -35,7 +19,11 @@ describe('Ionic Angular Application', () => {
           `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template blank`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stdout).not.toContain('ERROR');
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).not.toContain('ERROR');
       },
       asyncTimeout
     );
@@ -48,7 +36,11 @@ describe('Ionic Angular Application', () => {
           `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template list`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stdout).not.toContain('ERROR');
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).not.toContain('ERROR');
       },
       asyncTimeout
     );
@@ -61,7 +53,11 @@ describe('Ionic Angular Application', () => {
           `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template sidemenu`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stdout).not.toContain('ERROR');
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).not.toContain('ERROR');
       },
       asyncTimeout
     );
@@ -74,47 +70,26 @@ describe('Ionic Angular Application', () => {
           `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template tabs`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stdout).not.toContain('ERROR');
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).not.toContain('ERROR');
       },
       asyncTimeout
     );
   });
 
   it(
-    'should generate application in subdir',
-    async () => {
-      const appName = uniq('ionic-angular');
-      await runNxCommandAsync(
-        `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --directory myDir`
-      );
-
-      await buildAndTestApp(`my-dir-${appName}`);
-    },
-    asyncTimeout
-  );
-
-  it(
     'should add tags',
     async () => {
       const appName = uniq('ionic-angular');
       await runNxCommandAsync(
-        `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --tags one,two`
+        `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --tags e2etag,e2ePackage`
       );
 
-      await buildAndTestApp(appName);
-    },
-    asyncTimeout
-  );
-
-  it(
-    'should create with unitTestRunner=none',
-    async () => {
-      const appName = uniq('ionic-angular');
-      await runNxCommandAsync(
-        `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --unitTestRunner none`
-      );
-
-      await buildAndTestApp(appName, 'none');
+      const project = readJson(`apps/${appName}/project.json`);
+      expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     },
     asyncTimeout
   );
@@ -131,7 +106,8 @@ describe('Ionic Angular Application', () => {
           `generate @nxext/ionic-angular:page --name my-page --project ${appName}`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stdout).not.toContain('ERROR');
       },
       asyncTimeout
     );
@@ -148,10 +124,25 @@ describe('Ionic Angular Application', () => {
             `generate @nxext/ionic-angular:page --name my-page --project ${appName} --directory my-dir`
           );
 
-          await buildAndTestApp(appName);
+          const buildResults = await runNxCommandAsync(`build ${appName}`);
+          expect(buildResults.stdout).not.toContain('ERROR');
         },
         asyncTimeout
       );
     });
   });
+
+  it(
+    'e2e',
+    async () => {
+      const appName = uniq('ionic-angular');
+      await runNxCommandAsync(
+        `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template blank`
+      );
+
+      const e2eResults = await runNxCommandAsync(`e2e ${appName}-e2e`);
+      expect(e2eResults.stdout).toContain('All specs passed!');
+    },
+    asyncTimeout
+  );
 });

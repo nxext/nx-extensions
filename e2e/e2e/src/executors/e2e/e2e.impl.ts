@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import type { ExecutorContext } from '@nrwl/devkit';
-import { logger } from '@nrwl/devkit';
+import { logger, parseTargetString, runExecutor } from '@nrwl/devkit';
 import { jestExecutor } from '@nrwl/jest/src/executors/jest/jest.impl';
 import type { NxPluginE2EExecutorOptions } from './schema';
 import { ChildProcess } from 'child_process';
@@ -19,12 +19,12 @@ import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 export async function* nxPluginE2EExecutor(
   options: NxPluginE2EExecutorOptions,
   context: ExecutorContext
-): AsyncGenerator<{ success: boolean }> {
-  const verdaccioUrl = `http://localhost:4872/`;
-  process.env.npm_config_registry = `http://localhost:4872/`;
-  process.env.YARN_REGISTRY = process.env.npm_config_registry;
+) {
+  const verdaccioPort = options.verdaccioPort || 4872;
+  const verdaccioUrl = `http://localhost:${verdaccioPort}/`;
+  process.env.npm_config_registry = verdaccioUrl;
+  process.env.YARN_REGISTRY = verdaccioUrl;
 
-  let success: boolean;
   ensureDirSync(tmpProjPath());
   cleanupAll();
 
@@ -47,10 +47,11 @@ export async function* nxPluginE2EExecutor(
     updatePackageJsonFiles('999.9.9', true);
     publishPackages(verdaccioUrl);
 
-    success = await runTests(options.jestConfig, context);
+    const target = `${context.projectName}:${options.testTarget}`;
+    const delegateTarget = parseTargetString(target);
+    yield* await runExecutor(delegateTarget, {}, context);
   } catch (e) {
     logger.error(e.message);
-    success = false;
   }
 
   try {
@@ -58,8 +59,6 @@ export async function* nxPluginE2EExecutor(
   } catch (e) {
     await killPort(4872);
   }
-
-  return { success };
 }
 
 async function runTests(
