@@ -6,9 +6,18 @@
     "e2e": {
       "executor": "@nxext/e2e:e2e",
       "options": {
-        "jestConfig": "e2e/ts.ed-e2e/jest.config.ts",
+        "testTarget": "run-e2e-tests",
         "verdaccioConfig": ".verdaccio/config.yml"
       }
+    },
+    "run-e2e-tests": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "e2e/ts.ed-e2e/jest.config.ts",
+        "passWithNoTests": true,
+        "runInBand": true
+      },
+      "outputs": ["coverage/e2e/ts.ed"]
     }
   },
   "tags": [],

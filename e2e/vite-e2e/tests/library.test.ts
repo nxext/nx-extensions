@@ -3,12 +3,14 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '@nxext/e2e';
+import { cleanupProject, newProject } from '@nxext/e2e';
 
 describe('vite lib e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/vite']);
   });
+
+  afterAll(() => cleanupProject());
 
   describe('vite lib', () => {
     it('should create vite library', async () => {

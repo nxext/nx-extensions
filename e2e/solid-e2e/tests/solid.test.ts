@@ -4,12 +4,14 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '../../e2e/src';
+import { cleanupProject, newProject } from '../../e2e/src';
 
 describe('solid e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/solid']);
   });
+
+  afterAll(() => cleanupProject());
 
   describe('solid app', () => {
     it('should build solid application', async () => {

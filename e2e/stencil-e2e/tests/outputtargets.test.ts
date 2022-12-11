@@ -3,7 +3,7 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '../../e2e/src';
+import { cleanupProject, newProject } from '../../e2e/src';
 
 describe('outputtargets e2e', () => {
   beforeAll(() => {
@@ -12,6 +12,8 @@ describe('outputtargets e2e', () => {
       ['@nrwl/angular', '@nrwl/react']
     );
   });
+
+  afterAll(() => cleanupProject());
 
   it(`should generate react lib`, async () => {
     const plugin = uniq('lib');
