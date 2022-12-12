@@ -5,12 +5,14 @@ import {
   updateFile,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '@nxext/e2e';
+import { cleanupProject, newProject } from '@nxext/e2e';
 
 describe('vite e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/vite']);
   });
+
+  afterAll(() => cleanupProject());
 
   describe('vite app', () => {
     it('should build vite application', async () => {

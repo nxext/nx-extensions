@@ -4,12 +4,14 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '../../e2e/src';
+import { cleanupProject, newProject } from '../../e2e/src';
 
 describe('preact e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/preact']);
   });
+
+  afterAll(() => cleanupProject());
 
   describe('preact app', () => {
     it('should build preact application', async () => {

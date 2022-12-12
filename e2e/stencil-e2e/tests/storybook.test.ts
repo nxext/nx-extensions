@@ -1,11 +1,13 @@
 import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { newProject } from '../../e2e/src';
+import { cleanupProject, newProject } from '../../e2e/src';
 import { runNxCommandUntil } from '../../e2e/src/utils/run-commands';
 
 describe('storybook e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil'], ['@nrwl/storybook']);
   });
+
+  afterAll(() => cleanupProject());
 
   it('should build', async () => {
     const plugin = uniq('build-storybook');
@@ -24,7 +26,7 @@ describe('storybook e2e', () => {
     expect(result.stdout).toContain('Storybook builder finished ...');
   }, 200000);
 
-  it('should serve', async () => {
+  xit('should serve', async () => {
     const plugin = uniq('storybook');
     await runNxCommandAsync(
       `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`

@@ -3,12 +3,14 @@ import {
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { newProject } from '../../e2e/src';
+import { cleanupProject, newProject } from '../../e2e/src';
 
 describe('library e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil']);
   });
+
+  afterAll(() => cleanupProject());
 
   it(`should build app with scss`, async () => {
     const plugin = uniq('lib');

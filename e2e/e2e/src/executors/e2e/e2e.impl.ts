@@ -1,8 +1,7 @@
 import 'dotenv/config';
 
 import type { ExecutorContext } from '@nrwl/devkit';
-import { logger } from '@nrwl/devkit';
-import { jestExecutor } from '@nrwl/jest/src/executors/jest/jest.impl';
+import { logger, parseTargetString, runExecutor } from '@nrwl/devkit';
 import type { NxPluginE2EExecutorOptions } from './schema';
 import { ChildProcess } from 'child_process';
 import {
@@ -11,22 +10,22 @@ import {
   publishPackages,
   startVerdaccio,
 } from '../../utils/registry';
-import { cleanupAll, killPort, updatePackageJsonFiles } from '../../utils';
-import { ensureDirSync } from 'fs-extra';
-import { tmpProjPath } from '@nrwl/nx-plugin/testing';
+import {
+  cleanupVerdaccio,
+  killPort,
+  updatePackageJsonFiles,
+} from '../../utils';
 
-// eslint-disable-next-line require-yield
 export async function* nxPluginE2EExecutor(
   options: NxPluginE2EExecutorOptions,
   context: ExecutorContext
-): AsyncGenerator<{ success: boolean }> {
-  const verdaccioUrl = `http://localhost:4872/`;
-  process.env.npm_config_registry = `http://localhost:4872/`;
-  process.env.YARN_REGISTRY = process.env.npm_config_registry;
+) {
+  const verdaccioPort = options.verdaccioPort || 4872;
+  const verdaccioUrl = `http://localhost:${verdaccioPort}/`;
+  process.env.npm_config_registry = verdaccioUrl;
+  process.env.YARN_REGISTRY = verdaccioUrl;
 
-  let success: boolean;
-  ensureDirSync(tmpProjPath());
-  cleanupAll();
+  cleanupVerdaccio();
 
   let child: ChildProcess;
   try {
@@ -43,41 +42,24 @@ export async function* nxPluginE2EExecutor(
   }
 
   try {
-    buildAllPackages();
+    buildAllPackages('e2e,docs,angular-vite,angular-nx,angular-swc');
     updatePackageJsonFiles('999.9.9', true);
-    publishPackages(verdaccioUrl);
+    publishPackages(verdaccioUrl, 'dist/packages');
 
-    success = await runTests(options.jestConfig, context);
+    const target = `${context.projectName}:${options.testTarget}`;
+    const delegateTarget = parseTargetString(target);
+    yield* await runExecutor(delegateTarget, {}, context);
   } catch (e) {
     logger.error(e.message);
-    success = false;
   }
 
   try {
     child.kill();
   } catch (e) {
-    await killPort(4872);
+    await killPort(verdaccioPort);
   }
 
-  return { success };
-}
-
-async function runTests(
-  jestConfig: string,
-  context: ExecutorContext
-): Promise<boolean> {
-  const { success } = await jestExecutor(
-    {
-      jestConfig,
-      watch: false,
-      runInBand: true,
-      maxWorkers: 1,
-      testTimeout: 120000,
-    },
-    context
-  );
-
-  return success;
+  cleanupVerdaccio();
 }
 
 export default nxPluginE2EExecutor;
