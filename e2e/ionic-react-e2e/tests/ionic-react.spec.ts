@@ -2,7 +2,7 @@ import { readJson, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
 import { ApplicationGeneratorSchema } from '@nxext/ionic-react';
 import { cleanupProject, newProject } from '@nxext/e2e';
 
-xdescribe('ionic react application e2e', () => {
+describe('ionic react application e2e', () => {
   const asyncTimeout = 300_000;
 
   beforeAll(() => {
@@ -20,20 +20,6 @@ xdescribe('ionic react application e2e', () => {
     skipFormat: false,
   };
 
-  async function buildAndTestApp(plugin: string) {
-    const buildResults = await runNxCommandAsync(`build ${plugin}`);
-    expect(buildResults.stderr).toBeFalsy();
-
-    const lintResults = await runNxCommandAsync(`lint ${plugin}`);
-    expect(lintResults.stdout).toContain('All files pass linting');
-
-    const testResults = await runNxCommandAsync(`test ${plugin}`);
-    expect(testResults.stderr).toContain('1 passed');
-
-    const e2eResults = await runNxCommandAsync(`e2e ${plugin}-e2e`);
-    expect(e2eResults.stdout).toContain('All specs passed!');
-  }
-
   describe('--template', () => {
     it(
       'blank',
@@ -43,7 +29,11 @@ xdescribe('ionic react application e2e', () => {
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template blank`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stderr).toBeFalsy();
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).toContain('All files pass linting');
       },
       asyncTimeout
     );
@@ -56,7 +46,11 @@ xdescribe('ionic react application e2e', () => {
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template list`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stderr).toBeFalsy();
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).toContain('All files pass linting');
       },
       asyncTimeout
     );
@@ -69,7 +63,11 @@ xdescribe('ionic react application e2e', () => {
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template sidemenu`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stderr).toBeFalsy();
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).toContain('All files pass linting');
       },
       asyncTimeout
     );
@@ -82,7 +80,25 @@ xdescribe('ionic react application e2e', () => {
           `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template tabs`
         );
 
-        await buildAndTestApp(appName);
+        const buildResults = await runNxCommandAsync(`build ${appName}`);
+        expect(buildResults.stderr).toBeFalsy();
+
+        const lintResults = await runNxCommandAsync(`lint ${appName}`);
+        expect(lintResults.stdout).toContain('All files pass linting');
+      },
+      asyncTimeout
+    );
+
+    it(
+      'e2e',
+      async () => {
+        const appName = uniq('ionic-react');
+        await runNxCommandAsync(
+          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template sidemenu`
+        );
+
+        const e2eResults = await runNxCommandAsync(`e2e ${appName}-e2e`);
+        expect(e2eResults.stdout).toContain('All specs passed!');
       },
       asyncTimeout
     );
@@ -100,7 +116,15 @@ xdescribe('ionic react application e2e', () => {
         await runNxCommandAsync(
           `generate @nxext/ionic-react:app ${options.name} --directory ${options.directory} --capacitor false`
         );
-        await buildAndTestApp(`${options.directory}-${options.name}`);
+        const buildResults = await runNxCommandAsync(
+          `build ${options.directory}-${options.name}`
+        );
+        expect(buildResults.stderr).toBeFalsy();
+
+        const lintResults = await runNxCommandAsync(
+          `lint ${options.directory}-${options.name}`
+        );
+        expect(lintResults.stdout).toContain('All files pass linting');
       },
       asyncTimeout
     );
@@ -124,7 +148,11 @@ xdescribe('ionic react application e2e', () => {
         );
         expect(projectConfiguration.tags).toEqual(['e2etag', 'e2ePackage']);
 
-        await buildAndTestApp(options.name);
+        const buildResults = await runNxCommandAsync(`build ${options.name}`);
+        expect(buildResults.stderr).toBeFalsy();
+
+        const lintResults = await runNxCommandAsync(`lint ${options.name}`);
+        expect(lintResults.stdout).toContain('All files pass linting');
       },
       asyncTimeout
     );
