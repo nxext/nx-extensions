@@ -39,10 +39,10 @@ export function addUser(url: string) {
   );
 }
 
-export function buildAllPackages() {
+export function buildAllPackages(exclude: string) {
   logger.info('Build all....');
   execSync(
-    `npx nx run-many --target=build --all --parallel --exclude=e2e,docs,angular-vite,angular-nx,angular-swc || { echo 'Build failed' ; exit 1; }`,
+    `npx nx run-many --target=build --all --parallel --exclude=${exclude} || { echo 'Build failed' ; exit 1; }`,
     {
       stdio: ['pipe', 'pipe', 'pipe'],
     }

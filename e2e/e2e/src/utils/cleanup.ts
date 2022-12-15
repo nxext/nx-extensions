@@ -10,9 +10,8 @@ export function cleanupProject() {
   }
 }
 
-export function cleanupAll() {
+export function cleanupVerdaccioStorage() {
   const tmpRegistryDir = join(process.cwd(), 'tmp/local-registry');
-  cleanupProject();
   if (existsSync(tmpRegistryDir)) {
     removeSync(tmpRegistryDir);
   }

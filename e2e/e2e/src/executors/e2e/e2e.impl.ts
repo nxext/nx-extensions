@@ -11,9 +11,11 @@ import {
   publishPackages,
   startVerdaccio,
 } from '../../utils/registry';
-import { cleanupAll, killPort, updatePackageJsonFiles } from '../../utils';
-import { ensureDirSync } from 'fs-extra';
-import { tmpProjPath } from '@nrwl/nx-plugin/testing';
+import {
+  cleanupVerdaccioStorage,
+  killPort,
+  updatePackageJsonFiles,
+} from '../../utils';
 
 // eslint-disable-next-line require-yield
 export async function* nxPluginE2EExecutor(
@@ -25,8 +27,7 @@ export async function* nxPluginE2EExecutor(
   process.env.npm_config_registry = verdaccioUrl;
   process.env.YARN_REGISTRY = verdaccioUrl;
 
-  ensureDirSync(tmpProjPath());
-  cleanupAll();
+  cleanupVerdaccioStorage();
 
   let child: ChildProcess;
   try {
@@ -43,8 +44,8 @@ export async function* nxPluginE2EExecutor(
   }
 
   try {
-    buildAllPackages();
-    updatePackageJsonFiles('999.9.9', true);
+    buildAllPackages('e2e,docs,angular-vite,angular-nx,angular-swc');
+    updatePackageJsonFiles('999.9.9', 'dist/packages');
     publishPackages(verdaccioUrl);
 
     const target = `${context.projectName}:${options.testTarget}`;
@@ -59,24 +60,6 @@ export async function* nxPluginE2EExecutor(
   } catch (e) {
     await killPort(4872);
   }
-}
-
-async function runTests(
-  jestConfig: string,
-  context: ExecutorContext
-): Promise<boolean> {
-  const { success } = await jestExecutor(
-    {
-      jestConfig,
-      watch: false,
-      runInBand: true,
-      maxWorkers: 1,
-      testTimeout: 120000,
-    },
-    context
-  );
-
-  return success;
 }
 
 export default nxPluginE2EExecutor;

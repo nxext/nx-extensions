@@ -8,6 +8,6 @@ export {
 } from './package-manager';
 export type { PackageManager } from './package-manager';
 export { runCreateWorkspace } from './create-workspace';
-export { cleanupAll, cleanupProject } from './cleanup';
+export { cleanupVerdaccioStorage, cleanupProject } from './cleanup';
 export { getNxVersion, getPublishedVersion } from './get-versions';
 export { updatePackageJsonFiles } from './json-utils';
