@@ -4,8 +4,11 @@ storage: ../tmp/local-registry/storage
 listen: localhost:4872
 
 auth:
-  htpasswd:
-    file: ./htpasswd
+  auth-memory:
+    users:
+      verdacciouser:
+        name: verdacciouser
+        password: passw0rd
 
 # a list of other known repositories we can talk to
 uplinks:
