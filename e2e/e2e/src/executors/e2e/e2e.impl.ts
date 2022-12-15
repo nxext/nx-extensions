@@ -13,7 +13,7 @@ import {
 } from '../../utils/registry';
 import {
   cleanupVerdaccioStorage,
-  cleanProject,
+  cleanupProject,
   killPort,
   updatePackageJsonFiles,
 } from '../../utils';
@@ -28,7 +28,7 @@ export async function* nxPluginE2EExecutor(
   process.env.npm_config_registry = verdaccioUrl;
   process.env.YARN_REGISTRY = verdaccioUrl;
 
-  cleanProject();
+  cleanupProject();
   cleanupVerdaccioStorage();
 
   let child: ChildProcess;
