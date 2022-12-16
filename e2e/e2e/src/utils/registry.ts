@@ -20,8 +20,8 @@ export function runRegistry(
       }
     });
 
-    childFork.on('error', (err: any) => reject([err]));
-    childFork.on('disconnect', (err: any) => reject([err]));
+    childFork.on('error', (err: unknown) => reject([err]));
+    childFork.on('disconnect', (err: unknown) => reject([err]));
   });
 }
 
@@ -39,10 +39,10 @@ export function addUser(url: string) {
   );
 }
 
-export function buildAllPackages() {
+export function buildAllPackages(exclude: string) {
   logger.info('Build all....');
   execSync(
-    `npx nx run-many --target=build --all --parallel --exclude=e2e,docs,angular-vite,angular-nx,angular-swc || { echo 'Build failed' ; exit 1; }`,
+    `npx nx run-many --target=build --all --parallel --exclude=${exclude} || { echo 'Build failed' ; exit 1; }`,
     {
       stdio: ['pipe', 'pipe', 'pipe'],
     }
@@ -60,9 +60,9 @@ export function runNpmPublish(path: string, verdaccioUrl: string) {
   return JSON.parse(buffer.toString());
 }
 
-export function publishPackages(verdaccioUrl: string) {
+export function publishPackages(verdaccioUrl: string, distDir: string) {
   const pkgFiles = glob
-    .sync('dist/packages/**/package.json')
+    .sync(joinPathFragments(distDir, '**/package.json'))
     .map((pkgJsonPath) => pkgJsonPath.replace('package.json', ''));
   pkgFiles.forEach((distPath) => {
     const pkgInfo = runNpmPublish(distPath, verdaccioUrl);
