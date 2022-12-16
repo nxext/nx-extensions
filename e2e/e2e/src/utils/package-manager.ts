@@ -57,7 +57,7 @@ export function packageInstall(pkgs: string[], projName?: string) {
   return install ? install.toString() : '';
 }
 
-export function getSelectedPackageManager(): 'npm' | 'yarn' | 'pnpm' {
+export function getSelectedPackageManager(): PackageManager {
   return (process.env.SELECTED_PM as 'npm' | 'yarn' | 'pnpm') || 'npm';
 }
 

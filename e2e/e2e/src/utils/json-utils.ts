@@ -1,15 +1,13 @@
 import { readFileSync, writeFileSync } from 'fs-extra';
-import { logger, readNxJson } from '@nrwl/devkit';
+import { joinPathFragments, logger, readNxJson } from '@nrwl/devkit';
 import * as glob from 'glob';
 
-export function updatePackageJsonFiles(version, isLocal) {
+export function updatePackageJsonFiles(version, disDir: string) {
   logger.info('Update versions...');
   const nxJson = readNxJson();
-  let pkgFiles = glob.sync('dist/packages/**/package.json');
+  let pkgFiles = glob.sync(joinPathFragments(disDir, '/**/package.json'));
 
-  if (isLocal) {
-    pkgFiles = pkgFiles.filter((f) => f !== 'package.json');
-  }
+  pkgFiles = pkgFiles.filter((f) => f !== 'package.json');
   pkgFiles.forEach((p) => {
     const content = JSON.parse(readFileSync(p).toString());
     content.version = version;
