@@ -6,6 +6,13 @@
 [SvelteJS](https://svelte.dev) plugin for NX
 [SolidJS](https://www.solidjs.com) plugin for NX
 [Vite](https://www.vitejs.dev) plugin for NX
+[Vitest](https://vitest.dev/) plugin for NX
+[Angular](https://angular.io/) plugin for NX
+[React](https://reactjs.org/) plugin for NX
+[Preact](https://preactjs.com/) plugin for NX
+[Ts.ED](https://tsed.io/) plugin for NX
+[Ionic](https://ionicframework.com/) plugin for NX
+
 
 ## Install and usage
 
@@ -17,7 +24,7 @@ Docs are here: https://nxext.dev
 
 ## Contributing
 
-PRs, ideas and discussions accepted.
+PRs, ideas and discussions accepted. Take a look at [the contributing file](CONTRIBUTING.md)!
 
 ## License
 
