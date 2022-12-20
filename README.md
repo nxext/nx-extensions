@@ -21,7 +21,7 @@ PRs, ideas and discussions accepted.
 
 ## License
 
-MIT © 2020 - 2021 Dominik Pieper
+MIT © 2020 - 2022 Nxext Team
 
 ## Contributors ✨
 
