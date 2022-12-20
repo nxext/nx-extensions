@@ -13,7 +13,6 @@
 [Ts.ED](https://tsed.io/) plugin for NX
 [Ionic](https://ionicframework.com/) plugin for NX
 
-
 ## Install and usage
 
 Docs are here: https://nxext.dev
