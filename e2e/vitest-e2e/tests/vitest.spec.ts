@@ -1,12 +1,16 @@
-import { checkFilesExist, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '@nxext/e2e';
+import {
+  checkFilesExist,
+  runNxCommandAsync,
+  cleanup,
+} from '@nrwl/nx-plugin/testing';
+import { newProject } from '@nxext/e2e';
 
 describe('vitest e2e', () => {
   beforeAll(async () => {
     newProject(['@nxext/vitest']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   it('should create vitest', async () => {
     await runNxCommandAsync(`generate @nxext/vitest:init`);

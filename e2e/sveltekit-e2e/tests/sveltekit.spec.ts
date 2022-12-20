@@ -1,17 +1,18 @@
 import {
   checkFilesExist,
+  cleanup,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '@nxext/e2e';
+import { newProject } from '@nxext/e2e';
 
 xdescribe('sveltekit e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/sveltekit']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   it('should create sveltekit app', async () => {
     const plugin = uniq('sveltekitapp');

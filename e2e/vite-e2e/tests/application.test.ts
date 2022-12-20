@@ -4,15 +4,16 @@ import {
   runNxCommandAsync,
   updateFile,
   uniq,
+  cleanup,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '@nxext/e2e';
+import { newProject } from '@nxext/e2e';
 
 describe('vite e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/vite']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   describe('vite app', () => {
     it('should build vite application', async () => {

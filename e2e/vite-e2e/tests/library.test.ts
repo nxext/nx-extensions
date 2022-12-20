@@ -1,16 +1,17 @@
 import {
   checkFilesExist,
+  cleanup,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '@nxext/e2e';
+import { newProject } from '@nxext/e2e';
 
 describe('vite lib e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/vite']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   describe('vite lib', () => {
     it('should create vite library', async () => {

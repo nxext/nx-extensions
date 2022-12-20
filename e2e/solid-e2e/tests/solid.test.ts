@@ -1,17 +1,18 @@
 import {
   checkFilesExist,
+  cleanup,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '../../e2e/src';
+import { newProject } from '../../e2e/src';
 
 describe('solid e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/solid']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   describe('solid app', () => {
     it('should build solid application', async () => {
