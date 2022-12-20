@@ -1,6 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn format:check
+yarn format:check || {
+  echo "Make sure to run \`yarn format\` before pushing." >&2;
+  exit 1;
+}
 yarn documentation
 yarn pretty-quick --check

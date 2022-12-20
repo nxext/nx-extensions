@@ -2,6 +2,8 @@
 
 PR's, ideas and discussions are welcome.
 
+Always run `yarn format` before doing a push!
+
 ## Project Structure
 
 This project uses the Nx CLI with Yarn 1.x.
