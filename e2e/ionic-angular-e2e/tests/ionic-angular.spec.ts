@@ -1,5 +1,10 @@
-import { readJson, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '@nxext/e2e';
+import {
+  cleanup,
+  readJson,
+  runNxCommandAsync,
+  uniq,
+} from '@nrwl/nx-plugin/testing';
+import { newProject } from '@nxext/e2e';
 
 describe('Ionic Angular Application', () => {
   const asyncTimeout = 600_000;
@@ -8,7 +13,7 @@ describe('Ionic Angular Application', () => {
     newProject(['@nxext/ionic-angular']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   describe('--template', () => {
     it(

@@ -1,12 +1,17 @@
-import { renameFile, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '../../e2e/src';
+import {
+  cleanup,
+  renameFile,
+  runNxCommandAsync,
+  uniq,
+} from '@nrwl/nx-plugin/testing';
+import { newProject } from '../../e2e/src';
 
 describe('buildoptions e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   it(`should build with custom stencil config naming`, async () => {
     const plugin = uniq('library');

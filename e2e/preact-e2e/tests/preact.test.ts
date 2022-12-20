@@ -1,17 +1,18 @@
 import {
   checkFilesExist,
+  cleanup,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '../../e2e/src';
+import { newProject } from '../../e2e/src';
 
 describe('preact e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/preact']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   describe('preact app', () => {
     it('should build preact application', async () => {

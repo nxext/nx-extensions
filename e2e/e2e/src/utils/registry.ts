@@ -1,6 +1,11 @@
 import { ChildProcess, fork, execSync } from 'child_process';
 import * as glob from 'glob';
-import { joinPathFragments, logger, workspaceRoot } from '@nrwl/devkit';
+import {
+  joinPathFragments,
+  logger,
+  workspaceRoot,
+  getPackageManagerCommand,
+} from '@nrwl/devkit';
 
 export function runRegistry(
   args: string[] = [],
@@ -40,11 +45,15 @@ export function addUser(url: string) {
 }
 
 export function buildAllPackages(exclude: string) {
+  const pm = getPackageManagerCommand();
   logger.info('Build all....');
   execSync(
-    `npx nx run-many --target=build --all --parallel --exclude=${exclude} || { echo 'Build failed' ; exit 1; }`,
+    pm.run(
+      'nx',
+      `run-many --target=build --all --parallel --exclude=${exclude} || { echo 'Build failed' ; exit 1; }`
+    ),
     {
-      stdio: ['pipe', 'pipe', 'pipe'],
+      stdio: [0, 1, 2],
     }
   );
 }

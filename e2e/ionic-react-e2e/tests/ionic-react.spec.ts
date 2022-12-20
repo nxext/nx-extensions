@@ -1,6 +1,11 @@
-import { readJson, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import {
+  cleanup,
+  readJson,
+  runNxCommandAsync,
+  uniq,
+} from '@nrwl/nx-plugin/testing';
 import { ApplicationGeneratorSchema } from '@nxext/ionic-react';
-import { cleanupProject, newProject } from '@nxext/e2e';
+import { newProject } from '@nxext/e2e';
 
 describe('ionic react application e2e', () => {
   const asyncTimeout = 300_000;
@@ -9,7 +14,7 @@ describe('ionic react application e2e', () => {
     newProject(['@nxext/ionic-react']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   const defaultOptions: ApplicationGeneratorSchema = {
     name: 'test',

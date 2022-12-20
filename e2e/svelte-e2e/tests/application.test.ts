@@ -1,18 +1,19 @@
 import {
   checkFilesExist,
+  cleanup,
   readJson,
   runNxCommandAsync,
   uniq,
   updateFile,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '../../e2e/src';
+import { newProject } from '../../e2e/src';
 
 describe('svelte e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/svelte']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   describe('Svelte app', () => {
     it('should build svelte application', async () => {

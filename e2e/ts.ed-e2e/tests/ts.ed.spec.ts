@@ -1,17 +1,18 @@
 import {
   checkFilesExist,
+  cleanup,
   readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '@nxext/e2e';
+import { newProject } from '@nxext/e2e';
 
 describe('ts.ed e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/ts.ed']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   it('should create ts.ed application', async () => {
     const plugin = uniq('ts.ed');

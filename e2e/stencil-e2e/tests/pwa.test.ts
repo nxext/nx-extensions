@@ -1,12 +1,12 @@
-import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '../../e2e/src';
+import { cleanup, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import { newProject } from '../../e2e/src';
 
 describe('pwa e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   it(`should build pwa app with scss`, async () => {
     const plugin = uniq('pwa');
