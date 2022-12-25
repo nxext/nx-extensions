@@ -1,7 +1,13 @@
 import 'dotenv/config';
 
 import type { ExecutorContext } from '@nrwl/devkit';
-import { logger, parseTargetString, runExecutor } from '@nrwl/devkit';
+import {
+  joinPathFragments,
+  logger,
+  parseTargetString,
+  readNxJson,
+  runExecutor,
+} from '@nrwl/devkit';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 import type { NxPluginE2EExecutorOptions } from './schema';
 import { ChildProcess } from 'child_process';
@@ -23,15 +29,13 @@ export async function* nxPluginE2EExecutor(
   options: NxPluginE2EExecutorOptions,
   context: ExecutorContext
 ) {
-  const verdaccioPort = options.verdaccioPort || 4872;
+  const verdaccioPort = options.verdaccioPort;
   const verdaccioUrl = `http://localhost:${verdaccioPort}/`;
   process.env.npm_config_registry = verdaccioUrl;
   process.env.YARN_REGISTRY = verdaccioUrl;
 
   // Ensure the temp directory where the projects will be generated is there
   ensureDirSync(tmpProjPath());
-
-  logger.info(context.projectGraph.nodes[context.projectName]);
 
   let child: ChildProcess;
   try {
@@ -48,9 +52,10 @@ export async function* nxPluginE2EExecutor(
   }
 
   try {
-    const distDir = 'dist/packages';
+    const nxJson = readNxJson();
+    const distDir = joinPathFragments('dist', nxJson.workspaceLayout.libsDir);
     buildAllPackages('e2e,docs,angular-vite,angular-nx,angular-swc');
-    updatePackageJsonFiles('999.9.9', distDir);
+    updatePackageJsonFiles('999.9.9', distDir, nxJson.npmScope);
     publishPackages(verdaccioUrl, distDir);
 
     const target = `${context.projectName}:${options.testTarget}`;

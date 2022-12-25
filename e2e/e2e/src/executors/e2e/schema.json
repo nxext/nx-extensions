@@ -16,7 +16,8 @@
     },
     "verdaccioPort": {
       "type": "number",
-      "description": "The port Verdaccio should use"
+      "description": "The port Verdaccio should use",
+      "default": 4872
     }
   },
   "additionalProperties": false,

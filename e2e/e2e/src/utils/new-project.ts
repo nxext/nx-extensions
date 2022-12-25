@@ -1,12 +1,10 @@
-import { getPackageManagerCommand } from '@nrwl/devkit';
-import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 import {
-  cleanupProject,
-  getNxVersion,
-  getSelectedPackageManager,
-  packageInstall,
-  runCreateWorkspace,
-} from './index';
+  detectPackageManager,
+  getPackageManagerCommand,
+  readNxJson,
+} from '@nrwl/devkit';
+import { tmpProjPath, cleanup } from '@nrwl/nx-plugin/testing';
+import { getNxVersion, packageInstall, runCreateWorkspace } from './index';
 import { execSync } from 'child_process';
 import { logError, logInfo } from './logger';
 
@@ -18,9 +16,9 @@ export function newProject(
   packagesToInstall: string[],
   nxPackagesToInstall?: string[],
   name = 'proj',
-  packageManager = getSelectedPackageManager()
+  packageManager = detectPackageManager()
 ): string {
-  cleanupProject();
+  cleanup();
 
   try {
     runCreateWorkspace(name, {
@@ -51,9 +49,9 @@ function addNxPackages(pkgs: string[], projName?: string) {
     .join(' ');
   const install = execSync(`${pm.addDev} ${pkgsWithVersions}`, {
     cwd,
-    stdio: ['pipe', 'pipe', 'pipe'],
+    stdio: [0, 1, 2],
     env: process.env,
     encoding: 'utf-8',
   });
-  return install ? install.toString() : '';
+  return install ?? '';
 }

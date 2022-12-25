@@ -1,9 +1,10 @@
 import {
   checkFilesExist,
+  cleanup,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '../../e2e/src';
+import { newProject } from '../../e2e/src';
 
 describe('outputtargets e2e', () => {
   beforeAll(() => {
@@ -13,7 +14,7 @@ describe('outputtargets e2e', () => {
     );
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   it(`should generate react lib`, async () => {
     const plugin = uniq('lib');

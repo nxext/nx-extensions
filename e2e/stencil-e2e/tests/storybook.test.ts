@@ -1,5 +1,5 @@
-import { runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { cleanupProject, newProject } from '../../e2e/src';
+import { cleanup, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import { newProject } from '../../e2e/src';
 import { runNxCommandUntil } from '../../e2e/src/utils/run-commands';
 
 describe('storybook e2e', () => {
@@ -7,7 +7,7 @@ describe('storybook e2e', () => {
     newProject(['@nxext/stencil'], ['@nrwl/storybook']);
   });
 
-  afterAll(() => cleanupProject());
+  afterAll(() => cleanup());
 
   it('should build', async () => {
     const plugin = uniq('build-storybook');

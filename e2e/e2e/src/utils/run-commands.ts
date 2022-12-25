@@ -1,13 +1,13 @@
 import { ChildProcess, exec } from 'child_process';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
-import { getPackageManagerNxCommand } from './package-manager';
+import { getPackageManagerCommand } from '@nrwl/devkit';
 
 export function runNxCommandUntil(
   command: string,
   criteria: (output: string) => boolean
 ): Promise<ChildProcess> {
-  const pm = getPackageManagerNxCommand();
-  const p = exec(`${pm.runNx} ${command}`, {
+  const pm = getPackageManagerCommand();
+  const p = exec(pm.run('nx', command), {
     cwd: tmpProjPath(),
     env: {
       ...process.env,

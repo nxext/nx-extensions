@@ -1,1 +1,1 @@
-export { newProject, cleanupProject } from './utils';
+export { newProject } from './utils';
