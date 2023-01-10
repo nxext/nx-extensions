@@ -1,5 +1,9 @@
 import { NormalizedSchema } from '../schema';
-import { addProjectConfiguration, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import {
+  addProjectConfiguration,
+  ProjectConfiguration,
+  Tree,
+} from '@nrwl/devkit';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const project: ProjectConfiguration = {
@@ -11,6 +15,6 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
   };
 
   addProjectConfiguration(tree, options.name, {
-    ...project
+    ...project,
   });
 }

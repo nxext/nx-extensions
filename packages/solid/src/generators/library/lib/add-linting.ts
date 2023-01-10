@@ -1,29 +1,42 @@
 import {
   addDependenciesToPackageJson,
+  ensurePackage,
   joinPathFragments,
   Tree,
+  updateJson,
 } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
-import { lintProjectGenerator } from '@nrwl/linter';
-import { extraEslintDependencies } from '../../utils/lint';
+import {
+  extendSolidEslintJson,
+  extraEslintDependencies,
+} from '../../utils/lint';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { readNxVersion } from '../../init/lib/util';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
+  if (options.linter === 'none') {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return () => {};
+  }
+
+  await ensurePackage(host, '@nrwl/linter', readNxVersion(host));
+  const { lintProjectGenerator } = await import('@nrwl/linter');
+
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,
     project: options.name,
     tsConfigPaths: [
       joinPathFragments(options.projectRoot, 'tsconfig.lib.json'),
     ],
-    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,spec.ts}`],
+    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,spec.ts,tsx}`],
     skipFormat: true,
   });
 
-  host.rename(
-    joinPathFragments(options.projectRoot, 'eslintrc.js'),
-    joinPathFragments(options.projectRoot, '.eslintrc.js')
+  updateJson(
+    host,
+    joinPathFragments(options.projectRoot, '.eslintrc.json'),
+    extendSolidEslintJson
   );
-  host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
 
   const installTask = await addDependenciesToPackageJson(
     host,

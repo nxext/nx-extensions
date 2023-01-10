@@ -13,7 +13,7 @@ describe('init', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(tree, {}, {'@nrwl/workspace': '15.4.1'});
+    addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.4.1' });
   });
 
   it('should add Solid dependencies', async () => {

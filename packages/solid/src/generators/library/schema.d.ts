@@ -5,7 +5,8 @@ export interface SolidLibrarySchema {
   tags?: string;
 
   linter: Linter;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'jest' | 'vitest' | 'none';
+  inSourceTests?: boolean;
   e2eTestRunner: 'cypress' | 'none';
   buildable?: boolean;
   directory?: string;

@@ -11,7 +11,7 @@ export const extendSolidEslintJson = (json: Linter.Config) => {
   const { plugins: pluginPlugins, ...config } = json;
 
   return {
-    plugins: ['solid', ...(pluginPlugins || []) ],
+    plugins: ['solid', ...(pluginPlugins || [])],
     ...config,
   };
 };

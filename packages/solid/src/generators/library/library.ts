@@ -4,6 +4,7 @@ import { addProject } from './lib/add-project';
 import { updateTsConfig } from './lib/update-tsconfig';
 import {
   convertNxGenerator,
+  ensurePackage,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -17,6 +18,7 @@ import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-ser
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
+import { readNxVersion } from '../init/lib/util';
 
 function normalizeOptions(
   tree: Tree,
@@ -86,6 +88,17 @@ export async function libraryGenerator(host: Tree, schema: SolidLibrarySchema) {
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
 
+  await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
+  const { viteConfigurationGenerator } = await import('@nrwl/vite');
+  const viteTask = await viteConfigurationGenerator(host, {
+    uiFramework: 'react',
+    project: options.name,
+    newProject: true,
+    includeLib: true,
+    inSourceTests: options.inSourceTests,
+    includeVitest: options.unitTestRunner === 'vitest',
+  });
+
   updateTsConfig(host, options);
   updateJestConfig(host, options);
 
@@ -97,7 +110,7 @@ export async function libraryGenerator(host: Tree, schema: SolidLibrarySchema) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, lintTask, jestTask);
+  return runTasksInSerial(initTask, viteTask, lintTask, jestTask);
 }
 
 export default libraryGenerator;

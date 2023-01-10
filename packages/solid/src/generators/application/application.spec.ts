@@ -15,7 +15,7 @@ describe('Solid app schematic', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(tree, {}, {'@nrwl/workspace': '15.4.1'});
+    addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.4.1' });
   });
 
   describe('Vite bundle', () => {

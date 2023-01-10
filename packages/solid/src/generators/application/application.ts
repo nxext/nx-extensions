@@ -31,10 +31,7 @@ function createFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-export async function applicationGenerator(
-  host: Tree,
-  schema: Schema
-) {
+export async function applicationGenerator(host: Tree, schema: Schema) {
   const options = normalizeOptions(host, schema);
 
   const initTask = await initGenerator(host, { ...options, skipFormat: true });

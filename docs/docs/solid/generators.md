@@ -58,6 +58,14 @@ Type: `string`
 
 Host to listen on.
 
+#### inSourceTests
+
+Default: `false`
+
+Type: `boolean`
+
+When using Vitest, separate spec files will not be generated and instead will be included within the source files. Read more on the Vitest docs site: https://vitest.dev/guide/in-source.html
+
 #### linter
 
 Default: `eslint`
@@ -75,6 +83,14 @@ Default: `5000`
 Type: `number`
 
 Port to listen on.
+
+#### rootProject (**hidden**)
+
+Default: `false`
+
+Type: `boolean`
+
+Create a application at the root of the workspace
 
 #### skipFormat
 
@@ -98,7 +114,7 @@ Default: `jest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `jest`, `vitest`, `none`
 
 Test runner to use for unit tests.
 
@@ -168,6 +184,14 @@ Type: `string`
 
 The library name used to import it, like @myorg/my-awesome-lib
 
+#### inSourceTests
+
+Default: `false`
+
+Type: `boolean`
+
+When using Vitest, separate spec files will not be generated and instead will be included within the source files. Read more on the Vitest docs site: https://vitest.dev/guide/in-source.html
+
 #### linter
 
 Default: `eslint`
@@ -206,7 +230,7 @@ Default: `jest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `jest`, `vitest`, `none`
 
 Test runner to use for unit tests.
 

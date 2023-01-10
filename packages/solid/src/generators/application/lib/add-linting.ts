@@ -1,10 +1,15 @@
 import {
-  addDependenciesToPackageJson, ensurePackage,
+  addDependenciesToPackageJson,
+  ensurePackage,
   joinPathFragments,
-  Tree, updateJson
+  Tree,
+  updateJson,
 } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
-import { extendSolidEslintJson, extraEslintDependencies } from '../../utils/lint';
+import {
+  extendSolidEslintJson,
+  extraEslintDependencies,
+} from '../../utils/lint';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { readNxVersion } from '../../init/lib/util';
 

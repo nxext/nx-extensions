@@ -3,7 +3,7 @@ import {
   getWorkspaceLayout,
   names,
   normalizePath,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { NormalizedSchema, Schema } from '../schema';
 

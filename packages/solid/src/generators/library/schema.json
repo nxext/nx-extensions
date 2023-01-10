@@ -27,7 +27,7 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": ["jest", "vitest", "none"],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
@@ -41,6 +41,11 @@
       "type": "string",
       "description": "A directory where the lib is placed.",
       "alias": "d"
+    },
+    "inSourceTests": {
+      "type": "boolean",
+      "default": false,
+      "description": "When using Vitest, separate spec files will not be generated and instead will be included within the source files. Read more on the Vitest docs site: https://vitest.dev/guide/in-source.html"
     },
     "publishable": {
       "type": "boolean",

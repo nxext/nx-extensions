@@ -4,11 +4,10 @@ import {
   ensurePackage,
   formatFiles,
   GeneratorCallback,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { updateDependencies } from './lib/add-dependencies';
-import { addLinterPlugin } from './lib/add-linter-plugin';
 import { readNxVersion } from './lib/util';
 
 export async function initGenerator(host: Tree, schema: Schema) {
@@ -21,18 +20,15 @@ export async function initGenerator(host: Tree, schema: Schema) {
     tasks.push(jestTask);
   }
 
-  const linterTask = addLinterPlugin(host);
-  tasks.push(linterTask);
-
-  const installTask = updateDependencies(host);
-  tasks.push(installTask);
-
   if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
     await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
     const { cypressInitGenerator } = await import('@nrwl/cypress');
     const cypressTask = cypressInitGenerator(host, {});
     tasks.push(cypressTask);
   }
+
+  const installTask = updateDependencies(host);
+  tasks.push(installTask);
 
   if (!schema.skipFormat) {
     await formatFiles(host);

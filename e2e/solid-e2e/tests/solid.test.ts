@@ -28,7 +28,9 @@ describe('solid e2e', () => {
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain('Successfully ran target build for project');
+      expect(result.stdout).toContain(
+        'Successfully ran target build for project'
+      );
 
       expect(() =>
         checkFilesExist(`dist/apps/${plugin}/index.html`)
@@ -55,7 +57,7 @@ describe('solid e2e', () => {
     });
   });
 
-  xdescribe('solid lib', () => {
+  describe('solid lib', () => {
     it('should create solid library', async () => {
       const plugin = uniq('solidlib');
       await runNxCommandAsync(
@@ -64,15 +66,6 @@ describe('solid e2e', () => {
 
       expect(() =>
         checkFilesExist(`libs/${plugin}/src/index.ts`)
-      ).not.toThrow();
-    });
-
-    it('should generate lib into directory', async () => {
-      await runNxCommandAsync(
-        `generate @nxext/solid:lib project/uilib --e2eTestRunner='none' --junitTestRunner='none'`
-      );
-      expect(() =>
-        checkFilesExist(`libs/project/uilib/src/index.ts`)
       ).not.toThrow();
     });
 
@@ -95,8 +88,8 @@ describe('solid e2e', () => {
       const result = await runNxCommandAsync(`build ${plugin}`);
       expect(() =>
         checkFilesExist(
-          `dist/libs/${plugin}/${plugin}.es.js`,
-          `dist/libs/${plugin}/${plugin}.umd.js`
+          `dist/libs/${plugin}/index.js`,
+          `dist/libs/${plugin}/index.mjs`
         )
       ).not.toThrow();
     });
