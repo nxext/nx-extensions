@@ -1,7 +1,7 @@
 import { NormalizedSchema } from '../../schema';
 import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
 
-export function createViteTargets(options: NormalizedSchema): {
+function createViteTargets(options: NormalizedSchema): {
   [key: string]: TargetConfiguration;
 } {
   return {
@@ -16,7 +16,7 @@ function createBuildTarget(options: NormalizedSchema): TargetConfiguration {
     executor: '@nxext/vite:build',
     outputs: ['{options.outputPath}'],
     options: {
-      outputPath: joinPathFragments('dist', options.projectRoot),
+      outputPath: joinPathFragments('dist', options.appProjectRoot),
       frameworkConfigFile: '@nxext/solid/plugins/vite',
     },
     configurations: {
@@ -29,7 +29,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
   return {
     executor: '@nxext/vite:dev',
     options: {
-      outputPath: joinPathFragments('dist', options.projectRoot),
+      outputPath: joinPathFragments('dist', options.appProjectRoot),
       frameworkConfigFile: '@nxext/solid/plugins/vite',
     },
   };
@@ -40,10 +40,10 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
     executor: '@nrwl/linter:lint',
     options: {
       linter: 'eslint',
-      tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
+      tsConfig: joinPathFragments(options.appProjectRoot, 'tsconfig.app.json'),
       exclude: [
         '**/node_modules/**',
-        `!${joinPathFragments(options.projectRoot, '**/*')}`,
+        `!${joinPathFragments(options.appProjectRoot, '**/*')}`,
       ],
     },
   };

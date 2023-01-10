@@ -1,5 +1,5 @@
 export interface Schema {
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'jest' | 'vitest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
   bundler?: 'vite';
   skipFormat: boolean;

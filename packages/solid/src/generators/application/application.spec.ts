@@ -1,12 +1,12 @@
-import { SolidApplicationSchema } from './schema';
+import { Schema } from './schema';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from './application';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
+import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 
 describe('Solid app schematic', () => {
   let tree: Tree;
-  const options: SolidApplicationSchema = {
+  const options: Schema = {
     name: 'test',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
@@ -14,19 +14,8 @@ describe('Solid app schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    tree.write(
-      'package.json',
-      `
-      {
-        "name": "test-name",
-        "dependencies": {},
-        "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
-        }
-      }
-    `
-    );
+    tree = createTreeWithEmptyV1Workspace();
+    addDependenciesToPackageJson(tree, {}, {'@nrwl/workspace': '15.4.1'});
   });
 
   describe('Vite bundle', () => {

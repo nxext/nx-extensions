@@ -1,13 +1,12 @@
 import { NormalizedSchema } from '../schema';
-import { Tree } from '@nrwl/devkit';
+import { joinPathFragments, Tree } from '@nrwl/devkit';
 
 export function updateJestConfig(host: Tree, options: NormalizedSchema) {
   if (options.unitTestRunner !== 'jest') {
     return;
   }
 
-  const jestConfigPath = `${options.projectRoot}/jest.config.ts`;
-  // const svelteConfigPath = `${options.projectRoot}/jest.config.ts`;
+  const jestConfigPath = joinPathFragments(`${options.appProjectRoot}/jest.config.ts`);
   const originalContent = host.read(jestConfigPath)?.toString();
   const content = updateJestConfigContent(originalContent);
   host.write(jestConfigPath, content);

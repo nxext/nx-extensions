@@ -1,0 +1,17 @@
+import { defineConfig } from 'vite';
+import viteTsConfigPaths from 'vite-tsconfig-paths';
+import solidPlugin from 'vite-plugin-solid';
+
+export default defineConfig({
+  server: {
+    port: 4200,
+    host: 'localhost',
+  },
+
+  plugins: [
+    solidPlugin(),
+    viteTsConfigPaths({
+      root: '../../',
+    }),
+  ],
+});

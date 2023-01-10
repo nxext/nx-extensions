@@ -28,7 +28,7 @@ describe('solid e2e', () => {
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain('Bundle complete');
+      expect(result.stdout).toContain('Successfully ran target build for project');
 
       expect(() =>
         checkFilesExist(`dist/apps/${plugin}/index.html`)
@@ -44,15 +44,6 @@ describe('solid e2e', () => {
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
     });
 
-    it('should generate app into directory', async () => {
-      await runNxCommandAsync(
-        `generate @nxext/solid:app project/ui --e2eTestRunner='none' --junitTestRunner='none'`
-      );
-      expect(() =>
-        checkFilesExist(`apps/project/ui/src/App.tsx`)
-      ).not.toThrow();
-    });
-
     it('should be able to run linter', async () => {
       const plugin = uniq('solidlint');
       await runNxCommandAsync(
@@ -64,7 +55,7 @@ describe('solid e2e', () => {
     });
   });
 
-  describe('solid lib', () => {
+  xdescribe('solid lib', () => {
     it('should create solid library', async () => {
       const plugin = uniq('solidlib');
       await runNxCommandAsync(

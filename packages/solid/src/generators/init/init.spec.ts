@@ -1,9 +1,9 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJson, Tree, addDependenciesToPackageJson } from '@nrwl/devkit';
+import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
 
-describe('init schematic', () => {
+describe('init', () => {
   let tree: Tree;
   const options: Schema = {
     skipFormat: true,
@@ -12,22 +12,12 @@ describe('init schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    tree.write(
-      'package.json',
-      `
-      {
-        "name": "test-name",
-        "dependencies": {},
-        "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
-        }
-      }
-    `
-    );
+    tree = createTreeWithEmptyV1Workspace();
+    addDependenciesToPackageJson(tree, {}, {'@nrwl/workspace': '15.4.1'});
   });
 
   it('should add Solid dependencies', async () => {
+    console.log(tree.read('package.json', 'utf-8'));
     await initGenerator(tree, options);
 
     const packageJson = readJson(tree, 'package.json');

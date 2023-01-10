@@ -1,35 +1,38 @@
 import { Schema } from './schema';
 import {
   convertNxGenerator,
+  ensurePackage,
   formatFiles,
   GeneratorCallback,
-  Tree,
+  Tree
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { addJestPlugin } from './lib/add-jest-plugin';
-import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
 import { addLinterPlugin } from './lib/add-linter-plugin';
-import { viteInitGenerator } from '@nxext/vite';
+import { readNxVersion } from './lib/util';
 
 export async function initGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
 
   if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
-    const jestTask = addJestPlugin(host);
+    await ensurePackage(host, '@nrwl/jest', readNxVersion(host));
+    const { jestInitGenerator } = await import('@nrwl/jest');
+    const jestTask = jestInitGenerator(host, {});
     tasks.push(jestTask);
-  }
-  if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
-    const cypressTask = addCypressPlugin(host);
-    tasks.push(cypressTask);
   }
 
   const linterTask = addLinterPlugin(host);
   tasks.push(linterTask);
+
   const installTask = updateDependencies(host);
   tasks.push(installTask);
-  const viteTask = await viteInitGenerator(host, schema);
-  tasks.push(viteTask);
+
+  if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
+    await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
+    const { cypressInitGenerator } = await import('@nrwl/cypress');
+    const cypressTask = cypressInitGenerator(host, {});
+    tasks.push(cypressTask);
+  }
 
   if (!schema.skipFormat) {
     await formatFiles(host);
