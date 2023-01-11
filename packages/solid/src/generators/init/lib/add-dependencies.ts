@@ -6,17 +6,23 @@ import {
   solidVersion,
   vitePluginSolidVersion,
 } from '../../utils/versions';
+import { Schema } from '../schema';
 
-export function updateDependencies(tree: Tree) {
-  return addDependenciesToPackageJson(
-    tree,
-    {},
-    {
+export function updateDependencies(tree: Tree, schema: Schema) {
+  let devDependencies: Record<string, string> = {
+    'solid-js': solidVersion,
+    'solid-testing-library': solidTestingLibraryVersion,
+    'eslint-plugin-solid': eslintPluginSolidVersion,
+    'vite-plugin-solid': vitePluginSolidVersion,
+  };
+
+  if (schema.unitTestRunner === 'jest') {
+    devDependencies = {
+      ...devDependencies,
       'solid-jest': solidJestVersion,
-      'solid-js': solidVersion,
-      'solid-testing-library': solidTestingLibraryVersion,
-      'eslint-plugin-solid': eslintPluginSolidVersion,
-      'vite-plugin-solid': vitePluginSolidVersion,
-    }
-  );
+      '@testing-library/jest-dom': '5.16.5',
+    };
+  }
+
+  return addDependenciesToPackageJson(tree, {}, devDependencies);
 }

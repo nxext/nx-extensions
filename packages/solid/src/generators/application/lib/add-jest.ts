@@ -12,10 +12,10 @@ export async function addJest(host: Tree, options: NormalizedSchema) {
 
   return await jestProjectGenerator(host, {
     project: options.name,
-    supportTsx: false,
+    supportTsx: true,
     skipSerializers: true,
-    setupFile: 'none',
-    babelJest: false,
+    setupFile: 'web-components',
+    compiler: 'babel',
     rootProject: options.rootProject,
   });
 }

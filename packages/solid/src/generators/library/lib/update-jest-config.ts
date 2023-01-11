@@ -12,6 +12,9 @@ export function updateJestConfig(host: Tree, options: NormalizedSchema) {
   host.write(configPath, content);
 }
 
-function updateJestConfigContent(content: string) {
-  return content;
+export function updateJestConfigContent(content: string) {
+  return content.replace(
+    `'babel-jest'`,
+    `['babel-jest', { presets: ['solid-jest/preset/browser'] }]`
+  );
 }

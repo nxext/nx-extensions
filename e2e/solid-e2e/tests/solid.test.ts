@@ -17,7 +17,7 @@ describe('solid e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    cleanup();
+    //cleanup();
   });
 
   describe('solid app', () => {
@@ -54,6 +54,38 @@ describe('solid e2e', () => {
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
       expect(result.stdout).toContain('All files pass linting');
+    });
+
+    describe('should be able to test the application', () => {
+      it('with jest', async () => {
+        const plugin = uniq('solidjest');
+        await runNxCommandAsync(
+          `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='jest'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/solid:component testcomp --project=${plugin}`
+        );
+
+        const result = await runNxCommandAsync(`test ${plugin}`);
+        expect(result.stdout).toContain(
+          'Successfully ran target build for project'
+        );
+      });
+
+      xit('with vitest', async () => {
+        const plugin = uniq('solidvitest');
+        await runNxCommandAsync(
+          `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='vitest'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/solid:component testcomp --project=${plugin}`
+        );
+
+        const result = await runNxCommandAsync(`test ${plugin}`);
+        expect(result.stdout).toContain(
+          'Successfully ran target build for project'
+        );
+      });
     });
   });
 
@@ -92,6 +124,38 @@ describe('solid e2e', () => {
           `dist/libs/${plugin}/index.mjs`
         )
       ).not.toThrow();
+    });
+
+    describe('should be able to test the library', () => {
+      it('with jest', async () => {
+        const plugin = uniq('solidjest');
+        await runNxCommandAsync(
+          `generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='jest'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/solid:component testcomp --project=${plugin}`
+        );
+
+        const result = await runNxCommandAsync(`test ${plugin}`);
+        expect(result.stdout).toContain(
+          'Successfully ran target build for project'
+        );
+      });
+
+      xit('with vitest', async () => {
+        const plugin = uniq('solidvitest');
+        await runNxCommandAsync(
+          `generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='vitest'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/solid:component testcomp --project=${plugin}`
+        );
+
+        const result = await runNxCommandAsync(`test ${plugin}`);
+        expect(result.stdout).toContain(
+          'Successfully ran target build for project'
+        );
+      });
     });
   });
 });

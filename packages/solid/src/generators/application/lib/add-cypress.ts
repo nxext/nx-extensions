@@ -1,14 +1,21 @@
-import { cypressProjectGenerator } from '@nrwl/cypress';
-import { Tree } from '@nrwl/devkit';
+import { ensurePackage, Tree } from '@nrwl/devkit';
 import { NormalizedSchema } from '../schema';
+import { readNxVersion } from '../../init/lib/util';
 
-export async function addCypress(tree: Tree, options: NormalizedSchema) {
+export async function addCypress(host: Tree, options: NormalizedSchema) {
   if (options.e2eTestRunner !== 'cypress') {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
   }
 
-  return await cypressProjectGenerator(tree, {
-    name: options.name + '-e2e',
-    project: options.name,
+  await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
+  const { cypressProjectGenerator } = await import('@nrwl/cypress');
+
+  return await cypressProjectGenerator(host, {
+    ...options,
+    name: options.e2eProjectName,
+    directory: options.directory,
+    project: options.projectName,
+    rootProject: options.rootProject,
+    bundler: 'vite',
   });
 }

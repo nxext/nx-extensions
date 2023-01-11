@@ -1,7 +1,7 @@
 import { SolidLibrarySchema } from './schema';
 import { Linter } from '@nrwl/linter';
-import { readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { addDependenciesToPackageJson, readJson, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from './library';
 
 describe('solid library schematic', () => {
@@ -15,19 +15,8 @@ describe('solid library schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    tree.write(
-      'package.json',
-      `
-      {
-        "name": "test-name",
-        "dependencies": {},
-        "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
-        }
-      }
-    `
-    );
+    tree = createTreeWithEmptyV1Workspace();
+    addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.4.1' });
   });
 
   it('should add solid dependencies', async () => {
@@ -41,12 +30,10 @@ describe('solid library schematic', () => {
   it('should add solid project files', async () => {
     await libraryGenerator(tree, options);
 
-    // expect(tree.exists(`libs/${options.name}/solid.config.cjs`)).toBeTruthy();
     expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
     expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
     expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/.eslintrc.json`)).toBeFalsy();
-    expect(tree.exists(`libs/${options.name}/.eslintrc.js`)).toBeTruthy();
+    expect(tree.exists(`libs/${options.name}/.eslintrc.json`)).toBeTruthy();
   });
 
   it('should fail if no importPath is provided with publishable', async () => {

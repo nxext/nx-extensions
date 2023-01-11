@@ -27,7 +27,7 @@ export async function initGenerator(host: Tree, schema: Schema) {
     tasks.push(cypressTask);
   }
 
-  const installTask = updateDependencies(host);
+  const installTask = updateDependencies(host, schema);
   tasks.push(installTask);
 
   if (!schema.skipFormat) {

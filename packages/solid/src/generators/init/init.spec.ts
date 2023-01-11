@@ -17,7 +17,6 @@ describe('init', () => {
   });
 
   it('should add Solid dependencies', async () => {
-    console.log(tree.read('package.json', 'utf-8'));
     await initGenerator(tree, options);
 
     const packageJson = readJson(tree, 'package.json');
