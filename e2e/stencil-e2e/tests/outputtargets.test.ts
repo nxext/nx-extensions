@@ -1,6 +1,7 @@
 import {
   checkFilesExist,
   cleanup,
+  runNxCommand,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
@@ -14,7 +15,12 @@ describe('outputtargets e2e', () => {
     );
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   it(`should generate react lib`, async () => {
     const plugin = uniq('lib');

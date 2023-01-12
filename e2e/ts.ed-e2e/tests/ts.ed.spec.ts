@@ -2,6 +2,7 @@ import {
   checkFilesExist,
   cleanup,
   readJson,
+  runNxCommand,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
@@ -12,7 +13,12 @@ describe('ts.ed e2e', () => {
     newProject(['@nxext/ts.ed']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   it('should create ts.ed application', async () => {
     const plugin = uniq('ts.ed');

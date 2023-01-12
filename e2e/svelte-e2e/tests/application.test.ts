@@ -2,6 +2,7 @@ import {
   checkFilesExist,
   cleanup,
   readJson,
+  runNxCommand,
   runNxCommandAsync,
   uniq,
   updateFile,
@@ -13,7 +14,12 @@ describe('svelte e2e', () => {
     newProject(['@nxext/svelte']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   describe('Svelte app', () => {
     it('should build svelte application', async () => {
