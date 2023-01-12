@@ -5,6 +5,7 @@ import {
   updateFile,
   uniq,
   cleanup,
+  runNxCommand,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
 
@@ -13,7 +14,12 @@ describe('vite e2e', () => {
     newProject(['@nxext/vite']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   describe('vite app', () => {
     it('should build vite application', async () => {

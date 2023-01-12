@@ -1,4 +1,9 @@
-import { cleanup, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import {
+  cleanup,
+  runNxCommand,
+  runNxCommandAsync,
+  uniq,
+} from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
 
 describe('capacitor-project e2e', () => {
@@ -17,7 +22,12 @@ describe('capacitor-project e2e', () => {
     );
   }, asyncTimeout);
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   it('should build successfully', async () => {
     const buildResults = await runNxCommandAsync(`build ${plugin}`);

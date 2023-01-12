@@ -1,4 +1,9 @@
-import { cleanup, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import {
+  cleanup,
+  runNxCommand,
+  runNxCommandAsync,
+  uniq,
+} from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
 describe('pwa e2e', () => {
@@ -6,7 +11,12 @@ describe('pwa e2e', () => {
     newProject(['@nxext/stencil']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   it(`should build pwa app with scss`, async () => {
     const plugin = uniq('pwa');

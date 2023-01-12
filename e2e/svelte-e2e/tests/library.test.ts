@@ -1,6 +1,7 @@
 import {
   checkFilesExist,
   cleanup,
+  runNxCommand,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
@@ -11,7 +12,12 @@ describe('svelte e2e', () => {
     newProject(['@nxext/svelte']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   describe('Svelte lib', () => {
     it('should create svelte library', async () => {
