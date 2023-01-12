@@ -29,6 +29,7 @@ module.exports = {
     { name: 'capacitor', description: 'capacitor specific' },
     { name: 'ionic-angular', description: 'ionic-angular specific' },
     { name: 'ionic-react', description: 'ionic-react specific' },
+    { name: 'vue', description: 'vue specific' },
   ],
 
   allowTicketNumber: true,

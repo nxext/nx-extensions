@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "vue",
+  "version": "0.0.1",
+  "generators": {
+    "vue": {
+      "factory": "./src/generators/vue/generator",
+      "schema": "./src/generators/vue/schema.json",
+      "description": "vue generator"
+    }
+  }
+}
