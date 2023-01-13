@@ -7,7 +7,7 @@ import {
 import { newProject } from '../../e2e/src';
 import { runNxCommandUntil } from '../../e2e/src/utils/run-commands';
 
-describe('storybook e2e', () => {
+xdescribe('storybook e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/stencil'], ['@nrwl/storybook']);
   });

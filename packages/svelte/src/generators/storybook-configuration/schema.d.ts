@@ -7,4 +7,6 @@ export interface StorybookConfigureSchema {
   js?: boolean;
   cypressDirectory?: string;
   standaloneConfig?: boolean;
+  tsConfiguration?: boolean;
+  configureTestRunner?: boolean;
 }

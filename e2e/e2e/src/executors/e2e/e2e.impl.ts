@@ -5,7 +5,6 @@ import {
   joinPathFragments,
   logger,
   parseTargetString,
-  readNxJson,
   runExecutor,
 } from '@nrwl/devkit';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
@@ -19,6 +18,7 @@ import {
 } from '../../utils/registry';
 import {
   cleanupVerdaccioStorage,
+  deployedVersion,
   killPort,
   updatePackageJsonFiles,
 } from '../../utils';
@@ -52,14 +52,14 @@ export async function* nxPluginE2EExecutor(
   }
 
   try {
-    const nxJson = readNxJson();
+    const nxJson = context.nxJsonConfiguration;
     const distDir = joinPathFragments('dist', nxJson.workspaceLayout.libsDir);
     buildAllPackages('e2e,docs,angular-vite,angular-nx,angular-swc');
-    updatePackageJsonFiles('999.9.9', distDir, nxJson.npmScope);
+    updatePackageJsonFiles(deployedVersion, distDir, nxJson.npmScope);
     publishPackages(verdaccioUrl, distDir);
 
     const target = `${context.projectName}:${options.testTarget}`;
-    const delegateTarget = parseTargetString(target);
+    const delegateTarget = parseTargetString(target, context.projectGraph);
     yield* await runExecutor(delegateTarget, {}, context);
   } catch (e) {
     logger.error(e.message);

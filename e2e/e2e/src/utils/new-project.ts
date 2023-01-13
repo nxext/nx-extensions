@@ -1,8 +1,4 @@
-import {
-  detectPackageManager,
-  getPackageManagerCommand,
-  readNxJson,
-} from '@nrwl/devkit';
+import { detectPackageManager, getPackageManagerCommand } from '@nrwl/devkit';
 import { tmpProjPath, cleanup } from '@nrwl/nx-plugin/testing';
 import { getNxVersion, packageInstall, runCreateWorkspace } from './index';
 import { execSync } from 'child_process';

@@ -300,6 +300,12 @@ Type: `boolean`
 
 Run the cypress-configure generator
 
+#### configureTestRunner
+
+Type: `boolean`
+
+Add a Storybook Test-Runner target.
+
 #### cypressDirectory
 
 Type: `string`
@@ -329,3 +335,11 @@ The tool to use for running lint checks.
 Type: `boolean`
 
 Split the project configuration into `<projectRoot>/project.json` rather than including it inside workspace.json
+
+#### tsConfiguration
+
+Default: `false`
+
+Type: `boolean`
+
+Configure your project with TypeScript. Generate main.ts and preview.ts files, instead of main.js and preview.js.
