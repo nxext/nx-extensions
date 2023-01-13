@@ -15,6 +15,7 @@ import {
   eslintPluginSvelteVersion,
   svelteCheckVersion,
   svelteJesterVersion,
+  svelteLoaderVersion,
   sveltePreprocessVersion,
   svelteVersion,
   testingLibrarySvelteVersion,
@@ -88,6 +89,7 @@ const sveltepkgs = [
   { pkg: '@testing-library/svelte', version: testingLibrarySvelteVersion },
   { pkg: '@sveltejs/vite-plugin-svelte', version: vitePluginSvelteVersion },
   { pkg: 'eslint-plugin-svelte3', version: eslintPluginSvelteVersion },
+  { pkg: 'svelte-loader', version: svelteLoaderVersion },
 ];
 
 sveltepkgs.forEach(({ pkg, version }) => {

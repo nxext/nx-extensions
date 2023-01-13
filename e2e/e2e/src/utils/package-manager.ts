@@ -1,13 +1,11 @@
 import { execSync } from 'child_process';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
-import { getNxVersion, getPublishedVersion } from './index';
+import { getNxVersion, deployedVersion } from './index';
 import {
   detectPackageManager,
   getPackageManagerCommand,
   getPackageManagerVersion,
-  joinPathFragments,
   PackageManager,
-  readNxJson,
 } from '@nrwl/devkit';
 
 export function getNxWorkspaceCommands({
@@ -36,14 +34,11 @@ export function getNxWorkspaceCommands({
 }
 
 export function packageInstall(pkgs: string[], projName?: string) {
-  const nxJson = readNxJson();
-  const distDir = joinPathFragments('dist', nxJson.workspaceLayout.libsDir);
   const cwd = projName ? `${tmpProjPath()}/${projName}` : tmpProjPath();
   const pm = getPackageManagerCommand();
   const pkgsWithVersions = pkgs
     .map((pgk) => {
-      const version = getPublishedVersion(pgk, distDir);
-      return `${pgk}@${version}`;
+      return `${pgk}@${deployedVersion}`;
     })
     .join(' ');
   const install = execSync(`${pm.addDev} ${pkgsWithVersions}`, {
