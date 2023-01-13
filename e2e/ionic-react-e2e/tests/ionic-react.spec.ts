@@ -1,6 +1,7 @@
 import {
   cleanup,
   readJson,
+  runNxCommand,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
@@ -14,7 +15,12 @@ describe('ionic react application e2e', () => {
     newProject(['@nxext/ionic-react']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   const defaultOptions: ApplicationGeneratorSchema = {
     name: 'test',

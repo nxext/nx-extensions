@@ -2,6 +2,7 @@ import {
   checkFilesExist,
   runNxCommandAsync,
   cleanup,
+  runNxCommand,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
 
@@ -10,7 +11,12 @@ describe('vitest e2e', () => {
     newProject(['@nxext/vitest']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   it('should create vitest', async () => {
     await runNxCommandAsync(`generate @nxext/vitest:init`);

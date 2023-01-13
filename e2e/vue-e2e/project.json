@@ -1,0 +1,27 @@
+{
+  "name": "vue-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "e2e/vue-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nxext/e2e:e2e",
+      "options": {
+        "testTarget": "run-e2e-tests",
+        "verdaccioConfig": ".verdaccio/config.yml"
+      },
+      "outputs": ["{workspaceRoot}/coverage/e2e/vue"]
+    },
+    "run-e2e-tests": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "e2e/vue-e2e/jest.config.ts",
+        "passWithNoTests": true,
+        "runInBand": true
+      },
+      "outputs": ["coverage/e2e/vue"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["vue"]
+}

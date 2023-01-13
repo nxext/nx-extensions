@@ -1,4 +1,9 @@
-import { cleanup, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
+import {
+  cleanup,
+  runNxCommand,
+  runNxCommandAsync,
+  uniq,
+} from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 import { runNxCommandUntil } from '../../e2e/src/utils/run-commands';
 
@@ -7,7 +12,12 @@ describe('storybook e2e', () => {
     newProject(['@nxext/stencil'], ['@nrwl/storybook']);
   });
 
-  afterAll(() => cleanup());
+  afterAll(() => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    runNxCommand('reset');
+    cleanup();
+  });
 
   it('should build', async () => {
     const plugin = uniq('build-storybook');
