@@ -20,8 +20,7 @@
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
-  "executors": "./executors.json",
   "peerDependencies": {
-    "@nrwl/devkit": "15.5.0"
+    "@nrwl/devkit": "^15.5.0"
   }
 }

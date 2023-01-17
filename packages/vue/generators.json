@@ -3,10 +3,17 @@
   "name": "vue",
   "version": "0.0.1",
   "generators": {
-    "vue": {
-      "factory": "./src/generators/vue/generator",
-      "schema": "./src/generators/vue/schema.json",
-      "description": "vue generator"
+    "init": {
+      "factory": "./src/generators/init/init",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initialize the `@nxext/vue` plugin.",
+      "hidden": true
+    },
+    "application": {
+      "factory": "./src/generators/application/application",
+      "schema": "./src/generators/application/schema.json",
+      "description": "Create a Vue application.",
+      "aliases": ["app"]
     }
   }
 }
