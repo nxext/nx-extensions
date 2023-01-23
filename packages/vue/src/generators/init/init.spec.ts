@@ -1,6 +1,4 @@
-import {
-  createTreeWithEmptyV1Workspace,
-} from '@nrwl/devkit/testing';
+import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
 import { Tree } from '@nrwl/devkit';
 
 import initGenerator from './init';

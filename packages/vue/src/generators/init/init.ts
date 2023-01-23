@@ -1,9 +1,9 @@
 import {
   addDependenciesToPackageJson,
   convertNxGenerator,
-  ensurePackage,
+  ensurePackage, formatFiles,
   GeneratorCallback,
-  Tree,
+  Tree
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { readNxVersion } from '../utils/utils';
@@ -48,6 +48,10 @@ export async function initGenerator(host: Tree, schema: InitSchema) {
     const { cypressInitGenerator } = await import('@nrwl/cypress');
     const cypressTask = cypressInitGenerator(host, {});
     tasks.push(cypressTask);
+  }
+
+  if (!schema.skipFormat) {
+    await formatFiles(host);
   }
 
   return runTasksInSerial(...tasks);

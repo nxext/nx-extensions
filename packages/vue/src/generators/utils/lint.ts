@@ -9,7 +9,7 @@ export const extraEslintDependencies = {
   },
 };
 
-export const extendReactEslintJson = (json: Linter.Config) => {
+export const extendVueEslintJson = (json: Linter.Config) => {
   const { extends: pluginExtends, ...config } = json;
 
   return {
@@ -18,7 +18,8 @@ export const extendReactEslintJson = (json: Linter.Config) => {
       'eslint:recommended',
       '@vue/eslint-config-typescript',
       '@vue/eslint-config-prettier',
-      ...(pluginExtends || [])],
+      ...(pluginExtends || []),
+    ],
     ...config,
   };
 };

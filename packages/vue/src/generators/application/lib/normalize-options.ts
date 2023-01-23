@@ -1,4 +1,10 @@
-import { extractLayoutDirectory, getWorkspaceLayout, names, normalizePath, Tree } from '@nrwl/devkit';
+import {
+  extractLayoutDirectory,
+  getWorkspaceLayout,
+  names,
+  normalizePath,
+  Tree,
+} from '@nrwl/devkit';
 import { NormalizedSchema, Schema } from '../schema';
 
 export function normalizeDirectory(options: Schema) {

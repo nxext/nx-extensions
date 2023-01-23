@@ -1,24 +1,25 @@
-import { Linter } from '@nrwl/linter';
-
 export interface Schema {
   name: string;
   tags?: string;
   directory?: string;
   unitTestRunner?: 'vitest' | 'none';
   e2eTestRunner?: 'cypress' | 'none';
-  inSourceTests?: boolean;
-  routing?: boolean;
   linter: Linter;
+  inSourceTests?: boolean;
+  publishable?: boolean;
+  buildable?: boolean;
+  importPath?: string;
+  component?: boolean;
   skipFormat?: boolean;
 }
+
 export interface NormalizedSchema<T extends Schema = Schema> extends T {
-  appProjectRoot: string;
-  appProjectName: string;
+  projectName: string;
+  projectRoot: string;
   e2eProjectName: string;
-  routing: boolean;
   projectDirectory: string;
   parsedTags: string[];
+  fileName: string;
   unitTestRunner: 'vitest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
-  rootProject: boolean;
 }
