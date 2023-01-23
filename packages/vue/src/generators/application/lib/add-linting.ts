@@ -1,5 +1,5 @@
 import {
-  extendReactEslintJson,
+  extendVueEslintJson,
   extraEslintDependencies,
 } from '../../utils/lint';
 import { NormalizedSchema } from '../schema';
@@ -39,14 +39,14 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     updateJson(
       host,
       joinPathFragments(options.appProjectRoot, '.eslintrc.json'),
-      extendReactEslintJson
+      extendVueEslintJson
     );
 
     const installTask = await addDependenciesToPackageJson(
       host,
       extraEslintDependencies.dependencies,
       {
-        ...extraEslintDependencies.devDependencies
+        ...extraEslintDependencies.devDependencies,
       }
     );
     tasks.push(installTask);

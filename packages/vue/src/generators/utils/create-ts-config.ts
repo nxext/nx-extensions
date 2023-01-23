@@ -18,15 +18,15 @@ export function createTsConfig(
       allowJs: false,
       esModuleInterop: false,
       allowSyntheticDefaultImports: true,
-      strict: options.strict
+      strict: options.strict,
     },
     files: [],
     include: [],
     references: [
       {
-        path: type === 'app' ? './tsconfig.app.json' : './tsconfig.lib.json'
-      }
-    ]
+        path: type === 'app' ? './tsconfig.app.json' : './tsconfig.lib.json',
+      },
+    ],
   } as any;
 
   json.compilerOptions.types =

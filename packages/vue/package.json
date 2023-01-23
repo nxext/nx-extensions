@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vue",
-  "version": "15.0.0",
+  "version": "15.5.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vue",
@@ -21,6 +21,6 @@
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
   "peerDependencies": {
-    "@nrwl/devkit": "^15.5.0"
+    "@nrwl/devkit": "~15.5.0"
   }
 }

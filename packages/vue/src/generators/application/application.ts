@@ -26,7 +26,7 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
 
   const initTask = await initGenerator(host, {
     ...options,
-    skipFormat: true
+    skipFormat: true,
   });
 
   const viteTask = await viteConfigurationGenerator(host, {

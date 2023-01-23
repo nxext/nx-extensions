@@ -14,6 +14,17 @@
       "schema": "./src/generators/application/schema.json",
       "description": "Create a Vue application.",
       "aliases": ["app"]
+    },
+    "library": {
+      "factory": "./src/generators/library/library",
+      "schema": "./src/generators/library/schema.json",
+      "description": "library generator",
+      "aliases": ["lib"]
+    },
+    "component": {
+      "factory": "./src/generators/component/generator",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator"
     }
   }
 }
