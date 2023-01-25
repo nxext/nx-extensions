@@ -1,3 +1,5 @@
+[DEPRECATED] This package is deprecated and will be removed in the next major release or by 1st August 2022. Please use the official nx plugin @nrwl/vite. Thank you for all your support and making vite popular in NX. Big thank you to NX team for taking vite on officially
+
 # @nxext/vite
 
 [![License](https://img.shields.io/npm/l/@nxext/svelte.svg?style=flat-square)]()
