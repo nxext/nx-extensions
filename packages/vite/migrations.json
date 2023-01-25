@@ -11,6 +11,12 @@
       "description": "'update",
       "cli": "nx",
       "implementation": "./src/migrations/viteconfig-to-config-file/viteconfig-to-config-file"
+    },
+    "move-to-nx": {
+      "version": "15.2.0",
+      "description": "move-to-nx",
+      "cli": "nx",
+      "implementation": "./src/migrations/move-to-nx/move-to-nx"
     }
   },
   "packageJsonUpdates": {
@@ -29,6 +35,10 @@
     },
     "13.2.3": {
       "version": "13.2.3",
+      "packages": {}
+    },
+    "15.2.0": {
+      "version": "15.2.0",
       "packages": {}
     }
   }

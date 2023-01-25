@@ -85,6 +85,7 @@
     "@vuepress/plugin-back-to-top": "^2.0.0-beta.49",
     "@vuepress/plugin-search": "^2.0.0-beta.43",
     "all-contributors-cli": "^6.25.1",
+    "ast-vite-config-merge": "^0.2.0",
     "autoprefixer": "10.4.14",
     "chalk": "4.1.0",
     "commitizen": "^4.3.0",
