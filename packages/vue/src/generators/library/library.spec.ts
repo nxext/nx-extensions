@@ -8,11 +8,16 @@ import {
 
 import { libraryGenerator } from './library';
 import { Schema } from './schema';
+import { Linter } from '@nrwl/linter';
 
 describe('library generator', () => {
   let host: Tree;
   const projectName = 'my-lib';
-  const options: Schema = { name: projectName, unitTestRunner: 'none' };
+  const options: Schema = {
+    name: projectName,
+    unitTestRunner: 'none',
+    linter: Linter.EsLint,
+  };
 
   beforeEach(() => {
     host = createTreeWithEmptyV1Workspace();
@@ -49,5 +54,31 @@ describe('library generator', () => {
     expect(tsconfigJson.compilerOptions.paths['@proj/my-lib']).toEqual([
       'libs/my-lib/src/index.ts',
     ]);
+  });
+
+  it('should add vue dependencies packages to package.json if not already present', async () => {
+    await libraryGenerator(host, options);
+
+    const packageJson = readJson(host, '/package.json');
+
+    expect(packageJson).toMatchObject({
+      dependencies: {
+        vue: expect.anything(),
+        'vue-tsc': expect.anything(),
+      },
+      devDependencies: {
+        '@vitejs/plugin-vue': expect.anything(),
+      },
+    });
+  });
+
+  it('should update tags', async () => {
+    await libraryGenerator(host, { ...options, tags: 'foo,bar' });
+    const project = readProjectConfiguration(host, 'my-lib');
+    expect(project).toEqual(
+      expect.objectContaining({
+        tags: ['foo', 'bar'],
+      })
+    );
   });
 });

@@ -90,7 +90,7 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
     tasks.push(componentTask);
   }
 
-  if(!options.skipFormat) {
+  if (!options.skipFormat) {
     await formatFiles(host);
   }
 

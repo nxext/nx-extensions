@@ -43,7 +43,7 @@
       "type": "boolean",
       "description": "When true, the component is exported from the project `index.ts` (if it exists).",
       "alias": "e",
-      "default": false,
+      "default": true,
       "x-prompt": "Should this component be exported in the project?"
     }
   },

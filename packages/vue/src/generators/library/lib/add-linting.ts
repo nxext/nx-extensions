@@ -14,11 +14,11 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
       linter: options.linter,
       project: options.projectName,
       tsConfigPaths: [
-        joinPathFragments(options.projectRoot, 'tsconfig.lib.json')
+        joinPathFragments(options.projectRoot, 'tsconfig.lib.json'),
       ],
       unitTestRunner: options.unitTestRunner,
       eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,tsx,js,jsx}`],
-      skipFormat: true
+      skipFormat: true,
     });
 
     updateJson(

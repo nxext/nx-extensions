@@ -1,9 +1,10 @@
 import {
   addDependenciesToPackageJson,
   convertNxGenerator,
-  ensurePackage, formatFiles,
+  ensurePackage,
+  formatFiles,
   GeneratorCallback,
-  Tree
+  Tree,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { readNxVersion } from '../utils/utils';
@@ -11,7 +12,6 @@ import {
   vitePluginVueVersion,
   vueRouterVersion,
   vueTestUtilsVersion,
-  vueTsconfigVersion,
   vueTscVersion,
   vueVersion,
 } from '../utils/versions';
@@ -21,7 +21,6 @@ function updateDependencies(host: Tree, schema: InitSchema) {
   let dependencies: Record<string, string> = {
     vue: vueVersion,
     'vue-tsc': vueTscVersion,
-    '@vue/tsconfig': vueTsconfigVersion,
   };
   if (schema.routing) {
     dependencies = {

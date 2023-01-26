@@ -22,9 +22,10 @@
       "aliases": ["lib"]
     },
     "component": {
-      "factory": "./src/generators/component/generator",
+      "factory": "./src/generators/component/component",
       "schema": "./src/generators/component/schema.json",
-      "description": "component generator"
+      "description": "component generator",
+      "aliases": ["c"]
     }
   }
 }

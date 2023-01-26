@@ -3,7 +3,7 @@ import {
   cleanup,
   runNxCommandAsync,
   uniq,
-  updateFile
+  updateFile,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 import { names } from '@nrwl/devkit';
@@ -23,7 +23,7 @@ describe('vue e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommandAsync('reset');
-    cleanup();
+    //cleanup();
   });
 
   describe('application', () => {
@@ -158,6 +158,16 @@ describe('vue e2e', () => {
         );
       });
 
+      it('should be able to run linter in directory', async () => {
+        const projectName = uniq('vueliblinter');
+        const subDir = 'subdir';
+        await runNxCommandAsync(
+          `generate @nxext/vue:lib ${projectName} --directory=${subDir} --unitTestRunner='none'`
+        );
+        const result = await runNxCommandAsync(`lint ${subDir}-${projectName}`);
+        expect(result.stdout).toContain(`All files pass linting.`);
+      });
+
       it('should be able to run vitest in directory', async () => {
         const projectName = uniq('vuelibvitest');
         const subDir = 'subdir';
@@ -173,7 +183,7 @@ describe('vue e2e', () => {
     });
   });
 
-  xdescribe('graph reference', () => {
+  describe('library reference', () => {
     it('should create a vue application with linked lib', async () => {
       const projectName = uniq('vuelinkapp');
       const libName = uniq('vuelinklib');
@@ -184,15 +194,17 @@ describe('vue e2e', () => {
       await runNxCommandAsync(
         `generate @nxext/vue:lib ${libName} --buildable --unitTestRunner='none'`
       );
-      updateFile(`apps/${projectName}/src/App.vue`, `
+      updateFile(
+        `apps/${projectName}/src/App.vue`,
+        `
 <script setup lang="ts">
 import { ${libClassName} } from '@proj/${libName}';
 </script>
 
 <template>
     <${libClassName} msg="Yey"></${libClassName}>
-</template>`);
-
+</template>`
+      );
 
       const result = await runNxCommandAsync(`build ${projectName}`);
       expect(result.stdout).toContain(
