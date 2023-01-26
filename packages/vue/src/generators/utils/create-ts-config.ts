@@ -15,7 +15,7 @@ export function createTsConfig(
 ) {
   const json = {
     compilerOptions: {
-      allowJs: false,
+      allowJs: true,
       esModuleInterop: false,
       allowSyntheticDefaultImports: true,
       strict: options.strict,

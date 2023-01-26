@@ -6,3 +6,9 @@ export interface Schema {
   skipTests?: boolean;
   export?: boolean;
 }
+
+interface NormalizedSchema extends Schema {
+  projectRoot: string;
+  projectSourceRoot: string;
+  fileName: string;
+}

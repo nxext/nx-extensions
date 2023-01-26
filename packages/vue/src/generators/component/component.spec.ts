@@ -1,29 +1,78 @@
 import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
 import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
-
 import { componentGenerator } from './component';
 import { Schema } from './schema';
-import { uniq } from '@nrwl/nx-plugin/testing';
-import libraryGenerator from '../library/library';
+import { applicationGenerator } from '../application/application';
+import { libraryGenerator } from '../library/library';
 import { Linter } from '@nrwl/linter';
 
 describe('component generator', () => {
   let host: Tree;
-  const projectName = uniq('test');
+  const libProjectName = 'my-lib';
 
-  const options: Schema = { name: 'testcomponent', project: projectName };
+  const options: Schema = {
+    name: 'testcomponent',
+    project: libProjectName,
+    export: false,
+  };
 
   beforeEach(() => {
     host = createTreeWithEmptyV1Workspace();
     addDependenciesToPackageJson(host, {}, { '@nrwl/workspace': '15.5.0' });
-    libraryGenerator(host, { name: projectName, linter: Linter.None });
+    libraryGenerator(host, {
+      name: libProjectName,
+      linter: Linter.None,
+      unitTestRunner: 'none',
+      skipFormat: true,
+    });
+    applicationGenerator(host, {
+      name: 'my-app',
+      linter: Linter.None,
+      unitTestRunner: 'none',
+      skipFormat: true,
+    });
   });
 
-  it('should run successfully', async () => {
+  it('should generate files', async () => {
     await componentGenerator(host, options);
 
+    host.listChanges().forEach((value) => {
+      if (value.path.startsWith('lib/my-lib')) {
+        console.log(value);
+      }
+    });
     expect(
-      host.exists(`libs/${projectName}/src/components/Testcomponent.vue`)
+      host.exists(`libs/my-lib/src/components/Testcomponent.vue`)
     ).toBeTruthy();
+  });
+
+  describe('--export', () => {
+    it('should add to index.ts barrel', async () => {
+      await componentGenerator(host, {
+        name: 'hello',
+        project: libProjectName,
+        export: true,
+      });
+
+      const indexContent = host.read('libs/my-lib/src/index.ts', 'utf-8');
+
+      expect(indexContent).toContain(
+        `export { default as Hello } from './components/Hello.vue';`
+      );
+    });
+
+    it('should not export from an app', async () => {
+      await componentGenerator(host, {
+        name: 'hello',
+        project: 'my-app',
+        export: true,
+      });
+
+      const indexContent = host.read('libs/my-lib/src/index.ts', 'utf-8');
+
+      expect(indexContent).not.toContain(
+        `import Hello from './components/Hello.vue';`
+      );
+    });
   });
 });

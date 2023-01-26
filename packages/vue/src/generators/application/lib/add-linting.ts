@@ -1,7 +1,4 @@
-import {
-  extendVueEslintJson,
-  extraEslintDependencies,
-} from '../../utils/lint';
+import { extendVueEslintJson, extraEslintDependencies } from '../../utils/lint';
 import { NormalizedSchema } from '../schema';
 import {
   addDependenciesToPackageJson,
