@@ -3,8 +3,10 @@ import {
   cleanup,
   runNxCommandAsync,
   uniq,
+  updateFile
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
+import { names } from '@nrwl/devkit';
 
 describe('vue e2e', () => {
   // Setting up individual workspaces per
@@ -21,7 +23,7 @@ describe('vue e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommandAsync('reset');
-    //cleanup();
+    cleanup();
   });
 
   describe('application', () => {
@@ -168,6 +170,34 @@ describe('vue e2e', () => {
           `Successfully ran target test for project ${subDir}-${projectName}`
         );
       });
+    });
+  });
+
+  xdescribe('graph reference', () => {
+    it('should create a vue application with linked lib', async () => {
+      const projectName = uniq('vuelinkapp');
+      const libName = uniq('vuelinklib');
+      const libClassName = names(libName).className;
+      await runNxCommandAsync(
+        `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --linter='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/vue:lib ${libName} --buildable --unitTestRunner='none'`
+      );
+      updateFile(`apps/${projectName}/src/App.vue`, `
+<script setup lang="ts">
+import { ${libClassName} } from '@proj/${libName}';
+</script>
+
+<template>
+    <${libClassName} msg="Yey"></${libClassName}>
+</template>`);
+
+
+      const result = await runNxCommandAsync(`build ${projectName}`);
+      expect(result.stdout).toContain(
+        `Successfully ran target build for project ${projectName}`
+      );
     });
   });
 });
