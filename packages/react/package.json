@@ -13,8 +13,8 @@
   "generators": "./generators.json",
   "dependencies": {
     "@nxext/vite": "^15.1.0",
-    "@nrwl/devkit": "15.5.0",
-    "@nrwl/react": "15.5.0"
+    "@nrwl/devkit": "15.6.0",
+    "@nrwl/react": "15.6.0"
   },
   "files": [
     "client.d.ts",

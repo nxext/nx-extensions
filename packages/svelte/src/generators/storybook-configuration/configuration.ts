@@ -7,22 +7,16 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-
 import { Linter } from '@nrwl/linter';
-
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
 import { readNxVersion } from '../init/lib/util';
 import { updateMainJs } from './lib/update-main-js';
-import { options } from 'yargs';
 
 export async function configurationGenerator(
   host: Tree,
   schema: StorybookConfigureSchema
 ) {
-  await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
-  const { configurationGenerator } = await import('@nrwl/storybook');
-
   const uiFramework = '@storybook/svelte';
   const options = normalizeSchema(schema);
   const tasks: GeneratorCallback[] = [];
@@ -35,6 +29,9 @@ export async function configurationGenerator(
     }
   );
   tasks.push(installTask);
+
+  await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
+  const { configurationGenerator } = await import('@nrwl/storybook');
 
   const storybookTask = await configurationGenerator(host, {
     name: options.name,

@@ -1,9 +1,9 @@
-import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import {
   Tree,
   readProjectConfiguration,
-  addDependenciesToPackageJson,
   readJson,
+  updateJson,
 } from '@nrwl/devkit';
 
 import { libraryGenerator } from './library';
@@ -20,8 +20,13 @@ describe('library generator', () => {
   };
 
   beforeEach(() => {
-    host = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(host, {}, { '@nrwl/workspace': '15.5.0' });
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(host, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
   });
 
   it('should run successfully', async () => {
