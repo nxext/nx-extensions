@@ -14,7 +14,7 @@ describe('@nxext/svelte:storybook-configuration', () => {
 
   beforeEach(async () => {
     tree = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.5.0' });
+    addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.6.0' });
 
     await libraryGenerator(tree, {
       name: 'test-ui-lib',

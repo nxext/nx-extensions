@@ -4,4 +4,4 @@
 
 ## Executors / Builders
 
-Our Vue applications are built using the executors from the [@nx/vite](https://nx.dev/packages/vite) plugin.
+Our Vue applications are built using the executors from the [@nrwl/vite](https://nx.dev/packages/vite) plugin.

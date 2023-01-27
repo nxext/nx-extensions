@@ -21,7 +21,7 @@ describe('library generator', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(host, {}, { '@nrwl/workspace': '15.5.0' });
+    addDependenciesToPackageJson(host, {}, { '@nrwl/workspace': '15.6.0' });
   });
 
   it('should run successfully', async () => {
