@@ -1,10 +1,10 @@
-import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
-import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
-import { componentGenerator } from './component';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree, updateJson } from '@nrwl/devkit';
+import { Linter } from '@nrwl/linter';
 import { Schema } from './schema';
 import { applicationGenerator } from '../application/application';
 import { libraryGenerator } from '../library/library';
-import { Linter } from '@nrwl/linter';
+import { componentGenerator } from './component';
 
 describe('component generator', () => {
   let host: Tree;
@@ -17,14 +17,20 @@ describe('component generator', () => {
   };
 
   beforeEach(() => {
-    host = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(host, {}, { '@nrwl/workspace': '15.5.0' });
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(host, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
     libraryGenerator(host, {
       name: libProjectName,
       linter: Linter.None,
       unitTestRunner: 'none',
       skipFormat: true,
     });
+
     applicationGenerator(host, {
       name: 'my-app',
       linter: Linter.None,

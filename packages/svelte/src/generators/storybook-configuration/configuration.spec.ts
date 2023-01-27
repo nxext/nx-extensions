@@ -1,10 +1,10 @@
 import {
-  addDependenciesToPackageJson,
   readJson,
   readProjectConfiguration,
   Tree,
+  updateJson,
 } from '@nrwl/devkit';
-import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '@nrwl/workspace/generators';
 
 import configurationGenerator from './configuration';
@@ -13,8 +13,13 @@ describe('@nxext/svelte:storybook-configuration', () => {
   let tree: Tree;
 
   beforeEach(async () => {
-    tree = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.5.0' });
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(tree, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
 
     await libraryGenerator(tree, {
       name: 'test-ui-lib',
@@ -27,8 +32,6 @@ describe('@nxext/svelte:storybook-configuration', () => {
       name: 'test-ui-lib',
       standaloneConfig: false,
     });
-
-    console.log(tree.read(`libs/test-ui-lib/.storybook/main.js`, 'utf-8'));
 
     // Root
     expect(tree.exists('.storybook/main.js')).toBeTruthy();

@@ -1,12 +1,11 @@
-import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import {
-  addDependenciesToPackageJson,
   readJson,
   readProjectConfiguration,
   Tree,
+  updateJson,
 } from '@nrwl/devkit';
-
-import applicationGenerator from './application';
+import { applicationGenerator } from './application';
 import { Schema } from './schema';
 import { Linter } from '@nrwl/linter';
 
@@ -21,8 +20,13 @@ describe('app generator', () => {
   };
 
   beforeEach(() => {
-    host = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(host, {}, { '@nrwl/workspace': '15.5.0' });
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(host, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
   });
 
   it('should run successfully', async () => {

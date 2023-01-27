@@ -7,9 +7,9 @@ export async function addCypress(host: Tree, options: NormalizedSchema) {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     return () => {};
   }
+
   await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
   const { cypressProjectGenerator } = await import('@nrwl/cypress');
-
   return await cypressProjectGenerator(host, {
     ...options,
     name: options.e2eProjectName,

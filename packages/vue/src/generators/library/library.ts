@@ -1,17 +1,11 @@
 import {
-  addProjectConfiguration,
   convertNxGenerator,
   ensurePackage,
   formatFiles,
-  generateFiles,
   GeneratorCallback,
-  names,
-  offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
-import * as path from 'path';
-import { NormalizedSchema, Schema } from './schema';
-import { readNxVersion } from '../utils/utils';
+import { Schema } from './schema';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import initGenerator from '../init/init';
 import { normalizeOptions } from './lib/normalize-options';
@@ -21,6 +15,7 @@ import { createLibraryFiles } from './lib/create-library-files';
 import componentGenerator from '../component/component';
 import { updateBaseTsConfig } from './lib/update-base-tsconfig';
 import { addLinting } from './lib/add-linting';
+import { readNxVersion } from '../utils/utils';
 
 export async function libraryGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
@@ -38,7 +33,6 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
   const initTask = await initGenerator(host, {
     ...options,
     routing: false,
-    unitTestRunner: options.unitTestRunner,
     skipFormat: true,
   });
   tasks.push(initTask);
