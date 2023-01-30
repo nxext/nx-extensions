@@ -1,9 +1,6 @@
-import {
-  createTreeWithEmptyV1Workspace,
-  createTreeWithEmptyWorkspace,
-} from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import applicationGenerator from '../application/application';
-import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
+import { Tree } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import { libraryGenerator } from '../library/library';
 
@@ -13,11 +10,10 @@ export async function createTestProject(
   unitTestrunner: 'none' | 'jest' = 'none',
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
-  const tree = createTreeWithEmptyV1Workspace();
-  addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.4.1' });
+  const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
 
   if (type === 'application') {
-    await applicationGenerator(tree, {
+    await applicationGenerator(host, {
       name: name,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
@@ -25,7 +21,7 @@ export async function createTestProject(
     });
   }
   if (type === 'library') {
-    await libraryGenerator(tree, {
+    await libraryGenerator(host, {
       name: name,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
@@ -34,5 +30,5 @@ export async function createTestProject(
     });
   }
 
-  return tree;
+  return host;
 }

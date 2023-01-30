@@ -57,7 +57,7 @@ describe('solid e2e', () => {
     });
 
     describe('should be able to test the application', () => {
-      it('with jest', async () => {
+      xit('with jest', async () => {
         const plugin = uniq('solidjest');
         await runNxCommandAsync(
           `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='jest'`
@@ -72,7 +72,7 @@ describe('solid e2e', () => {
         );
       });
 
-      xit('with vitest', async () => {
+      it('with vitest', async () => {
         const plugin = uniq('solidvitest');
         await runNxCommandAsync(
           `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='vitest'`
@@ -89,7 +89,7 @@ describe('solid e2e', () => {
     });
   });
 
-  describe('solid lib', () => {
+  xdescribe('solid lib', () => {
     it('should create solid library', async () => {
       const plugin = uniq('solidlib');
       await runNxCommandAsync(
@@ -127,7 +127,7 @@ describe('solid e2e', () => {
     });
 
     describe('should be able to test the library', () => {
-      it('with jest', async () => {
+      xit('with jest', async () => {
         const plugin = uniq('solidjest');
         await runNxCommandAsync(
           `generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='jest'`

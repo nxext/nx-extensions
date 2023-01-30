@@ -1,11 +1,15 @@
 import { SolidLibrarySchema } from './schema';
 import { Linter } from '@nrwl/linter';
-import { addDependenciesToPackageJson, readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
+import { readJson, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from './library';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../init/lib/util');
 
 describe('solid library schematic', () => {
-  let tree: Tree;
+  let host: Tree;
   const options: SolidLibrarySchema = {
     name: 'test',
     linter: Linter.EsLint,
@@ -13,32 +17,33 @@ describe('solid library schematic', () => {
     e2eTestRunner: 'cypress',
     skipFormat: false,
   };
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
 
   beforeEach(() => {
-    tree = createTreeWithEmptyV1Workspace();
-    addDependenciesToPackageJson(tree, {}, { '@nrwl/workspace': '15.4.1' });
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should add solid dependencies', async () => {
-    await libraryGenerator(tree, options);
-    const packageJson = readJson(tree, 'package.json');
+    await libraryGenerator(host, options);
+    const packageJson = readJson(host, 'package.json');
 
     expect(packageJson.devDependencies['solid-js']).toBeDefined();
     expect(packageJson.devDependencies['solid-jest']).toBeDefined();
   });
 
   it('should add solid project files', async () => {
-    await libraryGenerator(tree, options);
+    await libraryGenerator(host, options);
 
-    expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/.eslintrc.json`)).toBeTruthy();
+    expect(host.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
+    expect(host.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
+    expect(host.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
+    expect(host.exists(`libs/${options.name}/.eslintrc.json`)).toBeTruthy();
   });
 
   it('should fail if no importPath is provided with publishable', async () => {
     try {
-      await libraryGenerator(tree, {
+      await libraryGenerator(host, {
         ...options,
         publishable: true,
       });

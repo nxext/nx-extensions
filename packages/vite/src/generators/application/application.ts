@@ -12,7 +12,6 @@ import {
   addDependenciesToPackageJson,
   convertNxGenerator,
   formatFiles,
-  GeneratorCallback,
   joinPathFragments,
   Tree,
   updateJson,

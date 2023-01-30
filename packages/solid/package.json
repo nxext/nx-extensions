@@ -22,7 +22,7 @@
   "main": "src/index.js",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nrwl/devkit": "15.6.0"
+    "@nrwl/devkit": "~15.7.0"
   },
   "peerDependencies": {
     "solid-js": "^1.6.0",

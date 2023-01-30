@@ -2,9 +2,13 @@ import componentGenerator, { SolidComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { names, Tree } from '@nrwl/devkit';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../init/lib/util');
 
 describe('component schematic', () => {
-  let tree: Tree;
+  let host: Tree;
   const projectName = uniq('testprojekt');
   const componentName = uniq('test');
   const options: SolidComponentSchema = {
@@ -13,19 +17,22 @@ describe('component schematic', () => {
     unitTestRunner: 'jest',
   };
 
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+
   beforeEach(async () => {
-    tree = await createTestProject(projectName);
+    host = await createTestProject(projectName);
   });
 
   it('should run successfully', async () => {
-    await expect(componentGenerator(tree, options)).resolves.not.toThrowError();
+    await expect(componentGenerator(host, options)).resolves.not.toThrowError();
   });
 
   it('should add file', async () => {
-    await componentGenerator(tree, options);
+    await componentGenerator(host, options);
     const name = names(componentName);
     expect(
-      tree.exists(
+      host.exists(
         `apps/${projectName}/src/components/${name.fileName}/${name.className}.ts`
       )
     );
