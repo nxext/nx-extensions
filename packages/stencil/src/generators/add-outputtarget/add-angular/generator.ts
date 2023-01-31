@@ -2,6 +2,7 @@ import {
   addDependenciesToPackageJson,
   applyChangesToString,
   convertNxGenerator,
+  ensurePackage,
   getWorkspaceLayout,
   joinPathFragments,
   readProjectConfiguration,
@@ -15,7 +16,7 @@ import {
   insertImport,
 } from '../../../utils/ast-utils';
 import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
-import { addToGitignore } from '../../../utils/utillities';
+import { addToGitignore, readNxVersion } from '../../../utils/utillities';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 import * as ts from 'typescript';
 import { relative } from 'path';
@@ -35,6 +36,7 @@ async function prepareAngularLibrary(
   const angularProjectName = `${options.projectName}-angular`;
   const { libsDir } = getWorkspaceLayout(host);
 
+  await ensurePackage(host, '@nrwl/angular', readNxVersion(host));
   const generators = await import('@nrwl/angular/generators');
   const libraryTarget = await generators.libraryGenerator(host, {
     name: angularProjectName,

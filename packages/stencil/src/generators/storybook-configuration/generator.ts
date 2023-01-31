@@ -1,5 +1,6 @@
 import {
   convertNxGenerator,
+  ensurePackage,
   formatFiles,
   generateFiles,
   GeneratorCallback,
@@ -15,13 +16,14 @@ import {
   writeJson,
 } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
-import { cypressProjectGenerator } from '@nrwl/storybook';
-import { initGenerator } from '@nrwl/storybook/src/generators/init/init';
 import { TsConfig } from '@nrwl/storybook/src/utils/utilities';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { getRootTsConfigPathInTree } from '@nrwl/workspace/src/utilities/typescript';
 import { join } from 'path';
-import { isBuildableStencilProject } from '../../utils/utillities';
+import {
+  isBuildableStencilProject,
+  readNxVersion,
+} from '../../utils/utillities';
 import { updateDependencies } from './lib/add-dependencies';
 import { updateLintConfig } from './lib/update-lint-config';
 import { StorybookConfigureSchema } from './schema';
@@ -39,14 +41,14 @@ export function getProjectTsImportPath(tree: Tree, projectName: string) {
 }
 
 export async function storybookConfigurationGenerator(
-  tree: Tree,
+  host: Tree,
   rawSchema: StorybookConfigureSchema
 ) {
   const tasks: GeneratorCallback[] = [];
   const uiFramework = '@storybook/html';
   const options = normalizeSchema(rawSchema);
 
-  const projectConfig = readProjectConfiguration(tree, options.name);
+  const projectConfig = readProjectConfiguration(host, options.name);
 
   if (!isBuildableStencilProject(projectConfig)) {
     logger.info(stripIndents`
@@ -64,22 +66,29 @@ export async function storybookConfigurationGenerator(
     return;
   }
 
-  const initTask = await initGenerator(tree, {
+  await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
+  const { initGenerator } = await import(
+    '@nrwl/storybook/src/generators/init/init'
+  );
+
+  const initTask = await initGenerator(host, {
     uiFramework: uiFramework,
   });
   tasks.push(initTask);
 
-  createRootStorybookDir(tree);
-  createProjectStorybookDir(tree, options.name, uiFramework);
-  configureTsProjectConfig(tree, options);
-  configureTsSolutionConfig(tree);
-  updateLintConfig(tree, options);
-  addStorybookTask(tree, options.name, uiFramework);
-  updateDependencies(tree);
+  createRootStorybookDir(host);
+  createProjectStorybookDir(host, options.name, uiFramework);
+  configureTsProjectConfig(host, options);
+  configureTsSolutionConfig(host);
+  updateLintConfig(host, options);
+  addStorybookTask(host, options.name, uiFramework);
+  updateDependencies(host);
 
   if (options.configureCypress) {
+    await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
+    const { cypressProjectGenerator } = await import('@nrwl/storybook');
     if (projectConfig.projectType !== 'application') {
-      const cypressTask = await cypressProjectGenerator(tree, {
+      const cypressTask = await cypressProjectGenerator(host, {
         name: options.name,
         js: false,
         linter: options.linter,
@@ -92,7 +101,7 @@ export async function storybookConfigurationGenerator(
     }
   }
 
-  await formatFiles(tree);
+  await formatFiles(host);
 
   return runTasksInSerial(...tasks);
 }

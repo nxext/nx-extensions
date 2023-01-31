@@ -5,6 +5,7 @@ import {
   readJson,
   readWorkspaceConfiguration,
   Tree,
+  updateJson,
   updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 import { makeLibBuildableGenerator } from './make-lib-buildable';
@@ -23,6 +24,12 @@ describe('make-lib-buildable schematic', () => {
 
   beforeEach(async () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(host, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
     await libraryGenerator(host, {
       name: options.name,
       style: SupportedStyles.css,

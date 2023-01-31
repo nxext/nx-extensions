@@ -1,17 +1,19 @@
 import {
   addDependenciesToPackageJson,
+  ensurePackage,
   GeneratorCallback,
   joinPathFragments,
   Tree,
   updateJson,
 } from '@nrwl/devkit';
 import { PWASchema } from '../schema';
-import { Linter, lintProjectGenerator } from '@nrwl/linter';
+import { Linter } from '@nrwl/linter';
 import {
   createStencilEslintJson,
   extraEslintDependencies,
 } from '../../../utils/lint';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { readNxVersion } from '../../../utils/utillities';
 
 export async function addLinting(host: Tree, options: PWASchema) {
   if (options.linter !== Linter.EsLint) {
@@ -19,6 +21,8 @@ export async function addLinting(host: Tree, options: PWASchema) {
     return () => {};
   }
 
+  await ensurePackage(host, '@nrwl/linter', readNxVersion(host));
+  const { lintProjectGenerator } = await import('@nrwl/linter');
   const tasks: GeneratorCallback[] = [];
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,
