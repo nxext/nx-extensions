@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "15.0.0",
+  "version": "15.6.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -25,7 +25,7 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "15.6.0",
+    "@nrwl/devkit": "~15.6.0",
     "ignore": "^5.2.0"
   },
   "peerDependencies": {

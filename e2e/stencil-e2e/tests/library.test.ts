@@ -11,7 +11,7 @@ import { runNxCommandUntil } from '../../e2e/src/utils/run-commands';
 
 describe('library e2e', () => {
   beforeAll(() => {
-    newProject(['@nxext/stencil', '@nxext/svelte'], ['@nrwl/storybook']);
+    newProject(['@nxext/stencil', '@nxext/svelte']);
   });
 
   afterAll(() => {

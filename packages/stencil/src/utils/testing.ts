@@ -2,6 +2,7 @@ import { SupportedStyles } from '../stencil-core-utils';
 import {
   readWorkspaceConfiguration,
   Tree,
+  updateJson,
   updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
@@ -19,6 +20,12 @@ export async function createTestUILib(
   buildable = true
 ): Promise<Tree> {
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+  updateJson(host, '/package.json', (json) => {
+    json.devDependencies = {
+      '@nrwl/workspace': '15.6.0',
+    };
+    return json;
+  });
   const workspaceConfiguration = readWorkspaceConfiguration(host);
   workspaceConfiguration.npmScope = testNpmScope;
   updateWorkspaceConfiguration(host, workspaceConfiguration);

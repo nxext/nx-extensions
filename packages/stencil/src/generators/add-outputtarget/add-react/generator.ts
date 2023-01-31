@@ -2,6 +2,7 @@ import {
   addDependenciesToPackageJson,
   applyChangesToString,
   convertNxGenerator,
+  ensurePackage,
   getWorkspaceLayout,
   readProjectConfiguration,
   Tree,
@@ -9,7 +10,7 @@ import {
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { Linter } from '@nrwl/linter';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore } from '../../../utils/utillities';
+import { addToGitignore, readNxVersion } from '../../../utils/utillities';
 import * as ts from 'typescript';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import { addImport } from '../../../utils/ast-utils';
@@ -23,8 +24,9 @@ async function prepareReactLibrary(
   const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
 
-  const generators = await import('@nrwl/react');
-  const libraryTarget = await generators.libraryGenerator(host, {
+  await ensurePackage(host, '@nrwl/react', readNxVersion(host));
+  const { libraryGenerator } = await import('@nrwl/react');
+  const libraryTarget = await libraryGenerator(host, {
     name: reactProjectName,
     style: 'css',
     publishable: options.publishable,

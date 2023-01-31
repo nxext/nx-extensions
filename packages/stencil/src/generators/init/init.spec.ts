@@ -1,5 +1,10 @@
 import { AppType } from '../../utils/typings';
-import { readJson, readWorkspaceConfiguration, Tree } from '@nrwl/devkit';
+import {
+  readJson,
+  readWorkspaceConfiguration,
+  Tree,
+  updateJson,
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { initGenerator } from './init';
 
@@ -8,6 +13,12 @@ describe('init', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(host, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
   });
 
   it('should add stencil dependencies', async () => {
