@@ -280,14 +280,6 @@ Type: `boolean`
 
 When true, the component is exported from the project `index.ts` (if it exists).
 
-#### inSourceTests
-
-Default: `false`
-
-Type: `boolean`
-
-When using Vitest, separate spec files will not be generated and instead will be included within the source files. Read more on the Vitest docs site: https://vitest.dev/guide/in-source.html
-
 #### skipTests
 
 Default: `false`
