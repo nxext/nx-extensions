@@ -32,6 +32,29 @@ export function newProject(
   }
 }
 
+export function newProjectWithPreset(
+  preset: string,
+  params?: string,
+  name = 'proj',
+  packageManager = detectPackageManager()
+): string {
+  cleanup();
+
+  try {
+    runCreateWorkspace(name, {
+      preset: preset,
+      extraArgs: params,
+      packageManager,
+    });
+
+    logInfo(`creating the test workspace with preset "${preset}"...`);
+    return name;
+  } catch (e) {
+    logError(`Failed to set up project for e2e tests.`, e.message);
+    throw e;
+  }
+}
+
 function addNxPackages(pkgs: string[], projName?: string) {
   if (pkgs == null || pkgs.length == 0) return;
 

@@ -287,3 +287,79 @@ Default: `false`
 Type: `boolean`
 
 When true, does not create `spec.ts` test files for the new component.
+
+## @nxext/vue:preset
+
+preset generator
+
+### Usage
+
+```bash
+nx generate preset ...
+```
+
+By default, Nx will search for `preset` in the default collection provisioned in nx.json.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/vue:preset ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g preset ... --dry-run
+```
+
+### Options
+
+#### e2eTestRunner
+
+Default: `none`
+
+Type: `string`
+
+Possible values: `cypress`, `none`
+
+Test runner to use for end to end (E2E) tests.
+
+#### linter
+
+Default: `eslint`
+
+Type: `string`
+
+Possible values: `eslint`, `none`
+
+The tool to use for running lint checks.
+
+#### tags
+
+Alias(es): t
+
+Type: `string`
+
+Add tags to the project (used for linting)
+
+#### tailwind
+
+Default: `false`
+
+Type: `boolean`
+
+Setup Tailwind
+
+#### unitTestRunner
+
+Default: `vitest`
+
+Type: `string`
+
+Possible values: `vitest`, `none`
+
+Test runner to use for unit tests.
+
+#### vueAppName
+
+Type: `string`
