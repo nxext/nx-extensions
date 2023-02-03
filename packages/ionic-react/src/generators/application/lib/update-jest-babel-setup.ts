@@ -1,6 +1,5 @@
-import type { Tree } from '@nrwl/devkit';
 import type { Node, PropertyAssignment } from 'typescript';
-import { joinPathFragments } from '@nrwl/devkit';
+import { Tree, joinPathFragments } from '@nrwl/devkit';
 import { tsquery } from '@phenomnomnominal/tsquery';
 import { NormalizedSchema } from '../schema';
 

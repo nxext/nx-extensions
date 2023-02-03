@@ -1,12 +1,14 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree, ensurePackage } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
-import { applicationGenerator } from '@nrwl/react';
 import { ApplicationGeneratorSchema } from '../schema';
+import { readNxVersion } from '../../../utils/utils';
 
 export async function addReact(
   host: Tree,
   options: ApplicationGeneratorSchema
 ) {
+  await ensurePackage(host, '@nrwl/angular', readNxVersion(host));
+  const { applicationGenerator } = await import('@nrwl/react');
   return await applicationGenerator(host, {
     ...options,
     name: options.name,

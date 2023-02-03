@@ -1,10 +1,10 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson } from '@nrwl/devkit';
+import { readJson, updateJson, Tree } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 
 describe('init schematic', () => {
-  let tree;
+  let host: Tree;
   const options: Schema = {
     skipFormat: true,
     unitTestRunner: 'jest',
@@ -12,25 +12,19 @@ describe('init schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    tree.overwrite(
-      'package.json',
-      `
-      {
-        "name": "test-name",
-        "dependencies": {},
-        "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
-        }
-      }
-    `
-    );
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(host, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
   });
 
   it('should add Preact dependencies', async () => {
-    await initGenerator(tree, options);
+    await initGenerator(host, options);
 
-    const packageJson = readJson(tree, 'package.json');
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['preact']).toBeDefined();
   });
 });
