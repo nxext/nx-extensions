@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "15.6.0",
+  "version": "15.6.1",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -29,7 +29,7 @@
     "ignore": "^5.2.0"
   },
   "peerDependencies": {
-    "@nxext/svelte": "^15.1.0",
+    "@nxext/svelte": "^15.6.0",
     "@nrwl/storybook": "^15.6.0",
     "@nrwl/cypress": "^15.6.0",
     "@nrwl/linter": "^15.6.0",
