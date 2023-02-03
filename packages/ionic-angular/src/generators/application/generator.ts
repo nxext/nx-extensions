@@ -7,7 +7,6 @@ import {
 import { addAngular } from './lib/add-angular';
 import { addCapacitor } from './lib/add-capacitor';
 import { addDependencies } from './lib/add-dependencies';
-import { generateCapacitorProject } from './lib/external-schematic';
 import { addFiles, removeFiles } from './lib/files';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateEslintConfig } from './lib/update-eslint-config';
@@ -26,7 +25,6 @@ export async function applicationGenerator(
   removeFiles(host, normalizedOptions);
   updateWorkspace(host, normalizedOptions);
   updateEslintConfig(host, normalizedOptions);
-  generateCapacitorProject(normalizedOptions);
 
   let capacitorTask: GeneratorCallback | null = null;
   if (options.capacitor) {
