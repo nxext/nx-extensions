@@ -5,5 +5,5 @@ import { applicationGenerator } from '../application/application';
 export default async function (host: Tree, options: PresetSchema) {
   options.name = options.vueAppName;
 
-  await applicationGenerator(host, options);
+  return await applicationGenerator(host, options);
 }

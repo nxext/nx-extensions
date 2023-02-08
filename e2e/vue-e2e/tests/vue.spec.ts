@@ -7,7 +7,7 @@ import {
 import { newProject } from '../../e2e/src';
 import { names } from '@nrwl/devkit';
 
-xdescribe('vue e2e', () => {
+describe('vue e2e', () => {
   // Setting up individual workspaces per
   // test can cause e2e runs to take a long time.
   // For this reason, we recommend each suite only
@@ -21,7 +21,7 @@ xdescribe('vue e2e', () => {
   afterAll(() => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
+    //runNxCommandAsync('reset');
     cleanup();
   });
 

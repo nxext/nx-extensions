@@ -5,7 +5,6 @@ import {
   detectPackageManager,
   getPackageManagerCommand,
   getPackageManagerVersion,
-  PackageManager,
 } from '@nrwl/devkit';
 
 export function getNxWorkspaceCommands({
@@ -33,7 +32,10 @@ export function getNxWorkspaceCommands({
   }[packageManager];
 }
 
-export function packageInstall(pkgs: string[], projName?: string) {
+export function packageInstallAsDevDependency(
+  pkgs: string[],
+  projName?: string
+) {
   const cwd = projName ? `${tmpProjPath()}/${projName}` : tmpProjPath();
   const pm = getPackageManagerCommand();
   const pkgsWithVersions = pkgs
@@ -48,8 +50,4 @@ export function packageInstall(pkgs: string[], projName?: string) {
     encoding: 'utf-8',
   });
   return install ?? '';
-}
-
-export function getSelectedPackageManager(): PackageManager {
-  return (process.env.SELECTED_PM as 'npm' | 'yarn' | 'pnpm') || 'npm';
 }

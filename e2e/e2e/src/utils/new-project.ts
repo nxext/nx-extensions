@@ -1,6 +1,10 @@
 import { detectPackageManager, getPackageManagerCommand } from '@nrwl/devkit';
 import { tmpProjPath, cleanup } from '@nrwl/nx-plugin/testing';
-import { getNxVersion, packageInstall, runCreateWorkspace } from './index';
+import {
+  getNxVersion,
+  packageInstallAsDevDependency,
+  runCreateWorkspace,
+} from './index';
 import { execSync } from 'child_process';
 import { logError, logInfo } from './logger';
 
@@ -22,7 +26,7 @@ export function newProject(
       packageManager,
     });
     addNxPackages(nxPackagesToInstall);
-    packageInstall(packagesToInstall);
+    packageInstallAsDevDependency(packagesToInstall);
 
     logInfo(`creating the test workspace...`);
     return name;
@@ -43,7 +47,7 @@ export function newProjectWithPreset(
   try {
     runCreateWorkspace(name, {
       preset: preset,
-      extraArgs: params,
+      extraArgs: `${params} --nxCloud=false`,
       packageManager,
     });
 

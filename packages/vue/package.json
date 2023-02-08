@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vue",
-  "version": "15.6.0-Beta.2",
+  "version": "15.6.0-Beta.3",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vue",
