@@ -314,6 +314,10 @@ nx g preset ... --dry-run
 
 ### Options
 
+#### vueAppName (_**required**_)
+
+Type: `string`
+
 #### e2eTestRunner
 
 Default: `none`
@@ -359,7 +363,3 @@ Type: `string`
 Possible values: `vitest`, `none`
 
 Test runner to use for unit tests.
-
-#### vueAppName
-
-Type: `string`

@@ -43,5 +43,5 @@
       "default": "none"
     }
   },
-  "required": ["name"]
+  "required": ["vueAppName"]
 }
