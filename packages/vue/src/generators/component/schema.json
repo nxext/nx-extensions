@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "Component",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "alias": "p",
+      "$default": {
+        "$source": "projectName"
+      },
+      "x-prompt": "What is the name of the project for this component?",
+      "x-priority": "important"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "A directory where the project is placed"
+    },
+    "skipTests": {
+      "type": "boolean",
+      "description": "When true, does not create `spec.ts` test files for the new component.",
+      "default": false,
+      "x-priority": "internal"
+    },
+    "export": {
+      "type": "boolean",
+      "description": "When true, the component is exported from the project `index.ts` (if it exists).",
+      "alias": "e",
+      "default": true,
+      "x-prompt": "Should this component be exported in the project?"
+    }
+  },
+  "required": ["name", "project"]
+}

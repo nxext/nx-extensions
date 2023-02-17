@@ -3,10 +3,34 @@
   "name": "vue",
   "version": "0.0.1",
   "generators": {
-    "vue": {
-      "factory": "./src/generators/vue/generator",
-      "schema": "./src/generators/vue/schema.json",
-      "description": "vue generator"
+    "init": {
+      "factory": "./src/generators/init/init",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Initialize the `@nxext/vue` plugin.",
+      "hidden": true
+    },
+    "application": {
+      "factory": "./src/generators/application/application",
+      "schema": "./src/generators/application/schema.json",
+      "description": "Create a Vue application.",
+      "aliases": ["app"]
+    },
+    "library": {
+      "factory": "./src/generators/library/library",
+      "schema": "./src/generators/library/schema.json",
+      "description": "library generator",
+      "aliases": ["lib"]
+    },
+    "component": {
+      "factory": "./src/generators/component/component",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator",
+      "aliases": ["c"]
+    },
+    "preset": {
+      "factory": "./src/generators/preset/generator",
+      "schema": "./src/generators/preset/schema.json",
+      "description": "preset generator"
     }
   }
 }

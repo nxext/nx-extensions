@@ -1,13 +1,10 @@
 import { execSync } from 'child_process';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
-import { getNxVersion, getPublishedVersion } from './index';
+import { getNxVersion, deployedVersion } from './index';
 import {
   detectPackageManager,
   getPackageManagerCommand,
   getPackageManagerVersion,
-  joinPathFragments,
-  PackageManager,
-  readNxJson,
 } from '@nrwl/devkit';
 
 export function getNxWorkspaceCommands({
@@ -35,15 +32,15 @@ export function getNxWorkspaceCommands({
   }[packageManager];
 }
 
-export function packageInstall(pkgs: string[], projName?: string) {
-  const nxJson = readNxJson();
-  const distDir = joinPathFragments('dist', nxJson.workspaceLayout.libsDir);
+export function packageInstallAsDevDependency(
+  pkgs: string[],
+  projName?: string
+) {
   const cwd = projName ? `${tmpProjPath()}/${projName}` : tmpProjPath();
   const pm = getPackageManagerCommand();
   const pkgsWithVersions = pkgs
     .map((pgk) => {
-      const version = getPublishedVersion(pgk, distDir);
-      return `${pgk}@${version}`;
+      return `${pgk}@${deployedVersion}`;
     })
     .join(' ');
   const install = execSync(`${pm.addDev} ${pkgsWithVersions}`, {
@@ -53,8 +50,4 @@ export function packageInstall(pkgs: string[], projName?: string) {
     encoding: 'utf-8',
   });
   return install ?? '';
-}
-
-export function getSelectedPackageManager(): PackageManager {
-  return (process.env.SELECTED_PM as 'npm' | 'yarn' | 'pnpm') || 'npm';
 }

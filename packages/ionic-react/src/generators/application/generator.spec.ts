@@ -1,10 +1,15 @@
-import { readJson, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import {
+  readJson,
+  readProjectConfiguration,
+  updateJson,
+  Tree,
+} from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { applicationGenerator } from './generator';
 import { ApplicationGeneratorSchema } from './schema';
 
 describe('application', () => {
-  let appTree: Tree;
+  let host: Tree;
 
   const options: ApplicationGeneratorSchema = {
     name: 'my-app',
@@ -46,46 +51,40 @@ describe('application', () => {
   }
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    appTree.write(
-      'package.json',
-      `
-       {
-         "name": "test-name",
-         "dependencies": {},
-         "devDependencies": {
-           "@nrwl/workspace": "0.0.0"
-         }
-       }
-     `
-    );
+    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(host, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
   });
 
   it('should add dependencies to package.json', async () => {
-    await applicationGenerator(appTree, options);
+    await applicationGenerator(host, options);
 
-    const packageJson = readJson(appTree, 'package.json');
+    const packageJson = readJson(host, 'package.json');
     expect(packageJson.dependencies['@ionic/react']).toBeDefined();
     expect(packageJson.dependencies['@ionic/react-router']).toBeDefined();
     expect(packageJson.devDependencies['@nrwl/react']).toBeDefined();
   });
 
   it('should generate application', async () => {
-    await applicationGenerator(appTree, options);
+    await applicationGenerator(host, options);
 
-    testGeneratedFiles(appTree, { ...options });
+    testGeneratedFiles(host, { ...options });
   });
 
   it('should delete unused @nrwl/react files', async () => {
-    await applicationGenerator(appTree, options);
+    await applicationGenerator(host, options);
 
-    expect(appTree.exists(`${projectRoot}/src/app/app.css`)).toBeFalsy();
-    expect(appTree.exists(`${projectRoot}/src/favicon.ico`)).toBeFalsy();
+    expect(host.exists(`${projectRoot}/src/app/app.css`)).toBeFalsy();
+    expect(host.exists(`${projectRoot}/src/favicon.ico`)).toBeFalsy();
   });
 
   it('should update assets in project configuration', async () => {
-    await applicationGenerator(appTree, options);
-    const project = readProjectConfiguration(appTree, options.name);
+    await applicationGenerator(host, options);
+    const project = readProjectConfiguration(host, options.name);
 
     expect(project.targets.build.options.assets).not.toContain(
       `${projectRoot}/src/favicon.ico`
@@ -97,52 +96,49 @@ describe('application', () => {
 
   describe('--template', () => {
     it('should add base template files', async () => {
-      await applicationGenerator(appTree, options);
+      await applicationGenerator(host, options);
 
-      expect(appTree.exists(`${projectRoot}/ionic.config.json`)).toBeTruthy();
+      expect(host.exists(`${projectRoot}/ionic.config.json`)).toBeTruthy();
       expect(
-        appTree.exists(`${projectRoot}/src/theme/variables.css`)
+        host.exists(`${projectRoot}/src/theme/variables.css`)
       ).toBeTruthy();
     });
 
     it('should add blank template files', async () => {
-      await applicationGenerator(appTree, { ...options, template: 'blank' });
+      await applicationGenerator(host, { ...options, template: 'blank' });
 
       expect(
-        appTree.exists(`${projectRoot}/src/components/ExploreContainer.tsx`)
+        host.exists(`${projectRoot}/src/components/ExploreContainer.tsx`)
       ).toBeTruthy();
     });
 
     it('should add list template files', async () => {
-      await applicationGenerator(appTree, { ...options, template: 'list' });
+      await applicationGenerator(host, { ...options, template: 'list' });
 
       expect(
-        appTree.exists(`${projectRoot}/src/pages/ViewMessage.tsx`)
+        host.exists(`${projectRoot}/src/pages/ViewMessage.tsx`)
       ).toBeTruthy();
     });
 
     it('should add sidemenu template files', async () => {
-      await applicationGenerator(appTree, { ...options, template: 'sidemenu' });
+      await applicationGenerator(host, { ...options, template: 'sidemenu' });
 
-      expect(appTree.exists(`${projectRoot}/src/pages/Page.tsx`)).toBeTruthy();
+      expect(host.exists(`${projectRoot}/src/pages/Page.tsx`)).toBeTruthy();
     });
 
     it('should add tabs template files', async () => {
-      await applicationGenerator(appTree, { ...options, template: 'tabs' });
+      await applicationGenerator(host, { ...options, template: 'tabs' });
 
-      expect(appTree.exists(`${projectRoot}/src/pages/Tab1.tsx`)).toBeTruthy();
+      expect(host.exists(`${projectRoot}/src/pages/Tab1.tsx`)).toBeTruthy();
     });
   });
 
   describe('--directory', () => {
     it('should update project configuration with directory', async () => {
-      await applicationGenerator(appTree, { ...options, directory: 'myDir' });
-      const project = readProjectConfiguration(
-        appTree,
-        `my-dir-${options.name}`
-      );
+      await applicationGenerator(host, { ...options, directory: 'myDir' });
+      const project = readProjectConfiguration(host, `my-dir-${options.name}`);
       const projectE2e = readProjectConfiguration(
-        appTree,
+        host,
         `my-dir-${options.name}-e2e`
       );
 
@@ -151,41 +147,41 @@ describe('application', () => {
     });
 
     it('should generate files', async () => {
-      await applicationGenerator(appTree, { ...options, directory: 'myDir' });
+      await applicationGenerator(host, { ...options, directory: 'myDir' });
 
-      expect(appTree.exists('apps/my-dir/my-app/src/main.ts'));
+      expect(host.exists('apps/my-dir/my-app/src/main.ts'));
     });
 
     it('should generate Capacitor project', async () => {
-      await applicationGenerator(appTree, {
+      await applicationGenerator(host, {
         ...options,
         directory: 'my-dir',
         capacitor: true,
       });
 
       expect(
-        appTree.exists(`apps/my-dir/my-app/capacitor.config.ts`)
+        host.exists(`apps/my-dir/my-app/capacitor.config.ts`)
       ).toBeDefined();
     });
   });
 
   describe('--unitTestRunner', () => {
     it('none', async () => {
-      await applicationGenerator(appTree, {
+      await applicationGenerator(host, {
         ...options,
         unitTestRunner: 'none',
       });
 
-      expect(appTree.exists(`${projectRoot}/src/app/App.spec.tsx`)).toBeFalsy();
+      expect(host.exists(`${projectRoot}/src/app/App.spec.tsx`)).toBeFalsy();
     });
   });
 
   describe('--capacitor', () => {
     describe('true', () => {
       it('should generate Capacitor project', async () => {
-        await applicationGenerator(appTree, { ...options, capacitor: true });
+        await applicationGenerator(host, { ...options, capacitor: true });
 
-        testGeneratedFiles(appTree, { ...options, capacitor: true });
+        testGeneratedFiles(host, { ...options, capacitor: true });
       });
     });
   });
@@ -193,23 +189,23 @@ describe('application', () => {
   describe('--standaloneConfig', () => {
     describe('true', () => {
       it('should generate package.json', async () => {
-        await applicationGenerator(appTree, {
+        await applicationGenerator(host, {
           ...options,
           standaloneConfig: true,
         });
 
-        expect(appTree.exists(`${projectRoot}/package.json`)).toBeDefined();
+        expect(host.exists(`${projectRoot}/package.json`)).toBeDefined();
       });
     });
 
     describe('false', () => {
       it('should not generate package.json', async () => {
-        await applicationGenerator(appTree, {
+        await applicationGenerator(host, {
           ...options,
           standaloneConfig: false,
         });
 
-        expect(appTree.exists(`${projectRoot}/package.json`)).toBeFalsy();
+        expect(host.exists(`${projectRoot}/package.json`)).toBeFalsy();
       });
     });
   });

@@ -1,7 +1,6 @@
 # @nxext/vite
 
 [![License](https://img.shields.io/npm/l/@nxext/svelte.svg?style=flat-square)]()
-[![nxext windows CI](https://github.com/nxext/nx-extensions/workflows/nxext%20windows%20CI/badge.svg)]()
 [![nxext macos CI](https://github.com/nxext/nx-extensions/workflows/nxext%20macos%20CI/badge.svg)]()
 
 ## Getting Started

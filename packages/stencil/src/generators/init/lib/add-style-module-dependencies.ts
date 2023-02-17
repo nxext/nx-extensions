@@ -1,10 +1,6 @@
 import { InitSchema } from '../schema';
 import { STYLE_PLUGIN_DEPENDENCIES } from '../../../utils/typings';
-import {
-  addDependenciesToPackageJson,
-  GeneratorCallback,
-  Tree,
-} from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 
 export function addStyledDependencies<T extends InitSchema>(
   tree: Tree,

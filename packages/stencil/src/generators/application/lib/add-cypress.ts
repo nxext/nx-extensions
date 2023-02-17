@@ -1,5 +1,6 @@
-import { Tree } from '@nrwl/devkit';
+import { ensurePackage, Tree } from '@nrwl/devkit';
 import { ApplicationSchema } from '../schema';
+import { readNxVersion } from '../../../utils/utillities';
 
 export async function addCypress(host: Tree, options: ApplicationSchema) {
   if (options.e2eTestRunner !== 'cypress') {
@@ -7,8 +8,9 @@ export async function addCypress(host: Tree, options: ApplicationSchema) {
     return () => {};
   }
 
-  const generators = await import('@nrwl/cypress');
-  return await generators.cypressProjectGenerator(host, {
+  await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
+  const { cypressProjectGenerator } = await import('@nrwl/cypress');
+  return await cypressProjectGenerator(host, {
     ...options,
     name: `${options.name}-e2e`,
     directory: options.directory,

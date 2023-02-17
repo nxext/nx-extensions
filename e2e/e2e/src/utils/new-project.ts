@@ -1,10 +1,10 @@
-import {
-  detectPackageManager,
-  getPackageManagerCommand,
-  readNxJson,
-} from '@nrwl/devkit';
+import { detectPackageManager, getPackageManagerCommand } from '@nrwl/devkit';
 import { tmpProjPath, cleanup } from '@nrwl/nx-plugin/testing';
-import { getNxVersion, packageInstall, runCreateWorkspace } from './index';
+import {
+  getNxVersion,
+  packageInstallAsDevDependency,
+  runCreateWorkspace,
+} from './index';
 import { execSync } from 'child_process';
 import { logError, logInfo } from './logger';
 
@@ -26,9 +26,32 @@ export function newProject(
       packageManager,
     });
     addNxPackages(nxPackagesToInstall);
-    packageInstall(packagesToInstall);
+    packageInstallAsDevDependency(packagesToInstall);
 
     logInfo(`creating the test workspace...`);
+    return name;
+  } catch (e) {
+    logError(`Failed to set up project for e2e tests.`, e.message);
+    throw e;
+  }
+}
+
+export function newProjectWithPreset(
+  preset: string,
+  params?: string,
+  name = 'proj',
+  packageManager = detectPackageManager()
+): string {
+  cleanup();
+
+  try {
+    runCreateWorkspace(name, {
+      preset: preset,
+      extraArgs: `${params} --nxCloud=false`,
+      packageManager,
+    });
+
+    logInfo(`creating the test workspace with preset "${preset}"...`);
     return name;
   } catch (e) {
     logError(`Failed to set up project for e2e tests.`, e.message);

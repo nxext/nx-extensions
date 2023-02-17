@@ -2,7 +2,7 @@ import {
   readJson,
   readProjectConfiguration,
   Tree,
-  writeJson,
+  updateJson,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { libraryGenerator } from '@nrwl/workspace/generators';
@@ -14,15 +14,16 @@ describe('@nxext/svelte:storybook-configuration', () => {
 
   beforeEach(async () => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    updateJson(tree, '/package.json', (json) => {
+      json.devDependencies = {
+        '@nrwl/workspace': '15.6.0',
+      };
+      return json;
+    });
+
     await libraryGenerator(tree, {
       name: 'test-ui-lib',
       standaloneConfig: false,
-    });
-    writeJson(tree, 'package.json', {
-      devDependencies: {
-        '@storybook/addon-essentials': '~6.2.9',
-        '@storybook/svelte': '~6.2.9',
-      },
     });
   });
 
@@ -33,22 +34,7 @@ describe('@nxext/svelte:storybook-configuration', () => {
     });
 
     // Root
-    expect(tree.exists('.storybook/tsconfig.json')).toBeTruthy();
     expect(tree.exists('.storybook/main.js')).toBeTruthy();
-    const rootStorybookTsconfigJson = readJson(
-      tree,
-      '.storybook/tsconfig.json'
-    );
-    expect(rootStorybookTsconfigJson.exclude).toEqual([
-      '../**/*.spec.js',
-      '../**/*.test.js',
-      '../**/*.spec.ts',
-      '../**/*.test.ts',
-      '../**/*.spec.tsx',
-      '../**/*.test.tsx',
-      '../**/*.spec.jsx',
-      '../**/*.test.jsx',
-    ]);
 
     // Local
     expect(
@@ -102,7 +88,7 @@ describe('@nxext/svelte:storybook-configuration', () => {
     expect(tree.read('.storybook/main.js', 'utf-8')).toEqual(newContents);
   });
 
-  it('should update workspace file for angular libs', async () => {
+  it('should update workspace file for libs', async () => {
     // Setup a new lib
     await libraryGenerator(tree, {
       name: 'test-ui-lib-2',
@@ -123,11 +109,8 @@ describe('@nxext/svelte:storybook-configuration', () => {
       },
       options: {
         port: 4400,
-        projectBuildConfig: 'test-ui-lib-2:build-storybook',
         uiFramework: '@storybook/svelte',
-        config: {
-          configFolder: 'libs/test-ui-lib-2/.storybook',
-        },
+        configDir: 'libs/test-ui-lib-2/.storybook',
       },
     });
 

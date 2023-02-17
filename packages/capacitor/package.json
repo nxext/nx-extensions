@@ -1,6 +1,6 @@
 {
   "name": "@nxext/capacitor",
-  "version": "15.2.0",
+  "version": "15.6.0",
   "description": "An Nx plugin for developing cross-platform applications using Capacitor",
   "author": {
     "name": "Devin Shoemaker",
@@ -25,10 +25,10 @@
     "migrations": "./migrations.json"
   },
   "dependencies": {
-    "@nrwl/devkit": "^15.4.1"
+    "@nrwl/devkit": "^15.6.0"
   },
   "peerDependencies": {
-    "@nrwl/workspace": "^15.4.1",
-    "nx": "^15.4.1"
+    "@nrwl/workspace": "^15.6.0",
+    "nx": "^15.6.0"
   }
 }

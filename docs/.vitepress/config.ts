@@ -276,19 +276,19 @@ function sideNavDocs() {
       collapsed: true,
       items: [
         {
-          text: 'Angular',
+          text: 'Vue',
           items: [
             {
               text: 'Overview',
-              link: '/docs/angular/overview',
+              link: '/docs/vue/overview',
             },
             {
               text: 'Installation',
-              link: '/docs/angular/installation',
+              link: '/docs/vue/installation',
             },
             {
               text: 'Generators',
-              link: '/docs/angular/generators',
+              link: '/docs/vue/generators',
             },
           ],
         },
@@ -305,11 +305,11 @@ function sideNavDocs() {
             },
             {
               text: 'Generators',
-              link: '/docs/vitest/generators',
+              link: '/docs/sveltekit/generators',
             },
             {
               text: 'Executors',
-              link: '/docs/vitest/executors',
+              link: '/docs/sveltekit/executors',
             },
           ],
         },
@@ -320,6 +320,23 @@ function sideNavDocs() {
       collapsible: true,
       collapsed: true,
       items: [
+        {
+          text: 'Angular',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/angular/overview',
+            },
+            {
+              text: 'Installation',
+              link: '/docs/angular/installation',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/angular/generators',
+            },
+          ],
+        },
         {
           text: 'Vite',
           items: [

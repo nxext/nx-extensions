@@ -11,6 +11,7 @@ import { dirname } from 'path';
 import { logger, readJsonFile } from '@nrwl/devkit';
 import { Workspaces } from 'nx/src/config/workspaces';
 import * as glob from 'glob';
+import { inspect } from 'util';
 
 console.log('\nCreating playground. This may take a few minutes.');
 

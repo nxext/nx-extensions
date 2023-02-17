@@ -1,7 +1,7 @@
 import componentGenerator, { SvelteComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
-import { names, Tree } from '@nrwl/devkit';
+import { logger, names, Tree } from '@nrwl/devkit';
 
 describe('component generator', () => {
   let tree: Tree;
@@ -16,6 +16,10 @@ describe('component generator', () => {
   describe('application', () => {
     beforeEach(async () => {
       tree = await createTestProject(projectName);
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      jest.spyOn(logger, 'warn').mockImplementation(() => {});
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      jest.spyOn(logger, 'debug').mockImplementation(() => {});
     });
 
     it('should run successfully', async () => {
@@ -49,6 +53,10 @@ describe('component generator', () => {
   describe('library', () => {
     beforeEach(async () => {
       tree = await createTestProject(projectName, 'library');
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      jest.spyOn(logger, 'warn').mockImplementation(() => {});
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      jest.spyOn(logger, 'debug').mockImplementation(() => {});
     });
 
     it('should add stories file if storybook is configured', async () => {
