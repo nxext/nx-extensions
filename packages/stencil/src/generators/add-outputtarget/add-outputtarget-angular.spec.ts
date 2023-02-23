@@ -4,7 +4,15 @@ import { names, Tree } from '@nrwl/devkit';
 import { outputtargetGenerator } from './add-outputtarget';
 import { AddOutputtargetSchematicSchema } from './schema';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../../utils/utillities');
+
 describe('add-outputtarget angular', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+
   let tree: Tree;
   const projectName = uniq('testproject');
   const options = {

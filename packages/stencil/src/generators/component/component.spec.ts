@@ -4,7 +4,15 @@ import { SupportedStyles } from '../../stencil-core-utils';
 import { names, Tree } from '@nrwl/devkit';
 import storybookConfigurationGenerator from '../storybook-configuration/generator';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../../utils/utillities');
+
 describe('component schematic', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+
   let tree: Tree;
   const projectName = 'test-project';
   const options: ComponentSchema = {

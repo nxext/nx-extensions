@@ -3,7 +3,7 @@ import {
   GeneratorCallback,
   Tree,
 } from '@nrwl/devkit';
-import { hasNxPackage, readNxVersion } from './util';
+import { hasNxPackage, readNxVersion } from '../../utils/utils';
 
 export function addLinterPlugin(tree: Tree): GeneratorCallback {
   const hasNrwlLinterDependency: boolean = hasNxPackage(tree, '@nrwl/linter');

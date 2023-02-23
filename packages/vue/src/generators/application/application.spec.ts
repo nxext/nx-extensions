@@ -9,7 +9,15 @@ import { applicationGenerator } from './application';
 import { Schema } from './schema';
 import { Linter } from '@nrwl/linter';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../utils/utils');
+
 describe('app generator', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+
   let host: Tree;
   const projectName = 'my-app';
   const options: Schema = {
@@ -21,12 +29,6 @@ describe('app generator', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
   });
 
   it('should run successfully', async () => {

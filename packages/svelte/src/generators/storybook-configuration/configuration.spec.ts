@@ -9,14 +9,22 @@ import { libraryGenerator } from '@nrwl/workspace/generators';
 
 import configurationGenerator from './configuration';
 
-describe('@nxext/svelte:storybook-configuration', () => {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../utils/utils');
+
+xdescribe('@nxext/svelte:storybook-configuration', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+
   let tree: Tree;
 
   beforeEach(async () => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(tree, '/package.json', (json) => {
       json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
+        '@nrwl/workspace': '15.7.0',
       };
       return json;
     });

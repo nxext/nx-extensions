@@ -5,7 +5,15 @@ import generator from './generator';
 import { PresetSchema } from './schema';
 import { Linter } from '@nrwl/linter';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../utils/utils');
+
 describe('preset generator', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+
   let host: Tree;
   const options: PresetSchema = {
     name: 'test',
@@ -20,7 +28,7 @@ describe('preset generator', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
+        '@nrwl/workspace': '15.7.0',
       };
       return json;
     });

@@ -4,7 +4,15 @@ import { ProjectType } from '@nrwl/workspace';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { names, Tree } from '@nrwl/devkit';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nrwl/devkit');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const readNxVersionModule = require('../utils/utils');
+
 describe('component schematic', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+
   let tree: Tree;
   const projectName = uniq('testprojekt');
   const componentName = uniq('test');

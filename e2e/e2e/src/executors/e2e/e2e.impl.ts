@@ -36,6 +36,7 @@ export async function* nxPluginE2EExecutor(
 
   // Ensure the temp directory where the projects will be generated is there
   ensureDirSync(tmpProjPath());
+  cleanupVerdaccioStorage();
 
   let child: ChildProcess;
   try {

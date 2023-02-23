@@ -5,7 +5,7 @@ import {
   addDependenciesToPackageJson,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { hasNxPackage, readNxVersion } from './util';
+import { hasNxPackage, readNxVersion } from '../../utils/utils';
 import { Schema } from '../schema';
 
 export function addJestPlugin(tree: Tree, schema: Schema): GeneratorCallback {
