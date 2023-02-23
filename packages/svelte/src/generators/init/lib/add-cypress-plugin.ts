@@ -4,7 +4,7 @@ import {
   addDependenciesToPackageJson,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { hasNxPackage, readNxVersion } from './util';
+import { hasNxPackage, readNxVersion } from '../../utils/utils';
 import { cypressInitGenerator } from '@nrwl/cypress';
 import { Schema } from '../schema';
 

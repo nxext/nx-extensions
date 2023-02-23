@@ -1,6 +1,6 @@
 {
   "name": "@nxext/ionic-angular",
-  "version": "15.6.0",
+  "version": "15.7.0",
   "description": "An Nx plugin for developing Ionic React applications and libraries",
   "author": {
     "name": "Devin Shoemaker",
@@ -25,10 +25,10 @@
     "migrations": "./migrations.json"
   },
   "dependencies": {
-    "@nxext/capacitor": "^15.6.0",
-    "@nrwl/devkit": "15.6.0"
+    "@nxext/capacitor": "^15.7.0",
+    "@nrwl/devkit": "15.7.0"
   },
   "peerDependencies": {
-    "@nrwl/angular": "^15.6.0"
+    "@nrwl/angular": "^15.7.0"
   }
 }

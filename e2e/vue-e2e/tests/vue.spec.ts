@@ -21,7 +21,7 @@ describe('vue e2e', () => {
   afterAll(() => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
-    //runNxCommandAsync('reset');
+    runNxCommandAsync('reset');
     cleanup();
   });
 

@@ -6,6 +6,8 @@ export function getNxVersion(): string {
   );
   return (
     process.env.NX_VERSION ||
+    pkgJson.dependencies['nx'] ||
+    pkgJson.devDependencies['nx'] ||
     pkgJson.dependencies['@nrwl/workspace'] ||
     pkgJson.devDependencies['@nrwl/workspace'] ||
     'latest'

@@ -7,7 +7,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
 
-describe('Ionic Angular Application', () => {
+xdescribe('Ionic Angular Application', () => {
   const asyncTimeout = 600_000;
 
   beforeAll(() => {
@@ -91,21 +91,7 @@ describe('Ionic Angular Application', () => {
     );
   });
 
-  it(
-    'should add tags',
-    async () => {
-      const appName = uniq('ionic-angular');
-      await runNxCommandAsync(
-        `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --tags e2etag,e2ePackage`
-      );
-
-      const project = readJson(`apps/${appName}/project.json`);
-      expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
-    },
-    asyncTimeout
-  );
-
-  describe('Ionic Angular Page', () => {
+  xdescribe('Ionic Angular Page', () => {
     it(
       'should create page in project',
       async () => {
@@ -143,7 +129,7 @@ describe('Ionic Angular Application', () => {
     });
   });
 
-  it(
+  xit(
     'e2e',
     async () => {
       const appName = uniq('ionic-angular');

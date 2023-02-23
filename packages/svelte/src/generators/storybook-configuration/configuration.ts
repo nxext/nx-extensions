@@ -10,7 +10,7 @@ import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-ser
 import { Linter } from '@nrwl/linter';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
-import { readNxVersion } from '../init/lib/util';
+import { readNxVersion } from '../utils/utils';
 import { updateMainJs } from './lib/update-main-js';
 
 export async function configurationGenerator(
