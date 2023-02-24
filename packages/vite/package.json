@@ -24,6 +24,7 @@
   "generators": "./generators.json",
   "dependencies": {
     "@nxext/vitest": "^15.1.0",
+    "ast-vite-config-merge": "^0.2.0",
     "rxjs-for-await": "1.0.0",
     "tsconfig-paths": "^4.1.0",
     "globrex": "^0.1.2",

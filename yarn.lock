@@ -5617,6 +5617,11 @@ assertion-error@^1.1.0:
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.1.0.tgz#e60b6b0e8f301bd97e5375215bda406c85118c0b"
   integrity sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==
 
+ast-vite-config-merge@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ast-vite-config-merge/-/ast-vite-config-merge-0.2.0.tgz#b962f3c8fa2c5979a2574b74130c6de0bd40d5cc"
+  integrity sha512-Ja8l5QLaq1VP4Ie47gCBrM6LgJ7WRVPS8OcDnLYaqw85bHAzpuES5SbbVdVzcCAbNjq2YXFv3EJqQjgd+9WXXQ==
+
 astral-regex@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"

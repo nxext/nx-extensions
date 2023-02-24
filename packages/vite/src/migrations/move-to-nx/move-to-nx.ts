@@ -5,18 +5,12 @@ import {
   ProjectConfiguration,
   Tree,
   updateProjectConfiguration,
+  addDependenciesToPackageJson,
+  readJson,
+  names,
 } from '@nrwl/devkit';
 import { mergeViteSourceFiles } from 'ast-vite-config-merge';
 import { join } from 'path';
-import {
-  addDependenciesToPackageJson,
-  readJson,
-  readNxJson,
-  Tree,
-  updateJson,
-  updateNxJson,
-  names,
-} from '@nrwl/devkit';
 import {
   nxVersion,
   viteVersion,
