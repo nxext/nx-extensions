@@ -5,8 +5,10 @@ import {
   MemberExpression,
   ModuleItem,
   NamedImportSpecifier,
+  Param,
   TsParameterProperty,
   TsType,
+  TsTypeAnnotation,
 } from '@swc/core';
 import Visitor from '@swc/core/Visitor';
 import {
@@ -18,6 +20,7 @@ import {
   isImportDeclaration,
   isTsTypeAnnotation,
   isTsTypeReference,
+  isParameter,
 } from 'swc-ast-helpers';
 
 function createCallExpression(
@@ -54,9 +57,7 @@ export class AngularInjector extends Visitor {
     return result;
   }
 
-  override visitConstructorParameter(
-    node: TsParameterProperty
-  ): TsParameterProperty {
+  override visitConstructorParameter(node: Param | TsParameterProperty): Param | TsParameterProperty {
     if (
       (node.decorators?.length &&
         node.decorators.some(
@@ -65,15 +66,16 @@ export class AngularInjector extends Visitor {
             isIdentifer(dec.expression.callee) &&
             dec.expression.callee.value === 'Inject'
         )) ||
-      !node.param ||
-      !node.param.typeAnnotation
+      (!node.param?.typeAnnotation && !(node as any).pat?.typeAnnotation)
     ) {
       return node;
     } else {
       if (
+        !isParameter(node) &&
+        node?.param?.typeAnnotation &&
         isTsTypeAnnotation(node.param.typeAnnotation) &&
-        isTsTypeReference(node.param.typeAnnotation.typeAnnotation) &&
-        isIdentifer(node.param.typeAnnotation.typeAnnotation.typeName)
+        isTsTypeReference(node.param?.typeAnnotation?.typeAnnotation) &&
+        isIdentifer(node.param?.typeAnnotation?.typeAnnotation.typeName)
       ) {
         node.decorators = node.decorators ?? [];
         node.decorators.push({
@@ -83,6 +85,25 @@ export class AngularInjector extends Visitor {
             {
               expression: createIdentifer(
                 node.param.typeAnnotation.typeAnnotation.typeName.value
+              ),
+            },
+          ]),
+        });
+        this.hasInjectedConstructor = true;
+        return node;
+      } else if (
+        isParameter(node) &&
+        isTsTypeAnnotation(((node as any)?.pat?.typeAnnotation as TsTypeAnnotation)) &&
+        isTsTypeReference(((node as any)?.pat?.typeAnnotation as TsTypeAnnotation)?.typeAnnotation) &&
+        isIdentifer(((node as any)?.pat?.typeAnnotation as TsTypeAnnotation)?.typeAnnotation?.typeName)) {
+        node.decorators = node.decorators ?? [];
+        node.decorators.push({
+          type: 'Decorator',
+          span: createSpan(),
+          expression: createCallExpression(createIdentifer('Inject'), [
+            {
+              expression: createIdentifer(
+                ((node as any).pat.typeAnnotation as TsTypeAnnotation).typeAnnotation.typeName.value
               ),
             },
           ]),
