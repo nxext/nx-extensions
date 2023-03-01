@@ -4,4 +4,6 @@ export interface NxPluginE2EExecutorOptions {
   ci: boolean;
   testTarget: string;
   verdaccioPort: number;
+
+  neededPackages: string;
 }

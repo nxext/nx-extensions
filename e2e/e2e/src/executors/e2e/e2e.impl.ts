@@ -6,6 +6,7 @@ import {
   logger,
   parseTargetString,
   runExecutor,
+  workspaceRoot,
 } from '@nrwl/devkit';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 import type { NxPluginE2EExecutorOptions } from './schema';
@@ -15,14 +16,10 @@ import {
   buildAllPackages,
   publishPackages,
   startVerdaccio,
-} from '../../utils/registry';
-import {
-  cleanupVerdaccioStorage,
-  deployedVersion,
-  killPort,
-  updatePackageJsonFiles,
-} from '../../utils';
-import { ensureDirSync } from 'fs-extra';
+} from './lib/registry';
+import { cleanupVerdaccioStorage } from './lib/cleanup';
+import { deployedVersion, killPort, updatePackageJsonFiles } from '../../utils';
+import { ensureDirSync, existsSync, removeSync } from 'fs-extra';
 
 // eslint-disable-next-line require-yield
 export async function* nxPluginE2EExecutor(
@@ -37,6 +34,10 @@ export async function* nxPluginE2EExecutor(
   // Ensure the temp directory where the projects will be generated is there
   ensureDirSync(tmpProjPath());
   cleanupVerdaccioStorage();
+  const distDir = joinPathFragments(workspaceRoot, 'dist');
+  if (existsSync(distDir)) {
+    removeSync(distDir);
+  }
 
   let child: ChildProcess;
   try {
@@ -55,7 +56,7 @@ export async function* nxPluginE2EExecutor(
   try {
     const nxJson = context.nxJsonConfiguration;
     const distDir = joinPathFragments('dist', nxJson.workspaceLayout.libsDir);
-    buildAllPackages('e2e,docs,angular-vite,angular-nx,angular-swc');
+    buildAllPackages(options.neededPackages);
     updatePackageJsonFiles(deployedVersion, distDir, nxJson.npmScope);
     publishPackages(verdaccioUrl, distDir);
 

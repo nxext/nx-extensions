@@ -43,13 +43,13 @@ export function addUser(url: string) {
   );
 }
 
-export function buildAllPackages(exclude: string) {
+export function buildAllPackages(includedPackages: string) {
   const pm = getPackageManagerCommand();
   logger.info('Build all....');
   execSync(
     pm.run(
       'nx',
-      `run-many --target=build --all --parallel --exclude=${exclude} || { echo 'Build failed' ; exit 1; }`
+      `run-many --target=build --parallel --projects=${includedPackages} || { echo 'Build failed' ; exit 1; }`
     ),
     {
       stdio: [0, 1, 2],

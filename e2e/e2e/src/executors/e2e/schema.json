@@ -18,8 +18,12 @@
       "type": "number",
       "description": "The port Verdaccio should use",
       "default": 4872
+    },
+    "neededPackages": {
+      "type": "string",
+      "description": ""
     }
   },
   "additionalProperties": false,
-  "required": ["testTarget", "verdaccioConfig"]
+  "required": ["testTarget", "verdaccioConfig", "neededPackages"]
 }

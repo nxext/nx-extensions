@@ -7,7 +7,8 @@
       "executor": "@nxext/e2e:e2e",
       "options": {
         "testTarget": "run-e2e-tests",
-        "verdaccioConfig": ".verdaccio/config.yml"
+        "verdaccioConfig": ".verdaccio/config.yml",
+        "neededPackages": "preact"
       }
     },
     "run-e2e-tests": {

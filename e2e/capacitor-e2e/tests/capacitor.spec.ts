@@ -2,6 +2,7 @@ import {
   cleanup,
   runNxCommand,
   runNxCommandAsync,
+  runCommand,
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
@@ -12,7 +13,7 @@ describe('capacitor-project e2e', () => {
   const plugin = uniq('capacitor');
 
   beforeAll(async () => {
-    newProject(['@nxext/capacitor'], ['@nrwl/react']);
+    newProject(['@nxext/capacitor']);
 
     await runNxCommandAsync(
       `generate @nrwl/react:app ${plugin} --routing=false`
