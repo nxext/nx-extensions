@@ -1,13 +1,12 @@
 import {
   cleanup,
-  readJson,
   runNxCommand,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '@nxext/e2e';
 
-xdescribe('Ionic Angular Application', () => {
+describe('Ionic Angular Application', () => {
   const asyncTimeout = 600_000;
 
   beforeAll(() => {
