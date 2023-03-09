@@ -18,5 +18,6 @@ export async function addAngular(
     linter: Linter.EsLint,
     unitTestRunner: options.unitTestRunner,
     e2eTestRunner: options.e2eTestRunner,
+    standalone: false,
   });
 }
