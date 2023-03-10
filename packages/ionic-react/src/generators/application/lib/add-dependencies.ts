@@ -1,10 +1,11 @@
-import { addDependenciesToPackageJson, readJson, Tree } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nrwl/devkit';
 import {
   ionicReactRouterVersion,
   ionicReactVersion,
   webVitalsVersion,
   workboxVersion,
 } from '../../../utils/versions';
+import { readNxVersion } from '../../../utils/utils';
 
 export function addDependencies(host: Tree) {
   return addDependenciesToPackageJson(
@@ -26,20 +27,8 @@ export function addDependencies(host: Tree) {
       'workbox-strategies': workboxVersion,
       'workbox-streams': workboxVersion,
     },
-    { '@nrwl/react': readNxVersion(host) }
+    {
+      '@nrwl/react': readNxVersion(host),
+    }
   );
-}
-
-function readNxVersion(tree: Tree): string {
-  const packageJson = readJson(tree, 'package.json');
-
-  const nxVersion = packageJson.devDependencies['@nrwl/workspace']
-    ? packageJson.devDependencies['@nrwl/workspace']
-    : packageJson.dependencies['@nrwl/workspace'];
-
-  if (!nxVersion) {
-    throw new Error('@nrwl/workspace is not a dependency.');
-  }
-
-  return nxVersion;
 }

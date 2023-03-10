@@ -79,6 +79,7 @@
     "@nrwl/vite": "15.7.2",
     "@nrwl/web": "15.7.2",
     "@nrwl/workspace": "15.7.2",
+    "@phenomnomnominal/tsquery": "4.1.1",
     "@preact/preset-vite": "^2.4.0",
     "@schematics/angular": "~15.1.0",
     "@stencil/core": "2.20.0",
