@@ -3,9 +3,9 @@ Originally from nrwl nx: packages/angular/src/utils/nx-devkit/ast-utils.ts
  */
 
 import * as ts from 'typescript';
-import { findNodes } from '@nrwl/workspace/src/utilities/typescript/find-nodes';
 import { getSourceNodes } from '@nrwl/workspace/src/utilities/typescript/get-source-nodes';
 import { Tree } from '@nrwl/devkit';
+import { tsquery } from '@phenomnomnominal/tsquery';
 import { insertChange } from '@nrwl/workspace/src/utilities/ast-utils';
 
 function _angularImportsFromNode(
@@ -65,9 +65,9 @@ export function getDecoratorMetadata(
   identifier: string,
   module: string
 ): ts.Node[] {
-  const angularImports: { [name: string]: string } = findNodes(
+  const angularImports: { [name: string]: string } = tsquery(
     source,
-    ts.SyntaxKind.ImportDeclaration
+    'ImportDeclaration'
   )
     .map((node: ts.ImportDeclaration) => _angularImportsFromNode(node, source))
     .reduce(
@@ -287,21 +287,6 @@ export function addDeclarationToModule(
     source,
     modulePath,
     'declarations',
-    symbolName
-  );
-}
-
-export function addEntryComponents(
-  host: Tree,
-  source: ts.SourceFile,
-  modulePath: string,
-  symbolName: string
-): ts.SourceFile {
-  return _addSymbolToNgModuleMetadata(
-    host,
-    source,
-    modulePath,
-    'entryComponents',
     symbolName
   );
 }
