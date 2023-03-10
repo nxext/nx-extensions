@@ -7,7 +7,7 @@ export async function addReact(
   host: Tree,
   options: ApplicationGeneratorSchema
 ) {
-  await ensurePackage(host, '@nrwl/angular', readNxVersion(host));
+  await ensurePackage(host, '@nrwl/react', readNxVersion(host));
   const { applicationGenerator } = await import('@nrwl/react');
   return await applicationGenerator(host, {
     ...options,
@@ -24,5 +24,6 @@ export async function addReact(
     routing: true,
     skipWorkspaceJson: true,
     globalCss: true,
+    bundler: options.bundler,
   });
 }

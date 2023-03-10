@@ -8,6 +8,7 @@ export interface ApplicationGeneratorSchema {
   capacitor: boolean;
   skipFormat: boolean;
   standaloneConfig?: boolean;
+  bundler?: 'webpack' | 'vite';
 }
 
 export interface NormalizedSchema extends ApplicationGeneratorSchema {

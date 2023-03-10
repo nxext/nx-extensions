@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "@nxext/capacitor": "^15.7.0",
-    "@nrwl/devkit": "15.7.0"
+    "@nrwl/devkit": "15.7.0",
+    "@phenomnomnominal/tsquery": "4.1.1"
   },
   "peerDependencies": {
     "@nrwl/angular": "^15.7.0"

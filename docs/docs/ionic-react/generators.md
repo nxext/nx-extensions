@@ -42,6 +42,16 @@ Type: `string`
 
 The name of the application.
 
+#### bundler
+
+Default: `webpack`
+
+Type: `string`
+
+Possible values: `vite`, `webpack`
+
+The bundler to use.
+
 #### capacitor
 
 Default: `true`
