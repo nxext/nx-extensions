@@ -1,19 +1,15 @@
 import * as ts from 'typescript';
 import { ChangeType, StringChange, Tree } from '@nrwl/devkit';
-import { findNodes } from '@nrwl/workspace/src/utilities/typescript';
+import { findNodes } from 'nx/src/utils/typescript';
 import { insertChange } from '@nrwl/workspace/src/utilities/ast-utils';
+import { tsquery } from '@phenomnomnominal/tsquery';
 
 export function readTsSourceFile(host: Tree, path: string): ts.SourceFile {
   if (!host.exists(path)) {
     throw new Error(`Typescript file not readable (${path}).`);
   } else {
     const contentBuffer = host.read(path);
-    return ts.createSourceFile(
-      path,
-      contentBuffer.toString(),
-      ts.ScriptTarget.Latest,
-      true
-    );
+    return tsquery.ast(contentBuffer.toString());
   }
 }
 
@@ -28,7 +24,7 @@ export function addAfterLastImport(
   source: ts.SourceFile,
   statement: string
 ): StringChange {
-  const allImports = findNodes(source, ts.SyntaxKind.ImportDeclaration);
+  const allImports = tsquery(source, 'ImportDeclaration');
   if (allImports.length > 0) {
     const lastImport = allImports[allImports.length - 1];
     return {
@@ -54,7 +50,7 @@ export function insertImport(
   isDefault = false
 ): ts.SourceFile {
   const rootNode = source;
-  const allImports = findNodes(rootNode, ts.SyntaxKind.ImportDeclaration);
+  const allImports = tsquery(source, 'ImportDeclaration');
 
   // get nodes that map to import statements from the file fileName
   const relevantImports = allImports.filter((node) => {
