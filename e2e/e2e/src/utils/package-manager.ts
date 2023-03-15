@@ -40,8 +40,12 @@ export function packageInstallAsDevDependency(
   const cwd = projName ? `${tmpProjPath()}/${projName}` : tmpProjPath();
   const pm = getPackageManagerCommand();
   const pkgsWithVersions = pkgs
-    .map((pgk) => {
-      return `${pgk}@${deployedVersion}`;
+    .map((pkg: string) => {
+      if (!pkg.includes('@')) {
+        return `${pkg}@${deployedVersion}`;
+      } else {
+        return pkg;
+      }
     })
     .join(' ');
   const install = execSync(

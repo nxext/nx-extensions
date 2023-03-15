@@ -8,18 +8,11 @@ import {
   addDependenciesToPackageJson,
   readJson,
   names,
+  ensurePackage,
+  logger,
 } from '@nrwl/devkit';
 import { mergeViteSourceFiles } from 'ast-vite-config-merge';
 import { join } from 'path';
-import {
-  nxVersion,
-  viteVersion,
-  vitePluginEslintVersion,
-  viteTsConfigPathsVersion,
-  jsdomVersion,
-  vitePluginReactVersion,
-  vitePluginDtsVersion,
-} from '@nrwl/vite/src/utils/versions';
 import { createSourceFile, ScriptTarget, SourceFile } from 'typescript';
 
 export default async function update(host: Tree) {
@@ -248,6 +241,8 @@ export default async function update(host: Tree) {
     }
 
     if (hasChanged) {
+      const userConfig = getConfigPath(project, host);
+      logger.info(host.read(userConfig).toJSON());
       project.targets = {
         ...project.targets,
         preview: {
@@ -270,7 +265,7 @@ export default async function update(host: Tree) {
       updateProjectConfiguration(host, projectName, project);
     }
   }
-  return checkDependenciesInstalled(host);
+  return await checkDependenciesInstalled(host);
 }
 
 function mergeConfigs(configs: SourceFile[]): SourceFile {
@@ -301,21 +296,23 @@ function getConfigPath(
   return null;
 }
 
-function checkDependenciesInstalled(host: Tree) {
+async function checkDependenciesInstalled(host: Tree) {
   const packageJson = readJson(host, 'package.json');
   const devDependencies = {};
   const dependencies = {};
   packageJson.dependencies = packageJson.dependencies || {};
   packageJson.devDependencies = packageJson.devDependencies || {};
 
-  // base deps
-  devDependencies['@nrwl/vite'] = nxVersion;
-  devDependencies['vite'] = viteVersion;
-  devDependencies['vite-plugin-eslint'] = vitePluginEslintVersion;
-  devDependencies['vite-tsconfig-paths'] = viteTsConfigPathsVersion;
-  devDependencies['jsdom'] = jsdomVersion;
+  await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
 
-  devDependencies['vite-plugin-dts'] = vitePluginDtsVersion;
+  // base deps
+  devDependencies['@nrwl/vite'] = readNxVersion(host);
+  devDependencies['vite'] = '^4.0.1';
+  devDependencies['vite-plugin-eslint'] = '^1.8.1';
+  devDependencies['vite-tsconfig-paths'] = '^4.0.2';
+  devDependencies['jsdom'] = '~20.0.3';
+
+  devDependencies['vite-plugin-dts'] = '~1.7.1';
 
   return addDependenciesToPackageJson(host, dependencies, devDependencies);
 }
@@ -437,4 +434,18 @@ function vitePackageNxPlusNxextBase(
       },
     },
   })`;
+}
+
+export function readNxVersion(tree: Tree): string {
+  const packageJson = readJson(tree, 'package.json');
+
+  const nxVersion = packageJson.devDependencies['@nrwl/workspace']
+    ? packageJson.devDependencies['@nrwl/workspace']
+    : packageJson.dependencies['@nrwl/workspace'];
+
+  if (!nxVersion) {
+    throw new Error('@nrwl/workspace is not a dependency.');
+  }
+
+  return nxVersion;
 }
