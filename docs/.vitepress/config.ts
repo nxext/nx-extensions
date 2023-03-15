@@ -321,23 +321,6 @@ function sideNavDocs() {
       collapsed: true,
       items: [
         {
-          text: 'Angular',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/angular/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/angular/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/angular/generators',
-            },
-          ],
-        },
-        {
           text: 'Vite',
           items: [
             {

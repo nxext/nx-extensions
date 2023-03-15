@@ -55,7 +55,7 @@ export async function* nxPluginE2EExecutor(
   try {
     const nxJson = context.nxJsonConfiguration;
     const distDir = joinPathFragments('dist', nxJson.workspaceLayout.libsDir);
-    buildAllPackages('e2e,docs,angular-vite,angular-nx,angular-swc');
+    buildAllPackages('e2e,docs');
     updatePackageJsonFiles(deployedVersion, distDir, nxJson.npmScope);
     publishPackages(verdaccioUrl, distDir);
 
