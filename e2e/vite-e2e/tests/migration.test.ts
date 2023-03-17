@@ -9,39 +9,55 @@ import { newProject } from '@nxext/e2e';
 import { deployedVersion } from '../../e2e/src/utils';
 
 describe('vite migration e2e', () => {
-  beforeEach(() => {
-    newProject(['@nxext/vite@15.1.0']);
+  describe('vite app', () => {
+    beforeEach(() => {
+      newProject(['@nxext/vite@15.1.0']);
+    });
+
+    afterEach(() => {
+      // `nx reset` kills the daemon, and performs
+      // some work which can help clean up e2e leftovers
+      runNxCommand('reset');
+      cleanup();
+    });
+
+    it('vite application', async () => {
+      const plugin = uniq('vite');
+      await runNxCommandAsync(`generate @nxext/vite:app ${plugin}`);
+
+      await runNxCommandAsync(`migrate @nxext/vite@${deployedVersion}`);
+      await runNxCommandAsync(`migrate --run-migrations`);
+
+      await runNxCommandAsync(`build ${plugin}`);
+
+      expect(() =>
+        checkFilesExist(`dist/apps/${plugin}/index.html`)
+      ).not.toThrow();
+    });
   });
 
-  afterEach(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommand('reset');
-    //cleanup();
-  });
+  describe('vite lib', () => {
+    beforeEach(() => {
+      newProject(['@nxext/vite@15.1.0']);
+    });
 
-  it('vite application', async () => {
-    const plugin = uniq('vite');
-    await runNxCommandAsync(`generate @nxext/vite:app ${plugin}`);
+    afterEach(() => {
+      // `nx reset` kills the daemon, and performs
+      // some work which can help clean up e2e leftovers
+      runNxCommand('reset');
+      cleanup();
+    });
 
-    await runNxCommandAsync(`migrate @nxext/vite@${deployedVersion}`);
-    await runNxCommandAsync(`migrate --run-migrations`);
+    it('vite lib', async () => {
+      const plugin = uniq('vitelib');
+      await runNxCommandAsync(`generate @nxext/vite:lib ${plugin} --buildable`);
 
-    const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain('Bundle complete');
+      await runNxCommandAsync(`migrate @nxext/vite@${deployedVersion}`);
+      await runNxCommandAsync(`migrate --run-migrations`);
 
-    expect(() =>
-      checkFilesExist(`dist/apps/${plugin}/index.html`)
-    ).not.toThrow();
-  });
-
-  it('vite lib', async () => {
-    const plugin = uniq('vitelib');
-    await runNxCommandAsync(`generate @nxext/vite:lib ${plugin}`);
-
-    await runNxCommandAsync(`migrate @nxext/vite@${deployedVersion}`);
-    await runNxCommandAsync(`migrate --run-migrations`);
-
-    expect(() => checkFilesExist(`libs/${plugin}/src/index.ts`)).not.toThrow();
+      expect(() =>
+        checkFilesExist(`libs/${plugin}/src/index.ts`)
+      ).not.toThrow();
+    });
   });
 });

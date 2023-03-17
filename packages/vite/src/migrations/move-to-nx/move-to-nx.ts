@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  getProjects,
   offsetFromRoot,
   ProjectConfiguration,
   Tree,
@@ -9,262 +8,306 @@ import {
   readJson,
   names,
   ensurePackage,
-  logger,
+  readProjectConfiguration,
 } from '@nrwl/devkit';
 import { mergeViteSourceFiles } from 'ast-vite-config-merge';
 import { join } from 'path';
 import { createSourceFile, ScriptTarget, SourceFile } from 'typescript';
+import { forEachExecutorOptions, readNxVersion } from './utils';
+import { BuildExecutorSchema } from '../../executors/build/schema';
+import { DevExecutorSchema } from '../../executors/dev/schema';
+import { Schema } from '../../executors/package/schema';
+
+function migrateVitePackage(
+  host: Tree,
+  projectName: string,
+  targetName: string
+) {
+  const projectConfiguration = readProjectConfiguration(host, projectName);
+  const targetConfiguration = projectConfiguration.targets[targetName];
+  targetConfiguration.executor = '@nrwl/vite:build';
+
+  const configsToMerge: SourceFile[] = [];
+  const nxextPlusNxConfig = vitePackageNxPlusNxextBase(
+    projectConfiguration.name,
+    projectConfiguration,
+    targetConfiguration.options?.entryFile
+  );
+  const originalUserConfigFile = getSourceFileForOption(
+    host,
+    projectConfiguration.root,
+    targetConfiguration.options?.configFile,
+    '@nxext/vite/plugins/vite-package'
+  );
+  const originalFrameworkConfigFile = getSourceFileForOption(
+    host,
+    projectConfiguration.root,
+    targetConfiguration.options?.frameworkConfigFile,
+    '@nxext/vite/plugins/vite-package'
+  );
+
+  const userConfig = getConfigPath(projectConfiguration, host);
+
+  if (originalFrameworkConfigFile) {
+    configsToMerge.push(originalFrameworkConfigFile);
+  }
+  if (originalUserConfigFile) {
+    configsToMerge.push(originalUserConfigFile);
+  }
+  if (userConfig) {
+    configsToMerge.push(
+      createSourceFile(
+        userConfig,
+        host.read(userConfig, 'utf-8'),
+        ScriptTarget.ES2022
+      )
+    );
+  }
+  configsToMerge.push(
+    createSourceFile(
+      'nxext-plus-nx-targetConfiguration',
+      nxextPlusNxConfig,
+      ScriptTarget.ES2022
+    )
+  );
+
+  // remove additional options designed for the original vite plugin by nxext
+  delete targetConfiguration.options?.configFile;
+  delete targetConfiguration.options?.frameworkConfigFile;
+  delete targetConfiguration.options?.entryFile;
+
+  // lets add the missing new targetConfiguration
+  targetConfiguration.defaultConfiguration = 'production';
+  targetConfiguration.configurations = {
+    development: {
+      mode: 'development',
+    },
+    production: {
+      mode: 'production',
+    },
+  };
+
+  if (userConfig) {
+    host.write(userConfig, mergeConfigs(configsToMerge).getFullText());
+  } else {
+    host.write(
+      join(projectConfiguration.root, 'vite.targetConfiguration.ts'),
+      mergeConfigs(configsToMerge).getFullText()
+    );
+  }
+
+  updateProjectConfiguration(host, projectName, projectConfiguration);
+}
+
+function migrateViteBuild(host: Tree, projectName: string, targetName: string) {
+  const projectConfiguration = readProjectConfiguration(host, projectName);
+  const targetConfiguration = projectConfiguration.targets[targetName];
+  targetConfiguration.executor = '@nrwl/vite:build';
+  const configsToMerge: SourceFile[] = [];
+  const nxextPlusNxConfig = viteProjectBase(projectConfiguration);
+  const originalUserConfigFile = getSourceFileForOption(
+    host,
+    projectConfiguration.root,
+    targetConfiguration.options?.configFile,
+    '@nxext/vite/plugins/vite'
+  );
+  const originalFrameworkConfigFile = getSourceFileForOption(
+    host,
+    projectConfiguration.root,
+    targetConfiguration.options?.frameworkConfigFile,
+    '@nxext/vite/plugins/vite'
+  );
+
+  const userConfig = getConfigPath(projectConfiguration, host);
+
+  if (originalFrameworkConfigFile) {
+    configsToMerge.push(originalFrameworkConfigFile);
+  }
+  if (originalUserConfigFile) {
+    configsToMerge.push(originalUserConfigFile);
+  }
+  if (userConfig) {
+    configsToMerge.push(
+      createSourceFile(
+        userConfig,
+        host.read(userConfig, 'utf-8'),
+        ScriptTarget.ES2022
+      )
+    );
+  }
+  configsToMerge.push(
+    createSourceFile(
+      'nxext-plus-nx-targetConfiguration',
+      nxextPlusNxConfig,
+      ScriptTarget.ES2022
+    )
+  );
+
+  // remove additional options designed for the original vite plugin by nxext
+  delete targetConfiguration.options?.configFile;
+  delete targetConfiguration.options?.frameworkConfigFile;
+  delete targetConfiguration.options?.entryFile;
+
+  // lets add the missing new targetConfiguration
+  targetConfiguration.configurations = {
+    development: {
+      extractLicenses: false,
+      optimization: false,
+      sourceMap: true,
+      vendorChunk: true,
+    },
+    production: {
+      fileReplacements: [
+        {
+          replace: `"apps/${projectConfiguration.name}/src/environments/environment.ts"`,
+          with: `"apps/${projectConfiguration.name}/src/environments/environment.prod.ts"`,
+        },
+      ],
+      optimization: true,
+      outputHashing: 'all',
+      sourceMap: false,
+      namedChunks: false,
+      extractLicenses: true,
+      vendorChunk: false,
+    },
+  };
+
+  if (userConfig) {
+    host.write(userConfig, mergeConfigs(configsToMerge).getFullText());
+  } else {
+    host.write(
+      join(projectConfiguration.root, 'vite.targetConfiguration.ts'),
+      mergeConfigs(configsToMerge).getFullText()
+    );
+  }
+
+  projectConfiguration.targets[targetName] = targetConfiguration;
+
+  projectConfiguration.targets = {
+    ...projectConfiguration.targets,
+    preview: {
+      executor: '@nrwl/vite:preview-server',
+      defaultConfiguration: 'development',
+      options: {
+        buildTarget: `"${projectName}:build"`,
+      },
+      configurations: {
+        development: {
+          buildTarget: `"${projectName}:build:development"`,
+        },
+        production: {
+          buildTarget: `"${projectName}:build:production"`,
+        },
+      },
+    },
+  };
+
+  updateProjectConfiguration(host, projectName, projectConfiguration);
+}
+
+function migrateViteDev(host: Tree, projectName: string, targetName: string) {
+  const projectConfiguration = readProjectConfiguration(host, projectName);
+  const targetConfiguration = projectConfiguration.targets[targetName];
+  targetConfiguration.executor = '@nrwl/vite:dev-server';
+  const configsToMerge: SourceFile[] = [];
+  const nxextPlusNxConfig = viteProjectBase(projectConfiguration);
+  const originalUserConfigFile = getSourceFileForOption(
+    host,
+    projectConfiguration.root,
+    targetConfiguration.options?.configFile,
+    '@nxext/vite/plugins/vite'
+  );
+  const originalFrameworkConfigFile = getSourceFileForOption(
+    host,
+    projectConfiguration.root,
+    targetConfiguration.options?.frameworkConfigFile,
+    '@nxext/vite/plugins/vite'
+  );
+
+  const userConfig = getConfigPath(projectConfiguration, host);
+
+  if (originalFrameworkConfigFile) {
+    configsToMerge.push(originalFrameworkConfigFile);
+  }
+  if (originalUserConfigFile) {
+    configsToMerge.push(originalUserConfigFile);
+  }
+  if (userConfig) {
+    configsToMerge.push(
+      createSourceFile(
+        userConfig,
+        host.read(userConfig, 'utf-8'),
+        ScriptTarget.ES2022
+      )
+    );
+  }
+  configsToMerge.push(
+    createSourceFile(
+      'nxext-plus-nx-targetConfiguration',
+      nxextPlusNxConfig,
+      ScriptTarget.ES2022
+    )
+  );
+
+  // remove additional options designed for the original vite plugin by nxext
+  delete targetConfiguration.options?.configFile;
+  delete targetConfiguration.options?.frameworkConfigFile;
+  delete targetConfiguration.options?.entryFile;
+
+  // lets add the missing new targetConfiguration
+  targetConfiguration.options = {
+    ...(targetConfiguration.options ?? {}),
+    hmr: true,
+    buildTarget: `${projectConfiguration.name}:build`,
+  };
+  targetConfiguration.configurations = {
+    development: {
+      buildTarget: `${projectConfiguration.name}:build:development`,
+    },
+    production: {
+      buildTarget: `${projectConfiguration.name}:build:production`,
+      hmr: false,
+    },
+  };
+
+  if (userConfig) {
+    host.write(userConfig, mergeConfigs(configsToMerge).getFullText());
+  } else {
+    host.write(
+      join(projectConfiguration.root, 'vite.targetConfiguration.ts'),
+      mergeConfigs(configsToMerge).getFullText()
+    );
+  }
+
+  projectConfiguration.targets[targetName] = targetConfiguration;
+  updateProjectConfiguration(host, projectName, projectConfiguration);
+}
 
 export default async function update(host: Tree) {
-  const projects = getProjects(host);
-
-  for (const [projectName, project] of projects) {
-    let hasChanged = false;
-    for (const [key, config] of Object.entries(project.targets)) {
-      if (config.executor === '@nxext/vite:package') {
-        const configsToMerge: SourceFile[] = [];
-        const nxextPlusNxConfig = vitePackageNxPlusNxextBase(
-          project.name,
-          project,
-          config.options?.entryFile
-        );
-        const originalUserConfigFile = getSourceFileForOption(
-          host,
-          project.root,
-          config.options?.configFile,
-          '@nxext/vite/plugins/vite-package'
-        );
-        const originalFrameworkConfigFile = getSourceFileForOption(
-          host,
-          project.root,
-          config.options?.frameworkConfigFile,
-          '@nxext/vite/plugins/vite-package'
-        );
-
-        const userConfig = getConfigPath(project, host);
-
-        if (originalFrameworkConfigFile) {
-          configsToMerge.push(originalFrameworkConfigFile);
-        }
-        if (originalUserConfigFile) {
-          configsToMerge.push(originalUserConfigFile);
-        }
-        if (userConfig) {
-          configsToMerge.push(
-            createSourceFile(
-              userConfig,
-              host.read(userConfig, 'utf-8'),
-              ScriptTarget.ES2022
-            )
-          );
-        }
-        configsToMerge.push(
-          createSourceFile(
-            'nxext-plus-nx-config',
-            nxextPlusNxConfig,
-            ScriptTarget.ES2022
-          )
-        );
-
-        // remove additional options designed for the original vite plugin by nxext
-        delete config.options?.configFile;
-        delete config.options?.frameworkConfigFile;
-        delete config.options?.entryFile;
-
-        // lets add the missing new config
-        config.defaultConfiguration = 'production';
-        config.configurations = {
-          development: {
-            mode: 'development',
-          },
-          production: {
-            mode: 'production',
-          },
-        };
-
-        if (userConfig) {
-          host.write(userConfig, mergeConfigs(configsToMerge).getFullText());
-        } else {
-          host.write(
-            join(project.root, 'vite.config.ts'),
-            mergeConfigs(configsToMerge).getFullText()
-          );
-        }
-        hasChanged = true;
-      } else if (config.executor === '@nxext/vite:build') {
-        const configsToMerge: SourceFile[] = [];
-        const nxextPlusNxConfig = viteProjectBase(project);
-        const originalUserConfigFile = getSourceFileForOption(
-          host,
-          project.root,
-          config.options?.configFile,
-          '@nxext/vite/plugins/vite'
-        );
-        const originalFrameworkConfigFile = getSourceFileForOption(
-          host,
-          project.root,
-          config.options?.frameworkConfigFile,
-          '@nxext/vite/plugins/vite'
-        );
-
-        const userConfig = getConfigPath(project, host);
-
-        if (originalFrameworkConfigFile) {
-          configsToMerge.push(originalFrameworkConfigFile);
-        }
-        if (originalUserConfigFile) {
-          configsToMerge.push(originalUserConfigFile);
-        }
-        if (userConfig) {
-          configsToMerge.push(
-            createSourceFile(
-              userConfig,
-              host.read(userConfig, 'utf-8'),
-              ScriptTarget.ES2022
-            )
-          );
-        }
-        configsToMerge.push(
-          createSourceFile(
-            'nxext-plus-nx-config',
-            nxextPlusNxConfig,
-            ScriptTarget.ES2022
-          )
-        );
-
-        // remove additional options designed for the original vite plugin by nxext
-        delete config.options?.configFile;
-        delete config.options?.frameworkConfigFile;
-        delete config.options?.entryFile;
-
-        // lets add the missing new config
-        config.configurations = {
-          development: {
-            extractLicenses: false,
-            optimization: false,
-            sourceMap: true,
-            vendorChunk: true,
-          },
-          production: {
-            fileReplacements: [
-              {
-                replace: `"apps/${project.name}/src/environments/environment.ts"`,
-                with: `"apps/${project.name}/src/environments/environment.prod.ts"`,
-              },
-            ],
-            optimization: true,
-            outputHashing: 'all',
-            sourceMap: false,
-            namedChunks: false,
-            extractLicenses: true,
-            vendorChunk: false,
-          },
-        };
-
-        if (userConfig) {
-          host.write(userConfig, mergeConfigs(configsToMerge).getFullText());
-        } else {
-          host.write(
-            join(project.root, 'vite.config.ts'),
-            mergeConfigs(configsToMerge).getFullText()
-          );
-        }
-        hasChanged = true;
-      } else if (config.executor === '@nxext/vite:dev') {
-        const configsToMerge: SourceFile[] = [];
-        const nxextPlusNxConfig = viteProjectBase(project);
-        const originalUserConfigFile = getSourceFileForOption(
-          host,
-          project.root,
-          config.options?.configFile,
-          '@nxext/vite/plugins/vite'
-        );
-        const originalFrameworkConfigFile = getSourceFileForOption(
-          host,
-          project.root,
-          config.options?.frameworkConfigFile,
-          '@nxext/vite/plugins/vite'
-        );
-
-        const userConfig = getConfigPath(project, host);
-
-        if (originalFrameworkConfigFile) {
-          configsToMerge.push(originalFrameworkConfigFile);
-        }
-        if (originalUserConfigFile) {
-          configsToMerge.push(originalUserConfigFile);
-        }
-        if (userConfig) {
-          configsToMerge.push(
-            createSourceFile(
-              userConfig,
-              host.read(userConfig, 'utf-8'),
-              ScriptTarget.ES2022
-            )
-          );
-        }
-        configsToMerge.push(
-          createSourceFile(
-            'nxext-plus-nx-config',
-            nxextPlusNxConfig,
-            ScriptTarget.ES2022
-          )
-        );
-
-        // remove additional options designed for the original vite plugin by nxext
-        delete config.options?.configFile;
-        delete config.options?.frameworkConfigFile;
-        delete config.options?.entryFile;
-
-        // lets add the missing new config
-        config.options = { ...(config.options ?? {}), hmr: true };
-        config.configurations = {
-          development: {
-            buildTarget: `"${project.name}:build:development"`,
-          },
-          production: {
-            buildTarget: `"${project.name}:build:production"`,
-            hmr: false,
-          },
-        };
-        if (userConfig) {
-          host.write(userConfig, mergeConfigs(configsToMerge).getFullText());
-        } else {
-          host.write(
-            join(project.root, 'vite.config.ts'),
-            mergeConfigs(configsToMerge).getFullText()
-          );
-        }
-        hasChanged = true;
-      }
-      return;
+  forEachExecutorOptions<BuildExecutorSchema>(
+    host,
+    '@nxext/vite:build',
+    (options, projectName, targetName, configurationName) => {
+      migrateViteBuild(host, projectName, targetName);
     }
+  );
 
-    if (hasChanged) {
-      const userConfig = getConfigPath(project, host);
-      logger.info(host.read(userConfig).toJSON());
-      project.targets = {
-        ...project.targets,
-        preview: {
-          executor: '@nrwl/vite:preview-server',
-          defaultConfiguration: 'development',
-          options: {
-            buildTarget: `"${project.name}:build"`,
-          },
-          configurations: {
-            development: {
-              buildTarget: `"${project.name}:build:development"`,
-            },
-            production: {
-              buildTarget: `"${project.name}:build:production"`,
-            },
-          },
-        },
-      };
-
-      updateProjectConfiguration(host, projectName, project);
+  forEachExecutorOptions<DevExecutorSchema>(
+    host,
+    '@nxext/vite:dev',
+    (options, projectName, targetName, configurationName) => {
+      migrateViteDev(host, projectName, targetName);
     }
-  }
+  );
+
+  forEachExecutorOptions<Schema>(
+    host,
+    '@nxext/vite:package',
+    (options, projectName, targetName, configurationName) => {
+      migrateVitePackage(host, projectName, targetName);
+    }
+  );
+
   return await checkDependenciesInstalled(host);
 }
 
@@ -434,18 +477,4 @@ function vitePackageNxPlusNxextBase(
       },
     },
   })`;
-}
-
-export function readNxVersion(tree: Tree): string {
-  const packageJson = readJson(tree, 'package.json');
-
-  const nxVersion = packageJson.devDependencies['@nrwl/workspace']
-    ? packageJson.devDependencies['@nrwl/workspace']
-    : packageJson.dependencies['@nrwl/workspace'];
-
-  if (!nxVersion) {
-    throw new Error('@nrwl/workspace is not a dependency.');
-  }
-
-  return nxVersion;
 }

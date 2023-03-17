@@ -1,17 +1,28 @@
-import { default as update } from './move-to-nx';
+import { default as migration } from './move-to-nx';
 import {
   Tree,
   readProjectConfiguration,
-  formatFiles
+  formatFiles,
+  logger,
 } from '@nrwl/devkit';
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const utilsModule = require('./utils');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
 
 describe('move-to-nx', () => {
+  jest.spyOn(utilsModule, 'readNxVersion').mockReturnValue('16.0.0');
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let tree: Tree;
 
   beforeEach(async () => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' })
-    tree.write('apps/app/project.json', `{
+    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+
+    tree.write(
+      'apps/app/project.json',
+      `{
   "name": "app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/app/src",
@@ -55,13 +66,6 @@ describe('move-to-nx', () => {
         }
       }
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/app/**/*.{ts,js,tsx,jsx}"]
-      }
-    },
     "test": {
       "executor": "@nxext/vitest:vitest",
       "options": {
@@ -70,42 +74,69 @@ describe('move-to-nx', () => {
     }
   },
   "tags": []
-}`);
-    tree.write('apps/app/vitest.config.ts', `
+}`
+    );
+    tree.write(
+      'apps/app/vitest.config.ts',
+      `
 import { mergeConfig } from 'vite';
 import baseConfig from '../../vitest.config';
 
 export default mergeConfig(baseConfig, {
   plugins: [],
-});`);
+});`
+    );
+
+    tree.write(
+      'libs/lib/project.json',
+      `
+{
+  "name": "lib",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/lib/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nxext/vite:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/lib",
+        "packageJson": "package.json",
+        "assets": ["assets"],
+        "entryFile": "src/index.ts",
+        "configFile": "@nxext/vite/plugins/vite-package"
+      }
+    },
+    "test": {
+      "executor": "@nxext/vitest:vitest",
+      "options": {
+        "vitestConfig": "libs/lib2/vitest.config.ts"
+      }
+    }
+  }
+}`
+    );
 
     await formatFiles(tree);
   });
 
-  it(`should change app targets to vite`, async () => {
-    await update(tree);
+  it(`should change app targets to @nrwl/vite`, async () => {
+    await migration(tree);
 
-    const config = readProjectConfiguration(tree, 'app');
-    expect(config.targets.build).toEqual({
-      executor: '@nxext/vite:build',
-      outputs: ['{options.outputPath}'],
-      options: {
-        frameworkConfigFile: '@nxext/svelte/plugins/vite',
-        outputPath: 'dist/apps/app',
-        assets: [
-          {
-            glob: '/*',
-            input: './public/**',
-            output: './',
-          },
-        ],
-        tsConfig: 'apps/app/tsconfig.app.json',
-      },
-      configurations: {
-        production: {},
-      },
-    });
+    const appProjectConfig = readProjectConfiguration(tree, 'app');
+    expect(appProjectConfig.targets.build.executor).toEqual('@nrwl/vite:build');
+    expect(appProjectConfig.targets.serve.executor).toEqual(
+      '@nrwl/vite:dev-server'
+    );
 
-    expect(config.targets.serve.executor).toEqual('@nxext/vite:dev');
+    for (const [key, config] of Object.entries(appProjectConfig.targets)) {
+      expect(config.executor).not.toContain('@nxext');
+    }
+
+    logger.info(tree.read('apps/app/project.json', 'utf-8'));
+
+    const libProjectConfig = readProjectConfiguration(tree, 'lib');
+    expect(libProjectConfig.targets.build.executor).toEqual('@nrwl/vite:build');
   });
 });
