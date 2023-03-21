@@ -26,6 +26,13 @@ export default async function runExecutor(
 ) {
   const taskCommand: TaskCommand = 'test';
 
+  logger.info(`
+  ###
+  ### You have to downgrade the Jest packages to Jest 27. We won't do this automatically cause it could break other Nx projects.
+  ### Stencil itself supports just Jest 27, Nx uses Jest 28 by default. Downgrade with caution!
+  ###
+  `);
+
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const { strictConfig, pathCollection } = await initializeStencilConfig(
     taskCommand,

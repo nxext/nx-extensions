@@ -4,6 +4,7 @@ import {
   runNxCommand,
   runNxCommandAsync,
   uniq,
+  runCommand,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
 
@@ -34,6 +35,17 @@ describe('application e2e', () => {
           `dist/apps/${plugin}/www/host.config.json`
         );
       }).not.toThrow();
+    });
+
+    it(`should be able to run e2e`, async () => {
+      const plugin = uniq('app2');
+      await runNxCommandAsync(
+        `generate @nxext/stencil:app ${plugin} --style='css' --e2eTestRunner='puppeteer' --junitTestRunner='none'`
+      );
+      runCommand(`yarn add -D @types/jest@27.0.3 jest@27.0.3 jest-cli@27.4.5`);
+
+      const result = await runNxCommandAsync(`e2e ${plugin} `);
+      expect(result.stdout).toContain('build finished');
     });
 
     it(`should build app with prerender parameter`, async () => {

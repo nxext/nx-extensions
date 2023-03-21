@@ -69,8 +69,7 @@ export default async function runExecutor(
     taskCommand,
     options,
     context,
-    flags,
-    dependencies
+    flags
   );
 
   const stencilConfig = await prepareConfigAndOutputargetPaths(
