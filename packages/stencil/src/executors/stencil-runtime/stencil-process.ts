@@ -1,5 +1,6 @@
-import { CompilerSystem, runTask } from '@stencil/core/cli';
+import { runTask } from '@stencil/core/cli';
 import type { Config } from '@stencil/core/compiler';
+import { CompilerSystem } from '@stencil/core/sys/node';
 
 type CoreCompiler = typeof import('@stencil/core/compiler');
 
