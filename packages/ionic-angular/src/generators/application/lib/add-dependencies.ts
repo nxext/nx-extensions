@@ -7,7 +7,7 @@ export function addDependencies(host: Tree) {
     {
       '@ionic/angular': ionicAngularVersion,
     },
-    { '@nrwl/angular': readNxVersion(host) }
+    { '@nx/angular': readNxVersion(host) }
   );
 }
 

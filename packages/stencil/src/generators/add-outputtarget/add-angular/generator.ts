@@ -36,8 +36,8 @@ async function prepareAngularLibrary(
   const angularProjectName = `${options.projectName}-angular`;
   const { libsDir } = getWorkspaceLayout(host);
 
-  await ensurePackage(host, '@nrwl/angular', readNxVersion(host));
-  const generators = await import('@nrwl/angular/generators');
+  await ensurePackage(host, '@nx/angular', readNxVersion(host));
+  const generators = await import('@nx/angular/generators');
   const libraryTarget = await generators.libraryGenerator(host, {
     name: angularProjectName,
     skipFormat: true,
