@@ -1,5 +1,6 @@
 {
   "name": "stencil",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/stencil/src",
   "projectType": "library",
   "generators": {},
@@ -27,7 +28,9 @@
         "jestConfig": "packages/stencil/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["{workspaceRoot}/coverage/packages/stencil"]
+      "outputs": [
+        "{workspaceRoot}/coverage/packages/stencil"
+      ]
     },
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -77,11 +80,13 @@
         ],
         "srcRootForCompilationRoot": "packages/stencil"
       },
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "dependsOn": [
         {
           "target": "build",
-          "projects": "dependencies"
+          "projects": "{dependencies}"
         }
       ]
     }
