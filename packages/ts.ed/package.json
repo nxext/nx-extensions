@@ -23,7 +23,7 @@
   "main": "./src/index.js",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nrwl/devkit": "15.7.0"
+    "@nx/devkit": "16.0.0-beta.7"
   },
   "devDependencies": {
     "@nrwl/cypress": "^15.0.10",

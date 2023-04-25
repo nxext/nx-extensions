@@ -2,7 +2,7 @@ import {
   readWorkspaceConfiguration,
   Tree,
   updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function setDefaults(host: Tree, options: NormalizedSchema) {

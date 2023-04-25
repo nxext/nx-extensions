@@ -6,7 +6,7 @@ import {
 } from '@stencil/core/sys/node';
 import { loadConfig } from '@stencil/core/compiler';
 import { PathCollection } from './types';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 import { join } from 'path';
 import { normalizePath } from '../../utils/normalize-path';
 import type { Config } from '@stencil/core/compiler';

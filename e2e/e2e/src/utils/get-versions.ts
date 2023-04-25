@@ -1,4 +1,4 @@
-import { joinPathFragments, readJsonFile, workspaceRoot } from '@nrwl/devkit';
+import { joinPathFragments, readJsonFile, workspaceRoot } from '@nx/devkit';
 
 export function getNxVersion(): string {
   const pkgJson = readJsonFile(

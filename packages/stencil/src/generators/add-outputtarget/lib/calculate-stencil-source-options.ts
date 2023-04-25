@@ -1,8 +1,4 @@
-import {
-  getWorkspaceLayout,
-  readProjectConfiguration,
-  Tree,
-} from '@nrwl/devkit';
+import { getWorkspaceLayout, readProjectConfiguration, Tree } from '@nx/devkit';
 import * as ts from 'typescript';
 import { readTsSourceFile } from '../../../utils/ast-utils';
 

@@ -1,4 +1,4 @@
-import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
+import { joinPathFragments, TargetConfiguration } from '@nx/devkit';
 import { NormalizedSchema as LibrarySchema } from '../library/schema';
 import { NormalizedSchema as ApplicationSchema } from '../application/schema';
 

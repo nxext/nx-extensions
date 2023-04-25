@@ -3,7 +3,7 @@ import {
   assetGlobsToFiles,
   FileInputOutput,
 } from '@nrwl/workspace/src/utilities/assets';
-import { logger } from '@nrwl/devkit';
+import { logger } from '@nx/devkit';
 import { copy } from 'fs-extra';
 
 export function copyAssets(

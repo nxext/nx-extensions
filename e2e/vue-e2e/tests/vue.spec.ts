@@ -5,7 +5,7 @@ import {
   updateFile,
 } from '@nrwl/nx-plugin/testing';
 import { newProject } from '../../e2e/src';
-import { names } from '@nrwl/devkit';
+import { names } from '@nx/devkit';
 
 describe('vue e2e', () => {
   // Setting up individual workspaces per

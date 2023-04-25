@@ -4,7 +4,7 @@ import {
   joinPathFragments,
   updateJson,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 import { NormalizedSchema } from '../schema';
 

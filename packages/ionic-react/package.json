@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@nxext/capacitor": "^15.7.0",
-    "@nrwl/devkit": "15.7.0"
+    "@nx/devkit": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "@nrwl/linter": "^15.7.0",

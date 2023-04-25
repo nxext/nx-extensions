@@ -3,7 +3,7 @@ import {
   ensurePackage,
   formatFiles,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { createApplicationFiles } from './lib/create-application-files';

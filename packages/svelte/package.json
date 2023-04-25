@@ -31,10 +31,10 @@
   },
   "dependencies": {
     "@nxext/vite": "^15.1.0",
-    "@nrwl/devkit": "15.7.0",
     "@nrwl/cypress": "15.7.0",
     "@nrwl/jest": "15.7.0",
-    "@nxext/vitest": "^15.1.0"
+    "@nxext/vitest": "^15.1.0",
+    "@nx/devkit": "16.0.0-beta.7"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"

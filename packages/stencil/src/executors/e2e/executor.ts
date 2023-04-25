@@ -6,7 +6,7 @@ import {
   initializeStencilConfig,
 } from '../stencil-runtime';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext, logger } from '@nrwl/devkit';
+import { ExecutorContext, logger } from '@nx/devkit';
 import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
 
 function createStencilCompilerOptions(

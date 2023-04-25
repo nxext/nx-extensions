@@ -4,8 +4,8 @@ import {
   Tree,
   updateJson,
   updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from '../generators/library/generator';
 import { ProjectType } from './typings';
 

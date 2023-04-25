@@ -1,11 +1,11 @@
 import componentGenerator, { ComponentSchema } from './component';
 import { createTestUILib, testNpmScope } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { names, Tree } from '@nrwl/devkit';
+import { names, Tree } from '@nx/devkit';
 import storybookConfigurationGenerator from '../storybook-configuration/generator';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../../utils/utillities');
 

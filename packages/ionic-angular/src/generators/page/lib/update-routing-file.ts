@@ -1,4 +1,4 @@
-import { names, Tree } from '@nrwl/devkit';
+import { names, Tree } from '@nx/devkit';
 import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils';
 import { tsquery } from '@phenomnomnominal/tsquery';
 import { NormalizedSchema } from '../schema';

@@ -1,5 +1,5 @@
 import { default as update } from './check-for-svelte-config';
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { createTestProject } from '../../generators/utils/testing';
 import { uniq } from '@nrwl/nx-plugin/testing';
 

@@ -25,7 +25,7 @@
     "migrations": "./migrations.json"
   },
   "dependencies": {
-    "@nrwl/devkit": "^15.7.0"
+    "@nx/devkit": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "@nrwl/workspace": "^15.7.0",

@@ -3,7 +3,7 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { addCapacitor } from './lib/add-capacitor';
 import { addDependencies } from './lib/add-dependencies';
 import { addReact } from './lib/add-react';

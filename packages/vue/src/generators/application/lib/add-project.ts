@@ -1,4 +1,4 @@
-import { addProjectConfiguration, ProjectConfiguration } from '@nrwl/devkit';
+import { addProjectConfiguration, ProjectConfiguration } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function addProject(host, options: NormalizedSchema) {

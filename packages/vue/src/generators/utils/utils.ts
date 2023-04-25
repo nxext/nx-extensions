@@ -1,4 +1,4 @@
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, Tree } from '@nx/devkit';
 
 export function readNxVersion(host: Tree): string {
   const packageJson = readJson(host, 'package.json');

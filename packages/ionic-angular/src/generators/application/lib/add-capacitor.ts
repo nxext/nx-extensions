@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { capacitorProjectGenerator } from '@nxext/capacitor';
 import { NormalizedSchema } from '../schema';
 

@@ -1,5 +1,5 @@
 import { eslintPluginSvelteVersion } from './versions';
-import { offsetFromRoot } from '@nrwl/devkit';
+import { offsetFromRoot } from '@nx/devkit';
 
 export const extraEslintDependencies = {
   dependencies: {},

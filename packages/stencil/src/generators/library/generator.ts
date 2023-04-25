@@ -7,7 +7,7 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { LibrarySchema, RawLibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utillities';

@@ -4,7 +4,7 @@ import {
   stripIndents,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { InitGeneratorSchema } from './schema';
 import {
   c8Version,

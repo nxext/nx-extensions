@@ -4,7 +4,7 @@ import {
   normalizePath,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function addBaseFiles(host: Tree, options: NormalizedSchema) {

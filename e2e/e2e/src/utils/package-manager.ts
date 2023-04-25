@@ -5,7 +5,7 @@ import {
   detectPackageManager,
   getPackageManagerCommand,
   getPackageManagerVersion,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export function getNxWorkspaceCommands({
   path = tmpProjPath(),

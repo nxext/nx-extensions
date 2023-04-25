@@ -1,4 +1,4 @@
-import { TargetConfiguration } from '@nrwl/devkit';
+import { TargetConfiguration } from '@nx/devkit';
 import { LibrarySchema } from '../generators/library/schema';
 import { PWASchema } from '../generators/ionic-pwa/schema';
 import { ApplicationSchema } from '../generators/application/schema';
