@@ -211,17 +211,17 @@
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/node with @nx/node",
+      "description": "Replace @nx/node with @nx/node",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/node",
+      "package": "@nx/node",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.5",
-      "description": "Replace @nrwl/node:webpack with @nx/node:webpack",
+      "description": "Replace @nx/node:webpack with @nx/node:webpack",
       "implementation": "./src/migrations/update-16-0-0/update-webpack-executor",
-      "package": "@nrwl/node",
+      "package": "@nx/node",
       "name": "update-16-0-0-update-executor"
     },
     {
