@@ -43,8 +43,8 @@ export async function initGenerator(host: Tree, schema: InitSchema) {
   updateDependencies(host, schema);
 
   if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
-    await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
-    const { cypressInitGenerator } = await import('@nrwl/cypress');
+    await ensurePackage(host, '@nx/cypress', readNxVersion(host));
+    const { cypressInitGenerator } = await import('@nx/cypress');
     const cypressTask = cypressInitGenerator(host, {});
     tasks.push(cypressTask);
   }

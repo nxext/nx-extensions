@@ -8,8 +8,8 @@ export async function addCypress(host: Tree, options: ApplicationSchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
-  const { cypressProjectGenerator } = await import('@nrwl/cypress');
+  await ensurePackage(host, '@nx/cypress', readNxVersion(host));
+  const { cypressProjectGenerator } = await import('@nx/cypress');
   return await cypressProjectGenerator(host, {
     ...options,
     name: `${options.name}-e2e`,

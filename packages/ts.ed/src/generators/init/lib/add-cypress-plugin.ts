@@ -5,11 +5,11 @@ import {
 } from '@nx/devkit';
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from './util';
-import { cypressInitGenerator } from '@nrwl/cypress';
+import { cypressInitGenerator } from '@nx/cypress';
 
 export function addCypressPlugin(tree: Tree): GeneratorCallback {
   const tasks: GeneratorCallback[] = [];
-  const hasNrwlCypressDependency: boolean = hasNxPackage(tree, '@nrwl/cypress');
+  const hasNrwlCypressDependency: boolean = hasNxPackage(tree, '@nx/cypress');
 
   if (!hasNrwlCypressDependency) {
     const nxVersion = readNxVersion(tree);
@@ -17,7 +17,7 @@ export function addCypressPlugin(tree: Tree): GeneratorCallback {
     const installTask = addDependenciesToPackageJson(
       tree,
       {},
-      { '@nrwl/cypress': nxVersion }
+      { '@nx/cypress': nxVersion }
     );
     tasks.push(installTask);
   }
