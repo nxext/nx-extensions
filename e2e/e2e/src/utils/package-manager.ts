@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { tmpProjPath } from '@nrwl/nx-plugin/testing';
+import { tmpProjPath } from '@nx/plugin/testing';
 import { getNxVersion, deployedVersion } from './index';
 import {
   detectPackageManager,

@@ -66,7 +66,6 @@
     "@nrwl/angular": "16.0.0-beta.7",
     "@nrwl/jest": "16.0.0-beta.7",
     "@nrwl/node": "16.0.0-beta.7",
-    "@nrwl/nx-plugin": "16.0.0-beta.7",
     "@nrwl/react": "16.0.0-beta.7",
     "@phenomnomnominal/tsquery": "4.1.1",
     "@preact/preset-vite": "^2.4.0",
@@ -142,7 +141,8 @@
     "@nx/storybook": "16.0.0-beta.7",
     "@nx/vite": "16.0.0-beta.7",
     "@nx/web": "16.0.0-beta.7",
-    "@nx/eslint-plugin": "16.0.0-beta.7"
+    "@nx/eslint-plugin": "16.0.0-beta.7",
+    "@nx/plugin": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"

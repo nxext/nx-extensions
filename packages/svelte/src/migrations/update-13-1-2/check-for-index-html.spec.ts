@@ -1,7 +1,7 @@
 import { default as update } from './check-for-index-html';
 import { Tree } from '@nx/devkit';
 import { createTestProject } from '../../generators/utils/testing';
-import { uniq } from '@nrwl/nx-plugin/testing';
+import { uniq } from '@nx/plugin/testing';
 
 describe('check-for-svelte-config', () => {
   let tree: Tree;

@@ -5,7 +5,7 @@ import {
   runNxCommand,
   runNxCommandAsync,
   uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 import { runNxCommandUntil } from '../../e2e/src/utils/run-commands';
 
