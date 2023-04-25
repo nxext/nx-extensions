@@ -30,8 +30,8 @@ export async function configurationGenerator(
   );
   tasks.push(installTask);
 
-  await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
-  const { configurationGenerator } = await import('@nrwl/storybook');
+  await ensurePackage(host, '@nx/storybook', readNxVersion(host));
+  const { configurationGenerator } = await import('@nx/storybook');
 
   const storybookTask = await configurationGenerator(host, {
     name: options.name,

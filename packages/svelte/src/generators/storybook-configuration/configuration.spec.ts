@@ -109,7 +109,7 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
     const project = readProjectConfiguration(tree, 'test-ui-lib-2');
 
     expect(project.targets.storybook).toEqual({
-      executor: '@nrwl/storybook:storybook',
+      executor: '@nx/storybook:storybook',
       configurations: {
         ci: {
           quiet: true,

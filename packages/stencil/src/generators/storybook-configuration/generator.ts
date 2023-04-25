@@ -16,7 +16,7 @@ import {
   writeJson,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
-import { TsConfig } from '@nrwl/storybook/src/utils/utilities';
+import { TsConfig } from '@nx/storybook/src/utils/utilities';
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
 import { join } from 'path';
@@ -66,9 +66,9 @@ export async function storybookConfigurationGenerator(
     return;
   }
 
-  await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
+  await ensurePackage(host, '@nx/storybook', readNxVersion(host));
   const { initGenerator } = await import(
-    '@nrwl/storybook/src/generators/init/init'
+    '@nx/storybook/src/generators/init/init'
   );
 
   const initTask = await initGenerator(host, {
@@ -85,8 +85,8 @@ export async function storybookConfigurationGenerator(
   updateDependencies(host);
 
   if (options.configureCypress) {
-    await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
-    const { cypressProjectGenerator } = await import('@nrwl/storybook');
+    await ensurePackage(host, '@nx/storybook', readNxVersion(host));
+    const { cypressProjectGenerator } = await import('@nx/storybook');
     if (projectConfig.projectType !== 'application') {
       const cypressTask = await cypressProjectGenerator(host, {
         name: options.name,
@@ -244,7 +244,7 @@ function addStorybookTask(
     },
   };
   projectConfig.targets['serve-storybook'] = {
-    executor: '@nrwl/storybook:storybook',
+    executor: '@nx/storybook:storybook',
     options: {
       uiFramework,
       port: 4400,
@@ -259,7 +259,7 @@ function addStorybookTask(
     },
   };
   projectConfig.targets['build-storybook'] = {
-    executor: '@nrwl/storybook:build',
+    executor: '@nx/storybook:build',
     outputs: ['{options.outputPath}'],
     options: {
       uiFramework,
