@@ -71,7 +71,6 @@
     "@nrwl/js": "16.0.0-beta.7",
     "@nrwl/linter": "16.0.0-beta.7",
     "@nrwl/node": "16.0.0-beta.7",
-    "@nrwl/nx-cloud": "16.0.2",
     "@nrwl/nx-plugin": "16.0.0-beta.7",
     "@nrwl/react": "16.0.0-beta.7",
     "@nrwl/storybook": "16.0.0-beta.7",
@@ -142,7 +141,8 @@
     "vitest": "^0.24.3",
     "vue": "^3.2.47",
     "yargs": "^17.7.1",
-    "yargs-parser": "^21.1.1"
+    "yargs-parser": "^21.1.1",
+    "nx-cloud": "16.0.2"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"
