@@ -3,7 +3,7 @@ Adding the `@nxext/ionic-react` plugin to your Nx workspace is trivial, and work
 ## Install Plugin
 
 ```
-npm install --save-dev --exact @nxext/ionic-react @nxext/capacitor @nrwl/react
+npm install --save-dev --exact @nxext/ionic-react @nxext/capacitor @nx/react
 ```
 
 ## Generating Applications

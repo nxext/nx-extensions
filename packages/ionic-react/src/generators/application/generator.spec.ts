@@ -71,7 +71,7 @@ describe('application', () => {
     const packageJson = readJson(host, 'package.json');
     expect(packageJson.dependencies['@ionic/react']).toBeDefined();
     expect(packageJson.dependencies['@ionic/react-router']).toBeDefined();
-    expect(packageJson.devDependencies['@nrwl/react']).toBeDefined();
+    expect(packageJson.devDependencies['@nx/react']).toBeDefined();
   });
 
   it('should generate application', async () => {
@@ -80,7 +80,7 @@ describe('application', () => {
     testGeneratedFiles(host, { ...options });
   });
 
-  it('should delete unused @nrwl/react files', async () => {
+  it('should delete unused @nx/react files', async () => {
     await applicationGenerator(host, options);
 
     expect(host.exists(`${projectRoot}/src/app/app.css`)).toBeFalsy();

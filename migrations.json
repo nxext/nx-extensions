@@ -203,9 +203,9 @@
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/react with @nx/react",
+      "description": "Replace @nx/react with @nx/react",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/react",
+      "package": "@nx/react",
       "name": "update-16-0-0-add-nx-packages"
     },
     {

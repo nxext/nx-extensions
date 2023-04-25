@@ -43,6 +43,6 @@ describe('Update Webpack Config 11.0.0', () => {
     const workspaceJson = readJsonInTree(result, '/workspace.json');
     expect(
       workspaceJson.projects['my-app-1'].architect.build.options.webpackConfig
-    ).toEqual('@nrwl/react/plugins/webpack');
+    ).toEqual('@nx/react/plugins/webpack');
   });
 });
