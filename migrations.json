@@ -117,23 +117,23 @@
       "version": "15.9.1",
       "description": "Add @nx/linter, @nx/cypress, @nrwl/jest, @nrwl/rollup if they are used",
       "factory": "./src/migrations/update-15-9-1/add-dropped-dependencies",
-      "package": "@nrwl/web",
+      "package": "@nx/web",
       "name": "add-dropped-dependencies"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/web with @nx/web",
+      "description": "Replace @nx/web with @nx/web",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/web",
+      "package": "@nx/web",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.4",
-      "description": "Replace @nrwl/web executors with @nx/webpack and @nx/rollup",
+      "description": "Replace @nx/web executors with @nx/webpack and @nx/rollup",
       "implementation": "./src/migrations/update-16-0-0-update-executors/update-16-0-0-update-executors",
-      "package": "@nrwl/web",
+      "package": "@nx/web",
       "name": "update-16-0-0-update-executors"
     },
     {
@@ -243,7 +243,7 @@
     {
       "cli": "nx",
       "version": "15.9.0-beta.9",
-      "description": "Update the file-server executor to use @nrwl/web:file-server",
+      "description": "Update the file-server executor to use @nx/web:file-server",
       "factory": "./src/migrations/update-15-9-0/update-file-server-executor",
       "package": "@nrwl/angular",
       "name": "update-file-server-executor"
