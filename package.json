@@ -64,7 +64,6 @@
     "@angular-devkit/schematics": "15.2.6",
     "@angular/compiler": "15.2.8",
     "@nrwl/angular": "16.0.0-beta.7",
-    "@nrwl/eslint-plugin-nx": "16.0.0-beta.7",
     "@nrwl/jest": "16.0.0-beta.7",
     "@nrwl/node": "16.0.0-beta.7",
     "@nrwl/nx-plugin": "16.0.0-beta.7",
@@ -142,7 +141,8 @@
     "@nx/cypress": "16.0.0-beta.7",
     "@nx/storybook": "16.0.0-beta.7",
     "@nx/vite": "16.0.0-beta.7",
-    "@nx/web": "16.0.0-beta.7"
+    "@nx/web": "16.0.0-beta.7",
+    "@nx/eslint-plugin": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"
