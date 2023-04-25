@@ -39,8 +39,8 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
 
   updateBaseTsConfig(host, options);
   if (options.buildable) {
-    await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
-    const { viteConfigurationGenerator } = await import('@nrwl/vite');
+    await ensurePackage(host, '@nx/vite', readNxVersion(host));
+    const { viteConfigurationGenerator } = await import('@nx/vite');
     const viteTask = await viteConfigurationGenerator(host, {
       uiFramework: 'none',
       project: options.projectName,
@@ -55,8 +55,8 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
   }
 
   if (!options.buildable && options.unitTestRunner === 'vitest') {
-    await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
-    const { vitestGenerator } = await import('@nrwl/vite');
+    await ensurePackage(host, '@nx/vite', readNxVersion(host));
+    const { vitestGenerator } = await import('@nx/vite');
 
     const vitestTask = await vitestGenerator(host, {
       uiFramework: 'none',

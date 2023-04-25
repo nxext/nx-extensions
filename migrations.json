@@ -107,9 +107,9 @@
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/vite with @nx/vite",
+      "description": "Replace @nx/vite with @nx/vite",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/vite",
+      "package": "@nx/vite",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
