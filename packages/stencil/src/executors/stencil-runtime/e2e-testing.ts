@@ -1,5 +1,5 @@
 import { deleteFile } from '../../utils/fileutils';
-import { fileExists } from '@nrwl/workspace/src/utilities/fileutils';
+import { fileExists } from '@nx/workspace/src/utilities/fileutils';
 import { PathCollection } from './types';
 import { relative } from 'path';
 import { joinPathFragments, writeJsonFile } from '@nx/devkit';

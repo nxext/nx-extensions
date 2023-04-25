@@ -5,7 +5,7 @@ import {
   Tree,
 } from '@nx/devkit';
 import { Schema } from './schema';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { normalizeOptions } from './lib/normalize-options';
 import { createComponentFiles } from './lib/create-component-files';

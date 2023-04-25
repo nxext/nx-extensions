@@ -32,7 +32,7 @@ logger.info('Creating nx workspace...');
 execSync(
   `node ${require.resolve(
     'nx'
-  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty --packageManager=yarn --nxCloud=false`,
+  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nx/workspace --npmScope=proj --preset=empty --packageManager=yarn --nxCloud=false`,
   {
     cwd: localTmpDir,
   }

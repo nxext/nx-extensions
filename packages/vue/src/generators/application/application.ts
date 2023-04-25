@@ -8,7 +8,7 @@ import { Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { createApplicationFiles } from './lib/create-application-files';
 import { normalizeOptions } from './lib/normalize-options';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { updateViteConfig } from './lib/update-vite-config';
 import { addCypress } from './lib/add-cypress';
 import { addLinting } from './lib/add-linting';

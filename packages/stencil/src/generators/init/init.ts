@@ -1,10 +1,10 @@
-import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
+import { setDefaultCollection } from '@nx/workspace/src/utilities/set-default-collection';
 import { InitSchema } from './schema';
 import { addStyledDependencies } from './lib/add-style-module-dependencies';
 import { addPuppeteer } from './lib/add-e2e-dependencies';
 import { addDependenciesByApptype } from './lib/add-dependencies-for-apptype';
 import { convertNxGenerator, formatFiles, Tree } from '@nx/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
 

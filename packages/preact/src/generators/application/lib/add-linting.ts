@@ -6,7 +6,7 @@ import {
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { extraEslintDependencies } from '../../utils/lint';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { readNxVersion } from '../../utils/utils';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {

@@ -1,4 +1,4 @@
-import { AssetGlob } from '@nrwl/workspace/src/utilities/assets';
+import { AssetGlob } from '@nx/workspace/src/utilities/assets';
 
 export interface Schema {
   entryFile: string;

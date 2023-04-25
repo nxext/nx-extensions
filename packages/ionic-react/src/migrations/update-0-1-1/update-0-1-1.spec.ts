@@ -1,7 +1,7 @@
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { readJsonInTree } from '@nrwl/workspace';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
+import { readJsonInTree } from '@nx/workspace';
+import { createEmptyWorkspace } from '@nx/workspace/testing';
 import * as path from 'path';
 
 describe('Update 0-1-0', () => {

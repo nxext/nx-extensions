@@ -48,12 +48,12 @@ export const hasError = (diagnostics: Diagnostic[]): boolean => {
 export function readNxVersion(host: Tree): string {
   const packageJson = readJson(host, 'package.json');
 
-  const nxVersion = packageJson.devDependencies['@nrwl/workspace']
-    ? packageJson.devDependencies['@nrwl/workspace']
-    : packageJson.dependencies['@nrwl/workspace'];
+  const nxVersion = packageJson.devDependencies['@nx/workspace']
+    ? packageJson.devDependencies['@nx/workspace']
+    : packageJson.dependencies['@nx/workspace'];
 
   if (!nxVersion) {
-    throw new Error('@nrwl/workspace is not a dependency.');
+    throw new Error('@nx/workspace is not a dependency.');
   }
 
   return nxVersion;

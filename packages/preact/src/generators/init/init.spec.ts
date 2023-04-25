@@ -23,7 +23,7 @@ describe('init schematic', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
-        '@nrwl/workspace': '15.7.0',
+        '@nx/workspace': '15.7.0',
       };
       return json;
     });

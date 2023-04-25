@@ -25,9 +25,9 @@
   "peerDependencies": {
     "svelte": "^3.44.2",
     "svelte-preprocess": "^4.4.2",
-    "@nrwl/workspace": "^15.7.0",
     "@nrwl/cypress": "^15.7.0",
-    "@nrwl/linter": "^15.7.0"
+    "@nrwl/linter": "^15.7.0",
+    "@nx/workspace": "16.0.0-beta.7"
   },
   "dependencies": {
     "@nxext/vite": "^15.1.0",
