@@ -69,7 +69,6 @@
     "@nrwl/node": "16.0.0-beta.7",
     "@nrwl/nx-plugin": "16.0.0-beta.7",
     "@nrwl/react": "16.0.0-beta.7",
-    "@nrwl/vite": "16.0.0-beta.7",
     "@nrwl/web": "16.0.0-beta.7",
     "@phenomnomnominal/tsquery": "4.1.1",
     "@preact/preset-vite": "^2.4.0",
@@ -142,7 +141,8 @@
     "@nx/js": "16.0.0-beta.7",
     "@nx/linter": "16.0.0-beta.7",
     "@nx/cypress": "16.0.0-beta.7",
-    "@nx/storybook": "16.0.0-beta.7"
+    "@nx/storybook": "16.0.0-beta.7",
+    "@nx/vite": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"

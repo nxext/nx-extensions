@@ -26,8 +26,8 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
     skipFormat: true,
   });
 
-  await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
-  const { viteConfigurationGenerator } = await import('@nrwl/vite');
+  await ensurePackage(host, '@nx/vite', readNxVersion(host));
+  const { viteConfigurationGenerator } = await import('@nx/vite');
   const viteTask = await viteConfigurationGenerator(host, {
     uiFramework: 'none',
     project: options.appProjectName,
