@@ -1,4 +1,4 @@
-import { Tree, ensurePackage } from '@nrwl/devkit';
+import { Tree, ensurePackage } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { readNxVersion } from '../../init/lib/util';
 

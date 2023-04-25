@@ -1,9 +1,5 @@
 import { NormalizedSchema } from '../schema';
-import {
-  addProjectConfiguration,
-  TargetConfiguration,
-  Tree,
-} from '@nrwl/devkit';
+import { addProjectConfiguration, TargetConfiguration, Tree } from '@nx/devkit';
 import { createLintTarget, createPackageTarget } from '../../utils/targets';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {

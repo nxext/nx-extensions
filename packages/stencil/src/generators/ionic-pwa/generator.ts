@@ -6,7 +6,7 @@ import {
   names,
   Tree,
   offsetFromRoot,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { PWASchema, RawPWASchema } from './schema';
 import { AppType } from '../../utils/typings';
 import { calculateStyle } from '../../utils/utillities';

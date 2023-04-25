@@ -1,4 +1,4 @@
-import { names, readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { names, readProjectConfiguration, Tree } from '@nx/devkit';
 import { NormalizedSchema, Schema } from '../schema';
 
 export function normalizeOptions(

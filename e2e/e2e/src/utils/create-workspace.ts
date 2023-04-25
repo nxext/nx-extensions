@@ -1,7 +1,7 @@
 import { getNxWorkspaceCommands } from './package-manager';
 import { dirname } from 'path';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
-import { PackageManager } from '@nrwl/devkit';
+import { PackageManager } from '@nx/devkit';
 import { execSync } from 'child_process';
 
 export function runCreateWorkspace(

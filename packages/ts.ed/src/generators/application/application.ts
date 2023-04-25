@@ -7,7 +7,7 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { NormalizedSchema, TsEdApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';

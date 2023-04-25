@@ -10,7 +10,7 @@ import {
   readProjectConfiguration,
   StringChange,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { findNodes } from 'nx/src/utils/typescript';
 
 export function addExportsToBarrel(tree: Tree, options: PreactComponentSchema) {

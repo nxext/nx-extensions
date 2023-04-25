@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, updateJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, updateJson } from '@nx/devkit';
 import { Linter } from '@nrwl/linter';
 import { Schema } from './schema';
 import { applicationGenerator } from '../application/application';
@@ -7,7 +7,7 @@ import { libraryGenerator } from '../library/library';
 import { componentGenerator } from './component';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../utils/utils');
 

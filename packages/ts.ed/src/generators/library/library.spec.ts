@@ -1,7 +1,7 @@
 import { TsEdLibrarySchema } from './schema';
 import { Linter } from '@nrwl/linter';
-import { readJson } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJson } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
 
 describe('Ts.ED library schematic', () => {

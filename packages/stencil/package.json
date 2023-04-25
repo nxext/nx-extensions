@@ -25,9 +25,9 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "~15.7.0",
     "@phenomnomnominal/tsquery": "4.1.1",
-    "ignore": "^5.2.0"
+    "ignore": "^5.2.0",
+    "@nx/devkit": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "@nxext/svelte": "^15.7.0",

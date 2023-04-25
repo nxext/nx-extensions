@@ -1,8 +1,8 @@
 import { TsEdApplicationSchema } from './schema';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from './application';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { readJson, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { readJson, Tree } from '@nx/devkit';
 
 describe('Ts.ED app schematic', () => {
   let tree: Tree;

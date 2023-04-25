@@ -1,9 +1,4 @@
-import {
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
-  Tree,
-} from '@nrwl/devkit';
+import { getWorkspaceLayout, joinPathFragments, names, Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
 function getParameters(options: NormalizedSchema) {

@@ -5,7 +5,7 @@ import {
   logger,
   workspaceRoot,
   getPackageManagerCommand,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export function runRegistry(
   args: string[] = [],

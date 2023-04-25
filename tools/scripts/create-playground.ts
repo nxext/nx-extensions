@@ -8,7 +8,7 @@ import {
 } from 'fs-extra';
 import { getPublishableLibNames, tmpProjPath } from './utils';
 import { dirname } from 'path';
-import { logger, readJsonFile } from '@nrwl/devkit';
+import { logger, readJsonFile } from '@nx/devkit';
 import { Workspaces } from 'nx/src/config/workspaces';
 import * as glob from 'glob';
 import { inspect } from 'util';

@@ -3,7 +3,7 @@ import {
   joinPathFragments,
   Tree,
   ensurePackage,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { extraEslintDependencies } from '../../utils/lint';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';

@@ -1,4 +1,4 @@
-import { Tree, ensurePackage } from '@nrwl/devkit';
+import { Tree, ensurePackage } from '@nx/devkit';
 import { Linter } from '@nrwl/linter';
 import { ApplicationGeneratorSchema } from '../schema';
 import { readNxVersion } from '../../../utils/utils';

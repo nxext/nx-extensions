@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { getProjects, Tree, updateProjectConfiguration } from '@nrwl/devkit';
+import { getProjects, Tree, updateProjectConfiguration } from '@nx/devkit';
 import { join } from 'path';
 
 export default function update(host: Tree) {

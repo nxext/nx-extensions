@@ -1,6 +1,6 @@
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { createComponentInProject } from './lib/create-component-in-project';
-import { convertNxGenerator, Tree } from '@nrwl/devkit';
+import { convertNxGenerator, Tree } from '@nx/devkit';
 
 export interface SolidComponentSchema {
   name: string;

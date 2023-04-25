@@ -2,10 +2,10 @@ import componentGenerator, { PreactComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
 import { ProjectType } from '@nrwl/workspace';
 import { uniq } from '@nrwl/nx-plugin/testing';
-import { names, Tree } from '@nrwl/devkit';
+import { names, Tree } from '@nx/devkit';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../utils/utils');
 

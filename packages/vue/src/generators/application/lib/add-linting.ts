@@ -6,7 +6,7 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { mapLintPattern } from '@nrwl/linter/src/generators/lint-project/lint-project';
 import { Linter, lintProjectGenerator } from '@nrwl/linter';

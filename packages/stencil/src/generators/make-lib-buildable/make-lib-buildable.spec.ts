@@ -7,9 +7,9 @@ import {
   Tree,
   updateJson,
   updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { makeLibBuildableGenerator } from './make-lib-buildable';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from '../library/generator';
 import { testNpmScope } from '../../utils/testing';
 

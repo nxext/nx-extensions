@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { PresetSchema } from './schema';
 import { applicationGenerator } from '../application/application';
 

@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function updateViteConfig(host: Tree, options: NormalizedSchema) {

@@ -1,4 +1,4 @@
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { readProjectConfiguration, Tree } from '@nx/devkit';
 import { StorybookConfigureSchema } from '../schema';
 
 export function updateMainJs(host: Tree, options: StorybookConfigureSchema) {

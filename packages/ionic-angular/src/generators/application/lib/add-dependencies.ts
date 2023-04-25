@@ -1,4 +1,4 @@
-import { addDependenciesToPackageJson, readJson, Tree } from '@nrwl/devkit';
+import { addDependenciesToPackageJson, readJson, Tree } from '@nx/devkit';
 import { ionicAngularVersion } from '../../../utils/versions';
 
 export function addDependencies(host: Tree) {

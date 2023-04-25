@@ -1,5 +1,5 @@
 import { NormalizedSchema } from '../schema';
-import { names, offsetFromRoot, Tree, generateFiles } from '@nrwl/devkit';
+import { names, offsetFromRoot, Tree, generateFiles } from '@nx/devkit';
 import { join } from 'path';
 
 export function createApplicationFiles(host: Tree, options: NormalizedSchema) {

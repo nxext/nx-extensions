@@ -1,10 +1,10 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson, updateJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJson, updateJson, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../utils/utils');
 

@@ -6,7 +6,7 @@ import {
   updateProjectConfiguration,
   formatFiles,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { MakeLibBuildableSchema } from './schema';
 import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { addToOutputTargets } from '../../stencil-core-utils';

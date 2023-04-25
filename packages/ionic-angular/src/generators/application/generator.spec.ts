@@ -3,13 +3,13 @@ import {
   readProjectConfiguration,
   updateJson,
   Tree,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { ApplicationGeneratorSchema } from './schema';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 
 describe('application schematic', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());

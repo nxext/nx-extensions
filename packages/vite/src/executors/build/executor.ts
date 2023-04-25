@@ -6,7 +6,7 @@ import {
   UserConfig,
   mergeConfig,
 } from 'vite';
-import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, logger } from '@nx/devkit';
 import { relative } from 'path';
 import { defineBaseConfig } from '../../../plugins/vite';
 import { replaceFiles } from '../../../plugins/file-replacement';

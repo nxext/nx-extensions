@@ -5,7 +5,7 @@ import {
   readProjectConfiguration,
   stripIndents,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';

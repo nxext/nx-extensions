@@ -1,5 +1,5 @@
 import { VitestExecutorOptions } from './schema';
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments } from '@nx/devkit';
 
 export default async function runExecutor(
   options: VitestExecutorOptions,

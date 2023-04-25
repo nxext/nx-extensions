@@ -10,7 +10,7 @@ import {
   readProjectConfiguration,
   StringChange,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);

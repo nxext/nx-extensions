@@ -4,7 +4,7 @@ import { createTestUILib } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../../utils/utillities');
 

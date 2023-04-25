@@ -3,7 +3,7 @@ import {
   GeneratorCallback,
   Tree,
   addDependenciesToPackageJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { hasNxPackage, readNxVersion } from './util';
 
 export function addJestPlugin(tree: Tree, options): GeneratorCallback {

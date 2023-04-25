@@ -1,4 +1,4 @@
-import { normalizePath, Tree, updateJson, writeJson } from '@nrwl/devkit';
+import { normalizePath, Tree, updateJson, writeJson } from '@nx/devkit';
 import { capacitorVersion } from '../../../utils/versions';
 import { NormalizedSchema } from '../schema';
 

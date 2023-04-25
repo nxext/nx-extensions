@@ -6,12 +6,7 @@ import {
   UserConfig,
   UserConfigExport,
 } from 'vite';
-import {
-  ExecutorContext,
-  joinPathFragments,
-  logger,
-  names,
-} from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, logger, names } from '@nx/devkit';
 import baseConfig from '../../../plugins/vite-package';
 import { copyFile } from 'fs/promises';
 import { relative } from 'path';
