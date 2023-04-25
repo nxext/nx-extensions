@@ -3,7 +3,6 @@
   "outputCapture": "direct-nodejs",
   "title": "Web Application vite package solution",
   "description": "Web vite package solution",
-  "cli": "nx",
   "type": "object",
   "properties": {
     "entryFile": {
@@ -59,7 +58,10 @@
       "default": {}
     }
   },
-  "required": ["entryFile", "outputPath"],
+  "required": [
+    "entryFile",
+    "outputPath"
+  ],
   "definitions": {
     "assetPattern": {
       "oneOf": [
@@ -80,7 +82,11 @@
             }
           },
           "additionalProperties": false,
-          "required": ["glob", "input", "output"]
+          "required": [
+            "glob",
+            "input",
+            "output"
+          ]
         },
         {
           "type": "string"

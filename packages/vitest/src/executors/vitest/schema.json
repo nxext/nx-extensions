@@ -2,7 +2,6 @@
   "version": 2,
   "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "title": "Vitest executor",
   "description": "",
   "type": "object",
@@ -18,7 +17,10 @@
     },
     "vitestMode": {
       "type": "string",
-      "enum": ["test", "benchmark"],
+      "enum": [
+        "test",
+        "benchmark"
+      ],
       "default": "test"
     }
   },
