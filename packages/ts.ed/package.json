@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "@nrwl/cypress": "^15.0.10",
-    "@nrwl/linter": "^15.0.10"
+    "@nx/linter": "16.0.0-beta.7"
   }
 }

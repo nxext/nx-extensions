@@ -8,8 +8,8 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
-import { mapLintPattern } from '@nrwl/linter/src/generators/lint-project/lint-project';
-import { Linter, lintProjectGenerator } from '@nrwl/linter';
+import { mapLintPattern } from '@nx/linter/src/generators/lint-project/lint-project';
+import { Linter, lintProjectGenerator } from '@nx/linter';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const tasks: GeneratorCallback[] = [];

@@ -1,5 +1,5 @@
 import { TsEdApplicationSchema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import applicationGenerator from './application';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { readJson, Tree } from '@nx/devkit';

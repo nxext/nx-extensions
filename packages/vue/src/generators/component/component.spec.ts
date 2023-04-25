@@ -1,6 +1,6 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { Tree, updateJson } from '@nx/devkit';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import { Schema } from './schema';
 import { applicationGenerator } from '../application/application';
 import { libraryGenerator } from '../library/library';

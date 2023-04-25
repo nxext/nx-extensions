@@ -123,7 +123,7 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
     });
 
     expect(project.targets.lint).toEqual({
-      executor: '@nrwl/linter:eslint',
+      executor: '@nx/linter:eslint',
       outputs: ['{options.outputFile}'],
       options: {
         lintFilePatterns: ['libs/test-ui-lib-2/**/*.ts'],

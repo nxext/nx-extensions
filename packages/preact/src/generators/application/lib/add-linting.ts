@@ -10,8 +10,8 @@ import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-seria
 import { readNxVersion } from '../../utils/utils';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
-  await ensurePackage(host, '@nrwl/linter', readNxVersion(host));
-  const { lintProjectGenerator } = await import('@nrwl/linter');
+  await ensurePackage(host, '@nx/linter', readNxVersion(host));
+  const { lintProjectGenerator } = await import('@nx/linter');
 
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,

@@ -7,7 +7,7 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { LibrarySchema } from '../schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import {
   createStencilEslintJson,
   extraEslintDependencies,
@@ -21,8 +21,8 @@ export async function addLinting(host: Tree, options: LibrarySchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nrwl/linter', readNxVersion(host));
-  const { lintProjectGenerator } = await import('@nrwl/linter');
+  await ensurePackage(host, '@nx/linter', readNxVersion(host));
+  const { lintProjectGenerator } = await import('@nx/linter');
   const tasks: GeneratorCallback[] = [];
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,

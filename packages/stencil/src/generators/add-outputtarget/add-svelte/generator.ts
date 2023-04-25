@@ -7,7 +7,7 @@ import {
   Tree,
 } from '@nx/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';
