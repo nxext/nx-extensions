@@ -31,14 +31,14 @@
   },
   "peerDependencies": {
     "@nxext/svelte": "^15.7.0",
-    "@nrwl/angular": "^15.7.0",
     "@stencil/core": "^2.17.1",
     "@nx/workspace": "16.0.0-beta.7",
     "@nx/linter": "16.0.0-beta.7",
     "@nx/cypress": "16.0.0-beta.7",
     "@nx/storybook": "16.0.0-beta.7",
     "@nx/jest": "16.0.0-beta.7",
-    "@nx/react": "16.0.0-beta.7"
+    "@nx/react": "16.0.0-beta.7",
+    "@nx/angular": "16.0.0-beta.7"
   },
   "peerDependenciesMeta": {
     "@nxext/svelte": {
@@ -50,7 +50,7 @@
     "@nx/react": {
       "optional": true
     },
-    "@nrwl/angular": {
+    "@nx/angular": {
       "optional": true
     },
     "@nx/cypress": {
