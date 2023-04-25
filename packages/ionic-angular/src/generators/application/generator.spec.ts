@@ -208,7 +208,8 @@ describe('application schematic', () => {
       expect(host.read(`package.json`).includes('karma')).toBeFalsy();
     });
 
-    it('karma', async () => {
+    // TODO: karma has been removed as an option in the underlying @nx/angular app generator
+    it.skip('karma', async () => {
       await applicationGenerator(host, {
         ...options,
         unitTestRunner: 'karma',
