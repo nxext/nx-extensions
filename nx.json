@@ -33,11 +33,6 @@
         "linter": "eslint"
       }
     },
-    "@nrwl/web": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
     "@nrwl/node": {
       "application": {
         "linter": "eslint"
@@ -71,6 +66,11 @@
     },
     "@nx/cypress": {
       "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nx/web": {
+      "application": {
         "linter": "eslint"
       }
     }

@@ -28,7 +28,7 @@ describe('Add Capacitor 3 run target', () => {
       root: 'apps/non-cap-app-1',
       targets: {
         cap: {
-          executor: '@nrwl/web:serve',
+          executor: '@nx/web:serve',
         },
       },
     });

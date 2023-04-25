@@ -2,7 +2,7 @@
 
 The Nxext Plugin for preact contains generators for managing Preact applications and libraries within an Nx workspace . It provides:
 
-- Vite alterntive to webpack (@nrwl/web)
+- Vite alterntive to webpack (@nx/web)
 - Quicker and smaller builds
 
 ## Adding the preact plugin
