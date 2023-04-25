@@ -3,7 +3,7 @@ import { Tree, readProjectConfiguration } from '@nx/devkit';
 
 import generator from './application';
 import { Schema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 
 describe('vite application generator', () => {
   let tree: Tree;

@@ -1,6 +1,6 @@
 import { AppType } from './../../utils/typings';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 
 export interface RawPWASchema {
   name: string;

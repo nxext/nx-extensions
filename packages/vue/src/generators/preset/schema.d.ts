@@ -1,4 +1,4 @@
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import { Schema } from '../application/schema';
 
 export interface PresetSchema extends Schema {

@@ -50,7 +50,7 @@ function createBuildTarget(
 
 function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    executor: '@nrwl/linter:lint',
+    executor: '@nx/linter:lint',
     options: {
       linter: 'eslint',
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,

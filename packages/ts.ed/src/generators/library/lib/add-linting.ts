@@ -4,7 +4,7 @@ import {
   Tree,
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { lintProjectGenerator } from '@nrwl/linter';
+import { lintProjectGenerator } from '@nx/linter';
 import { extraEslintDependencies } from '../../utils/lint';
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 
