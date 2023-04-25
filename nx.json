@@ -20,11 +20,6 @@
     "defaultBase": "main"
   },
   "generators": {
-    "@nrwl/cypress": {
-      "cypress-project": {
-        "linter": "eslint"
-      }
-    },
     "@nrwl/react": {
       "application": {
         "linter": "eslint"
@@ -71,6 +66,11 @@
     },
     "@nx/workspace": {
       "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nx/cypress": {
+      "cypress-project": {
         "linter": "eslint"
       }
     }

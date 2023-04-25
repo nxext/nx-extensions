@@ -1,4 +1,4 @@
-import { cypressProjectGenerator } from '@nrwl/cypress';
+import { cypressProjectGenerator } from '@nx/cypress';
 import { Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
