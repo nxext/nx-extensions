@@ -13,7 +13,7 @@ describe('Update 11.0.0', () => {
     initialTree = createEmptyWorkspace(Tree.empty());
 
     schematicRunner = new SchematicTestRunner(
-      '@nrwl/nx-plugin',
+      '@nx/plugin',
       path.join(__dirname, '../../../migrations.json')
     );
 

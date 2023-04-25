@@ -1,5 +1,5 @@
 import componentGenerator, { SvelteComponentSchema } from './component';
-import { uniq } from '@nrwl/nx-plugin/testing';
+import { uniq } from '@nx/plugin/testing';
 import { names, Tree } from '@nx/devkit';
 import { createTestProject } from '../utils/testing';
 

@@ -3,7 +3,7 @@ import {
   runNxCommand,
   runNxCommandAsync,
   uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { newProject } from '@nxext/e2e';
 
 describe('Ionic Angular Application', () => {

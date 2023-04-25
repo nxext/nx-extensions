@@ -5,7 +5,7 @@ import {
   runNxCommandAsync,
   uniq,
   runCommand,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 
 describe('application e2e', () => {

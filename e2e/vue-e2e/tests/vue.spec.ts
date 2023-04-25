@@ -3,7 +3,7 @@ import {
   runNxCommandAsync,
   uniq,
   updateFile,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 import { names } from '@nx/devkit';
 
