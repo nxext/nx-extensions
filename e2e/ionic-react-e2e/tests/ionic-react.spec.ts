@@ -4,7 +4,7 @@ import {
   runNxCommand,
   runNxCommandAsync,
   uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { ApplicationGeneratorSchema } from '@nxext/ionic-react';
 import { newProject } from '@nxext/e2e';
 

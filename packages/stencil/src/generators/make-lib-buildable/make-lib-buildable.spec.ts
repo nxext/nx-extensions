@@ -1,4 +1,4 @@
-import { uniq } from '@nrwl/nx-plugin/testing';
+import { uniq } from '@nx/plugin/testing';
 import { MakeLibBuildableSchema } from './schema';
 import { SupportedStyles } from '../../stencil-core-utils';
 import {

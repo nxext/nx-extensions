@@ -1,6 +1,6 @@
 import { getNxWorkspaceCommands } from './package-manager';
 import { dirname } from 'path';
-import { tmpProjPath } from '@nrwl/nx-plugin/testing';
+import { tmpProjPath } from '@nx/plugin/testing';
 import { PackageManager } from '@nx/devkit';
 import { execSync } from 'child_process';
 
