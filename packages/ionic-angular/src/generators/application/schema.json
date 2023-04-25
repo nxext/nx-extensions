@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "id": "IonicAngularApp",
   "title": "Create an Ionic Angular Application for Nx",
   "type": "object",
@@ -22,13 +21,19 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": [
+        "jest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": ["cypress", "none"],
+      "enum": [
+        "cypress",
+        "none"
+      ],
       "description": "Test runner to use for end to end (e2e) tests.",
       "default": "cypress"
     },
@@ -78,5 +83,7 @@
       "type": "boolean"
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

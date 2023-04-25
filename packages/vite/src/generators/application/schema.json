@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "NxViteApp",
   "title": "Create a Vite Application for Nx",
   "examples": [
@@ -29,7 +28,10 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint", "none"],
+      "enum": [
+        "eslint",
+        "none"
+      ],
       "default": "eslint"
     },
     "supportJSX": {
@@ -49,7 +51,11 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["vitest", "jest", "none"],
+      "enum": [
+        "vitest",
+        "jest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "vitest"
     },

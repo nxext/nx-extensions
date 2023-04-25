@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "QwikNxPreset",
   "title": "",
   "type": "object",
@@ -22,12 +21,18 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint", "none"],
+      "enum": [
+        "eslint",
+        "none"
+      ],
       "default": "eslint"
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["vitest", "none"],
+      "enum": [
+        "vitest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "vitest"
     },
@@ -38,10 +43,15 @@
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": ["cypress", "none"],
+      "enum": [
+        "cypress",
+        "none"
+      ],
       "description": "Test runner to use for end to end (E2E) tests.",
       "default": "none"
     }
   },
-  "required": ["vueAppName"]
+  "required": [
+    "vueAppName"
+  ]
 }

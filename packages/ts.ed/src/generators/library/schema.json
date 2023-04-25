@@ -3,7 +3,6 @@
   "$id": "Svelte",
   "title": "",
   "type": "object",
-  "cli": "nx",
   "properties": {
     "name": {
       "type": "string",
@@ -22,18 +21,27 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint"],
+      "enum": [
+        "eslint"
+      ],
       "default": "eslint"
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "vitest", "none"],
+      "enum": [
+        "jest",
+        "vitest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": ["cypress", "none"],
+      "enum": [
+        "cypress",
+        "none"
+      ],
       "description": "Test runner to use for end to end (e2e) tests.",
       "default": "cypress"
     },
@@ -61,5 +69,7 @@
       "default": false
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

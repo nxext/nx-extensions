@@ -3,7 +3,6 @@
   "$id": "Nxext-Pwa",
   "title": "",
   "type": "object",
-  "cli": "nx",
   "properties": {
     "name": {
       "type": "string",
@@ -26,13 +25,19 @@
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": ["puppeteer", "none"],
+      "enum": [
+        "puppeteer",
+        "none"
+      ],
       "description": "Test runner to use for end to end (e2e) tests",
       "default": "puppeteer"
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": [
+        "jest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
@@ -43,7 +48,10 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint", "none"],
+      "enum": [
+        "eslint",
+        "none"
+      ],
       "default": "eslint"
     },
     "style": {
@@ -79,5 +87,7 @@
       }
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

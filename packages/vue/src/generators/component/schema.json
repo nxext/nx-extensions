@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "Component",
   "title": "",
   "type": "object",
@@ -42,5 +41,8 @@
       "x-prompt": "Should this component be exported in the project?"
     }
   },
-  "required": ["name", "project"]
+  "required": [
+    "name",
+    "project"
+  ]
 }

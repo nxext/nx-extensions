@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "NxViteLibrary",
   "title": "Create a vite Library for Nx",
   "type": "object",
@@ -29,12 +28,19 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint", "none"],
+      "enum": [
+        "eslint",
+        "none"
+      ],
       "default": "eslint"
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["vitest", "jest", "none"],
+      "enum": [
+        "vitest",
+        "jest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "vitest"
     },
@@ -87,5 +93,7 @@
       "type": "boolean"
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

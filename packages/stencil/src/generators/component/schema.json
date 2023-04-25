@@ -3,7 +3,6 @@
   "$id": "Component",
   "title": "",
   "type": "object",
-  "cli": "nx",
   "properties": {
     "name": {
       "type": "string",
@@ -30,5 +29,8 @@
       "default": false
     }
   },
-  "required": ["name", "project"]
+  "required": [
+    "name",
+    "project"
+  ]
 }
