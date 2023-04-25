@@ -2,7 +2,7 @@ import {
   ProjectConfiguration,
   Tree,
   updateProjectConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { getSvelteLegacyTargetProjects } from '../utils/migration-utils';
 
 export default function update(host: Tree) {

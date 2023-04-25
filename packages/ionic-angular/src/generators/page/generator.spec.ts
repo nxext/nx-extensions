@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, updateJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, updateJson } from '@nx/devkit';
 
 import { pageGenerator } from './generator';
 import { PageGeneratorSchema } from './schema';
@@ -7,7 +7,7 @@ import { ApplicationGeneratorSchema } from '../application/schema';
 import { applicationGenerator } from '../application/generator';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 
 describe('page generator', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());

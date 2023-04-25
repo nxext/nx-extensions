@@ -4,7 +4,7 @@ import {
   joinPathFragments,
   readJsonFile,
   writeJsonFile,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { sortObjectByKeys } from '@nrwl/workspace/src/utils/ast-utils';
 import { default as runCommands } from 'nx/src/executors/run-commands/run-commands.impl';
 import { AddExecutorSchema } from './schema';

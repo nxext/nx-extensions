@@ -2,7 +2,7 @@ import {
   addDependenciesToPackageJson,
   removeDependenciesFromPackageJson,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import {
   reactRouterDomVersion,
   typesReactRouterDomVersion,

@@ -16,7 +16,7 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import viteInitGenerator from '../init/init';
 import { lintProjectGenerator } from '@nrwl/linter';
 import { addVitest } from './lib/add-vitest';

@@ -2,7 +2,7 @@ import {
   addDependenciesToPackageJson,
   GeneratorCallback,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { viteVersion } from '../../../utils/version';
 
 export function updateDependencies(tree: Tree): GeneratorCallback {

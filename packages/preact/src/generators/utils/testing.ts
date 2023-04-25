@@ -1,7 +1,7 @@
 import { ProjectType } from '@nrwl/workspace';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import applicationGenerator from '../application/application';
-import { Tree, updateJson } from '@nrwl/devkit';
+import { Tree, updateJson } from '@nx/devkit';
 import { Linter } from '@nrwl/linter';
 import { libraryGenerator } from '../library/library';
 

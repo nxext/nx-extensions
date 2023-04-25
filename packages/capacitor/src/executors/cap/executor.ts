@@ -1,4 +1,4 @@
-import { ExecutorContext, normalizePath } from '@nrwl/devkit';
+import { ExecutorContext, normalizePath } from '@nx/devkit';
 import runCommands, {
   RunCommandsOptions,
 } from 'nx/src/executors/run-commands/run-commands.impl';

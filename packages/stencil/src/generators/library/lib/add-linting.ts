@@ -5,7 +5,7 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { LibrarySchema } from '../schema';
 import { Linter } from '@nrwl/linter';
 import {

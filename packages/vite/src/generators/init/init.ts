@@ -1,9 +1,4 @@
-import {
-  Tree,
-  updateJson,
-  formatFiles,
-  convertNxGenerator,
-} from '@nrwl/devkit';
+import { Tree, updateJson, formatFiles, convertNxGenerator } from '@nx/devkit';
 
 import { Schema } from './schema';
 import { addJestPlugin } from './lib/add-jest-plugin';

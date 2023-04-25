@@ -1,5 +1,5 @@
 import ignore from 'ignore';
-import { readJson, Tree } from '@nrwl/devkit';
+import { readJson, Tree } from '@nx/devkit';
 import type { Diagnostic } from '@stencil/core/compiler';
 import { SupportedStyles } from '../stencil-core-utils';
 

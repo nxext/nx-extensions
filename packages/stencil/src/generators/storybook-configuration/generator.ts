@@ -14,7 +14,7 @@ import {
   Tree,
   updateProjectConfiguration,
   writeJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { Linter } from '@nrwl/linter';
 import { TsConfig } from '@nrwl/storybook/src/utils/utilities';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';

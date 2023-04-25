@@ -1,11 +1,11 @@
 import { PreactApplicationSchema } from './schema';
 import { Linter } from '@nrwl/linter';
 import applicationGenerator from './application';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { updateJson, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { updateJson, Tree } from '@nx/devkit';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nrwl/devkit');
+const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../utils/utils');
 

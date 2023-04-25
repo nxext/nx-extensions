@@ -1,6 +1,6 @@
 import { SveltekitExecutorOptions } from './schema';
 import executor from './executor';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 
 const options: SveltekitExecutorOptions = {
   command: 'build',

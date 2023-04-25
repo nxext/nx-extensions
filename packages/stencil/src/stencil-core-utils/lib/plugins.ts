@@ -5,7 +5,7 @@ import {
   ChangeType,
   StringChange,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { findNodes } from 'nx/src/utils/typescript';
 
 function addCodeIntoArray(

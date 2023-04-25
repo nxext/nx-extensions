@@ -3,7 +3,7 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { Schema } from './schema';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';

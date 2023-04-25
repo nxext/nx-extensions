@@ -1,4 +1,4 @@
-import { Tree, ensurePackage } from '@nrwl/devkit';
+import { Tree, ensurePackage } from '@nx/devkit';
 import { readNxVersion } from './util';
 
 export async function addJestPlugin(host: Tree) {

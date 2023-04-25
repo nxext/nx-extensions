@@ -35,9 +35,9 @@
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/devkit with @nx/devkit",
+      "description": "Replace @nx/devkit with @nx/devkit",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/devkit",
+      "package": "@nx/devkit",
       "name": "update-16-0-0-add-nx-packages"
     },
     {

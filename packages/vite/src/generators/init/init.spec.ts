@@ -1,5 +1,5 @@
-import { addDependenciesToPackageJson, readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { addDependenciesToPackageJson, readJson, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 
 import { viteVersion } from '../../utils/version';
 import { viteInitGenerator } from './init';

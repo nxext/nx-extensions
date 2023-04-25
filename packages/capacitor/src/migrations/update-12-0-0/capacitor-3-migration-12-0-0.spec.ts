@@ -2,8 +2,8 @@ import {
   addProjectConfiguration,
   readProjectConfiguration,
   Tree,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import capacitorMigartion from './capacitor-3-migration-12-0-0';
 
 describe('Add Capacitor 3 run target', () => {

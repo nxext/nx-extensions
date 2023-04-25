@@ -1,12 +1,12 @@
 import 'dotenv/config';
 
-import type { ExecutorContext } from '@nrwl/devkit';
+import type { ExecutorContext } from '@nx/devkit';
 import {
   joinPathFragments,
   logger,
   parseTargetString,
   runExecutor,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { tmpProjPath } from '@nrwl/nx-plugin/testing';
 import type { NxPluginE2EExecutorOptions } from './schema';
 import { ChildProcess } from 'child_process';

@@ -1,4 +1,4 @@
-import { Tree, writeJson } from '@nrwl/devkit';
+import { Tree, writeJson } from '@nx/devkit';
 
 export function createTsConfig(
   host: Tree,
