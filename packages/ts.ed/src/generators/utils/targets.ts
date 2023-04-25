@@ -24,7 +24,7 @@ export function createPackageTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nrwl/node:execute',
+    executor: '@nx/node:execute',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
@@ -43,7 +43,7 @@ export function createBuildTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nrwl/node:webpack',
+    executor: '@nx/node:webpack',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: joinPathFragments('dist', options.projectRoot),
@@ -62,7 +62,7 @@ export function createServeTarget(
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
-    executor: '@nrwl/node:node',
+    executor: '@nx/node:node',
     options: {
       buildTarget: `${options.name}:build`,
     },
