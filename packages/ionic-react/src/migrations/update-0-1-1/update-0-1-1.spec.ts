@@ -17,7 +17,7 @@ describe('Update 0-1-0', () => {
     );
   });
 
-  it(`should add @nrwl/react lib`, async () => {
+  it(`should add @nx/react lib`, async () => {
     // eslint-disable-next-line require-atomic-updates
     tree = await schematicRunner
       .runSchematicAsync('update-0.1.1', {}, tree)
@@ -26,7 +26,7 @@ describe('Update 0-1-0', () => {
     const packageJson = readJsonInTree(tree, '/package.json');
     expect(packageJson).toMatchObject({
       devDependencies: {
-        '@nrwl/react': '9.0.0',
+        '@nx/react': '9.0.0',
       },
     });
   });
