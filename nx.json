@@ -25,14 +25,6 @@
         "linter": "eslint"
       }
     },
-    "@nrwl/node": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    },
     "@nrwl/nest": {
       "application": {
         "linter": "eslint"
@@ -67,6 +59,14 @@
       }
     },
     "@nx/react": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nx/node": {
       "application": {
         "linter": "eslint"
       },
