@@ -1,5 +1,4 @@
 import { names, Tree } from '@nx/devkit';
-import { readFileIfExisting } from '@nx/workspace/src/core/file-utils';
 import { tsquery } from '@phenomnomnominal/tsquery';
 import { NormalizedSchema } from '../schema';
 import {
@@ -16,7 +15,10 @@ export function updateAppRoutingModule(tree: Tree, options: NormalizedSchema) {
     `/src/app/app-routing.module.ts`
   );
 
-  const appRoutingModule = readFileIfExisting(appRoutingModuleFilePath);
+  let appRoutingModule: string;
+  if (tree.exists(appRoutingModuleFilePath)) {
+    appRoutingModule = tree.read(appRoutingModuleFilePath, 'utf-8');
+  }
 
   if (appRoutingModule !== '') {
     const newContents = tsquery.replace(
