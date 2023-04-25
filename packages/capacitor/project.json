@@ -52,7 +52,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/capacitor"],
       "options": {
         "jestConfig": "packages/capacitor/jest.config.ts",

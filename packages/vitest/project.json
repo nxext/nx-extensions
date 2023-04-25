@@ -17,7 +17,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/vitest"],
       "options": {
         "jestConfig": "packages/vitest/jest.config.ts",
