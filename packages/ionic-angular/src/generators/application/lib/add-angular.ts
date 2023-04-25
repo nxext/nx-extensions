@@ -7,8 +7,8 @@ export async function addAngular(
   host: Tree,
   options: ApplicationGeneratorSchema
 ) {
-  await ensurePackage(host, '@nrwl/angular', readNxVersion(host));
-  const { applicationGenerator } = await import('@nrwl/angular/generators');
+  await ensurePackage(host, '@nx/angular', readNxVersion(host));
+  const { applicationGenerator } = await import('@nx/angular/generators');
   return await applicationGenerator(host, {
     ...options,
     name: options.name,

@@ -40,7 +40,7 @@ describe('application schematic', () => {
 
     const packageJson = readJson(host, 'package.json');
     expect(packageJson.dependencies['@ionic/angular']).toBeDefined();
-    expect(packageJson.devDependencies['@nrwl/angular']).toBeDefined();
+    expect(packageJson.devDependencies['@nx/angular']).toBeDefined();
   });
 
   it('should update assets in project configuration', async () => {
