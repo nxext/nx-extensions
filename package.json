@@ -75,7 +75,6 @@
     "@nrwl/storybook": "16.0.0-beta.7",
     "@nrwl/vite": "16.0.0-beta.7",
     "@nrwl/web": "16.0.0-beta.7",
-    "@nrwl/workspace": "16.0.0-beta.7",
     "@phenomnomnominal/tsquery": "4.1.1",
     "@preact/preset-vite": "^2.4.0",
     "@schematics/angular": "15.2.6",
@@ -142,7 +141,8 @@
     "yargs": "^17.7.1",
     "yargs-parser": "^21.1.1",
     "nx-cloud": "16.0.2",
-    "@nx/devkit": "16.0.0-beta.7"
+    "@nx/devkit": "16.0.0-beta.7",
+    "@nx/workspace": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"

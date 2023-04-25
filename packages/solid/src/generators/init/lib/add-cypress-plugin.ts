@@ -3,7 +3,7 @@ import {
   Tree,
   addDependenciesToPackageJson,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from './util';
 import { cypressInitGenerator } from '@nrwl/cypress';
 

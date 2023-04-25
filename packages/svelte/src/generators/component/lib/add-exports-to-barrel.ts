@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 
-import { findNodes } from '@nrwl/workspace';
+import { findNodes } from '@nx/workspace';
 import { SvelteComponentSchema } from '../component';
 import {
   applyChangesToString,

@@ -1,5 +1,5 @@
 import { names, Tree } from '@nx/devkit';
-import { readFileIfExisting } from '@nrwl/workspace/src/core/file-utils';
+import { readFileIfExisting } from '@nx/workspace/src/core/file-utils';
 import { tsquery } from '@phenomnomnominal/tsquery';
 import { NormalizedSchema } from '../schema';
 import {

@@ -5,7 +5,7 @@ import {
   SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
-import { readJsonInTree, readWorkspace } from '@nrwl/workspace';
+import { readJsonInTree, readWorkspace } from '@nx/workspace';
 
 function displayInformation(): Rule {
   return (host: Tree, context: SchematicContext) => {

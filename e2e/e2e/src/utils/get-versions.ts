@@ -8,8 +8,8 @@ export function getNxVersion(): string {
     process.env.NX_VERSION ||
     pkgJson.dependencies['nx'] ||
     pkgJson.devDependencies['nx'] ||
-    pkgJson.dependencies['@nrwl/workspace'] ||
-    pkgJson.devDependencies['@nrwl/workspace'] ||
+    pkgJson.dependencies['@nx/workspace'] ||
+    pkgJson.devDependencies['@nx/workspace'] ||
     'latest'
   );
 }

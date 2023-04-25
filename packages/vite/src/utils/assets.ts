@@ -2,7 +2,7 @@ import {
   AssetGlob,
   assetGlobsToFiles,
   FileInputOutput,
-} from '@nrwl/workspace/src/utilities/assets';
+} from '@nx/workspace/src/utilities/assets';
 import { logger } from '@nx/devkit';
 import { copy } from 'fs-extra';
 

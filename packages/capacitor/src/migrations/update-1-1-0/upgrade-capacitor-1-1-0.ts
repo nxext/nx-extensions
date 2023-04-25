@@ -5,7 +5,7 @@ import {
   SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
-import { readJsonInTree, updatePackagesInPackageJson } from '@nrwl/workspace';
+import { readJsonInTree, updatePackagesInPackageJson } from '@nx/workspace';
 import * as path from 'path';
 
 function displayInformation(): Rule {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
-import { readJsonInTree } from '@nrwl/workspace';
+import { readJsonInTree } from '@nx/workspace';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 
 function getIonicReactProjectPaths(

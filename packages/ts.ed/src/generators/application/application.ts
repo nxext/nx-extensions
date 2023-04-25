@@ -11,7 +11,7 @@ import {
 import { NormalizedSchema, TsEdApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';

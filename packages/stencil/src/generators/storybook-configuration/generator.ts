@@ -17,8 +17,8 @@ import {
 } from '@nx/devkit';
 import { Linter } from '@nrwl/linter';
 import { TsConfig } from '@nrwl/storybook/src/utils/utilities';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { getRootTsConfigPathInTree } from '@nrwl/workspace/src/utilities/typescript';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
+import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
 import { join } from 'path';
 import {
   isBuildableStencilProject,

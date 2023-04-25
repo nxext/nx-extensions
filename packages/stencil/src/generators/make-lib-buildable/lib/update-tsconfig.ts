@@ -1,6 +1,6 @@
 import { MakeLibBuildableSchema } from '../schema';
 import { Tree, updateJson } from '@nx/devkit';
-import { getRootTsConfigPathInTree } from '@nrwl/workspace/src/utilities/typescript';
+import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
 import { getProjectTsImportPath } from '../../storybook-configuration/generator';
 
 export function updateTsConfig(host: Tree, options: MakeLibBuildableSchema) {

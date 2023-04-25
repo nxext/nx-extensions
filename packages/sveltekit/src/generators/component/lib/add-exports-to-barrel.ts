@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 
-import { ProjectType } from '@nrwl/workspace';
+import { ProjectType } from '@nx/workspace';
 import { SvelteComponentSchema } from '../component';
 import {
   applyChangesToString,
