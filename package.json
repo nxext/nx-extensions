@@ -67,7 +67,6 @@
     "@nrwl/cypress": "16.0.0-beta.7",
     "@nrwl/eslint-plugin-nx": "16.0.0-beta.7",
     "@nrwl/jest": "16.0.0-beta.7",
-    "@nrwl/js": "16.0.0-beta.7",
     "@nrwl/linter": "16.0.0-beta.7",
     "@nrwl/node": "16.0.0-beta.7",
     "@nrwl/nx-plugin": "16.0.0-beta.7",
@@ -142,7 +141,8 @@
     "yargs-parser": "^21.1.1",
     "nx-cloud": "16.0.2",
     "@nx/devkit": "16.0.0-beta.7",
-    "@nx/workspace": "16.0.0-beta.7"
+    "@nx/workspace": "16.0.0-beta.7",
+    "@nx/js": "16.0.0-beta.7"
   },
   "peerDependencies": {
     "rxjs": "^7.4.0"

@@ -1,5 +1,6 @@
 {
   "name": "sveltekit",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/sveltekit/src",
   "projectType": "library",
   "targets": {
@@ -23,7 +24,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/sveltekit",
