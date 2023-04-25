@@ -17,7 +17,7 @@ import {
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import init from '../init/init';
 import { lintProjectGenerator } from '@nx/linter';
-import { jestProjectGenerator } from '@nrwl/jest';
+import { jestProjectGenerator } from '@nx/jest';
 import { viteVersion } from '../../utils/version';
 import {
   createViteEslintJson,

@@ -49,7 +49,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/e2e/e2e"],
       "options": {
         "jestConfig": "e2e/e2e/jest.config.ts",

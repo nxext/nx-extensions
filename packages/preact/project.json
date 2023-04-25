@@ -21,7 +21,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "packages/preact/jest.config.ts",
         "passWithNoTests": true
