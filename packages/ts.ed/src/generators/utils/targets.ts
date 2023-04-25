@@ -89,7 +89,7 @@ export function createTestTarget(
   options: LibrarySchema | ApplicationSchema
 ): TargetConfiguration {
   return {
-    executor: '@nrwl/jest:jest',
+    executor: '@nx/jest:jest',
     options: {
       jestConfig: joinPathFragments(options.projectRoot, 'jest.config.ts'),
       passwithNoTests: true,

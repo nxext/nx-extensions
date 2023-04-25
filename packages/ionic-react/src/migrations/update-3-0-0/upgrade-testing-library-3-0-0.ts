@@ -11,7 +11,7 @@ import * as path from 'path';
 function displayInformation(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const config = readJsonInTree(host, 'package.json');
-    if (config.devDependencies && config.devDependencies['@nrwl/jest']) {
+    if (config.devDependencies && config.devDependencies['@nx/jest']) {
       context.logger.info(stripIndents`
       @testing-library/user-event is being upgraded two major versions. 
 

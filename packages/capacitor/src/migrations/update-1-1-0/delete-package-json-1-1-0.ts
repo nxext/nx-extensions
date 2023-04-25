@@ -10,7 +10,7 @@ import { readJsonInTree, readWorkspace } from '@nx/workspace';
 function displayInformation(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const config = readJsonInTree(host, 'package.json');
-    if (config.devDependencies && config.devDependencies['@nrwl/jest']) {
+    if (config.devDependencies && config.devDependencies['@nx/jest']) {
       context.logger.info(stripIndents`
       With @nxtend/capacitor 1.1.0 a package.json is no longer necessary
       for each Capacitor project. Going forward, the workspace package.json

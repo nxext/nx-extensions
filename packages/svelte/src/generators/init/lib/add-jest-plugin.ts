@@ -1,4 +1,4 @@
-import { jestInitGenerator } from '@nrwl/jest';
+import { jestInitGenerator } from '@nx/jest';
 import {
   GeneratorCallback,
   Tree,
@@ -15,7 +15,7 @@ export function addJestPlugin(tree: Tree, schema: Schema): GeneratorCallback {
   }
 
   const tasks: GeneratorCallback[] = [];
-  const hasNrwlJestDependency: boolean = hasNxPackage(tree, '@nrwl/jest');
+  const hasNrwlJestDependency: boolean = hasNxPackage(tree, '@nx/jest');
 
   if (!hasNrwlJestDependency) {
     const nxVersion = readNxVersion(tree);
@@ -23,7 +23,7 @@ export function addJestPlugin(tree: Tree, schema: Schema): GeneratorCallback {
     const installTask = addDependenciesToPackageJson(
       tree,
       {},
-      { '@nrwl/jest': nxVersion }
+      { '@nx/jest': nxVersion }
     );
     tasks.push(installTask);
   }

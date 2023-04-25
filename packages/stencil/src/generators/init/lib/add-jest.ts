@@ -8,8 +8,8 @@ export async function addJest(host: Tree, options: InitSchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nrwl/jest', readNxVersion(host));
-  const { jestInitGenerator } = await import('@nrwl/jest');
+  await ensurePackage(host, '@nx/jest', readNxVersion(host));
+  const { jestInitGenerator } = await import('@nx/jest');
 
   return jestInitGenerator(host, {});
 }

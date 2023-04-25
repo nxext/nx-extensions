@@ -52,7 +52,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/ionic-react"],
       "options": {
         "jestConfig": "packages/ionic-react/jest.config.ts",

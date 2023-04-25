@@ -6,8 +6,8 @@ export async function addJest(host: Tree, options: NormalizedSchema) {
   if (options.unitTestRunner !== 'jest') {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
   }
-  await ensurePackage(host, '@nrwl/jest', readNxVersion(host));
-  const { jestProjectGenerator } = await import('@nrwl/jest');
+  await ensurePackage(host, '@nx/jest', readNxVersion(host));
+  const { jestProjectGenerator } = await import('@nx/jest');
 
   return await jestProjectGenerator(host, {
     project: options.name,
