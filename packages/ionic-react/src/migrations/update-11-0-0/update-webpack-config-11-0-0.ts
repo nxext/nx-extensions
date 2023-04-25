@@ -13,7 +13,7 @@ function updateWebpackConfig() {
       }
 
       project.architect.build.options.webpackConfig =
-        '@nrwl/react/plugins/webpack';
+        '@nx/react/plugins/webpack';
     });
 
     return json;

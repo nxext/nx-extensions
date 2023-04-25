@@ -24,8 +24,8 @@ async function prepareReactLibrary(
   const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
 
-  await ensurePackage(host, '@nrwl/react', readNxVersion(host));
-  const { libraryGenerator } = await import('@nrwl/react');
+  await ensurePackage(host, '@nx/react', readNxVersion(host));
+  const { libraryGenerator } = await import('@nx/react');
   const libraryTarget = await libraryGenerator(host, {
     name: reactProjectName,
     style: 'css',

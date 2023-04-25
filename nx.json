@@ -20,14 +20,6 @@
     "defaultBase": "main"
   },
   "generators": {
-    "@nrwl/react": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    },
     "@nrwl/next": {
       "application": {
         "linter": "eslint"
@@ -71,6 +63,14 @@
     },
     "@nx/plugin": {
       "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nx/react": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
         "linter": "eslint"
       }
     }

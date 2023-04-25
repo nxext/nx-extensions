@@ -29,7 +29,7 @@
     "@nx/devkit": "16.0.0-beta.7"
   },
   "peerDependencies": {
-    "@nrwl/react": "^15.7.0",
-    "@nx/linter": "16.0.0-beta.7"
+    "@nx/linter": "16.0.0-beta.7",
+    "@nx/react": "16.0.0-beta.7"
   }
 }

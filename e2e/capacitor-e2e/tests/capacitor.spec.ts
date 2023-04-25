@@ -12,11 +12,9 @@ describe('capacitor-project e2e', () => {
   const plugin = uniq('capacitor');
 
   beforeAll(async () => {
-    newProject(['@nxext/capacitor'], ['@nrwl/react']);
+    newProject(['@nxext/capacitor'], ['@nx/react']);
 
-    await runNxCommandAsync(
-      `generate @nrwl/react:app ${plugin} --routing=false`
-    );
+    await runNxCommandAsync(`generate @nx/react:app ${plugin} --routing=false`);
     await runNxCommandAsync(
       `generate @nxext/capacitor:capacitor-project --project=${plugin}`
     );

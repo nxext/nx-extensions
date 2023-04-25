@@ -28,7 +28,7 @@ export function addDependencies(host: Tree) {
       'workbox-streams': workboxVersion,
     },
     {
-      '@nrwl/react': readNxVersion(host),
+      '@nx/react': readNxVersion(host),
     }
   );
 }
