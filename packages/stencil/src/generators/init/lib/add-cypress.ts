@@ -8,7 +8,7 @@ export async function addCypress(host: Tree, options: InitSchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
-  const generators = await import('@nrwl/cypress');
+  await ensurePackage(host, '@nx/cypress', readNxVersion(host));
+  const generators = await import('@nx/cypress');
   return generators.cypressInitGenerator(host, {});
 }

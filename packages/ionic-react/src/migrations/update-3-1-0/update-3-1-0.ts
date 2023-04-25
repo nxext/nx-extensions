@@ -14,7 +14,7 @@ import * as path from 'path';
 
 function displayInformation(host: Tree, context: SchematicContext) {
   const config = readJsonInTree(host, 'package.json');
-  if (config.devDependencies && config.devDependencies['@nrwl/cypress']) {
+  if (config.devDependencies && config.devDependencies['@nx/cypress']) {
     context.logger.info(stripIndents`
       @testing-library/cypress is being updated to 7.0.0 and includes breaking changes.
       
