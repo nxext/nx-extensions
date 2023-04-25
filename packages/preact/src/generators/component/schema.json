@@ -3,7 +3,6 @@
   "$id": "Component",
   "title": "",
   "type": "object",
-  "cli": "nx",
   "properties": {
     "name": {
       "type": "string",
@@ -22,10 +21,16 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": [
+        "jest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     }
   },
-  "required": ["name", "project"]
+  "required": [
+    "name",
+    "project"
+  ]
 }

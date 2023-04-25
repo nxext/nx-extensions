@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "VitestProject",
   "title": "",
   "type": "object",
@@ -17,9 +16,14 @@
     "framework": {
       "description": "Framework to use.",
       "type": "string",
-      "enum": ["generic", "svelte"],
+      "enum": [
+        "generic",
+        "svelte"
+      ],
       "default": "generic"
     }
   },
-  "required": ["project"]
+  "required": [
+    "project"
+  ]
 }

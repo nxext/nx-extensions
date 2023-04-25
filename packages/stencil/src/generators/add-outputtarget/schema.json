@@ -3,7 +3,6 @@
   "$id": "AddOutputtarget",
   "title": "",
   "type": "object",
-  "cli": "nx",
   "properties": {
     "projectName": {
       "type": "string",
@@ -16,14 +15,21 @@
     },
     "outputType": {
       "type": "string",
-      "enum": ["angular", "react", "svelte"],
+      "enum": [
+        "angular",
+        "react",
+        "svelte"
+      ],
       "description": "Select what kind of library you want to generate.",
       "x-prompt": "Which framework do you use?"
     },
     "unitTestRunner": {
       "description": "Adds the specified unit test runner.",
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": [
+        "jest",
+        "none"
+      ],
       "default": "jest"
     },
     "publishable": {
@@ -40,5 +46,8 @@
       "default": false
     }
   },
-  "required": ["projectName", "outputType"]
+  "required": [
+    "projectName",
+    "outputType"
+  ]
 }

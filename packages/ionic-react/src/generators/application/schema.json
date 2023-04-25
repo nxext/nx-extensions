@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "id": "Application",
   "title": "Create an Ionic React Application for Nx",
   "examples": [
@@ -27,13 +26,19 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": [
+        "jest",
+        "none"
+      ],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": ["cypress", "none"],
+      "enum": [
+        "cypress",
+        "none"
+      ],
       "description": "Test runner to use for end to end (e2e) tests.",
       "default": "cypress"
     },
@@ -86,11 +91,16 @@
     "bundler": {
       "description": "The bundler to use.",
       "type": "string",
-      "enum": ["vite", "webpack"],
+      "enum": [
+        "vite",
+        "webpack"
+      ],
       "x-prompt": "Which bundler do you want to use to build the application?",
       "default": "webpack",
       "x-priority": "important"
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }

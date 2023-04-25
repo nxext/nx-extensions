@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "NxStorybookConfigure",
   "type": "object",
   "properties": {
@@ -24,7 +23,10 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint", "none"],
+      "enum": [
+        "eslint",
+        "none"
+      ],
       "default": "eslint"
     },
     "js": {
@@ -46,5 +48,7 @@
       "description": "Add a Storybook Test-Runner target."
     }
   },
-  "required": ["name"]
+  "required": [
+    "name"
+  ]
 }
