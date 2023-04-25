@@ -18,7 +18,7 @@ import {
   updateJson,
 } from '@nx/devkit';
 import viteInitGenerator from '../init/init';
-import { lintProjectGenerator } from '@nrwl/linter';
+import { lintProjectGenerator } from '@nx/linter';
 import { addVitest } from './lib/add-vitest';
 
 async function addLinting(host: Tree, options: NormalizedSchema) {

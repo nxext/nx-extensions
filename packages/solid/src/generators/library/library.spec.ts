@@ -1,5 +1,5 @@
 import { SolidLibrarySchema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import { readJson, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';

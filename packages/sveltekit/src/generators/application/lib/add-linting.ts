@@ -3,7 +3,7 @@ import {
   joinPathFragments,
   Tree,
 } from '@nx/devkit';
-import { lintProjectGenerator } from '@nrwl/linter';
+import { lintProjectGenerator } from '@nx/linter';
 import { extraEslintDependencies } from '../../utils/lint';
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { NormalizedSchema } from '../schema';

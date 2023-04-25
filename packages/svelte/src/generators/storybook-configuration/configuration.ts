@@ -7,7 +7,7 @@ import {
   Tree,
 } from '@nx/devkit';
 import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
 import { readNxVersion } from '../utils/utils';

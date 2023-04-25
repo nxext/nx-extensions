@@ -37,7 +37,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
 
 function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    executor: '@nrwl/linter:lint',
+    executor: '@nx/linter:lint',
     options: {
       linter: 'eslint',
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),

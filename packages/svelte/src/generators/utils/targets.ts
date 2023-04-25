@@ -91,7 +91,7 @@ export function createLintTarget(
   options: LibrarySchema | ApplicationSchema
 ): TargetConfiguration {
   return {
-    executor: '@nrwl/linter:lint',
+    executor: '@nx/linter:lint',
     options: {
       linter: 'eslint',
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),

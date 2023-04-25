@@ -117,7 +117,7 @@ export function getLintTarget(
   projectRoot: string
 ): TargetConfiguration {
   return {
-    executor: '@nrwl/linter:eslint',
+    executor: '@nx/linter:eslint',
     outputs: ['{options.outputFile}'],
     options: {
       lintFilePatterns: `${projectRoot}/**/*.{ts,tsx}`,

@@ -1,6 +1,6 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { Tree } from '@nx/devkit';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import applicationGenerator from '../application/generator';
 
 export async function createTestProject(

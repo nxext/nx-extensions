@@ -1,5 +1,5 @@
 import { TsEdLibrarySchema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import { readJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
