@@ -1,6 +1,6 @@
 import componentGenerator, { PreactComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
-import { ProjectType } from '@nrwl/workspace';
+import { ProjectType } from '@nx/workspace';
 import { uniq } from '@nrwl/nx-plugin/testing';
 import { names, Tree } from '@nx/devkit';
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
-import { formatFiles, readJsonInTree, updateJsonInTree } from '@nrwl/workspace';
+import { formatFiles, readJsonInTree, updateJsonInTree } from '@nx/workspace';
 import * as path from 'path';
 
 function getTsconfigFilePaths(host: Tree): {

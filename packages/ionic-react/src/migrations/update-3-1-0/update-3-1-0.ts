@@ -9,7 +9,7 @@ import {
   formatFiles,
   readJsonInTree,
   updatePackagesInPackageJson,
-} from '@nrwl/workspace';
+} from '@nx/workspace';
 import * as path from 'path';
 
 function displayInformation(host: Tree, context: SchematicContext) {

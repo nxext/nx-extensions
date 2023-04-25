@@ -1,7 +1,7 @@
 import { generateFiles, names, offsetFromRoot, Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { join } from 'path';
-import { getRelativePathToRootTsConfig } from '@nrwl/workspace/src/utilities/typescript';
+import { getRelativePathToRootTsConfig } from '@nx/workspace/src/utilities/typescript';
 import { createTsConfig } from '../../utils/create-ts-config';
 
 export function createLibraryFiles(host: Tree, options: NormalizedSchema) {

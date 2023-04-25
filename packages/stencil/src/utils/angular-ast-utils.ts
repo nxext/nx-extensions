@@ -3,10 +3,10 @@ Originally from nrwl nx: packages/angular/src/utils/nx-devkit/ast-utils.ts
  */
 
 import * as ts from 'typescript';
-import { getSourceNodes } from '@nrwl/workspace/src/utilities/typescript/get-source-nodes';
+import { getSourceNodes } from '@nx/workspace/src/utilities/typescript/get-source-nodes';
 import { Tree } from '@nx/devkit';
 import { tsquery } from '@phenomnomnominal/tsquery';
-import { insertChange } from '@nrwl/workspace/src/utilities/ast-utils';
+import { insertChange } from '@nx/workspace/src/utilities/ast-utils';
 
 function _angularImportsFromNode(
   node: ts.ImportDeclaration,

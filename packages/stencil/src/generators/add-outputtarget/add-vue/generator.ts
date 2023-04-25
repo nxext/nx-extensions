@@ -14,7 +14,7 @@
 // import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 // import { addImport } from '../../../utils/ast-utils';
 // import { addOutputTarget } from '../../../stencil-core-utils';
-// import { addGlobal } from '@nrwl/workspace/src/utilities/ast-utils';
+// import { addGlobal } from '@nx/workspace/src/utilities/ast-utils';
 // import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 //
 // export async function prepareVueLibrary(

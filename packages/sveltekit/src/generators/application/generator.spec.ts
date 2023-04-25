@@ -22,7 +22,7 @@ describe('sveltekit generator', () => {
         "name": "sveltekit-test",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `

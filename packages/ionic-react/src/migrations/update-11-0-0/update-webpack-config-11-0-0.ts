@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { chain, Rule } from '@angular-devkit/schematics';
-import { updateWorkspaceInTree } from '@nrwl/workspace';
+import { updateWorkspaceInTree } from '@nx/workspace';
 
 function updateWebpackConfig() {
   return updateWorkspaceInTree((json) => {

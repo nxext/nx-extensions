@@ -16,7 +16,7 @@ export async function createTestProject(
         "name": "test-name",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `

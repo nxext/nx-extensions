@@ -7,7 +7,7 @@ import {
   reactRouterDomVersion,
   typesReactRouterDomVersion,
 } from '../../../utils/versions';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 
 export function changeReactRouter(host: Tree) {
   const removeTask = removeDependenciesFromPackageJson(

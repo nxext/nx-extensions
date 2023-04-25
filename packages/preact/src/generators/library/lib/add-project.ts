@@ -1,5 +1,5 @@
 import { NormalizedSchema } from '../schema';
-import { ProjectType } from '@nrwl/workspace';
+import { ProjectType } from '@nx/workspace';
 import {
   addProjectConfiguration,
   getWorkspaceLayout,

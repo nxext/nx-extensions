@@ -6,7 +6,7 @@ import {
   GeneratorCallback,
   Tree,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { Linter } from '@nrwl/linter';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';

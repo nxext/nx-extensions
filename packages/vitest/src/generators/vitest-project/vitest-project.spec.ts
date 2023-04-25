@@ -3,7 +3,7 @@ import { Tree, readProjectConfiguration } from '@nx/devkit';
 
 import generator from './vitest-project';
 import { VitestProjectGeneratorSchema } from './schema';
-import { libraryGenerator } from '@nrwl/workspace';
+import { libraryGenerator } from '@nx/workspace';
 
 describe('vitest-project generator', () => {
   let host: Tree;

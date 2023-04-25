@@ -1,4 +1,4 @@
-import { ProjectType } from '@nrwl/workspace';
+import { ProjectType } from '@nx/workspace';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import applicationGenerator from '../application/application';
 import { Tree, updateJson } from '@nx/devkit';
@@ -14,7 +14,7 @@ export async function createTestProject(
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   updateJson(host, '/package.json', (json) => {
     json.devDependencies = {
-      '@nrwl/workspace': '15.7.0',
+      '@nx/workspace': '15.7.0',
     };
     return json;
   });

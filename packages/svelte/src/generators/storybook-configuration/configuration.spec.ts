@@ -5,7 +5,7 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { libraryGenerator } from '@nrwl/workspace/generators';
+import { libraryGenerator } from '@nx/workspace/generators';
 
 import configurationGenerator from './configuration';
 
@@ -24,7 +24,7 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(tree, '/package.json', (json) => {
       json.devDependencies = {
-        '@nrwl/workspace': '15.7.0',
+        '@nx/workspace': '15.7.0',
       };
       return json;
     });

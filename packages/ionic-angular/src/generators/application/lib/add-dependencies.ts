@@ -14,12 +14,12 @@ export function addDependencies(host: Tree) {
 function readNxVersion(tree: Tree): string {
   const packageJson = readJson(tree, 'package.json');
 
-  const nxVersion = packageJson.devDependencies['@nrwl/workspace']
-    ? packageJson.devDependencies['@nrwl/workspace']
-    : packageJson.dependencies['@nrwl/workspace'];
+  const nxVersion = packageJson.devDependencies['@nx/workspace']
+    ? packageJson.devDependencies['@nx/workspace']
+    : packageJson.dependencies['@nx/workspace'];
 
   if (!nxVersion) {
-    throw new Error('@nrwl/workspace is not a dependency.');
+    throw new Error('@nx/workspace is not a dependency.');
   }
 
   return nxVersion;

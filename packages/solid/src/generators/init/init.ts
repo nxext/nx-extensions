@@ -5,7 +5,7 @@ import {
   GeneratorCallback,
   Tree,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';

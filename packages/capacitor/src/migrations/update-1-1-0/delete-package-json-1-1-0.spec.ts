@@ -1,7 +1,7 @@
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { serializeJson } from '@nx/devkit';
-import { createEmptyWorkspace } from '@nrwl/workspace/testing';
+import { createEmptyWorkspace } from '@nx/workspace/testing';
 import * as path from 'path';
 
 describe('Update 1.1.0', () => {
