@@ -28,12 +28,10 @@
         "jestConfig": "packages/stencil/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/packages/stencil"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/packages/stencil"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/packages/stencil",
         "tsConfig": "packages/stencil/tsconfig.lib.json",
@@ -80,9 +78,7 @@
         ],
         "srcRootForCompilationRoot": "packages/stencil"
       },
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "dependsOn": [
         {
           "target": "build",

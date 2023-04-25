@@ -1,5 +1,6 @@
 {
   "name": "solid",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/solid/src",
   "projectType": "library",
   "generators": {},
@@ -28,7 +29,7 @@
       "outputs": ["{workspaceRoot}/coverage/packages/solid"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/packages/solid",
         "tsConfig": "packages/solid/tsconfig.lib.json",
