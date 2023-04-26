@@ -15,7 +15,7 @@ import {
   addImport,
   insertImport,
 } from '../../../utils/ast-utils';
-import { addGlobal } from '@nx/workspace/src/utilities/ast-utils';
+import { addGlobal } from '@nx/js';
 import { addToGitignore, readNxVersion } from '../../../utils/utillities';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 import * as ts from 'typescript';

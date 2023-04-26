@@ -14,7 +14,7 @@ function removeViteFromDeps(tree: Tree) {
 }
 
 export async function viteInitGenerator(host: Tree, options: Schema) {
-  const jestTask = addJestPlugin(host, options);
+  const jestTask = await addJestPlugin(host, options);
   const vitestTask = addVitestPlugin(host, options);
   const installTask = updateDependencies(host);
 
