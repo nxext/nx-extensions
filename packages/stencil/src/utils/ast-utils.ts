@@ -1,7 +1,6 @@
 import * as ts from 'typescript';
 import { ChangeType, StringChange, Tree } from '@nx/devkit';
-import { findNodes } from 'nx/src/utils/typescript';
-import { insertChange } from '@nx/workspace/src/utilities/ast-utils';
+import { findNodes, insertChange } from '@nx/js';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 export function readTsSourceFile(host: Tree, path: string): ts.SourceFile {

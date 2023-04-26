@@ -2,16 +2,16 @@ import {
   GeneratorCallback,
   Tree,
   addDependenciesToPackageJson,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from '../../utils/utils';
 import { cypressInitGenerator } from '@nx/cypress';
 import { Schema } from '../schema';
 
-export function addCypressPlugin(
+export async function addCypressPlugin(
   tree: Tree,
   schema: Schema
-): GeneratorCallback {
+): Promise<GeneratorCallback> {
   if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     return () => {};
@@ -31,7 +31,7 @@ export function addCypressPlugin(
     tasks.push(installTask);
   }
 
-  const cypressTask = cypressInitGenerator(tree, {});
+  const cypressTask = await cypressInitGenerator(tree, {});
   tasks.push(cypressTask);
 
   return runTasksInSerial(...tasks);

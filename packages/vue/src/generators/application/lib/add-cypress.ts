@@ -15,7 +15,6 @@ export async function addCypress(host: Tree, options: NormalizedSchema) {
     name: options.e2eProjectName,
     directory: options.directory,
     project: options.appProjectName,
-    rootProject: options.rootProject,
     bundler: 'vite',
   });
 }
