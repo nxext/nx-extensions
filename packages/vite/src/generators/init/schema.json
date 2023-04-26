@@ -7,11 +7,7 @@
     "unitTestRunner": {
       "description": "Adds the specified unit test runner",
       "type": "string",
-      "enum": [
-        "vitest",
-        "jest",
-        "none"
-      ],
+      "enum": ["vitest", "jest", "none"],
       "default": "vitest"
     },
     "skipFormat": {
