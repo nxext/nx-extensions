@@ -12,8 +12,6 @@ import { ApplicationGeneratorSchema } from './schema';
 const devkit = require('@nx/devkit');
 
 describe('application', () => {
-  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-
   let host: Tree;
 
   const options: ApplicationGeneratorSchema = {

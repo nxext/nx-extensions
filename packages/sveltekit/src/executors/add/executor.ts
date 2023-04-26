@@ -5,7 +5,7 @@ import {
   readJsonFile,
   writeJsonFile,
 } from '@nx/devkit';
-import { sortObjectByKeys } from '@nx/workspace/src/utils/ast-utils';
+import { sortObjectByKeys } from 'nx/src/utils/object-sort';
 import { default as runCommands } from 'nx/src/executors/run-commands/run-commands.impl';
 import { AddExecutorSchema } from './schema';
 

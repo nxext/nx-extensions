@@ -3,12 +3,15 @@ import {
   GeneratorCallback,
   Tree,
   addDependenciesToPackageJson,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from '../../utils/utils';
 import { Schema } from '../schema';
 
-export function addJestPlugin(tree: Tree, schema: Schema): GeneratorCallback {
+export async function addJestPlugin(
+  tree: Tree,
+  schema: Schema
+): Promise<GeneratorCallback> {
   if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     return () => {};
@@ -28,7 +31,7 @@ export function addJestPlugin(tree: Tree, schema: Schema): GeneratorCallback {
     tasks.push(installTask);
   }
 
-  const jestTask = jestInitGenerator(tree, {});
+  const jestTask = await jestInitGenerator(tree, {});
   tasks.push(jestTask);
 
   return runTasksInSerial(...tasks);

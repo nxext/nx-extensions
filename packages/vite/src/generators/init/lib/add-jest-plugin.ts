@@ -3,10 +3,14 @@ import {
   GeneratorCallback,
   Tree,
   addDependenciesToPackageJson,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { hasNxPackage, readNxVersion } from './util';
 
-export function addJestPlugin(tree: Tree, options): GeneratorCallback {
+export async function addJestPlugin(
+  tree: Tree,
+  options
+): Promise<GeneratorCallback> {
   if (options.unitTestRunner !== 'jest') {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     return () => {};
@@ -20,10 +24,10 @@ export function addJestPlugin(tree: Tree, options): GeneratorCallback {
       () => {}
     : addDependenciesToPackageJson(tree, {}, { '@nx/jest': nxVersion });
 
-  const jestTask = jestInitGenerator(tree, {});
+  const jestTask = await jestInitGenerator(tree, {});
 
   return async () => {
     await installTask();
-    return jestTask();
+    return await jestTask();
   };
 }

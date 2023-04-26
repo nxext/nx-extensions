@@ -16,11 +16,11 @@ export async function initGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
 
   if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
-    const jestTask = addJestPlugin(host);
+    const jestTask = await addJestPlugin(host);
     tasks.push(jestTask);
   }
   if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
-    const cypressTask = addCypressPlugin(host);
+    const cypressTask = await addCypressPlugin(host);
     tasks.push(cypressTask);
   }
 

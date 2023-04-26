@@ -5,7 +5,7 @@ import {
   updateJson,
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { libraryGenerator } from '@nx/workspace/generators';
+import { libraryGenerator } from '@nx/js';
 
 import configurationGenerator from './configuration';
 
@@ -31,7 +31,6 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
 
     await libraryGenerator(tree, {
       name: 'test-ui-lib',
-      standaloneConfig: false,
     });
   });
 
