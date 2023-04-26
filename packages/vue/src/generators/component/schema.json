@@ -41,8 +41,5 @@
       "x-prompt": "Should this component be exported in the project?"
     }
   },
-  "required": [
-    "name",
-    "project"
-  ]
+  "required": ["name", "project"]
 }

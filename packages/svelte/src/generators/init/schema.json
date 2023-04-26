@@ -7,20 +7,13 @@
     "unitTestRunner": {
       "description": "Adds the specified unit test runner.",
       "type": "string",
-      "enum": [
-        "jest",
-        "vitest",
-        "none"
-      ],
+      "enum": ["jest", "vitest", "none"],
       "default": "vitest"
     },
     "e2eTestRunner": {
       "description": "Adds the specified e2e test runner.",
       "type": "string",
-      "enum": [
-        "cypress",
-        "none"
-      ],
+      "enum": ["cypress", "none"],
       "default": "cypress"
     },
     "skipFormat": {

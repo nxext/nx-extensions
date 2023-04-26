@@ -28,8 +28,5 @@
       "alias": "d"
     }
   },
-  "required": [
-    "project",
-    "name"
-  ]
+  "required": ["project", "name"]
 }

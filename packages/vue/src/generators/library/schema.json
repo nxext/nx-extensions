@@ -43,10 +43,7 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": [
-        "vitest",
-        "none"
-      ],
+      "enum": ["vitest", "none"],
       "description": "Test runner to use for unit tests.",
       "default": "none"
     },
@@ -57,10 +54,7 @@
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": [
-        "cypress",
-        "none"
-      ],
+      "enum": ["cypress", "none"],
       "description": "Test runner to use for end to end (E2E) tests.",
       "default": "cypress"
     },
@@ -72,14 +66,9 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": [
-        "eslint",
-        "none"
-      ],
+      "enum": ["eslint", "none"],
       "default": "eslint"
     }
   },
-  "required": [
-    "name"
-  ]
+  "required": ["name"]
 }

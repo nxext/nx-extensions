@@ -6,11 +6,7 @@
   "properties": {
     "unitTestRunner": {
       "type": "string",
-      "enum": [
-        "jest",
-        "vitest",
-        "none"
-      ],
+      "enum": ["jest", "vitest", "none"],
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
@@ -21,10 +17,7 @@
     },
     "e2eTestRunner": {
       "type": "string",
-      "enum": [
-        "cypress",
-        "none"
-      ],
+      "enum": ["cypress", "none"],
       "description": "Test runner to use for end to end (E2E) tests.",
       "default": "cypress"
     },
