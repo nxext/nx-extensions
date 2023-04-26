@@ -20,8 +20,5 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "testTarget",
-    "verdaccioConfig"
-  ]
+  "required": ["testTarget", "verdaccioConfig"]
 }

@@ -17,10 +17,7 @@
     },
     "vitestMode": {
       "type": "string",
-      "enum": [
-        "test",
-        "benchmark"
-      ],
+      "enum": ["test", "benchmark"],
       "default": "test"
     }
   },

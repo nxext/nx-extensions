@@ -58,10 +58,7 @@
       "default": {}
     }
   },
-  "required": [
-    "entryFile",
-    "outputPath"
-  ],
+  "required": ["entryFile", "outputPath"],
   "definitions": {
     "assetPattern": {
       "oneOf": [
@@ -82,11 +79,7 @@
             }
           },
           "additionalProperties": false,
-          "required": [
-            "glob",
-            "input",
-            "output"
-          ]
+          "required": ["glob", "input", "output"]
         },
         {
           "type": "string"
