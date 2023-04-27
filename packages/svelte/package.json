@@ -35,11 +35,5 @@
     "@nx/devkit": "16.0.0-beta.7",
     "@nx/cypress": "16.0.0-beta.7",
     "@nx/jest": "16.0.0-beta.7"
-  },
-  "nx-migrate": {
-    "migrations": "./migrations.json"
-  },
-  "nx-migrations": {
-    "migrations": "./migrations.json"
   }
 }

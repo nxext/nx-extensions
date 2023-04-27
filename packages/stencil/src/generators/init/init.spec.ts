@@ -41,12 +41,4 @@ describe('init', () => {
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
   });
-
-  describe('defaultCollection', () => {
-    it('should be set if none was set before', async () => {
-      await initGenerator(host, { name: 'test', appType: AppType.application });
-      const workspaceJson = readWorkspaceConfiguration(host);
-      expect(workspaceJson.cli.defaultCollection).toEqual('@nxext/stencil');
-    });
-  });
 });

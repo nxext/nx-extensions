@@ -83,7 +83,6 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
     // Setup a new lib
     await libraryGenerator(tree, {
       name: 'test-ui-lib-2',
-      standaloneConfig: false,
     });
 
     tree.write('.storybook/main.js', newContents);
@@ -99,7 +98,6 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
     // Setup a new lib
     await libraryGenerator(tree, {
       name: 'test-ui-lib-2',
-      standaloneConfig: false,
     });
     await configurationGenerator(tree, {
       name: 'test-ui-lib-2',

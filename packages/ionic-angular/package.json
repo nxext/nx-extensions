@@ -20,10 +20,6 @@
   },
   "schematics": "./generators.json",
   "builders": "./executors.json",
-  "ng-update": {
-    "requirements": {},
-    "migrations": "./migrations.json"
-  },
   "dependencies": {
     "@nxext/capacitor": "^15.7.0",
     "@phenomnomnominal/tsquery": "4.1.1",
