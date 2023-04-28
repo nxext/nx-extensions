@@ -19,7 +19,7 @@ const readNxVersionModule = require('../../utils/utillities');
 
 describe('schematic:application', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('16.0.0');
 
   let host: Tree;
   const options: RawApplicationSchema = { name: 'test', linter: Linter.None };
@@ -28,7 +28,7 @@ describe('schematic:application', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
-        '@nx/workspace': '15.7.0',
+        '@nx/workspace': '16.0.0',
       };
       return json;
     });

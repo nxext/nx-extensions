@@ -2,11 +2,11 @@ import {
   addDependenciesToPackageJson,
   joinPathFragments,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { lintProjectGenerator } from '@nx/linter';
 import { extraEslintDependencies } from '../../utils/lint';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const lintTask = await lintProjectGenerator(host, {

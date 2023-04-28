@@ -13,8 +13,8 @@ import {
   TargetConfiguration,
   Tree,
   updateJson,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import init from '../init/init';
 import { lintProjectGenerator } from '@nx/linter';
 import { jestProjectGenerator } from '@nx/jest';

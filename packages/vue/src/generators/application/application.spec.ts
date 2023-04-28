@@ -16,7 +16,7 @@ const readNxVersionModule = require('../utils/utils');
 
 describe('app generator', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('16.0.0');
 
   let host: Tree;
   const projectName = 'my-app';

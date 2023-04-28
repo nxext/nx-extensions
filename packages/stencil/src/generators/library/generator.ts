@@ -7,6 +7,7 @@ import {
   names,
   offsetFromRoot,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { LibrarySchema, RawLibrarySchema } from './schema';
 import { AppType } from '../../utils/typings';
@@ -14,7 +15,6 @@ import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../../generators/init/init';
 import { MakeLibBuildableSchema } from '../../generators/make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 import makeLibBuildableGenerator from '../../generators/make-lib-buildable/make-lib-buildable';
 

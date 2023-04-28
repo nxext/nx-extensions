@@ -6,6 +6,7 @@ import {
   names,
   Tree,
   offsetFromRoot,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { PWASchema, RawPWASchema } from './schema';
 import { AppType } from '../../utils/typings';
@@ -13,7 +14,6 @@ import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
 import { addStylePluginToConfig } from '../../stencil-core-utils';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 import { addLinting } from '../application/lib/add-linting';
 

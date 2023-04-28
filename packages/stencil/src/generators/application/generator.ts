@@ -7,12 +7,12 @@ import {
   names,
   offsetFromRoot,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { ApplicationSchema, RawApplicationSchema } from './schema';
 import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addProject } from './lib/add-project';
 import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';

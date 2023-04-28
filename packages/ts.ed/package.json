@@ -1,6 +1,6 @@
 {
   "name": "@nxext/ts.ed",
-  "version": "15.7.0",
+  "version": "16.0.0",
   "license": "MIT",
   "author": "Nick Wiltshire",
   "description": "Nx plugin for Ts.ED",
@@ -23,10 +23,10 @@
   "main": "./src/index.js",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nx/devkit": "16.0.0-beta.7"
+    "@nx/devkit": "16.0.0"
   },
   "devDependencies": {
-    "@nx/linter": "16.0.0-beta.7",
-    "@nx/cypress": "16.0.0-beta.7"
+    "@nx/linter": "16.0.0",
+    "@nx/cypress": "16.0.0"
   }
 }

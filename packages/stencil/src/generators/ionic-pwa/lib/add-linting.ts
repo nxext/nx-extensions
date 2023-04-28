@@ -5,6 +5,7 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { PWASchema } from '../schema';
 import { Linter } from '@nx/linter';
@@ -12,7 +13,6 @@ import {
   createStencilEslintJson,
   extraEslintDependencies,
 } from '../../../utils/lint';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { readNxVersion } from '../../../utils/utillities';
 
 export async function addLinting(host: Tree, options: PWASchema) {

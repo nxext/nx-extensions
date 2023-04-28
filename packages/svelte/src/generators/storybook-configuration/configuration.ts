@@ -5,8 +5,8 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { Linter } from '@nx/linter';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';

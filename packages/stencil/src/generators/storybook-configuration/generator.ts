@@ -14,10 +14,10 @@ import {
   Tree,
   updateProjectConfiguration,
   writeJson,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
 import { TsConfig } from '@nx/storybook/src/utils/utilities';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
 import { join } from 'path';
 import {

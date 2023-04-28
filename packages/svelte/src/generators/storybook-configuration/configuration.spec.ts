@@ -16,7 +16,7 @@ const readNxVersionModule = require('../utils/utils');
 
 xdescribe('@nxext/svelte:storybook-configuration', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('16.0.0');
 
   let tree: Tree;
 
@@ -24,7 +24,7 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(tree, '/package.json', (json) => {
       json.devDependencies = {
-        '@nx/workspace': '15.7.0',
+        '@nx/workspace': '16.0.0',
       };
       return json;
     });

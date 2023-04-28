@@ -3,8 +3,8 @@ import {
   GeneratorCallback,
   Tree,
   addDependenciesToPackageJson,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { hasNxPackage, readNxVersion } from './util';
 
 export async function addJestPlugin(tree: Tree): Promise<GeneratorCallback> {

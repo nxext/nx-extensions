@@ -1,4 +1,10 @@
-import { Tree, updateJson, formatFiles, convertNxGenerator } from '@nx/devkit';
+import {
+  Tree,
+  updateJson,
+  formatFiles,
+  convertNxGenerator,
+  runTasksInSerial,
+} from '@nx/devkit';
 
 import { Schema } from './schema';
 import { addJestPlugin } from './lib/add-jest-plugin';
@@ -24,11 +30,7 @@ export async function viteInitGenerator(host: Tree, options: Schema) {
     await formatFiles(host);
   }
 
-  return async () => {
-    await jestTask();
-    await vitestTask();
-    await installTask();
-  };
+  return runTasksInSerial(jestTask, vitestTask, installTask);
 }
 
 export default viteInitGenerator;
