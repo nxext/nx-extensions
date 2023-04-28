@@ -192,7 +192,6 @@ describe('application schematic', () => {
       });
 
       expect(host.read(`package.json`).includes('jest')).toBeFalsy();
-      expect(host.read(`package.json`).includes('karma')).toBeFalsy();
       expect(
         host.exists(`${projectRoot}/src/app/home/home.page.spec.ts`)
       ).toBeFalsy();
@@ -205,17 +204,6 @@ describe('application schematic', () => {
       });
 
       expect(host.read(`package.json`).includes('jest')).toBeTruthy();
-      expect(host.read(`package.json`).includes('karma')).toBeFalsy();
-    });
-
-    // TODO: karma has been removed as an option in the underlying @nx/angular app generator
-    it.skip('karma', async () => {
-      await applicationGenerator(host, {
-        ...options,
-        unitTestRunner: 'karma',
-      });
-
-      expect(host.read(`package.json`).includes('karma')).toBeTruthy();
     });
   });
 
