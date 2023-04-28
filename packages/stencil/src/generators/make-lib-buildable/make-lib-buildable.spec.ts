@@ -4,9 +4,9 @@ import { SupportedStyles } from '../../stencil-core-utils';
 import {
   readJson,
   readWorkspaceConfiguration,
+  updateWorkspaceConfiguration,
   Tree,
   updateJson,
-  updateWorkspaceConfiguration,
 } from '@nx/devkit';
 import { makeLibBuildableGenerator } from './make-lib-buildable';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
@@ -26,7 +26,7 @@ describe('make-lib-buildable schematic', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
-        '@nx/workspace': '15.7.0',
+        '@nx/workspace': '16.0.0',
       };
       return json;
     });
@@ -47,7 +47,7 @@ describe('make-lib-buildable schematic', () => {
       "import { Config } from '@stencil/core';
 
       export const config: Config = {
-        namespace: 'testproject674078',
+        namespace: '${name}',
         taskQueue: 'async',
         sourceMap: true,
 

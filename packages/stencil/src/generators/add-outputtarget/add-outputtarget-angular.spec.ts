@@ -11,7 +11,7 @@ const readNxVersionModule = require('../../utils/utillities');
 
 describe('add-outputtarget angular', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('16.0.0');
 
   let tree: Tree;
   const projectName = uniq('testproject');

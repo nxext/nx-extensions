@@ -3,8 +3,8 @@ import {
   addDependenciesToPackageJson,
   joinPathFragments,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 
 import { NormalizedSchema } from '../schema';
 import { extendVueEslintJson, extraEslintDependencies } from '../../utils/lint';

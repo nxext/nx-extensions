@@ -4,9 +4,9 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { Schema } from './schema';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import initGenerator from '../init/init';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateViteConfig } from './lib/update-vite-config';

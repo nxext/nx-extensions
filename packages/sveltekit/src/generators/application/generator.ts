@@ -9,13 +9,13 @@ import {
   offsetFromRoot,
   Tree,
   convertNxGenerator,
+  runTasksInSerial,
 } from '@nx/devkit';
 import * as path from 'path';
 import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
 import { ProjectType } from '@nx/workspace';
 import { relative } from 'path';
 import { addLinting } from './lib/add-linting';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { installDependencies } from './lib/install-dependencies';
 import { viteInitGenerator } from '@nxext/vite';
 import { createViteTargets } from './lib/targets';

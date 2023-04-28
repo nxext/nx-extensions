@@ -5,8 +5,8 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { readNxVersion } from '../utils/utils';
 import {
   vitePluginVueVersion,

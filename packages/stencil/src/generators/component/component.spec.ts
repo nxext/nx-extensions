@@ -11,7 +11,7 @@ const readNxVersionModule = require('../../utils/utillities');
 
 describe('component schematic', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('16.0.0');
 
   let tree: Tree;
   const projectName = 'test-project';

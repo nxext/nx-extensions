@@ -6,8 +6,8 @@ import {
   joinPathFragments,
   Tree,
   updateJson,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { mapLintPattern } from '@nx/linter/src/generators/lint-project/lint-project';
 import { Linter, lintProjectGenerator } from '@nx/linter';
 

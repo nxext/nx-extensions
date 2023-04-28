@@ -14,6 +14,7 @@ import {
   formatFiles,
   GeneratorCallback,
   joinPathFragments,
+  runTasksInSerial,
   Tree,
   updateJson,
 } from '@nx/devkit';
@@ -81,13 +82,13 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
     await formatFiles(host);
   }
 
-  return async () => {
-    await viteInitTask();
-    await lintTask();
-    await lintDependenciesTask();
-    await jestTask();
-    await vitestTask();
-  };
+  return runTasksInSerial(
+    viteInitTask,
+    lintTask,
+    lintDependenciesTask,
+    jestTask,
+    vitestTask
+  );
 }
 
 export default applicationGenerator;

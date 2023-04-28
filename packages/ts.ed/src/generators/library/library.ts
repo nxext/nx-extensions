@@ -12,8 +12,8 @@ import {
   offsetFromRoot,
   Tree,
   updateJson,
+  runTasksInSerial,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';

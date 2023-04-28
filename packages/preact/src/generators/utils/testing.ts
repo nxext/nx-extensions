@@ -14,7 +14,7 @@ export async function createTestProject(
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   updateJson(host, '/package.json', (json) => {
     json.devDependencies = {
-      '@nx/workspace': '15.7.0',
+      '@nx/workspace': '16.0.0',
     };
     return json;
   });
