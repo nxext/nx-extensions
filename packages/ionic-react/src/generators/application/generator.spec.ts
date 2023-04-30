@@ -8,9 +8,6 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { ApplicationGeneratorSchema } from './schema';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nx/devkit');
-
 describe('application', () => {
   let host: Tree;
 

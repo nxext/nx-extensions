@@ -36,6 +36,7 @@ export function packageInstallAsDevDependency(
   pkgs: string[],
   projName?: string
 ) {
+  const verdaccioUrl = `http://localhost:4872/`;
   const cwd = projName ? `${tmpProjPath()}/${projName}` : tmpProjPath();
   const pm = getPackageManagerCommand();
   const pkgsWithVersions = pkgs
@@ -43,11 +44,14 @@ export function packageInstallAsDevDependency(
       return `${pgk}@${deployedVersion}`;
     })
     .join(' ');
-  const install = execSync(`${pm.addDev} ${pkgsWithVersions}`, {
-    cwd,
-    stdio: [0, 1, 2],
-    env: process.env,
-    encoding: 'utf-8',
-  });
+  const install = execSync(
+    `${pm.addDev} ${pkgsWithVersions} --registry ${verdaccioUrl}`,
+    {
+      cwd,
+      stdio: [0, 1, 2],
+      env: process.env,
+      encoding: 'utf-8',
+    }
+  );
   return install ?? '';
 }

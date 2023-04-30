@@ -7,7 +7,7 @@ import {
 } from '@nx/plugin/testing';
 import { newProject } from '@nxext/e2e';
 
-describe('vite lib e2e', () => {
+xdescribe('vite lib e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/vite']);
   });

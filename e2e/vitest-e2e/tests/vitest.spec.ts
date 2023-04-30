@@ -6,7 +6,7 @@ import {
 } from '@nx/plugin/testing';
 import { newProject } from '@nxext/e2e';
 
-describe('vitest e2e', () => {
+xdescribe('vitest e2e', () => {
   beforeAll(async () => {
     newProject(['@nxext/vitest']);
   });

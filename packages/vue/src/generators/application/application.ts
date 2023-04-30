@@ -26,7 +26,7 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
     skipFormat: true,
   });
 
-  await ensurePackage(host, '@nx/vite', readNxVersion(host));
+  await ensurePackage('@nx/vite', readNxVersion(host));
   const { viteConfigurationGenerator } = await import('@nx/vite');
 
   const viteTask = await viteConfigurationGenerator(host, {
