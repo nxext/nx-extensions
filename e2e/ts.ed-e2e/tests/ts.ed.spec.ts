@@ -17,7 +17,7 @@ describe('ts.ed e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    cleanup();
+    //cleanup();
   });
 
   it('should create ts.ed application', async () => {

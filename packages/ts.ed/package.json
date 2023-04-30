@@ -23,7 +23,8 @@
   "main": "./src/index.js",
   "schematics": "./generators.json",
   "dependencies": {
-    "@nx/devkit": "16.0.0"
+    "@nx/devkit": "16.0.0",
+    "@nx/node": "16.0.0"
   },
   "devDependencies": {
     "@nx/linter": "16.0.0",
