@@ -26,7 +26,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template blank`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template blank --verbose`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -43,7 +43,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template list`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template list --verbose`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -60,7 +60,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template sidemenu`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template sidemenu --verbose`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -77,7 +77,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template tabs`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template tabs --verbose`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
