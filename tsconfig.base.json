@@ -23,12 +23,8 @@
       "@nxext/e2e": ["e2e/e2e/src/index.ts"],
       "@nxext/ionic-angular": ["packages/ionic-angular/src/index.ts"],
       "@nxext/ionic-react": ["packages/ionic-react/src/index.ts"],
-      "@nxext/plugin-run-utils": ["packages/plugin-run-utils/src/index.ts"],
       "@nxext/preact": ["packages/preact/src/index.ts"],
-      "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
-      "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"],
-      "@nxext/ts.ed": ["packages/ts.ed/src/index.ts"],
       "@nxext/vite": ["packages/vite/src/index.ts"],
       "@nxext/vitest": ["packages/vitest/src/index.ts"],
       "@nxext/vue": ["packages/vue/src/index.ts"]
