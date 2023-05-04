@@ -1,21 +1,18 @@
 /**
  * Originally from the Nx repo: https://github.com/nrwl/nx
  */
-import { removeSync, readJsonSync } from 'fs-extra';
+import { readJsonSync } from 'fs-extra';
 import * as chalk from 'chalk';
 import * as path from 'path';
-import { dedent } from 'tslint/lib/utils';
 import { FileSystemSchematicJsonDescription } from '@angular-devkit/schematics/tools';
 import {
   htmlSelectorFormat,
   pathFormat,
 } from '@angular-devkit/schematics/src/formats';
 import {
-  createDocLink,
+  dedent,
   formatDeprecated,
-  generateJsonFile,
   generateMarkdownFile,
-  generateTsFile,
   sortAlphabeticallyFunction,
   sortByBooleanFunction,
 } from './utils';
@@ -25,8 +22,6 @@ import {
 } from './get-package-configurations';
 import { parseJsonSchemaToOptions } from './json-parser';
 import { createSchemaFlattener, SchemaFlattener } from './schema-flattener';
-import { inspect } from 'util';
-import { join } from 'path';
 
 /**
  * @WhatItDoes: Generates default documentation from the schematics' schema.

@@ -5,20 +5,17 @@ import { readFileSync } from 'fs';
 import { removeSync, readJsonSync } from 'fs-extra';
 import { join, relative } from 'path';
 import { parseJsonSchemaToOptions } from './json-parser';
-import { dedent } from 'tslint/lib/utils';
 import { FileSystemSchematicJsonDescription } from '@angular-devkit/schematics/tools';
 import {
   htmlSelectorFormat,
   pathFormat,
 } from '@angular-devkit/schematics/src/formats';
 import {
-  createDocLink,
   formatDeprecated,
-  generateJsonFile,
   generateMarkdownFile,
-  generateTsFile,
   sortAlphabeticallyFunction,
   sortByBooleanFunction,
+  dedent,
 } from './utils';
 import {
   Configuration,
