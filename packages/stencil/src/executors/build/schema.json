@@ -1,0 +1,90 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "http://json-schema.org/schema",
+  "title": "Stencil build",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "projectType": {
+      "type": "string"
+    },
+    "configPath": {
+      "type": "string",
+      "description": "Path to the stencil.config.ts file."
+    },
+    "ci": {
+      "type": "boolean",
+      "description": "Run a build using recommended settings for a Continuous Integration (CI) environment. Defaults the number of workers to 4.",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Adds additional runtime code to help debug, and sets the log level for more verbose output.",
+      "default": false
+    },
+    "dev": {
+      "type": "boolean",
+      "description": "Runs a development build.",
+      "default": false
+    },
+    "docsReadme": {
+      "type": "boolean",
+      "descripton": "Generate readme.md docs based on the component types, properties, methods, events, JSDocs, CSS Custom Properties, etc.",
+      "default": false
+    },
+    "es5": {
+      "type": "boolean",
+      "descripton": "Creates an ES5 compatible build. By default ES5 builds are not created during development in order to improve build times. However, ES5 builds are always created during production builds. Use this flag to create ES5 builds during development.",
+      "default": false
+    },
+    "log": {
+      "type": "boolean",
+      "description": "Write logs for the stencil build into stencil-build.log. The log file is written in the same location as the config.",
+      "default": false
+    },
+    "prerender": {
+      "type": "boolean",
+      "description": "Prerender the application using the www output target after the build has completed.",
+      "default": false
+    },
+    "prod": {
+      "type": "boolean",
+      "description": "Runs a production build which will optimize each file, improve bundling, remove unused code, minify, etc. A production build is the default, this flag is only used to override the --dev flag.",
+      "default": false
+    },
+    "maxWorkers": {
+      "type": "number",
+      "description": "Max number of workers the compiler should use. Defaults to use the same number of CPUs the Operating System has available."
+    },
+    "port": {
+      "type": "number",
+      "description": "Max number of workers the compiler should use. Defaults to use the same number of CPUs the Operating System has available."
+    },
+    "serve": {
+      "type": "boolean",
+      "description": "Starts the Integrated Dev Server."
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Logs additional information about each step of the build."
+    },
+    "watch": {
+      "type": "boolean",
+      "description": "Watches files during development and triggers a rebuild when files are updated."
+    },
+    "ssr": {
+      "type": "boolean",
+      "description": "Starts the server side render process.."
+    },
+    "noOpen": {
+      "type": "boolean",
+      "description": "By default the --serve command will open a browser window. Using the --noOpen command will no automatically open a browser window."
+    },
+    "tsConfig": {
+      "type": "string",
+      "description": "The path to tsconfig file."
+    }
+  },
+  "required": []
+}

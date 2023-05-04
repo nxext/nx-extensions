@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Nxext-Application",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the project (used for linting)",
+      "alias": "t"
+    },
+    "directory": {
+      "type": "string",
+      "description": "A directory where the project is placed",
+      "alias": "d"
+    },
+    "e2eTestRunner": {
+      "type": "string",
+      "enum": ["puppeteer", "none"],
+      "description": "Test runner to use for end to end (e2e) tests",
+      "default": "puppeteer"
+    },
+    "unitTestRunner": {
+      "type": "string",
+      "enum": ["jest", "none"],
+      "description": "Test runner to use for unit tests.",
+      "default": "jest"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "default": false
+    },
+    "linter": {
+      "description": "The tool to use for running lint checks.",
+      "type": "string",
+      "enum": ["eslint", "none"],
+      "default": "eslint"
+    },
+    "style": {
+      "description": "The file extension to be used for style files.",
+      "type": "string",
+      "default": "css",
+      "alias": "s",
+      "x-prompt": {
+        "message": "Which stylesheet format would you like to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "css",
+            "label": "CSS"
+          },
+          {
+            "value": "scss",
+            "label": "SASS(.scss)       [ http://sass-lang.com          ]"
+          },
+          {
+            "value": "styl",
+            "label": "Stylus(.styl)     [ http://stylus-lang.com        ]"
+          },
+          {
+            "value": "less",
+            "label": "LESS              [ http://lesscss.org            ]"
+          },
+          {
+            "value": "pcss",
+            "label": "PostCSS           [ https://postcss.org/            ]"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["name"]
+}

@@ -1,0 +1,54 @@
+import type { RuleSetRule, RuleSetUseItem } from 'webpack';
+
+/**
+ * This type is a member from the `RuleSetUseItem` union type declared by Webpack. The
+ * other member of that union type is a string.
+ */
+ type ObjectTypeRuleSetUseItem = {loader?: string, options?: { [index: string]: any }};
+
+ /**
+  * Since `RuleSetUse` union type has multiple members of different types, this returns
+  * `true` if the `rule.use` property is an Array.
+  */
+ const isArrayTypeUsePropPresent = (use: unknown): use is Array<unknown> => use instanceof Array;
+ 
+ /**
+  * Since `RuleSetUseItem` union type has multiple members of different types, this returns
+  * `true` if parameter is `ObjectTypeRuleSetUseItem` type.
+  */
+ const isObjectTypeRuleSetUseItem = (ele: RuleSetUseItem): ele is Required<ObjectTypeRuleSetUseItem> => {
+   return (typeof ele === 'object') && (typeof ele?.loader === 'string') && (typeof ele?.options === 'object');
+ }
+ 
+ /**
+  * With a given `rule` and `name` of a Webpack loader (e.g.: 'babel-loader'), return all occurrences from 
+  * `rule.use` collection.
+  * 
+  * This has been developed to specifically for 'babel-loader' although will work with other loaders of 
+  * *same shape*. Same shape since Webpack's `rules` property, although typed, has objects of union types 
+  * with most having multiple members.
+  * 
+  * @see https://webpack.js.org/configuration/module/#modulerules
+  * @see https://webpack.js.org/loaders/
+  * @see https://webpack.js.org/loaders/babel-loader
+  */
+ export function filterByLoaderName(rule: RuleSetRule | '...', name: string): Array<Required<ObjectTypeRuleSetUseItem>> | undefined {
+     // RegExp to match file path segments
+     const pathSegment = /(?!\\|\/)[-\w]+(?=\\|\/)/g;
+     
+     /**
+      * Returns `true` if the `rule.use[n].loader` value has `name` value in it.
+      * Prior to using this predicate, verify that `ele` has values by using `isObjectTypeRuleSetUseItem`.
+      */
+     const isUseLoaderByName = (ele: Required<ObjectTypeRuleSetUseItem>): boolean => {
+       return Array.from(ele.loader.matchAll(pathSegment)).map(e => e.pop()).some(e => e === name);
+     }
+ 
+     if (typeof rule === 'object') {
+       return isArrayTypeUsePropPresent(rule.use)
+           ? rule.use.filter(isObjectTypeRuleSetUseItem).filter(isUseLoaderByName)
+           : undefined;
+     } else if (typeof rule === 'string') {
+       return undefined;
+     }
+ }
