@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "MakeLibBuildable",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What library would you like to make buildable?"
+    },
+    "importPath": {
+      "type": "string",
+      "description": "The library name used to import it, like @myorg/my-awesome-lib"
+    },
+    "style": {
+      "description": "The file extension to be used for style files.",
+      "type": "string",
+      "default": "css",
+      "alias": "s",
+      "x-prompt": {
+        "message": "Which stylesheet format would you like to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "css",
+            "label": "CSS"
+          },
+          {
+            "value": "scss",
+            "label": "SASS(.scss)       [ http://sass-lang.com          ]"
+          },
+          {
+            "value": "styl",
+            "label": "Stylus(.styl)     [ http://stylus-lang.com        ]"
+          },
+          {
+            "value": "less",
+            "label": "LESS              [ http://lesscss.org            ]"
+          },
+          {
+            "value": "pcss",
+            "label": "PostCSS           [ https://postcss.org/            ]"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["name"]
+}

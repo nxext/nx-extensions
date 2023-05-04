@@ -1,0 +1,87 @@
+{
+  // @see https://babeljs.io/docs/en/options#sourcetype
+  "sourceType": "unambiguous",
+  // @see https://babeljs.io/docs/en/options#babelrcroots
+  "babelrcRoots": [
+    // Keep the root as a root
+    ".",
+
+    // Also consider monorepo packages "root" and load their .babelrc.json files.
+    "./libs/*"
+  ],
+  // @see https://babeljs.io/docs/en/options#presets
+  "presets": [
+    "@babel/preset-env",
+    [
+      // @see https://babeljs.io/docs/en/babel-preset-typescript
+      "@babel/preset-typescript",
+      {
+        "onlyRemoveTypeImports": false
+      }
+    ],
+    [
+      // @see https://babeljs.io/docs/en/babel-preset-react
+      "@babel/preset-react",
+      {
+        "pragma": "h", // default pragma is React.createElement (only in classic runtime)
+        "development": true,
+        "useSpread": true,
+        "runtime": "classic"
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-shorthand-properties",
+    "@babel/plugin-transform-block-scoping",
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-private-property-in-object",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-private-methods",
+      {
+        "loose": true
+      }
+    ],
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-syntax-dynamic-import",
+    [
+      "@babel/plugin-proposal-object-rest-spread",
+      {
+        "loose": true,
+        "useBuiltIns": true
+      }
+    ],
+    "@babel/plugin-transform-classes",
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-parameters",
+    "@babel/plugin-transform-destructuring",
+    "@babel/plugin-transform-spread",
+    "@babel/plugin-transform-for-of",
+    "babel-plugin-macros",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-nullish-coalescing-operator",
+    [
+      "babel-plugin-polyfill-corejs3",
+      {
+        "method": "usage-global",
+        "absoluteImports": "core-js",
+        "version": "3.22.7"
+      }
+    ]
+  ]
+}

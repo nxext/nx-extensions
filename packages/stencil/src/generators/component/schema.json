@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Component",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the component?"
+    },
+    "project": {
+      "type": "string",
+      "description": "Project where the component is generated",
+      "x-prompt": "What project would you like to use?",
+      "alias": "p"
+    },
+    "directory": {
+      "type": "string",
+      "description": "A directory where the project is placed",
+      "alias": "d"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["name", "project"]
+}

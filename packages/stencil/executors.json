@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "builders": {
+    "build": {
+      "implementation": "./src/executors/build/compat",
+      "schema": "./src/executors/build/schema.json",
+      "description": "stencil build"
+    },
+    "test": {
+      "implementation": "./src/executors/test/compat",
+      "schema": "./src/executors/test/schema.json",
+      "description": "stencil test"
+    },
+    "e2e": {
+      "implementation": "./src/executors/e2e/compat",
+      "schema": "./src/executors/e2e/schema.json",
+      "description": "stencil e2e"
+    },
+    "serve": {
+      "implementation": "./src/executors/serve/compat",
+      "schema": "./src/executors/serve/schema.json",
+      "description": "serve executor"
+    }
+  },
+  "executors": {
+    "build": {
+      "implementation": "./src/executors/build/executor",
+      "schema": "./src/executors/build/schema.json",
+      "description": "stencil build"
+    },
+    "test": {
+      "implementation": "./src/executors/test/executor",
+      "schema": "./src/executors/test/schema.json",
+      "description": "stencil test"
+    },
+    "e2e": {
+      "implementation": "./src/executors/e2e/executor",
+      "schema": "./src/executors/e2e/schema.json",
+      "description": "stencil e2e"
+    },
+    "serve": {
+      "implementation": "./src/executors/serve/executor",
+      "schema": "./src/executors/serve/schema.json",
+      "description": "serve executor"
+    }
+  }
+}

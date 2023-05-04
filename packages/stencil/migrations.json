@@ -1,0 +1,90 @@
+{
+  "generators": {},
+  "packageJsonUpdates": {
+    "1.1.0": {
+      "version": "1.1.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "1.16.3",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "10.0.0": {
+      "version": "10.0.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "1.17.3",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "10.2.1": {
+      "version": "10.2.1",
+      "packages": {
+        "@stencil/core": {
+          "version": "2.0.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "10.3.0": {
+      "version": "10.3.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "2.3.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "11.2.1": {
+      "version": "11.2.1",
+      "packages": {
+        "@stencil/core": {
+          "version": "2.4.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "12.0.0": {
+      "version": "12.0.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "^2.5.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@nxext/stencil": {
+          "version": "12.0.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "12.2.0": {
+      "version": "12.2.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "^2.9.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "13.1.0": {
+      "version": "13.1.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "^2.10.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    },
+    "13.2.0": {
+      "version": "13.2.0",
+      "packages": {
+        "@stencil/core": {
+          "version": "^2.13.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
+}

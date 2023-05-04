@@ -1,0 +1,19 @@
+import { html } from 'lit-html';
+
+export default {
+  title: '<%= className %>',
+  component: '<%= className %>',
+  args: {
+    first: 'first',
+    middle: 'first',
+    last: 'first',
+  },
+};
+
+const Template = (args) => {
+  return html`
+    <<%= componentFileName %> first=${args.first} middle=${args.middle} last=${args.last}></<%= componentFileName %>>
+  `;
+};
+
+export const Default = (args) => Template(args);
