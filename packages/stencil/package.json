@@ -1,0 +1,67 @@
+{
+  "name": "@nxext/stencil",
+  "version": "15.7.0",
+  "license": "MIT",
+  "author": "Dominik Pieper",
+  "description": "Nx plugin for stenciljs",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "stenciljs",
+    "pwa",
+    "web components"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
+  "main": "src/index.js",
+  "schematics": "./generators.json",
+  "generators": "./generators.json",
+  "builders": "./executors.json",
+  "executors": "./executors.json",
+  "dependencies": {
+    "@phenomnomnominal/tsquery": "4.1.1",
+    "ignore": "^5.2.0",
+    "@nx/devkit": "^16.0.0",
+    "@nx/js": "^16.0.0"
+  },
+  "peerDependencies": {
+    "@nxext/svelte": "^15.7.0",
+    "@stencil/core": "^2.17.1",
+    "@nx/workspace": "16.0.0",
+    "@nx/linter": "16.0.0",
+    "@nx/cypress": "16.0.0",
+    "@nx/storybook": "16.0.0",
+    "@nx/jest": "16.0.0",
+    "@nx/react": "16.0.0",
+    "@nx/angular": "16.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@nxext/svelte": {
+      "optional": true
+    },
+    "@nx/storybook": {
+      "optional": true
+    },
+    "@nx/react": {
+      "optional": true
+    },
+    "@nx/angular": {
+      "optional": true
+    },
+    "@nx/cypress": {
+      "optional": true
+    }
+  },
+  "nx-migrate": {
+    "migrations": "./migrations.json"
+  },
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  }
+}

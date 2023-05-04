@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "http://json-schema.org/schema",
+  "title": "Stencil build",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "projectType": {
+      "type": "string"
+    },
+    "configPath": {
+      "type": "string",
+      "description": "Path to the stencil.config.ts file."
+    },
+    "watch": {
+      "type": "boolean"
+    }
+  },
+  "required": []
+}

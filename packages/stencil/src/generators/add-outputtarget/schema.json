@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "AddOutputtarget",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "Project for that the library should be generated.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "For which project should the target be generated?"
+    },
+    "outputType": {
+      "type": "string",
+      "enum": ["angular", "react", "svelte"],
+      "description": "Select what kind of library you want to generate.",
+      "x-prompt": "Which framework do you use?"
+    },
+    "unitTestRunner": {
+      "description": "Adds the specified unit test runner.",
+      "type": "string",
+      "enum": ["jest", "none"],
+      "default": "jest"
+    },
+    "publishable": {
+      "type": "boolean",
+      "description": "",
+      "default": false
+    },
+    "importPath": {
+      "type": "string",
+      "description": "The library name used to import it, like @myorg/my-awesome-lib"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["projectName", "outputType"]
+}

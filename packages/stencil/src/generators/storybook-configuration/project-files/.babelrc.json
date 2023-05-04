@@ -1,0 +1,11 @@
+{
+  "presets": [
+    [
+      // @see https://babeljs.io/docs/en/babel-preset-typescript
+      "@babel/preset-typescript",
+      {
+        "onlyRemoveTypeImports": true
+      }
+    ]
+  ]
+}
