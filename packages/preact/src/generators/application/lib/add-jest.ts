@@ -1,12 +1,11 @@
-import { Tree, ensurePackage } from '@nx/devkit';
+import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { readNxVersion } from '../../utils/utils';
 
 export async function addJest(host: Tree, options: NormalizedSchema) {
   if (options.unitTestRunner !== 'jest') {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
   }
-  await ensurePackage(host, '@nx/jest', readNxVersion(host));
+  await ensurePackage('@nx/jest', NX_VERSION);
   const { jestProjectGenerator } = await import('@nx/jest');
 
   return await jestProjectGenerator(host, {

@@ -4,13 +4,13 @@ import {
   Tree,
   ensurePackage,
   runTasksInSerial,
+  NX_VERSION,
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { extraEslintDependencies } from '../../utils/lint';
-import { readNxVersion } from '../../utils/utils';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
-  await ensurePackage(host, '@nx/linter', readNxVersion(host));
+  await ensurePackage('@nx/linter', NX_VERSION);
   const { lintProjectGenerator } = await import('@nx/linter');
 
   const lintTask = await lintProjectGenerator(host, {

@@ -1,4 +1,9 @@
-import { addDependenciesToPackageJson, readJson, Tree } from '@nx/devkit';
+import {
+  addDependenciesToPackageJson,
+  NX_VERSION,
+  readJson,
+  Tree,
+} from '@nx/devkit';
 import { ionicAngularVersion } from '../../../utils/versions';
 
 export function addDependencies(host: Tree) {
@@ -7,20 +12,6 @@ export function addDependencies(host: Tree) {
     {
       '@ionic/angular': ionicAngularVersion,
     },
-    { '@nx/angular': readNxVersion(host) }
+    { '@nx/angular': NX_VERSION }
   );
-}
-
-function readNxVersion(tree: Tree): string {
-  const packageJson = readJson(tree, 'package.json');
-
-  const nxVersion = packageJson.devDependencies['@nx/workspace']
-    ? packageJson.devDependencies['@nx/workspace']
-    : packageJson.dependencies['@nx/workspace'];
-
-  if (!nxVersion) {
-    throw new Error('@nx/workspace is not a dependency.');
-  }
-
-  return nxVersion;
 }

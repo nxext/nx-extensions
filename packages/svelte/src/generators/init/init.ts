@@ -24,7 +24,7 @@ export async function initGenerator(host: Tree, schema: Schema) {
   const cypressTask = await addCypressPlugin(host, schema);
   tasks.push(cypressTask);
 
-  const linterTask = addLinterPlugin(host);
+  const linterTask = await addLinterPlugin(host);
   tasks.push(linterTask);
 
   const installTask = updateDependencies(host);

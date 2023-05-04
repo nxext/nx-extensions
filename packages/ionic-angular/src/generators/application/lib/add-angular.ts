@@ -1,13 +1,12 @@
-import { Tree, ensurePackage } from '@nx/devkit';
+import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
 import { Linter } from '@nx/linter';
 import { ApplicationGeneratorSchema } from '../schema';
-import { readNxVersion } from '../../../utils/utils';
 
 export async function addAngular(
   host: Tree,
   options: ApplicationGeneratorSchema
 ) {
-  ensurePackage('@nx/angular', readNxVersion(host));
+  ensurePackage('@nx/angular', NX_VERSION);
   const { applicationGenerator } = await import('@nx/angular/generators');
   return await applicationGenerator(host, {
     ...options,

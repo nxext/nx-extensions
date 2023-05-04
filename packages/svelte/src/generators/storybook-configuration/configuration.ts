@@ -6,11 +6,11 @@ import {
   GeneratorCallback,
   Tree,
   runTasksInSerial,
+  NX_VERSION,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
-import { readNxVersion } from '../utils/utils';
 import { updateMainJs } from './lib/update-main-js';
 
 export async function configurationGenerator(
@@ -30,7 +30,7 @@ export async function configurationGenerator(
   );
   tasks.push(installTask);
 
-  await ensurePackage(host, '@nx/storybook', readNxVersion(host));
+  await ensurePackage('@nx/storybook', NX_VERSION);
   const { configurationGenerator } = await import('@nx/storybook');
 
   const storybookTask = await configurationGenerator(host, {

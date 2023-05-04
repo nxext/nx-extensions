@@ -9,7 +9,6 @@ import {
 import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
-import { addLinterPlugin } from './lib/add-linter-plugin';
 import { viteInitGenerator } from '@nxext/vite';
 
 export async function initGenerator(host: Tree, schema: Schema) {
@@ -24,8 +23,6 @@ export async function initGenerator(host: Tree, schema: Schema) {
     tasks.push(cypressTask);
   }
 
-  const linterTask = addLinterPlugin(host);
-  tasks.push(linterTask);
   const installTask = updateDependencies(host);
   tasks.push(installTask);
   const viteTask = await viteInitGenerator(host, schema);
