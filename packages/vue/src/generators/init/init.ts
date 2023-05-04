@@ -6,8 +6,8 @@ import {
   GeneratorCallback,
   Tree,
   runTasksInSerial,
+  NX_VERSION,
 } from '@nx/devkit';
-import { readNxVersion } from '../utils/utils';
 import {
   vitePluginVueVersion,
   vueRouterVersion,
@@ -43,7 +43,7 @@ export async function initGenerator(host: Tree, schema: InitSchema) {
   updateDependencies(host, schema);
 
   if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
-    await ensurePackage('@nx/cypress', readNxVersion(host));
+    await ensurePackage('@nx/cypress', NX_VERSION);
     const { cypressInitGenerator } = await import('@nx/cypress');
     const cypressTask = await cypressInitGenerator(host, {});
     tasks.push(cypressTask);

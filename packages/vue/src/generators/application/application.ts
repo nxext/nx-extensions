@@ -4,6 +4,7 @@ import {
   formatFiles,
   Tree,
   runTasksInSerial,
+  NX_VERSION,
 } from '@nx/devkit';
 import { Schema } from './schema';
 import { addProject } from './lib/add-project';
@@ -13,7 +14,6 @@ import { updateViteConfig } from './lib/update-vite-config';
 import { addCypress } from './lib/add-cypress';
 import { addLinting } from './lib/add-linting';
 import initGenerator from '../init/init';
-import { readNxVersion } from '../utils/utils';
 
 export async function applicationGenerator(host: Tree, schema: Schema) {
   const options = normalizeOptions(host, schema);
@@ -26,7 +26,7 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
     skipFormat: true,
   });
 
-  await ensurePackage('@nx/vite', readNxVersion(host));
+  await ensurePackage('@nx/vite', NX_VERSION);
   const { viteConfigurationGenerator } = await import('@nx/vite');
 
   const viteTask = await viteConfigurationGenerator(host, {

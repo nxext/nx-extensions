@@ -1,8 +1,7 @@
-import { Tree, ensurePackage } from '@nx/devkit';
-import { readNxVersion } from './util';
+import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
 
 export async function addJestPlugin(host: Tree) {
-  await ensurePackage(host, '@nx/jest', readNxVersion(host));
+  await ensurePackage(host, '@nx/jest', NX_VERSION);
   const { jestInitGenerator } = await import('@nx/jest');
 
   return await jestInitGenerator(host, {});

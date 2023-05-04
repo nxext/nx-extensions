@@ -1,22 +1,14 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import {
-  readJson,
-  readProjectConfiguration,
-  Tree,
-  updateJson,
-} from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { applicationGenerator } from './application';
 import { Schema } from './schema';
 import { Linter } from '@nx/linter';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const readNxVersionModule = require('../utils/utils');
 
 describe('app generator', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('16.0.0');
 
   let host: Tree;
   const projectName = 'my-app';

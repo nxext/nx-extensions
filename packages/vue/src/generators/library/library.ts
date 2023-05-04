@@ -5,6 +5,7 @@ import {
   GeneratorCallback,
   Tree,
   runTasksInSerial,
+  NX_VERSION,
 } from '@nx/devkit';
 import { Schema } from './schema';
 import initGenerator from '../init/init';
@@ -15,7 +16,6 @@ import { createLibraryFiles } from './lib/create-library-files';
 import componentGenerator from '../component/component';
 import { updateBaseTsConfig } from './lib/update-base-tsconfig';
 import { addLinting } from './lib/add-linting';
-import { readNxVersion } from '../utils/utils';
 
 export async function libraryGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
@@ -39,7 +39,7 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
 
   updateBaseTsConfig(host, options);
   if (options.buildable) {
-    await ensurePackage(host, '@nx/vite', readNxVersion(host));
+    await ensurePackage('@nx/vite', NX_VERSION);
     const { viteConfigurationGenerator } = await import('@nx/vite');
     const viteTask = await viteConfigurationGenerator(host, {
       uiFramework: 'none',
@@ -55,7 +55,7 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
   }
 
   if (!options.buildable && options.unitTestRunner === 'vitest') {
-    await ensurePackage(host, '@nx/vite', readNxVersion(host));
+    await ensurePackage('@nx/vite', NX_VERSION);
     const { vitestGenerator } = await import('@nx/vite');
 
     const vitestTask = await vitestGenerator(host, {

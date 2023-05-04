@@ -1,11 +1,10 @@
-import { addDependenciesToPackageJson, Tree } from '@nx/devkit';
+import { addDependenciesToPackageJson, NX_VERSION, Tree } from '@nx/devkit';
 import {
   ionicReactRouterVersion,
   ionicReactVersion,
   webVitalsVersion,
   workboxVersion,
 } from '../../../utils/versions';
-import { readNxVersion } from '../../../utils/utils';
 
 export function addDependencies(host: Tree) {
   return addDependenciesToPackageJson(
@@ -28,7 +27,7 @@ export function addDependencies(host: Tree) {
       'workbox-streams': workboxVersion,
     },
     {
-      '@nx/react': readNxVersion(host),
+      '@nx/react': NX_VERSION,
     }
   );
 }

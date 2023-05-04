@@ -7,11 +7,9 @@ import { updateJson, Tree } from '@nx/devkit';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const readNxVersionModule = require('../utils/utils');
 
 describe('Preact app schematic', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('16.0.0');
 
   let host: Tree;
   const options: PreactApplicationSchema = {

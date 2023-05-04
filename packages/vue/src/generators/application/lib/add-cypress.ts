@@ -1,6 +1,5 @@
-import { ensurePackage, Tree } from '@nx/devkit';
+import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { readNxVersion } from '../../utils/utils';
 
 export async function addCypress(host: Tree, options: NormalizedSchema) {
   if (options.e2eTestRunner !== 'cypress') {
@@ -8,7 +7,7 @@ export async function addCypress(host: Tree, options: NormalizedSchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nx/cypress', readNxVersion(host));
+  await ensurePackage(host, '@nx/cypress', NX_VERSION);
   const { cypressProjectGenerator } = await import('@nx/cypress');
   return await cypressProjectGenerator(host, {
     ...options,

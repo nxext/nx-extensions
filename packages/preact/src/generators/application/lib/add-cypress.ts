@@ -1,12 +1,11 @@
-import { Tree, ensurePackage } from '@nx/devkit';
+import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { readNxVersion } from '../../utils/utils';
 
 export async function addCypress(host: Tree, options: NormalizedSchema) {
   if (options.e2eTestRunner !== 'cypress') {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
   }
-  await ensurePackage(host, '@nx/cypress', readNxVersion(host));
+  await ensurePackage('@nx/cypress', NX_VERSION);
   const { cypressProjectGenerator } = await import('@nx/cypress');
 
   return await cypressProjectGenerator(host, {
