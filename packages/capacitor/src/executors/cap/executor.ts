@@ -1,4 +1,4 @@
-import { ExecutorContext, normalizePath } from '@nx/devkit';
+import { ExecutorContext, normalizePath, readJsonFile } from '@nx/devkit';
 import runCommands, {
   RunCommandsOptions,
 } from 'nx/src/executors/run-commands/run-commands.impl';
@@ -11,11 +11,15 @@ export default async function runExecutor(
   const projectRoot = context.workspace.projects[context.projectName].root;
   const projectRootPath = normalizePath(`${context.root}/${projectRoot}`);
 
+  const { devDependencies } = readJsonFile('package.json');
+  const packageName = '@capacitor/cli';
+  const packageVersion = devDependencies?.[packageName]?.replace(/[\\~^]/g, '');
+
   const cmd = sanitizeCapacitorCommand(options.cmd);
 
   const runCommandsOptions: RunCommandsOptions = {
     cwd: projectRootPath,
-    command: `npx --package=@capacitor/cli cap ${cmd}`,
+    command: `npx --package=${packageName}@${packageVersion} cap ${cmd}`,
     __unparsed__: [],
   };
 
