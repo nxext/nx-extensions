@@ -17,7 +17,7 @@ export async function configurationGenerator(
   host: Tree,
   schema: StorybookConfigureSchema
 ) {
-  const uiFramework = '@storybook/svelte';
+  const uiFramework = '@storybook/svelte-vite';
   const options = normalizeSchema(schema);
   const tasks: GeneratorCallback[] = [];
 
@@ -43,7 +43,6 @@ export async function configurationGenerator(
     standaloneConfig: options.standaloneConfig,
     tsConfiguration: options.tsConfiguration,
     configureTestRunner: options.configureTestRunner,
-    bundler: 'webpack',
   });
   tasks.push(storybookTask);
 

@@ -22,10 +22,10 @@
   "builders": "./executors.json",
   "dependencies": {
     "@nxext/capacitor": "^16.0.0",
-    "@nx/devkit": "16.0.0"
+    "@nx/devkit": "^16.1.0"
   },
   "peerDependencies": {
-    "@nx/linter": "16.0.0",
-    "@nx/react": "16.0.0"
+    "@nx/linter": "^16.1.0",
+    "@nx/react": "^16.1.0"
   }
 }

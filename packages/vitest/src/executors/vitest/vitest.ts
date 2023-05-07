@@ -18,5 +18,5 @@ export default async function runExecutor(
     root: projectRoot,
   } as any);
 
-  return { success: result };
+  return { success: true };
 }

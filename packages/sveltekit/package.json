@@ -23,6 +23,6 @@
   "schematics": "./generators.json",
   "dependencies": {
     "@nxext/vite": "^15.1.0",
-    "@nx/devkit": "16.0.0"
+    "@nx/devkit": "^16.1.0"
   }
 }
