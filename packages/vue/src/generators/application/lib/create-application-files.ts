@@ -2,7 +2,7 @@ import { generateFiles, names, offsetFromRoot, Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { join } from 'path';
 import { createTsConfig } from '../../utils/create-ts-config';
-import { getRelativePathToRootTsConfig } from '@nx/workspace/src/utilities/typescript';
+import { getRelativePathToRootTsConfig } from '@nx/js';
 
 export function createApplicationFiles(host: Tree, options: NormalizedSchema) {
   const relativePathToRootTsConfig = getRelativePathToRootTsConfig(
