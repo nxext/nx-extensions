@@ -21,6 +21,7 @@
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
   "dependencies": {
-    "@nx/devkit": "^16.1.0"
+    "@nx/devkit": "^16.1.0",
+    "@nx/js": "^16.1.0"
   }
 }

@@ -7,13 +7,15 @@ import {
   Tree,
   updateJson,
   runTasksInSerial,
+  ensurePackage,
+  NX_VERSION,
 } from '@nx/devkit';
-import { mapLintPattern } from '@nx/linter/src/generators/lint-project/lint-project';
-import { Linter, lintProjectGenerator } from '@nx/linter';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const tasks: GeneratorCallback[] = [];
-  if (options.linter === Linter.EsLint) {
+  if (options.linter === 'eslint') {
+    ensurePackage('@nx/linter', NX_VERSION);
+    const { lintProjectGenerator } = await import('@nx/linter');
     const lintTask = await lintProjectGenerator(host, {
       linter: options.linter,
       project: options.appProjectName,
@@ -49,4 +51,13 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     tasks.push(installTask);
   }
   return runTasksInSerial(...tasks);
+}
+
+function mapLintPattern(
+  projectRoot: string,
+  extension: string,
+  rootProject?: boolean
+) {
+  const infix = rootProject ? 'src/' : '';
+  return `${projectRoot}/${infix}**/*.${extension}`;
 }
