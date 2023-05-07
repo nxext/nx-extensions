@@ -12,12 +12,6 @@ export async function createTestProject(
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-  updateJson(host, '/package.json', (json) => {
-    json.devDependencies = {
-      '@nx/workspace': '16.0.0',
-    };
-    return json;
-  });
 
   if (type === ProjectType.Application) {
     await applicationGenerator(host, {

@@ -19,12 +19,6 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
 
   beforeEach(async () => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(tree, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nx/workspace': '16.0.0',
-      };
-      return json;
-    });
 
     await libraryGenerator(tree, {
       name: 'test-ui-lib',

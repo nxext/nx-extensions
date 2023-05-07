@@ -23,9 +23,9 @@
   "dependencies": {
     "@nxext/capacitor": "^16.0.0",
     "@phenomnomnominal/tsquery": "4.1.1",
-    "@nx/devkit": "16.0.0"
+    "@nx/devkit": "^16.1.0"
   },
   "peerDependencies": {
-    "@nx/angular": "16.0.0"
+    "@nx/angular": "^16.1.0"
   }
 }

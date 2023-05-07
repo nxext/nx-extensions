@@ -2,19 +2,80 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "16.0.0-beta.9",
-      "description": "Replace `dependsOn.projects` and `inputs` definitions with new configuration format.",
-      "implementation": "./src/migrations/update-16-0-0/update-depends-on-to-tokens",
-      "package": "nx",
-      "name": "16.0.0-tokens-for-depends-on"
+      "version": "16.1.0-beta.1",
+      "requires": {
+        "@angular/core": ">=15.0.0"
+      },
+      "description": "Remove exported `@angular/platform-server` `renderModule` method. The `renderModule` method is now exported by the Angular CLI.",
+      "factory": "./src/migrations/update-16-1-0/remove-render-module-platform-server-exports",
+      "package": "@nx/angular",
+      "name": "remove-render-module-platform-server-exports"
     },
     {
-      "version": "16.0.0-beta.9",
-      "description": "Fix .babelrc presets if it contains an invalid entry for @nx/web/babel.",
       "cli": "nx",
-      "implementation": "./src/migrations/update-16-0-0/fix-invalid-babelrc",
-      "package": "@nx/workspace",
-      "name": "16-0-0-fix-invalid-babelrc"
+      "version": "16.1.0-beta.1",
+      "requires": {
+        "@angular/core": ">=16.0.0-rc.4"
+      },
+      "description": "Remove 'ngcc' invocation if exists from the 'postinstall' script in package.json.",
+      "factory": "./src/migrations/update-16-1-0/remove-ngcc-invocation",
+      "package": "@nx/angular",
+      "name": "remove-ngcc-invocation"
+    },
+    {
+      "cli": "nx",
+      "version": "16.1.0-beta.1",
+      "requires": {
+        "@angular/core": ">=16.0.0-rc.4"
+      },
+      "description": "Extract the app config for standalone apps",
+      "factory": "./src/migrations/update-16-1-0/extract-standalone-config-from-bootstrap",
+      "package": "@nx/angular",
+      "name": "extract-app-config-for-standalone"
+    },
+    {
+      "cli": "nx",
+      "version": "16.1.0-beta.1",
+      "requires": {
+        "@angular/core": ">=16.0.0-rc.4"
+      },
+      "description": "Update server executors' configuration to disable 'buildOptimizer' for non optimized builds.",
+      "factory": "./src/migrations/update-16-1-0/update-server-executor-config",
+      "package": "@nx/angular",
+      "name": "update-server-executor-config"
+    },
+    {
+      "cli": "nx",
+      "version": "16.1.0-beta.1",
+      "requires": {
+        "@angular/core": ">=16.0.0"
+      },
+      "description": "Update the @angular/cli package version to ~16.0.0.",
+      "factory": "./src/migrations/update-16-1-0/update-angular-cli",
+      "package": "@nx/angular",
+      "name": "update-angular-cli-version-16-0-0"
+    },
+    {
+      "cli": "nx",
+      "version": "16.1.0-beta.0",
+      "description": "Ignore @nx/react/plugins/storybook in Storybook eslint rules.",
+      "factory": "./src/migrations/update-16-1-0/eslint-ignore-react-plugin",
+      "package": "@nx/storybook",
+      "name": "update-16-1-0"
+    },
+    {
+      "version": "16.0.0",
+      "description": "As of Angular v16, the `moduleId` property of `@Component` is deprecated as it no longer has any effect.",
+      "factory": "./migrations/remove-module-id/bundle",
+      "package": "@angular/core",
+      "name": "migration-v16-remove-module-id"
+    },
+    {
+      "version": "16.0.0",
+      "description": "In Angular version 15.2, the guard and resolver interfaces (CanActivate, Resolve, etc) were deprecated. This migration removes imports and 'implements' clauses that contain them.",
+      "factory": "./migrations/guard-and-resolve-interfaces/bundle",
+      "package": "@angular/core",
+      "name": "migration-v16-guard-and-resolve-interfaces"
     }
   ]
 }

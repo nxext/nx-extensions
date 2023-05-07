@@ -27,12 +27,6 @@ describe('application schematic', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nx/workspace': '16.0.0',
-      };
-      return json;
-    });
   });
 
   it('should add dependencies to package.json', async () => {

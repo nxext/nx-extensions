@@ -21,12 +21,6 @@ describe('Preact app schematic', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nx/workspace': '16.0.0',
-      };
-      return json;
-    });
   });
 
   describe('Vite bundle', () => {

@@ -24,13 +24,13 @@
   "peerDependencies": {
     "preact": "^10.6.2",
     "@preact/preset-vite": "^2.1.5",
-    "@nx/workspace": "16.0.0",
-    "@nx/linter": "16.0.0",
-    "@nx/cypress": "16.0.0"
+    "@nx/workspace": "^16.1.0",
+    "@nx/linter": "^16.1.0",
+    "@nx/cypress": "^16.1.0"
   },
   "dependencies": {
-    "@nxext/vite": "^15.1.0",
-    "@nx/devkit": "16.0.0"
+    "@nxext/vite": "^16.0.0",
+    "@nx/devkit": "^16.1.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"

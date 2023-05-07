@@ -28,12 +28,6 @@ describe('page generator', () => {
 
   beforeEach(async () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nx/workspace': '16.0.0',
-      };
-      return json;
-    });
     await applicationGenerator(host, projectOptions);
   });
 
