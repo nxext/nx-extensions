@@ -2,16 +2,16 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-[StencilJS](https://stenciljs.com) plugin for NX
-[SvelteJS](https://svelte.dev) plugin for NX
-[SolidJS](https://www.solidjs.com) plugin for NX
-[Vite](https://www.vitejs.dev) plugin for NX
-[Vitest](https://vitest.dev/) plugin for NX
-[Angular](https://angular.io/) plugin for NX
-[React](https://reactjs.org/) plugin for NX
-[Preact](https://preactjs.com/) plugin for NX
-[Ts.ED](https://tsed.io/) plugin for NX
-[Ionic](https://ionicframework.com/) plugin for NX
+- [StencilJS](https://stenciljs.com) plugin for NX
+- [SvelteJS](https://svelte.dev) plugin for NX
+- [SolidJS](https://www.solidjs.com) plugin for NX
+- [Vite](https://www.vitejs.dev) plugin for NX
+- [Vitest](https://vitest.dev/) plugin for NX
+- [Angular](https://angular.io/) plugin for NX
+- [React](https://reactjs.org/) plugin for NX
+- [Preact](https://preactjs.com/) plugin for NX
+- [Ts.ED](https://tsed.io/) plugin for NX
+- [Ionic](https://ionicframework.com/) plugin for NX
 
 ## Attention
 If you use the 15.7 package of amny package, be sure to use the Nx version 15.7. The Version numbers have to match. Nxext packages with 15.7 aren't compatible with Nx 15.8

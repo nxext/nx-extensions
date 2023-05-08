@@ -37,7 +37,9 @@ export async function applicationGenerator(
 
   return () => {
     installTask();
-    angularTask();
+    if (angularTask) {
+      angularTask();
+    }
 
     if (capacitorTask) {
       capacitorTask();
