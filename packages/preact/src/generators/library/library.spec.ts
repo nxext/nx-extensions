@@ -1,10 +1,15 @@
 import { PreactLibrarySchema } from './schema';
-import { Linter } from '@nrwl/linter';
-import { readJson, updateJson } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Linter } from '@nx/linter';
+import { readJson, updateJson } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
+
 describe('preact library schematic', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let host;
   const options: PreactLibrarySchema = {
     name: 'test',
@@ -16,12 +21,6 @@ describe('preact library schematic', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
   });
 
   it('should add preact dependencies', async () => {

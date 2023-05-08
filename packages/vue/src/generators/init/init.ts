@@ -5,9 +5,9 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
-} from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { readNxVersion } from '../utils/utils';
+  runTasksInSerial,
+  NX_VERSION,
+} from '@nx/devkit';
 import {
   vitePluginVueVersion,
   vueRouterVersion,
@@ -43,9 +43,9 @@ export async function initGenerator(host: Tree, schema: InitSchema) {
   updateDependencies(host, schema);
 
   if (!schema.e2eTestRunner || schema.e2eTestRunner === 'cypress') {
-    await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
-    const { cypressInitGenerator } = await import('@nrwl/cypress');
-    const cypressTask = cypressInitGenerator(host, {});
+    await ensurePackage('@nx/cypress', NX_VERSION);
+    const { cypressInitGenerator } = await import('@nx/cypress');
+    const cypressTask = await cypressInitGenerator(host, {});
     tasks.push(cypressTask);
   }
 

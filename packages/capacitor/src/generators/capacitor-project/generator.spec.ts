@@ -5,8 +5,8 @@ import {
   readProjectConfiguration,
   Tree,
   writeJson,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import generator from './generator';
 import { CapacitorGeneratorSchema } from './schema';
 
@@ -28,7 +28,7 @@ describe('capacitor-project', () => {
       root: projectRoot,
       targets: {
         test: {
-          executor: '@nrwl/jest:jest',
+          executor: '@nx/jest:jest',
         },
       },
     });
@@ -167,8 +167,6 @@ describe('capacitor-project', () => {
     );
 
     expect(projectConfiguration.targets.test).toBeTruthy();
-    expect(projectConfiguration.targets.test.executor).toEqual(
-      '@nrwl/jest:jest'
-    );
+    expect(projectConfiguration.targets.test.executor).toEqual('@nx/jest:jest');
   });
 });

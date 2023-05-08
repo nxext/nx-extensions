@@ -1,9 +1,14 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson, updateJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { readJson, updateJson, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
 
 describe('init schematic', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let host: Tree;
   const options: Schema = {
     skipFormat: true,
@@ -13,12 +18,6 @@ describe('init schematic', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
   });
 
   it('should add Preact dependencies', async () => {

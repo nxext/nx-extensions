@@ -1,11 +1,16 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readProjectConfiguration, updateJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, readProjectConfiguration, updateJson } from '@nx/devkit';
 
 import generator from './generator';
 import { PresetSchema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
 
 describe('preset generator', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let host: Tree;
   const options: PresetSchema = {
     name: 'test',
@@ -18,12 +23,6 @@ describe('preset generator', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
   });
 
   it('should run successfully', async () => {

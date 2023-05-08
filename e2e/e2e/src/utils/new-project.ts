@@ -1,5 +1,5 @@
-import { detectPackageManager, getPackageManagerCommand } from '@nrwl/devkit';
-import { tmpProjPath, cleanup } from '@nrwl/nx-plugin/testing';
+import { detectPackageManager, getPackageManagerCommand } from '@nx/devkit';
+import { tmpProjPath, cleanup } from '@nx/plugin/testing';
 import {
   getNxVersion,
   packageInstallAsDevDependency,

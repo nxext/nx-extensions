@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 
-import { findNodes } from '@nrwl/workspace';
+import { findNodes } from '@nx/js';
 import { SvelteComponentSchema } from '../component';
 import {
   applyChangesToString,
@@ -10,7 +10,7 @@ import {
   readProjectConfiguration,
   StringChange,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);

@@ -1,4 +1,4 @@
-import { ExecutorContext, joinPathFragments, logger } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, logger } from '@nx/devkit';
 import { default as runCommands } from 'nx/src/executors/run-commands/run-commands.impl';
 import { SveltekitExecutorOptions } from './schema';
 

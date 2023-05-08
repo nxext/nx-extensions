@@ -1,8 +1,8 @@
-import { ProjectType } from '@nrwl/workspace';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { ProjectType } from '@nx/workspace';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import applicationGenerator from '../application/application';
-import { Tree, updateJson } from '@nrwl/devkit';
-import { Linter } from '@nrwl/linter';
+import { Tree, updateJson } from '@nx/devkit';
+import { Linter } from '@nx/linter';
 import { libraryGenerator } from '../library/library';
 
 export async function createTestProject(
@@ -12,12 +12,6 @@ export async function createTestProject(
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-  updateJson(host, '/package.json', (json) => {
-    json.devDependencies = {
-      '@nrwl/workspace': '15.6.0',
-    };
-    return json;
-  });
 
   if (type === ProjectType.Application) {
     await applicationGenerator(host, {

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs-extra';
-import { joinPathFragments, logger } from '@nrwl/devkit';
+import { joinPathFragments, logger } from '@nx/devkit';
 import * as glob from 'glob';
 
 export function updatePackageJsonFiles(

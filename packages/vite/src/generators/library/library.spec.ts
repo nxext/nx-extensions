@@ -1,9 +1,9 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readProjectConfiguration } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, readProjectConfiguration } from '@nx/devkit';
 
 import generator from './library';
 import { Schema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 
 describe('vite library generator', () => {
   let tree: Tree;
@@ -24,7 +24,7 @@ describe('vite library generator', () => {
         "name": "test-name",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `

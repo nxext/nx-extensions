@@ -3,7 +3,6 @@
   "$id": "Init",
   "title": "",
   "type": "object",
-  "cli": "nx",
   "properties": {
     "unitTestRunner": {
       "description": "Adds the specified unit test runner.",

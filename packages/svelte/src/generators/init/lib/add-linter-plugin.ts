@@ -1,25 +1,8 @@
-import {
-  addDependenciesToPackageJson,
-  GeneratorCallback,
-  Tree,
-} from '@nrwl/devkit';
-import { hasNxPackage, readNxVersion } from './util';
+import { ensurePackage, GeneratorCallback, NX_VERSION, Tree } from '@nx/devkit';
 
-export function addLinterPlugin(tree: Tree): GeneratorCallback {
-  const hasNrwlLinterDependency: boolean = hasNxPackage(tree, '@nrwl/linter');
+export async function addLinterPlugin(tree: Tree): Promise<GeneratorCallback> {
+  ensurePackage('@nrwl/linter', NX_VERSION);
+  const { lintInitGenerator } = await import('@nrwl/linter');
 
-  if (!hasNrwlLinterDependency) {
-    const nxVersion = readNxVersion(tree);
-
-    return addDependenciesToPackageJson(
-      tree,
-      {},
-      {
-        '@nrwl/linter': nxVersion,
-      }
-    );
-  } else {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    return () => {};
-  }
+  return lintInitGenerator(tree, {});
 }

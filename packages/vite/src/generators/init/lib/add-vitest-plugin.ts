@@ -1,4 +1,4 @@
-import { GeneratorCallback, Tree } from '@nrwl/devkit';
+import { GeneratorCallback, Tree } from '@nx/devkit';
 import { vitestInitGenerator } from '@nxext/vitest';
 
 export function addVitestPlugin(tree: Tree, options): GeneratorCallback {

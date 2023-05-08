@@ -3,9 +3,9 @@ import {
   runNxCommandAsync,
   uniq,
   updateFile,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
-import { names } from '@nrwl/devkit';
+import { names } from '@nx/devkit';
 
 describe('vue e2e', () => {
   // Setting up individual workspaces per
@@ -21,7 +21,7 @@ describe('vue e2e', () => {
   afterAll(() => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
-    //runNxCommandAsync('reset');
+    runNxCommandAsync('reset');
     cleanup();
   });
 

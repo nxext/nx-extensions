@@ -1,10 +1,10 @@
-import { getRootTsConfigPathInTree } from '@nrwl/workspace/src/utilities/typescript';
+import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
 import {
   getWorkspaceLayout,
   joinPathFragments,
   updateJson,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 import { NormalizedSchema } from '../schema';
 

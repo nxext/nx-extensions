@@ -3,15 +3,15 @@ import {
   joinPathFragments,
   Tree,
   ensurePackage,
-} from '@nrwl/devkit';
+  runTasksInSerial,
+  NX_VERSION,
+} from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { extraEslintDependencies } from '../../utils/lint';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { readNxVersion } from '../../utils/utils';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
-  await ensurePackage(host, '@nrwl/linter', readNxVersion(host));
-  const { lintProjectGenerator } = await import('@nrwl/linter');
+  await ensurePackage('@nx/linter', NX_VERSION);
+  const { lintProjectGenerator } = await import('@nx/linter');
 
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,

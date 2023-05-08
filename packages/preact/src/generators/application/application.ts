@@ -7,11 +7,11 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+  runTasksInSerial,
+} from '@nx/devkit';
 import { NormalizedSchema, PreactApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';

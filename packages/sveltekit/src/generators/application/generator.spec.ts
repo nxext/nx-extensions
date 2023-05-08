@@ -1,9 +1,9 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { readProjectConfiguration, Tree } from '@nx/devkit';
 
 import generator from './generator';
 import { SveltekitGeneratorSchema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 
 describe('sveltekit generator', () => {
   let tree: Tree;
@@ -22,7 +22,7 @@ describe('sveltekit generator', () => {
         "name": "sveltekit-test",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `

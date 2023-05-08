@@ -5,7 +5,7 @@ import {
   names,
   normalizePath,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { NormalizedSchema, Schema } from '../schema';
 
 export function normalizeOptions<T extends Schema = Schema>(

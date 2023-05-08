@@ -3,7 +3,6 @@
   "$id": "Solid",
   "title": "",
   "type": "object",
-  "cli": "nx",
   "properties": {
     "name": {
       "type": "string",

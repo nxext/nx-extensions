@@ -6,7 +6,7 @@ import {
   runNxCommandAsync,
   uniq,
   updateFile,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 
 describe('svelte e2e', () => {

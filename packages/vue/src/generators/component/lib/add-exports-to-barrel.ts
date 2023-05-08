@@ -3,7 +3,7 @@ import {
   getProjects,
   Tree,
   joinPathFragments,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { addImport } from '../../utils/ast-utils';
 import * as ts from 'typescript';

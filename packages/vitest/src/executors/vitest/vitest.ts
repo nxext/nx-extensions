@@ -1,5 +1,5 @@
 import { VitestExecutorOptions } from './schema';
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments } from '@nx/devkit';
 
 export default async function runExecutor(
   options: VitestExecutorOptions,
@@ -18,5 +18,5 @@ export default async function runExecutor(
     root: projectRoot,
   } as any);
 
-  return { success: result };
+  return { success: true };
 }

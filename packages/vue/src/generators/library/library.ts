@@ -4,9 +4,10 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
-} from '@nrwl/devkit';
+  runTasksInSerial,
+  NX_VERSION,
+} from '@nx/devkit';
 import { Schema } from './schema';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import initGenerator from '../init/init';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateViteConfig } from './lib/update-vite-config';
@@ -15,7 +16,6 @@ import { createLibraryFiles } from './lib/create-library-files';
 import componentGenerator from '../component/component';
 import { updateBaseTsConfig } from './lib/update-base-tsconfig';
 import { addLinting } from './lib/add-linting';
-import { readNxVersion } from '../utils/utils';
 
 export async function libraryGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
@@ -39,8 +39,8 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
 
   updateBaseTsConfig(host, options);
   if (options.buildable) {
-    await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
-    const { viteConfigurationGenerator } = await import('@nrwl/vite');
+    await ensurePackage('@nx/vite', NX_VERSION);
+    const { viteConfigurationGenerator } = await import('@nx/vite');
     const viteTask = await viteConfigurationGenerator(host, {
       uiFramework: 'none',
       project: options.projectName,
@@ -55,8 +55,8 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
   }
 
   if (!options.buildable && options.unitTestRunner === 'vitest') {
-    await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
-    const { vitestGenerator } = await import('@nrwl/vite');
+    await ensurePackage('@nx/vite', NX_VERSION);
+    const { vitestGenerator } = await import('@nx/vite');
 
     const vitestTask = await vitestGenerator(host, {
       uiFramework: 'none',

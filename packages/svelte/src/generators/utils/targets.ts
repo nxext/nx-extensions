@@ -1,4 +1,4 @@
-import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
+import { joinPathFragments, TargetConfiguration } from '@nx/devkit';
 import { NormalizedSchema as ApplicationSchema } from '../application/schema';
 import { NormalizedSchema as LibrarySchema } from '../library/schema';
 
@@ -91,7 +91,7 @@ export function createLintTarget(
   options: LibrarySchema | ApplicationSchema
 ): TargetConfiguration {
   return {
-    executor: '@nrwl/linter:lint',
+    executor: '@nx/linter:lint',
     options: {
       linter: 'eslint',
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),

@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { vitestProjectGenerator } from '@nxext/vitest';
 

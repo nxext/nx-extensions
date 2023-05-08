@@ -1,5 +1,5 @@
 import { NormalizedSchema } from '../schema';
-import { addProjectConfiguration, Tree } from '@nrwl/devkit';
+import { addProjectConfiguration, Tree } from '@nx/devkit';
 import { createViteTargets } from './project/vite';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {

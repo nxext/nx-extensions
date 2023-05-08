@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "NxViteApp",
   "title": "Create a Vite Application for Nx",
   "examples": [

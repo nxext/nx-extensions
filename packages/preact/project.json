@@ -1,11 +1,12 @@
 {
   "name": "preact",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/preact/src",
   "projectType": "library",
   "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "packages/preact/**/*.ts",
@@ -20,7 +21,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "packages/preact/jest.config.ts",
         "passWithNoTests": true
@@ -28,7 +29,7 @@
       "outputs": ["{workspaceRoot}/coverage/packages/preact"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/packages/preact",
         "tsConfig": "packages/preact/tsconfig.lib.json",

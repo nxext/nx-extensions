@@ -1,9 +1,9 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, readProjectConfiguration } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, readProjectConfiguration } from '@nx/devkit';
 
 import generator from './application';
 import { Schema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 
 describe('vite application generator', () => {
   let tree: Tree;
@@ -24,7 +24,7 @@ describe('vite application generator', () => {
         "name": "test-name",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `
@@ -42,7 +42,7 @@ describe('vite application generator', () => {
     const config = readProjectConfiguration(tree, 'test');
 
     expect(config.targets['test']).toBeDefined();
-    expect(config.targets['test'].executor).toBe('@nrwl/jest:jest');
+    expect(config.targets['test'].executor).toBe('@nx/jest:jest');
 
     expect(tree.exists(`apps/${options.name}/jest.config.ts`)).toBeTruthy();
     expect(tree.exists(`jest.config.ts`)).toBeTruthy();

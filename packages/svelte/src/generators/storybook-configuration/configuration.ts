@@ -5,19 +5,19 @@ import {
   formatFiles,
   GeneratorCallback,
   Tree,
-} from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { Linter } from '@nrwl/linter';
+  runTasksInSerial,
+  NX_VERSION,
+} from '@nx/devkit';
+import { Linter } from '@nx/linter';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
-import { readNxVersion } from '../init/lib/util';
 import { updateMainJs } from './lib/update-main-js';
 
 export async function configurationGenerator(
   host: Tree,
   schema: StorybookConfigureSchema
 ) {
-  const uiFramework = '@storybook/svelte';
+  const uiFramework = '@storybook/svelte-vite';
   const options = normalizeSchema(schema);
   const tasks: GeneratorCallback[] = [];
 
@@ -30,8 +30,8 @@ export async function configurationGenerator(
   );
   tasks.push(installTask);
 
-  await ensurePackage(host, '@nrwl/storybook', readNxVersion(host));
-  const { configurationGenerator } = await import('@nrwl/storybook');
+  await ensurePackage('@nx/storybook', NX_VERSION);
+  const { configurationGenerator } = await import('@nx/storybook');
 
   const storybookTask = await configurationGenerator(host, {
     name: options.name,
@@ -43,7 +43,6 @@ export async function configurationGenerator(
     standaloneConfig: options.standaloneConfig,
     tsConfiguration: options.tsConfiguration,
     configureTestRunner: options.configureTestRunner,
-    bundler: 'webpack',
   });
   tasks.push(storybookTask);
 

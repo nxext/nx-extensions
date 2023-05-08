@@ -24,7 +24,7 @@
 ## Features
 
 - support Nx 12
-- plugin rewritten with `@nrwl/devkit` for better maintainability and future proofing for future Nx versions
+- plugin rewritten with `@nx/devkit` for better maintainability and future proofing for future Nx versions
 - update Ionic to 5.8.3
 - update list starter template
 
@@ -117,13 +117,13 @@
 
 ## Bug Fixes
 
-- fix `Collection @nrwl/react not found` error if `@nrwl/react` is not added manually
+- fix `Collection @nx/react not found` error if `@nx/react` is not added manually
 
 # 3.0.3
 
 ## Bug Fixes
 
-- add `@nrwl/react` version based on the users Nx version
+- add `@nx/react` version based on the users Nx version
 - don't unnecessarily add `@nxext/ionic-react` dependency in `init` schematic
 - add `@nxext/capacitor` 1.0.0 instead of `*`
 
@@ -177,7 +177,7 @@
 
 ## Features
 
-- extend `@nrwl/react` schematics
+- extend `@nx/react` schematics
 - import `@testing-library/jest-dom` commands for unit tests
 - upgrade `@testing-library/jest-dom` to 5.5.0
 - upgrade `@testing-library/cypress` to 6.0.0

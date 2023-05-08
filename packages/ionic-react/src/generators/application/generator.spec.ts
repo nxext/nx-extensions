@@ -3,8 +3,8 @@ import {
   readProjectConfiguration,
   updateJson,
   Tree,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { ApplicationGeneratorSchema } from './schema';
 
@@ -52,12 +52,6 @@ describe('application', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
   });
 
   it('should add dependencies to package.json', async () => {
@@ -66,7 +60,7 @@ describe('application', () => {
     const packageJson = readJson(host, 'package.json');
     expect(packageJson.dependencies['@ionic/react']).toBeDefined();
     expect(packageJson.dependencies['@ionic/react-router']).toBeDefined();
-    expect(packageJson.devDependencies['@nrwl/react']).toBeDefined();
+    expect(packageJson.devDependencies['@nx/react']).toBeDefined();
   });
 
   it('should generate application', async () => {
@@ -75,7 +69,7 @@ describe('application', () => {
     testGeneratedFiles(host, { ...options });
   });
 
-  it('should delete unused @nrwl/react files', async () => {
+  it('should delete unused @nx/react files', async () => {
     await applicationGenerator(host, options);
 
     expect(host.exists(`${projectRoot}/src/app/app.css`)).toBeFalsy();

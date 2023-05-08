@@ -4,7 +4,7 @@ import {
   getWorkspaceLayout,
   TargetConfiguration,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const targets: { [key: string]: TargetConfiguration } = {
@@ -50,7 +50,7 @@ function createBuildTarget(
 
 function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    executor: '@nrwl/linter:lint',
+    executor: '@nx/linter:lint',
     options: {
       linter: 'eslint',
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,

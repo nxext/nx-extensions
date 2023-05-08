@@ -14,11 +14,12 @@ import {
   formatFiles,
   GeneratorCallback,
   joinPathFragments,
+  runTasksInSerial,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import viteInitGenerator from '../init/init';
-import { lintProjectGenerator } from '@nrwl/linter';
+import { lintProjectGenerator } from '@nx/linter';
 import { addVitest } from './lib/add-vitest';
 
 async function addLinting(host: Tree, options: NormalizedSchema) {
@@ -81,13 +82,13 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
     await formatFiles(host);
   }
 
-  return async () => {
-    await viteInitTask();
-    await lintTask();
-    await lintDependenciesTask();
-    await jestTask();
-    await vitestTask();
-  };
+  return runTasksInSerial(
+    viteInitTask,
+    lintTask,
+    lintDependenciesTask,
+    jestTask,
+    vitestTask
+  );
 }
 
 export default applicationGenerator;

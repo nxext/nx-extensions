@@ -17,7 +17,7 @@
 ## Features
 
 - support Nx 12
-- plugin rewritten with `@nrwl/devkit` for better maintainability and future proofing for future Nx versions
+- plugin rewritten with `@nx/devkit` for better maintainability and future proofing for future Nx versions
 - update Capacitor to 3.2.5
 - add Capacitor `run` target (requires Capacitor 3)
 

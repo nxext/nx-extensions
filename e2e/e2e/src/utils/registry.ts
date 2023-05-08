@@ -5,7 +5,7 @@ import {
   logger,
   workspaceRoot,
   getPackageManagerCommand,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 export function runRegistry(
   args: string[] = [],
@@ -31,9 +31,8 @@ export function runRegistry(
 }
 
 export async function startVerdaccio(verdaccioConfig: string) {
-  const port = 4872;
   return runRegistry(
-    ['-c', joinPathFragments(workspaceRoot, verdaccioConfig), '-l', `${port}`],
+    ['-c', joinPathFragments(workspaceRoot, verdaccioConfig)],
     {}
   );
 }
@@ -59,14 +58,19 @@ export function buildAllPackages(exclude: string) {
 }
 
 export function runNpmPublish(path: string, verdaccioUrl: string) {
-  const buffer = execSync(
-    `npm publish -tag latest --access public --json --registry ${verdaccioUrl}`,
-    {
-      cwd: path,
-      stdio: ['pipe', 'pipe', 'pipe'],
-    }
-  );
-  return JSON.parse(buffer.toString());
+  try {
+    const buffer = execSync(
+      `npm publish -tag latest --access public --json --registry ${verdaccioUrl}`,
+      {
+        cwd: path,
+        stdio: ['pipe', 'pipe', 'pipe'],
+      }
+    );
+    return JSON.parse(buffer.toString());
+  } catch (err) {
+    logger.error(`Failed to publish: ${path}`);
+    return { err: 'Failed to publish' };
+  }
 }
 
 export function publishPackages(verdaccioUrl: string, distDir: string) {

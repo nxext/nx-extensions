@@ -2,8 +2,8 @@ import {
   AssetGlob,
   assetGlobsToFiles,
   FileInputOutput,
-} from '@nrwl/workspace/src/utilities/assets';
-import { logger } from '@nrwl/devkit';
+} from '@nx/js/src/utils/assets/assets';
+import { logger } from '@nx/devkit';
 import { copy } from 'fs-extra';
 
 export function copyAssets(

@@ -1,9 +1,8 @@
-import { Tree, ensurePackage } from '@nrwl/devkit';
-import { readNxVersion } from './util';
+import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
 
 export async function addCypressPlugin(host: Tree) {
-  await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
-  const { cypressInitGenerator } = await import('@nrwl/cypress');
+  await ensurePackage(host, '@nx/cypress', NX_VERSION);
+  const { cypressInitGenerator } = await import('@nx/cypress');
 
   return cypressInitGenerator(host, {});
 }

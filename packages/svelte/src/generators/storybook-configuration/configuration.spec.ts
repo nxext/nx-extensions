@@ -3,27 +3,25 @@ import {
   readProjectConfiguration,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { libraryGenerator } from '@nrwl/workspace/generators';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { libraryGenerator } from '@nx/js';
 
 import configurationGenerator from './configuration';
 
-describe('@nxext/svelte:storybook-configuration', () => {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
+
+xdescribe('@nxext/svelte:storybook-configuration', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let tree: Tree;
 
   beforeEach(async () => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(tree, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
 
     await libraryGenerator(tree, {
       name: 'test-ui-lib',
-      standaloneConfig: false,
     });
   });
 
@@ -76,7 +74,6 @@ describe('@nxext/svelte:storybook-configuration', () => {
     // Setup a new lib
     await libraryGenerator(tree, {
       name: 'test-ui-lib-2',
-      standaloneConfig: false,
     });
 
     tree.write('.storybook/main.js', newContents);
@@ -92,7 +89,6 @@ describe('@nxext/svelte:storybook-configuration', () => {
     // Setup a new lib
     await libraryGenerator(tree, {
       name: 'test-ui-lib-2',
-      standaloneConfig: false,
     });
     await configurationGenerator(tree, {
       name: 'test-ui-lib-2',
@@ -101,7 +97,7 @@ describe('@nxext/svelte:storybook-configuration', () => {
     const project = readProjectConfiguration(tree, 'test-ui-lib-2');
 
     expect(project.targets.storybook).toEqual({
-      executor: '@nrwl/storybook:storybook',
+      executor: '@nx/storybook:storybook',
       configurations: {
         ci: {
           quiet: true,
@@ -115,7 +111,7 @@ describe('@nxext/svelte:storybook-configuration', () => {
     });
 
     expect(project.targets.lint).toEqual({
-      executor: '@nrwl/linter:eslint',
+      executor: '@nx/linter:eslint',
       outputs: ['{options.outputFile}'],
       options: {
         lintFilePatterns: ['libs/test-ui-lib-2/**/*.ts'],

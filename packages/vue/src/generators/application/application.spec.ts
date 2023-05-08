@@ -1,15 +1,15 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import {
-  readJson,
-  readProjectConfiguration,
-  Tree,
-  updateJson,
-} from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { applicationGenerator } from './application';
 import { Schema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
 
 describe('app generator', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let host: Tree;
   const projectName = 'my-app';
   const options: Schema = {
@@ -21,12 +21,6 @@ describe('app generator', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
   });
 
   it('should run successfully', async () => {

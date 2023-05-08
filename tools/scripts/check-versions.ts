@@ -19,7 +19,7 @@ import * as chalk from 'chalk';
 import * as glob from 'glob';
 import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
-import { dasherize } from '@nrwl/workspace/src/utils/strings';
+import { dasherize } from '@nx/workspace/src/utils/strings';
 
 const root = join(__dirname, '..');
 const excluded = ['nxVersion'];

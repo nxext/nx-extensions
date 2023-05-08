@@ -2,7 +2,7 @@
 
 The Nxext Plugin for React contains generators for managing React applications and libraries within an Nx workspace . It provides:
 
-- Vite alterntive to webpack (@nrwl/web)
+- Vite alterntive to webpack (@nx/web)
 - Quicker and smaller builds
 
 ## Adding the React plugin

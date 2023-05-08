@@ -13,7 +13,7 @@
       "outputs": ["{workspaceRoot}/coverage/e2e/vue"]
     },
     "run-e2e-tests": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "e2e/vue-e2e/jest.config.ts",
         "passWithNoTests": true,

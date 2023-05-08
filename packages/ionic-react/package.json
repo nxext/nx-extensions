@@ -1,6 +1,6 @@
 {
   "name": "@nxext/ionic-react",
-  "version": "15.6.0",
+  "version": "16.0.0",
   "description": "An Nx plugin for developing Ionic React applications and libraries",
   "author": {
     "name": "Devin Shoemaker",
@@ -20,16 +20,12 @@
   },
   "schematics": "./generators.json",
   "builders": "./executors.json",
-  "ng-update": {
-    "requirements": {},
-    "migrations": "./migrations.json"
-  },
   "dependencies": {
-    "@nxext/capacitor": "^15.6.0",
-    "@nrwl/devkit": "15.6.0"
+    "@nxext/capacitor": "^16.0.0",
+    "@nx/devkit": "^16.1.0"
   },
   "peerDependencies": {
-    "@nrwl/linter": "^15.6.0",
-    "@nrwl/react": "^15.6.0"
+    "@nx/linter": "^16.1.0",
+    "@nx/react": "^16.1.0"
   }
 }

@@ -1,11 +1,12 @@
 {
   "name": "svelte",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/svelte/src",
   "projectType": "library",
   "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "packages/svelte/**/*.ts",
@@ -21,7 +22,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "packages/svelte/jest.config.ts",
         "passWithNoTests": true
@@ -29,7 +30,7 @@
       "outputs": ["{workspaceRoot}/coverage/packages/svelte"]
     },
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "options": {
         "outputPath": "dist/packages/svelte",
         "tsConfig": "packages/svelte/tsconfig.lib.json",
@@ -69,7 +70,7 @@
       "dependsOn": [
         {
           "target": "build",
-          "projects": "dependencies"
+          "dependencies": true
         }
       ]
     }

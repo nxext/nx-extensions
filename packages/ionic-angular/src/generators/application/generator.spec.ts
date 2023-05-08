@@ -3,12 +3,17 @@ import {
   readProjectConfiguration,
   updateJson,
   Tree,
-} from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+} from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { ApplicationGeneratorSchema } from './schema';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
+
 describe('application schematic', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let host: Tree;
   const options: ApplicationGeneratorSchema = {
     name: 'my-app',
@@ -22,12 +27,6 @@ describe('application schematic', () => {
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
   });
 
   it('should add dependencies to package.json', async () => {
@@ -35,7 +34,7 @@ describe('application schematic', () => {
 
     const packageJson = readJson(host, 'package.json');
     expect(packageJson.dependencies['@ionic/angular']).toBeDefined();
-    expect(packageJson.devDependencies['@nrwl/angular']).toBeDefined();
+    expect(packageJson.devDependencies['@nx/angular']).toBeDefined();
   });
 
   it('should update assets in project configuration', async () => {
@@ -187,7 +186,6 @@ describe('application schematic', () => {
       });
 
       expect(host.read(`package.json`).includes('jest')).toBeFalsy();
-      expect(host.read(`package.json`).includes('karma')).toBeFalsy();
       expect(
         host.exists(`${projectRoot}/src/app/home/home.page.spec.ts`)
       ).toBeFalsy();
@@ -200,16 +198,6 @@ describe('application schematic', () => {
       });
 
       expect(host.read(`package.json`).includes('jest')).toBeTruthy();
-      expect(host.read(`package.json`).includes('karma')).toBeFalsy();
-    });
-
-    it('karma', async () => {
-      await applicationGenerator(host, {
-        ...options,
-        unitTestRunner: 'karma',
-      });
-
-      expect(host.read(`package.json`).includes('karma')).toBeTruthy();
     });
   });
 

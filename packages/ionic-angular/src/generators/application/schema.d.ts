@@ -1,4 +1,4 @@
-import { E2eTestRunner, UnitTestRunner } from '@nrwl/angular';
+import { E2eTestRunner, UnitTestRunner } from '@nx/angular';
 
 export interface ApplicationGeneratorSchema {
   name: string;

@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "id": "Application",
   "title": "Create an Ionic React Application for Nx",
   "examples": [
@@ -82,6 +81,14 @@
     "standaloneConfig": {
       "description": "Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`.",
       "type": "boolean"
+    },
+    "bundler": {
+      "description": "The bundler to use.",
+      "type": "string",
+      "enum": ["vite", "webpack"],
+      "x-prompt": "Which bundler do you want to use to build the application?",
+      "default": "webpack",
+      "x-priority": "important"
     }
   },
   "required": ["name"]

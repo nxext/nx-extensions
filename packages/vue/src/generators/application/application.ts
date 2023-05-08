@@ -3,17 +3,17 @@ import {
   ensurePackage,
   formatFiles,
   Tree,
-} from '@nrwl/devkit';
+  runTasksInSerial,
+  NX_VERSION,
+} from '@nx/devkit';
 import { Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { createApplicationFiles } from './lib/create-application-files';
 import { normalizeOptions } from './lib/normalize-options';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { updateViteConfig } from './lib/update-vite-config';
 import { addCypress } from './lib/add-cypress';
 import { addLinting } from './lib/add-linting';
 import initGenerator from '../init/init';
-import { readNxVersion } from '../utils/utils';
 
 export async function applicationGenerator(host: Tree, schema: Schema) {
   const options = normalizeOptions(host, schema);
@@ -26,8 +26,9 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
     skipFormat: true,
   });
 
-  await ensurePackage(host, '@nrwl/vite', readNxVersion(host));
-  const { viteConfigurationGenerator } = await import('@nrwl/vite');
+  await ensurePackage('@nx/vite', NX_VERSION);
+  const { viteConfigurationGenerator } = await import('@nx/vite');
+
   const viteTask = await viteConfigurationGenerator(host, {
     uiFramework: 'none',
     project: options.appProjectName,

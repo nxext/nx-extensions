@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vue",
-  "version": "15.6.0-Beta.3",
+  "version": "16.0.0-Beta.3",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vue",
@@ -21,6 +21,7 @@
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
   "dependencies": {
-    "@nrwl/devkit": "~15.6.0"
+    "@nx/devkit": "^16.1.0",
+    "@nx/js": "^16.1.0"
   }
 }

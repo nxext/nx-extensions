@@ -8,7 +8,7 @@ import {
 } from 'fs-extra';
 import { getPublishableLibNames, tmpProjPath } from './utils';
 import { dirname } from 'path';
-import { logger, readJsonFile } from '@nrwl/devkit';
+import { logger, readJsonFile } from '@nx/devkit';
 import { Workspaces } from 'nx/src/config/workspaces';
 import * as glob from 'glob';
 import { inspect } from 'util';
@@ -32,7 +32,7 @@ logger.info('Creating nx workspace...');
 execSync(
   `node ${require.resolve(
     'nx'
-  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=proj --preset=empty --packageManager=yarn --nxCloud=false`,
+  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nx/workspace --npmScope=proj --preset=empty --packageManager=yarn --nxCloud=false`,
   {
     cwd: localTmpDir,
   }

@@ -1,7 +1,7 @@
 import { SvelteLibrarySchema } from './schema';
-import { Linter } from '@nrwl/linter';
-import { readJson } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Linter } from '@nx/linter';
+import { readJson } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
 
 describe('svelte library schematic', () => {
@@ -23,7 +23,7 @@ describe('svelte library schematic', () => {
         "name": "test-name",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `

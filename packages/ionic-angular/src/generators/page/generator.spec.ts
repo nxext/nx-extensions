@@ -1,12 +1,17 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, updateJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, updateJson } from '@nx/devkit';
 
 import { pageGenerator } from './generator';
 import { PageGeneratorSchema } from './schema';
 import { ApplicationGeneratorSchema } from '../application/schema';
 import { applicationGenerator } from '../application/generator';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const devkit = require('@nx/devkit');
+
 describe('page generator', () => {
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+
   let host: Tree;
 
   const projectOptions: ApplicationGeneratorSchema = {
@@ -23,12 +28,6 @@ describe('page generator', () => {
 
   beforeEach(async () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    updateJson(host, '/package.json', (json) => {
-      json.devDependencies = {
-        '@nrwl/workspace': '15.6.0',
-      };
-      return json;
-    });
     await applicationGenerator(host, projectOptions);
   });
 

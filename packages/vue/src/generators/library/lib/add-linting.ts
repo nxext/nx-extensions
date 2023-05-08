@@ -1,10 +1,10 @@
-import { Linter, lintProjectGenerator } from '@nrwl/linter';
+import { Linter, lintProjectGenerator } from '@nx/linter';
 import {
   addDependenciesToPackageJson,
   joinPathFragments,
   Tree,
-} from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+  runTasksInSerial,
+} from '@nx/devkit';
 
 import { NormalizedSchema } from '../schema';
 import { extendVueEslintJson, extraEslintDependencies } from '../../utils/lint';

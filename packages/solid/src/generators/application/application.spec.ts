@@ -1,8 +1,8 @@
 import { SolidApplicationSchema } from './schema';
-import { Linter } from '@nrwl/linter';
+import { Linter } from '@nx/linter';
 import applicationGenerator from './application';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree } from '@nx/devkit';
 
 describe('Solid app schematic', () => {
   let tree: Tree;
@@ -22,7 +22,7 @@ describe('Solid app schematic', () => {
         "name": "test-name",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `

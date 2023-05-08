@@ -3,7 +3,8 @@ import {
   updateJson,
   formatFiles,
   convertNxGenerator,
-} from '@nrwl/devkit';
+  runTasksInSerial,
+} from '@nx/devkit';
 
 import { Schema } from './schema';
 import { addJestPlugin } from './lib/add-jest-plugin';
@@ -19,7 +20,7 @@ function removeViteFromDeps(tree: Tree) {
 }
 
 export async function viteInitGenerator(host: Tree, options: Schema) {
-  const jestTask = addJestPlugin(host, options);
+  const jestTask = await addJestPlugin(host, options);
   const vitestTask = addVitestPlugin(host, options);
   const installTask = updateDependencies(host);
 
@@ -29,11 +30,7 @@ export async function viteInitGenerator(host: Tree, options: Schema) {
     await formatFiles(host);
   }
 
-  return async () => {
-    await jestTask();
-    await vitestTask();
-    await installTask();
-  };
+  return runTasksInSerial(jestTask, vitestTask, installTask);
 }
 
 export default viteInitGenerator;

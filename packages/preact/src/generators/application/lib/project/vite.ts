@@ -1,5 +1,5 @@
 import { NormalizedSchema } from '../../schema';
-import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
+import { joinPathFragments, TargetConfiguration } from '@nx/devkit';
 
 export function createViteTargets(options: NormalizedSchema): {
   [key: string]: TargetConfiguration;
@@ -37,7 +37,7 @@ function createServeTarget(options: NormalizedSchema): TargetConfiguration {
 
 function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    executor: '@nrwl/linter:lint',
+    executor: '@nx/linter:lint',
     options: {
       linter: 'eslint',
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),

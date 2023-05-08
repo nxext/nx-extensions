@@ -1,7 +1,7 @@
 import { SolidLibrarySchema } from './schema';
-import { Linter } from '@nrwl/linter';
-import { readJson, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Linter } from '@nx/linter';
+import { readJson, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
 
 describe('solid library schematic', () => {
@@ -23,7 +23,7 @@ describe('solid library schematic', () => {
         "name": "test-name",
         "dependencies": {},
         "devDependencies": {
-          "@nrwl/workspace": "0.0.0"
+          "@nx/workspace": "0.0.0"
         }
       }
     `

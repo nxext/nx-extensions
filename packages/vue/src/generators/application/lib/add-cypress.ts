@@ -1,6 +1,5 @@
-import { ensurePackage, Tree } from '@nrwl/devkit';
+import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { readNxVersion } from '../../utils/utils';
 
 export async function addCypress(host: Tree, options: NormalizedSchema) {
   if (options.e2eTestRunner !== 'cypress') {
@@ -8,14 +7,13 @@ export async function addCypress(host: Tree, options: NormalizedSchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nrwl/cypress', readNxVersion(host));
-  const { cypressProjectGenerator } = await import('@nrwl/cypress');
+  await ensurePackage('@nx/cypress', NX_VERSION);
+  const { cypressProjectGenerator } = await import('@nx/cypress');
   return await cypressProjectGenerator(host, {
     ...options,
     name: options.e2eProjectName,
     directory: options.directory,
     project: options.appProjectName,
-    rootProject: options.rootProject,
     bundler: 'vite',
   });
 }

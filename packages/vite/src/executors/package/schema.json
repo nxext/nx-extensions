@@ -3,7 +3,6 @@
   "outputCapture": "direct-nodejs",
   "title": "Web Application vite package solution",
   "description": "Web vite package solution",
-  "cli": "nx",
   "type": "object",
   "properties": {
     "entryFile": {

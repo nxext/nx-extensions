@@ -13,11 +13,11 @@ import {
   TargetConfiguration,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+  runTasksInSerial,
+} from '@nx/devkit';
 import init from '../init/init';
-import { lintProjectGenerator } from '@nrwl/linter';
-import { jestProjectGenerator } from '@nrwl/jest';
+import { lintProjectGenerator } from '@nx/linter';
+import { jestProjectGenerator } from '@nx/jest';
 import { viteVersion } from '../../utils/version';
 import {
   createViteEslintJson,
