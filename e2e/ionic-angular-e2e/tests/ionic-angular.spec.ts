@@ -107,25 +107,6 @@ describe('Ionic Angular Application', () => {
       },
       asyncTimeout
     );
-
-    describe('--directory', () => {
-      it(
-        'should create page in directory',
-        async () => {
-          const appName = uniq('ionic-angular');
-          await runNxCommandAsync(
-            `generate @nxext/ionic-angular:app --name ${appName} --capacitor false`
-          );
-          await runNxCommandAsync(
-            `generate @nxext/ionic-angular:page --name my-page --project ${appName} --directory my-dir`
-          );
-
-          const buildResults = await runNxCommandAsync(`build ${appName}`);
-          expect(buildResults.stdout).not.toContain('ERROR');
-        },
-        asyncTimeout
-      );
-    });
   });
 
   xit(

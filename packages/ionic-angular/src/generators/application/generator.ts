@@ -2,6 +2,7 @@ import {
   convertNxGenerator,
   formatFiles,
   GeneratorCallback,
+  runTasksInSerial,
   Tree,
 } from '@nx/devkit';
 import { addAngular } from './lib/add-angular';
@@ -35,16 +36,7 @@ export async function applicationGenerator(
     await formatFiles(host);
   }
 
-  return () => {
-    installTask();
-    if (angularTask) {
-      angularTask();
-    }
-
-    if (capacitorTask) {
-      capacitorTask();
-    }
-  };
+  return runTasksInSerial(installTask, angularTask, capacitorTask);
 }
 
 export default applicationGenerator;
