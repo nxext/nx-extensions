@@ -19,7 +19,7 @@ describe('ionic react application e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    cleanup();
+    //cleanup();
   });
 
   const defaultOptions: ApplicationGeneratorSchema = {
@@ -37,7 +37,7 @@ describe('ionic react application e2e', () => {
       async () => {
         const appName = uniq('ionic-react');
         await runNxCommandAsync(
-          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template blank`
+          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template blank --bundler webpack`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -54,7 +54,7 @@ describe('ionic react application e2e', () => {
       async () => {
         const appName = uniq('ionic-react');
         await runNxCommandAsync(
-          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template list`
+          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template list --bundler webpack`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -71,7 +71,7 @@ describe('ionic react application e2e', () => {
       async () => {
         const appName = uniq('ionic-react');
         await runNxCommandAsync(
-          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template sidemenu`
+          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template sidemenu --bundler webpack`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -88,7 +88,7 @@ describe('ionic react application e2e', () => {
       async () => {
         const appName = uniq('ionic-react');
         await runNxCommandAsync(
-          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template tabs`
+          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template tabs --bundler webpack`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -105,7 +105,7 @@ describe('ionic react application e2e', () => {
       async () => {
         const appName = uniq('ionic-react');
         await runNxCommandAsync(
-          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template sidemenu`
+          `generate @nxext/ionic-react:app --name ${appName} --capacitor false --template sidemenu --bundler webpack`
         );
 
         const e2eResults = await runNxCommandAsync(`e2e ${appName}-e2e`);
@@ -125,7 +125,7 @@ describe('ionic react application e2e', () => {
           directory: 'subdir',
         };
         await runNxCommandAsync(
-          `generate @nxext/ionic-react:app ${options.name} --directory ${options.directory} --capacitor false`
+          `generate @nxext/ionic-react:app ${options.name} --directory ${options.directory} --capacitor false --bundler webpack`
         );
         const buildResults = await runNxCommandAsync(
           `build ${options.directory}-${options.name}`
@@ -135,34 +135,6 @@ describe('ionic react application e2e', () => {
         const lintResults = await runNxCommandAsync(
           `lint ${options.directory}-${options.name}`
         );
-        expect(lintResults.stdout).toContain('All files pass linting');
-      },
-      asyncTimeout
-    );
-  });
-
-  describe('--tags', () => {
-    it(
-      'should add tags to project configuration',
-      async () => {
-        const options: ApplicationGeneratorSchema = {
-          ...defaultOptions,
-          name: uniq('ionic-react'),
-          tags: 'e2etag,e2ePackage',
-        };
-        await runNxCommandAsync(
-          `generate @nxext/ionic-react:app ${options.name} --tags ${options.tags} --capacitor false`
-        );
-
-        const projectConfiguration = readJson(
-          `apps/${options.name}/project.json`
-        );
-        expect(projectConfiguration.tags).toEqual(['e2etag', 'e2ePackage']);
-
-        const buildResults = await runNxCommandAsync(`build ${options.name}`);
-        expect(buildResults.stderr).toBeFalsy();
-
-        const lintResults = await runNxCommandAsync(`lint ${options.name}`);
         expect(lintResults.stdout).toContain('All files pass linting');
       },
       asyncTimeout

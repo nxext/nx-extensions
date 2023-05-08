@@ -2,6 +2,7 @@ import {
   convertNxGenerator,
   formatFiles,
   GeneratorCallback,
+  runTasksInSerial,
   Tree,
 } from '@nx/devkit';
 import { addCapacitor } from './lib/add-capacitor';
@@ -31,7 +32,8 @@ export async function applicationGenerator(
   updateJestBabelSetup(host, normalizedOptions);
   updateCypressSetup(host, normalizedOptions);
 
-  let capacitorTask: GeneratorCallback | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  let capacitorTask: GeneratorCallback = () => {};
   if (options.capacitor) {
     capacitorTask = await addCapacitor(host, normalizedOptions);
   }
@@ -40,15 +42,7 @@ export async function applicationGenerator(
     await formatFiles(host);
   }
 
-  return () => {
-    installTask();
-    reactTask();
-    routerTask();
-
-    if (capacitorTask) {
-      capacitorTask();
-    }
-  };
+  return runTasksInSerial(installTask, reactTask, routerTask, capacitorTask);
 }
 
 export default applicationGenerator;
