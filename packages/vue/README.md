@@ -1,4 +1,4 @@
-# @nxext/vite
+# @nxext/vue
 [![License](https://img.shields.io/npm/l/@nxext/svelte.svg?style=flat-square)]()
 
 **Not production ready yet**
