@@ -17,6 +17,9 @@ import {
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
+import { addVite } from './lib/add-vite';
+import { updateViteConfig } from './lib/update-vite-config';
+import { createProjectFiles } from './lib/create-project-files';
 import { addVitest } from './lib/add-vitest';
 
 function normalizeOptions(
@@ -47,23 +50,6 @@ function normalizeOptions(
   };
 }
 
-function createFiles(host: Tree, options: NormalizedSchema) {
-  generateFiles(
-    host,
-    joinPathFragments(__dirname, './files'),
-    options.projectRoot,
-    {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-    }
-  );
-
-  if (!options.publishable && !options.buildable) {
-    host.delete(`${options.projectRoot}/package.json`);
-  }
-}
-
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
   return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
     json.name = options.importPath;
@@ -85,13 +71,15 @@ export async function libraryGenerator(
   const initTask = await initGenerator(host, { ...options, skipFormat: true });
 
   addProject(host, options);
-  createFiles(host, options);
+  await createProjectFiles(host, options);
 
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
+  const viteTask = await addVite(host, options);
   const vitestTask = await addVitest(host, options);
 
   updateTsConfig(host, options);
+  updateViteConfig(host, options);
   updateJestConfig(host, options);
 
   if (options.publishable || options.buildable) {
@@ -102,7 +90,7 @@ export async function libraryGenerator(
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, lintTask, jestTask, vitestTask);
+  return runTasksInSerial(initTask, lintTask, viteTask, jestTask, vitestTask);
 }
 
 export default libraryGenerator;

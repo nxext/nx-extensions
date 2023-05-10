@@ -2,13 +2,10 @@ module.exports = {
   "parser": "@typescript-eslint/parser",
   "plugins": ["svelte3", "@typescript-eslint"],
   "extends": ["<%= offsetFromRoot %>.eslintrc.json"],
-  "ignorePatterns": ["!**/*", "vitest.config.ts"],
+  "ignorePatterns": ["!**/*", "vite.config.ts"],
   "overrides": [
     {
       "files": ["*.ts", "*.js", "*.svelte"],
-      "parserOptions": {
-        "project": ["<%= projectRoot %>/tsconfig.*?.json"]
-      },
       "rules": {}
     },
     {

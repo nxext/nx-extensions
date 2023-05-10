@@ -13,18 +13,6 @@ describe('init schematic', () => {
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    tree.overwrite(
-      'package.json',
-      `
-      {
-        "name": "test-name",
-        "dependencies": {},
-        "devDependencies": {
-          "@nx/workspace": "0.0.0"
-        }
-      }
-    `
-    );
   });
 
   it('should add Svelte dependencies', async () => {

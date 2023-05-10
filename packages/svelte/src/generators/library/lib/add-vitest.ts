@@ -1,14 +1,26 @@
-import { Tree } from '@nx/devkit';
+import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { vitestProjectGenerator } from '@nxext/vitest';
 
 export async function addVitest(host: Tree, options: NormalizedSchema) {
-  if (options.unitTestRunner !== 'vitest') {
-    return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
+  if (
+    !options.buildable &&
+    !options.publishable &&
+    options.unitTestRunner === 'vitest'
+  ) {
+    const { vitestGenerator } = ensurePackage<typeof import('@nx/vite')>(
+      '@nx/vite',
+      NX_VERSION
+    );
+
+    return await vitestGenerator(host, {
+      uiFramework: 'none',
+      project: options.name,
+      coverageProvider: 'c8',
+      inSourceTests: false,
+      skipFormat: true,
+    });
   }
 
-  return await vitestProjectGenerator(host, {
-    project: options.name,
-    framework: 'svelte',
-  });
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  return () => {};
 }
