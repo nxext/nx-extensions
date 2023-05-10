@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "schematics": "./generators.json",
@@ -30,10 +33,6 @@
     "@nx/cypress": "^16.1.0"
   },
   "dependencies": {
-    "@nxext/vite": "^15.1.0",
-    "@nxext/vitest": "^15.1.0",
-    "@nx/devkit": "^16.1.0",
-    "@nx/cypress": "^16.1.0",
-    "@nx/jest": "^16.1.0"
+    "@nx/devkit": "^16.1.0"
   }
 }

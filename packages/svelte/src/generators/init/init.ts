@@ -10,16 +10,12 @@ import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
 import { addLinterPlugin } from './lib/add-linter-plugin';
-import { addVitestPlugin } from './lib/add-vitest';
 
 export async function initGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
 
   const jestTask = await addJestPlugin(host, schema);
   tasks.push(jestTask);
-
-  const vitestTask = addVitestPlugin(host, schema);
-  tasks.push(vitestTask);
 
   const cypressTask = await addCypressPlugin(host, schema);
   tasks.push(cypressTask);

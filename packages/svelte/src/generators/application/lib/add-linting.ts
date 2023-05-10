@@ -15,6 +15,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     tsConfigPaths: [
       joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
     ],
+    unitTestRunner: options.unitTestRunner,
     eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,svelte,spec.ts}`],
     skipFormat: true,
   });

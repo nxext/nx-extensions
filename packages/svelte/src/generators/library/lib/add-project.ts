@@ -1,20 +1,9 @@
 import { NormalizedSchema } from '../schema';
-import { addProjectConfiguration, TargetConfiguration, Tree } from '@nx/devkit';
-import {
-  createLintTarget,
-  createPackageTarget,
-  createSvelteCheckTarget,
-} from '../../utils/targets';
+import { addProjectConfiguration, Tree } from '@nx/devkit';
+import { createLintAndCheckTargets } from '../../utils/targets';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
-  const targets: { [key: string]: TargetConfiguration } = {
-    lint: createLintTarget(options),
-    check: createSvelteCheckTarget(options),
-  };
-
-  if (options.buildable || options.publishable) {
-    targets.build = createPackageTarget('library', options);
-  }
+  const targets = createLintAndCheckTargets(options);
 
   addProjectConfiguration(tree, options.name, {
     root: options.projectRoot,

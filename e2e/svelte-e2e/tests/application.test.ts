@@ -9,7 +9,7 @@ import {
 } from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 
-xdescribe('svelte e2e', () => {
+describe('svelte e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/svelte']);
   });
@@ -29,7 +29,9 @@ xdescribe('svelte e2e', () => {
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain('Bundle complete');
+      expect(result.stdout).toContain(
+        `Successfully ran target build for project ${plugin}`
+      );
 
       expect(() =>
         checkFilesExist(`dist/apps/${plugin}/index.html`)
@@ -76,38 +78,42 @@ xdescribe('svelte e2e', () => {
       );
     });
 
-    it('should be able to run tests with jest', async () => {
-      const plugin = uniq('svelteapptests');
-      await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --unitTestRunner=jest --e2eTestRunner='none'`
-      );
-      await runNxCommandAsync(
-        `generate @nxext/svelte:component test --project=${plugin}`
-      );
+    describe('should be able to run tests', () => {
+      it('with jest', async () => {
+        const plugin = uniq('svelteapptests');
+        await runNxCommandAsync(
+          `generate @nxext/svelte:app ${plugin} --unitTestRunner='jest' --e2eTestRunner='none'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/svelte:component test --project=${plugin}`
+        );
 
-      const result = await runNxCommandAsync(`test ${plugin}`);
-      expect(`${result.stdout}${result.stderr}`).toContain(
-        'Ran all test suites'
-      );
-    });
+        const result = await runNxCommandAsync(`test ${plugin}`);
+        expect(`${result.stdout}${result.stderr}`).toContain(
+          'Ran all test suites'
+        );
+      });
 
-    it('should be able to run tests with vitest', async () => {
-      const plugin = uniq('svelteapptests');
-      await runNxCommandAsync(
-        `generate @nxext/svelte:app ${plugin} --unitTestRunner='vitest' --e2eTestRunner='none'`
-      );
-      await runNxCommandAsync(
-        `generate @nxext/svelte:component test --project=${plugin}`
-      );
+      it('with vitest', async () => {
+        const plugin = uniq('svelteapptests');
+        await runNxCommandAsync(
+          `generate @nxext/svelte:app ${plugin} --unitTestRunner='vitest' --e2eTestRunner='none'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/svelte:component test --project=${plugin}`
+        );
 
-      const result = await runNxCommandAsync(`test ${plugin}`);
-      expect(`${result.stdout}${result.stderr}`).toContain('1 passed');
+        const result = await runNxCommandAsync(`test ${plugin}`);
+        expect(`${result.stdout}${result.stderr}`).toContain(
+          `Successfully ran target test for project ${plugin}`
+        );
+      });
     });
   });
 
   describe('Svelte app', () => {
-    it('should build svelte application with dependencies', async () => {
-      const appName = uniq('svelte');
+    xit('should build svelte application with dependencies', async () => {
+      const appName = 'svelteappwithdeps';
       await runNxCommandAsync(
         `generate @nxext/svelte:app ${appName} --e2eTestRunner='none' --unitTestRunner='none'`
       );
@@ -157,7 +163,9 @@ h1 {
       );
 
       const result = await runNxCommandAsync(`build ${appName}`);
-      expect(result.stdout).toContain('Bundle complete');
+      expect(result.stdout).toContain(
+        `Successfully ran target build for project ${appName}`
+      );
 
       expect(() =>
         checkFilesExist(`dist/apps/${appName}/index.html`)

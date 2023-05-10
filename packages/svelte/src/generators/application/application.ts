@@ -16,7 +16,9 @@ import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
-import { addVitest } from './lib/add-vitest';
+import { addVite } from './lib/add-vite';
+import { updateViteConfig } from './lib/update-vite-config';
+import { createApplicationFiles } from './lib/create-project-files';
 
 function normalizeOptions(
   tree: Tree,
@@ -45,47 +47,30 @@ function normalizeOptions(
   };
 }
 
-function createFiles(host: Tree, options: NormalizedSchema) {
-  generateFiles(
-    host,
-    joinPathFragments(__dirname, './files'),
-    options.projectRoot,
-    {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-    }
-  );
-}
-
 export async function applicationGenerator(
-  tree: Tree,
+  host: Tree,
   schema: SvelteApplicationSchema
 ) {
-  const options = normalizeOptions(tree, schema);
+  const options = normalizeOptions(host, schema);
 
-  const initTask = await initGenerator(tree, { ...options, skipFormat: true });
+  const initTask = await initGenerator(host, { ...options, skipFormat: true });
 
-  addProject(tree, options);
-  createFiles(tree, options);
+  addProject(host, options);
+  await createApplicationFiles(host, options);
 
-  const lintTask = await addLinting(tree, options);
-  const jestTask = await addJest(tree, options);
-  const vitestTask = await addVitest(tree, options);
-  const cypressTask = await addCypress(tree, options);
-  updateJestConfig(tree, options);
+  const viteTask = await addVite(host, options);
+  const lintTask = await addLinting(host, options);
+  const jestTask = await addJest(host, options);
+  const cypressTask = await addCypress(host, options);
+
+  updateJestConfig(host, options);
+  updateViteConfig(host, options);
 
   if (!options.skipFormat) {
-    await formatFiles(tree);
+    await formatFiles(host);
   }
 
-  return runTasksInSerial(
-    initTask,
-    lintTask,
-    jestTask,
-    vitestTask,
-    cypressTask
-  );
+  return runTasksInSerial(initTask, viteTask, lintTask, jestTask, cypressTask);
 }
 
 export default applicationGenerator;
