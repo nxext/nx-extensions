@@ -79,6 +79,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://keybase.io/sniperwolf"><img src="https://avatars.githubusercontent.com/u/741938?v=4?s=100" width="100px;" alt="Fabrizio Fallico"/><br /><sub><b>Fabrizio Fallico</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=sniperwolf" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Lcarv20"><img src="https://avatars.githubusercontent.com/u/42584819?v=4?s=100" width="100px;" alt="Luís Carvalho"/><br /><sub><b>Luís Carvalho</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=Lcarv20" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
