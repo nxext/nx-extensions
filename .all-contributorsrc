@@ -317,6 +317,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Brocco",
+      "name": "Mike Brocchi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1565117?v=4",
+      "profile": "https://twitter.com/Brocco",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
