@@ -299,6 +299,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mwarger",
+      "name": "Mat Warger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/686823?v=4",
+      "profile": "https://mw.codes/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

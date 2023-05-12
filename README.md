@@ -81,6 +81,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://keybase.io/sniperwolf"><img src="https://avatars.githubusercontent.com/u/741938?v=4?s=100" width="100px;" alt="Fabrizio Fallico"/><br /><sub><b>Fabrizio Fallico</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=sniperwolf" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Lcarv20"><img src="https://avatars.githubusercontent.com/u/42584819?v=4?s=100" width="100px;" alt="Luís Carvalho"/><br /><sub><b>Luís Carvalho</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=Lcarv20" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Nesci28"><img src="https://avatars.githubusercontent.com/u/33325461?v=4?s=100" width="100px;" alt="Mark Gagnon"/><br /><sub><b>Mark Gagnon</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=Nesci28" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://mw.codes/"><img src="https://avatars.githubusercontent.com/u/686823?v=4?s=100" width="100px;" alt="Mat Warger"/><br /><sub><b>Mat Warger</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=mwarger" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
