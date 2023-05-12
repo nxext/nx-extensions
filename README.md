@@ -74,6 +74,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://www.riceboyler.com/"><img src="https://avatars.githubusercontent.com/u/2243596?v=4?s=100" width="100px;" alt="Jason Clark"/><br /><sub><b>Jason Clark</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=riceboyler" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://decisely.com/"><img src="https://avatars.githubusercontent.com/u/868919?v=4?s=100" width="100px;" alt="Victor Borg"/><br /><sub><b>Victor Borg</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=borgius" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/blackholegalaxy"><img src="https://avatars.githubusercontent.com/u/11064123?v=4?s=100" width="100px;" alt="blackholegalaxy"/><br /><sub><b>blackholegalaxy</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=blackholegalaxy" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/nitedani"><img src="https://avatars.githubusercontent.com/u/67418286?v=4?s=100" width="100px;" alt="nitedani"/><br /><sub><b>nitedani</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=nitedani" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
