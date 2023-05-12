@@ -326,6 +326,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "0scrm",
+      "name": "Oscar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34385875?v=4",
+      "profile": "https://oscarmarion.dev/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
