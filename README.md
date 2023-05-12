@@ -89,6 +89,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ecstrema"><img src="https://avatars.githubusercontent.com/u/35939574?v=4?s=100" width="100px;" alt="Rémi Marche"/><br /><sub><b>Rémi Marche</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=ecstrema" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/simonflk"><img src="https://avatars.githubusercontent.com/u/4867329?v=4?s=100" width="100px;" alt="Simon Flack"/><br /><sub><b>Simon Flack</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=simonflk" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.tiepphan.com/"><img src="https://avatars.githubusercontent.com/u/7151365?v=4?s=100" width="100px;" alt="Tiep Phan"/><br /><sub><b>Tiep Phan</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=tieppt" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
