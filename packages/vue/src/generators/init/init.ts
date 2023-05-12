@@ -16,6 +16,7 @@ import {
   vueVersion,
 } from '../utils/versions';
 import { InitSchema } from './schema';
+import { addPluginToNxJson } from '../utils/add-plugin-to-nx-json';
 
 function updateDependencies(host: Tree, schema: InitSchema) {
   let dependencies: Record<string, string> = {
@@ -48,6 +49,8 @@ export async function initGenerator(host: Tree, schema: InitSchema) {
     const cypressTask = await cypressInitGenerator(host, {});
     tasks.push(cypressTask);
   }
+
+  addPluginToNxJson('@nxext/vue', host);
 
   if (!schema.skipFormat) {
     await formatFiles(host);

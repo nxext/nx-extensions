@@ -22,7 +22,7 @@ describe('vue e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommandAsync('reset');
-    cleanup();
+    //cleanup();
   });
 
   describe('application', () => {
