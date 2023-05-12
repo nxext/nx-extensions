@@ -236,6 +236,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "borgius",
+      "name": "Victor Borg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/868919?v=4",
+      "profile": "http://decisely.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
