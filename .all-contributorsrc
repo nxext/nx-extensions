@@ -344,6 +344,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "simonflk",
+      "name": "Simon Flack",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4867329?v=4",
+      "profile": "https://github.com/simonflk",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
