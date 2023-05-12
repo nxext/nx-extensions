@@ -68,6 +68,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/barbados-clemens"><img src="https://avatars.githubusercontent.com/u/23272162?v=4?s=100" width="100px;" alt="Caleb Ukle"/><br /><sub><b>Caleb Ukle</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=barbados-clemens" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/marckassay"><img src="https://avatars.githubusercontent.com/u/459665?v=4?s=100" width="100px;" alt="Marc Kassay"/><br /><sub><b>Marc Kassay</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=marckassay" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/SimonCockx"><img src="https://avatars.githubusercontent.com/u/47859223?v=4?s=100" width="100px;" alt="SimonCockx"/><br /><sub><b>SimonCockx</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=SimonCockx" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
