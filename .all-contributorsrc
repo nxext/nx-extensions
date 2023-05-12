@@ -227,6 +227,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "riceboyler",
+      "name": "Jason Clark",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2243596?v=4",
+      "profile": "http://www.riceboyler.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
