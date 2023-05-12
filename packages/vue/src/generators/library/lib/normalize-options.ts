@@ -6,13 +6,14 @@ import {
   Tree,
 } from '@nx/devkit';
 import { NormalizedSchema, Schema } from '../schema';
+import { getImportPath } from './get-import-path';
 
 export function normalizeOptions<T extends Schema = Schema>(
   host: Tree,
   options: Schema
 ): NormalizedSchema<T> {
   const name = names(options.name).fileName;
-  const { libsDir: defaultLibsDir, npmScope } = getWorkspaceLayout(host);
+  const { libsDir: defaultLibsDir } = getWorkspaceLayout(host);
   const { projectDirectory, layoutDirectory } = extractLayoutDirectory(
     options.directory
   );
@@ -28,9 +29,7 @@ export function normalizeOptions<T extends Schema = Schema>(
     : [];
   const buildable = options?.buildable || false;
   const importPath =
-    options.importPath || npmScope
-      ? `${npmScope === '@' ? '' : '@'}${npmScope}/${fullProjectDirectory}`
-      : fullProjectDirectory;
+    options.importPath || getImportPath(host, fullProjectDirectory);
 
   return {
     ...options,
