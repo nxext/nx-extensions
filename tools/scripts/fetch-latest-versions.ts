@@ -1,16 +1,12 @@
 import { spawnSync } from 'child_process';
-import {
+/*import {
   ionicVersion,
   puppeteer,
   STENCIL_OUTPUTTARGET_VERSION,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
   stencilVersion,
-} from '../../packages/stencil/src/utils/versions';
-import {
-  c8Version,
-  vitestVersion,
-} from '../../packages/vitest/src/utils/versions';
+} from '../../packages/stencil/src/utils/versions';*/
 import {
   eslintPluginSvelteVersion,
   svelteCheckVersion,
@@ -22,8 +18,6 @@ import {
   tsconfigSvelteVersion,
   vitePluginSvelteVersion,
 } from '../../packages/svelte/src/generators/utils/versions';
-import { viteVersion } from '../../packages/vite/src/utils/version';
-import { vitePluginReactVersion } from '../../packages/react/src/generators/utils/versions';
 import {
   eslintPluginSolidVersion,
   solidJestVersion,
@@ -39,6 +33,7 @@ import {
 } from '../../packages/preact/src/generators/utils/versions';
 import { capacitorVersion } from '../../packages/capacitor/src/utils/versions';
 
+/*
 console.log('======================================');
 console.log('Stencil:');
 console.log('======================================');
@@ -75,7 +70,7 @@ const stencilpkgs = [
 stencilpkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
-
+*/
 console.log('======================================');
 console.log('Svelte:');
 console.log('======================================');
@@ -106,18 +101,6 @@ const vitePkgs = [
 ];
 
 vitePkgs.forEach(({ pkg, version }) => {
-  checkVersion(pkg, version);
-});
-
-console.log('======================================');
-console.log('React:');
-console.log('======================================');
-
-const reactPkgs = [
-  { pkg: '@vitejs/plugin-react', version: vitePluginReactVersion },
-];
-
-reactPkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
 

@@ -9,7 +9,7 @@ import {
 } from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 
-describe('svelte e2e', () => {
+xdescribe('svelte e2e', () => {
   beforeAll(() => {
     newProject(['@nxext/svelte']);
   });

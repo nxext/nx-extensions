@@ -1,4 +1,4 @@
-export const preactVersion = '^10.6.4';
-export const testingLibraryPreactVersion = '^2.0.1';
-export const vitePluginPreactVersion = '^2.4.0';
+export const preactVersion = '^10.14.0';
+export const testingLibraryPreactVersion = '^3.2.3';
+export const vitePluginPreactVersion = '^2.5.0';
 export const eslintPluginPreactVersion = '^0.1.0';
