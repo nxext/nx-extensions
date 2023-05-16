@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "<%= offsetFromRoot %>dist/out-tsc",
     "module": "commonjs",
-    "types": ["jest", "node"]
+    "types": ["vitest/globals", "vitest/importMeta", "vite/client", "node"]
   },
   "include": [
     "**/*.spec.ts",

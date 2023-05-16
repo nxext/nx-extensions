@@ -50,14 +50,6 @@ Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 
-#### port
-
-Default: `3000`
-
-Type: `number`
-
-Port to listen on.
-
 #### skipFormat
 
 Default: `false`
@@ -114,10 +106,10 @@ Project where the component is generated
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `vitest`, `none`
 
 Test runner to use for unit tests.
