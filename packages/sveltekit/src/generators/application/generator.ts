@@ -1,30 +1,27 @@
 import {
   addProjectConfiguration,
   formatFiles,
-  generateFiles,
   getWorkspaceLayout,
   joinPathFragments,
   names,
-  getWorkspacePath,
-  offsetFromRoot,
   Tree,
-  convertNxGenerator,
   runTasksInSerial,
+  workspaceRoot,
 } from '@nx/devkit';
-import * as path from 'path';
 import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
 import { ProjectType } from '@nx/workspace';
 import { relative } from 'path';
 import { addLinting } from './lib/add-linting';
 import { installDependencies } from './lib/install-dependencies';
-import { viteInitGenerator } from '@nxext/vite';
-import { createViteTargets } from './lib/targets';
+import { addFiles } from './lib/add-project-files';
+import { createSvelteCheckTarget } from './lib/targets';
+import { addVite } from './lib/add-vite';
+import { updateViteConfig } from './lib/update-vite-config';
 
 function normalizeOptions(
   host: Tree,
   options: SveltekitGeneratorSchema
 ): NormalizedSchema {
-  const workspacePath = getWorkspacePath(host);
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -35,8 +32,8 @@ function normalizeOptions(
     ? options.tags.split(',').map((s) => s.trim())
     : [];
   const distDir = relative(
-    joinPathFragments(`${workspacePath}/${projectRoot}`),
-    joinPathFragments(`${workspacePath}/dist/${projectRoot}`)
+    joinPathFragments(`${workspaceRoot}/${projectRoot}`),
+    joinPathFragments(`${workspaceRoot}/dist/${projectRoot}`)
   );
 
   return {
@@ -49,21 +46,6 @@ function normalizeOptions(
   };
 }
 
-function addFiles(host: Tree, options: NormalizedSchema) {
-  const templateOptions = {
-    ...options,
-    ...names(options.name),
-    offsetFromRoot: offsetFromRoot(options.projectRoot),
-    template: '',
-  };
-  generateFiles(
-    host,
-    path.join(__dirname, 'files'),
-    options.projectRoot,
-    templateOptions
-  );
-}
-
 export async function applicationGenerator(
   host: Tree,
   schema: SveltekitGeneratorSchema
@@ -71,7 +53,7 @@ export async function applicationGenerator(
   const options = normalizeOptions(host, schema);
 
   const targets = {
-    ...createViteTargets(options),
+    check: createSvelteCheckTarget(options),
     add: {
       executor: '@nxext/sveltekit:add',
     },
@@ -85,9 +67,11 @@ export async function applicationGenerator(
     tags: options.parsedTags,
   });
   addFiles(host, options);
-  const lintTask = await addLinting(host, options);
 
-  const viteTask = await viteInitGenerator(host, options);
+  const lintTask = await addLinting(host, options);
+  const viteTask = await addVite(host, options);
+
+  updateViteConfig(host, options);
 
   if (!options.skipFormat) {
     await formatFiles(host);
@@ -95,7 +79,7 @@ export async function applicationGenerator(
 
   const installTask = installDependencies(host);
 
-  return runTasksInSerial(installTask, lintTask, viteTask);
+  return runTasksInSerial(installTask, viteTask, lintTask);
 }
 
 export default applicationGenerator;
