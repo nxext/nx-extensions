@@ -10,8 +10,10 @@ import { NormalizedSchema } from '../schema';
 import { extraEslintDependencies } from '../../utils/lint';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
-  ensurePackage('@nx/linter', NX_VERSION);
-  const { lintProjectGenerator } = await import('@nx/linter');
+  const { lintProjectGenerator } = ensurePackage<typeof import('@nx/linter')>(
+    '@nx/linter',
+    NX_VERSION
+  );
 
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,

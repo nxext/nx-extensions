@@ -26,9 +26,9 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": ["vitest", "jest", "none"],
       "description": "Test runner to use for unit tests.",
-      "default": "jest"
+      "default": "vitest"
     },
     "e2eTestRunner": {
       "type": "string",
@@ -40,16 +40,6 @@
       "type": "string",
       "description": "A directory where the lib is placed.",
       "alias": "d"
-    },
-    "port": {
-      "type": "number",
-      "description": "Port to listen on.",
-      "default": 5000
-    },
-    "host": {
-      "type": "string",
-      "description": "Host to listen on.",
-      "default": "localhost"
     },
     "skipFormat": {
       "description": "Skip formatting files.",
