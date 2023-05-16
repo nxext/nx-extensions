@@ -1,6 +1,4 @@
-export const eslintPluginSvelteVersion = '^3.1.2';
-export const svelteVersion = '^3.44.0';
-export const svelteKitVersion = 'next';
-export const svelteKitAdapterVersion = 'next';
-export const sveltePreprocessVersion = '^4.9.4';
-export const angularSchematicsVersion = '^13.0.0';
+export const eslintPluginSvelteVersion = '^4.0.0';
+export const svelteVersion = '^3.54.0';
+export const svelteKitVersion = '^1.0.0-next.587';
+export const svelteKitAdapterVersion = '^1.0.0-next.90';

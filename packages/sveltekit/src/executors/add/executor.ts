@@ -27,9 +27,14 @@ export default async function runExecutor(
   packageJson.devDependencies = {};
   writeJsonFile(packageJsonPath, packageJson);
 
+  const packageName = 'svelte-add';
+  const packageVersion = globalPackageJson?.devDependencies?.[
+    packageName
+  ]?.replace(/[\\~^]/g, '');
+
   await runCommands(
     {
-      command: `npx svelte-add ${options.package}`,
+      command: `npx --package=${packageName}@${packageVersion} svelte-add ${options.package}`,
       cwd: projectRoot,
       parallel: false,
       color: true,
