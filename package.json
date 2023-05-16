@@ -49,6 +49,7 @@
     "prepare": "is-ci || husky install"
   },
   "private": true,
+  "packageManager": "yarn@1.22.19",
   "dependencies": {},
   "devDependencies": {
     "@nx/angular": "16.1.4",
