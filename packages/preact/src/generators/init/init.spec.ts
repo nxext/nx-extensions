@@ -1,18 +1,13 @@
 import { Schema } from './schema';
 import { initGenerator } from './init';
-import { readJson, updateJson, Tree } from '@nx/devkit';
+import { readJson, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nx/devkit');
-
 describe('init schematic', () => {
-  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-
   let host: Tree;
   const options: Schema = {
     skipFormat: true,
-    unitTestRunner: 'jest',
+    unitTestRunner: 'vitest',
     e2eTestRunner: 'cypress',
   };
 

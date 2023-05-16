@@ -22,5 +22,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["preact", "vite"]
+  "implicitDependencies": ["preact"]
 }

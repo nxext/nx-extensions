@@ -2,7 +2,7 @@ module.exports = {
   "parser": "@typescript-eslint/parser",
   "plugins": ["preact", "@typescript-eslint"],
   "extends": ["<%= offsetFromRoot %>.eslintrc.json"],
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["!**/*", "vite.config.ts"],
   "overrides": [
     {
       "files": ["*.ts", "*.js", "*.tsx"],

@@ -20,7 +20,7 @@
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "main": "src/index.js",
-  "schematics": "./generators.json",
+  "generators": "./generators.json",
   "peerDependencies": {
     "preact": "^10.6.2",
     "@preact/preset-vite": "^2.1.5",
@@ -29,10 +29,6 @@
     "@nx/cypress": "^16.1.0"
   },
   "dependencies": {
-    "@nxext/vite": "^16.0.0",
     "@nx/devkit": "^16.1.0"
-  },
-  "nx-migrate": {
-    "migrations": "./migrations.json"
   }
 }

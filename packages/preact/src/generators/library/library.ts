@@ -17,6 +17,9 @@ import {
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
+import { addVite } from './lib/add-vite';
+import { addVitest } from './lib/add-vitest';
+import { updateViteConfig } from './lib/update-vite-config';
 
 function normalizeOptions(
   tree: Tree,
@@ -86,11 +89,14 @@ export async function libraryGenerator(
   addProject(host, options);
   createFiles(host, options);
 
+  const viteTask = await addVite(host, options);
+  const vitestTask = await addVitest(host, options);
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
 
   updateTsConfig(host, options);
   updateJestConfig(host, options);
+  updateViteConfig(host, options);
 
   if (options.publishable || options.buildable) {
     updateLibPackageNpmScope(host, options);
@@ -100,7 +106,7 @@ export async function libraryGenerator(
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, lintTask, jestTask);
+  return runTasksInSerial(initTask, viteTask, vitestTask, lintTask, jestTask);
 }
 
 export default libraryGenerator;

@@ -1,8 +1,14 @@
 import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
+import { Schema } from '../schema';
 
-export async function addCypressPlugin(host: Tree) {
-  await ensurePackage(host, '@nx/cypress', NX_VERSION);
-  const { cypressInitGenerator } = await import('@nx/cypress');
+export async function addCypressPlugin(host: Tree, options: Schema) {
+  if (options.e2eTestRunner !== 'cypress') {
+    return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
+  }
+  const { cypressInitGenerator } = ensurePackage<typeof import('@nx/cypress')>(
+    '@nx/cypress',
+    NX_VERSION
+  );
 
   return cypressInitGenerator(host, {});
 }

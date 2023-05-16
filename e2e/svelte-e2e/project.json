@@ -22,5 +22,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["svelte", "vite"]
+  "implicitDependencies": ["svelte"]
 }
