@@ -11,22 +11,11 @@ describe('sveltekit generator', () => {
     name: 'test',
     skipFormat: false,
     linter: Linter.EsLint,
+    unitTestRunner: 'none',
   };
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    tree.write(
-      'package.json',
-      `
-      {
-        "name": "sveltekit-test",
-        "dependencies": {},
-        "devDependencies": {
-          "@nx/workspace": "0.0.0"
-        }
-      }
-    `
-    );
   });
 
   it('should run successfully', async () => {

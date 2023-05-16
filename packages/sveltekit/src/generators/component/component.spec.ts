@@ -10,7 +10,7 @@ describe('component schematic', () => {
   const options: SvelteComponentSchema = {
     name: componentName,
     project: projectName,
-    unitTestRunner: 'jest',
+    unitTestRunner: 'vitest',
   };
 
   beforeEach(async () => {

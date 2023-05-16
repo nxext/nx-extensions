@@ -14,18 +14,5 @@
       "schema": "./src/generators/component/schema.json",
       "description": "component generator"
     }
-  },
-  "schematics": {
-    "application": {
-      "factory": "./src/generators/application/generator#applicationSchematic",
-      "schema": "./src/generators/application/schema.json",
-      "description": "sveltekit app generator",
-      "aliases": ["app"]
-    },
-    "component": {
-      "factory": "./src/generators/component/component#componentSchematic",
-      "schema": "./src/generators/component/schema.json",
-      "description": "component generator"
-    }
   }
 }

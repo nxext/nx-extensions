@@ -99,4 +99,3 @@ export async function applicationGenerator(
 }
 
 export default applicationGenerator;
-export const applicationSchematic = convertNxGenerator(applicationGenerator);

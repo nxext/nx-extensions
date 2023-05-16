@@ -21,9 +21,9 @@
     },
     "unitTestRunner": {
       "type": "string",
-      "enum": ["jest", "none"],
+      "enum": ["vitest", "none"],
       "description": "Test runner to use for unit tests.",
-      "default": "jest"
+      "default": "vitest"
     }
   },
   "required": ["name", "project"]

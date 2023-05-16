@@ -1,12 +1,11 @@
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { createComponentInProject } from './lib/create-component-in-project';
-import { convertNxGenerator, Tree } from '@nx/devkit';
-
+import { Tree } from '@nx/devkit';
 export interface SvelteComponentSchema {
   name: string;
   project: string;
   directory?: string;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'vitest' | 'none';
 }
 
 export async function componentGenerator(
@@ -18,4 +17,3 @@ export async function componentGenerator(
 }
 
 export default componentGenerator;
-export const componentSchematic = convertNxGenerator(componentGenerator);
