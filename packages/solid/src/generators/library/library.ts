@@ -5,11 +5,9 @@ import { updateTsConfig } from './lib/update-tsconfig';
 import {
   convertNxGenerator,
   formatFiles,
-  generateFiles,
   getWorkspaceLayout,
   joinPathFragments,
   names,
-  offsetFromRoot,
   Tree,
   updateJson,
   runTasksInSerial,
@@ -17,6 +15,10 @@ import {
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
+import { createFiles } from './lib/create-project-files';
+import { updateViteConfig } from './lib/update-vite-config';
+import { addVite } from './lib/add-vite';
+import { addVitest } from './lib/add-vitest';
 
 function normalizeOptions(
   tree: Tree,
@@ -46,28 +48,13 @@ function normalizeOptions(
   };
 }
 
-function createFiles(host: Tree, options: NormalizedSchema) {
-  generateFiles(
-    host,
-    joinPathFragments(__dirname, './files'),
-    options.projectRoot,
-    {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-    }
-  );
-
-  if (!options.publishable && !options.buildable) {
-    host.delete(`${options.projectRoot}/package.json`);
-  }
-}
-
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
-  return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
-    json.name = options.importPath;
-    return json;
-  });
+  if (options.publishable || options.buildable) {
+    updateJson(host, `${options.projectRoot}/package.json`, (json) => {
+      json.name = options.importPath;
+      return json;
+    });
+  }
 }
 
 export async function libraryGenerator(host: Tree, schema: SolidLibrarySchema) {
@@ -85,19 +72,19 @@ export async function libraryGenerator(host: Tree, schema: SolidLibrarySchema) {
 
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
+  const viteTask = await addVite(host, options);
+  const vitestTask = await addVitest(host, options);
 
   updateTsConfig(host, options);
   updateJestConfig(host, options);
-
-  if (options.publishable || options.buildable) {
-    updateLibPackageNpmScope(host, options);
-  }
+  updateViteConfig(host, options);
+  updateLibPackageNpmScope(host, options);
 
   if (!options.skipFormat) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, lintTask, jestTask);
+  return runTasksInSerial(initTask, viteTask, vitestTask, lintTask, jestTask);
 }
 
 export default libraryGenerator;

@@ -1,32 +1,6 @@
 {
   "name": "solid",
   "version": "0.1",
-  "schematics": {
-    "application": {
-      "factory": "./src/generators/application/application#applicationSchematic",
-      "schema": "./src/generators/application/schema.json",
-      "description": "Solid application schematic",
-      "aliases": ["app"]
-    },
-    "library": {
-      "factory": "./src/generators/library/library#librarySchematic",
-      "schema": "./src/generators/library/schema.json",
-      "description": "Solid library schematic",
-      "aliases": ["lib"]
-    },
-    "component": {
-      "factory": "./src/generators/component/component#componentSchematic",
-      "schema": "./src/generators/component/schema.json",
-      "description": "Add component",
-      "aliases": ["c"]
-    },
-    "init": {
-      "factory": "./src/generators/init/init#initSchematic",
-      "schema": "./src/generators/init/schema.json",
-      "description": "Init schematic",
-      "hidden": true
-    }
-  },
   "generators": {
     "application": {
       "factory": "./src/generators/application/application#applicationGenerator",

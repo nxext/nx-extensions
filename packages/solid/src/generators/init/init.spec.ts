@@ -7,7 +7,7 @@ describe('init schematic', () => {
   let tree: Tree;
   const options: Schema = {
     skipFormat: true,
-    unitTestRunner: 'jest',
+    unitTestRunner: 'vitest',
     e2eTestRunner: 'cypress',
   };
 

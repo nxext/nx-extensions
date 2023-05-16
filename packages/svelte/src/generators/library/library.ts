@@ -5,11 +5,9 @@ import { updateTsConfig } from './lib/update-tsconfig';
 import {
   convertNxGenerator,
   formatFiles,
-  generateFiles,
   getWorkspaceLayout,
   joinPathFragments,
   names,
-  offsetFromRoot,
   Tree,
   updateJson,
   runTasksInSerial,

@@ -50,14 +50,6 @@ Possible values: `cypress`, `none`
 
 Test runner to use for end to end (e2e) tests.
 
-#### host
-
-Default: `localhost`
-
-Type: `string`
-
-Host to listen on.
-
 #### linter
 
 Default: `eslint`
@@ -67,14 +59,6 @@ Type: `string`
 Possible values: `eslint`
 
 The tool to use for running lint checks.
-
-#### port
-
-Default: `5000`
-
-Type: `number`
-
-Port to listen on.
 
 #### skipFormat
 
@@ -94,11 +78,11 @@ Add tags to the project (used for linting)
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `vitest`, `jest`, `none`
 
 Test runner to use for unit tests.
 

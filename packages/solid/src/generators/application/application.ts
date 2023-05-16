@@ -16,6 +16,9 @@ import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
+import { addVite } from './lib/add-vite';
+import { updateViteConfig } from './lib/update-vite-config';
+import { createFiles } from './lib/create-project-files';
 
 function normalizeOptions(
   tree: Tree,
@@ -44,21 +47,6 @@ function normalizeOptions(
   };
 }
 
-function createFiles(host: Tree, options: NormalizedSchema) {
-  generateFiles(
-    host,
-    joinPathFragments(__dirname, './files'),
-    options.projectRoot,
-    {
-      ...options,
-      ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
-    }
-  );
-
-  host.delete(joinPathFragments(`${options.projectRoot}/public/index.html`));
-}
-
 export async function applicationGenerator(
   tree: Tree,
   schema: SolidApplicationSchema
@@ -70,16 +58,19 @@ export async function applicationGenerator(
   addProject(tree, options);
   createFiles(tree, options);
 
+  const viteTask = await addVite(tree, options);
   const lintTask = await addLinting(tree, options);
   const jestTask = await addJest(tree, options);
   const cypressTask = await addCypress(tree, options);
+
   updateJestConfig(tree, options);
+  updateViteConfig(tree, options);
 
   if (!options.skipFormat) {
     await formatFiles(tree);
   }
 
-  return runTasksInSerial(initTask, lintTask, jestTask, cypressTask);
+  return runTasksInSerial(initTask, viteTask, lintTask, jestTask, cypressTask);
 }
 
 export default applicationGenerator;

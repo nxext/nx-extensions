@@ -22,5 +22,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["solid", "vite"]
+  "implicitDependencies": ["solid"]
 }

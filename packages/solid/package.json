@@ -20,9 +20,8 @@
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "main": "src/index.js",
-  "schematics": "./generators.json",
+  "generators": "./generators.json",
   "dependencies": {
-    "@nxext/vite": "^15.1.0",
     "@nx/devkit": "^16.1.0"
   },
   "peerDependencies": {
