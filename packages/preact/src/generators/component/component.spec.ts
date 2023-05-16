@@ -4,12 +4,7 @@ import { ProjectType } from '@nx/workspace';
 import { uniq } from '@nx/plugin/testing';
 import { names, Tree } from '@nx/devkit';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const devkit = require('@nx/devkit');
-
 describe('component schematic', () => {
-  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-
   let tree: Tree;
   const projectName = uniq('testprojekt');
   const componentName = uniq('test');

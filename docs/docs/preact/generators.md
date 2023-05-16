@@ -94,11 +94,11 @@ Add tags to the project (used for linting)
 
 #### unitTestRunner
 
-Default: `jest`
+Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `vitest`, `jest`, `none`
 
 Test runner to use for unit tests.
 
@@ -206,7 +206,7 @@ Default: `jest`
 
 Type: `string`
 
-Possible values: `jest`, `none`
+Possible values: `vitest`, `jest`, `none`
 
 Test runner to use for unit tests.
 

@@ -5,7 +5,7 @@ export interface PreactApplicationSchema {
   tags?: string;
 
   linter: Linter;
-  unitTestRunner: 'jest' | 'none';
+  unitTestRunner: 'vitest' | 'jest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
   directory?: string;
   host?: string;
