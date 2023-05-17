@@ -1,3 +1,5 @@
 e2e/ionic-angular-e2e/**
 e2e/vite-e2e/**
 e2e/vitest-e2e/**
+packages/vite/**
+packages/vitest/**
