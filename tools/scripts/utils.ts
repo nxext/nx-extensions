@@ -1,6 +1,6 @@
 import { existsSync, lstatSync, copySync, renameSync } from 'fs-extra';
+import { workspaceRoot } from '@nx/devkit';
 import { Workspaces } from 'nx/src/config/workspaces';
-import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 
 export function getPublishableLibNames(
   workspaceJson = new Workspaces(workspaceRoot).readWorkspaceConfiguration()

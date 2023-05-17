@@ -3,8 +3,7 @@ import { execSync } from 'child_process';
 import { readFileSync, removeSync, writeFileSync } from 'fs-extra';
 import { copyAndRename, getPublishableLibNames, tmpProjPath } from './utils';
 import { Workspaces } from 'nx/src/config/workspaces';
-import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
-import { logger, readJsonFile } from '@nx/devkit';
+import { logger, readJsonFile, workspaceRoot } from '@nx/devkit';
 import * as glob from 'glob';
 
 console.log('\nUpdating playground...');

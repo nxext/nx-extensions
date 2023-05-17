@@ -1,4 +1,3 @@
-import { workspaceRoot } from '@nrwl/tao/src/utils/app-root';
 import { execSync } from 'child_process';
 import {
   ensureDirSync,
@@ -8,10 +7,9 @@ import {
 } from 'fs-extra';
 import { getPublishableLibNames, tmpProjPath } from './utils';
 import { dirname } from 'path';
-import { logger, readJsonFile } from '@nx/devkit';
+import { logger, readJsonFile, workspaceRoot } from '@nx/devkit';
 import { Workspaces } from 'nx/src/config/workspaces';
 import * as glob from 'glob';
-import { inspect } from 'util';
 
 console.log('\nCreating playground. This may take a few minutes.');
 
