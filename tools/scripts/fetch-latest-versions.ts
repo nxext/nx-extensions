@@ -32,6 +32,13 @@ import {
   vitePluginPreactVersion,
 } from '../../packages/preact/src/generators/utils/versions';
 import { capacitorVersion } from '../../packages/capacitor/src/utils/versions';
+import {
+  vueRouterVersion,
+  vueTestUtilsVersion,
+  vueTscVersion,
+  vueVersion,
+  vitePluginVueVersion,
+} from '../../packages/vue/src/generators/utils/versions';
 
 /*
 console.log('======================================');
@@ -92,19 +99,6 @@ sveltepkgs.forEach(({ pkg, version }) => {
 });
 
 console.log('======================================');
-console.log('Vite:');
-console.log('======================================');
-
-const vitePkgs = [
-  { pkg: 'vite', version: viteVersion },
-  { pkg: 'tsconfig-paths', version: '3.14.1' },
-];
-
-vitePkgs.forEach(({ pkg, version }) => {
-  checkVersion(pkg, version);
-});
-
-console.log('======================================');
 console.log('Preact:');
 console.log('======================================');
 
@@ -136,19 +130,6 @@ solidPkgs.forEach(({ pkg, version }) => {
 });
 
 console.log('======================================');
-console.log('Vitest:');
-console.log('======================================');
-
-const vitestPkgs = [
-  { pkg: 'vitest', version: vitestVersion },
-  { pkg: 'c8', version: c8Version },
-];
-
-vitestPkgs.forEach(({ pkg, version }) => {
-  checkVersion(pkg, version);
-});
-
-console.log('======================================');
 console.log('Capacitor:');
 console.log('======================================');
 
@@ -160,6 +141,22 @@ const capacitorPkgs = [
 ];
 
 capacitorPkgs.forEach(({ pkg, version }) => {
+  checkVersion(pkg, version);
+});
+
+console.log('======================================');
+console.log('Vue:');
+console.log('======================================');
+
+const vuePkgs = [
+  { pkg: 'vue-router', version: vueRouterVersion },
+  { pkg: '@vue/test-utils', version: vueTestUtilsVersion },
+  { pkg: 'vue-tsc', version: vueTscVersion },
+  { pkg: 'vue', version: vueVersion },
+  { pkg: '@vitejs/plugin-vue', version: vitePluginVueVersion },
+];
+
+vuePkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
 

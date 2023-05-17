@@ -15,13 +15,12 @@ jobs:
     name: Nx Cloud - Main Job
     uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.13.0
     with:
-      number-of-agents: 3
+      number-of-agents: 5
       environment-variables: |
         npm_config_registry=http://localhost:4872
       node-version: 18.x
       yarn-version: 1.x
       parallel-commands: |
-        npx nx-cloud record npx nx workspace-lint
         npx nx-cloud record npx nx format:check
       parallel-commands-on-agents: |
         yarn nx affected --target=lint --parallel 3
@@ -34,7 +33,7 @@ jobs:
     name: Nx Cloud - Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.13.0
     with:
-      number-of-agents: 3
+      number-of-agents: 5
       environment-variables: |
         npm_config_registry=http://localhost:4872
       node-version: 16.x
