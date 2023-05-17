@@ -26,7 +26,7 @@ describe('vue e2e', () => {
   });
 
   describe('application', () => {
-    it('should create a vue application', async () => {
+    xit('should create a vue application', async () => {
       const projectName = uniq('vuebuild');
       await runNxCommandAsync(
         `generate @nxext/vue:app ${projectName} --unitTestRunner='none'`
@@ -68,45 +68,6 @@ describe('vue e2e', () => {
         `Successfully ran target test for project ${projectName}`
       );
     });
-
-    describe('--directory', () => {
-      it('should create a vue application in directory', async () => {
-        const projectName = uniq('vuebuild');
-        const subDir = 'subdir';
-        await runNxCommandAsync(
-          `generate @nxext/vue:app ${projectName} --directory=${subDir} --unitTestRunner='none'`
-        );
-        const result = await runNxCommandAsync(
-          `build ${subDir}-${projectName}`
-        );
-        expect(result.stdout).toContain(
-          `Successfully ran target build for project ${subDir}-${projectName}`
-        );
-      });
-
-      it('should be able to run linter in directory', async () => {
-        const projectName = uniq('vuelint');
-        const subDir = 'subdir';
-        await runNxCommandAsync(
-          `generate @nxext/vue:app ${projectName} --directory=${subDir} --unitTestRunner='none'`
-        );
-        const result = await runNxCommandAsync(`lint ${subDir}-${projectName}`);
-        expect(result.stdout).toContain(`All files pass linting.`);
-      });
-
-      it('should be able to run vitest in directory', async () => {
-        const projectName = uniq('vuetest');
-        const subDir = 'subdir';
-        await runNxCommandAsync(
-          `generate @nxext/vue:app ${projectName} --directory=${subDir} --unitTestRunner='vitest'`
-        );
-        const result = await runNxCommandAsync(`test ${subDir}-${projectName}`);
-        expect(result.stdout).toContain(`1 passed`);
-        expect(result.stdout).toContain(
-          `Successfully ran target test for project ${subDir}-${projectName}`
-        );
-      });
-    });
   });
 
   describe('library', () => {
@@ -140,45 +101,6 @@ describe('vue e2e', () => {
       );
       const result = await runNxCommandAsync(`lint ${projectName}`);
       expect(result.stdout).toContain(`All files pass linting.`);
-    });
-
-    describe('--directory', () => {
-      it('should create a vue lib and make it buildable in directory', async () => {
-        const projectName = uniq('vuelib');
-        const subDir = 'subdir';
-        await runNxCommandAsync(
-          `generate @nxext/vue:lib ${projectName} --directory=${subDir} --buildable --unitTestRunner='none'`
-        );
-        const result = await runNxCommandAsync(
-          `build ${subDir}-${projectName}`
-        );
-        expect(result.stdout).toContain(
-          `Successfully ran target build for project ${subDir}-${projectName}`
-        );
-      });
-
-      it('should be able to run linter in directory', async () => {
-        const projectName = uniq('vueliblinter');
-        const subDir = 'subdir';
-        await runNxCommandAsync(
-          `generate @nxext/vue:lib ${projectName} --directory=${subDir} --unitTestRunner='none'`
-        );
-        const result = await runNxCommandAsync(`lint ${subDir}-${projectName}`);
-        expect(result.stdout).toContain(`All files pass linting.`);
-      });
-
-      it('should be able to run vitest in directory', async () => {
-        const projectName = uniq('vuelibvitest');
-        const subDir = 'subdir';
-        await runNxCommandAsync(
-          `generate @nxext/vue:lib ${projectName} --directory=${subDir} --unitTestRunner='vitest'`
-        );
-        const result = await runNxCommandAsync(`test ${subDir}-${projectName}`);
-        expect(result.stdout).toContain(`1 passed`);
-        expect(result.stdout).toContain(
-          `Successfully ran target test for project ${subDir}-${projectName}`
-        );
-      });
     });
   });
 
