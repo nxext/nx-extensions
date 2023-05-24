@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "App",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "unitTestRunner": {
+      "type": "string",
+      "enum": ["vitest", "none"],
+      "description": "Test runner to use for unit tests.",
+      "default": "vitest"
+    },
+    "appId": {
+      "type": "string",
+      "description": "The app ID for the project.",
+      "default": "io.ionic.starter",
+      "x-prompt": "What app ID would you like to use?"
+    }
+  },
+  "required": ["name", "appId"]
+}

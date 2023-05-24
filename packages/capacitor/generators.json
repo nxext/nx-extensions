@@ -7,6 +7,12 @@
       "factory": "./src/generators/capacitor-project/generator",
       "schema": "./src/generators/capacitor-project/schema.json",
       "description": "Add a Capacitor project"
+    },
+    "application": {
+      "factory": "./src/generators/application/generator",
+      "schema": "./src/generators/application/schema.json",
+      "description": "application generator",
+      "aliases": ["app"]
     }
   },
   "schematics": {
@@ -14,6 +20,12 @@
       "factory": "./src/generators/capacitor-project/generator#capacitorProjectSchematic",
       "schema": "./src/generators/capacitor-project/schema.json",
       "description": "Add a Capacitor project"
+    },
+    "application": {
+      "factory": "./src/generators/application/generator#applicationSchematic",
+      "schema": "./src/generators/application/schema.json",
+      "description": "application generator",
+      "aliases": ["app"]
     }
   }
 }
