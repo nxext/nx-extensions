@@ -1,6 +1,6 @@
 {
   "name": "@nxext/svelte",
-  "version": "16.0.0",
+  "version": "16.2.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",
@@ -28,11 +28,11 @@
   "peerDependencies": {
     "svelte": "^3.44.2",
     "svelte-preprocess": "^4.4.2",
-    "@nx/workspace": "^16.1.0",
-    "@nx/linter": "^16.1.0",
-    "@nx/cypress": "^16.1.0"
+    "@nx/workspace": "^16.2.0",
+    "@nx/linter": "^16.2.0",
+    "@nx/cypress": "^16.2.0"
   },
   "dependencies": {
-    "@nx/devkit": "^16.1.0"
+    "@nx/devkit": "^16.2.0"
   }
 }
