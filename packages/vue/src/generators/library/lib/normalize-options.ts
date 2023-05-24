@@ -1,6 +1,5 @@
 import {
   extractLayoutDirectory,
-  getImportPath,
   getWorkspaceLayout,
   names,
   normalizePath,
@@ -29,7 +28,9 @@ export function normalizeOptions<T extends Schema = Schema>(
     : [];
   const buildable = options?.buildable || false;
   const importPath =
-    options.importPath || getImportPath(npmScope, fullProjectDirectory);
+    options.importPath || npmScope
+      ? `${npmScope === '@' ? '' : '@'}${npmScope}/${fullProjectDirectory}`
+      : fullProjectDirectory;
 
   return {
     ...options,

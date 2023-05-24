@@ -2,80 +2,35 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "16.1.0-beta.1",
-      "requires": {
-        "@angular/core": ">=15.0.0"
-      },
-      "description": "Remove exported `@angular/platform-server` `renderModule` method. The `renderModule` method is now exported by the Angular CLI.",
-      "factory": "./src/migrations/update-16-1-0/remove-render-module-platform-server-exports",
-      "package": "@nx/angular",
-      "name": "remove-render-module-platform-server-exports"
+      "version": "16.2.0-beta.0",
+      "description": "Remove outputPath from run commands",
+      "implementation": "./src/migrations/update-16-2-0/remove-run-commands-output-path",
+      "package": "nx",
+      "name": "16.2.0-remove-output-path-from-run-commands"
     },
     {
       "cli": "nx",
-      "version": "16.1.0-beta.1",
-      "requires": {
-        "@angular/core": ">=16.0.0-rc.4"
-      },
-      "description": "Remove 'ngcc' invocation if exists from the 'postinstall' script in package.json.",
-      "factory": "./src/migrations/update-16-1-0/remove-ngcc-invocation",
-      "package": "@nx/angular",
-      "name": "remove-ngcc-invocation"
+      "version": "16.2.0-beta.0",
+      "description": "Normalize tsconfig.cy.json files to be located at '<projectRoot>/cypress/tsconfig.json'",
+      "implementation": "./src/migrations/update-16-2-0/update-cy-tsconfig",
+      "package": "@nx/cypress",
+      "name": "update-16-2-0-normalize-tsconfigs"
     },
     {
       "cli": "nx",
-      "version": "16.1.0-beta.1",
-      "requires": {
-        "@angular/core": ">=16.0.0-rc.4"
-      },
-      "description": "Extract the app config for standalone apps",
-      "factory": "./src/migrations/update-16-1-0/extract-standalone-config-from-bootstrap",
-      "package": "@nx/angular",
-      "name": "extract-app-config-for-standalone"
+      "version": "16.2.0-beta.0",
+      "description": "Replace @nx/plugin:e2e with @nx/jest",
+      "implementation": "./src/migrations/update-16-2-0/replace-e2e-executor",
+      "package": "@nx/plugin",
+      "name": "update-16-2-0-replace-e2e-executor"
     },
     {
       "cli": "nx",
-      "version": "16.1.0-beta.1",
-      "requires": {
-        "@angular/core": ">=16.0.0-rc.4"
-      },
-      "description": "Update server executors' configuration to disable 'buildOptimizer' for non optimized builds.",
-      "factory": "./src/migrations/update-16-1-0/update-server-executor-config",
-      "package": "@nx/angular",
-      "name": "update-server-executor-config"
-    },
-    {
-      "cli": "nx",
-      "version": "16.1.0-beta.1",
-      "requires": {
-        "@angular/core": ">=16.0.0"
-      },
-      "description": "Update the @angular/cli package version to ~16.0.0.",
-      "factory": "./src/migrations/update-16-1-0/update-angular-cli",
-      "package": "@nx/angular",
-      "name": "update-angular-cli-version-16-0-0"
-    },
-    {
-      "cli": "nx",
-      "version": "16.1.0-beta.0",
-      "description": "Ignore @nx/react/plugins/storybook in Storybook eslint rules.",
-      "factory": "./src/migrations/update-16-1-0/eslint-ignore-react-plugin",
-      "package": "@nx/storybook",
-      "name": "update-16-1-0"
-    },
-    {
-      "version": "16.0.0",
-      "description": "As of Angular v16, the `moduleId` property of `@Component` is deprecated as it no longer has any effect.",
-      "factory": "./migrations/remove-module-id/bundle",
-      "package": "@angular/core",
-      "name": "migration-v16-remove-module-id"
-    },
-    {
-      "version": "16.0.0",
-      "description": "In Angular version 15.2, the guard and resolver interfaces (CanActivate, Resolve, etc) were deprecated. This migration removes imports and 'implements' clauses that contain them.",
-      "factory": "./migrations/guard-and-resolve-interfaces/bundle",
-      "package": "@angular/core",
-      "name": "migration-v16-guard-and-resolve-interfaces"
+      "version": "16.2.0-beta.0",
+      "description": "Remove react-test-renderer from package.json",
+      "implementation": "./src/migrations/update-16-2-0-remove-package/update-16-2-0-remove-package",
+      "package": "@nx/react",
+      "name": "update-16-2-0-remove-package"
     }
   ]
 }

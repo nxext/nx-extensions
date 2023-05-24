@@ -15,7 +15,6 @@ export async function addReact(
     skipFormat: options.skipFormat,
     directory: options.directory,
     unitTestRunner: options.unitTestRunner,
-    babelJest: false,
     e2eTestRunner: options.e2eTestRunner,
     linter: Linter.EsLint,
     pascalCaseFiles: true,
