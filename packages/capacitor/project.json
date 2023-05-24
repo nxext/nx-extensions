@@ -34,6 +34,11 @@
             "input": "./packages/capacitor",
             "glob": "executors.json",
             "output": "."
+          },
+          {
+            "input": "./packages/capacitor",
+            "glob": "migrations.json",
+            "output": "."
           }
         ]
       }

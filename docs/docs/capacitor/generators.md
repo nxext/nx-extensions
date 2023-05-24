@@ -59,3 +59,55 @@ Skip formatting files.
 Type: `string`
 
 The directory of your projects built web assets.
+
+## @nxext/capacitor:application
+
+application generator
+
+### Usage
+
+```bash
+nx generate application ...
+```
+
+```bash
+nx g app ... # same
+```
+
+By default, Nx will search for `application` in the default collection provisioned in nx.json.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/capacitor:application ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g application ... --dry-run
+```
+
+### Options
+
+#### appId (_**required**_)
+
+Default: `io.ionic.starter`
+
+Type: `string`
+
+The app ID for the project.
+
+#### name (_**required**_)
+
+Type: `string`
+
+#### unitTestRunner
+
+Default: `vitest`
+
+Type: `string`
+
+Possible values: `vitest`, `none`
+
+Test runner to use for unit tests.

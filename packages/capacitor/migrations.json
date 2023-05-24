@@ -1,0 +1,25 @@
+{
+  "packageJsonUpdates": {
+    "16.2.0": {
+      "version": "16.2.0",
+      "packages": {
+        "@capacitor/core": {
+          "version": "^5.0.3",
+          "alwaysAddToPackageJson": true
+        },
+        "@capacitor/cli": {
+          "version": "^5.0.3",
+          "alwaysAddToPackageJson": true
+        },
+        "@capacitor/ios": {
+          "version": "^5.0.3",
+          "alwaysAddToPackageJson": false
+        },
+        "@capacitor/android": {
+          "version": "^5.0.3",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
+}

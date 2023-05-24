@@ -12,9 +12,11 @@ describe('capacitor-project e2e', () => {
   const plugin = uniq('capacitor');
 
   beforeAll(async () => {
-    newProject(['@nxext/capacitor'], ['@nx/react']);
+    newProject(['@nxext/capacitor']);
 
-    await runNxCommandAsync(`generate @nx/react:app ${plugin} --routing=false`);
+    await runNxCommandAsync(
+      `generate @nxext/capacitor:app ${plugin} --appId='io.ionic.starter'`
+    );
     await runNxCommandAsync(
       `generate @nxext/capacitor:capacitor-project --project=${plugin}`
     );
@@ -24,12 +26,14 @@ describe('capacitor-project e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    cleanup();
+    //cleanup();
   });
 
   it('should build successfully', async () => {
     const buildResults = await runNxCommandAsync(`build ${plugin}`);
-    expect(buildResults.stdout).toContain('compiled');
+    expect(buildResults.stdout).toContain(
+      `Successfully ran target build for project ${plugin}`
+    );
   });
 
   it('should lint successfully', async () => {
@@ -39,12 +43,9 @@ describe('capacitor-project e2e', () => {
 
   it('should run tests successfully', async () => {
     const testResults = await runNxCommandAsync(`test ${plugin}`);
-    expect(testResults.stderr).toContain('Ran all test suites');
-  });
-
-  it('should run e2e tests successfully', async () => {
-    const e2eResults = await runNxCommandAsync(`e2e ${plugin}-e2e --headless`);
-    expect(e2eResults.stdout).toContain('All specs passed!');
+    expect(testResults.stdout).toContain(
+      `Successfully ran target test for project ${plugin}`
+    );
   });
 
   it('should run cap successfully', async () => {
