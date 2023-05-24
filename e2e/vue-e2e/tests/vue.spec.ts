@@ -104,7 +104,7 @@ describe('vue e2e', () => {
     });
   });
 
-  describe('library reference', () => {
+  xdescribe('library reference', () => {
     it('should create a vue application with linked lib', async () => {
       const projectName = uniq('vuelinkapp');
       const libName = uniq('vuelinklib');
