@@ -4,7 +4,7 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 import { NormalizedSchema } from '../schema';
 
 export function updateJestBabelSetup(tree: Tree, options: NormalizedSchema) {
-  if (options.unitTestRunner !== 'jest') {
+  if (options.unitTestRunner !== 'jest' || options.bundler === 'vite') {
     return;
   }
 

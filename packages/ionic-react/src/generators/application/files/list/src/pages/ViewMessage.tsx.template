@@ -40,7 +40,7 @@ function ViewMessage() {
         {message ? (
           <>
             <IonItem>
-              <IonIcon icon={personCircle} color="primary"></IonIcon>
+              <IonIcon aria-hidden="true" icon={personCircle} color="primary"></IonIcon>
               <IonLabel className="ion-text-wrap">
                 <h2>
                   {message.fromName}
