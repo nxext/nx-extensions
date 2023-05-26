@@ -6,7 +6,7 @@ titleTemplate: Nxext brings different tools to Nx
 
 hero:
   name: Nxext
-  tagline: Nxext brings different tools Nx
+  tagline: Nxext brings different tools to Nx
   actions:
     - theme: brand
       text: Get Started
