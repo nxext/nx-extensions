@@ -1,6 +1,0 @@
-import { mergeConfig } from 'vite'
-import baseConfig from '<%= offsetFromRoot %>vitest.config';
-
-export default mergeConfig(baseConfig, {
-  plugins: []
-})

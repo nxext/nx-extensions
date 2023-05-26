@@ -1,9 +1,0 @@
-import { mergeConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-import baseConfig from '<%= offsetFromRoot %>vitest.config';
-
-export default mergeConfig(baseConfig, {
-  plugins: [
-    svelte({ hot: !process.env.VITEST }),
-  ]
-})
