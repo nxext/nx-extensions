@@ -22,5 +22,6 @@ export function normalizeOptions(
     name: names(options.name).fileName,
     appProjectName,
     appProjectRoot,
+    bundler: 'webpack',
   };
 }
