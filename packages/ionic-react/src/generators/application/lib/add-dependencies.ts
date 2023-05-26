@@ -1,9 +1,10 @@
-import { addDependenciesToPackageJson, NX_VERSION, Tree } from '@nx/devkit';
+import { addDependenciesToPackageJson, Tree } from '@nx/devkit';
 import {
   ionicReactRouterVersion,
   ionicReactVersion,
   webVitalsVersion,
   workboxVersion,
+  capacitorPluginVersion,
 } from '../../../utils/versions';
 
 export function addDependencies(host: Tree) {
@@ -13,6 +14,9 @@ export function addDependencies(host: Tree) {
       '@ionic/react': ionicReactVersion,
       '@ionic/react-router': ionicReactRouterVersion,
       'web-vitals': webVitalsVersion,
+      '@capacitor/haptics': capacitorPluginVersion,
+      '@capacitor/keyboard': capacitorPluginVersion,
+      '@capacitor/status-bar': capacitorPluginVersion,
       'workbox-background-sync': workboxVersion,
       'workbox-broadcast-update': workboxVersion,
       'workbox-cacheable-response': workboxVersion,
@@ -26,8 +30,6 @@ export function addDependencies(host: Tree) {
       'workbox-strategies': workboxVersion,
       'workbox-streams': workboxVersion,
     },
-    {
-      '@nx/react': NX_VERSION,
-    }
+    {}
   );
 }

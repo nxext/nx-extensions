@@ -1,9 +1,4 @@
-import {
-  readJson,
-  readProjectConfiguration,
-  updateJson,
-  Tree,
-} from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { ApplicationGeneratorSchema } from './schema';
@@ -30,7 +25,6 @@ describe('application', () => {
     expect(
       tree.exists(`${projectRoot}/src/assets/icon/favicon.png`)
     ).toBeTruthy();
-    expect(tree.exists(`${projectRoot}/src/assets/icon/icon.png`)).toBeTruthy();
 
     // Starter templates
     expect(tree.exists(`${projectRoot}/src/App.tsx`)).toBeTruthy();

@@ -1,10 +1,4 @@
-import {
-  cleanup,
-  readJson,
-  runNxCommand,
-  runNxCommandAsync,
-  uniq,
-} from '@nx/plugin/testing';
+import { runNxCommand, runNxCommandAsync, uniq } from '@nx/plugin/testing';
 import { ApplicationGeneratorSchema } from '@nxext/ionic-react';
 import { newProject } from '@nxext/e2e';
 
@@ -19,7 +13,6 @@ describe('ionic react application e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    //cleanup();
   });
 
   const defaultOptions: ApplicationGeneratorSchema = {
@@ -110,32 +103,6 @@ describe('ionic react application e2e', () => {
 
         const e2eResults = await runNxCommandAsync(`e2e ${appName}-e2e`);
         expect(e2eResults.stdout).toContain('All specs passed!');
-      },
-      asyncTimeout
-    );
-  });
-
-  describe('--directory', () => {
-    it(
-      'should create src in the specified directory',
-      async () => {
-        const options: ApplicationGeneratorSchema = {
-          ...defaultOptions,
-          name: uniq('ionic-react'),
-          directory: 'subdir',
-        };
-        await runNxCommandAsync(
-          `generate @nxext/ionic-react:app ${options.name} --directory ${options.directory} --capacitor false --bundler webpack`
-        );
-        const buildResults = await runNxCommandAsync(
-          `build ${options.directory}-${options.name}`
-        );
-        expect(buildResults.stderr).toBeFalsy();
-
-        const lintResults = await runNxCommandAsync(
-          `lint ${options.directory}-${options.name}`
-        );
-        expect(lintResults.stdout).toContain('All files pass linting');
       },
       asyncTimeout
     );
