@@ -1,9 +1,11 @@
 import {
   convertNxGenerator,
+  ensurePackage,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
   names,
+  NX_VERSION,
   offsetFromRoot,
   Tree,
 } from '@nx/devkit';
@@ -11,12 +13,17 @@ import * as path from 'path';
 import { updateAppRoutingModule } from './lib/update-routing-file';
 import { NormalizedSchema, PageGeneratorSchema } from './schema';
 
-function normalizeOptions(
+async function normalizeOptions(
   tree: Tree,
   options: PageGeneratorSchema
-): NormalizedSchema {
-  const { appsDir, npmScope } = getWorkspaceLayout(tree);
+): Promise<NormalizedSchema> {
+  ensurePackage('@nx/js', NX_VERSION);
+  const { getNpmScope } = await import(
+    '@nx/js/src/utils/package-json/get-npm-scope'
+  );
+  const { appsDir } = getWorkspaceLayout(tree);
   const projectRoot = `${appsDir}/${options.project}`;
+  const npmScope = getNpmScope(tree);
 
   return {
     ...options,
@@ -48,7 +55,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
 }
 
 export async function pageGenerator(tree: Tree, options: PageGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(tree, options);
+  const normalizedOptions = await normalizeOptions(tree, options);
   addFiles(tree, normalizedOptions);
   updateAppRoutingModule(tree, normalizedOptions);
 

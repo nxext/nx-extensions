@@ -64,7 +64,7 @@
     "@nx/storybook": "16.2.2",
     "@nx/vite": "16.2.2",
     "@nx/workspace": "16.2.2",
-    "@phenomnomnominal/tsquery": "4.1.1",
+    "@phenomnomnominal/tsquery": "~5.0.1",
     "@preact/preset-vite": "^2.5.0",
     "@schematics/angular": "16.0.0",
     "@stencil/core": "3.2.2",

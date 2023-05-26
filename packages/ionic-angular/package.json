@@ -22,7 +22,7 @@
   "builders": "./executors.json",
   "dependencies": {
     "@nxext/capacitor": "^16.2.0",
-    "@phenomnomnominal/tsquery": "4.1.1",
+    "@phenomnomnominal/tsquery": "~5.0.1",
     "@nx/devkit": "^16.2.0"
   },
   "peerDependencies": {

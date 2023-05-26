@@ -8,7 +8,7 @@
 
 <ion-content [fullscreen]="true" *ngIf="message">
   <ion-item>
-    <ion-icon name="person-circle" color="primary"></ion-icon>
+    <ion-icon aria-hidden="true" name="person-circle" color="primary"></ion-icon>
     <ion-label class="ion-text-wrap">
       <h2>
         {{ message.fromName }}

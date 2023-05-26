@@ -15,12 +15,11 @@ function addBaseFiles(host: Tree, options: NormalizedSchema) {
     template: '',
   };
 
-  generateFiles(
-    host,
-    normalizePath(__dirname + '/../files/base'),
-    options.appProjectRoot,
-    templateOptions
-  );
+  const filesDir = options.standalone
+    ? normalizePath(__dirname + '/../files/base-standalone')
+    : normalizePath(__dirname + '/../files/base');
+
+  generateFiles(host, filesDir, options.appProjectRoot, templateOptions);
 }
 
 function addTemplateFiles(host: Tree, options: NormalizedSchema) {
@@ -31,12 +30,11 @@ function addTemplateFiles(host: Tree, options: NormalizedSchema) {
     template: '',
   };
 
-  generateFiles(
-    host,
-    normalizePath(__dirname + `/../files/${options.template}`),
-    options.appProjectRoot,
-    templateOptions
-  );
+  const filesDir = options.standalone
+    ? normalizePath(__dirname + `/../files/${options.template}-standalone`)
+    : normalizePath(__dirname + `/../files/${options.template}`);
+
+  generateFiles(host, filesDir, options.appProjectRoot, templateOptions);
 }
 
 export function addFiles(host: Tree, options: NormalizedSchema) {
