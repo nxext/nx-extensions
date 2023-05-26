@@ -5,12 +5,9 @@
 - [StencilJS](https://stenciljs.com) plugin for NX
 - [SvelteJS](https://svelte.dev) plugin for NX
 - [SolidJS](https://www.solidjs.com) plugin for NX
-- [Vite](https://www.vitejs.dev) plugin for NX
-- [Vitest](https://vitest.dev/) plugin for NX
 - [Angular](https://angular.io/) plugin for NX
 - [React](https://reactjs.org/) plugin for NX
 - [Preact](https://preactjs.com/) plugin for NX
-- [Ts.ED](https://tsed.io/) plugin for NX
 - [Ionic](https://ionicframework.com/) plugin for NX
 
 ## Attention
