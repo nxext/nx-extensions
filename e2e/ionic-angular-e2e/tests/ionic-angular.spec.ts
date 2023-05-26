@@ -1,9 +1,4 @@
-import {
-  cleanup,
-  runNxCommand,
-  runNxCommandAsync,
-  uniq,
-} from '@nx/plugin/testing';
+import { runNxCommand, runNxCommandAsync, uniq } from '@nx/plugin/testing';
 import { newProject } from '@nxext/e2e';
 
 describe('Ionic Angular Application', () => {
@@ -17,7 +12,6 @@ describe('Ionic Angular Application', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    cleanup();
   });
 
   describe('--template', () => {
@@ -26,7 +20,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template blank --verbose`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template blank`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -43,7 +37,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template list --verbose`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template list`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -60,7 +54,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template sidemenu --verbose`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template sidemenu`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -77,7 +71,7 @@ describe('Ionic Angular Application', () => {
       async () => {
         const appName = uniq('ionic-angular');
         await runNxCommandAsync(
-          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template tabs --verbose`
+          `generate @nxext/ionic-angular:app --name ${appName} --capacitor false --template tabs`
         );
 
         const buildResults = await runNxCommandAsync(`build ${appName}`);
@@ -90,7 +84,7 @@ describe('Ionic Angular Application', () => {
     );
   });
 
-  xdescribe('Ionic Angular Page', () => {
+  describe('Ionic Angular Page', () => {
     it(
       'should create page in project',
       async () => {
@@ -109,7 +103,7 @@ describe('Ionic Angular Application', () => {
     );
   });
 
-  xit(
+  it(
     'e2e',
     async () => {
       const appName = uniq('ionic-angular');

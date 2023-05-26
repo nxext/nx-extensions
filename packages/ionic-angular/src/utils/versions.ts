@@ -1,1 +1,2 @@
-export const ionicAngularVersion = '^6.1.4';
+export const ionicAngularVersion = '^7.0.0';
+export const ioniconsVersion = '^7.0.0';

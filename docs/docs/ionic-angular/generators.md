@@ -68,12 +68,6 @@ Type: `boolean`
 
 Skip formatting files.
 
-#### standaloneConfig
-
-Type: `boolean`
-
-Split the project configuration into `<projectRoot>/project.json` rather than including it inside `workspace.json`.
-
 #### tags
 
 Type: `string`

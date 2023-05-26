@@ -219,28 +219,4 @@ describe('application schematic', () => {
       });
     });
   });
-
-  describe('--standaloneConfig', () => {
-    describe('true', () => {
-      it('should generate package.json', async () => {
-        await applicationGenerator(host, {
-          ...options,
-          standaloneConfig: true,
-        });
-
-        expect(host.exists(`${projectRoot}/package.json`)).toBeDefined();
-      });
-    });
-
-    describe('false', () => {
-      it('should not generate package.json', async () => {
-        await applicationGenerator(host, {
-          ...options,
-          standaloneConfig: false,
-        });
-
-        expect(host.exists(`${projectRoot}/package.json`)).toBeFalsy();
-      });
-    });
-  });
 });

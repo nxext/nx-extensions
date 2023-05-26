@@ -1,7 +1,6 @@
 import {
   convertNxGenerator,
   formatFiles,
-  GeneratorCallback,
   runTasksInSerial,
   Tree,
 } from '@nx/devkit';
@@ -16,21 +15,18 @@ import { ApplicationGeneratorSchema } from './schema';
 
 export async function applicationGenerator(
   host: Tree,
-  options: ApplicationGeneratorSchema
+  schema: ApplicationGeneratorSchema
 ) {
-  const normalizedOptions = normalizeOptions(host, options);
+  const options = await normalizeOptions(host, schema);
 
   const installTask = addDependencies(host);
   const angularTask = await addAngular(host, options);
-  addFiles(host, normalizedOptions);
-  removeFiles(host, normalizedOptions);
-  updateWorkspace(host, normalizedOptions);
-  updateEslintConfig(host, normalizedOptions);
+  addFiles(host, options);
+  removeFiles(host, options);
+  updateWorkspace(host, options);
+  updateEslintConfig(host, options);
 
-  let capacitorTask: GeneratorCallback | null = null;
-  if (options.capacitor) {
-    capacitorTask = await addCapacitor(host, normalizedOptions);
-  }
+  const capacitorTask = await addCapacitor(host, options);
 
   if (!options.skipFormat) {
     await formatFiles(host);
