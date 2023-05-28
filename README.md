@@ -11,7 +11,7 @@
 - [Ionic](https://ionicframework.com/) plugin for NX
 
 ## Attention
-If you use the 16.2 package of any package, be sure to use the Nx version 15.7. The Version numbers have to match. Nxext packages with 15.7 aren't compatible with Nx 15.8
+If you use the 16.2 package of any package, be sure to use the Nx version 16.2. The Version numbers have to match. Nxext packages with 15.7 aren't compatible with Nx 15.8
 
 ## Install and usage
 
