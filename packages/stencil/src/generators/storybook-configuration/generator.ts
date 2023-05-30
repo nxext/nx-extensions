@@ -7,6 +7,7 @@ import {
   getWorkspaceLayout,
   joinPathFragments,
   logger,
+  NX_VERSION,
   offsetFromRoot,
   readJson,
   readProjectConfiguration,
@@ -14,16 +15,13 @@ import {
   Tree,
   updateProjectConfiguration,
   writeJson,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { Linter } from '@nx/linter';
 import { TsConfig } from '@nx/storybook/src/utils/utilities';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
 import { join } from 'path';
-import {
-  isBuildableStencilProject,
-  readNxVersion,
-} from '../../utils/utillities';
+import { isBuildableStencilProject } from '../../utils/utillities';
 import { updateDependencies } from './lib/add-dependencies';
 import { updateLintConfig } from './lib/update-lint-config';
 import { StorybookConfigureSchema } from './schema';
@@ -45,7 +43,7 @@ export async function storybookConfigurationGenerator(
   rawSchema: StorybookConfigureSchema
 ) {
   const tasks: GeneratorCallback[] = [];
-  const uiFramework = '@storybook/html';
+  const uiFramework = '@storybook/html-webpack5';
   const options = normalizeSchema(rawSchema);
 
   const projectConfig = readProjectConfiguration(host, options.name);
@@ -66,7 +64,7 @@ export async function storybookConfigurationGenerator(
     return;
   }
 
-  await ensurePackage(host, '@nx/storybook', readNxVersion(host));
+  await ensurePackage('@nx/storybook', NX_VERSION);
   const { initGenerator } = await import(
     '@nx/storybook/src/generators/init/init'
   );
@@ -85,7 +83,7 @@ export async function storybookConfigurationGenerator(
   updateDependencies(host);
 
   if (options.configureCypress) {
-    await ensurePackage(host, '@nx/storybook', readNxVersion(host));
+    await ensurePackage('@nx/storybook', NX_VERSION);
     const { cypressProjectGenerator } = await import('@nx/storybook');
     if (projectConfig.projectType !== 'application') {
       const cypressTask = await cypressProjectGenerator(host, {
