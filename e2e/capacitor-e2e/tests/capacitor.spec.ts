@@ -1,9 +1,4 @@
-import {
-  cleanup,
-  runNxCommand,
-  runNxCommandAsync,
-  uniq,
-} from '@nx/plugin/testing';
+import { runNxCommand, runNxCommandAsync, uniq } from '@nx/plugin/testing';
 import { newProject } from '@nxext/e2e';
 
 describe('capacitor-project e2e', () => {

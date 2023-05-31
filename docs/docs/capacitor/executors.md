@@ -11,3 +11,9 @@ Options can be configured in the 'project.json' when defining the executor, or w
 Type: `string`
 
 The Capacitor command.
+
+#### preserveProjectNodeModules
+
+Type: `boolean`
+
+Preserve the node_modules folder inside the project dir.
