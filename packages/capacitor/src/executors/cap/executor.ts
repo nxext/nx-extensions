@@ -23,6 +23,8 @@ export default async function* runExecutor(
   const { devDependencies } = readJsonFile('package.json');
   const packageName = '@capacitor/cli';
   const packageVersion = devDependencies?.[packageName]?.replace(/[\\~^]/g, '');
+  const preserveProjectNodeModules =
+    options?.preserveProjectNodeModules || false;
 
   await runCommands(
     {
@@ -64,7 +66,7 @@ export default async function* runExecutor(
   const result = await runCommands(runCommandsOptions, context);
 
   const nodeModulesPath = normalizePath(`${projectRootPath}/node_modules`);
-  if (existsSync(nodeModulesPath)) {
+  if (existsSync(nodeModulesPath) && preserveProjectNodeModules) {
     try {
       logger.info(`\n\nRemoving node_modules from project root...`);
       rmSync(nodeModulesPath, { recursive: true, force: true });

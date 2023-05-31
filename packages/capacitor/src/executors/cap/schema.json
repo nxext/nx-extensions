@@ -9,6 +9,10 @@
     "cmd": {
       "description": "The Capacitor command.",
       "type": "string"
+    },
+    "preserveProjectNodeModules": {
+      "description": "Preserve the node_modules folder inside the project dir.",
+      "type": "boolean"
     }
   },
   "required": []
