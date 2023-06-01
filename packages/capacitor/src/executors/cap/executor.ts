@@ -66,7 +66,7 @@ export default async function* runExecutor(
   const result = await runCommands(runCommandsOptions, context);
 
   const nodeModulesPath = normalizePath(`${projectRootPath}/node_modules`);
-  if (existsSync(nodeModulesPath) && preserveProjectNodeModules) {
+  if (existsSync(nodeModulesPath) && !preserveProjectNodeModules) {
     try {
       logger.info(`\n\nRemoving node_modules from project root...`);
       rmSync(nodeModulesPath, { recursive: true, force: true });
