@@ -1,6 +1,6 @@
 {
   "name": "@nxext/capacitor",
-  "version": "16.2.1",
+  "version": "16.2.2",
   "description": "An Nx plugin for developing cross-platform applications using Capacitor",
   "author": {
     "name": "Devin Shoemaker",
