@@ -21,10 +21,10 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "dependencies": {
-    "@nx/devkit": "^16.2.0"
+    "@nx/devkit": "^16.3.0"
   },
   "peerDependencies": {
-    "nx": "^16.2.0",
-    "@nx/workspace": "^16.2.0"
+    "nx": "^16.3.0",
+    "@nx/workspace": "^16.3.0"
   }
 }
