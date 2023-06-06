@@ -1,11 +1,16 @@
 import { Linter } from 'eslint';
+import {
+  eslintPluginPrettierVueVersion,
+  eslintPluginTypescriptVueVersion,
+  eslintPluginVueVersion,
+} from './versions';
 
 export const extraEslintDependencies = {
   dependencies: {},
   devDependencies: {
-    'eslint-plugin-vue': '^9.3.0',
-    '@vue/eslint-config-prettier': '^7.0.0',
-    '@vue/eslint-config-typescript': '^11.0.2',
+    'eslint-plugin-vue': eslintPluginVueVersion,
+    '@vue/eslint-config-prettier': eslintPluginPrettierVueVersion,
+    '@vue/eslint-config-typescript': eslintPluginTypescriptVueVersion,
   },
 };
 

@@ -38,6 +38,9 @@ import {
   vueTscVersion,
   vueVersion,
   vitePluginVueVersion,
+  eslintPluginVueVersion,
+  eslintPluginPrettierVueVersion,
+  eslintPluginTypescriptVueVersion,
 } from '../../packages/vue/src/generators/utils/versions';
 
 /*
@@ -154,6 +157,16 @@ const vuePkgs = [
   { pkg: 'vue-tsc', version: vueTscVersion },
   { pkg: 'vue', version: vueVersion },
   { pkg: '@vitejs/plugin-vue', version: vitePluginVueVersion },
+
+  { pkg: 'eslint-plugin-vue', version: eslintPluginVueVersion },
+  {
+    pkg: '@vue/eslint-config-prettier',
+    version: eslintPluginPrettierVueVersion,
+  },
+  {
+    pkg: '@vue/eslint-config-typescript',
+    version: eslintPluginTypescriptVueVersion,
+  },
 ];
 
 vuePkgs.forEach(({ pkg, version }) => {
