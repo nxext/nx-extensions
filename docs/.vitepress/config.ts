@@ -218,23 +218,6 @@ function sideNavDocs() {
           ],
         },
         {
-          text: 'React',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/react/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/react/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/react/generators',
-            },
-          ],
-        },
-        {
           text: 'Preact',
           items: [
             {
@@ -359,6 +342,23 @@ function sideNavDocs() {
             {
               text: 'Executors',
               link: '/docs/vitest/executors',
+            },
+          ],
+        },
+        {
+          text: 'React',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/react/overview',
+            },
+            {
+              text: 'Installation',
+              link: '/docs/react/installation',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/react/generators',
             },
           ],
         },

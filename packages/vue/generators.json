@@ -28,9 +28,14 @@
       "aliases": ["c"]
     },
     "preset": {
-      "factory": "./src/generators/preset/generator",
+      "factory": "./src/generators/preset/preset",
       "schema": "./src/generators/preset/schema.json",
       "description": "preset generator"
+    },
+    "storybook-configuration": {
+      "factory": "./src/generators/storybook-configuration/configuration",
+      "schema": "./src/generators/storybook-configuration/schema.json",
+      "description": "storybook-configuration generator"
     }
   }
 }

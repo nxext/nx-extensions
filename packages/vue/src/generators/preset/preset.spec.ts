@@ -1,7 +1,7 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { Tree, readProjectConfiguration, updateJson } from '@nx/devkit';
+import { Tree, readProjectConfiguration } from '@nx/devkit';
 
-import generator from './generator';
+import generator from './preset';
 import { PresetSchema } from './schema';
 import { Linter } from '@nx/linter';
 

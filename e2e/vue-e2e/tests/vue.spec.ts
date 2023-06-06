@@ -1,9 +1,4 @@
-import {
-  cleanup,
-  runNxCommandAsync,
-  uniq,
-  updateFile,
-} from '@nx/plugin/testing';
+import { runNxCommandAsync, uniq, updateFile } from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 import { names } from '@nx/devkit';
 
@@ -22,7 +17,6 @@ describe('vue e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommandAsync('reset');
-    //cleanup();
   });
 
   describe('application', () => {
@@ -104,7 +98,7 @@ describe('vue e2e', () => {
     });
   });
 
-  xdescribe('library reference', () => {
+  describe('library reference', () => {
     it('should create a vue application with linked lib', async () => {
       const projectName = uniq('vuelinkapp');
       const libName = uniq('vuelinklib');
@@ -125,6 +119,23 @@ import { ${libClassName} } from '@proj/${libName}';
 <template>
     <${libClassName} msg="Yey"></${libClassName}>
 </template>`
+      );
+
+      const result = await runNxCommandAsync(`build ${projectName}`);
+      expect(result.stdout).toContain(
+        `Successfully ran target build for project ${projectName}`
+      );
+    });
+  });
+
+  describe('storybook', () => {
+    it('should create a vue lib and add storybook', async () => {
+      const projectName = uniq('vuestorybook');
+      await runNxCommandAsync(
+        `generate @nxext/vue:lib ${projectName} --buildable --unitTestRunner='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/vue:storybook-configuration ${projectName}`
       );
 
       const result = await runNxCommandAsync(`build ${projectName}`);
