@@ -4,8 +4,5 @@ import { mount } from '@vue/test-utils'
 import <%= className %> from './<%= className %>.vue'
 
 describe('<%= className %>', () => {
-  it('renders properly', () => {
-    const wrapper = mount(<%= className %>, { props: { msg: 'Hello Vitest' } })
-    expect(wrapper.text()).toContain('Hello Vitest')
-  })
+  <%- componentTests %>
 })

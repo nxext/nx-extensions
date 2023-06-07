@@ -79,6 +79,7 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
         options.unitTestRunner === 'none' ||
         (options.unitTestRunner === 'vitest' && options.inSourceTests == true),
       export: true,
+      inSourceTests: options.inSourceTests,
     });
     tasks.push(componentTask);
   }

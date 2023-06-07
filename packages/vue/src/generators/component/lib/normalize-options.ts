@@ -7,7 +7,7 @@ export function normalizeOptions(
 ): NormalizedSchema {
   const project = readProjectConfiguration(tree, options.project);
   const projectRoot = project.root;
-  const fileName = names(options.name).className;
+  const { className } = names(options.name);
   const projectSourceRoot = project.sourceRoot;
   const directory = options.directory
     ? `components/${options.directory}`
@@ -16,7 +16,8 @@ export function normalizeOptions(
   return {
     ...options,
     projectRoot,
-    fileName,
+    fileName: className,
+    className,
     directory,
     projectSourceRoot,
   };

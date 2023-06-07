@@ -39,7 +39,7 @@ export async function storybookConfigurationGenerator(
     typeof import('@nx/storybook')
   >('@nx/storybook', NX_VERSION);
 
-  const installTask = await configurationGenerator(host, {
+  const configurationTask = await configurationGenerator(host, {
     name: schema.name,
     configureCypress: schema.configureCypress,
     js: schema.js,
@@ -59,7 +59,7 @@ export async function storybookConfigurationGenerator(
 
   await formatFiles(host);
 
-  return installTask;
+  return configurationTask;
 }
 
 export default storybookConfigurationGenerator;

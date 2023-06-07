@@ -76,16 +76,30 @@ describe('vue e2e', () => {
       );
     });
 
-    it('should be able to run vitest', async () => {
-      const projectName = uniq('vuelibvitest');
-      await runNxCommandAsync(
-        `generate @nxext/vue:lib ${projectName} --unitTestRunner='vitest'`
-      );
-      const result = await runNxCommandAsync(`test ${projectName}`);
-      expect(result.stdout).toContain(`1 passed`);
-      expect(result.stdout).toContain(
-        `Successfully ran target test for project ${projectName}`
-      );
+    describe('should be able to run vitest', () => {
+      it('spec file', async () => {
+        const projectName = uniq('vuelibvitest');
+        await runNxCommandAsync(
+          `generate @nxext/vue:lib ${projectName} --unitTestRunner='vitest'`
+        );
+        const result = await runNxCommandAsync(`test ${projectName}`);
+        expect(result.stdout).toContain(`1 passed`);
+        expect(result.stdout).toContain(
+          `Successfully ran target test for project ${projectName}`
+        );
+      });
+
+      it('inSourceTest', async () => {
+        const projectName = uniq('vuelibvitest');
+        await runNxCommandAsync(
+          `generate @nxext/vue:lib ${projectName} --unitTestRunner='vitest' --inSourceTest=true`
+        );
+        const result = await runNxCommandAsync(`test ${projectName}`);
+        expect(result.stdout).toContain(`1 passed`);
+        expect(result.stdout).toContain(
+          `Successfully ran target test for project ${projectName}`
+        );
+      });
     });
 
     it('should be able to run linter', async () => {
