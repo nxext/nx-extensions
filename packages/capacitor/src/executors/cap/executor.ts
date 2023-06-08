@@ -60,6 +60,7 @@ export default async function* runExecutor(
   let success = false;
   try {
     execSync(`npx --package=${packageName}@${packageVersion} cap ${cmd}`, {
+      stdio: 'inherit',
       cwd: projectRootPath,
     });
     success = true;
