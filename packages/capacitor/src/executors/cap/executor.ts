@@ -57,13 +57,6 @@ export default async function* runExecutor(
 
   const cmd = sanitizeCapacitorCommand(options.cmd);
 
-  const runCommandsOptions: RunCommandsOptions = {
-    cwd: projectRootPath,
-    command: `npx --package=${packageName}@${packageVersion} cap ${cmd}`,
-    forwardAllArgs: true,
-    __unparsed__: [],
-  };
-
   let success = false
   try {
     execSync(`npx --package=${packageName}@${packageVersion} cap ${cmd}`, { cwd: projectRootPath })
