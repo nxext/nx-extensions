@@ -12,6 +12,7 @@ import runCommands, {
 } from 'nx/src/executors/run-commands/run-commands.impl';
 import { CommandExecutorSchema } from './schema';
 import { existsSync, rmSync } from 'fs';
+import { execSync } from 'node:child_process'
 
 export default async function* runExecutor(
   options: CommandExecutorSchema,
@@ -63,7 +64,11 @@ export default async function* runExecutor(
     __unparsed__: [],
   };
 
-  const result = await runCommands(runCommandsOptions, context);
+  let success = false
+  try {
+    execSync(`npx --package=${packageName}@${packageVersion} cap ${cmd}`, { cwd: projectRootPath })
+    success = true
+  } catch {}
 
   const nodeModulesPath = normalizePath(`${projectRootPath}/node_modules`);
   if (existsSync(nodeModulesPath) && !preserveProjectNodeModules) {
@@ -75,7 +80,7 @@ export default async function* runExecutor(
     }
   }
 
-  return result;
+  return { success };
 }
 
 /**
