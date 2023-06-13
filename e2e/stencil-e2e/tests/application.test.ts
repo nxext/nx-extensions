@@ -42,7 +42,10 @@ describe('application e2e', () => {
       await runNxCommandAsync(
         `generate @nxext/stencil:app ${plugin} --style='css' --e2eTestRunner='puppeteer' --junitTestRunner='none'`
       );
-      runCommand(`yarn add -D @types/jest@27.0.3 jest@27.0.3 jest-cli@27.4.5`, {});
+      runCommand(
+        `yarn add -D @types/jest@27.0.3 jest@27.0.3 jest-cli@27.4.5`,
+        {}
+      );
 
       const result = await runNxCommandAsync(`e2e ${plugin} `);
       expect(result.stdout).toContain('build finished');
