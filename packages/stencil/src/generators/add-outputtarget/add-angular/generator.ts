@@ -23,6 +23,7 @@ import {
 } from '../../../utils/angular-ast-utils';
 import { getProjectTsImportPath } from '../../storybook-configuration/generator';
 import { addAfterLastImport, addImport } from '../../../utils/ast-utils';
+import { addGlobal } from '@nx/js';
 
 async function prepareAngularLibrary(
   host: Tree,
