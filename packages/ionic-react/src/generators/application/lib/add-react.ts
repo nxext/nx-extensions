@@ -20,7 +20,6 @@ export async function addReact(
     pascalCaseFiles: true,
     classComponent: false,
     routing: true,
-    skipWorkspaceJson: true,
     globalCss: true,
     bundler: options.bundler,
   });
