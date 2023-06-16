@@ -8,6 +8,7 @@ import {
   runTasksInSerial,
   NX_VERSION,
 } from '@nx/devkit';
+import { initGenerator as jsInitGenerator } from '@nx/js';
 import {
   vitePluginVueVersion,
   vueRouterVersion,
@@ -49,6 +50,10 @@ export async function initGenerator(host: Tree, schema: InitSchema) {
     const cypressTask = await cypressInitGenerator(host, {});
     tasks.push(cypressTask);
   }
+
+  await jsInitGenerator(host, {
+    skipFormat: true,
+  });
 
   addPluginToNxJson('@nxext/vue', host);
 

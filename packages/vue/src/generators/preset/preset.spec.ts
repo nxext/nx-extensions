@@ -13,8 +13,8 @@ describe('preset generator', () => {
 
   let host: Tree;
   const options: PresetSchema = {
-    name: 'test',
     vueAppName: 'test',
+    name: 'test',
     linter: Linter.None,
     skipFormat: false,
     e2eTestRunner: 'cypress',

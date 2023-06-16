@@ -55,6 +55,18 @@
       "description": "Skip formatting files.",
       "type": "boolean",
       "default": false
+    },
+    "rootProject": {
+      "description": "Create a application at the root of the workspace",
+      "type": "boolean",
+      "default": false,
+      "hidden": true
+    },
+    "skipNxJson": {
+      "description": "Skip updating `nx.json` with default options based on values provided to this app.",
+      "type": "boolean",
+      "default": false,
+      "x-priority": "internal"
     }
   },
   "required": ["name"]

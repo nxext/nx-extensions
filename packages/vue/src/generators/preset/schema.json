@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "QwikNxPreset",
+  "$id": "VueNxPreset",
   "title": "",
   "type": "object",
   "properties": {
@@ -40,6 +40,11 @@
       "enum": ["cypress", "none"],
       "description": "Test runner to use for end to end (E2E) tests.",
       "default": "none"
+    },
+    "standalone": {
+      "type": "boolean",
+      "description": "Generate a standalone project",
+      "default": false
     }
   },
   "required": ["vueAppName"]

@@ -22,7 +22,9 @@ export function normalizeOptions<T extends Schema = Schema>(
   options: Schema
 ): NormalizedSchema<T> {
   const name = names(options.name).fileName;
-  const e2eProjectName = `${names(options.name).fileName}-e2e`;
+  const e2eProjectName = options.rootProject
+    ? 'e2e'
+    : `${names(options.name).fileName}-e2e`;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
@@ -30,7 +32,9 @@ export function normalizeOptions<T extends Schema = Schema>(
   const appProjectName = normalizeProjectName(options);
   const { layoutDirectory } = extractLayoutDirectory(options.directory);
   const appsDir = layoutDirectory ?? getWorkspaceLayout(host).appsDir;
-  const appProjectRoot = normalizePath(`${appsDir}/${appDirectory}`);
+  const appProjectRoot = options.rootProject
+    ? '.'
+    : normalizePath(`${appsDir}/${appDirectory}`);
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];

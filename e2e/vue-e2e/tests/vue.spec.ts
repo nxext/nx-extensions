@@ -20,17 +20,6 @@ describe('vue e2e', () => {
   });
 
   describe('application', () => {
-    xit('should create a vue application', async () => {
-      const projectName = uniq('vuebuild');
-      await runNxCommandAsync(
-        `generate @nxext/vue:app ${projectName} --unitTestRunner='none'`
-      );
-      const result = await runNxCommandAsync(`build ${projectName}`);
-      expect(result.stdout).toContain(
-        `Successfully ran target build for project ${projectName}`
-      );
-    });
-
     it('should create a vue application with routing', async () => {
       const projectName = uniq('vuerouting');
       await runNxCommandAsync(
