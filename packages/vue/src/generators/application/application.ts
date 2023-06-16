@@ -1,9 +1,4 @@
-import {
-  convertNxGenerator,
-  formatFiles,
-  Tree,
-  runTasksInSerial,
-} from '@nx/devkit';
+import { formatFiles, Tree, runTasksInSerial } from '@nx/devkit';
 import { Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { createApplicationFiles } from './lib/create-application-files';
@@ -12,12 +7,14 @@ import { addCypress } from './lib/add-cypress';
 import { addLinting } from './lib/add-linting';
 import initGenerator from '../init/init';
 import { addVite } from './lib/add-vite';
+import { setDefaults } from './lib/set-defaults';
 
 export async function applicationGenerator(host: Tree, schema: Schema) {
   const options = normalizeOptions(host, schema);
 
   addProject(host, options);
   createApplicationFiles(host, options);
+  setDefaults(host, options);
 
   const initTask = await initGenerator(host, {
     ...options,
@@ -40,4 +37,3 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
 }
 
 export default applicationGenerator;
-export const applicationSchematic = convertNxGenerator(applicationGenerator);

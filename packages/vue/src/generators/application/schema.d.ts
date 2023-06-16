@@ -10,6 +10,8 @@ export interface Schema {
   routing?: boolean;
   linter: Linter;
   skipFormat?: boolean;
+  rootProject?: boolean;
+  skipNxJson?: boolean;
 }
 export interface NormalizedSchema<T extends Schema = Schema> extends T {
   appProjectRoot: string;

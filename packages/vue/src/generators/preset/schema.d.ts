@@ -11,4 +11,5 @@ export interface PresetSchema extends Schema {
   tailwind?: boolean;
   unitTestRunner: 'vitest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
+  standalone?: boolean;
 }

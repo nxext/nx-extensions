@@ -66,6 +66,14 @@ Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
 
+#### rootProject (**hidden**)
+
+Default: `false`
+
+Type: `boolean`
+
+Create a application at the root of the workspace
+
 #### routing
 
 Default: `false`
@@ -81,6 +89,14 @@ Default: `false`
 Type: `boolean`
 
 Skip formatting files.
+
+#### skipNxJson
+
+Default: `false`
+
+Type: `boolean`
+
+Skip updating `nx.json` with default options based on values provided to this app.
 
 #### tags
 
@@ -337,6 +353,14 @@ Type: `string`
 Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
+
+#### standalone
+
+Default: `false`
+
+Type: `boolean`
+
+Generate a standalone project
 
 #### tags
 

@@ -100,4 +100,61 @@ describe('app generator', () => {
         }
       `);
   });
+
+  it('should generate files in root', async () => {
+    await applicationGenerator(host, { ...options, rootProject: true });
+
+    expect(host.exists('vite.config.ts')).toBeTruthy();
+    expect(host.exists('index.html')).toBeTruthy();
+    expect(host.exists('src/App.vue')).toBeTruthy();
+    expect(host.exists('src/main.ts')).toBeTruthy();
+
+    const tsconfig = readJson(host, 'tsconfig.json');
+    expect(tsconfig.compilerOptions.allowJs).toEqual(true);
+    const tsconfigApp = readJson(host, 'tsconfig.app.json');
+    expect(tsconfigApp.compilerOptions.outDir).toEqual('./dist/out-tsc');
+    expect(tsconfigApp.extends).toEqual('./tsconfig.json');
+    expect(tsconfigApp.exclude).toEqual([
+      'jest.config.ts',
+      'src/**/*.spec.ts',
+      'src/**/*.test.ts',
+      'src/**/*.spec.tsx',
+      'src/**/*.test.tsx',
+      'src/**/*.spec.js',
+      'src/**/*.test.js',
+      'src/**/*.spec.jsx',
+      'src/**/*.test.jsx',
+    ]);
+
+    const eslintJson = readJson(host, '.eslintrc.json');
+    expect(eslintJson.extends).toEqual([
+      'plugin:vue/vue3-essential',
+      'eslint:recommended',
+      '@vue/eslint-config-typescript',
+      '@vue/eslint-config-prettier',
+      './.eslintrc.json',
+    ]);
+
+    expect(host.exists('e2e/cypress.config.ts')).toBeTruthy();
+    const tsconfigE2E = readJson(host, 'e2e/tsconfig.json');
+    expect(tsconfigE2E).toMatchInlineSnapshot(`
+        Object {
+          "compilerOptions": Object {
+            "allowJs": true,
+            "outDir": "../dist/out-tsc",
+            "sourceMap": false,
+            "types": Array [
+              "cypress",
+              "node",
+            ],
+          },
+          "extends": "../tsconfig.base.json",
+          "include": Array [
+            "src/**/*.ts",
+            "src/**/*.js",
+            "cypress.config.ts",
+          ],
+        }
+      `);
+  });
 });
