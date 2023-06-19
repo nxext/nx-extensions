@@ -5,10 +5,10 @@ import {
   readProjectConfiguration,
   stripIndents,
   Tree,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
 import addAngularGenerator from './add-angular/generator';
 import addReactGenerator from './add-react/generator';
 //import addVueGenerator from './add-vue/generator';

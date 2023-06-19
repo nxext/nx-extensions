@@ -2,13 +2,17 @@ import {
   addDependenciesToPackageJson,
   applyChangesToString,
   convertNxGenerator,
+  ensurePackage,
   getWorkspaceLayout,
   readProjectConfiguration,
   Tree,
 } from '@nx/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { Linter } from '@nx/linter';
-import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
+import {
+  nxextSvelteVersion,
+  STENCIL_OUTPUTTARGET_VERSION,
+} from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
@@ -23,8 +27,9 @@ async function prepareSvelteLibrary(
   const { libsDir } = getWorkspaceLayout(host);
   const svelteProjectName = `${options.projectName}-svelte`;
 
-  const generators = await import('@nxext/svelte');
-  const libraryTarget = await generators.libraryGenerator(host, {
+  ensurePackage('@nxext/svelte', nxextSvelteVersion);
+  const { libraryGenerator } = await import('@nxext/svelte');
+  const libraryTarget = await libraryGenerator(host, {
     name: svelteProjectName,
     publishable: options.publishable,
     importPath: options.importPath,

@@ -1,4 +1,4 @@
-export const stencilVersion = '3.2.0';
+export const stencilVersion = '^3.4.0';
 export const stencilRouterVersion = '^1.0.1';
 export const ionicVersion = '^6.4.1';
 
@@ -27,3 +27,5 @@ export const STENCIL_STYLE_PLUGIN_VERSION: {
   pcss: '2.1.0',
   styl: '1.0.1',
 };
+
+export const nxextSvelteVersion = '^16.3.0';
