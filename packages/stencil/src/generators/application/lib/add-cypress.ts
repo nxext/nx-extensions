@@ -1,4 +1,4 @@
-import { ensurePackage, Tree } from '@nx/devkit';
+import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
 import { ApplicationSchema } from '../schema';
 import { readNxVersion } from '../../../utils/utillities';
 
@@ -8,7 +8,7 @@ export async function addCypress(host: Tree, options: ApplicationSchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nx/cypress', readNxVersion(host));
+  await ensurePackage('@nx/cypress', NX_VERSION);
   const { cypressProjectGenerator } = await import('@nx/cypress');
   return await cypressProjectGenerator(host, {
     ...options,

@@ -1,6 +1,5 @@
-import { ensurePackage, Tree } from '@nx/devkit';
+import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
 import { InitSchema } from '../schema';
-import { readNxVersion } from '../../../utils/utillities';
 
 export async function addJest(host: Tree, options: InitSchema) {
   if (options.unitTestRunner !== 'jest') {
@@ -8,7 +7,7 @@ export async function addJest(host: Tree, options: InitSchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nx/jest', readNxVersion(host));
+  await ensurePackage('@nx/jest', NX_VERSION);
   const { jestInitGenerator } = await import('@nx/jest');
 
   return jestInitGenerator(host, {});

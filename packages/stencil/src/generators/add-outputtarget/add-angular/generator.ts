@@ -5,12 +5,13 @@ import {
   ensurePackage,
   getWorkspaceLayout,
   joinPathFragments,
+  NX_VERSION,
   readProjectConfiguration,
   Tree,
 } from '@nx/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore, readNxVersion } from '../../../utils/utillities';
+import { addToGitignore } from '../../../utils/utillities';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 import * as ts from 'typescript';
 import { relative } from 'path';
@@ -32,7 +33,7 @@ async function prepareAngularLibrary(
   const angularProjectName = `${options.projectName}-angular`;
   const { libsDir } = getWorkspaceLayout(host);
 
-  await ensurePackage(host, '@nx/angular', readNxVersion(host));
+  await ensurePackage('@nx/angular', NX_VERSION);
   const generators = await import('@nx/angular/generators');
   const libraryTarget = await generators.libraryGenerator(host, {
     name: angularProjectName,

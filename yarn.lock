@@ -3895,10 +3895,10 @@
   dependencies:
     "@sinonjs/commons" "^2.0.0"
 
-"@stencil/core@3.2.2":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-3.2.2.tgz#cf3b4ffb7992d0197aa1987dbc5236c4eb98cb6b"
-  integrity sha512-wXb9cVWL0T3cTwYLveekdTFCRGx6+9hpVDEXna+N8K8OPoW6xtFAHRLv+LjOM7k59PkA8MG3IinAfV7Y+xa0Hw==
+"@stencil/core@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-3.4.0.tgz#8cdfccb5fa9fb3fd2fc63c60c5552b650e9eac21"
+  integrity sha512-kEtPtV6QegME8YgMjWrhS7KktItbhqOpAuK9aXypDdI/7bLU9iM/4DtnQGWY/DARBophk+XRBfNXcE62Bmi0dw==
 
 "@svgr/babel-plugin-add-jsx-attribute@8.0.0":
   version "8.0.0"

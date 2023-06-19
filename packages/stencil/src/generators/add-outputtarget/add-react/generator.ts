@@ -4,13 +4,16 @@ import {
   convertNxGenerator,
   ensurePackage,
   getWorkspaceLayout,
+  NX_VERSION,
   readProjectConfiguration,
+  runTasksInSerial,
   Tree,
 } from '@nx/devkit';
+import { initGenerator as jsInitGenerator } from '@nx/js';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { Linter } from '@nx/linter';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore, readNxVersion } from '../../../utils/utillities';
+import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import { addImport } from '../../../utils/ast-utils';
@@ -24,12 +27,19 @@ async function prepareReactLibrary(
   const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
 
-  await ensurePackage(host, '@nx/react', readNxVersion(host));
+  const jsInitTask = await jsInitGenerator(host, {
+    ...options,
+    tsConfigName: 'tsconfig.base.json',
+    skipFormat: true,
+  });
+
+  ensurePackage('@nx/react', NX_VERSION);
   const { libraryGenerator } = await import('@nx/react');
   const libraryTarget = await libraryGenerator(host, {
     name: reactProjectName,
     style: 'css',
     publishable: options.publishable,
+    bundler: options.publishable ? 'rollup' : 'none',
     importPath: options.importPath,
     component: false,
     skipTsConfig: false,
@@ -53,7 +63,7 @@ async function prepareReactLibrary(
 
   addToGitignore(host, `${libsDir}/${reactProjectName}/**/generated`);
 
-  return libraryTarget;
+  return runTasksInSerial(jsInitTask, libraryTarget);
 }
 
 function addReactOutputtarget(

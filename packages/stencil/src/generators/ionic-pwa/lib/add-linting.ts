@@ -3,8 +3,10 @@ import {
   ensurePackage,
   GeneratorCallback,
   joinPathFragments,
+  NX_VERSION,
   Tree,
   updateJson,
+  runTasksInSerial,
 } from '@nx/devkit';
 import { PWASchema } from '../schema';
 import { Linter } from '@nx/linter';
@@ -12,8 +14,6 @@ import {
   createStencilEslintJson,
   extraEslintDependencies,
 } from '../../../utils/lint';
-import { runTasksInSerial } from '@nx/workspace/src/utilities/run-tasks-in-serial';
-import { readNxVersion } from '../../../utils/utillities';
 
 export async function addLinting(host: Tree, options: PWASchema) {
   if (options.linter !== Linter.EsLint) {
@@ -21,7 +21,7 @@ export async function addLinting(host: Tree, options: PWASchema) {
     return () => {};
   }
 
-  await ensurePackage(host, '@nx/linter', readNxVersion(host));
+  await ensurePackage('@nx/linter', NX_VERSION);
   const { lintProjectGenerator } = await import('@nx/linter');
   const tasks: GeneratorCallback[] = [];
   const lintTask = await lintProjectGenerator(host, {
