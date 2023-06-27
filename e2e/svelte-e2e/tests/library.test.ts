@@ -1,9 +1,4 @@
-import {
-  cleanup,
-  runNxCommand,
-  runNxCommandAsync,
-  uniq,
-} from '@nx/plugin/testing';
+import { runNxCommand, runNxCommandAsync, uniq } from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 
 describe('svelte e2e', () => {
@@ -15,7 +10,6 @@ describe('svelte e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    //cleanup();
   });
 
   describe('Svelte lib', () => {

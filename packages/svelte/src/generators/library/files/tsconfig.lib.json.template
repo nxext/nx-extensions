@@ -10,7 +10,7 @@
       Svelte Preprocess cannot figure out whether you have a value or a type, so tell TypeScript
       to enforce using `import type` instead of `import` for Types.
      */
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     /**
       To have warnings/errors of the Svelte compiler at the correct position,
@@ -25,7 +25,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     /** Needed for the vite-tsconfig-paths vite plugin. */
-    "checkJs": true
+    "checkJs": true,
+    "allowJs": true
   },
 
   "include": ["src/**/*"],

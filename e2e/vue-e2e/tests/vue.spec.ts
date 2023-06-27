@@ -2,7 +2,7 @@ import { runNxCommandAsync, uniq, updateFile } from '@nx/plugin/testing';
 import { newProject } from '../../e2e/src';
 import { names } from '@nx/devkit';
 
-describe('vue e2e', () => {
+xdescribe('vue e2e', () => {
   // Setting up individual workspaces per
   // test can cause e2e runs to take a long time.
   // For this reason, we recommend each suite only

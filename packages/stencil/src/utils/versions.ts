@@ -13,9 +13,9 @@ export const eslintPluginStencilVersion = '0.3.1';
 export const STENCIL_OUTPUTTARGET_VERSION: {
   [style: string]: string;
 } = {
-  react: '^0.4.0',
-  angular: '^0.5.0',
-  vue: '^0.7.0',
+  react: '^0.5.3',
+  angular: '^0.7.1',
+  vue: '^0.8.6',
   svelte: '^0.0.3',
 };
 
@@ -23,9 +23,9 @@ export const STENCIL_STYLE_PLUGIN_VERSION: {
   [style: string]: string;
 } = {
   less: '1.0.0',
-  scss: '3.0.0',
+  scss: '3.0.4',
   pcss: '2.1.0',
   styl: '1.0.1',
 };
 
-export const nxextSvelteVersion = '^16.3.0';
+export const nxextSvelteVersion = '^16.4.0';

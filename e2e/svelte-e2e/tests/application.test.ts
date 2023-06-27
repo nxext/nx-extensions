@@ -1,6 +1,5 @@
 import {
   checkFilesExist,
-  cleanup,
   readJson,
   runNxCommand,
   runNxCommandAsync,
@@ -18,7 +17,6 @@ describe('svelte e2e', () => {
     // `nx reset` kills the daemon, and performs
     // some work which can help clean up e2e leftovers
     runNxCommand('reset');
-    cleanup();
   });
 
   describe('Svelte app', () => {
