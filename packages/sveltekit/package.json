@@ -1,6 +1,6 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "16.3.0-next.0",
+  "version": "16.5.0-next.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Sveltekit",
@@ -21,6 +21,6 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nx/devkit": "^16.3.0"
+    "@nx/devkit": "^16.5.0"
   }
 }
