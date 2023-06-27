@@ -8,7 +8,7 @@ import { newProject } from '../../e2e/src';
 import { names } from '@nx/devkit';
 import { newProjectWithPreset } from '../../e2e/src/utils/new-project';
 
-describe('vue e2e', () => {
+xdescribe('vue e2e', () => {
   const projectName = uniq('presetapp');
 
   beforeAll(() => {

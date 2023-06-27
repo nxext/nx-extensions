@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "16.3.0",
+  "version": "16.4.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -27,19 +27,19 @@
   "dependencies": {
     "@phenomnomnominal/tsquery": "4.1.1",
     "ignore": "^5.2.0",
-    "@nx/devkit": "^16.3.0",
-    "@nx/js": "^16.3.0"
+    "@nx/devkit": "^16.4.0",
+    "@nx/js": "^16.4.0"
   },
   "peerDependencies": {
-    "@nxext/svelte": "^16.3.0",
+    "@nxext/svelte": "^16.4.0",
     "@stencil/core": "^2.17.1",
-    "@nx/workspace": "16.3.0",
-    "@nx/linter": "16.3.0",
-    "@nx/cypress": "16.3.0",
-    "@nx/storybook": "16.3.0",
-    "@nx/jest": "16.3.0",
-    "@nx/react": "16.3.0",
-    "@nx/angular": "16.3.0"
+    "@nx/workspace": "16.4.0",
+    "@nx/linter": "16.4.0",
+    "@nx/cypress": "16.4.0",
+    "@nx/storybook": "16.4.0",
+    "@nx/jest": "16.4.0",
+    "@nx/react": "16.4.0",
+    "@nx/angular": "16.4.0"
   },
   "peerDependenciesMeta": {
     "@nxext/svelte": {

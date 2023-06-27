@@ -1,12 +1,12 @@
 import { spawnSync } from 'child_process';
-/*import {
+import {
   ionicVersion,
   puppeteer,
   STENCIL_OUTPUTTARGET_VERSION,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
   stencilVersion,
-} from '../../packages/stencil/src/utils/versions';*/
+} from '../../packages/stencil/src/utils/versions';
 import {
   eslintPluginSvelteVersion,
   svelteCheckVersion,
@@ -43,7 +43,6 @@ import {
   eslintPluginTypescriptVueVersion,
 } from '../../packages/vue/src/generators/utils/versions';
 
-/*
 console.log('======================================');
 console.log('Stencil:');
 console.log('======================================');
@@ -80,7 +79,7 @@ const stencilpkgs = [
 stencilpkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
-*/
+
 console.log('======================================');
 console.log('Svelte:');
 console.log('======================================');
