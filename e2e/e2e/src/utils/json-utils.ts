@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs-extra';
-import { joinPathFragments, logger } from '@nx/devkit';
+import { joinPathFragments, logger, NX_VERSION } from '@nx/devkit';
 import * as glob from 'glob';
 
 export function updatePackageJsonFiles(
@@ -17,6 +17,9 @@ export function updatePackageJsonFiles(
     for (const key in content.dependencies) {
       if (key.startsWith(`@${npmScope}/`)) {
         content.dependencies[key] = version;
+      }
+      if (key.startsWith(`@nx/`)) {
+        content.dependencies[key] = NX_VERSION;
       }
     }
     writeFileSync(p, JSON.stringify(content, null, 2));
