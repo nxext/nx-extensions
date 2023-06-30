@@ -32,7 +32,7 @@
   },
   "peerDependencies": {
     "@nxext/svelte": "^16.3.0",
-    "@stencil/core": "^2.17.1",
+    "@stencil/core": "^3.4.0",
     "@nx/workspace": "16.3.0",
     "@nx/linter": "16.3.0",
     "@nx/cypress": "16.3.0",
