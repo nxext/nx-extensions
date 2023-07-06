@@ -1,22 +1,27 @@
 import {
   checkFilesExist,
   readJson,
-  runNxCommand,
   runNxCommandAsync,
   uniq,
   updateFile,
 } from '@nx/plugin/testing';
-import { newProject } from '../../e2e/src';
+import { createTestProject, installPlugin } from '@nxext/e2e-utils';
+import { rmSync } from 'fs';
 
 describe('svelte e2e', () => {
+  let projectDirectory: string;
+
   beforeAll(() => {
-    newProject(['@nxext/svelte']);
+    projectDirectory = createTestProject();
+    installPlugin(projectDirectory, 'svelte');
   });
 
   afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommand('reset');
+    // Cleanup the test project
+    rmSync(projectDirectory, {
+      recursive: true,
+      force: true,
+    });
   });
 
   describe('Svelte app', () => {

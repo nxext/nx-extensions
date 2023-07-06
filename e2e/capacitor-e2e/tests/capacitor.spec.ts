@@ -1,13 +1,14 @@
-import { runNxCommand, runNxCommandAsync, uniq } from '@nx/plugin/testing';
-import { newProject } from '@nxext/e2e';
+import { runNxCommandAsync, uniq } from '@nx/plugin/testing';
+import { createTestProject, installPlugin } from '@nxext/e2e-utils';
+import { rmSync } from 'fs';
 
 describe('capacitor-project e2e', () => {
-  const asyncTimeout = 600_000;
-
+  let projectDirectory: string;
   const plugin = uniq('capacitor');
 
   beforeAll(async () => {
-    newProject(['@nxext/capacitor']);
+    projectDirectory = createTestProject();
+    installPlugin(projectDirectory, 'capacitor');
 
     await runNxCommandAsync(
       `generate @nxext/capacitor:app ${plugin} --appId='io.ionic.starter'`
@@ -15,13 +16,14 @@ describe('capacitor-project e2e', () => {
     await runNxCommandAsync(
       `generate @nxext/capacitor:capacitor-project --project=${plugin}`
     );
-  }, asyncTimeout);
+  });
 
   afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommand('reset');
-    //cleanup();
+    // Cleanup the test project
+    rmSync(projectDirectory, {
+      recursive: true,
+      force: true,
+    });
   });
 
   it('should build successfully', async () => {

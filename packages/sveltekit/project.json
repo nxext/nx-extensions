@@ -56,6 +56,10 @@
           }
         ]
       }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs sveltekit {args.ver} {args.tag}",
+      "dependsOn": ["build"]
     }
   },
   "tags": []

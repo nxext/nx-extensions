@@ -1,24 +1,25 @@
-import {
-  checkFilesExist,
-  runNxCommand,
-  runNxCommandAsync,
-  uniq,
-} from '@nx/plugin/testing';
-import { newProject } from '../../e2e/src';
+import { checkFilesExist, runNxCommandAsync, uniq } from '@nx/plugin/testing';
+import { createTestProject, installPlugin } from '@nxext/e2e-utils';
+import { rmSync } from 'fs';
 
-xdescribe('preact e2e', () => {
+describe('preact e2e', () => {
+  let projectDirectory: string;
+
   beforeAll(() => {
-    newProject(['@nxext/preact']);
+    projectDirectory = createTestProject();
+    installPlugin(projectDirectory, 'preact');
   });
 
   afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommand('reset');
+    // Cleanup the test project
+    rmSync(projectDirectory, {
+      recursive: true,
+      force: true,
+    });
   });
 
   describe('preact app', () => {
-    it('should build preact application', async () => {
+    xit('should build preact application', async () => {
       const plugin = uniq('preact');
       await runNxCommandAsync(`generate @nxext/preact:app ${plugin}`);
 

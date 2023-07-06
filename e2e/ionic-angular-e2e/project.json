@@ -5,20 +5,27 @@
   "sourceRoot": "e2e/ionic-angular-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nxext/e2e:e2e",
-      "options": {
-        "testTarget": "run-e2e-tests",
-        "verdaccioConfig": ".verdaccio/config.yml"
-      }
-    },
-    "run-e2e-tests": {
       "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "e2e/ionic-angular-e2e/jest.config.ts",
         "passWithNoTests": true,
         "runInBand": true
       },
-      "outputs": ["coverage/e2e/ionic-angular"]
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "dependsOn": ["^build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["e2e/ionic-angular-e2e/**/*.ts"]
+      }
     }
   },
   "tags": [],
