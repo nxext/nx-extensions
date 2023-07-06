@@ -1,20 +1,22 @@
 import { checkFilesExist, runNxCommandAsync, uniq } from '@nx/plugin/testing';
-import { newProjectWithPreset } from '../../e2e/src/utils/new-project';
+import { createTestProject, installPlugin } from '@nxext/e2e-utils';
+import { rmSync } from 'fs';
 
 xdescribe('vue e2e', () => {
   const projectName = uniq('presetappstandalone');
+  let projectDirectory: string;
 
   beforeAll(() => {
-    newProjectWithPreset(
-      '@nxext/vue',
-      `--vueAppName=${projectName} --standalone`
-    );
+    projectDirectory = createTestProject();
+    installPlugin(projectDirectory, 'vue');
   });
 
-  afterEach(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommandAsync('reset');
+  afterAll(() => {
+    // Cleanup the test project
+    rmSync(projectDirectory, {
+      recursive: true,
+      force: true,
+    });
   });
 
   describe('preset', () => {

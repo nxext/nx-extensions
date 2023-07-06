@@ -66,6 +66,10 @@
         ]
       },
       "outputs": ["{options.outputPath}"]
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs preact {args.ver} {args.tag}",
+      "dependsOn": ["build"]
     }
   },
   "tags": []

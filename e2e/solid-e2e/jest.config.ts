@@ -1,17 +1,11 @@
 export default {
   displayName: 'solid-e2e',
-
-  globals: {},
+  preset: '../../jest.preset.js',
   transform: {
-    '^.+\\.[tj]s$': [
-      'ts-jest',
-      {
-        tsconfig: '<rootDir>/tsconfig.spec.json',
-      },
-    ],
+    '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/e2e/solid-e2e',
-  preset: '../../jest.preset.js',
-  maxWorkers: 1,
+  globalSetup: '../../tools/scripts/start-local-registry.ts',
+  globalTeardown: '../../tools/scripts/stop-local-registry.ts',
 };

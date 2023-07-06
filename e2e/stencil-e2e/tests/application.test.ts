@@ -1,23 +1,26 @@
 import {
   checkFilesExist,
-  cleanup,
-  runNxCommand,
   runNxCommandAsync,
   uniq,
   runCommand,
 } from '@nx/plugin/testing';
-import { newProject } from '../../e2e/src';
+import { createTestProject, installPlugin } from '@nxext/e2e-utils';
+import { rmSync } from 'fs';
 
 describe('application e2e', () => {
+  let projectDirectory: string;
+
   beforeAll(() => {
-    newProject(['@nxext/stencil']);
+    projectDirectory = createTestProject();
+    installPlugin(projectDirectory, 'stencil');
   });
 
   afterAll(() => {
-    // `nx reset` kills the daemon, and performs
-    // some work which can help clean up e2e leftovers
-    runNxCommand('reset');
-    cleanup();
+    // Cleanup the test project
+    rmSync(projectDirectory, {
+      recursive: true,
+      force: true,
+    });
   });
 
   describe('app', () => {

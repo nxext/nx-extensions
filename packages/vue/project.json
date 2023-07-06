@@ -56,6 +56,10 @@
         "jestConfig": "packages/vue/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs vue {args.ver} {args.tag}",
+      "dependsOn": ["build"]
     }
   },
   "tags": []
