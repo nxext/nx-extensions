@@ -1,14 +1,14 @@
-import pageGenerator, { SveltePageSchema } from './page';
+import libraryGenerator, { SvelteLibrarySchema } from './library';
 import { uniq } from '@nx/plugin/testing';
 import { names, Tree } from '@nx/devkit';
 import { createTestProject } from '../utils/testing';
 
-describe('page schematic', () => {
+describe('library schematic', () => {
   let tree: Tree;
   const projectName = uniq('testprojekt');
-  const pageName = uniq('home');
-  const options: SveltePageSchema = {
-    name: pageName,
+  const libraryName = uniq('test');
+  const options: SvelteLibrarySchema = {
+    name: libraryName,
     project: projectName,
     unitTestRunner: 'vitest',
   };
@@ -18,15 +18,15 @@ describe('page schematic', () => {
   });
 
   it('should run successfully', async () => {
-    await expect(pageGenerator(tree, options)).resolves.not.toThrowError();
+    await expect(libraryGenerator(tree, options)).resolves.not.toThrowError();
   });
 
   it('should add file', async () => {
-    await pageGenerator(tree, options);
-    const name = names(pageName);
+    await libraryGenerator(tree, options);
+    const name = names(libraryName);
     expect(
       tree.exists(
-        `apps/${projectName}/src/routes/${name.fileName}/${name.className}.svelte`
+        `apps/${projectName}/src/lib/${name.fileName}/${name.className}.svelte`
       )
     );
   });
