@@ -47,7 +47,7 @@
     "rest": {
       "type": "string",
       "description": "REST endpoints (GET, POST)",
-      "x-prompt": "What endpoints would you like to generate for the server API (g,p) ?",
+      "x-prompt": "What endpoints would you like to generate for the server API (get,post,put,patch,delete) ?",
       "alias": "r"
     },
     "project": {
