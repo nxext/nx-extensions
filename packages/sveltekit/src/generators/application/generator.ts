@@ -36,7 +36,7 @@ function normalizeOptions(
     joinPathFragments(`${workspaceRoot}/dist/${projectRoot}`)
   );
 
-  return {
+  const config = {
     ...options,
     distDir,
     projectName,
@@ -44,6 +44,8 @@ function normalizeOptions(
     projectDirectory,
     parsedTags,
   };
+
+  return config;
 }
 
 export async function applicationGenerator(
