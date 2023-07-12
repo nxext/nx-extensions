@@ -1,4 +1,4 @@
-import <%= fileName %> from './<%= fileName %>.svelte'
+import <%= fileName %> from './+page.svelte'
 import { render } from '@testing-library/svelte'
 
 it('it works', async () => {

@@ -16,19 +16,19 @@ export function createPageInProject(tree: Tree, options: SveltePageSchema) {
   const shouldWriteLayout = options.layout;
   const shouldWriteLoader = options.loader;
 
-  generateFiles(
-    tree,
-    joinPathFragments(__dirname, '../files/src/routes'),
-    joinPathFragments(
-      `${projectConfig.sourceRoot}/${projectDirectory}/${targetPath}`
-    ),
-    names(options.name)
-  );
-
   if (shouldWriteLayout) {
     generateFiles(
       tree,
       joinPathFragments(__dirname, '../files/src/layout'),
+      joinPathFragments(
+        `${projectConfig.sourceRoot}/${projectDirectory}/${targetPath}`
+      ),
+      names(options.name)
+    );
+  } else {
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, '../files/src/plain'),
       joinPathFragments(
         `${projectConfig.sourceRoot}/${projectDirectory}/${targetPath}`
       ),

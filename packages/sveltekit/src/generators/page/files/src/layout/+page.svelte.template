@@ -1,0 +1,7 @@
+<script language="ts">
+    import { layout } from '$app/layouts';
+</script>
+
+<layout>
+    <h1><%= name %></h1>
+</layout>
