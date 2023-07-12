@@ -15,11 +15,16 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
 
   const targetPath = options.targetPath;
 
-  const shouldWritePage = options.page;
+  let shouldWritePage = options.page;
   const shouldWriteLayout = options.layout;
   const shouldWriteDataLoader = options.data;
   const shouldWriteErrorPage = options.error;
   const shouldWriteServer = options.server;
+
+  // layout includes page file
+  if (shouldWritePage && shouldWriteLayout) {
+    shouldWritePage = false;
+  }
 
   const routesFolder = `${projectConfig.sourceRoot}/${projectDirectory}/routes`;
   const destinationFolder = targetPath
