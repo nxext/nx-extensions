@@ -18,36 +18,41 @@
       "type": "boolean",
       "description": "Whether to create a page file",
       "x-prompt": "Would you like to generate a page?",
+      "default": true,
       "alias": "p"
     },
     "server": {
       "type": "boolean",
       "description": "Whether to create a server file",
       "x-prompt": "Would you like to generate a server API?",
-      "alias": "s"
+      "alias": "s",
+      "default": false
     },
     "layout": {
       "type": "boolean",
       "description": "Whether to create a layout file",
       "x-prompt": "Would you like to generate a layout?",
-      "alias": "l"
+      "alias": "l",
+      "default": false
     },
     "data": {
       "type": "boolean",
       "description": "Whether to create a data loader file",
       "x-prompt": "Would you like to generate a data loader for the page?",
-      "alias": "d"
+      "alias": "d",
+      "default": false
     },
     "error": {
       "type": "boolean",
       "description": "Whether to create an error page",
       "x-prompt": "Would you like to generate an error page for the data loader?",
-      "alias": "e"
+      "alias": "e",
+      "default": false
     },
-    "rest": {
+    "methods": {
       "type": "string",
-      "description": "REST endpoints (GET, POST)",
-      "x-prompt": "What endpoints would you like to generate for the server API (get,post,put,patch,delete) ?",
+      "description": "HTTP methods for endpoints (GET, POST)",
+      "x-prompt": "What methods would you like to support (get,post,put,patch,delete) ?",
       "alias": "r"
     },
     "project": {
