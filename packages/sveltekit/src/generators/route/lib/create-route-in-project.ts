@@ -11,7 +11,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);
   const projectDirectory = options.directory ?? '';
 
-  options.restMethods = (options.rest || '').split(',');
+  options.methodList = (options.methods || '').split(',');
 
   const targetPath = options.targetPath;
 
