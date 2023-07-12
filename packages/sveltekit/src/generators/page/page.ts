@@ -6,7 +6,7 @@ export interface SveltePageSchema {
   targetPath?: string;
   directory?: string;
   layout?: boolean;
-  loader?: boolean;
+  data?: boolean;
   error?: boolean;
   unitTestRunner: 'vitest' | 'none';
 }
