@@ -3,8 +3,8 @@ import { Tree } from '@nx/devkit';
 export interface SvelteRouteSchema {
   name: string;
   project: string;
-  rest?: string;
-  restMethods?: string[];
+  methods?: string;
+  methodList?: string[];
   targetPath?: string;
   directory?: string;
   server?: boolean;

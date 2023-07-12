@@ -1,7 +1,7 @@
 import { json } from '.@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
-<%= if (restMethods.includes('get')) { %>
+<%= if (methodList.includes('get')) { %>
 export const GET: RequestHandler = async (event) => {
   // take any params data and use it to fetch data for the response
   // return new Response('<%= name %>')
@@ -11,7 +11,7 @@ export const GET: RequestHandler = async (event) => {
 };
 <% } %>
 
-<%= if (restMethods.includes('post')) { %>
+<%= if (methodList.includes('post')) { %>
 export const POST: RequestHandler = async (event) => {
   // take the post data from the event and post it somewhere
   // return new Response('<%= name %>')
@@ -21,7 +21,7 @@ export const POST: RequestHandler = async (event) => {
 };
 <% } %>
 
-<%= if (restMethods.includes('put')) { %>
+<%= if (methodList.includes('put')) { %>
 export const PUT: RequestHandler = async (event) => {  
   // take the put data from the event and put it somewhere
   // return new Response('<%= name %>')
@@ -31,7 +31,7 @@ export const PUT: RequestHandler = async (event) => {
 };
 <% } %>
 
-<%= if (restMethods.includes('patch')) { %>
+<%= if (methodList.includes('patch')) { %>
 export const PATCH: RequestHandler = async (event) => {  
   // take the patch data from the event and patch it somewhere
   // return new Response('<%= name %>')
@@ -41,7 +41,7 @@ export const PATCH: RequestHandler = async (event) => {
 };
 <% } %>
 
-<%= if (restMethods.includes('delete')) { %>
+<%= if (methodList.includes('delete')) { %>
 export const DELETE: RequestHandler = async (event) => {  
   // return new Response('<%= name %>')
   return json({
