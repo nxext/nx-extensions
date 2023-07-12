@@ -1,7 +1,13 @@
 <script language="ts">
+    import { page } from '$app/store';
     import { layout } from '$app/layouts';
 </script>
 
 <layout>
     <h1><%= name %></h1>
+
+    <pre>
+        {JSON.stringify($page, null, 2)}
+    </pre>    
 </layout>
+

@@ -13,6 +13,11 @@
       "factory": "./src/generators/component/component",
       "schema": "./src/generators/component/schema.json",
       "description": "component generator"
+    },
+    "page": {
+      "factory": "./src/generators/page/page#pageGenerator",
+      "schema": "./src/generators/page/schema.json",
+      "description": "page generator"
     }
   }
 }
