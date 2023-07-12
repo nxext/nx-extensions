@@ -24,14 +24,21 @@
       "executor": "@nx/vite:preview"
     },
     "component": {
-      "executor": "nxext-sveltekit:component",
+      "executor": "@nxext/sveltekit:component",
+      "options": {
+        "project": "<%= name %>",
+        "unitTestRunner": "vitest"
+      }
+    },
+    "page": {
+      "executor": "@nxext/sveltekit:page",
       "options": {
         "project": "<%= name %>",
         "unitTestRunner": "vitest"
       }
     },
     "add": {
-      "executor": "nxext-sveltekit:add"
+      "executor": "@nxext/sveltekit:add"
     },
     "lint": {
       "executor": "@nx/linter:eslint",
