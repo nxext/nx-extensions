@@ -1,7 +1,9 @@
-<script>
-    import { layout } from '$app/layouts';
+<script language="ts">
+    import { page } from '$app/store';
 </script>
 
-<layout>
-    <h1><%= name %></h1>
-</layout>
+<h1><%= name %></h1>
+
+<pre>
+    {JSON.stringify($page, null, 2)}
+</pre>

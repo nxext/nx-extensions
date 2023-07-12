@@ -40,6 +40,32 @@ The `project.json` is for the sveltekit app is preconfigured with the following 
 - Run `nx component my-app` to add a component to the app
 - Run `nx page my-app` to add a page to the app
 
+## Generate pages
+
+Pages will be generated relative to the `routes` folder of the app.
+Use the `targetPath` (or `t` alias) option to specify the specific route of the page
+
+Generate a page `posts` in the root routes folder `/routes`.
+The page will have additional data loader `d`
+
+```
+nx page posts -d
+```
+
+Generate the page `[slug]` in the `routes/posts` routes folder of the app
+The page will have additional data loader `d` and layout `l` files.
+
+```
+nx page [slug] -dl -t posts
+```
+
+Generate the page `[width]x[height]` in the `routes/images/[..file]` routes folder of the app
+The page will additionally have: loader `d`, layout `l` and error page `e`
+
+```
+nx page [width]x[height] -dle -t images/[..file]
+```
+
 ## Run your project
 
 > Note: you may see an error in your command line when you run any of the following commands with older versions of this extension: `config.kit.target is no longer required, and should be removed`. If you see this error, remove the `kit` object from your `svelte.config.js` file at the root of your app.
