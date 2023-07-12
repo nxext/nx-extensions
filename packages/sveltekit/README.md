@@ -40,30 +40,37 @@ The `project.json` is for the sveltekit app is preconfigured with the following 
 - Run `nx component my-app` to add a component to the app
 - Run `nx page my-app` to add a page to the app
 
-## Generate pages
+## Generate routes
 
-Pages will be generated relative to the `routes` folder of the app.
-Use the `targetPath` (or `t` alias) option to specify the specific route of the page
+Routes will be generated relative to the `routes` folder of the app.
+Use the `targetPath` (or `t` alias) option to specify the parent route folder target of the route
 
-Generate a page `posts` in the root routes folder `/routes`.
+Generate a route `posts` in the root `/routes` folder.
 The page will have additional data loader `d`
 
 ```
-nx page posts -d
+nx route posts -d
 ```
 
-Generate the page `[slug]` in the `routes/posts` routes folder of the app
-The page will have additional data loader `d` and layout `l` files.
+Generate the route `[slug]` in the `routes/posts` folder of the app
+The route will have a page `p`, data loader `d` and layout `l` files.
 
 ```
-nx page [slug] -dl -t posts
+nx route [slug] -pdl -t posts
 ```
 
-Generate the page `[width]x[height]` in the `routes/images/[..file]` routes folder of the app
-The page will additionally have: loader `d`, layout `l` and error page `e`
+Generate the route `[width]x[height]` in the `routes/images/[...file]` folder.
+The route will have a page `p`, data loader `d`, layout `l` and an error page `e`
 
 ```
-nx page [width]x[height] -dle -t images/[..file]
+nx route [width]x[height] -pdle -t images/[...file]
+```
+
+Generate the route `posts` in the `routes/api` folder.
+The route will have a server file `s` with REST endpoints for GET `get`, POST `post` etc.
+
+```
+nx route posts -t api --server --rest get,post,delete
 ```
 
 ## Run your project

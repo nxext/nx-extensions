@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "Page",
+  "$id": "Route",
   "title": "",
   "type": "object",
   "properties": {
@@ -13,6 +13,18 @@
       },
       "x-prompt": "What name would you like to use?",
       "alias": "n"
+    },
+    "page": {
+      "type": "boolean",
+      "description": "Whether to create a page file",
+      "x-prompt": "Would you like to generate a page?",
+      "alias": "p"
+    },
+    "server": {
+      "type": "boolean",
+      "description": "Whether to create a server file",
+      "x-prompt": "Would you like to generate a server API?",
+      "alias": "s"
     },
     "layout": {
       "type": "boolean",
@@ -32,11 +44,16 @@
       "x-prompt": "Would you like to generate an error page for the data loader?",
       "alias": "e"
     },
+    "rest": {
+      "type": "string",
+      "description": "REST endpoints (GET, POST)",
+      "x-prompt": "What endpoints would you like to generate for the server API (g,p) ?",
+      "alias": "r"
+    },
     "project": {
       "type": "string",
       "description": "Project where the component is generated",
-      "x-prompt": "What project would you like to use?",
-      "alias": "p"
+      "x-prompt": "What project would you like to use?"
     },
     "targetPath": {
       "type": "string",

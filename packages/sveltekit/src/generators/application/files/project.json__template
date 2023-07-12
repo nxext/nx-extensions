@@ -30,8 +30,8 @@
         "unitTestRunner": "vitest"
       }
     },
-    "page": {
-      "executor": "@nxext/sveltekit:page",
+    "route": {
+      "executor": "@nxext/sveltekit:route",
       "options": {
         "project": "<%= name %>",
         "unitTestRunner": "vitest"
