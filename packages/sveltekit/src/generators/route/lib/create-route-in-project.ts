@@ -5,34 +5,49 @@ import {
   readProjectConfiguration,
   Tree,
 } from '@nx/devkit';
-import { SveltePageSchema } from '../page';
+import { SvelteRouteSchema } from '../route';
 
-export function createPageInProject(tree: Tree, options: SveltePageSchema) {
+export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);
   const projectDirectory = options.directory ?? '';
 
+  options.restMethods = (options.rest || '').split(',');
+
   const targetPath = options.targetPath;
 
+  const shouldWritePage = options.page;
   const shouldWriteLayout = options.layout;
   const shouldWriteDataLoader = options.data;
   const shouldWriteErrorPage = options.error;
+  const shouldWriteServer = options.server;
 
   const routesFolder = `${projectConfig.sourceRoot}/${projectDirectory}/routes`;
   const destinationFolder = targetPath
     ? `${routesFolder}/${targetPath}`
     : routesFolder;
 
+  if (shouldWriteServer) {
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, '../files/src/server'),
+      joinPathFragments(destinationFolder),
+      names(options.name)
+    );
+  }
+
+  if (shouldWritePage) {
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, '../files/src/page'),
+      joinPathFragments(destinationFolder),
+      names(options.name)
+    );
+  }
+
   if (shouldWriteLayout) {
     generateFiles(
       tree,
       joinPathFragments(__dirname, '../files/src/layout'),
-      joinPathFragments(destinationFolder),
-      names(options.name)
-    );
-  } else {
-    generateFiles(
-      tree,
-      joinPathFragments(__dirname, '../files/src/plain'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );

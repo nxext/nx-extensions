@@ -1,0 +1,39 @@
+import { json } from '.@sveltejs/kit';
+import type { RequestHandler } from './$types';
+
+<%= if (restMethods.includes('get')) { %>
+export const GET: RequestHandler = async (event) => {
+  // return new Response('<%= name %>')
+  return json({
+    success: true
+  })  
+};
+<% } %>
+
+<%= if (restMethods.includes('post')) { %>
+export const POST: RequestHandler = async (event) => {  
+  // return new Response('<%= name %>')
+  return json({
+    success: true
+  })
+};
+<% } %>
+
+<%= if (restMethods.includes('delete')) { %>
+export const DELETE: RequestHandler = async (event) => {  
+  // return new Response('<%= name %>')
+  return json({
+    success: true
+  })
+};
+<% } %>
+
+<%= if (restMethods.includes('patch')) { %>
+export const PATCH: RequestHandler = async (event) => {  
+  // return new Response('<%= name %>')
+  return json({
+    success: true
+  })
+};
+<% } %>
+
