@@ -1,8 +1,8 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "16.5.0-next.0",
+  "version": "16.5.0-next.1",
   "license": "MIT",
-  "author": "Dominik Pieper",
+  "author": "Kristian Mandrup",
   "description": "Nx plugin for Sveltekit",
   "homepage": "https://nxext.dev/",
   "keywords": [

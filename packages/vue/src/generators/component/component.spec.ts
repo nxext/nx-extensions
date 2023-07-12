@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { Tree, updateJson } from '@nx/devkit';
+import { Tree } from '@nx/devkit';
 import { Linter } from '@nx/linter';
 import { Schema } from './schema';
 import { applicationGenerator } from '../application/application';

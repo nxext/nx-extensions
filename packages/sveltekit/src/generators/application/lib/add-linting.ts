@@ -19,6 +19,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     '@nx/linter',
     NX_VERSION
   );
+
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,
     project: options.name,

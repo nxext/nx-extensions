@@ -7,7 +7,7 @@ import {
 import { createTestProject, installPlugin } from '@nxext/e2e-utils';
 import { rmSync } from 'fs';
 
-xdescribe('sveltekit e2e', () => {
+describe('sveltekit e2e', () => {
   let projectDirectory: string;
 
   beforeAll(() => {

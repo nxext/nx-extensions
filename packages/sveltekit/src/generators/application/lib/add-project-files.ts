@@ -9,10 +9,14 @@ export function addFiles(host: Tree, options: NormalizedSchema) {
     offsetFromRoot: offsetFromRoot(options.projectRoot),
     template: '',
   };
-  generateFiles(
-    host,
-    path.join(__dirname, '../files'),
-    options.projectRoot,
-    templateOptions
-  );
+  try {
+    generateFiles(
+      host,
+      path.join(__dirname, '../files'),
+      options.projectRoot,
+      templateOptions
+    );
+  } catch (e) {
+    throw new Error(e);
+  }
 }

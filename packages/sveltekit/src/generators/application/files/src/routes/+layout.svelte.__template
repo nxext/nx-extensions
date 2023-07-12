@@ -1,0 +1,13 @@
+<script lang="ts">
+    import '../app.css'
+</script>
+
+<nav>
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+    </ul>
+</nav>
+
+<slot/>

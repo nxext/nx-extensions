@@ -2,6 +2,7 @@
 	"name": "<%= fileName %>",
 	"version": "0.0.1",
   "type": "module",
+  "license": "MIT",
   "devDependencies": {
     "svelte": "<%= offsetFromRoot %>node_modules/svelte"
   }

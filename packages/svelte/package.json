@@ -26,8 +26,8 @@
   "typings": "./src/index.d.ts",
   "schematics": "./generators.json",
   "peerDependencies": {
-    "svelte": "^3.44.2",
-    "svelte-preprocess": "^4.4.2",
+    "svelte": "^3.47.0",
+    "svelte-preprocess": "^5.0.4",
     "@nx/workspace": "^16.5.0",
     "@nx/linter": "^16.5.0",
     "@nx/cypress": "^16.5.0"
