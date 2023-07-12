@@ -9,6 +9,10 @@ import { sortObjectByKeys } from 'nx/src/utils/object-sort';
 import { default as runCommands } from 'nx/src/executors/run-commands/run-commands.impl';
 import { AddExecutorSchema } from './schema';
 
+const packageMap = {
+  picocss: '@picocss/pico',
+};
+
 export default async function runExecutor(
   options: AddExecutorSchema,
   context: ExecutorContext
@@ -32,9 +36,11 @@ export default async function runExecutor(
     packageName
   ]?.replace(/[\\~^]/g, '');
 
+  const npmPackageName = packageMap[options.package] || options.package;
+
   await runCommands(
     {
-      command: `npx --package=${packageName}@${packageVersion} svelte-add ${options.package}`,
+      command: `npx --package=${packageName}@${packageVersion} svelte-add ${npmPackageName}`,
       cwd: projectRoot,
       parallel: false,
       color: true,

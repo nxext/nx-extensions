@@ -1,0 +1,64 @@
+{
+  "name": "<%= name %>",
+  "$schema": "<%= offsetFromRoot %>/node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "<%= projectDirectory %>/<%= name %>/src",
+  "projectType": "application",
+  "tags": ["scope:app"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/<%= projectDirectory %>/<%= name %>"
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test"
+    },
+    "serve": {
+      "executor": "@nx/vite:serve"
+    },
+    "dev": {
+      "executor": "@nx/vite:dev-server"
+    },
+    "preview": {
+      "executor": "@nx/vite:preview"
+    },
+    "component": {
+      "executor": "nxext-sveltekit:component",
+      "options": {
+        "project": "<%= name %>",
+        "unitTestRunner": "vitest"
+      }
+    },
+    "add": {
+      "executor": "nxext-sveltekit:add"
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["<%= projectDirectory %>/frontend/**/*.{ts,svelte,spec.ts}"],
+        "ignorePath": "<%= projectDirectory %>/<%= name %>/.gitignore"
+      }
+    },
+    "check": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "command": "svelte-check",
+        "cwd": "apps/<%= name %>",
+        "tsconfig": "./tsconfig.app.json"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "command": "playwright test",
+        "cwd": "<%= projectDirectory %>/<%= name %>"
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+  }

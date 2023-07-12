@@ -1,0 +1,6 @@
+import * as api from './+page'
+
+it('it works', async () => {
+  const data = await api.load()
+  expect(data).toEqual({})
+})
