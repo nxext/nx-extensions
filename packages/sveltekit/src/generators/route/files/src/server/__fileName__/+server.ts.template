@@ -3,6 +3,7 @@ import type { RequestHandler } from './$types';
 
 <%= if (restMethods.includes('get')) { %>
 export const GET: RequestHandler = async (event) => {
+  // take any params data and use it to fetch data for the response
   // return new Response('<%= name %>')
   return json({
     success: true
@@ -11,7 +12,28 @@ export const GET: RequestHandler = async (event) => {
 <% } %>
 
 <%= if (restMethods.includes('post')) { %>
-export const POST: RequestHandler = async (event) => {  
+export const POST: RequestHandler = async (event) => {
+  // take the post data from the event and post it somewhere
+  // return new Response('<%= name %>')
+  return json({
+    success: true
+  })
+};
+<% } %>
+
+<%= if (restMethods.includes('put')) { %>
+export const PUT: RequestHandler = async (event) => {  
+  // take the put data from the event and put it somewhere
+  // return new Response('<%= name %>')
+  return json({
+    success: true
+  })
+};
+<% } %>
+
+<%= if (restMethods.includes('patch')) { %>
+export const PATCH: RequestHandler = async (event) => {  
+  // take the patch data from the event and patch it somewhere
   // return new Response('<%= name %>')
   return json({
     success: true
@@ -28,12 +50,4 @@ export const DELETE: RequestHandler = async (event) => {
 };
 <% } %>
 
-<%= if (restMethods.includes('patch')) { %>
-export const PATCH: RequestHandler = async (event) => {  
-  // return new Response('<%= name %>')
-  return json({
-    success: true
-  })
-};
-<% } %>
 
