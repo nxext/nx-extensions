@@ -1,5 +1,5 @@
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
-import { createLibraryInProject } from './lib/create-library-in-project';
+import { createLibInProject } from './lib/create-library-in-project';
 import { Tree } from '@nx/devkit';
 export interface SvelteLibrarySchema {
   name: string;
@@ -8,12 +8,12 @@ export interface SvelteLibrarySchema {
   unitTestRunner: 'vitest' | 'none';
 }
 
-export async function LibraryGenerator(
+export async function libraryGenerator(
   tree: Tree,
   options: SvelteLibrarySchema
 ) {
-  createLibraryInProject(tree, options);
+  createLibInProject(tree, options);
   addExportsToBarrel(tree, options);
 }
 
-export default LibraryGenerator;
+export default libraryGenerator;
