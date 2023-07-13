@@ -8,10 +8,12 @@ export interface SvelteRouteSchema {
   targetPath?: string;
   directory?: string;
   api?: boolean;
-  clientLoader?: boolean;
-  serverLoader?: boolean;
   page?: boolean;
+  pageClientLoader?: boolean;
+  pageServerLoader?: boolean;
   layout?: boolean;
+  layoutClientLoader?: boolean;
+  layoutServerLoader?: boolean;
   error?: boolean;
   unitTestRunner: 'vitest' | 'none';
 }
