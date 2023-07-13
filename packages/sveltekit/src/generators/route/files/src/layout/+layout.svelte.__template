@@ -1,4 +1,0 @@
-<div class="<%= name %>-container">
-    <slot/>
-</div>
-
