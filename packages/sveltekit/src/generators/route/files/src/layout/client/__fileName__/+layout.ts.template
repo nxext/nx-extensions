@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types';
+import type { LayoutLoad } from './$types';
 
-export const load: PageServerLoad = async (event) => {
+export const load: LayoutLoad = async (event) => {
   return {}
 };
