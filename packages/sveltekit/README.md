@@ -46,31 +46,31 @@ Routes will be generated relative to the `routes` folder of the app.
 Use the `targetPath` (or `t` alias) option to specify the parent route folder target of the route
 
 Generate a route `posts` in the root `/routes` folder.
-The page will have additional data loader `d`
+The page will have additional client page data loader `c`
 
 ```
 nx route posts -d
 ```
 
 Generate the route `[slug]` in the `routes/posts` folder of the app
-The route will have a page `p`, data loader `d` and layout `l` files.
+The route will have a page `p`, client page data loader `c` and a layout page `l`.
 
 ```
 nx route [slug] -pdl -t posts
 ```
 
 Generate the route `[width]x[height]` in the `routes/images/[...file]` folder.
-The route will have a page `p`, data loader `d`, layout `l` and an error page `e`
+The route will have a page `p`, client data loader `c`, layout page `l` and an error page `e`
 
 ```
 nx route [width]x[height] -pdle -t images/[...file]
 ```
 
 Generate the route `posts` in the `routes/api` folder.
-The route will have a server API file `a` with endpoint for the HTTP methods GET `get` and POST `post` and a server loader file `s`
+The route will have a server API file `a` with endpoint for the HTTP methods `m` GET `get` and POST `post` and a server loader file `s`
 
 ```
-nx route posts -t api -a -s --methods get,post
+nx route posts -t api -a -s -m get,post
 ```
 
 ## Run your project
