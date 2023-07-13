@@ -17,9 +17,10 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
 
   let shouldWritePage = options.page;
   const shouldWriteLayout = options.layout;
-  const shouldWriteDataLoader = options.data;
+  const shouldWriteClientLoader = options.clientLoader;
+  const shouldWriteServerLoader = options.serverLoader;
   const shouldWriteErrorPage = options.error;
-  const shouldWriteServer = options.server;
+  const shouldWriteServerAPI = options.api;
 
   // layout includes page file
   if (shouldWritePage && shouldWriteLayout) {
@@ -31,10 +32,10 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
     ? `${routesFolder}/${targetPath}`
     : routesFolder;
 
-  if (shouldWriteServer) {
+  if (shouldWriteServerAPI) {
     generateFiles(
       tree,
-      joinPathFragments(__dirname, '../files/src/server'),
+      joinPathFragments(__dirname, '../files/src/server/api'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );
@@ -67,10 +68,19 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
     );
   }
 
-  if (shouldWriteDataLoader) {
+  if (shouldWriteClientLoader) {
     generateFiles(
       tree,
-      joinPathFragments(__dirname, '../files/src/data'),
+      joinPathFragments(__dirname, '../files/src/client'),
+      joinPathFragments(destinationFolder),
+      names(options.name)
+    );
+  }
+
+  if (shouldWriteServerLoader) {
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, '../files/src/server/loader'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );
