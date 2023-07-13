@@ -1,0 +1,8 @@
+import * as loader from './+layout'
+
+describe('<%= name %> loader', () => {
+  it('it works', async () => {
+    const data = await api.load()
+    expect(data).toEqual({})
+  })
+})

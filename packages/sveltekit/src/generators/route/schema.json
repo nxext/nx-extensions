@@ -28,11 +28,18 @@
       "alias": "a",
       "default": false
     },
-    "serverLoader": {
+    "pageServerLoader": {
       "type": "boolean",
       "description": "Whether to create a server data loader file",
       "x-prompt": "Would you like to generate a server data loader for the page?",
       "alias": "s",
+      "default": false
+    },
+    "pageClientLoader": {
+      "type": "boolean",
+      "description": "Whether to create a client data loader file",
+      "x-prompt": "Would you like to generate a client data loader for the page?",
+      "alias": "c",
       "default": false
     },
     "layout": {
@@ -42,11 +49,16 @@
       "alias": "l",
       "default": false
     },
-    "clientLoader": {
+    "layoutServerLoader": {
       "type": "boolean",
-      "description": "Whether to create a client data loader file",
-      "x-prompt": "Would you like to generate a client data loader for the page?",
-      "alias": "c",
+      "description": "Whether to create a layout server data loader file",
+      "x-prompt": "Would you like to generate a server data loader for the layout?",
+      "default": false
+    },
+    "layoutClientLoader": {
+      "type": "boolean",
+      "description": "Whether to create a layout client data loader file",
+      "x-prompt": "Would you like to generate a client loader for the layout?",
       "default": false
     },
     "error": {
@@ -60,7 +72,7 @@
       "type": "string",
       "description": "HTTP methods for endpoints (GET, POST)",
       "x-prompt": "What methods would you like to support (get,post,put,patch,delete) ?",
-      "alias": "r"
+      "alias": "m"
     },
     "project": {
       "type": "string",

@@ -17,8 +17,10 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
 
   let shouldWritePage = options.page;
   const shouldWriteLayout = options.layout;
-  const shouldWriteClientLoader = options.clientLoader;
-  const shouldWriteServerLoader = options.serverLoader;
+  const shouldWritePageClientLoader = options.pageClientLoader;
+  const shouldWritePageServerLoader = options.pageServerLoader;
+  const shouldWriteLayoutClientLoader = options.layoutClientLoader;
+  const shouldWriteLayoutServerLoader = options.layoutServerLoader;
   const shouldWriteErrorPage = options.error;
   const shouldWriteServerAPI = options.api;
 
@@ -35,7 +37,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
   if (shouldWriteServerAPI) {
     generateFiles(
       tree,
-      joinPathFragments(__dirname, '../files/src/server/api'),
+      joinPathFragments(__dirname, '../files/src/api'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );
@@ -44,7 +46,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
   if (shouldWritePage) {
     generateFiles(
       tree,
-      joinPathFragments(__dirname, '../files/src/page'),
+      joinPathFragments(__dirname, '../files/src/page/page'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );
@@ -53,7 +55,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
   if (shouldWriteLayout) {
     generateFiles(
       tree,
-      joinPathFragments(__dirname, '../files/src/layout'),
+      joinPathFragments(__dirname, '../files/src/layout/page'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );
@@ -68,19 +70,37 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
     );
   }
 
-  if (shouldWriteClientLoader) {
+  if (shouldWritePageClientLoader) {
     generateFiles(
       tree,
-      joinPathFragments(__dirname, '../files/src/client'),
+      joinPathFragments(__dirname, '../files/src/page/client'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );
   }
 
-  if (shouldWriteServerLoader) {
+  if (shouldWritePageServerLoader) {
     generateFiles(
       tree,
-      joinPathFragments(__dirname, '../files/src/server/loader'),
+      joinPathFragments(__dirname, '../files/src/page/server'),
+      joinPathFragments(destinationFolder),
+      names(options.name)
+    );
+  }
+
+  if (shouldWriteLayoutClientLoader) {
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, '../files/src/layout/client'),
+      joinPathFragments(destinationFolder),
+      names(options.name)
+    );
+  }
+
+  if (shouldWriteLayoutServerLoader) {
+    generateFiles(
+      tree,
+      joinPathFragments(__dirname, '../files/src/layout/server'),
       joinPathFragments(destinationFolder),
       names(options.name)
     );
