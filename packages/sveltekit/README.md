@@ -67,10 +67,10 @@ nx route [width]x[height] -pdle -t images/[...file]
 ```
 
 Generate the route `posts` in the `routes/api` folder.
-The route will have a server file `s` with endpoint for the HTTP methods GET `get` and POST `post`
+The route will have a server API file `a` with endpoint for the HTTP methods GET `get` and POST `post` and a server loader file `s`
 
 ```
-nx route posts -t api --server --methods get,post
+nx route posts -t api -a -s --methods get,post
 ```
 
 ## Run your project
