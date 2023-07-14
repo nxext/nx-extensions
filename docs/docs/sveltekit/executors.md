@@ -10,6 +10,6 @@ Options can be configured in the 'project.json' when defining the executor, or w
 
 Type: `string`
 
-Possible values: `tailwindcss`, `mdsvex`, `graphql`, `postcss`, `bulma`, `windicss`, `firebase-hosting`
+Possible values: `tailwindcss`, `mdsvex`, `graphql`, `postcss`, `picocss`, `bulma`, `windicss`, `firebase-hosting`
 
 Package you want to install

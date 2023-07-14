@@ -25,7 +25,8 @@
     "tslib": "^2.3.0",
     "@nx/devkit": "17.0.1",
     "typescript": "5.1.6",
-    "nx": "17.0.1"
+    "nx": "17.0.1",
+    "@nx/workspace": "17.0.1"
   },
   "peerDependencies": {
     "@nx/vite": "17.0.1",
