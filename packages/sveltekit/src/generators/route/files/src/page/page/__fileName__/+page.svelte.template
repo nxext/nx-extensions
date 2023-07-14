@@ -1,9 +1,18 @@
 <script language="ts">
     import { page } from '$app/store';
+<% if (layout) { %>    
+    import { layout } from '$app/layouts';
+<% } %>    
 </script>
 
+<% if (layout) { %>    
+<layout>
+<% } %>
 <h1><%= name %></h1>
 
 <pre>
     {JSON.stringify($page, null, 2)}
 </pre>
+<% if (layout) { %>    
+</layout>
+<% } %>
