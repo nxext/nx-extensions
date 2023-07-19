@@ -11,6 +11,6 @@ export async function addCypressPlugin(
     return () => {};
   }
 
-  await ensurePackage('@nrwl/cypress', NX_VERSION);
+  await ensurePackage('@nx/cypress', NX_VERSION);
   return cypressInitGenerator(tree, {});
 }

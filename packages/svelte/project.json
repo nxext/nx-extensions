@@ -17,6 +17,7 @@
           "packages/svelte/**/*.d.ts",
           "packages/svelte/generators.json",
           "packages/svelte/package.json",
+          "packages/svelte/project.json",
           "packages/svelte/migrations.json"
         ]
       }

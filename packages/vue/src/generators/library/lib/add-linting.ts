@@ -4,11 +4,11 @@ import {
   joinPathFragments,
   Tree,
   runTasksInSerial,
+  updateJson,
 } from '@nx/devkit';
 
 import { NormalizedSchema } from '../schema';
 import { extendVueEslintJson, extraEslintDependencies } from '../../utils/lint';
-import { updateJson } from 'nx/src/generators/utils/json';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   if (options.linter === Linter.EsLint) {

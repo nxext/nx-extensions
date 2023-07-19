@@ -21,11 +21,14 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "dependencies": {
+    "tslib": "^2.3.0",
     "@nxext/capacitor": "^16.5.0",
-    "@nx/devkit": "^16.5.0"
+    "@nx/devkit": "^16.5.0",
+    "typescript": "5.1.6"
   },
   "peerDependencies": {
     "@nx/linter": "^16.5.0",
-    "@nx/react": "^16.5.0"
+    "@nx/react": "^16.5.0",
+    "@phenomnomnominal/tsquery": "~5.0.1"
   }
 }

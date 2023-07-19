@@ -1,10 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import {
-  Tree,
-  readProjectConfiguration,
-  readJson,
-  updateJson,
-} from '@nx/devkit';
+import { Tree, readProjectConfiguration, readJson } from '@nx/devkit';
 
 import { libraryGenerator } from './library';
 import { Schema } from './schema';

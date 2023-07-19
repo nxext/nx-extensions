@@ -21,10 +21,12 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "dependencies": {
+    "tslib": "^2.3.0",
+    "ignore": "^5.2.4",
     "@nx/devkit": "^16.5.0"
   },
   "peerDependencies": {
     "nx": "^16.5.0",
-    "@nx/workspace": "^16.5.0"
+    "@nx/web": "^16.5.0"
   }
 }

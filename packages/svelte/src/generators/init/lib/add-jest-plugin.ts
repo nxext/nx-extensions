@@ -11,7 +11,7 @@ export async function addJestPlugin(
     return () => {};
   }
 
-  await ensurePackage('@nrwl/jest', NX_VERSION);
+  await ensurePackage('@nx/jest', NX_VERSION);
 
   return await jestInitGenerator(tree, {});
 }

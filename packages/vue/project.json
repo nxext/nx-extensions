@@ -45,7 +45,8 @@
           "packages/vue/**/*.ts",
           "packages/vue/generators.json",
           "packages/vue/executors.json",
-          "packages/vue/package.json"
+          "packages/vue/package.json",
+          "packages/vue/project.json"
         ]
       }
     },

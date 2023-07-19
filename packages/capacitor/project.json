@@ -52,6 +52,7 @@
           "packages/capacitor/generators.json",
           "packages/capacitor/executors.json",
           "packages/capacitor/package.json",
+          "packages/capacitor/project.json",
           "packages/capacitor/migrations.json"
         ]
       }

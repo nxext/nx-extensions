@@ -16,7 +16,8 @@
           "packages/preact/**/*.spec.jsx",
           "packages/preact/**/*.d.ts",
           "packages/preact/generators.json",
-          "packages/preact/package.json"
+          "packages/preact/package.json",
+          "packages/preact/project.json"
         ]
       }
     },

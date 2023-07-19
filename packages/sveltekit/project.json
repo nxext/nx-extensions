@@ -11,6 +11,7 @@
           "packages/sveltekit/**/*.ts",
           "packages/sveltekit/generators.json",
           "packages/sveltekit/executors.json",
+          "packages/sveltekit/project.json",
           "packages/sveltekit/package.json"
         ]
       }

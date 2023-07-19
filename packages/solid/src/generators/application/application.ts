@@ -1,11 +1,9 @@
 import {
   convertNxGenerator,
   formatFiles,
-  generateFiles,
   getWorkspaceLayout,
   joinPathFragments,
   names,
-  offsetFromRoot,
   Tree,
   runTasksInSerial,
 } from '@nx/devkit';
