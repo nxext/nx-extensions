@@ -5,8 +5,7 @@ import applicationGenerator from '../application/generator';
 
 export async function createTestProject(
   name: string,
-  unitTestrunner: 'none' | 'vitest' = 'none',
-  e2eTestrunner: 'none' | 'cypress' = 'none'
+  unitTestrunner: 'none' | 'vitest' = 'none'
 ): Promise<Tree> {
   const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   tree.write(

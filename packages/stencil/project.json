@@ -18,6 +18,7 @@
           "packages/stencil/generators.json",
           "packages/stencil/executors.json",
           "packages/stencil/package.json",
+          "packages/stencil/project.json",
           "packages/stencil/migrations.json"
         ]
       }

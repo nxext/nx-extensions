@@ -47,6 +47,7 @@
           "packages/ionic-angular/generators.json",
           "packages/ionic-angular/executors.json",
           "packages/ionic-angular/package.json",
+          "packages/ionic-angular/project.json",
           "packages/ionic-angular/migrations.json"
         ]
       }

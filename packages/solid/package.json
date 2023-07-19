@@ -22,12 +22,15 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "@nx/devkit": "^16.4.0"
+    "tslib": "^2.3.0",
+    "@nx/devkit": "^16.4.0",
+    "typescript": "5.1.6"
   },
   "peerDependencies": {
-    "solid-js": "^1.6.0",
-    "@nx/workspace": "^16.5.0",
+    "nx": "^16.5.0",
     "@nx/linter": "^16.5.0",
+    "@nx/vite": "^16.5.0",
+    "@nx/jest": "^16.5.0",
     "@nx/cypress": "^16.5.0"
   },
   "nx-migrate": {

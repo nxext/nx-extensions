@@ -1,4 +1,3 @@
-import { Linter } from 'eslint';
 import {
   eslintPluginPrettierVueVersion,
   eslintPluginTypescriptVueVersion,
@@ -14,7 +13,7 @@ export const extraEslintDependencies = {
   },
 };
 
-export const extendVueEslintJson = (json: Linter.Config) => {
+export const extendVueEslintJson = (json: any) => {
   const { extends: pluginExtends, ...config } = json;
 
   return {

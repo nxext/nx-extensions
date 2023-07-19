@@ -47,6 +47,7 @@
           "packages/ionic-react/generators.json",
           "packages/ionic-react/executors.json",
           "packages/ionic-react/package.json",
+          "packages/ionic-react/project.json",
           "packages/ionic-react/migrations.json"
         ]
       }

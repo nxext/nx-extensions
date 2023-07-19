@@ -7,9 +7,7 @@ import {
   readJsonFile,
   runExecutor as nxRunExecutor,
 } from '@nx/devkit';
-import runCommands, {
-  RunCommandsOptions,
-} from 'nx/src/executors/run-commands/run-commands.impl';
+import runCommands from 'nx/src/executors/run-commands/run-commands.impl';
 import { CommandExecutorSchema } from './schema';
 import { existsSync, rmSync } from 'fs';
 import { execSync } from 'node:child_process';

@@ -2,7 +2,6 @@ import {
   eslintPluginImportVersion,
   eslintPluginStencilVersion,
 } from './versions';
-import type { Linter } from 'eslint';
 import { offsetFromRoot } from '@nx/devkit';
 
 export const extraEslintDependencies = {
@@ -13,9 +12,7 @@ export const extraEslintDependencies = {
   },
 };
 
-export const createStencilEslintJson = (
-  projectRoot: string
-): Linter.Config => ({
+export const createStencilEslintJson = (projectRoot: string) => ({
   extends: [
     'plugin:@stencil/recommended',
     'plugin:import/recommended',
