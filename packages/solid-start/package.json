@@ -1,9 +1,9 @@
 {
-  "name": "@nxext/solid",
+  "name": "@nxext/solid-start",
   "version": "16.5.0",
   "license": "MIT",
   "author": "Kristian Mandrup",
-  "description": "Nx plugin for solid",
+  "description": "Nx plugin for solid-start",
   "homepage": "https://nxext.dev/",
   "keywords": [
     "nx",

@@ -1,17 +1,17 @@
 {
-  "name": "solid",
+  "name": "solid-start",
   "version": "0.1",
   "generators": {
     "application": {
       "factory": "./src/generators/application/application#applicationGenerator",
       "schema": "./src/generators/application/schema.json",
-      "description": "Solid application schematic",
+      "description": "SolidStart application schematic",
       "aliases": ["app"]
     },
     "library": {
       "factory": "./src/generators/library/library#libraryGenerator",
       "schema": "./src/generators/library/schema.json",
-      "description": "Solid library schematic",
+      "description": "SolidStart library schematic",
       "aliases": ["lib"]
     },
     "component": {

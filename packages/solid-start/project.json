@@ -1,7 +1,7 @@
 {
-  "name": "solid",
+  "name": "solid-start",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/solid/src",
+  "sourceRoot": "packages/solid-start/src",
   "projectType": "library",
   "generators": {},
   "targets": {
@@ -9,58 +9,58 @@
       "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "packages/solid/**/*.ts",
-          "packages/solid/**/*.spec.ts",
-          "packages/solid/**/*.spec.tsx",
-          "packages/solid/**/*.spec.js",
-          "packages/solid/**/*.spec.jsx",
-          "packages/solid/**/*.d.ts",
-          "packages/solid/generators.json",
-          "packages/solid/package.json",
-          "packages/solid/project.json"
+          "packages/solid-start/**/*.ts",
+          "packages/solid-start/**/*.spec.ts",
+          "packages/solid-start/**/*.spec.tsx",
+          "packages/solid-start/**/*.spec.js",
+          "packages/solid-start/**/*.spec.jsx",
+          "packages/solid-start/**/*.d.ts",
+          "packages/solid-start/generators.json",
+          "packages/solid-start/package.json",
+          "packages/solid-start/project.json"
         ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "packages/solid/jest.config.ts",
+        "jestConfig": "packages/solid-start/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["{workspaceRoot}/coverage/packages/solid"]
+      "outputs": ["{workspaceRoot}/coverage/packages/solid-start"]
     },
     "build": {
       "executor": "@nx/js:tsc",
       "options": {
-        "outputPath": "dist/packages/solid",
-        "tsConfig": "packages/solid/tsconfig.lib.json",
-        "packageJson": "packages/solid/package.json",
-        "main": "packages/solid/src/index.ts",
+        "outputPath": "dist/packages/solid-start",
+        "tsConfig": "packages/solid-start/tsconfig.lib.json",
+        "packageJson": "packages/solid-start/package.json",
+        "main": "packages/solid-start/src/index.ts",
         "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
-          "packages/solid/*.md",
+          "packages/solid-start/*.md",
           {
-            "input": "./packages/solid/src",
+            "input": "./packages/solid-start/src",
             "glob": "**/!(*.ts)",
             "output": "./src"
           },
           {
-            "input": "./packages/solid/src",
+            "input": "./packages/solid-start/src",
             "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
-            "input": "./packages/solid",
+            "input": "./packages/solid-start",
             "glob": "generators.json",
             "output": "."
           },
           {
-            "input": "./packages/solid",
+            "input": "./packages/solid-start",
             "glob": "builders.json",
             "output": "."
           },
           {
-            "input": "./packages/solid",
+            "input": "./packages/solid-start",
             "glob": "migrations.json",
             "output": "."
           }

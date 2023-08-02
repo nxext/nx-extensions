@@ -10,8 +10,8 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/packages/solid',
-  displayName: 'solid',
+  coverageDirectory: '../../coverage/packages/solid-start',
+  displayName: 'solid-start',
   testEnvironment: 'node',
   preset: '../../jest.preset.js',
 };

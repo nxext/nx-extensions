@@ -6,7 +6,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["packages/solid/tsconfig.*?.json"]
+        "project": ["packages/solid-start/tsconfig.*?.json"]
       },
       "rules": {}
     },
