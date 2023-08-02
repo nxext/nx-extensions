@@ -1,0 +1,8 @@
+import <%= className %> from './<%= className %>'
+import { render } from 'solid-testing-library'
+
+it('it works', async () => {
+  const { getByText } = render(<%= className %>)
+
+  expect(getByText('Hello component!'));
+})

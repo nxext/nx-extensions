@@ -1,0 +1,77 @@
+{
+  "name": "solid",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/solid/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/solid/**/*.ts",
+          "packages/solid/**/*.spec.ts",
+          "packages/solid/**/*.spec.tsx",
+          "packages/solid/**/*.spec.js",
+          "packages/solid/**/*.spec.jsx",
+          "packages/solid/**/*.d.ts",
+          "packages/solid/generators.json",
+          "packages/solid/package.json",
+          "packages/solid/project.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "packages/solid/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/packages/solid"]
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/solid",
+        "tsConfig": "packages/solid/tsconfig.lib.json",
+        "packageJson": "packages/solid/package.json",
+        "main": "packages/solid/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson": false,
+        "assets": [
+          "packages/solid/*.md",
+          {
+            "input": "./packages/solid/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/solid/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/solid",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/solid",
+            "glob": "builders.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/solid",
+            "glob": "migrations.json",
+            "output": "."
+          }
+        ]
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs solid {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}
