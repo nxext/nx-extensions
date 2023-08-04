@@ -1,5 +1,6 @@
 {
   "name": "docs",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/docs",
   "projectType": "library",
   "targets": {

@@ -300,17 +300,17 @@ Type: `boolean`
 
 Run the cypress-configure generator
 
-#### configureTestRunner
-
-Type: `boolean`
-
-Add a Storybook Test-Runner target.
-
 #### cypressDirectory
 
 Type: `string`
 
 A directory where the Cypress project will be placed. Added at root by default.
+
+#### interactionTests
+
+Type: `boolean`
+
+Add a Storybook Test-Runner target.
 
 #### js
 

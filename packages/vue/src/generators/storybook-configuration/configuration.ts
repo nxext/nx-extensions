@@ -46,7 +46,7 @@ export async function storybookConfigurationGenerator(
     linter: schema.linter,
     cypressDirectory: schema.cypressDirectory,
     tsConfiguration: schema.tsConfiguration,
-    configureTestRunner: schema.configureTestRunner,
+    interactionTests: schema.interactionTests,
     configureStaticServe: schema.configureStaticServe,
     uiFramework: '@storybook/vue3-vite',
     skipFormat: true,
