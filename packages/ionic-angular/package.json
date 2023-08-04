@@ -1,6 +1,6 @@
 {
   "name": "@nxext/ionic-angular",
-  "version": "16.5.0",
+  "version": "16.6.0",
   "description": "An Nx plugin for developing Ionic React applications and libraries",
   "author": {
     "name": "Devin Shoemaker",
@@ -22,14 +22,14 @@
   "builders": "./executors.json",
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nxext/capacitor": "^16.5.0",
+    "@nxext/capacitor": "^16.6.0",
     "@phenomnomnominal/tsquery": "~5.0.1",
-    "@nx/devkit": "^16.5.0",
+    "@nx/devkit": "^16.6.0",
     "typescript": "5.1.6"
   },
   "peerDependencies": {
-    "@nx/angular": "^16.5.0",
-    "@nx/linter": "^16.5.0",
-    "@nx/js": "^16.5.0"
+    "@nx/angular": "^16.6.0",
+    "@nx/linter": "^16.6.0",
+    "@nx/js": "^16.6.0"
   }
 }

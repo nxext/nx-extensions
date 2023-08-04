@@ -33,8 +33,14 @@
             "input": "./packages/vue",
             "glob": "executors.json",
             "output": "."
+          },
+          {
+            "input": "./packages/vue",
+            "glob": "migrations.json",
+            "output": "."
           }
-        ]
+        ],
+        "updateBuildableProjectDepsInPackageJson": true
       }
     },
     "lint": {

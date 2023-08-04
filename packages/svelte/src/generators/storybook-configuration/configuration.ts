@@ -42,7 +42,7 @@ export async function configurationGenerator(
     cypressDirectory: options.cypressDirectory,
     standaloneConfig: options.standaloneConfig,
     tsConfiguration: options.tsConfiguration,
-    configureTestRunner: options.configureTestRunner,
+    interactionTests: options.interactionTests,
   });
   tasks.push(storybookTask);
 

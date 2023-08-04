@@ -40,7 +40,7 @@
       "description": "Configure your project with TypeScript. Generate main.ts and preview.ts files, instead of main.js and preview.js.",
       "default": false
     },
-    "configureTestRunner": {
+    "interactionTests": {
       "type": "boolean",
       "description": "Add a Storybook Test-Runner target."
     }

@@ -72,7 +72,7 @@
         "description": "Path to ignore."
       }
     },
-    "configureTestRunner": {
+    "interactionTests": {
       "type": "boolean",
       "description": "Add a Storybook Test-Runner target."
     }

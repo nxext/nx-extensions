@@ -438,12 +438,6 @@ Type: `boolean`
 
 Specifies whether to configure a static file server target for serving storybook. Helpful for speeding up CI build/test times.
 
-#### configureTestRunner
-
-Type: `boolean`
-
-Add a Storybook Test-Runner target.
-
 #### cypressDirectory
 
 Type: `string`
@@ -471,6 +465,12 @@ Automatically generate `*.stories.ts` files for components declared in this proj
 Type: `array`
 
 Paths to ignore when looking for components.
+
+#### interactionTests
+
+Type: `boolean`
+
+Add a Storybook Test-Runner target.
 
 #### js
 
