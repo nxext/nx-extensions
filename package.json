@@ -117,7 +117,7 @@
     "verdaccio-auth-memory": "^10.2.2",
     "vite-plugin-solid": "^2.7.0",
     "vitepress": "^1.0.0-rc.4",
-    "vue-component-meta": "^1.6.5",
+    "vue-component-meta": "^1.8.8",
     "yargs": "^17.7.2",
     "yargs-parser": "^21.1.1"
   },
