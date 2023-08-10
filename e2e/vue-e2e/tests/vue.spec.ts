@@ -3,7 +3,7 @@ import { names } from '@nx/devkit';
 import { createTestProject, installPlugin } from '@nxext/e2e-utils';
 import { rmSync } from 'fs';
 
-xdescribe('vue e2e', () => {
+describe('vue e2e', () => {
   let projectDirectory: string;
 
   beforeAll(() => {
@@ -21,7 +21,7 @@ xdescribe('vue e2e', () => {
 
   describe('application', () => {
     it('should create a vue application with routing', async () => {
-      const projectName = uniq('vuerouting');
+      const projectName = uniq('vue-routing');
       await runNxCommandAsync(
         `generate @nxext/vue:app ${projectName} --routing --unitTestRunner='none'`
       );
@@ -32,7 +32,7 @@ xdescribe('vue e2e', () => {
     });
 
     it('should be able to run linter', async () => {
-      const projectName = uniq('vuelint');
+      const projectName = uniq('vue-lint');
       await runNxCommandAsync(
         `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --linter='eslint'`
       );
@@ -41,7 +41,7 @@ xdescribe('vue e2e', () => {
     });
 
     it('should be able to run vitest', async () => {
-      const projectName = uniq('vuetest');
+      const projectName = uniq('vue-test');
       await runNxCommandAsync(
         `generate @nxext/vue:app ${projectName} --unitTestRunner='vitest'`
       );
@@ -55,7 +55,7 @@ xdescribe('vue e2e', () => {
 
   describe('library', () => {
     it('should create a vue lib and make it buildable', async () => {
-      const projectName = uniq('vuelib');
+      const projectName = uniq('vue-lib');
       await runNxCommandAsync(
         `generate @nxext/vue:lib ${projectName} --buildable --unitTestRunner='none'`
       );
@@ -66,7 +66,7 @@ xdescribe('vue e2e', () => {
     });
 
     it('should be able to run vitest', async () => {
-      const projectName = uniq('vuelibvitest');
+      const projectName = uniq('vue-libvitest');
       await runNxCommandAsync(
         `generate @nxext/vue:lib ${projectName} --unitTestRunner='vitest'`
       );
@@ -78,7 +78,7 @@ xdescribe('vue e2e', () => {
     });
 
     it('should be able to run linter', async () => {
-      const projectName = uniq('vueliblint');
+      const projectName = uniq('vue-liblint');
       await runNxCommandAsync(
         `generate @nxext/vue:lib ${projectName} --unitTestRunner='none' --linter='eslint'`
       );
@@ -89,8 +89,8 @@ xdescribe('vue e2e', () => {
 
   describe('library reference', () => {
     it('should create a vue application with linked lib', async () => {
-      const projectName = uniq('vuelinkapp');
-      const libName = uniq('vuelinklib');
+      const projectName = uniq('vue-linkapp');
+      const libName = uniq('vue-linklib');
       const libClassName = names(libName).className;
       await runNxCommandAsync(
         `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --linter='none'`
@@ -119,7 +119,7 @@ import { ${libClassName} } from '@proj/${libName}';
 
   describe('storybook', () => {
     it('should create a vue lib and add storybook', async () => {
-      const projectName = uniq('vuestorybook');
+      const projectName = uniq('vue-storybook');
       await runNxCommandAsync(
         `generate @nxext/vue:lib ${projectName} --buildable --unitTestRunner='none'`
       );
