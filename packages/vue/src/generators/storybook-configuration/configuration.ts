@@ -1,10 +1,4 @@
-import {
-  convertNxGenerator,
-  ensurePackage,
-  formatFiles,
-  NX_VERSION,
-  Tree,
-} from '@nx/devkit';
+import { ensurePackage, formatFiles, NX_VERSION, Tree } from '@nx/devkit';
 import { StorybookConfigurationGeneratorSchema } from './schema';
 
 /*
@@ -63,6 +57,3 @@ export async function storybookConfigurationGenerator(
 }
 
 export default storybookConfigurationGenerator;
-export const storybookConfigurationSchematic = convertNxGenerator(
-  storybookConfigurationGenerator
-);

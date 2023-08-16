@@ -1,6 +1,7 @@
-import { runNxCommandAsync, uniq } from '@nx/plugin/testing';
+import { runNxCommandAsync, uniq, updateFile } from '@nx/plugin/testing';
 import { createTestProject, installPlugin } from '@nxext/e2e-utils';
 import { rmSync } from 'fs';
+import { names } from '@nx/devkit';
 
 describe('svelte e2e', () => {
   let projectDirectory: string;
@@ -101,6 +102,42 @@ describe('svelte e2e', () => {
       expect(`${result.stdout}${result.stderr}`).toContain(
         'Storybook builder finished'
       );
+    });
+
+    describe('library reference', () => {
+      it('should create a svelte application with linked lib', async () => {
+        const projectName = uniq('sveltelinkapp');
+        const libName = uniq('sveltelinklib');
+        const libClassName = names(libName).className;
+
+        await runNxCommandAsync(
+          `generate @nxext/svelte:c ${libClassName} --project ${libName}`
+        );
+
+        updateFile(
+          `apps/${projectName}/src/App.svelte`,
+          `
+<script lang="ts">
+import { ${libClassName} } from '@proj/${libName}';
+</script>
+
+<main>
+    <${libClassName} msg="Yey"></${libClassName}>
+</main>`
+        );
+
+        await runNxCommandAsync(
+          `generate @nxext/svelte:app ${projectName} --unitTestRunner='none' --e2eTestRunner='none'`
+        );
+        await runNxCommandAsync(
+          `generate @nxext/svelte:lib ${libName} --buildable --unitTestRunner='none' --e2eTestRunner='none'`
+        );
+
+        const result = await runNxCommandAsync(`build ${projectName}`);
+        expect(result.stdout).toContain(
+          `Successfully ran target build for project ${projectName}`
+        );
+      });
     });
   });
 });

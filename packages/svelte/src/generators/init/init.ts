@@ -1,6 +1,5 @@
 import { Schema } from './schema';
 import {
-  convertNxGenerator,
   formatFiles,
   GeneratorCallback,
   Tree,
@@ -10,6 +9,7 @@ import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
 import { addLinterPlugin } from './lib/add-linter-plugin';
+import { addPluginToNxJson } from '../utils/add-plugin-to-nx-json';
 
 export async function initGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
@@ -26,10 +26,10 @@ export async function initGenerator(host: Tree, schema: Schema) {
   const installTask = updateDependencies(host);
   tasks.push(installTask);
 
+  addPluginToNxJson('@nxext/svelte', host);
+
   if (!schema.skipFormat) {
     await formatFiles(host);
   }
   return runTasksInSerial(...tasks);
 }
-
-export const initSchematic = convertNxGenerator(initGenerator);
