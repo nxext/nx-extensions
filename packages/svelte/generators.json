@@ -1,37 +1,6 @@
 {
   "name": "svelte",
   "version": "0.1",
-  "schematics": {
-    "application": {
-      "factory": "./src/generators/application/application#applicationSchematic",
-      "schema": "./src/generators/application/schema.json",
-      "description": "Svelte application schematic",
-      "aliases": ["app"]
-    },
-    "library": {
-      "factory": "./src/generators/library/library#librarySchematic",
-      "schema": "./src/generators/library/schema.json",
-      "description": "Svelte library schematic",
-      "aliases": ["lib"]
-    },
-    "component": {
-      "factory": "./src/generators/component/component#componentSchematic",
-      "schema": "./src/generators/component/schema.json",
-      "description": "Add component",
-      "aliases": ["c"]
-    },
-    "storybook-configuration": {
-      "factory": "./src/generators/storybook-configuration/configuration#configurationSchematic",
-      "schema": "./src/generators/storybook-configuration/schema.json",
-      "description": "storybook-configuration generator"
-    },
-    "init": {
-      "factory": "./src/generators/init/init#initSchematic",
-      "schema": "./src/generators/init/schema.json",
-      "description": "init schematic",
-      "hidden": true
-    }
-  },
   "generators": {
     "application": {
       "factory": "./src/generators/application/application#applicationGenerator",

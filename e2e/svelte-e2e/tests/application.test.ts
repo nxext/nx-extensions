@@ -115,7 +115,7 @@ describe('svelte e2e', () => {
   });
 
   describe('Svelte app', () => {
-    xit('should build svelte application with dependencies', async () => {
+    it('should build svelte application with dependencies', async () => {
       const appName = 'svelteappwithdeps';
       await runNxCommandAsync(
         `generate @nxext/svelte:app ${appName} --e2eTestRunner='none' --unitTestRunner='none'`

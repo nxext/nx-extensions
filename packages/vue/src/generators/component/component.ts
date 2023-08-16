@@ -1,5 +1,4 @@
 import {
-  convertNxGenerator,
   formatFiles,
   GeneratorCallback,
   Tree,
@@ -25,5 +24,3 @@ export async function componentGenerator(tree: Tree, schema: Schema) {
 }
 
 export default componentGenerator;
-
-export const componentSchematic = convertNxGenerator(componentGenerator);
