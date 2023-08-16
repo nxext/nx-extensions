@@ -22,7 +22,6 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "peerDependencies": {
-    "nx": "^16.6.0",
     "@nx/workspace": "^16.6.0",
     "@nx/linter": "^16.6.0",
     "@nx/jest": "^16.6.0",

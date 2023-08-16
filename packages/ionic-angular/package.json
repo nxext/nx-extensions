@@ -29,7 +29,6 @@
   },
   "peerDependencies": {
     "@nx/angular": "^16.6.0",
-    "@nx/linter": "^16.6.0",
-    "@nx/js": "^16.6.0"
+    "@nx/linter": "^16.6.0"
   }
 }

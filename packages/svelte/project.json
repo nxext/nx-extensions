@@ -37,7 +37,6 @@
         "tsConfig": "packages/svelte/tsconfig.lib.json",
         "packageJson": "packages/svelte/package.json",
         "main": "packages/svelte/src/index.ts",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/svelte/*.md",
           {

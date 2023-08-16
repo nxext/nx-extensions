@@ -27,7 +27,6 @@
     "typescript": "5.1.6"
   },
   "peerDependencies": {
-    "nx": "^16.6.0",
     "@nx/linter": "^16.6.0",
     "@nx/vite": "^16.6.0",
     "@nx/jest": "^16.6.0",

@@ -12,7 +12,6 @@
         "main": "packages/capacitor/src/index.ts",
         "packageJson": "packages/capacitor/package.json",
         "tsConfig": "packages/capacitor/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/capacitor/*.md",
           {

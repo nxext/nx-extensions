@@ -26,11 +26,9 @@
     "typescript": "5.1.6"
   },
   "peerDependencies": {
-    "nx": "^16.6.0",
     "@nx/js": "^16.6.0",
     "@nx/linter": "^16.6.0",
     "@nx/vite": "^16.6.0",
-    "@nx/workspace": "^16.6.0",
     "@nx/storybook": "^16.6.0",
     "@nx/cypress": "^16.6.0"
   }
