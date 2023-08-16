@@ -12,7 +12,6 @@
         "main": "packages/ionic-react/src/index.ts",
         "packageJson": "packages/ionic-react/package.json",
         "tsConfig": "packages/ionic-react/tsconfig.lib.json",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/ionic-react/*.md",
           {

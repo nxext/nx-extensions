@@ -36,7 +36,6 @@
         "tsConfig": "packages/solid/tsconfig.lib.json",
         "packageJson": "packages/solid/package.json",
         "main": "packages/solid/src/index.ts",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/solid/*.md",
           {

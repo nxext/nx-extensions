@@ -38,7 +38,6 @@
         "tsConfig": "packages/stencil/tsconfig.lib.json",
         "packageJson": "packages/stencil/package.json",
         "main": "packages/stencil/src/index.ts",
-        "updateBuildableProjectDepsInPackageJson": false,
         "assets": [
           "packages/stencil/*.md",
           {

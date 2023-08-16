@@ -26,7 +26,6 @@
     "@nx/devkit": "^16.6.0"
   },
   "peerDependencies": {
-    "nx": "^16.6.0",
     "@nx/web": "^16.6.0"
   }
 }
