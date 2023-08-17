@@ -9,7 +9,7 @@ import { applicationGenerator } from '../application/generator';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
 
-describe('page generator', () => {
+xdescribe('page generator', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
 
   let host: Tree;

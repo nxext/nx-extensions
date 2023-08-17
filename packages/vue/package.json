@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vue",
-  "version": "16.6.0-Beta.3",
+  "version": "16.7.0-Beta.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vue",
@@ -21,15 +21,17 @@
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
   "dependencies": {
-    "@nx/devkit": "^16.6.0",
+    "@nx/devkit": "^16.7.1",
     "tslib": "^2.3.0",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "@nx/workspace": "^16.7.1",
+    "nx": "^16.7.1"
   },
   "peerDependencies": {
-    "@nx/js": "^16.6.0",
-    "@nx/linter": "^16.6.0",
-    "@nx/vite": "^16.6.0",
-    "@nx/storybook": "^16.6.0",
-    "@nx/cypress": "^16.6.0"
+    "@nx/js": "^16.7.1",
+    "@nx/linter": "^16.7.1",
+    "@nx/vite": "^16.7.1",
+    "@nx/storybook": "^16.7.1",
+    "@nx/cypress": "^16.7.1"
   }
 }

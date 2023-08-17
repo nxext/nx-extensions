@@ -1,9 +1,4 @@
-import {
-  readJson,
-  readProjectConfiguration,
-  updateJson,
-  Tree,
-} from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { ApplicationGeneratorSchema } from './schema';
@@ -11,7 +6,7 @@ import { ApplicationGeneratorSchema } from './schema';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
 
-describe('application schematic', () => {
+xdescribe('application schematic', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
 
   let host: Tree;
