@@ -5,7 +5,7 @@ export interface Schema {
   tags?: string;
   directory?: string;
   unitTestRunner?: 'vitest' | 'none';
-  e2eTestRunner?: 'cypress' | 'none';
+  e2eTestRunner?: 'cypress' | 'playwright' | 'none';
   inSourceTests?: boolean;
   routing?: boolean;
   linter: Linter;

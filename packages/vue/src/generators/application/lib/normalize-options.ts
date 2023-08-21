@@ -41,7 +41,7 @@ export function normalizeOptions<T extends Schema = Schema>(
   let e2eProjectName = 'e2e';
   if (!options.rootProject) {
     e2eProjectName = `${names(options.name).fileName}-e2e`;
-    e2eProjectRoot = `${projectDirectory}-e2e`;
+    e2eProjectRoot = normalizePath(`${appsDir}/${projectDirectory}-e2e`);
   }
 
   return {

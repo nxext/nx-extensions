@@ -16,7 +16,7 @@ describe('app generator', () => {
     name: projectName,
     linter: Linter.EsLint,
     unitTestRunner: 'vitest',
-    e2eTestRunner: 'cypress',
+    e2eTestRunner: 'none',
   };
 
   beforeEach(() => {
@@ -77,28 +77,6 @@ describe('app generator', () => {
       '@vue/eslint-config-prettier/skip-formatting',
       '../../.eslintrc.json',
     ]);
-
-    expect(host.exists('apps/my-app-e2e/cypress.config.ts')).toBeTruthy();
-    const tsconfigE2E = readJson(host, 'apps/my-app-e2e/tsconfig.json');
-    expect(tsconfigE2E).toMatchInlineSnapshot(`
-        Object {
-          "compilerOptions": Object {
-            "allowJs": true,
-            "outDir": "../../dist/out-tsc",
-            "sourceMap": false,
-            "types": Array [
-              "cypress",
-              "node",
-            ],
-          },
-          "extends": "../../tsconfig.base.json",
-          "include": Array [
-            "src/**/*.ts",
-            "src/**/*.js",
-            "cypress.config.ts",
-          ],
-        }
-      `);
   });
 
   it('should generate files in root', async () => {
@@ -134,10 +112,48 @@ describe('app generator', () => {
       '@vue/eslint-config-prettier/skip-formatting',
       './.eslintrc.json',
     ]);
+  });
 
-    expect(host.exists('e2e/cypress.config.ts')).toBeTruthy();
-    const tsconfigE2E = readJson(host, 'e2e/tsconfig.json');
-    expect(tsconfigE2E).toMatchInlineSnapshot(`
+  describe('e2e', () => {
+    describe('cypress', () => {
+      it('integrated - should generate files', async () => {
+        await applicationGenerator(host, {
+          ...options,
+          e2eTestRunner: 'cypress',
+        });
+
+        expect(host.exists('apps/my-app-e2e/cypress.config.ts')).toBeTruthy();
+        const tsconfigE2E = readJson(host, 'apps/my-app-e2e/tsconfig.json');
+        expect(tsconfigE2E).toMatchInlineSnapshot(`
+        Object {
+          "compilerOptions": Object {
+            "allowJs": true,
+            "outDir": "../../dist/out-tsc",
+            "sourceMap": false,
+            "types": Array [
+              "cypress",
+              "node",
+            ],
+          },
+          "extends": "../../tsconfig.base.json",
+          "include": Array [
+            "src/**/*.ts",
+            "src/**/*.js",
+            "cypress.config.ts",
+          ],
+        }
+      `);
+      });
+      it('standalone - should generate files', async () => {
+        await applicationGenerator(host, {
+          ...options,
+          rootProject: true,
+          e2eTestRunner: 'cypress',
+        });
+
+        expect(host.exists('e2e/cypress.config.ts')).toBeTruthy();
+        const tsconfigE2E = readJson(host, 'e2e/tsconfig.json');
+        expect(tsconfigE2E).toMatchInlineSnapshot(`
         Object {
           "compilerOptions": Object {
             "allowJs": true,
@@ -156,5 +172,29 @@ describe('app generator', () => {
           ],
         }
       `);
+      });
+    });
+
+    describe('playwright', () => {
+      it('integrated - should generate files', async () => {
+        await applicationGenerator(host, {
+          ...options,
+          e2eTestRunner: 'playwright',
+        });
+
+        expect(
+          host.exists('apps/my-app-e2e/playwright.config.ts')
+        ).toBeTruthy();
+      });
+      it('standalone - should generate files', async () => {
+        await applicationGenerator(host, {
+          ...options,
+          rootProject: true,
+          e2eTestRunner: 'playwright',
+        });
+
+        expect(host.exists('e2e/playwright.config.ts')).toBeTruthy();
+      });
+    });
   });
 });
