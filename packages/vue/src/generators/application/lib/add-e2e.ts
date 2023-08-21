@@ -25,9 +25,8 @@ export async function addE2e(host: Tree, options: NormalizedSchema) {
   }
 
   if (options.e2eTestRunner === 'playwright') {
-    const { configurationGenerator } = ensurePackage<
-      typeof import('@nx/playwright')
-    >('@nx/playwright', NX_VERSION);
+    await ensurePackage('@nx/playwright', NX_VERSION);
+    const { configurationGenerator } = await import('@nx/playwright');
     addProjectConfiguration(host, options.e2eProjectName, {
       root: options.e2eProjectRoot,
       sourceRoot: joinPathFragments(options.e2eProjectRoot, 'src'),
