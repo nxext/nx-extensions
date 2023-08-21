@@ -44,7 +44,7 @@ Default: `cypress`
 
 Type: `string`
 
-Possible values: `cypress`, `none`
+Possible values: `cypress`, `playwright`, `none`
 
 Test runner to use for end to end (E2E) tests.
 

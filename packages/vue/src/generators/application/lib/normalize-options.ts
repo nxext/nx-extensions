@@ -22,9 +22,6 @@ export function normalizeOptions<T extends Schema = Schema>(
   options: Schema
 ): NormalizedSchema<T> {
   const name = names(options.name).fileName;
-  const e2eProjectName = options.rootProject
-    ? 'e2e'
-    : `${names(options.name).fileName}-e2e`;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
@@ -40,11 +37,18 @@ export function normalizeOptions<T extends Schema = Schema>(
     : [];
   const routing = options.routing || false;
   const rootProject = false;
+  let e2eProjectRoot = 'e2e';
+  let e2eProjectName = 'e2e';
+  if (!options.rootProject) {
+    e2eProjectName = `${names(options.name).fileName}-e2e`;
+    e2eProjectRoot = `${projectDirectory}-e2e`;
+  }
 
   return {
     ...options,
     appProjectName,
     e2eProjectName,
+    e2eProjectRoot,
     appProjectRoot,
     rootProject,
     projectDirectory,

@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vue",
-  "version": "16.7.0-Beta.0",
+  "version": "16.7.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vue",
@@ -8,7 +8,9 @@
   "keywords": [
     "vite",
     "vitest",
-    "vue"
+    "vue",
+    "cypress",
+    "playwright"
   ],
   "repository": {
     "type": "github",
@@ -32,6 +34,18 @@
     "@nx/linter": "^16.7.1",
     "@nx/vite": "^16.7.1",
     "@nx/storybook": "^16.7.1",
-    "@nx/cypress": "^16.7.1"
+    "@nx/cypress": "^16.7.1",
+    "@nx/playwright": "^16.7.1"
+  },
+  "peerDependenciesMeta": {
+    "@nx/storybook": {
+      "optional": true
+    },
+    "@nx/cypress": {
+      "optional": true
+    },
+    "@nx/playwright": {
+      "optional": true
+    }
   }
 }

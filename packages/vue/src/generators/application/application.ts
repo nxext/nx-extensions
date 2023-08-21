@@ -3,7 +3,7 @@ import { Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { createApplicationFiles } from './lib/create-application-files';
 import { normalizeOptions } from './lib/normalize-options';
-import { addCypress } from './lib/add-cypress';
+import { addE2e } from './lib/add-e2e';
 import { addLinting } from './lib/add-linting';
 import initGenerator from '../init/init';
 import { addVite } from './lib/add-vite';
@@ -27,13 +27,13 @@ export async function applicationGenerator(host: Tree, schema: Schema) {
   }
 
   const lintTask = await addLinting(host, options);
-  const cypressTask = await addCypress(host, options);
+  const e2eTask = await addE2e(host, options);
 
   if (!options.skipFormat) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, viteTask, lintTask, cypressTask);
+  return runTasksInSerial(initTask, viteTask, lintTask, e2eTask);
 }
 
 export default applicationGenerator;
