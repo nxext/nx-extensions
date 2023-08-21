@@ -201,6 +201,23 @@ function sideNavDocs() {
       collapsed: true,
       items: [
         {
+          text: 'Vue',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/vue/overview',
+            },
+            {
+              text: 'Installation',
+              link: '/docs/vue/installation',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/vue/generators',
+            },
+          ],
+        },
+        {
           text: 'Svelte',
           items: [
             {
@@ -258,23 +275,6 @@ function sideNavDocs() {
       collapsible: true,
       collapsed: true,
       items: [
-        {
-          text: 'Vue',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/vue/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/vue/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/vue/generators',
-            },
-          ],
-        },
         {
           text: 'Sveltekit',
           items: [
