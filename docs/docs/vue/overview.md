@@ -1,6 +1,6 @@
-# Overview of the Svelte plugin
+# Overview of the Vue plugin
 
-[@nxext/vue](https://github.com/nxext/nx-extensions/tree/main/packages/vue) is a nx plugin to bring [VueJs](https://vuejs.org/) to [Nx](https://nx.dev/).
+[@nxext/vue](https://github.com/nxext/nx-extensions/tree/main/packages/vue) is a Nx plugin to bring [VueJs](https://vuejs.org/) to [Nx](https://nx.dev/).
 
 ## Executors / Builders
 
