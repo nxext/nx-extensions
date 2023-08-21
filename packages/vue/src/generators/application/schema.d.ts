@@ -17,10 +17,11 @@ export interface NormalizedSchema<T extends Schema = Schema> extends T {
   appProjectRoot: string;
   appProjectName: string;
   e2eProjectName: string;
+  e2eProjectRoot: string;
   routing: boolean;
   projectDirectory: string;
   parsedTags: string[];
   unitTestRunner: 'vitest' | 'none';
-  e2eTestRunner: 'cypress' | 'none';
+  e2eTestRunner: 'cypress' | 'playwright' | 'none';
   rootProject: boolean;
 }

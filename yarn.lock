@@ -3911,6 +3911,15 @@
   resolved "https://registry.yarnpkg.com/@nx/nx-win32-x64-msvc/-/nx-win32-x64-msvc-16.7.1.tgz#fb107fcc92f7b5ebedf951131723ac0ef6062e99"
   integrity sha512-DLyME4yJKVhNTMgR3gDx7wVQ6ov6d9j2inGbTwoGoigMvzdaSqeoceMR5CSLOAeq9YBnH8FCbugTccg0iyZtvw==
 
+"@nx/playwright@16.7.1":
+  version "16.7.1"
+  resolved "https://registry.yarnpkg.com/@nx/playwright/-/playwright-16.7.1.tgz#20324237f40fb74dff612459d7e139df8af13425"
+  integrity sha512-DR1MCLvEoJfBOKhxukgDGwMRgf+0LhKbrai542EaZEUsHOIqVirChzV+g+tzpji3UI+LPz37ef/q69qGiTRiig==
+  dependencies:
+    "@nx/devkit" "16.7.1"
+    "@nx/linter" "16.7.1"
+    tslib "^2.3.0"
+
 "@nx/plugin@16.7.1":
   version "16.7.1"
   resolved "https://registry.yarnpkg.com/@nx/plugin/-/plugin-16.7.1.tgz#0421c15d20e916221aa37571217e4f6e4262d414"

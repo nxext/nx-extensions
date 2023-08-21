@@ -55,6 +55,7 @@
   "devDependencies": {
     "@nx/angular": "16.7.1",
     "@nx/cypress": "16.7.1",
+    "@nx/playwright": "16.7.1",
     "@nx/devkit": "16.7.1",
     "@nx/eslint-plugin": "16.7.1",
     "@nx/jest": "16.7.1",

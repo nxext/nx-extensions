@@ -23,7 +23,7 @@ describe('vue e2e', () => {
     it('should create a vue application with routing', async () => {
       const projectName = uniq('vue-routing');
       await runNxCommandAsync(
-        `generate @nxext/vue:app ${projectName} --routing --unitTestRunner='none'`
+        `generate @nxext/vue:app ${projectName} --routing --unitTestRunner='none' --e2eTestRunner='none'`
       );
       const result = await runNxCommandAsync(`build ${projectName}`);
       expect(result.stdout).toContain(
@@ -34,7 +34,7 @@ describe('vue e2e', () => {
     it('should be able to run linter', async () => {
       const projectName = uniq('vue-lint');
       await runNxCommandAsync(
-        `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --linter='eslint'`
+        `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --e2eTestRunner='none' --linter='eslint'`
       );
       const result = await runNxCommandAsync(`lint ${projectName}`);
       expect(result.stdout).toContain(`All files pass linting.`);
@@ -43,7 +43,7 @@ describe('vue e2e', () => {
     it('should be able to run vitest', async () => {
       const projectName = uniq('vue-test');
       await runNxCommandAsync(
-        `generate @nxext/vue:app ${projectName} --unitTestRunner='vitest'`
+        `generate @nxext/vue:app ${projectName} --unitTestRunner='vitest' --e2eTestRunner='none'`
       );
       const result = await runNxCommandAsync(`test ${projectName}`);
       expect(result.stdout).toContain(`1 passed`);
@@ -68,7 +68,7 @@ describe('vue e2e', () => {
     it('should be able to run vitest', async () => {
       const projectName = uniq('vue-libvitest');
       await runNxCommandAsync(
-        `generate @nxext/vue:lib ${projectName} --unitTestRunner='vitest'`
+        `generate @nxext/vue:lib ${projectName} --unitTestRunner='vitest' --e2eTestRunner='none'`
       );
       const result = await runNxCommandAsync(`test ${projectName}`);
       expect(result.stdout).toContain(`1 passed`);
@@ -80,7 +80,7 @@ describe('vue e2e', () => {
     it('should be able to run linter', async () => {
       const projectName = uniq('vue-liblint');
       await runNxCommandAsync(
-        `generate @nxext/vue:lib ${projectName} --unitTestRunner='none' --linter='eslint'`
+        `generate @nxext/vue:lib ${projectName} --unitTestRunner='none' --e2eTestRunner='none' --linter='eslint'`
       );
       const result = await runNxCommandAsync(`lint ${projectName}`);
       expect(result.stdout).toContain(`All files pass linting.`);
@@ -93,10 +93,10 @@ describe('vue e2e', () => {
       const libName = uniq('vue-linklib');
       const libClassName = names(libName).className;
       await runNxCommandAsync(
-        `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --linter='none'`
+        `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --e2eTestRunner='none' --linter='none'`
       );
       await runNxCommandAsync(
-        `generate @nxext/vue:lib ${libName} --buildable --unitTestRunner='none'`
+        `generate @nxext/vue:lib ${libName} --buildable --unitTestRunner='none' --e2eTestRunner='none'`
       );
       updateFile(
         `apps/${projectName}/src/App.vue`,
@@ -121,7 +121,7 @@ import { ${libClassName} } from '@proj/${libName}';
     it('should create a vue lib and add storybook', async () => {
       const projectName = uniq('vue-storybook');
       await runNxCommandAsync(
-        `generate @nxext/vue:lib ${projectName} --buildable --unitTestRunner='none'`
+        `generate @nxext/vue:lib ${projectName} --buildable --unitTestRunner='none' --e2eTestRunner='none'`
       );
       await runNxCommandAsync(
         `generate @nxext/vue:storybook-configuration ${projectName}`
@@ -130,6 +130,29 @@ import { ${libClassName} } from '@proj/${libName}';
       const result = await runNxCommandAsync(`build ${projectName}`);
       expect(result.stdout).toContain(
         `Successfully ran target build for project ${projectName}`
+      );
+    });
+  });
+
+  describe('e2e tests', () => {
+    it('should be able to run cypress', async () => {
+      const projectName = uniq('vue-e2e-cypress');
+      await runNxCommandAsync(
+        `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --e2eTestRunner='cypress'`
+      );
+      const result = await runNxCommandAsync(`e2e ${projectName}-e2e`);
+      expect(result.stdout).toContain(`app.cy.ts`);
+      expect(result.stdout).toContain(`All specs passed!`);
+    });
+
+    xit('should be able to run playwright', async () => {
+      const projectName = uniq('vue-e2e-playwright');
+      await runNxCommandAsync(
+        `generate @nxext/vue:app ${projectName} --unitTestRunner='none' --e2eTestRunner='playwright'`
+      );
+      const result = await runNxCommandAsync(`e2e ${projectName}-e2e`);
+      expect(result.stdout).toContain(
+        `Successfully ran target e2e for ${projectName}-e2e`
       );
     });
   });
