@@ -1,5 +1,4 @@
 import { NormalizedSchema } from '../schema';
-import { ProjectType } from '@nx/workspace';
 import { addProjectConfiguration, TargetConfiguration, Tree } from '@nx/devkit';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
@@ -10,7 +9,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
   addProjectConfiguration(tree, options.name, {
     root: options.projectRoot,
     sourceRoot: `${options.projectRoot}/src`,
-    projectType: ProjectType.Library,
+    projectType: 'library',
     tags: options.parsedTags,
     targets,
   });

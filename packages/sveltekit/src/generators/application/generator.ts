@@ -9,7 +9,6 @@ import {
   workspaceRoot,
 } from '@nx/devkit';
 import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
-import { ProjectType } from '@nx/workspace';
 import { relative } from 'path';
 import { addLinting } from './lib/add-linting';
 import { installDependencies } from './lib/install-dependencies';
@@ -61,7 +60,7 @@ export async function applicationGenerator(
 
   addProjectConfiguration(host, options.projectName, {
     root: options.projectRoot,
-    projectType: ProjectType.Application,
+    projectType: 'application',
     sourceRoot: `${options.projectRoot}/src`,
     targets: targets,
     tags: options.parsedTags,
