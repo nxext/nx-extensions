@@ -13,6 +13,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import devkit from '@nx/devkit';
 import { join } from 'path';
 import * as glob from 'glob';
+
 const { readCachedProjectGraph, NX_VERSION } = devkit;
 
 function invariant(condition, message) {
@@ -49,27 +50,21 @@ invariant(
 
 process.chdir(outputPath);
 
-// Updating the version in "package.json" before publishing
 try {
-  const distDir = join(process.cwd(), 'dist');
   const npmScope = '@nxext';
-  let pkgFiles = glob.sync(join(distDir, '/**/package.json'));
-  pkgFiles.forEach((p) => {
-    const content = JSON.parse(readFileSync(p).toString());
-    content.version = version;
-    for (const key in content.dependencies) {
-      if (key.startsWith(`${npmScope}/`)) {
-        content.dependencies[key] = version;
-      }
-      if (key.startsWith(`@nx/`)) {
-        content.dependencies[key] = NX_VERSION;
-      }
+  const content = JSON.parse(readFileSync(`package.json`).toString());
+  content.version = '999.9.9';
+  for (const key in content.dependencies) {
+    if (key.startsWith(`${npmScope}/`)) {
+      content.dependencies[key] = version;
     }
-    writeFileSync(p, JSON.stringify(content, null, 2));
-  });
+    if (key.startsWith(`@nx/`)) {
+      content.dependencies[key] = NX_VERSION;
+    }
+  }
+  writeFileSync(`package.json`, JSON.stringify(json, null, 2));
 } catch (e) {
   console.error(`Error reading package.json file from library build output.`);
 }
-
 // Execute "npm publish" to publish
-execSync(`npm publish --access public --tag ${tag}`);
+execSync(`npm publish --access public --tag ${tag} --verbose`);

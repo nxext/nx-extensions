@@ -497,3 +497,67 @@ Default: `false`
 Type: `boolean`
 
 Configure your project with TypeScript. Generate main.ts and preview.ts files, instead of main.js and preview.js.
+
+## @nxext/vue:setup-tailwind
+
+setup-tailwind generator
+
+### Usage
+
+```bash
+nx generate setup-tailwind ...
+```
+
+By default, Nx will search for `setup-tailwind` in the default collection provisioned in nx.json.
+
+You can specify the collection explicitly as follows:
+
+```bash
+nx g @nxext/vue:setup-tailwind ...
+```
+
+Show what will be generated without writing to disk:
+
+```bash
+nx g setup-tailwind ... --dry-run
+```
+
+### Examples
+
+Initialize Tailwind configuration for the `my-app` project.:
+
+```bash
+nx nx g setup-tailwind --project=my-app
+```
+
+### Options
+
+#### project (_**required**_)
+
+Alias(es): p
+
+Type: `string`
+
+The name of the project to add the Tailwind CSS setup for.
+
+#### buildTarget
+
+Default: `build`
+
+Type: `string`
+
+The name of the target used to build the project. This option is not needed in most cases.
+
+#### skipFormat
+
+Type: `boolean`
+
+Skips formatting the workspace after the generator completes.
+
+#### skipPackageJson
+
+Default: `false`
+
+Type: `boolean`
+
+Do not add dependencies to `package.json`.

@@ -6,3 +6,6 @@ export const vueTestUtilsVersion = '^2.4.1';
 export const eslintPluginVueVersion = '^9.14.1';
 export const eslintPluginPrettierVueVersion = '^7.1.0';
 export const eslintPluginTypescriptVueVersion = '^11.0.3';
+export const postcssVersion = '8.4.21';
+export const tailwindcssVersion = '3.2.7';
+export const autoprefixerVersion = '10.4.13';
