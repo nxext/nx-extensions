@@ -16,9 +16,11 @@ export default async function* runExecutor(
   options: CommandExecutorSchema,
   context: ExecutorContext
 ) {
-  const projectRoot = context.workspace.projects[context.projectName].root;
+  const projectConfig = context.workspace.projects[context.projectName];
+  const projectRoot = projectConfig.root;
+  const projectDistDir = projectConfig.targets['build'].options.outputPath;
   const projectRootPath = normalizePath(`${context.root}/${projectRoot}`);
-  const projectDistPath = normalizePath(`${context.root}/dist/${projectRoot}`);
+  const projectDistPath = normalizePath(`${context.root}/${projectDistDir}`);
   const { devDependencies } = readJsonFile('package.json');
   const packageName = '@capacitor/cli';
   const packageVersion = devDependencies?.[packageName]?.replace(/[\\~^]/g, '');
