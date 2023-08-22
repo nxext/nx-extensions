@@ -10,6 +10,7 @@
       "options": {
         "outputPath": "dist/packages/vue",
         "main": "packages/vue/src/index.ts",
+        "additionalEntryPoints": ["packages/vue/src/tailwind.ts"],
         "packageJson": "packages/vue/package.json",
         "tsConfig": "packages/vue/tsconfig.lib.json",
         "assets": [
