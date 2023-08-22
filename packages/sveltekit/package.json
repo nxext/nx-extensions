@@ -27,7 +27,6 @@
     "nx": "^16.7.1"
   },
   "peerDependencies": {
-    "@nx/workspace": "^16.7.1",
     "@nx/linter": "^16.7.1",
     "@nx/vite": "^16.7.1"
   }
