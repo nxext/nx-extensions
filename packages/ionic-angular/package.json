@@ -8,8 +8,9 @@
   },
   "homepage": "https://nxext.dev/docs/ionic-angular/overview.html",
   "repository": {
-    "type": "github",
-    "url": "https://github.com/nxext/nx-extensions"
+    "type": "git",
+    "url": "https://github.com/nxext/nx-extensions",
+    "directory": "packages/ionic-angular"
   },
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"

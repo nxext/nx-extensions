@@ -13,8 +13,9 @@
     "playwright"
   ],
   "repository": {
-    "type": "github",
-    "url": "https://github.com/nxext/nx-extensions"
+    "type": "git",
+    "url": "https://github.com/nxext/nx-extensions",
+    "directory": "packages/vue"
   },
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"

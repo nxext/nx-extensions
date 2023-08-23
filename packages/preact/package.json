@@ -13,8 +13,9 @@
     "web components"
   ],
   "repository": {
-    "type": "github",
-    "url": "https://github.com/nxext/nx-extensions"
+    "type": "git",
+    "url": "https://github.com/nxext/nx-extensions",
+    "directory": "packages/preact"
   },
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"

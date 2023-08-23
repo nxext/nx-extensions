@@ -7,8 +7,9 @@
     "email": "gion@syncrea.ch"
   },
   "repository": {
-    "type": "github",
-    "url": "https://github.com/nxext/nx-extensions"
+    "type": "git",
+    "url": "https://github.com/nxext/nx-extensions",
+    "directory": "packages/core"
   },
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"
