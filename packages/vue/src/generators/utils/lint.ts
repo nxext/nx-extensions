@@ -13,6 +13,7 @@ export const extraEslintDependencies = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const extendVueEslintJson = (json: any) => {
   const { extends: pluginExtends, ...config } = json;
 

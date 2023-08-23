@@ -47,7 +47,7 @@ export class TypeScriptVueImportLocator {
 
   fromNode(
     filePath: string,
-    node: any,
+    node: ts.Node,
     visitor: (
       importExpr: string,
       filePath: string,

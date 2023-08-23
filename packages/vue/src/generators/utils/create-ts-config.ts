@@ -26,6 +26,7 @@ export function createTsConfig(
         path: type === 'app' ? './tsconfig.app.json' : './tsconfig.lib.json',
       },
     ],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
 
   json.compilerOptions.types =

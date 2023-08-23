@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "http://json-schema.org/schema",
+  "title": "Nuxt build",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "outputPath": {
+      "type": "string",
+      "description": "The output path of the generated files.",
+      "x-completion-type": "directory",
+      "x-priority": "important"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "At the moment, it prints out hook names and timings on the server, and logs hook arguments as well in the browser.",
+      "default": false
+    },
+    "dev": {
+      "type": "boolean",
+      "description": "Whether Nuxt is running in development mode.",
+      "default": false
+    },
+    "ssr": {
+      "type": "boolean",
+      "description": "Whether to enable rendering of HTML - either dynamically (in server mode) or at generate time. If set to false generated pages will have no content."
+    }
+  },
+  "required": []
+}

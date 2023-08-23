@@ -1,0 +1,22 @@
+{
+  "extends": "<%= rootTsConfig %>",
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "outDir": "<%= offsetFromRoot %>dist/out-tsc",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "./**/*"
+  ]
+}

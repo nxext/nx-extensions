@@ -1,0 +1,50 @@
+{
+  "name": "@nxext/nuxt",
+  "version": "16.7.0",
+  "license": "MIT",
+  "author": "Gion Kunz",
+  "description": "Nx plugin for Nuxt3",
+  "homepage": "https://nxext.dev/",
+  "keywords": [
+    "nuxt",
+    "nitro",
+    "vue",
+    "cypress",
+    "playwright"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "schematics": "./generators.json",
+  "generators": "./generators.json",
+  "builders": "./executors.json",
+  "executors": "./executors.json",
+  "dependencies": {
+    "@nx/devkit": "^16.7.1",
+    "tslib": "^2.3.0",
+    "@nx/workspace": "^16.7.1",
+    "@nuxt/kit": "^3.6.5",
+    "nuxi": "^3.6.5",
+    "@nxext/core": "^16.7.0"
+  },
+  "peerDependencies": {
+    "@nx/js": "^16.7.1",
+    "@nx/linter": "^16.7.1",
+    "@nx/cypress": "^16.7.1",
+    "@nx/playwright": "^16.7.1"
+  },
+  "peerDependenciesMeta": {
+    "@nx/cypress": {
+      "optional": true
+    },
+    "@nx/playwright": {
+      "optional": true
+    }
+  }
+}

@@ -11,7 +11,7 @@ import storybookConfigurationGenerator from './configuration';
 jest.mock('@nx/cypress/src/utils/cypress-version');
 // nested code imports graph from the repo, which might have innacurate graph version
 jest.mock('nx/src/project-graph/project-graph', () => ({
-  ...jest.requireActual<any>('nx/src/project-graph/project-graph'),
+  ...jest.requireActual('nx/src/project-graph/project-graph'),
   createProjectGraphAsync: jest
     .fn()
     .mockImplementation(async () => ({ nodes: {}, dependencies: {} })),

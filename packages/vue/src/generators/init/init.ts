@@ -17,7 +17,7 @@ import {
   vueVersion,
 } from '../utils/versions';
 import { InitSchema } from './schema';
-import { addPluginToNxJson } from '../utils/add-plugin-to-nx-json';
+import { addPluginToNxJson } from '@nxext/core';
 
 function updateDependencies(host: Tree, schema: InitSchema) {
   let dependencies: Record<string, string> = {

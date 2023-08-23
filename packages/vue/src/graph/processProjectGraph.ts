@@ -21,7 +21,7 @@ export async function processProjectGraph(
   graph: ProjectGraph,
   context: ProjectGraphProcessorContext
 ) {
-  const builder = new ProjectGraphBuilder(graph);
+  const builder = new ProjectGraphBuilder(graph, context.fileMap);
   const filesToProcess = context.filesToProcess;
   if (Object.keys(filesToProcess).length == 0) {
     return graph;
