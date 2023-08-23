@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "builders": {
+    "build": {
+      "implementation": "./src/executors/build/compat",
+      "schema": "./src/executors/build/schema.json",
+      "description": "Nuxt build"
+    },
+    "serve": {
+      "implementation": "./src/executors/serve/compat",
+      "schema": "./src/executors/serve/schema.json",
+      "description": "Nuxt dev server"
+    }
+  },
+  "executors": {
+    "build": {
+      "implementation": "./src/executors/build/executor",
+      "schema": "./src/executors/build/schema.json",
+      "description": "Nuxt build"
+    },
+    "serve": {
+      "implementation": "./src/executors/serve/executor",
+      "schema": "./src/executors/serve/schema.json",
+      "description": "Nuxt dev server"
+    }
+  }
+}

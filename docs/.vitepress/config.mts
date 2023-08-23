@@ -40,6 +40,10 @@ function nav() {
           text: 'Discord Chat',
           link: 'https://discord.gg/Hqjp9NrZQ7',
         },
+        {
+          text: 'Github',
+          link: 'https://github.com/nxext/nx-extensions',
+        },
       ],
     },
   ];
@@ -293,6 +297,27 @@ function sideNavDocs() {
             {
               text: 'Executors',
               link: '/docs/sveltekit/executors',
+            },
+          ],
+        },
+        {
+          text: 'Nuxt',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/nuxt/overview',
+            },
+            {
+              text: 'Installation',
+              link: '/docs/nuxt/installation',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/nuxt/generators',
+            },
+            {
+              text: 'Executors',
+              link: '/docs/nuxt/executors',
             },
           ],
         },

@@ -16,7 +16,7 @@ import {
 import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
-import { addImport } from '../../../utils/ast-utils';
+import { addImport } from '@nxext/core';
 import { addOutputTarget } from '../../../stencil-core-utils';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 

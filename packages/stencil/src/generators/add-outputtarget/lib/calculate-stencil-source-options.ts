@@ -1,10 +1,11 @@
-import { getWorkspaceLayout, readProjectConfiguration, Tree } from '@nx/devkit';
+import { readProjectConfiguration, Tree } from '@nx/devkit';
+import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
 import * as ts from 'typescript';
-import { readTsSourceFile } from '../../../utils/ast-utils';
+import { readTsSourceFile } from '@nxext/core';
 
 export function calculateStencilSourceOptions(host: Tree, projectName: string) {
   const stencilProjectConfig = readProjectConfiguration(host, projectName);
-  const { npmScope } = getWorkspaceLayout(host);
+  const npmScope = getNpmScope(host);
 
   const stencilConfigPath = `${stencilProjectConfig.root}/stencil.config.ts`;
   const stencilConfigSource: ts.SourceFile = readTsSourceFile(

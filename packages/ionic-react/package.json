@@ -6,10 +6,13 @@
     "name": "Devin Shoemaker",
     "email": "devinshoe@gmail.com"
   },
-  "homepage": "https://nxext.dev/docs/ionic-react/getting-started",
+  "homepage": "https://nxext.dev/docs/ionic-react/overview.html",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nxext-team/nxext.git"
+    "type": "github",
+    "url": "https://github.com/nxext/nx-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "license": "MIT",
   "main": "src/index.js",
