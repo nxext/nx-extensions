@@ -88,6 +88,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/simonflk"><img src="https://avatars.githubusercontent.com/u/4867329?v=4?s=100" width="100px;" alt="Simon Flack"/><br /><sub><b>Simon Flack</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=simonflk" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.tiepphan.com/"><img src="https://avatars.githubusercontent.com/u/7151365?v=4?s=100" width="100px;" alt="Tiep Phan"/><br /><sub><b>Tiep Phan</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=tieppt" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://tehwol.fi/"><img src="https://avatars.githubusercontent.com/u/15650679?v=4?s=100" width="100px;" alt="tehw0lf"/><br /><sub><b>tehw0lf</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=tehw0lf" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gionkunz"><img src="https://avatars.githubusercontent.com/u/2203704?v=4?s=100" width="100px;" alt="Gion Kunz"/><br /><sub><b>Gion Kunz</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=gionkunz" title="Code">💻</a> <a href="#ideas-gionkunz" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
