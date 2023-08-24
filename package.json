@@ -38,8 +38,6 @@
     "create-playground": "ts-node -P tools/scripts/tsconfig.scripts.json tools/scripts/create-playground.ts",
     "update-playground": "ts-node -P tools/scripts/tsconfig.scripts.json tools/scripts/update-playground.ts",
     "setup-local-plugins": "ts-node tools/scripts/setup-local-plugins.ts",
-    "local-registry": "./tools/scripts/local-registry.sh",
-    "local-release": "node ./tools/scripts/local-release.js",
     "documentation": "ts-node -P tools/scripts/tsconfig.scripts.json ./tools/scripts/documentation/documentation.ts",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
