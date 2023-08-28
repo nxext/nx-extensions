@@ -8,7 +8,7 @@ Always run `yarn format` before doing a push!
 
 This project uses the Nx CLI with Yarn 1.x.
 
-This project is built with Nx and follows the OSS project structure. The [Getting Started](https://nx.dev/angular/getting-started/what-is-nx) guide shows how to work with Nx workspaces.
+This project is built with Nx and follows the OSS project structure. The [Getting Started](https://nx.dev/getting-started) guide shows how to work with Nx workspaces.
 
 ## Build
 
