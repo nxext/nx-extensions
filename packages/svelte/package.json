@@ -27,17 +27,17 @@
   "typings": "./src/index.d.ts",
   "schematics": "./generators.json",
   "peerDependencies": {
-    "@nx/jest": "^16.7.1",
-    "@nx/vite": "^16.7.1",
-    "@nx/js": "^16.7.1",
-    "@nx/linter": "^16.7.1",
-    "@nx/storybook": "^16.7.1",
-    "@nx/cypress": "^16.7.1",
+    "@nx/jest": "^16.7.4",
+    "@nx/vite": "^16.7.4",
+    "@nx/js": "^16.7.4",
+    "@nx/linter": "^16.7.4",
+    "@nx/storybook": "^16.7.4",
+    "@nx/cypress": "^16.7.4",
     "typescript": "5.1.6",
-    "nx": "^16.7.1"
+    "nx": "^16.7.4"
   },
   "dependencies": {
-    "@nx/devkit": "^16.7.1",
+    "@nx/devkit": "^16.7.4",
     "tslib": "^2.3.0"
   }
 }

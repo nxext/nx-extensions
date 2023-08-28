@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "^16.7.1",
+    "@nx/devkit": "^16.7.4",
     "typescript": "5.1.6",
-    "nx": "^16.7.1"
+    "nx": "^16.7.4"
   }
 }

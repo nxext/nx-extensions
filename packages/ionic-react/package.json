@@ -27,12 +27,12 @@
   "dependencies": {
     "tslib": "^2.3.0",
     "@nxext/capacitor": "^16.7.0",
-    "@nx/devkit": "^16.7.1",
+    "@nx/devkit": "^16.7.4",
     "typescript": "5.1.6"
   },
   "peerDependencies": {
-    "@nx/linter": "^16.7.1",
-    "@nx/react": "^16.7.1",
+    "@nx/linter": "^16.7.4",
+    "@nx/react": "^16.7.4",
     "@phenomnomnominal/tsquery": "~5.0.1"
   }
 }
