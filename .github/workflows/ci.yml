@@ -13,25 +13,17 @@ jobs:
     with:
       main-branch-name: main
       number-of-agents: 3
-      environment-variables: |
-        npm_config_registry=http://localhost:4872
-      node-version: 18.x
-      yarn-version: 1.x
       init-commands: |
-        yarn nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
+        pnpm exec nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
       parallel-commands: |
-        yarn nx-cloud record -- yarn nx format:check
+        pnpm exec nx-cloud record -- pnpm exec nx format:check
       parallel-commands-on-agents: |
-        yarn nx affected --target=lint --parallel=3
-        yarn nx affected --target=test --parallel=3 --ci --code-coverage
-        yarn nx affected --target=build --parallel=3
+        pnpm exec nx affected --target=lint --parallel=3
+        pnpm exec nx affected --target=test --parallel=3 --ci --code-coverage
+        pnpm exec nx affected --target=build --parallel=3
 
   agents:
     name: Nx Cloud - Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.13.0
     with:
       number-of-agents: 3
-      environment-variables: |
-        npm_config_registry=http://localhost:4872
-      node-version: 18.x
-      yarn-version: 1.x

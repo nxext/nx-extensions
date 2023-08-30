@@ -30,7 +30,7 @@ logger.info('Creating nx workspace...');
 execSync(
   `node ${require.resolve(
     'nx'
-  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nx/workspace --npmScope=proj --preset=empty --packageManager=yarn --nxCloud=false`,
+  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nx/workspace --npmScope=proj --preset=empty --packageManager=pnpm --nxCloud=false`,
   {
     cwd: localTmpDir,
   }
@@ -75,8 +75,8 @@ pkgFiles.forEach((p) => {
   writeFileSync(p, JSON.stringify(content, null, 2));
 });
 
-logger.info(`Running yarn install....`);
-execSync('yarn install', {
+logger.info(`Running pnpm install....`);
+execSync('pnpm install', {
   cwd: tmpProjPath(),
   stdio: ['ignore', 'ignore', 'ignore'],
 });
