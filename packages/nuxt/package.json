@@ -30,8 +30,8 @@
     "@nx/devkit": "^16.7.4",
     "tslib": "^2.3.0",
     "@nx/workspace": "^16.7.4",
-    "@nuxt/kit": "^3.6.5",
-    "nuxi": "^3.6.5",
+    "@nuxt/kit": "3.6.5",
+    "nuxi": "3.6.5",
     "@nxext/core": "^16.7.0"
   },
   "peerDependencies": {
