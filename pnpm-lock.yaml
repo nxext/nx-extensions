@@ -17,8 +17,8 @@ devDependencies:
     specifier: 16.0.0
     version: 16.0.0
   '@nuxt/kit':
-    specifier: ^3.7.0
-    version: 3.7.0
+    specifier: 3.6.5
+    version: 3.6.5
   '@nx/angular':
     specifier: 16.7.4
     version: 16.7.4(@angular-devkit/build-angular@16.2.0)(@angular-devkit/core@16.0.0)(@angular-devkit/schematics@16.0.0)(@schematics/angular@16.0.0)(@swc-node/register@1.6.6)(@swc/core@1.3.69)(@types/node@18.15.3)(eslint@8.46.0)(nx@16.7.4)(rxjs@7.8.1)(ts-node@10.9.1)(typescript@5.1.6)(verdaccio@5.18.0)
@@ -185,10 +185,10 @@ devDependencies:
     specifier: 13.2.3
     version: 13.2.3
   nuxi:
-    specifier: ^3.7.2
-    version: 3.7.2
+    specifier: 3.6.5
+    version: 3.6.5
   nuxt:
-    specifier: ^3.6.5
+    specifier: 3.6.5
     version: 3.6.5(@types/node@18.15.3)(eslint@8.46.0)(less@4.1.3)(stylus@0.59.0)(typescript@5.1.6)
   nx:
     specifier: 16.7.4
@@ -5693,36 +5693,6 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/kit@3.7.0:
-    resolution:
-      {
-        integrity: sha512-bsPRb2NTLHRacjyybhhA3pZFIqo2pxB6bcP4FQDuzlGzVTI5PtJzbfNpkmQC7q+LZt8K0pNlxKVGisDvZctk6w==,
-      }
-    engines: { node: ^14.18.0 || >=16.10.0 }
-    dependencies:
-      '@nuxt/schema': 3.7.0
-      c12: 1.4.2
-      consola: 3.2.3
-      defu: 6.1.2
-      globby: 13.2.2
-      hash-sum: 2.0.0
-      ignore: 5.2.4
-      jiti: 1.19.3
-      knitwork: 1.0.0
-      mlly: 1.4.1
-      pathe: 1.1.1
-      pkg-types: 1.0.3
-      scule: 1.0.0
-      semver: 7.5.4
-      ufo: 1.3.0
-      unctx: 2.3.1
-      unimport: 3.2.0(rollup@3.28.1)
-      untyped: 1.4.0
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/schema@3.6.5:
     resolution:
       {
@@ -5744,28 +5714,6 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/schema@3.7.0:
-    resolution:
-      {
-        integrity: sha512-fNRAubny1x6rIibm/HcacnEGeAQri/FkJ5ei24aY4YjQ12+xDfi7bljfFr6C2+CrEGc1beYd4OQcUqXqEpz5+g==,
-      }
-    engines: { node: ^14.18.0 || >=16.10.0 }
-    dependencies:
-      '@nuxt/ui-templates': 1.3.1
-      defu: 6.1.2
-      hookable: 5.5.3
-      pathe: 1.1.1
-      pkg-types: 1.0.3
-      postcss-import-resolver: 2.0.0
-      std-env: 3.4.3
-      ufo: 1.3.0
-      unimport: 3.2.0(rollup@3.28.1)
-      untyped: 1.4.0
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
   /@nuxt/telemetry@2.4.1:
     resolution:
       {
@@ -5773,7 +5721,7 @@ packages:
       }
     hasBin: true
     dependencies:
-      '@nuxt/kit': 3.7.0
+      '@nuxt/kit': 3.6.5
       chalk: 5.3.0
       ci-info: 3.8.0
       consola: 3.2.3
@@ -17423,17 +17371,6 @@ packages:
     resolution:
       {
         integrity: sha512-4XEXYz71UiWWiKC1/cJCzqRSUEImYRmjcvKpSsBKMU58ALYVSx5KIoas5SwLO8tEKO5BS4DAe4u7MYix7hfuHQ==,
-      }
-    engines: { node: ^14.18.0 || >=16.10.0 }
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
-  /nuxi@3.7.2:
-    resolution:
-      {
-        integrity: sha512-WNczi4X5ms8v63BTlCH+ZZDPzoFI0/V5KW8an4Zv6qOngtONHALw1u6qvtcAqG2tuMDu8gdJuzxMZL2845Dbig==,
       }
     engines: { node: ^14.18.0 || >=16.10.0 }
     hasBin: true

@@ -1,6 +1,6 @@
 import { NuxtBuildExecutorOptions } from './schema';
 import { createProjectGraphAsync } from '@nx/workspace/src/core/project-graph';
-import { ExecutorContext, logger } from '@nx/devkit';
+import { ExecutorContext } from '@nx/devkit';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
@@ -9,10 +9,8 @@ import {
 import { join } from 'path';
 
 // Required because dep is ESM package. Changing moduleResolution to NodeNext causes other issues unfortunately.
-export function loadNuxtKitDynamicImport() {
-  return Function('return import("@nuxt/kit")')() as Promise<
-    typeof import('@nuxt/kit')
-  >;
+export function loadNuxiDynamicImport() {
+  return Function('return import("nuxi")')() as Promise<typeof import('nuxi')>;
 }
 
 export function getConfigOverrides(
@@ -30,41 +28,15 @@ export function getConfigOverrides(
     },
     typescript: {
       typeCheck: true,
+      tsConfig: {
+        extends: join(
+          context.root,
+          context.projectsConfigurations.projects[context.projectName].root,
+          'tsconfig.app.json'
+        ),
+      },
     },
   };
-}
-
-async function loadNuxtInstance(
-  options: NuxtBuildExecutorOptions,
-  context: ExecutorContext
-) {
-  const { loadNuxt } = await loadNuxtKitDynamicImport();
-  const nuxt = await loadNuxt({
-    cwd: join(
-      context.root,
-      context.projectsConfigurations.projects[context.projectName].root
-    ),
-    overrides: getConfigOverrides(options, context),
-  });
-  return nuxt;
-}
-
-async function build(
-  options: NuxtBuildExecutorOptions,
-  context: ExecutorContext
-) {
-  const nuxt = await loadNuxtInstance(options, context);
-  const { buildNuxt } = await loadNuxtKitDynamicImport();
-
-  try {
-    await buildNuxt(nuxt).catch((err) => {
-      if (!err.toString().includes('_stop_')) {
-        throw err;
-      }
-    });
-  } finally {
-    nuxt.close();
-  }
 }
 
 export default async function runExecutor(
@@ -100,13 +72,18 @@ export default async function runExecutor(
     dependencies
   );
 
-  try {
-    await build(options, context);
-
-    return { success: true };
-  } catch (err) {
-    logger.error(err.message);
-
-    return { success: false, error: err.message };
-  }
+  const { runCommand } = await loadNuxiDynamicImport();
+  await runCommand(
+    'build',
+    [
+      join(
+        context.root,
+        context.projectsConfigurations.projects[context.projectName].root
+      ),
+    ],
+    {
+      overrides: getConfigOverrides(options, context),
+    }
+  );
+  return { success: true };
 }
