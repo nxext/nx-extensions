@@ -49,7 +49,7 @@
     "prepare": "is-ci || husky install"
   },
   "private": true,
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "pnpm@8.7.0",
   "devDependencies": {
     "@angular-devkit/core": "16.0.0",
     "@angular-devkit/schematics": "16.0.0",
