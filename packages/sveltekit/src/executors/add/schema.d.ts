@@ -1,3 +1,3 @@
 export interface AddExecutorSchema {
-  package: string
+  package: string;
 }
