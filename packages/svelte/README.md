@@ -32,9 +32,9 @@ nx g @nxext/svelte:library my-lib
 
 #Use your project
 
-* Run ``nx build my-app`` to build the app
-* Run ``nx test my-app`` to test the app
-* Run ``nx e2e my-app`` to run the e2e tests
+- Run `nx build my-app` to build the app
+- Run `nx test my-app` to test the app
+- Run `nx e2e my-app` to run the e2e tests
 
 #Documentation
 
