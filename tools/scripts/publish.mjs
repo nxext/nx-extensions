@@ -11,9 +11,6 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 
 import devkit from '@nx/devkit';
-import { join } from 'path';
-import * as glob from 'glob';
-
 const { readCachedProjectGraph, NX_VERSION } = devkit;
 
 function invariant(condition, message) {
