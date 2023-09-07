@@ -24,20 +24,20 @@
   "typings": "./src/index.d.ts",
   "generators": "./generators.json",
   "dependencies": {
-    "@nx/devkit": "^16.7.4",
+    "@nx/devkit": "^16.8.0",
     "tslib": "^2.3.0",
     "typescript": "5.1.6",
-    "@nx/workspace": "^16.7.4",
-    "nx": "^16.7.4",
+    "@nx/workspace": "^16.8.0",
+    "nx": "^16.8.0",
     "@nxext/core": "^16.7.0"
   },
   "peerDependencies": {
-    "@nx/js": "^16.7.4",
-    "@nx/linter": "^16.7.4",
-    "@nx/vite": "^16.7.4",
-    "@nx/storybook": "^16.7.4",
-    "@nx/cypress": "^16.7.4",
-    "@nx/playwright": "^16.7.4"
+    "@nx/js": "^16.8.0",
+    "@nx/linter": "^16.8.0",
+    "@nx/vite": "^16.8.0",
+    "@nx/storybook": "^16.8.0",
+    "@nx/cypress": "^16.8.0",
+    "@nx/playwright": "^16.8.0"
   },
   "peerDependenciesMeta": {
     "@nx/storybook": {

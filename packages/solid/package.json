@@ -24,15 +24,15 @@
   "generators": "./generators.json",
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "^16.7.4",
+    "@nx/devkit": "^16.8.0",
     "typescript": "5.1.6",
-    "nx": "^16.7.4"
+    "nx": "^16.8.0"
   },
   "peerDependencies": {
-    "@nx/linter": "^16.7.4",
-    "@nx/vite": "^16.7.4",
-    "@nx/jest": "^16.7.4",
-    "@nx/cypress": "^16.7.4"
+    "@nx/linter": "^16.8.0",
+    "@nx/vite": "^16.8.0",
+    "@nx/jest": "^16.8.0",
+    "@nx/cypress": "^16.8.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"
