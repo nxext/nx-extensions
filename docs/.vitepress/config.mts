@@ -37,8 +37,8 @@ function nav() {
           link: 'https://twitter.com/nxext_dev',
         },
         {
-          text: 'Discord Chat',
-          link: 'https://discord.gg/Hqjp9NrZQ7',
+          text: 'Nx Discord Chat',
+          link: 'https://discord.gg/SWyp4xfGjn',
         },
         {
           text: 'Github',
