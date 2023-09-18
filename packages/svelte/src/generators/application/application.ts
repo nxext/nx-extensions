@@ -1,15 +1,14 @@
 import {
   convertNxGenerator,
   formatFiles,
-  generateFiles,
   getWorkspaceLayout,
   joinPathFragments,
   names,
-  offsetFromRoot,
   Tree,
   runTasksInSerial,
+  GeneratorCallback,
 } from '@nx/devkit';
-import { NormalizedSchema, SvelteApplicationSchema } from './schema';
+import { NormalizedSchema, Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
 import { addLinting } from './lib/add-linting';
@@ -19,39 +18,20 @@ import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
 import { updateViteConfig } from './lib/update-vite-config';
 import { createApplicationFiles } from './lib/create-project-files';
-
-function normalizeOptions(
-  tree: Tree,
-  options: SvelteApplicationSchema
-): NormalizedSchema {
-  const { appsDir } = getWorkspaceLayout(tree);
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? joinPathFragments(`${names(options.directory).fileName}/${name}`)
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const fileName = projectName;
-  const projectRoot = joinPathFragments(`${appsDir}/${projectDirectory}`);
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-
-  return {
-    ...options,
-    name: projectName,
-    projectRoot,
-    parsedTags,
-    fileName,
-    projectDirectory,
-    skipFormat: false,
-  };
-}
+import { normalizeOptions } from './lib/normalize-options';
 
 export async function applicationGenerator(
   host: Tree,
-  schema: SvelteApplicationSchema
-) {
-  const options = normalizeOptions(host, schema);
+  schema: Schema
+): Promise<GeneratorCallback> {
+  return await applicationGeneratorInternal(host, {
+    projectNameAndRootFormat: 'derived',
+    ...schema,
+  });
+}
+
+export async function applicationGeneratorInternal(host: Tree, schema: Schema) {
+  const options = await normalizeOptions(host, schema);
 
   const initTask = await initGenerator(host, { ...options, skipFormat: true });
 

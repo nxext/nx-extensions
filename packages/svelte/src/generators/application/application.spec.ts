@@ -1,4 +1,4 @@
-import { SvelteApplicationSchema } from './schema';
+import { Schema } from './schema';
 import { Linter } from '@nx/linter';
 import applicationGenerator from './application';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
@@ -6,7 +6,7 @@ import { readJson } from '@nx/devkit';
 
 describe('svelte app generator', () => {
   let tree;
-  const options: SvelteApplicationSchema = {
+  const options: Schema = {
     name: 'my-app',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',

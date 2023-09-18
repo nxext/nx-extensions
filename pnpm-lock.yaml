@@ -144,7 +144,7 @@ devDependencies:
     version: 2.14.0(eslint@8.46.0)
   eslint-plugin-svelte3:
     specifier: ^4.0.0
-    version: 4.0.0(eslint@8.46.0)(svelte@3.59.1)
+    version: 4.0.0(eslint@8.46.0)(svelte@4.2.1)
   file-type:
     specifier: ^18.5.0
     version: 18.5.0
@@ -203,11 +203,11 @@ devDependencies:
     specifier: ^3.1.3
     version: 3.1.3(prettier@2.7.1)
   svelte:
-    specifier: ^3.59.1
-    version: 3.59.1
+    specifier: ^4.2.1
+    version: 4.2.1
   svelte-preprocess:
     specifier: ^5.0.4
-    version: 5.0.4(@babel/core@7.22.10)(less@4.1.3)(postcss@8.4.28)(stylus@0.59.0)(svelte@3.59.1)(typescript@5.1.6)
+    version: 5.0.4(@babel/core@7.22.10)(less@4.1.3)(postcss@8.4.28)(stylus@0.59.0)(svelte@4.2.1)(typescript@5.1.6)
   tcp-port-used:
     specifier: ^1.0.2
     version: 1.0.2
@@ -7627,6 +7627,13 @@ packages:
       }
     dev: true
 
+  /@types/estree@1.0.1:
+    resolution:
+      {
+        integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==,
+      }
+    dev: true
+
   /@types/express-serve-static-core@4.17.28:
     resolution:
       {
@@ -9247,6 +9254,15 @@ packages:
       }
     dev: true
 
+  /aria-query@5.3.0:
+    resolution:
+      {
+        integrity: sha512-b0P0sZPKtyu8HkeRAfCq0IfURZK+SuwMjY1UXGBU27wpAiTwQAIlq56IbIO+ytk/JjS1fMR14ee5WBBfKi5J6A==,
+      }
+    dependencies:
+      dequal: 2.0.3
+    dev: true
+
   /array-differ@3.0.0:
     resolution:
       {
@@ -9459,6 +9475,15 @@ packages:
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
+    dev: true
+
+  /axobject-query@3.2.1:
+    resolution:
+      {
+        integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==,
+      }
+    dependencies:
+      dequal: 2.0.3
     dev: true
 
   /babel-jest@29.5.0(@babel/core@7.22.10):
@@ -10484,6 +10509,19 @@ packages:
         integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==,
       }
     engines: { iojs: '>= 1.0.0', node: '>= 0.12.0' }
+    dev: true
+
+  /code-red@1.0.4:
+    resolution:
+      {
+        integrity: sha512-7qJWqItLA8/VPVlKJlFXU+NBlo/qyfs39aJcuMT/2ere32ZqvF5OSxgdM5xOfJJ7O429gg2HM47y8v9P+9wrNw==,
+      }
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.15
+      '@types/estree': 1.0.1
+      acorn: 8.10.0
+      estree-walker: 3.0.3
+      periscopic: 3.1.0
     dev: true
 
   /collect-v8-coverage@1.0.1:
@@ -11524,6 +11562,14 @@ packages:
     engines: { node: '>= 0.8' }
     dev: true
 
+  /dequal@2.0.3:
+    resolution:
+      {
+        integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==,
+      }
+    engines: { node: '>=6' }
+    dev: true
+
   /destr@2.0.1:
     resolution:
       {
@@ -12212,7 +12258,7 @@ packages:
       globals: 13.21.0
     dev: true
 
-  /eslint-plugin-svelte3@4.0.0(eslint@8.46.0)(svelte@3.59.1):
+  /eslint-plugin-svelte3@4.0.0(eslint@8.46.0)(svelte@4.2.1):
     resolution:
       {
         integrity: sha512-OIx9lgaNzD02+MDFNLw0GEUbuovNcglg+wnd/UY0fbZmlQSz7GlQiQ1f+yX0XvC07XPcDOnFcichqI3xCwp71g==,
@@ -12222,7 +12268,7 @@ packages:
       svelte: ^3.2.0
     dependencies:
       eslint: 8.46.0
-      svelte: 3.59.1
+      svelte: 4.2.1
     dev: true
 
   /eslint-scope@5.1.1:
@@ -14562,6 +14608,15 @@ packages:
       '@types/estree': 1.0.0
     dev: true
 
+  /is-reference@3.0.2:
+    resolution:
+      {
+        integrity: sha512-v3rht/LgVcsdZa3O2Nqs+NMowLOxeOm7Ay9+/ARQ2F+qEoANRcqrjAZKGN0v8ymUetZGgkp26LTnGT7H0Qo9Pg==,
+      }
+    dependencies:
+      '@types/estree': 1.0.0
+    dev: true
+
   /is-ssh@1.4.0:
     resolution:
       {
@@ -15930,6 +15985,13 @@ packages:
         integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==,
       }
     engines: { node: '>=14' }
+    dev: true
+
+  /locate-character@3.0.0:
+    resolution:
+      {
+        integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==,
+      }
     dev: true
 
   /locate-path@5.0.0:
@@ -17969,6 +18031,17 @@ packages:
       {
         integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==,
       }
+    dev: true
+
+  /periscopic@3.1.0:
+    resolution:
+      {
+        integrity: sha512-vKiQ8RRtkl9P+r/+oefh25C3fhybptkHKCZSPlcXiJux2tJF55GnEj3BVn4A5gKfq9NWWXXrxkHBwVPUfH0opw==,
+      }
+    dependencies:
+      '@types/estree': 1.0.0
+      estree-walker: 3.0.3
+      is-reference: 3.0.2
     dev: true
 
   /picocolors@1.0.0:
@@ -20538,7 +20611,7 @@ packages:
     engines: { node: '>= 0.4' }
     dev: true
 
-  /svelte-preprocess@5.0.4(@babel/core@7.22.10)(less@4.1.3)(postcss@8.4.28)(stylus@0.59.0)(svelte@3.59.1)(typescript@5.1.6):
+  /svelte-preprocess@5.0.4(@babel/core@7.22.10)(less@4.1.3)(postcss@8.4.28)(stylus@0.59.0)(svelte@4.2.1)(typescript@5.1.6):
     resolution:
       {
         integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==,
@@ -20588,16 +20661,30 @@ packages:
       sorcery: 0.11.0
       strip-indent: 3.0.0
       stylus: 0.59.0
-      svelte: 3.59.1
+      svelte: 4.2.1
       typescript: 5.1.6
     dev: true
 
-  /svelte@3.59.1:
+  /svelte@4.2.1:
     resolution:
       {
-        integrity: sha512-pKj8fEBmqf6mq3/NfrB9SLtcJcUvjYSWyePlfCqN9gujLB25RitWK8PvFzlwim6hD/We35KbPlRteuA6rnPGcQ==,
+        integrity: sha512-LpLqY2Jr7cRxkrTc796/AaaoMLF/1ax7cto8Ot76wrvKQhrPmZ0JgajiWPmg9mTSDqO16SSLiD17r9MsvAPTmw==,
       }
-    engines: { node: '>= 8' }
+    engines: { node: '>=16' }
+    dependencies:
+      '@ampproject/remapping': 2.2.1
+      '@jridgewell/sourcemap-codec': 1.4.15
+      '@jridgewell/trace-mapping': 0.3.18
+      acorn: 8.10.0
+      aria-query: 5.3.0
+      axobject-query: 3.2.1
+      code-red: 1.0.4
+      css-tree: 2.3.1
+      estree-walker: 3.0.3
+      is-reference: 3.0.2
+      locate-character: 3.0.0
+      magic-string: 0.30.3
+      periscopic: 3.1.0
     dev: true
 
   /svg-parser@2.0.4:
