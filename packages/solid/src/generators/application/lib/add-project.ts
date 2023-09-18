@@ -8,8 +8,8 @@ import {
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   addProjectConfiguration(tree, options.name, {
-    root: options.projectRoot,
-    sourceRoot: `${options.projectRoot}/src`,
+    root: options.appProjectRoot,
+    sourceRoot: `${options.appProjectRoot}/src`,
     projectType: 'application',
     tags: options.parsedTags,
     targets: { lint: createLintTarget(options) },
@@ -21,10 +21,10 @@ function createLintTarget(options: NormalizedSchema): TargetConfiguration {
     executor: '@nx/linter:lint',
     options: {
       linter: 'eslint',
-      tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
+      tsConfig: joinPathFragments(options.appProjectRoot, 'tsconfig.app.json'),
       exclude: [
         '**/node_modules/**',
-        `!${joinPathFragments(options.projectRoot, '**/*')}`,
+        `!${joinPathFragments(options.appProjectRoot, '**/*')}`,
       ],
     },
   };

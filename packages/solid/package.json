@@ -1,8 +1,8 @@
 {
   "name": "@nxext/solid",
-  "version": "16.7.0",
+  "version": "16.8.0",
   "license": "MIT",
-  "author": "Kristian Mandrup",
+  "author": "Dominik Pieper",
   "description": "Nx plugin for solid",
   "homepage": "https://nxext.dev/",
   "keywords": [
@@ -23,10 +23,10 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "tslib": "^2.3.0",
+    "nx": "^16.8.0",
     "@nx/devkit": "^16.8.0",
     "typescript": "5.1.6",
-    "nx": "^16.8.0"
+    "tslib": "^2.3.0"
   },
   "peerDependencies": {
     "@nx/linter": "^16.8.0",

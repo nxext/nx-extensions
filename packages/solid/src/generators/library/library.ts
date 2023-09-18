@@ -5,8 +5,6 @@ import { updateTsConfig } from './lib/update-tsconfig';
 import {
   convertNxGenerator,
   formatFiles,
-  getWorkspaceLayout,
-  joinPathFragments,
   names,
   Tree,
   updateJson,
@@ -19,26 +17,39 @@ import { createFiles } from './lib/create-project-files';
 import { updateViteConfig } from './lib/update-vite-config';
 import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
+import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
-function normalizeOptions(
-  tree: Tree,
+async function normalizeOptions(
+  host: Tree,
   options: SolidLibrarySchema
-): NormalizedSchema {
-  const { libsDir, npmScope } = getWorkspaceLayout(tree);
+): Promise<NormalizedSchema> {
+  const {
+    projectName,
+    names: projectNames,
+    projectRoot,
+    importPath,
+  } = await determineProjectNameAndRootOptions(host, {
+    name: options.name,
+    projectType: 'library',
+    directory: options.directory,
+    importPath: options.importPath,
+    projectNameAndRootFormat: options.projectNameAndRootFormat,
+    callingGenerator: '@nxext/solid:library',
+  });
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const fileName = projectName;
-  const projectRoot = joinPathFragments(`${libsDir}/${projectDirectory}`);
+  const fileName = options.simpleName
+    ? projectNames.projectSimpleName
+    : projectNames.projectFileName;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
-  const importPath = options.importPath || `@${npmScope}/${projectDirectory}`;
 
   return {
     ...options,
+    inSourceTests: false,
     name: projectName,
     projectRoot,
     parsedTags,
@@ -58,7 +69,17 @@ function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
 }
 
 export async function libraryGenerator(host: Tree, schema: SolidLibrarySchema) {
-  const options = normalizeOptions(host, schema);
+  return await libraryGeneratorInternal(host, {
+    projectNameAndRootFormat: 'derived',
+    ...schema,
+  });
+}
+
+export async function libraryGeneratorInternal(
+  host: Tree,
+  schema: SolidLibrarySchema
+) {
+  const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(
       `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`

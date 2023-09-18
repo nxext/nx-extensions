@@ -6,7 +6,7 @@ import {
   writeFileSync,
 } from 'fs-extra';
 import { getPublishableLibNames, tmpProjPath } from './utils';
-import { dirname } from 'path';
+import { dirname, basename } from 'path';
 import { logger, readJsonFile, workspaceRoot } from '@nx/devkit';
 import { Workspaces } from 'nx/src/config/workspaces';
 import * as glob from 'glob';
@@ -25,12 +25,11 @@ removeSync(tmpProjPath());
 ensureDirSync(tmpProjPath());
 
 const localTmpDir = dirname(tmpProjPath());
+const baseName = basename(tmpProjPath());
 
 logger.info('Creating nx workspace...');
 execSync(
-  `node ${require.resolve(
-    'nx'
-  )} new proj --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nx/workspace --npmScope=proj --preset=empty --packageManager=pnpm --nxCloud=false`,
+  `pnpx create-nx-workspace --preset=empty --name=${baseName} --skipGit=true --packageManager=pnpm --nxCloud=false`,
   {
     cwd: localTmpDir,
   }
