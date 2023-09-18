@@ -41,6 +41,11 @@
       "description": "A directory where the lib is placed.",
       "alias": "d"
     },
+    "projectNameAndRootFormat": {
+      "description": "Whether to generate the project name and root directory as provided (`as-provided`) or generate them composing their values and taking the configured layout into account (`derived`).",
+      "type": "string",
+      "enum": ["as-provided", "derived"]
+    },
     "publishable": {
       "type": "boolean",
       "description": "Create a publishable library."
@@ -53,6 +58,11 @@
     "importPath": {
       "type": "string",
       "description": "The library name used to import it, like @myorg/my-awesome-lib"
+    },
+    "simpleName": {
+      "description": "Don't include the directory in the name of the module of the library.",
+      "type": "boolean",
+      "default": false
     },
     "skipFormat": {
       "description": "Skip formatting files.",

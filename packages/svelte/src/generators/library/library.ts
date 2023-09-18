@@ -5,9 +5,6 @@ import { updateTsConfig } from './lib/update-tsconfig';
 import {
   convertNxGenerator,
   formatFiles,
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
   Tree,
   updateJson,
   runTasksInSerial,
@@ -19,34 +16,7 @@ import { addVite } from './lib/add-vite';
 import { updateViteConfig } from './lib/update-vite-config';
 import { createProjectFiles } from './lib/create-project-files';
 import { addVitest } from './lib/add-vitest';
-
-function normalizeOptions(
-  tree: Tree,
-  options: SvelteLibrarySchema
-): NormalizedSchema {
-  const { libsDir, npmScope } = getWorkspaceLayout(tree);
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const fileName = projectName;
-  const projectRoot = joinPathFragments(`${libsDir}/${projectDirectory}`);
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-  const importPath = options.importPath || `@${npmScope}/${projectDirectory}`;
-
-  return {
-    ...options,
-    name: projectName,
-    projectRoot,
-    parsedTags,
-    fileName,
-    projectDirectory,
-    importPath,
-  };
-}
+import { normalizeOptions } from './lib/normalize-options';
 
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
   return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
@@ -59,7 +29,7 @@ export async function libraryGenerator(
   host: Tree,
   schema: SvelteLibrarySchema
 ) {
-  const options = normalizeOptions(host, schema);
+  const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(
       `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`

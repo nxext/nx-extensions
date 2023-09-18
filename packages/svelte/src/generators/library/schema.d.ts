@@ -1,9 +1,10 @@
 import { Linter } from '@nx/linter';
+import { ProjectNameAndRootFormat } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 export interface SvelteLibrarySchema {
   name: string;
   tags?: string;
-
+  projectNameAndRootFormat?: ProjectNameAndRootFormat;
   linter: Linter;
   unitTestRunner: 'jest' | 'vitest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
@@ -12,6 +13,7 @@ export interface SvelteLibrarySchema {
   publishable?: boolean;
   importPath?: string;
   skipFormat: boolean;
+  simpleName?: boolean;
 }
 
 export interface NormalizedSchema extends SvelteLibrarySchema {

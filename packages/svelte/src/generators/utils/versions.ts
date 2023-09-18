@@ -1,9 +1,9 @@
 export const eslintPluginSvelteVersion = '^4.0.0';
-export const svelteVersion = '^3.59.1';
+export const svelteVersion = '^4.2.1';
 export const svelteJesterVersion = '^2.3.2';
 export const svelteCheckVersion = '^2.10.2';
-export const svelteLoaderVersion = '^3.1.7';
-export const sveltePreprocessVersion = '^5.0.3';
+export const svelteLoaderVersion = '^3.1.9';
+export const sveltePreprocessVersion = '^5.0.4';
 export const tsconfigSvelteVersion = '^4.0.1';
 export const testingLibrarySvelteVersion = '^3.2.2';
 export const vitePluginSvelteVersion = '^1.0.1';
