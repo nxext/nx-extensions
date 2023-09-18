@@ -7,11 +7,13 @@ export interface SolidLibrarySchema {
   linter: Linter;
   unitTestRunner: 'vitest' | 'jest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
+  projectNameAndRootFormat?: ProjectNameAndRootFormat;
   buildable?: boolean;
   directory?: string;
   publishable?: boolean;
   importPath?: string;
   skipFormat: boolean;
+  simpleName?: boolean;
 }
 
 export interface NormalizedSchema extends SolidLibrarySchema {
@@ -20,4 +22,5 @@ export interface NormalizedSchema extends SolidLibrarySchema {
   fileName: string;
   parsedTags: string[];
   importPath: string;
+  inSourceTests: boolean;
 }

@@ -7,7 +7,7 @@ import { libraryGenerator } from './library';
 describe('solid library schematic', () => {
   let tree: Tree;
   const options: SolidLibrarySchema = {
-    name: 'test',
+    name: 'myLib',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
@@ -42,11 +42,11 @@ describe('solid library schematic', () => {
     await libraryGenerator(tree, options);
 
     // expect(tree.exists(`libs/${options.name}/solid.config.cjs`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/.eslintrc.json`)).toBeFalsy();
-    expect(tree.exists(`libs/${options.name}/.eslintrc.js`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/tsconfig.lib.json`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/tsconfig.spec.json`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/tsconfig.json`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/.eslintrc.json`)).toBeFalsy();
+    expect(tree.exists(`libs/my-lib/.eslintrc.js`)).toBeTruthy();
   });
 
   it('should fail if no importPath is provided with publishable', async () => {

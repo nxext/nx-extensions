@@ -1,13 +1,12 @@
 import {
   convertNxGenerator,
   formatFiles,
-  getWorkspaceLayout,
-  joinPathFragments,
   names,
   Tree,
   runTasksInSerial,
+  GeneratorCallback,
 } from '@nx/devkit';
-import { NormalizedSchema, SolidApplicationSchema } from './schema';
+import { NormalizedSchema, Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
 import { addLinting } from './lib/add-linting';
@@ -17,39 +16,61 @@ import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
 import { updateViteConfig } from './lib/update-vite-config';
 import { createFiles } from './lib/create-project-files';
+import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
-function normalizeOptions(
-  tree: Tree,
-  options: SolidApplicationSchema
-): NormalizedSchema {
-  const { appsDir } = getWorkspaceLayout(tree);
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? joinPathFragments(`${names(options.directory).fileName}/${name}`)
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const fileName = projectName;
-  const projectRoot = joinPathFragments(`${appsDir}/${projectDirectory}`);
+async function normalizeOptions<T extends Schema = Schema>(
+  host: Tree,
+  options: Schema,
+  callingGenerator = '@nxext/solid:application'
+): Promise<NormalizedSchema<T>> {
+  const {
+    projectName: appProjectName,
+    projectRoot: appProjectRoot,
+    projectNameAndRootFormat,
+  } = await determineProjectNameAndRootOptions(host, {
+    name: options.name,
+    projectType: 'application',
+    directory: options.directory,
+    projectNameAndRootFormat: options.projectNameAndRootFormat,
+    rootProject: options.rootProject,
+    callingGenerator,
+  });
+  options.rootProject = appProjectRoot === '.';
+  options.projectNameAndRootFormat = projectNameAndRootFormat;
+
+  const e2eProjectName = options.rootProject ? 'e2e' : `${appProjectName}-e2e`;
+  const e2eProjectRoot = options.rootProject ? 'e2e' : `${appProjectRoot}-e2e`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
+  //const fileName = options.pascalCaseFiles ? 'App' : 'app';
+  const fileName = 'App';
 
   return {
     ...options,
-    name: projectName,
-    projectRoot,
+    name: names(options.name).fileName,
+    projectName: appProjectName,
+    appProjectRoot,
+    e2eProjectName,
+    e2eProjectRoot,
     parsedTags,
     fileName,
-    projectDirectory,
     skipFormat: false,
   };
 }
 
 export async function applicationGenerator(
-  tree: Tree,
-  schema: SolidApplicationSchema
-) {
-  const options = normalizeOptions(tree, schema);
+  host: Tree,
+  schema: Schema
+): Promise<GeneratorCallback> {
+  return await applicationGeneratorInternal(host, {
+    projectNameAndRootFormat: 'derived',
+    ...schema,
+  });
+}
+
+export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
+  const options = await normalizeOptions(tree, schema);
 
   const initTask = await initGenerator(tree, { ...options, skipFormat: true });
 

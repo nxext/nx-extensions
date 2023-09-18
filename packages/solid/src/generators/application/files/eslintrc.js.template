@@ -7,7 +7,7 @@ module.exports = {
     {
       "files": ["*.ts", "*.js", "*.tsx"],
       "parserOptions": {
-        "project": ["<%= projectRoot %>/tsconfig.*?.json"]
+        "project": ["<%= appProjectRoot %>/tsconfig.*?.json"]
       },
       "rules": {}
     },

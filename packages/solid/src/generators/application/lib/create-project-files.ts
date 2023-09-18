@@ -11,11 +11,11 @@ export function createFiles(host: Tree, options: NormalizedSchema) {
   generateFiles(
     host,
     joinPathFragments(__dirname, '../files'),
-    options.projectRoot,
+    options.appProjectRoot,
     {
       ...options,
       ...names(options.name),
-      offsetFromRoot: offsetFromRoot(options.projectRoot),
+      offsetFromRoot: offsetFromRoot(options.appProjectRoot),
     }
   );
 }

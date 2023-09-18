@@ -60,6 +60,22 @@ Possible values: `eslint`
 
 The tool to use for running lint checks.
 
+#### projectNameAndRootFormat
+
+Type: `string`
+
+Possible values: `as-provided`, `derived`
+
+Whether to generate the project name and root directory as provided (`as-provided`) or generate them composing their values and taking the configured layout into account (`derived`).
+
+#### rootProject (**hidden**)
+
+Default: `false`
+
+Type: `boolean`
+
+Create a application at the root of the workspace
+
 #### skipFormat
 
 Default: `false`
@@ -167,6 +183,14 @@ The tool to use for running lint checks.
 Type: `boolean`
 
 Create a publishable library.
+
+#### simpleName
+
+Default: `false`
+
+Type: `boolean`
+
+Don't include the directory in the name of the module of the library.
 
 #### skipFormat
 

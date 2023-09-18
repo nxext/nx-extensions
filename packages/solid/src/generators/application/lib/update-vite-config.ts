@@ -2,7 +2,7 @@ import { Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
 export function updateViteConfig(host: Tree, options: NormalizedSchema) {
-  const configPath = `${options.projectRoot}/vite.config.ts`;
+  const configPath = `${options.appProjectRoot}/vite.config.ts`;
   const originalContent = host.read(configPath, 'utf-8');
   const content = updateViteConfigContent(originalContent);
   host.write(configPath, content);

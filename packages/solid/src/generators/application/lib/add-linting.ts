@@ -23,17 +23,17 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     linter: options.linter,
     project: options.name,
     tsConfigPaths: [
-      joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
+      joinPathFragments(options.appProjectRoot, 'tsconfig.app.json'),
     ],
-    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,spec.ts,tsx}`],
+    eslintFilePatterns: [`${options.appProjectRoot}/**/*.{ts,spec.ts,tsx}`],
     skipFormat: true,
   });
 
   host.rename(
-    joinPathFragments(options.projectRoot, 'eslintrc.js'),
-    joinPathFragments(options.projectRoot, '.eslintrc.js')
+    joinPathFragments(options.appProjectRoot, 'eslintrc.js'),
+    joinPathFragments(options.appProjectRoot, '.eslintrc.js')
   );
-  host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
+  host.delete(joinPathFragments(options.appProjectRoot, '.eslintrc.json'));
 
   const installTask = await addDependenciesToPackageJson(
     host,
