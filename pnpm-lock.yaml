@@ -16,6 +16,12 @@ devDependencies:
   '@angular-devkit/schematics':
     specifier: 16.0.0
     version: 16.0.0
+  '@eslint/eslintrc':
+    specifier: ^2.1.1
+    version: 2.1.2
+  '@eslint/js':
+    specifier: 8.49.0
+    version: 8.49.0
   '@nuxt/kit':
     specifier: 3.6.5
     version: 3.6.5
@@ -4763,10 +4769,10 @@ packages:
       - supports-color
     dev: true
 
-  /@eslint/js@8.47.0:
+  /@eslint/js@8.49.0:
     resolution:
       {
-        integrity: sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==,
+        integrity: sha512-1S8uAY/MTJqVx0SC4epBq+N2yhuwtNwLbJYNZyhL2pO1ZVKn5HFXav5T41Ryzy9K9V7ZId2JB2oy/W4aCd9/2w==,
       }
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
     dev: true
@@ -12312,7 +12318,7 @@ packages:
       '@eslint-community/eslint-utils': 4.3.0(eslint@8.46.0)
       '@eslint-community/regexpp': 4.6.2
       '@eslint/eslintrc': 2.1.2
-      '@eslint/js': 8.47.0
+      '@eslint/js': 8.49.0
       '@humanwhocodes/config-array': 0.11.10
       '@humanwhocodes/module-importer': 1.0.1
       '@nodelib/fs.walk': 1.2.8

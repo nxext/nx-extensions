@@ -53,6 +53,8 @@
   "devDependencies": {
     "@angular-devkit/core": "16.0.0",
     "@angular-devkit/schematics": "16.0.0",
+    "@eslint/eslintrc": "^2.1.1",
+    "@eslint/js": "8.49.0",
     "@nuxt/kit": "3.6.5",
     "@nx/angular": "16.8.1",
     "@nx/cypress": "16.8.1",
@@ -149,5 +151,6 @@
   },
   "nx": {
     "includedScripts": []
-  }
+  },
+  "dependencies": {}
 }
