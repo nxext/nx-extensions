@@ -13,6 +13,7 @@ import {
   ensurePackage,
   NX_VERSION,
 } from '@nx/devkit';
+import { mapLintPattern } from '@nxext/core';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const tasks: GeneratorCallback[] = [];
@@ -54,13 +55,4 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     tasks.push(installTask);
   }
   return runTasksInSerial(...tasks);
-}
-
-function mapLintPattern(
-  projectRoot: string,
-  extension: string,
-  rootProject?: boolean
-) {
-  const infix = rootProject ? 'src/' : '';
-  return `${projectRoot}/${infix}**/*.${extension}`;
 }

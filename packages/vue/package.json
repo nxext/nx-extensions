@@ -29,7 +29,7 @@
     "typescript": "5.1.6",
     "@nx/workspace": "^16.8.0",
     "nx": "^16.8.0",
-    "@nxext/core": "^16.7.0"
+    "@nxext/core": "^16.8.0"
   },
   "peerDependencies": {
     "@nx/js": "^16.8.0",
