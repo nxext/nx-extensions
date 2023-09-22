@@ -26,7 +26,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
   );
   host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
 
-  const installTask = await addDependenciesToPackageJson(
+  const installTask = addDependenciesToPackageJson(
     host,
     extraEslintDependencies.dependencies,
     extraEslintDependencies.devDependencies
