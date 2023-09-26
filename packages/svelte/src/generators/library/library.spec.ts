@@ -74,6 +74,7 @@ describe('svelte library schematic', () => {
       'vitest/importMeta',
       'vite/client',
       'node',
+      'vitest',
     ]);
   });
 });

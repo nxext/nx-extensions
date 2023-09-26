@@ -84,6 +84,7 @@ describe('svelte app generator', () => {
         'vitest/importMeta',
         'vite/client',
         'node',
+        'vitest',
       ]);
     });
   });
