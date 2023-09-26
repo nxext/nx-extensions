@@ -14,18 +14,5 @@
       "schema": "./src/generators/page/schema.json",
       "description": "Generate an Ionic page component"
     }
-  },
-  "schematics": {
-    "application": {
-      "factory": "./src/generators/application/generator#applicationSchematic",
-      "schema": "./src/generators/application/schema.json",
-      "aliases": ["app"],
-      "description": "Create an Ionic Angular application."
-    },
-    "page": {
-      "factory": "./src/generators/page/generator#pageSchematic",
-      "schema": "./src/generators/page/schema.json",
-      "description": "Generate an Ionic page component"
-    }
   }
 }

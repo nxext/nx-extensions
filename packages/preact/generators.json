@@ -3,25 +3,25 @@
   "version": "0.1",
   "generators": {
     "application": {
-      "factory": "./src/generators/application/application#applicationGenerator",
+      "factory": "./src/generators/application/application",
       "schema": "./src/generators/application/schema.json",
       "description": "preact application schematic",
       "aliases": ["app"]
     },
     "library": {
-      "factory": "./src/generators/library/library#libraryGenerator",
+      "factory": "./src/generators/library/library",
       "schema": "./src/generators/library/schema.json",
       "description": "preact library schematic",
       "aliases": ["lib"]
     },
     "component": {
-      "factory": "./src/generators/component/component#componentGenerator",
+      "factory": "./src/generators/component/component",
       "schema": "./src/generators/component/schema.json",
       "description": "Add component",
       "aliases": ["c"]
     },
     "init": {
-      "factory": "./src/generators/init/init#initGenerator",
+      "factory": "./src/generators/init/init",
       "schema": "./src/generators/init/schema.json",
       "description": "Init schematic",
       "hidden": true

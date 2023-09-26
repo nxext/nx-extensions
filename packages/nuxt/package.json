@@ -27,18 +27,18 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nx/devkit": "^16.8.0",
+    "@nx/devkit": "^16.9.1",
     "tslib": "^2.3.0",
-    "@nx/workspace": "^16.8.0",
+    "@nx/workspace": "^16.9.1",
     "@nuxt/kit": "3.6.5",
     "nuxi": "3.6.5",
     "@nxext/core": "^16.7.0"
   },
   "peerDependencies": {
-    "@nx/js": "^16.8.0",
-    "@nx/linter": "^16.8.0",
-    "@nx/cypress": "^16.8.0",
-    "@nx/playwright": "^16.8.0"
+    "@nx/js": "^16.9.1",
+    "@nx/linter": "^16.9.1",
+    "@nx/cypress": "^16.9.1",
+    "@nx/playwright": "^16.9.1"
   },
   "peerDependenciesMeta": {
     "@nx/cypress": {

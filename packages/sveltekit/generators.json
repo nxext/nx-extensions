@@ -4,13 +4,13 @@
   "version": "0.0.1",
   "generators": {
     "application": {
-      "factory": "./src/generators/application/generator#applicationGenerator",
+      "factory": "./src/generators/application/generator",
       "schema": "./src/generators/application/schema.json",
       "description": "sveltekit app generator",
       "aliases": ["app"]
     },
     "component": {
-      "factory": "./src/generators/component/component#componentGenerator",
+      "factory": "./src/generators/component/component",
       "schema": "./src/generators/component/schema.json",
       "description": "component generator"
     }
