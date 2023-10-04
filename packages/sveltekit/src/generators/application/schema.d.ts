@@ -8,6 +8,7 @@ export interface SveltekitGeneratorSchema {
   port?: number;
   skipFormat: boolean;
   linter: Linter;
+  skipPackageJson?: boolean;
 }
 
 export interface NormalizedSchema extends SveltekitGeneratorSchema {

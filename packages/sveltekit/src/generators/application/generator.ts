@@ -7,6 +7,7 @@ import {
   Tree,
   runTasksInSerial,
   workspaceRoot,
+  GeneratorCallback,
 } from '@nx/devkit';
 import { NormalizedSchema, SveltekitGeneratorSchema } from './schema';
 import { relative } from 'path';
@@ -49,6 +50,7 @@ export async function applicationGenerator(
   host: Tree,
   schema: SveltekitGeneratorSchema
 ) {
+  const tasks: GeneratorCallback[] = [];
   const options = normalizeOptions(host, schema);
 
   const targets = {
@@ -68,7 +70,9 @@ export async function applicationGenerator(
   addFiles(host, options);
 
   const lintTask = await addLinting(host, options);
+  tasks.push(lintTask);
   const viteTask = await addVite(host, options);
+  tasks.push(viteTask);
 
   updateViteConfig(host, options);
 
@@ -76,9 +80,12 @@ export async function applicationGenerator(
     await formatFiles(host);
   }
 
-  const installTask = installDependencies(host);
+  if (!options.skipPackageJson) {
+    const installTask = installDependencies(host);
+    tasks.push(installTask);
+  }
 
-  return runTasksInSerial(installTask, viteTask, lintTask);
+  return runTasksInSerial(...tasks);
 }
 
 export default applicationGenerator;

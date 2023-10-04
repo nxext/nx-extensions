@@ -27,6 +27,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     ],
     eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,svelte,spec.ts}`],
     skipFormat: true,
+    skipPackageJson: options.skipPackageJson,
   });
 
   host.rename(
@@ -35,7 +36,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
   );
   host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
 
-  const installTask = await addDependenciesToPackageJson(
+  const installTask = addDependenciesToPackageJson(
     host,
     extraEslintDependencies.dependencies,
     extraEslintDependencies.devDependencies
