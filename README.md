@@ -91,6 +91,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/intellild"><img src="https://avatars.githubusercontent.com/u/8379858?v=4?s=100" width="100px;" alt="intellild"/><br /><sub><b>intellild</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=intellild" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://sebastiandg.com/"><img src="https://avatars.githubusercontent.com/u/13395979?v=4?s=100" width="100px;" alt="Sebastian Duque Gutierrez"/><br /><sub><b>Sebastian Duque Gutierrez</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=sebastiandg7" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
