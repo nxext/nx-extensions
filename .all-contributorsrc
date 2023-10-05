@@ -336,6 +336,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/1606617?v=4",
       "profile": "https://josh.wgnd.org/",
       "contributions": ["code"]
+    },
+    {
+      "login": "mandarini",
+      "name": "Katerina Skroumpelou",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6603745?v=4",
+      "profile": "https://psyber.city/",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
