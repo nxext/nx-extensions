@@ -94,6 +94,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://sebastiandg.com/"><img src="https://avatars.githubusercontent.com/u/13395979?v=4?s=100" width="100px;" alt="Sebastian Duque Gutierrez"/><br /><sub><b>Sebastian Duque Gutierrez</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=sebastiandg7" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://www.arendjantetteroo.nl/"><img src="https://avatars.githubusercontent.com/u/713066?v=4?s=100" width="100px;" alt="Arend-Jan Tetteroo"/><br /><sub><b>Arend-Jan Tetteroo</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=arendjantetteroo" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/dancork"><img src="https://avatars.githubusercontent.com/u/1881054?v=4?s=100" width="100px;" alt="Dan Cork"/><br /><sub><b>Dan Cork</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=dancork" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://josh.wgnd.org/"><img src="https://avatars.githubusercontent.com/u/1606617?v=4?s=100" width="100px;" alt="Josh Wiegand"/><br /><sub><b>Josh Wiegand</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=jrwiegand" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
