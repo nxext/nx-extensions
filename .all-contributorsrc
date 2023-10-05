@@ -301,6 +301,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/71267909?v=4",
       "profile": "https://github.com/Schmale97",
       "contributions": ["code"]
+    },
+    {
+      "login": "intellild",
+      "name": "intellild",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8379858?v=4",
+      "profile": "https://github.com/intellild",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
