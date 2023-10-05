@@ -343,6 +343,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/6603745?v=4",
       "profile": "https://psyber.city/",
       "contributions": ["code"]
+    },
+    {
+      "login": "devinrhode2",
+      "name": "Devin Rhode",
+      "avatar_url": "https://avatars.githubusercontent.com/u/539816?v=4",
+      "profile": "https://github.com/devinrhode2",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,

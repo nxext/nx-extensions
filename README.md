@@ -96,6 +96,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/dancork"><img src="https://avatars.githubusercontent.com/u/1881054?v=4?s=100" width="100px;" alt="Dan Cork"/><br /><sub><b>Dan Cork</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=dancork" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://josh.wgnd.org/"><img src="https://avatars.githubusercontent.com/u/1606617?v=4?s=100" width="100px;" alt="Josh Wiegand"/><br /><sub><b>Josh Wiegand</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=jrwiegand" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://psyber.city/"><img src="https://avatars.githubusercontent.com/u/6603745?v=4?s=100" width="100px;" alt="Katerina Skroumpelou"/><br /><sub><b>Katerina Skroumpelou</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=mandarini" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/devinrhode2"><img src="https://avatars.githubusercontent.com/u/539816?v=4?s=100" width="100px;" alt="Devin Rhode"/><br /><sub><b>Devin Rhode</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=devinrhode2" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
