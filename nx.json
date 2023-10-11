@@ -21,17 +21,17 @@
     "defaultBase": "main"
   },
   "generators": {
-    "@nrwl/next": {
+    "@nx/next": {
       "application": {
         "linter": "eslint"
       }
     },
-    "@nrwl/nest": {
+    "@nx/nest": {
       "application": {
         "linter": "eslint"
       }
     },
-    "@nrwl/express": {
+    "@nx/express": {
       "application": {
         "linter": "eslint"
       },
