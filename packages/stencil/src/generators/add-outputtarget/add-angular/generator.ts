@@ -23,7 +23,7 @@ import {
   addExportToModule,
 } from '../../../utils/angular-ast-utils';
 import { getProjectTsImportPath } from '../../storybook-configuration/generator';
-import { addAfterLastImport, addImport } from '@nxext/core';
+import { addAfterLastImport, addImport } from '@nxext/common';
 import { addGlobal } from '@nx/js';
 
 async function prepareAngularLibrary(

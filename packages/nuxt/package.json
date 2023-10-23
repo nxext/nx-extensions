@@ -32,7 +32,7 @@
     "@nx/workspace": "17.0.1",
     "@nuxt/kit": "3.6.5",
     "nuxi": "3.6.5",
-    "@nxext/core": "^17.0.0"
+    "@nxext/common": "*"
   },
   "peerDependencies": {
     "@nx/js": "17.0.1",

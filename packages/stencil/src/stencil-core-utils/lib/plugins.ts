@@ -1,5 +1,5 @@
 import * as ts from 'typescript';
-import { readTsSourceFile } from '@nxext/core';
+import { readTsSourceFile } from '@nxext/common';
 import {
   applyChangesToString,
   ChangeType,

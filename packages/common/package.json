@@ -1,5 +1,5 @@
 {
-  "name": "@nxext/core",
+  "name": "@nxext/common",
   "version": "17.0.0",
   "description": "Core utilities for nxext Nx plugins",
   "author": {
