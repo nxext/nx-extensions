@@ -10,7 +10,7 @@ import {
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');

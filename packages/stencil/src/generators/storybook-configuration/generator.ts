@@ -17,14 +17,15 @@ import {
   writeJson,
   runTasksInSerial,
 } from '@nx/devkit';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import { TsConfig } from '@nx/storybook/src/utils/utilities';
-import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
+import { getRootTsConfigPathInTree } from '@nx/js';
 import { join } from 'path';
 import { isBuildableStencilProject } from '../../utils/utillities';
 import { updateDependencies } from './lib/add-dependencies';
 import { updateLintConfig } from './lib/update-lint-config';
 import { StorybookConfigureSchema } from './schema';
+import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
 
 /**
  * With Nx `npmScope` (eg: nx-workspace) and `projectName` (eg: nx-project), returns a path portion to be used for import statements or
@@ -35,7 +36,8 @@ import { StorybookConfigureSchema } from './schema';
  */
 export function getProjectTsImportPath(tree: Tree, projectName: string) {
   const workspaceLayout = getWorkspaceLayout(tree);
-  return `@${workspaceLayout.npmScope}/${projectName}`;
+  const npmScope = getNpmScope(tree);
+  return `@${npmScope}/${projectName}`;
 }
 
 export async function storybookConfigurationGenerator(

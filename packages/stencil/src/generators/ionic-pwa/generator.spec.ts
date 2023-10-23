@@ -11,7 +11,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { ionicPwaGenerator } from './generator';
 import { applicationGenerator } from '../application/generator';
 import { RawPWASchema } from './schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');

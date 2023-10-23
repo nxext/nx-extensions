@@ -19,13 +19,13 @@ import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
-import { updateViteConfig } from './lib/update-vite-config';
+import { createOrEditViteConfig } from '@nx/vite';
 
 function normalizeOptions(
   tree: Tree,
   options: PreactLibrarySchema
 ): NormalizedSchema {
-  const { libsDir, npmScope } = getWorkspaceLayout(tree);
+  const { libsDir } = getWorkspaceLayout(tree);
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -36,7 +36,6 @@ function normalizeOptions(
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
-  const importPath = options.importPath || `@${npmScope}/${projectDirectory}`;
 
   return {
     ...options,
@@ -45,7 +44,6 @@ function normalizeOptions(
     parsedTags,
     fileName,
     projectDirectory,
-    importPath,
   };
 }
 
@@ -90,13 +88,26 @@ export async function libraryGenerator(
   createFiles(host, options);
 
   const viteTask = await addVite(host, options);
+  createOrEditViteConfig(
+    host,
+    {
+      project: options.name,
+      includeLib: false,
+      includeVitest: options.unitTestRunner === 'vitest',
+      inSourceTests: false,
+      rollupOptionsExternal: [],
+      imports: [`import preact from '@preact/preset-vite'`],
+      plugins: [`preact()`],
+    },
+    false
+  );
+
   const vitestTask = await addVitest(host, options);
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
 
   updateTsConfig(host, options);
   updateJestConfig(host, options);
-  updateViteConfig(host, options);
 
   if (options.publishable || options.buildable) {
     updateLibPackageNpmScope(host, options);

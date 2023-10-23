@@ -1,4 +1,4 @@
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 export interface PreactLibrarySchema {
   name: string;
@@ -19,5 +19,4 @@ export interface NormalizedSchema extends PreactLibrarySchema {
   projectDirectory: string;
   fileName: string;
   parsedTags: string[];
-  importPath: string;
 }

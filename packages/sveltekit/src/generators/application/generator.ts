@@ -16,7 +16,7 @@ import { installDependencies } from './lib/install-dependencies';
 import { addFiles } from './lib/add-project-files';
 import { createSvelteCheckTarget } from './lib/targets';
 import { addVite } from './lib/add-vite';
-import { updateViteConfig } from './lib/update-vite-config';
+import { createOrEditViteConfig } from '@nx/vite';
 
 function normalizeOptions(
   host: Tree,
@@ -73,8 +73,19 @@ export async function applicationGenerator(
   tasks.push(lintTask);
   const viteTask = await addVite(host, options);
   tasks.push(viteTask);
-
-  updateViteConfig(host, options);
+  createOrEditViteConfig(
+    host,
+    {
+      project: options.projectName,
+      includeLib: false,
+      includeVitest: options.unitTestRunner === 'vitest',
+      inSourceTests: false,
+      rollupOptionsExternal: [],
+      imports: [`import { sveltekit } from '@sveltejs/kit/vite'`],
+      plugins: [`sveltekit()`],
+    },
+    false
+  );
 
   if (!options.skipFormat) {
     await formatFiles(host);

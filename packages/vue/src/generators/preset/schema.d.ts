@@ -1,4 +1,4 @@
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import { Schema } from '../application/schema';
 
 export interface PresetSchema extends Schema {

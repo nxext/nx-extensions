@@ -5,7 +5,7 @@ import {
   runTasksInSerial,
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { lintProjectGenerator } from '@nx/linter';
+import { lintProjectGenerator } from '@nx/eslint';
 import { extraEslintDependencies } from '../../utils/lint';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {

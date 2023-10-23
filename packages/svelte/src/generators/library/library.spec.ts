@@ -1,5 +1,5 @@
 import { SvelteLibrarySchema } from './schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import { readJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';

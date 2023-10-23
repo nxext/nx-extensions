@@ -1,10 +1,5 @@
 import { SupportedStyles } from '../stencil-core-utils';
-import {
-  readWorkspaceConfiguration,
-  Tree,
-  updateJson,
-  updateWorkspaceConfiguration,
-} from '@nx/devkit';
+import { Tree, updateJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from '../generators/library/generator';
 import { ProjectType } from './typings';
@@ -12,7 +7,6 @@ import { ProjectType } from './typings';
 /**
  * The value of `npmScope` in an nx.json file
  */
-export const testNpmScope = 'test-workspace';
 
 export async function createTestUILib(
   libName: string,
@@ -22,13 +16,10 @@ export async function createTestUILib(
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   updateJson(host, '/package.json', (json) => {
     json.devDependencies = {
-      '@nx/workspace': '15.7.0',
+      '@nx/workspace': '17.0.0',
     };
     return json;
   });
-  const workspaceConfiguration = readWorkspaceConfiguration(host);
-  workspaceConfiguration.npmScope = testNpmScope;
-  updateWorkspaceConfiguration(host, workspaceConfiguration);
 
   await libraryGenerator(host, {
     name: libName,

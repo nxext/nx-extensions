@@ -1,14 +1,11 @@
 import {
   convertNxGenerator,
   formatFiles,
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
   Tree,
   runTasksInSerial,
   GeneratorCallback,
 } from '@nx/devkit';
-import { NormalizedSchema, Schema } from './schema';
+import { Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
 import { addLinting } from './lib/add-linting';
@@ -16,9 +13,9 @@ import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
-import { updateViteConfig } from './lib/update-vite-config';
 import { createApplicationFiles } from './lib/create-project-files';
 import { normalizeOptions } from './lib/normalize-options';
+import { createOrEditViteConfig } from '@nx/vite';
 
 export async function applicationGenerator(
   host: Tree,
@@ -39,12 +36,25 @@ export async function applicationGeneratorInternal(host: Tree, schema: Schema) {
   await createApplicationFiles(host, options);
 
   const viteTask = await addVite(host, options);
+  createOrEditViteConfig(
+    host,
+    {
+      project: options.name,
+      includeLib: false,
+      includeVitest: options.unitTestRunner === 'vitest',
+      inSourceTests: false,
+      rollupOptionsExternal: [],
+      imports: [`import { svelte } from '@sveltejs/vite-plugin-svelte'`],
+      plugins: [`svelte()`],
+    },
+    false
+  );
+
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
   const cypressTask = await addCypress(host, options);
 
   updateJestConfig(host, options);
-  updateViteConfig(host, options);
 
   if (!options.skipFormat) {
     await formatFiles(host);

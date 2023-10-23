@@ -3,7 +3,7 @@ import { Tree, readProjectConfiguration, readJson } from '@nx/devkit';
 
 import { libraryGenerator } from './library';
 import { Schema } from './schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');

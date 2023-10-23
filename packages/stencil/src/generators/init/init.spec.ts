@@ -1,10 +1,5 @@
 import { AppType } from '../../utils/typings';
-import {
-  readJson,
-  readWorkspaceConfiguration,
-  Tree,
-  updateJson,
-} from '@nx/devkit';
+import { readJson, Tree, updateJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { initGenerator } from './init';
 

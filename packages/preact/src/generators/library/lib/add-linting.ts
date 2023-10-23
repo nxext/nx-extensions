@@ -14,8 +14,8 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     return () => {};
   }
-  const { lintProjectGenerator } = ensurePackage<typeof import('@nx/linter')>(
-    '@nx/linter',
+  const { lintProjectGenerator } = ensurePackage<typeof import('@nx/eslint')>(
+    '@nx/eslint',
     NX_VERSION
   );
 

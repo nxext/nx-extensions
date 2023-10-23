@@ -1,4 +1,3 @@
-import { getRootTsConfigPathInTree } from '@nx/workspace/src/utilities/typescript';
 import {
   getWorkspaceLayout,
   joinPathFragments,
@@ -7,6 +6,7 @@ import {
 } from '@nx/devkit';
 
 import { NormalizedSchema } from '../schema';
+import { getRootTsConfigPathInTree } from '@nx/js';
 
 export function updateBaseTsConfig(host: Tree, options: NormalizedSchema) {
   updateJson(host, getRootTsConfigPathInTree(host), (json) => {

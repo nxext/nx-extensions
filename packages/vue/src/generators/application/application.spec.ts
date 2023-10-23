@@ -2,7 +2,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { applicationGenerator } from './application';
 import { Schema } from './schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');

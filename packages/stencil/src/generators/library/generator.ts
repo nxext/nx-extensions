@@ -17,12 +17,14 @@ import { MakeLibBuildableSchema } from '../../generators/make-lib-buildable/sche
 import { updateTsConfig } from './lib/update-tsconfig';
 import { addProject } from './lib/add-project';
 import makeLibBuildableGenerator from '../../generators/make-lib-buildable/make-lib-buildable';
+import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
 
 function normalizeOptions(
   host: Tree,
   options: RawLibrarySchema
 ): LibrarySchema {
-  const { libsDir, npmScope } = getWorkspaceLayout(host);
+  const { libsDir } = getWorkspaceLayout(host);
+  const npmScope = getNpmScope(host);
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`

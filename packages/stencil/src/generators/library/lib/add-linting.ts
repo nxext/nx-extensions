@@ -9,7 +9,7 @@ import {
   runTasksInSerial,
 } from '@nx/devkit';
 import { LibrarySchema } from '../schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import {
   createStencilEslintJson,
   extraEslintDependencies,
@@ -21,8 +21,8 @@ export async function addLinting(host: Tree, options: LibrarySchema) {
     return () => {};
   }
 
-  await ensurePackage('@nx/linter', NX_VERSION);
-  const { lintProjectGenerator } = await import('@nx/linter');
+  await ensurePackage('@nx/eslint', NX_VERSION);
+  const { lintProjectGenerator } = await import('@nx/eslint');
   const tasks: GeneratorCallback[] = [];
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,

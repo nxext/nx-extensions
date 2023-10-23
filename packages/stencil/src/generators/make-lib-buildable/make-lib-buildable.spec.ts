@@ -1,17 +1,10 @@
 import { uniq } from '@nx/plugin/testing';
 import { MakeLibBuildableSchema } from './schema';
 import { SupportedStyles } from '../../stencil-core-utils';
-import {
-  readJson,
-  readWorkspaceConfiguration,
-  Tree,
-  updateJson,
-  updateWorkspaceConfiguration,
-} from '@nx/devkit';
+import { readJson, Tree, updateJson } from '@nx/devkit';
 import { makeLibBuildableGenerator } from './make-lib-buildable';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from '../library/generator';
-import { testNpmScope } from '../../utils/testing';
 
 describe('make-lib-buildable schematic', () => {
   let host: Tree;
@@ -26,7 +19,7 @@ describe('make-lib-buildable schematic', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
-        '@nx/workspace': '15.7.0',
+        '@nx/workspace': '17.0.0',
       };
       return json;
     });
@@ -111,9 +104,6 @@ describe('make-lib-buildable schematic using defaults', () => {
 
   beforeEach(async () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
-    const workspaceConfiguration = readWorkspaceConfiguration(host);
-    workspaceConfiguration.npmScope = testNpmScope;
-    updateWorkspaceConfiguration(host, workspaceConfiguration);
 
     await libraryGenerator(host, {
       name: options.name,
@@ -128,7 +118,7 @@ describe('make-lib-buildable schematic using defaults', () => {
     await makeLibBuildableGenerator(host, options);
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
-    expect(tsConfig.compilerOptions.paths[`@${testNpmScope}/${name}`]).toEqual([
+    expect(tsConfig.compilerOptions.paths[`@proj/${name}`]).toEqual([
       `dist/libs/${name}`,
     ]);
   });
