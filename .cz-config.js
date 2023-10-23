@@ -22,9 +22,6 @@ module.exports = {
     { name: 'sveltekit', description: 'Sveltekit specific' },
     { name: 'solid', description: 'SolidJS specific' },
     { name: 'preact', description: 'Preact specific' },
-    { name: 'capacitor', description: 'capacitor specific' },
-    { name: 'ionic-angular', description: 'ionic-angular specific' },
-    { name: 'ionic-react', description: 'ionic-react specific' },
     { name: 'vue', description: 'vue specific' },
   ],
 

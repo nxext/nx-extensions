@@ -1,7 +1,0 @@
-{
-  "name": "<%= appName %>",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
-}
