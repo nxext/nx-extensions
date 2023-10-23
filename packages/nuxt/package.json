@@ -1,6 +1,6 @@
 {
   "name": "@nxext/nuxt",
-  "version": "16.7.0",
+  "version": "17.0.0",
   "license": "MIT",
   "author": "Gion Kunz",
   "description": "Nx plugin for Nuxt3",
@@ -32,7 +32,7 @@
     "@nx/workspace": "17.0.1",
     "@nuxt/kit": "3.6.5",
     "nuxi": "3.6.5",
-    "@nxext/core": "^16.7.0"
+    "@nxext/core": "^17.0.0"
   },
   "peerDependencies": {
     "@nx/js": "17.0.1",

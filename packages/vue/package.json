@@ -1,6 +1,6 @@
 {
   "name": "@nxext/vue",
-  "version": "16.7.0",
+  "version": "17.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Vue",
@@ -28,7 +28,7 @@
     "tslib": "^2.3.0",
     "typescript": "5.1.6",
     "nx": "17.0.1",
-    "@nxext/core": "^16.8.0"
+    "@nxext/core": "^17.0.0"
   },
   "peerDependencies": {
     "@nx/js": "17.0.1",

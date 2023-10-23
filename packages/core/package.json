@@ -1,6 +1,6 @@
 {
   "name": "@nxext/core",
-  "version": "16.8.0",
+  "version": "17.0.0",
   "description": "Core utilities for nxext Nx plugins",
   "author": {
     "name": "Gion Kunz",

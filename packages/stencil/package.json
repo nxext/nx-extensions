@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "16.7.0",
+  "version": "17.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -35,7 +35,7 @@
     "@nx/workspace": "17.0.1",
     "@nx/angular": "17.0.1",
     "nx": "17.0.1",
-    "@nxext/core": "^16.7.0"
+    "@nxext/core": "^17.0.0"
   },
   "peerDependencies": {
     "@nxext/svelte": "^16.7.0",
