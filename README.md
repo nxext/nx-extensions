@@ -8,7 +8,6 @@
 - [Angular](https://angular.io/) plugin for NX
 - [React](https://reactjs.org/) plugin for NX
 - [Preact](https://preactjs.com/) plugin for NX
-- [Ionic](https://ionicframework.com/) plugin for NX
 
 ## Attention
 

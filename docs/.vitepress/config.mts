@@ -64,15 +64,6 @@ function sideNavGuide() {
         },
       ],
     },
-    {
-      text: 'Vite',
-      items: [
-        {
-          text: 'Environment variables',
-          link: '/guide/vite/environment-variables',
-        },
-      ],
-    },
   ];
 }
 
@@ -93,109 +84,6 @@ function sideNavDocs() {
         {
           text: 'Contributing',
           link: '/docs/nxext/contributing',
-        },
-      ],
-    },
-    {
-      text: 'Ionic projects',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        {
-          text: 'Stencil',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/stencil/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/stencil/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/stencil/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/stencil/executors',
-            },
-          ],
-        },
-        {
-          text: 'Capacitor',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/capacitor/overview',
-            },
-            {
-              text: 'Migrating from Nxtend',
-              link: '/docs/capacitor/migrating-from-nxtend',
-            },
-            {
-              text: 'Getting started',
-              link: '/docs/capacitor/getting-started',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/capacitor/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/capacitor/executors',
-            },
-          ],
-        },
-        {
-          text: 'Ionic Angular',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/ionic-angular/overview',
-            },
-            {
-              text: 'Migrating from Nxtend',
-              link: '/docs/ionic-angular/migrating-from-nxtend',
-            },
-            {
-              text: 'Getting started',
-              link: '/docs/ionic-angular/getting-started',
-            },
-            {
-              text: 'Capacitor',
-              link: '/docs/ionic-angular/capacitor',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/ionic-angular/generators',
-            },
-          ],
-        },
-        {
-          text: 'Ionic React',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/ionic-react/overview',
-            },
-            {
-              text: 'Migrating from Nxtend',
-              link: '/docs/ionic-react/migrating-from-nxtend',
-            },
-            {
-              text: 'Getting started',
-              link: '/docs/ionic-react/getting-started',
-            },
-            {
-              text: 'Capacitor',
-              link: '/docs/ionic-react/capacitor',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/ionic-react/generators',
-            },
-          ],
         },
       ],
     },
