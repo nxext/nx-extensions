@@ -19,7 +19,7 @@ import {
 } from '../utils/versions';
 import { InitSchema } from './schema';
 import { initGenerator as jsInitGenerator } from '@nx/js';
-import { addPluginToNxJson } from '@nxext/core';
+import { addPluginToNxJson } from '@nxext/common';
 
 function updateDependencies(host: Tree) {
   const dependencies: Record<string, string> = {

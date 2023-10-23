@@ -5,7 +5,7 @@ import {
   joinPathFragments,
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { addImport } from '@nxext/core';
+import { addImport } from '@nxext/common';
 import * as ts from 'typescript';
 
 export function addExportsToBarrel(host: Tree, options: NormalizedSchema) {

@@ -13,7 +13,7 @@ import {
   ensurePackage,
   NX_VERSION,
 } from '@nx/devkit';
-import { mapLintPattern } from '@nxext/core';
+import { mapLintPattern } from '@nxext/common';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const tasks: GeneratorCallback[] = [];
