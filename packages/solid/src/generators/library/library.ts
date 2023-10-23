@@ -14,10 +14,10 @@ import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { createFiles } from './lib/create-project-files';
-import { updateViteConfig } from './lib/update-vite-config';
 import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
 import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
+import { createOrEditViteConfig } from '@nx/vite';
 
 async function normalizeOptions(
   host: Tree,
@@ -94,11 +94,24 @@ export async function libraryGeneratorInternal(
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
   const viteTask = await addVite(host, options);
+  createOrEditViteConfig(
+    host,
+    {
+      project: options.name,
+      includeLib: false,
+      includeVitest: options.unitTestRunner === 'vitest',
+      inSourceTests: false,
+      rollupOptionsExternal: [],
+      imports: [`import solidPlugin from 'vite-plugin-solid'`],
+      plugins: [`solidPlugin()`],
+    },
+    false
+  );
+
   const vitestTask = await addVitest(host, options);
 
   updateTsConfig(host, options);
   updateJestConfig(host, options);
-  updateViteConfig(host, options);
   updateLibPackageNpmScope(host, options);
 
   if (!options.skipFormat) {

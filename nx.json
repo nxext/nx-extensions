@@ -1,19 +1,14 @@
 {
-  "npmScope": "nxext",
   "workspaceLayout": {
     "appsDir": "e2e",
     "libsDir": "packages"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx-cloud",
       "options": {
-        "accessToken": "NTlhMGE3ZTYtYjk5OC00Mzc5LWE2ZTAtNzE4ODEzNDY5MjlmfHJlYWQ=",
         "useLightClient": true,
-        "cacheableOperations": ["build", "test", "lint", "e2e"],
         "canTrackAnalytics": true,
-        "showUsageWarnings": true,
-        "parallel": 1
+        "showUsageWarnings": true
       }
     }
   },
@@ -79,17 +74,20 @@
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "inputs": ["production", "^production"],
+      "cache": true
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true
     },
     "lint": {
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json",
         "{workspaceRoot}/eslint.config.js"
-      ]
+      ],
+      "cache": true
     },
     "build-storybook": {
       "inputs": [
@@ -98,6 +96,9 @@
         "{projectRoot}/.storybook/**/*",
         "{projectRoot}/tsconfig.storybook.json"
       ]
+    },
+    "e2e": {
+      "cache": true
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
@@ -121,5 +122,7 @@
       "!{projectRoot}/tsconfig.storybook.json",
       "!{projectRoot}/eslint.config.js"
     ]
-  }
+  },
+  "nxCloudAccessToken": "NTlhMGE3ZTYtYjk5OC00Mzc5LWE2ZTAtNzE4ODEzNDY5MjlmfHJlYWQ=",
+  "parallel": 1
 }

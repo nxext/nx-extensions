@@ -1,6 +1,6 @@
 import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
 import { NormalizedSchema, Schema } from '../schema';
-import { updateViteConfig } from './update-vite-config';
+import { createOrEditViteConfig } from '@nx/vite';
 
 export async function addVite(host: Tree, options: NormalizedSchema<Schema>) {
   await ensurePackage('@nx/vite', NX_VERSION);
@@ -13,6 +13,18 @@ export async function addVite(host: Tree, options: NormalizedSchema<Schema>) {
     includeVitest: options.unitTestRunner === 'vitest',
     inSourceTests: options.inSourceTests,
   });
-  updateViteConfig(host, options);
+  createOrEditViteConfig(
+    host,
+    {
+      project: options.name,
+      includeLib: false,
+      includeVitest: options.unitTestRunner === 'vitest',
+      inSourceTests: false,
+      rollupOptionsExternal: [],
+      imports: [`import vue from '@vitejs/plugin-vue'`],
+      plugins: [`vue()`],
+    },
+    false
+  );
   return viteTask;
 }

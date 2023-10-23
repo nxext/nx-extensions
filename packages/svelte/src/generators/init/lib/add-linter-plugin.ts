@@ -1,8 +1,8 @@
 import { ensurePackage, GeneratorCallback, NX_VERSION, Tree } from '@nx/devkit';
 
 export async function addLinterPlugin(tree: Tree): Promise<GeneratorCallback> {
-  ensurePackage('@nx/linter', NX_VERSION);
-  const { lintInitGenerator } = await import('@nx/linter');
+  ensurePackage('@nx/eslint', NX_VERSION);
+  const { lintInitGenerator } = await import('@nx/eslint');
 
   return lintInitGenerator(tree, {});
 }

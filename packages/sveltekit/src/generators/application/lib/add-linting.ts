@@ -15,8 +15,8 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     return () => {};
   }
 
-  const { lintProjectGenerator } = ensurePackage<typeof import('@nx/linter')>(
-    '@nx/linter',
+  const { lintProjectGenerator } = ensurePackage<typeof import('@nx/eslint')>(
+    '@nx/eslint',
     NX_VERSION
   );
   const lintTask = await lintProjectGenerator(host, {

@@ -11,7 +11,7 @@ import {
 } from '@nx/devkit';
 import { initGenerator as jsInitGenerator } from '@nx/js';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';

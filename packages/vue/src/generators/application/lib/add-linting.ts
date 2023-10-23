@@ -15,8 +15,8 @@ import { mapLintPattern } from '@nxext/core';
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const tasks: GeneratorCallback[] = [];
   if (options.linter === 'eslint') {
-    ensurePackage('@nx/linter', NX_VERSION);
-    const { lintProjectGenerator } = await import('@nx/linter');
+    ensurePackage('@nx/eslint', NX_VERSION);
+    const { lintProjectGenerator } = await import('@nx/eslint');
     const lintTask = await lintProjectGenerator(host, {
       linter: options.linter,
       project: options.appProjectName,

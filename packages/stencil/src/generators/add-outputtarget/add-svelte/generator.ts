@@ -8,7 +8,7 @@ import {
   Tree,
 } from '@nx/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import {
   nxextSvelteVersion,
   STENCIL_OUTPUTTARGET_VERSION,

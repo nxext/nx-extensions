@@ -8,7 +8,7 @@ import {
   runTasksInSerial,
   NX_VERSION,
 } from '@nx/devkit';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
 import { updateMainJs } from './lib/update-main-js';

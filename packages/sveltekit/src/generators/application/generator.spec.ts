@@ -3,7 +3,7 @@ import { readProjectConfiguration, Tree } from '@nx/devkit';
 
 import generator from './generator';
 import { SveltekitGeneratorSchema } from './schema';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 describe('sveltekit generator', () => {
   let tree: Tree;

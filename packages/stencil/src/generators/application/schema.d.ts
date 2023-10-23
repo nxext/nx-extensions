@@ -1,6 +1,6 @@
 import { AppType } from './../../utils/typings';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 export interface RawApplicationSchema {
   name: string;

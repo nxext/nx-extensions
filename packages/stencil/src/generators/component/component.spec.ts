@@ -1,5 +1,5 @@
 import componentGenerator, { ComponentSchema } from './component';
-import { createTestUILib, testNpmScope } from '../../utils/testing';
+import { createTestUILib } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { names, Tree } from '@nx/devkit';
 import storybookConfigurationGenerator from '../storybook-configuration/generator';
@@ -128,7 +128,7 @@ describe('component schematic', () => {
       });
       await componentGenerator(tree, options);
 
-      classPathValue = `@${testNpmScope}/${options.project}/${options.name}`;
+      classPathValue = `@proj/${options.project}/${options.name}`;
       className = names(options.name).className;
       contents = tree.read(
         'libs/test-project/src/components/test-component/test-component.stories.tsx',

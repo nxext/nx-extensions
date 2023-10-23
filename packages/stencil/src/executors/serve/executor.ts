@@ -8,12 +8,12 @@ import {
 import { createProjectGraphAsync } from '@nx/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
 import { ExecutorContext, logger } from '@nx/devkit';
+import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
 import {
   calculateProjectDependencies,
   checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies,
-} from '@nx/workspace/src/utilities/buildable-libs-utils';
-import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
+} from '@nx/js/src/utils/buildable-libs-utils';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,

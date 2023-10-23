@@ -57,3 +57,5 @@ e2e/stencil-e2e/tests/dev.test.ts
 
 # Vitepress
 /docs/.vitepress/cache
+
+.nx/cache

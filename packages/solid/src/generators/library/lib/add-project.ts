@@ -17,7 +17,7 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
 
 function createLintTarget(options: NormalizedSchema): TargetConfiguration {
   return {
-    executor: '@nx/linter:lint',
+    executor: '@nx/eslint:lint',
     options: {
       linter: 'eslint',
       tsConfig: `${options.projectRoot}/tsconfig.lib.json`,

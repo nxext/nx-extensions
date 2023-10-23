@@ -9,12 +9,12 @@ import {
 import { Schema } from './schema';
 import initGenerator from '../init/init';
 import { normalizeOptions } from './lib/normalize-options';
-import { updateViteConfig } from './lib/update-vite-config';
 import { addProject } from './lib/add-project';
 import { createLibraryFiles } from './lib/create-library-files';
 import componentGenerator from '../component/component';
 import { updateBaseTsConfig } from './lib/update-base-tsconfig';
 import { addLinting } from './lib/add-linting';
+import { createOrEditViteConfig } from '@nx/vite';
 
 export async function libraryGenerator(host: Tree, schema: Schema) {
   const tasks: GeneratorCallback[] = [];
@@ -49,8 +49,19 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
       inSourceTests: options.inSourceTests,
     });
     tasks.push(viteTask);
-
-    updateViteConfig(host, options);
+    createOrEditViteConfig(
+      host,
+      {
+        project: options.name,
+        includeLib: false,
+        includeVitest: options.unitTestRunner === 'vitest',
+        inSourceTests: false,
+        rollupOptionsExternal: [],
+        imports: [`import vue from '@vitejs/plugin-vue'`],
+        plugins: [`vue()`],
+      },
+      false
+    );
   }
 
   if (!options.buildable && options.unitTestRunner === 'vitest') {
@@ -64,7 +75,19 @@ export async function libraryGenerator(host: Tree, schema: Schema) {
       inSourceTests: options.inSourceTests,
     });
     tasks.push(vitestTask);
-    updateViteConfig(host, options);
+    createOrEditViteConfig(
+      host,
+      {
+        project: options.name,
+        includeLib: false,
+        includeVitest: options.unitTestRunner === 'vitest',
+        inSourceTests: false,
+        rollupOptionsExternal: [],
+        imports: [`import vue from '@vitejs/plugin-vue'`],
+        plugins: [`vue()`],
+      },
+      true
+    );
   }
 
   const lintTask = await addLinting(host, options);

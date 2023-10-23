@@ -6,6 +6,7 @@ import {
   runTasksInSerial,
   GeneratorCallback,
 } from '@nx/devkit';
+import { createOrEditViteConfig } from '@nx/vite';
 import { NormalizedSchema, Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
@@ -14,7 +15,6 @@ import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
-import { updateViteConfig } from './lib/update-vite-config';
 import { createFiles } from './lib/create-project-files';
 import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
@@ -78,12 +78,25 @@ export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
   createFiles(tree, options);
 
   const viteTask = await addVite(tree, options);
+  createOrEditViteConfig(
+    tree,
+    {
+      project: options.projectName,
+      includeLib: false,
+      includeVitest: options.unitTestRunner === 'vitest',
+      inSourceTests: false,
+      rollupOptionsExternal: [],
+      imports: [`import solidPlugin from 'vite-plugin-solid'`],
+      plugins: [`solidPlugin()`],
+    },
+    false
+  );
+
   const lintTask = await addLinting(tree, options);
   const jestTask = await addJest(tree, options);
   const cypressTask = await addCypress(tree, options);
 
   updateJestConfig(tree, options);
-  updateViteConfig(tree, options);
 
   if (!options.skipFormat) {
     await formatFiles(tree);
