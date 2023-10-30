@@ -9,9 +9,11 @@
 - [React](https://reactjs.org/) plugin for NX
 - [Preact](https://preactjs.com/) plugin for NX
 
+The Ionic and Capacitor packages are now located [here](https://github.com/nxext/nx-extensions-ionic)
+
 ## Attention
 
-If you use the e.g. 16.2 package of any package, be sure to use the Nx version 16.2. The Version numbers have to match. Nxext packages with 15.7 aren't compatible with Nx 15.8
+If you use the e.g. 17.0 package of any package, be sure to use the Nx version 16.2. The Version numbers have to match. Nxext packages with 16.7 aren't compatible with Nx 16.8
 
 ## Install and usage
 
