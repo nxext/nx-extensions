@@ -80,8 +80,8 @@ devDependencies:
     specifier: 16.0.0
     version: 16.0.0
   '@stencil/core':
-    specifier: 3.4.0
-    version: 3.4.0
+    specifier: 4.7.0
+    version: 4.7.0
   '@swc-node/register':
     specifier: 1.6.8
     version: 1.6.8(@swc/core@1.3.91)(typescript@5.1.6)
@@ -804,7 +804,7 @@ packages:
       '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-module-transforms': 7.22.9(@babel/core@7.22.5)
       '@babel/helpers': 7.22.10
-      '@babel/parser': 7.22.10
+      '@babel/parser': 7.23.0
       '@babel/template': 7.22.5
       '@babel/traverse': 7.22.10
       '@babel/types': 7.22.10
@@ -830,7 +830,7 @@ packages:
       '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-module-transforms': 7.22.9(@babel/core@7.22.9)
       '@babel/helpers': 7.22.10
-      '@babel/parser': 7.22.10
+      '@babel/parser': 7.23.0
       '@babel/template': 7.22.5
       '@babel/traverse': 7.22.10
       '@babel/types': 7.22.10
@@ -6958,12 +6958,12 @@ packages:
       '@sinonjs/commons': 2.0.0
     dev: true
 
-  /@stencil/core@3.4.0:
+  /@stencil/core@4.7.0:
     resolution:
       {
-        integrity: sha512-kEtPtV6QegME8YgMjWrhS7KktItbhqOpAuK9aXypDdI/7bLU9iM/4DtnQGWY/DARBophk+XRBfNXcE62Bmi0dw==,
+        integrity: sha512-hl3hD5FA8F9kZiDJSus08Kno1QRl+fXeMBzrl5DjWAzAu0JHxL1AqTph5oQSekjvkSahaa8JtsXnHRZU93eivg==,
       }
-    engines: { node: '>=14.10.0', npm: '>=6.0.0' }
+    engines: { node: '>=16.0.0', npm: '>=7.10.0' }
     hasBin: true
     dev: true
 
@@ -8313,7 +8313,7 @@ packages:
         integrity: sha512-QyPaE15DQwbnIBp/yNJ8lbvXTZxS00kRly0kfFgAD5EYmCbYcA+1EEyRalc93M0gosL/xHeg3lKAClIXYpmUiQ==,
       }
     dependencies:
-      magic-string: 0.30.3
+      magic-string: 0.30.5
       pathe: 1.1.1
       pretty-format: 29.6.3
     dev: true
@@ -11131,7 +11131,7 @@ packages:
       dom-serializer: 2.0.0
       domhandler: 5.0.3
       htmlparser2: 8.0.2
-      postcss: 8.4.28
+      postcss: 8.4.31
       pretty-bytes: 5.6.0
     dev: true
 
@@ -19499,7 +19499,7 @@ packages:
       adjust-sourcemap-loader: 4.0.0
       convert-source-map: 1.8.0
       loader-utils: 2.0.4
-      postcss: 8.4.28
+      postcss: 8.4.31
       source-map: 0.6.1
     dev: true
 
@@ -22323,7 +22323,7 @@ packages:
       '@types/node': 18.15.3
       esbuild: 0.18.20
       less: 4.1.3
-      postcss: 8.4.28
+      postcss: 8.4.31
       rollup: 3.28.1
       sass: 1.64.1
       terser: 5.19.2
@@ -22489,7 +22489,7 @@ packages:
       chai: 4.3.8
       debug: 4.3.4
       local-pkg: 0.4.3
-      magic-string: 0.30.3
+      magic-string: 0.30.5
       pathe: 1.1.1
       picocolors: 1.0.0
       std-env: 3.4.3

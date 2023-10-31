@@ -31,7 +31,6 @@ import {
   testingLibraryPreactVersion,
   vitePluginPreactVersion,
 } from '../../packages/preact/src/generators/utils/versions';
-import { capacitorVersion } from '../../packages/capacitor/src/utils/versions';
 import {
   vueRouterVersion,
   vueTestUtilsVersion,
@@ -128,21 +127,6 @@ const solidPkgs = [
 ];
 
 solidPkgs.forEach(({ pkg, version }) => {
-  checkVersion(pkg, version);
-});
-
-console.log('======================================');
-console.log('Capacitor:');
-console.log('======================================');
-
-const capacitorPkgs = [
-  { pkg: '@capacitor/core', version: capacitorVersion },
-  { pkg: '@capacitor/android', version: capacitorVersion },
-  { pkg: '@capacitor/ios', version: capacitorVersion },
-  { pkg: '@capacitor/cli', version: capacitorVersion },
-];
-
-capacitorPkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
 

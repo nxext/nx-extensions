@@ -10,7 +10,7 @@ const readNxVersionModule = require('../../utils/utillities');
 
 describe('storybook-configuration generator', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('17.0.0');
 
   const options: StorybookConfigureSchema = {
     name: 'test',
