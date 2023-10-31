@@ -32,8 +32,8 @@ function updateDependencies(host: Tree) {
     '@nuxt/kit': nuxtKitVersion,
     '@nuxt/devtools': nuxtDevtoolsVersion,
     '@nx/vite': NX_VERSION,
+    '@nx/vue': NX_VERSION,
     '@vue/test-utils': vueTestUtilsVersion,
-    '@nxext/vue': nxextVueVersion,
   };
 
   return addDependenciesToPackageJson(host, dependencies, devDependencies);
@@ -55,11 +55,11 @@ export async function initGenerator(host: Tree, schema: InitSchema) {
     skipFormat: true,
   });
 
-  await ensurePackage('@nxext/vue', nxextVueVersion);
+  await ensurePackage('@nx/vue', NX_VERSION);
   await ensurePackage('@nx/vite', NX_VERSION);
 
   // Add plugin for dep graph support of Vue SFCs
-  addPluginToNxJson('@nxext/vue', host);
+  addPluginToNxJson('@nx/vue', host);
 
   if (!schema.skipFormat) {
     await formatFiles(host);

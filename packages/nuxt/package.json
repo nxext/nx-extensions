@@ -1,6 +1,6 @@
 {
   "name": "@nxext/nuxt",
-  "version": "17.0.0-alpha3",
+  "version": "17.0.0-alpha6",
   "license": "MIT",
   "author": "Gion Kunz",
   "description": "Nx plugin for Nuxt3",
