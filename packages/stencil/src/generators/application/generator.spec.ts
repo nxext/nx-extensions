@@ -19,7 +19,7 @@ const readNxVersionModule = require('../../utils/utillities');
 
 describe('schematic:application', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
-  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
+  jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('17.0.0');
 
   let host: Tree;
   const options: RawApplicationSchema = { name: 'test', linter: Linter.None };
