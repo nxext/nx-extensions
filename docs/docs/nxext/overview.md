@@ -13,7 +13,7 @@ technologies. [Nxext](https://github.com/nxext/nx-extensions) is a collection of
 | [`@nxext/vitest`](../vitest/overview)                                        | An Nx plugin for development with [Vitest](https://vitest.dev/).                                |
 | [`@nxext/react`](../react/overview)                                          | An Nx plugin for development with [React](https://reactjs.org/).                                |
 | [`@nxext/preact`](../preact/overview)                                        | An Nx plugin for development with [Preact](https://reactjs.org/).                               |
+| [`@nxext/nx-extensions-ionic`](https://github.com/nxext/nx-extensions-ionic) | Nx plugins for [Ionic](https://ionic.io) applications                                           |
 | [`@nxext/sveltekit`](../sveltekit/overview)                                  | (Alpha) An NX plugin for development with [SvelteKit](https://kit.svelte.dev/) applications.    |
 | [`@nxext/vue`](../vue/overview)                                              | (Alpha) An NX plugin for development with [Vue](https://kit.svelte.dev/) applications.          |
 | [`@nxext/nuxt`](../nuxt/overview)                                            | (Alpha) An NX plugin for development with [Nuxt3](https://nuxt.com/) applications.              |
-| [`@nxext/nx-extensions-ionic`](https://github.com/nxext/nx-extensions-ionic) | Nx extensions for [Ionic](https://ionic.io) applications                                        |
