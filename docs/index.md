@@ -32,4 +32,6 @@ features:
     details: An approachable, performant and versatile framework for building web user interfaces.
   - title: Nuxt (Alpha)
     details: The Intuitive Web Framework
+  - title: Ionic
+    details: A new way to build and ship for mobile.
 ---
