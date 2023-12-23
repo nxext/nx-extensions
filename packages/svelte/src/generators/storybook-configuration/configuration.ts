@@ -34,7 +34,7 @@ export async function configurationGenerator(
   const { configurationGenerator } = await import('@nx/storybook');
 
   const storybookTask = await configurationGenerator(host, {
-    name: options.name,
+    project: options.name,
     uiFramework,
     configureCypress: options.configureCypress,
     js: options.js,
