@@ -6,26 +6,12 @@
   "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "packages/solid/**/*.ts",
-          "packages/solid/**/*.spec.ts",
-          "packages/solid/**/*.spec.tsx",
-          "packages/solid/**/*.spec.js",
-          "packages/solid/**/*.spec.jsx",
-          "packages/solid/**/*.d.ts",
-          "packages/solid/generators.json",
-          "packages/solid/package.json",
-          "packages/solid/project.json"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "packages/solid/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "packages/solid/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/packages/solid"]
     },

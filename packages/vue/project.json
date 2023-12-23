@@ -45,23 +45,13 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "packages/vue/**/*.ts",
-          "packages/vue/generators.json",
-          "packages/vue/executors.json",
-          "packages/vue/package.json",
-          "packages/vue/project.json"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/vue/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "packages/vue/jest.config.ts"
       }
     },
     "publish": {

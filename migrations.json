@@ -2,33 +2,54 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "17.0.0-beta.1",
-      "description": "Updates the default cache directory to .nx/cache",
-      "implementation": "./src/migrations/update-17-0-0/move-cache-directory",
-      "package": "nx",
-      "name": "17.0.0-move-cache-directory"
+      "version": "17.0.2",
+      "description": "Remove deprecated build options",
+      "implementation": "./src/migrations/update-17-0-0/remove-deprecated-build-options",
+      "package": "@nx/js",
+      "name": "update-17-0-0-remove-deprecated-build-options"
+    },
+    {
+      "version": "17.1.0-beta.1",
+      "description": "Updates for @typescript-utils/utils v6.9.1+",
+      "implementation": "./src/migrations/update-17-1-0/update-typescript-eslint",
+      "package": "@nx/eslint",
+      "name": "update-typescript-eslint"
+    },
+    {
+      "version": "17.2.0-beta.0",
+      "description": "Simplify eslintFilePatterns",
+      "implementation": "./src/migrations/update-17-2-0/simplify-eslint-patterns",
+      "package": "@nx/eslint",
+      "name": "simplify-eslint-patterns"
+    },
+    {
+      "version": "17.1.0-beta.2",
+      "description": "Move target defaults",
+      "implementation": "./src/migrations/update-17-1-0/move-target-defaults",
+      "package": "@nx/vite",
+      "name": "move-target-defaults"
+    },
+    {
+      "version": "17.2.0-beta.10",
+      "description": "Update vite config.",
+      "implementation": "./src/migrations/update-17-2-0/update-vite-config",
+      "package": "@nx/vite",
+      "name": "update-vite-config"
+    },
+    {
+      "version": "17.1.0-beta.2",
+      "description": "Move jest executor options to nx.json targetDefaults",
+      "implementation": "./src/migrations/update-17-1-0/move-options-to-target-defaults",
+      "package": "@nx/jest",
+      "name": "move-options-to-target-defaults"
     },
     {
       "cli": "nx",
-      "version": "17.0.0-beta.3",
-      "description": "Use minimal config for tasksRunnerOptions",
-      "implementation": "./src/migrations/update-17-0-0/use-minimal-config-for-tasks-runner-options",
-      "package": "nx",
-      "name": "17.0.0-use-minimal-config-for-tasks-runner-options"
-    },
-    {
-      "version": "17.0.0-rc.1",
-      "description": "Migration for v17.0.0-rc.1",
-      "implementation": "./src/migrations/update-17-0-0/rm-default-collection-npm-scope",
-      "package": "nx",
-      "name": "rm-default-collection-npm-scope"
-    },
-    {
-      "version": "17.0.0-beta.7",
-      "description": "update-17-0-0-rename-to-eslint",
-      "implementation": "./src/migrations/update-17-0-0-rename-to-eslint/update-17-0-0-rename-to-eslint",
-      "package": "@nx/eslint",
-      "name": "update-17-0-0-rename-to-eslint"
+      "version": "17.2.0-beta.2",
+      "description": "Rename '@nx/angular:webpack-dev-server' executor to '@nx/angular:dev-server'",
+      "factory": "./src/migrations/update-17-2-0/rename-webpack-dev-server",
+      "package": "@nx/angular",
+      "name": "rename-webpack-dev-server-executor"
     }
   ]
 }
