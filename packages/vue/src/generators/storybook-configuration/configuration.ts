@@ -34,7 +34,7 @@ export async function storybookConfigurationGenerator(
   >('@nx/storybook', NX_VERSION);
 
   const installTask = await configurationGenerator(host, {
-    name: schema.name,
+    project: schema.name,
     configureCypress: schema.configureCypress,
     js: schema.js,
     linter: schema.linter,
