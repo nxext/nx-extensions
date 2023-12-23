@@ -6,27 +6,12 @@
   "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "packages/svelte/**/*.ts",
-          "packages/svelte/**/*.spec.ts",
-          "packages/svelte/**/*.spec.tsx",
-          "packages/svelte/**/*.spec.js",
-          "packages/svelte/**/*.spec.jsx",
-          "packages/svelte/**/*.d.ts",
-          "packages/svelte/generators.json",
-          "packages/svelte/package.json",
-          "packages/svelte/project.json",
-          "packages/svelte/migrations.json"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "packages/svelte/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "packages/svelte/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/packages/svelte"]
     },

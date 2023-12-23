@@ -44,23 +44,13 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "packages/nuxt/**/*.ts",
-          "packages/nuxt/generators.json",
-          "packages/nuxt/executors.json",
-          "packages/nuxt/package.json",
-          "packages/nuxt/project.json"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/nuxt/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "packages/nuxt/jest.config.ts"
       }
     },
     "publish": {
