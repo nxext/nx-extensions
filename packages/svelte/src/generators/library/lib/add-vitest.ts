@@ -15,7 +15,7 @@ export async function addVitest(host: Tree, options: NormalizedSchema) {
     return await vitestGenerator(host, {
       uiFramework: 'none',
       project: options.name,
-      coverageProvider: 'c8',
+      coverageProvider: 'v8',
       inSourceTests: false,
       skipFormat: true,
     });
