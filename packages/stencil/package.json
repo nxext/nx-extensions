@@ -29,12 +29,12 @@
     "tslib": "^2.3.0",
     "@phenomnomnominal/tsquery": "~5.0.1",
     "ignore": "^5.2.0",
-    "@nx/devkit": "17.0.1",
-    "@nx/js": "17.0.1",
-    "typescript": "5.1.6",
-    "@nx/workspace": "17.0.1",
-    "@nx/angular": "17.0.1",
-    "nx": "17.0.1",
+    "@nx/devkit": "17.2.7",
+    "@nx/js": "17.2.7",
+    "typescript": "5.2.2",
+    "@nx/workspace": "17.2.7",
+    "@nx/angular": "17.2.7",
+    "nx": "17.2.7",
     "@nxext/common": "*"
   },
   "peerDependencies": {

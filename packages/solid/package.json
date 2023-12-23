@@ -23,16 +23,16 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "nx": "17.0.1",
-    "@nx/devkit": "17.0.1",
-    "typescript": "5.1.6",
+    "nx": "17.2.7",
+    "@nx/devkit": "17.2.7",
+    "typescript": "5.2.2",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@nx/vite": "17.0.1",
-    "@nx/jest": "17.0.1",
-    "@nx/cypress": "17.0.1",
-    "@nx/eslint": "17.0.1"
+    "@nx/vite": "17.2.7",
+    "@nx/jest": "17.2.7",
+    "@nx/cypress": "17.2.7",
+    "@nx/eslint": "17.2.7"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"
