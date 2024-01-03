@@ -163,6 +163,34 @@ function sideNavDocs() {
       ],
     },
     {
+      text: 'Ionic projects',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          text: 'Stencil',
+          items: [
+            {
+              text: 'Overview',
+              link: '/docs/stencil/overview',
+            },
+            {
+              text: 'Installation',
+              link: '/docs/stencil/installation',
+            },
+            {
+              text: 'Generators',
+              link: '/docs/stencil/generators',
+            },
+            {
+              text: 'Executors',
+              link: '/docs/stencil/executors',
+            },
+          ],
+        },
+      ],
+    },
+    {
       text: 'Unstable/Alpha projects',
       collapsible: true,
       collapsed: true,
