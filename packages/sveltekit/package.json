@@ -1,6 +1,6 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "17.0.1",
+  "version": "17.2.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Sveltekit",
