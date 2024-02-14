@@ -26,7 +26,9 @@ function copyOrCreatePackageJson(pathCollection: PathCollection) {
   };
 
   if (fileExists(pathCollection.pkgJson)) {
-    copyFile(pathCollection.pkgJson, pathCollection.distDir);
+    if (pathCollection.projectRoot !== pathCollection.distDir) {
+      copyFile(pathCollection.pkgJson, pathCollection.distDir);
+    }
   } else {
     writeJsonFile(
       joinPathFragments(pathCollection.distDir, 'package.json'),
