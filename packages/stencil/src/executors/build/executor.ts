@@ -54,6 +54,7 @@ export default async function runExecutor(
   );
 
   if (
+    !context.target.dependsOn &&
     !checkDependentProjectsHaveBeenBuilt(
       context.root,
       context.projectName,
