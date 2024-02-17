@@ -15,7 +15,7 @@ function addCodeIntoArray(
 ): StringChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
   let node = nodes[0];
-  const matchingProperties: ts.ObjectLiteralElement[] = (
+  const matchingProperties: ts.ObjectLiteralElement[] = node && (
     node as ts.ObjectLiteralExpression
   ).properties
     .filter(
