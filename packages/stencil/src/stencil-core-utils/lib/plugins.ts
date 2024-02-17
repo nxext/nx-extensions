@@ -15,20 +15,20 @@ function addCodeIntoArray(
 ): StringChange[] {
   const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
   let node = nodes[0];
-  const matchingProperties: ts.ObjectLiteralElement[] = node && (
-    node as ts.ObjectLiteralExpression
-  ).properties
-    .filter(
-      (prop: ts.ObjectLiteralElementLike) =>
-        prop.kind == ts.SyntaxKind.PropertyAssignment
-    )
-    .filter((prop: ts.PropertyAssignment) => {
-      if (prop.name.kind === ts.SyntaxKind.Identifier) {
-        return (prop.name as ts.Identifier).getText(source) == identifier;
-      }
+  const matchingProperties: ts.ObjectLiteralElement[] =
+    node &&
+    (node as ts.ObjectLiteralExpression).properties
+      .filter(
+        (prop: ts.ObjectLiteralElementLike) =>
+          prop.kind == ts.SyntaxKind.PropertyAssignment
+      )
+      .filter((prop: ts.PropertyAssignment) => {
+        if (prop.name.kind === ts.SyntaxKind.Identifier) {
+          return (prop.name as ts.Identifier).getText(source) == identifier;
+        }
 
-      return false;
-    });
+        return false;
+      });
 
   if (!matchingProperties) {
     return [];
