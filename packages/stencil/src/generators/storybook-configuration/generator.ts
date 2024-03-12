@@ -71,9 +71,7 @@ export async function storybookConfigurationGenerator(
     '@nx/storybook/src/generators/init/init'
   );
 
-  const initTask = await initGenerator(host, {
-    uiFramework: uiFramework,
-  });
+  const initTask = await initGenerator(host, {});
   tasks.push(initTask);
 
   createRootStorybookDir(host);
