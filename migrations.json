@@ -2,54 +2,58 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "17.0.2",
-      "description": "Remove deprecated build options",
-      "implementation": "./src/migrations/update-17-0-0/remove-deprecated-build-options",
-      "package": "@nx/js",
-      "name": "update-17-0-0-remove-deprecated-build-options"
+      "version": "17.3.0-beta.6",
+      "description": "Updates the nx wrapper.",
+      "implementation": "./src/migrations/update-17-3-0/update-nxw",
+      "package": "nx",
+      "name": "17.3.0-update-nx-wrapper"
     },
     {
-      "version": "17.1.0-beta.1",
-      "description": "Updates for @typescript-utils/utils v6.9.1+",
-      "implementation": "./src/migrations/update-17-1-0/update-typescript-eslint",
-      "package": "@nx/eslint",
-      "name": "update-typescript-eslint"
+      "cli": "nx",
+      "version": "18.0.0-beta.2",
+      "description": "Updates .env to disabled adding plugins when generating projects in an existing Nx workspace",
+      "implementation": "./src/migrations/update-18-0-0/disable-crystal-for-existing-workspaces",
+      "x-repair-skip": true,
+      "package": "nx",
+      "name": "18.0.0-disable-adding-plugins-for-existing-workspaces"
     },
     {
-      "version": "17.2.0-beta.0",
-      "description": "Simplify eslintFilePatterns",
-      "implementation": "./src/migrations/update-17-2-0/simplify-eslint-patterns",
-      "package": "@nx/eslint",
-      "name": "simplify-eslint-patterns"
-    },
-    {
-      "version": "17.1.0-beta.2",
-      "description": "Move target defaults",
-      "implementation": "./src/migrations/update-17-1-0/move-target-defaults",
+      "version": "17.3.0-beta.0",
+      "description": "Move the vitest coverage thresholds in their own object if exists and add reporters.",
+      "implementation": "./src/migrations/update-17-3-0/vitest-coverage-and-reporters",
       "package": "@nx/vite",
-      "name": "move-target-defaults"
+      "name": "vitest-coverage-and-reporters"
     },
     {
-      "version": "17.2.0-beta.10",
-      "description": "Update vite config.",
-      "implementation": "./src/migrations/update-17-2-0/update-vite-config",
-      "package": "@nx/vite",
-      "name": "update-vite-config"
-    },
-    {
-      "version": "17.1.0-beta.2",
-      "description": "Move jest executor options to nx.json targetDefaults",
-      "implementation": "./src/migrations/update-17-1-0/move-options-to-target-defaults",
-      "package": "@nx/jest",
+      "version": "17.2.9",
+      "description": "Move executor options to target defaults",
+      "implementation": "./src/migrations/update-17-2-9/move-options-to-target-defaults",
+      "package": "@nx/eslint",
       "name": "move-options-to-target-defaults"
     },
     {
       "cli": "nx",
-      "version": "17.2.0-beta.2",
-      "description": "Rename '@nx/angular:webpack-dev-server' executor to '@nx/angular:dev-server'",
-      "factory": "./src/migrations/update-17-2-0/rename-webpack-dev-server",
+      "version": "17.3.1-beta.0",
+      "description": "Add project property to playwright config",
+      "implementation": "./src/migrations/update-17-3-1/add-project-to-config",
+      "package": "@nx/playwright",
+      "name": "17-3-1-add-project-to-config"
+    },
+    {
+      "cli": "nx",
+      "version": "18.0.0-beta.0",
+      "description": "Add NX_MF_DEV_SERVER_STATIC_REMOTES to inputs for task hashing when '@nx/webpack:webpack' is used for Module Federation.",
+      "factory": "./src/migrations/update-18-0-0/add-mf-env-var-to-target-defaults",
+      "package": "@nx/react",
+      "name": "add-module-federation-env-var-to-target-defaults"
+    },
+    {
+      "cli": "nx",
+      "version": "18.0.0-beta.0",
+      "description": "Add NX_MF_DEV_SERVER_STATIC_REMOTES to inputs for task hashing when '@nx/angular:webpack-browser' is used for Module Federation.",
+      "factory": "./src/migrations/update-18-0-0/add-mf-env-var-to-target-defaults",
       "package": "@nx/angular",
-      "name": "rename-webpack-dev-server-executor"
+      "name": "add-module-federation-env-var-to-target-defaults"
     }
   ]
 }

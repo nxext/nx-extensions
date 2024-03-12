@@ -29,22 +29,22 @@
     "tslib": "^2.3.0",
     "@phenomnomnominal/tsquery": "~5.0.1",
     "ignore": "^5.2.0",
-    "@nx/devkit": "^17.2.0",
-    "@nx/js": "^17.2.0",
-    "typescript": "5.2.2",
-    "@nx/workspace": "^17.2.0",
-    "@nx/angular": "^17.2.0",
-    "nx": "^17.2.7",
+    "@nx/devkit": "18.0.8",
+    "@nx/js": "18.0.8",
+    "typescript": "5.3.3",
+    "@nx/workspace": "18.0.8",
+    "@nx/angular": "18.0.8",
+    "nx": "18.0.8",
     "@nxext/common": "^17.0.1"
   },
   "peerDependencies": {
     "@nxext/svelte": "^17.0.0",
     "@stencil/core": "^4.7.0",
-    "@nx/cypress": "^17.2.0",
-    "@nx/storybook": "^17.2.0",
-    "@nx/jest": "^17.2.0",
-    "@nx/react": "^17.2.0",
-    "@nx/eslint": "^17.2.0"
+    "@nx/cypress": "18.0.8",
+    "@nx/storybook": "18.0.8",
+    "@nx/jest": "18.0.8",
+    "@nx/react": "18.0.8",
+    "@nx/eslint": "18.0.8"
   },
   "peerDependenciesMeta": {
     "@nxext/svelte": {
