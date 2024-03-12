@@ -1,6 +1,6 @@
 {
   "name": "@nxext/common",
-  "version": "17.0.2",
+  "version": "18.0.0",
   "description": "Core utilities for nxext Nx plugins",
   "author": {
     "name": "Gion Kunz",
@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "18.0.8",
+    "@nx/devkit": "^18.0.8",
     "typescript": "5.3.3",
-    "nx": "18.0.8"
+    "nx": "^18.0.8"
   }
 }
