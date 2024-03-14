@@ -25,9 +25,6 @@
       "options": {
         "jestConfig": "packages/common/jest.config.ts"
       }
-    },
-    "semantic-release": {
-      "executor": "@theunderscorer/nx-semantic-release:semantic-release"
     }
   },
   "tags": []
