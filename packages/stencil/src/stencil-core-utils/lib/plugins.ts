@@ -13,7 +13,7 @@ function addCodeIntoArray(
   identifier: string,
   toInsert: string
 ): StringChange[] {
-  const nodes = findNodes(source, ts.SyntaxKind.ObjectLiteralExpression);
+  const nodes = findNodes(source, [ts.SyntaxKind.ObjectLiteralExpression, ts.SyntaxKind.ArrayLiteralExpression]);
   let node = nodes[0];
   const matchingProperties: ts.ObjectLiteralElement[] =
     node &&
