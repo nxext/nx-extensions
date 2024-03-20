@@ -93,23 +93,6 @@ function sideNavDocs() {
       collapsed: true,
       items: [
         {
-          text: 'Vue',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/vue/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/vue/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/vue/generators',
-            },
-          ],
-        },
-        {
           text: 'Svelte',
           items: [
             {
@@ -213,93 +196,6 @@ function sideNavDocs() {
             {
               text: 'Executors',
               link: '/docs/sveltekit/executors',
-            },
-          ],
-        },
-        {
-          text: 'Nuxt',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/nuxt/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/nuxt/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/nuxt/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/nuxt/executors',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      text: 'Deprecated projects',
-      collapsible: true,
-      collapsed: true,
-      items: [
-        {
-          text: 'Vite',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/vite/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/vite/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/vite/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/vite/executors',
-            },
-          ],
-        },
-        {
-          text: 'Vitest',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/vitest/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/vitest/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/vitest/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/vitest/executors',
-            },
-          ],
-        },
-        {
-          text: 'React',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/react/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/react/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/react/generators',
             },
           ],
         },

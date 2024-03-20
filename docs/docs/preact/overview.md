@@ -21,4 +21,4 @@ npm install -D @nxext/preact
 
 ## Executors / Builders
 
-Our Preact applications are built using the executors from the [@nxext/vite](../vite/overview.md) plugin.
+Our Preact applications are built using the executors from the @nx/vite plugin.
