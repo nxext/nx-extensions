@@ -2,13 +2,7 @@
   "name": "nxext",
   "version": "0.0.0",
   "license": "MIT",
-  "keywords": [
-    "nx",
-    "nx-plugin",
-    "stenciljs",
-    "pwa",
-    "web components"
-  ],
+  "keywords": [],
   "repository": {
     "type": "github",
     "url": "https://github.com/nxext/nx-extensions"
@@ -57,7 +51,6 @@
     "@commitlint/config-conventional": "^17.0.0",
     "@eslint/eslintrc": "^2.1.1",
     "@eslint/js": "8.49.0",
-    "@nuxt/kit": "3.6.5",
     "@nx/angular": "18.0.8",
     "@nx/cypress": "18.0.8",
     "@nx/devkit": "18.0.8",
@@ -114,8 +107,6 @@
     "jsonc-parser": "^3.2.0",
     "kill-port": "^2.0.1",
     "lint-staged": "13.2.3",
-    "nuxi": "3.6.5",
-    "nuxt": "3.6.5",
     "nx": "18.0.8",
     "prettier": "2.7.1",
     "pretty-quick": "^3.1.3",
