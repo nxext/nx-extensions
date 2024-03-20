@@ -25,6 +25,7 @@ import {
 import { getProjectTsImportPath } from '../../storybook-configuration/generator';
 import { addAfterLastImport, addImport } from '@nxext/common';
 import { addGlobal } from '@nx/js';
+import { existsSync } from 'fs-extra';
 
 async function prepareAngularLibrary(
   host: Tree,
@@ -117,6 +118,11 @@ function addLibraryDirectives(
   const modulePath = joinPathFragments(
     `${libsDir}/${angularProjectName}/src/lib/${angularProjectName}.module.ts`
   );
+
+  if (!existsSync(modulePath)) {
+    return;
+  }
+
   const sourceText = host.read(modulePath, 'utf-8');
   let sourceFile = createSourceFile(
     modulePath,
