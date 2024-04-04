@@ -32,6 +32,12 @@ nx g application ... --dry-run
 
 Type: `string`
 
+#### adapterVersion
+
+Type: `string`
+
+The version to use for sveltekit adapter-auto
+
 #### directory
 
 Alias(es): d
@@ -65,6 +71,18 @@ Default: `false`
 Type: `boolean`
 
 Do not add dependencies to `package.json`.
+
+#### svelteKitVersion
+
+Type: `string`
+
+The sveltekit version to use
+
+#### svelteVersion
+
+Type: `string`
+
+The svelte version to use
 
 #### tags
 
