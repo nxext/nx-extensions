@@ -9,6 +9,9 @@ export interface SveltekitGeneratorSchema {
   skipFormat: boolean;
   linter: Linter;
   skipPackageJson?: boolean;
+  adapterVersion?: string;
+  svelteVersion?: string;
+  svelteKitVersion?: string;
 }
 
 export interface NormalizedSchema extends SveltekitGeneratorSchema {

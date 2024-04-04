@@ -94,7 +94,7 @@ export async function applicationGenerator(
   }
 
   if (!options.skipPackageJson) {
-    const installTask = installDependencies(host);
+    const installTask = installDependencies(host, options);
     tasks.push(installTask);
   }
 
