@@ -39,6 +39,18 @@
       "type": "boolean",
       "default": false,
       "x-priority": "internal"
+    },
+    "adapterVersion": {
+      "type": "string",
+      "description": "The version to use for sveltekit adapter-auto"
+    },
+    "svelteVersion": {
+      "type": "string",
+      "description": "The svelte version to use"
+    },
+    "svelteKitVersion": {
+      "type": "string",
+      "description": "The sveltekit version to use"
     }
   },
   "required": ["name"]
