@@ -31,10 +31,10 @@
     "ignore": "^5.2.0",
     "@nx/devkit": "^18.0.8",
     "@nx/js": "^18.0.8",
-    "typescript": "5.3.3",
+    "typescript": "5.4.5",
     "@nx/workspace": "^18.0.8",
     "@nx/angular": "^18.0.8",
-    "nx": "18.0.8",
+    "nx": "18.2.4",
     "@nxext/common": "^18.0.0",
     "fs-extra": "^10.1.0"
   },
