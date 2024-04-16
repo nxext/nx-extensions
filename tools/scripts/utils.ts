@@ -1,9 +1,8 @@
 import { existsSync, lstatSync, copySync, renameSync } from 'fs-extra';
-import { workspaceRoot } from '@nx/devkit';
-import { Workspaces } from 'nx/src/config/workspaces';
+import { readCachedProjectGraph, readProjectsConfigurationFromProjectGraph } from "@nx/devkit";
 
 export function getPublishableLibNames(
-  workspaceJson = new Workspaces(workspaceRoot).readWorkspaceConfiguration()
+  workspaceJson = readProjectsConfigurationFromProjectGraph(readCachedProjectGraph())
 ) {
   const { projects } = workspaceJson;
 
