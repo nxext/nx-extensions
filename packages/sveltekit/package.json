@@ -25,10 +25,10 @@
     "tslib": "^2.3.0",
     "@nx/devkit": "^18.0.8",
     "typescript": "5.4.5",
-    "nx": "^18.0.8",
     "@nx/workspace": "^18.0.8"
   },
   "peerDependencies": {
+    "nx": "^18.0.8",
     "@nx/vite": "^18.0.8",
     "@nx/eslint": "^18.0.8"
   }

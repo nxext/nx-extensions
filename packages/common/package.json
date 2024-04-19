@@ -17,7 +17,9 @@
   "dependencies": {
     "tslib": "^2.3.0",
     "@nx/devkit": "^18.0.8",
-    "typescript": "5.4.5",
+    "typescript": "5.4.5"
+  },
+  "peerDependencies": {
     "nx": "^18.0.8"
   }
 }

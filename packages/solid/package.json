@@ -23,12 +23,12 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "nx": "^18.0.8",
     "@nx/devkit": "^18.0.8",
     "typescript": "5.4.5",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
+    "nx": "^18.0.8",
     "@nx/vite": "^18.0.8",
     "@nx/jest": "^18.0.8",
     "@nx/cypress": "^18.0.8",
