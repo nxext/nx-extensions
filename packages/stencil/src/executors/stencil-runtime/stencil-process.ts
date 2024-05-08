@@ -7,9 +7,15 @@ type CoreCompiler = typeof import('@stencil/core/compiler');
 export const loadCoreCompiler = async (
   sys: CompilerSystem
 ): Promise<CoreCompiler> => {
-  await sys.dynamicImport(sys.getCompilerExecutingPath());
+  const coreCompiler: CoreCompiler = await sys.dynamicImport(
+    sys.getCompilerExecutingPath()
+  );
 
-  return (globalThis as any).stencil;
+  if (!('stencil' in globalThis)) {
+    globalThis.stencil = coreCompiler;
+  }
+
+  return globalThis.stencil;
 };
 
 export async function createStencilProcess(config: Config): Promise<void> {
