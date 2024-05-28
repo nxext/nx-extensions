@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
-import { findNodes } from 'nx/src/utils/typescript';
 import { ChangeType, StringChange, Tree } from '@nx/devkit';
+import { findNodes } from '@nx/js';
 
 export function readTsSourceFile(host: Tree, path: string): ts.SourceFile {
   if (!host.exists(path)) {

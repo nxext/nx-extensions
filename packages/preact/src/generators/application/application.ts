@@ -8,6 +8,7 @@ import {
   offsetFromRoot,
   Tree,
   runTasksInSerial,
+  readNxJson,
 } from '@nx/devkit';
 import { NormalizedSchema, PreactApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
@@ -35,11 +36,30 @@ function normalizeOptions(
     ? options.tags.split(',').map((s) => s.trim())
     : [];
 
+  const nxJson = readNxJson(tree);
+
+  let e2eWebServerTarget = 'serve';
+  let e2ePort = 4200;
+  if (
+    nxJson.targetDefaults?.[e2eWebServerTarget] &&
+    nxJson.targetDefaults?.[e2eWebServerTarget].options?.port
+  ) {
+    e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
+  }
+
+  const e2eProjectName = `${name}-e2e`;
+  const e2eProjectRoot = `${projectRoot}-e2e`;
+  const e2eWebServerAddress = `http://localhost:${e2ePort}`;
+
   return {
     ...options,
     name: projectName,
     projectRoot,
     parsedTags,
+    e2eWebServerTarget,
+    e2eWebServerAddress,
+    e2eProjectName,
+    e2eProjectRoot,
     fileName,
     projectDirectory,
     skipFormat: false,

@@ -10,7 +10,7 @@ import {
   StringChange,
   Tree,
 } from '@nx/devkit';
-import { findNodes } from 'nx/src/utils/typescript';
+import { findNodes } from '@nx/js';
 
 export function addExportsToBarrel(tree: Tree, options: SolidComponentSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);

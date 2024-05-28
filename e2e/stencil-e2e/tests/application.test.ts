@@ -72,16 +72,4 @@ describe('application e2e', () => {
       }).not.toThrow();
     });
   });
-
-  describe('pwa', () => {
-    it(`should build pwa app with scss`, async () => {
-      const plugin = uniq('pwa');
-      await runNxCommandAsync(
-        `generate @nxext/stencil:pwa ${plugin} --style='scss' --e2eTestRunner='none' --junitTestRunner='none'`
-      );
-
-      const result = await runNxCommandAsync(`build ${plugin} --dev`);
-      expect(result.stdout).toContain('build finished');
-    });
-  });
 });

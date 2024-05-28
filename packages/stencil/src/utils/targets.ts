@@ -1,17 +1,12 @@
 import { TargetConfiguration } from '@nx/devkit';
 import { LibrarySchema } from '../generators/library/schema';
-import { PWASchema } from '../generators/ionic-pwa/schema';
 import { ApplicationSchema } from '../generators/application/schema';
 import { MakeLibBuildableSchema } from '../generators/make-lib-buildable/schema';
 import { ProjectType } from '../utils/typings';
 
 export function getDefaultTargets(
   projectType: ProjectType,
-  options:
-    | LibrarySchema
-    | PWASchema
-    | ApplicationSchema
-    | MakeLibBuildableSchema
+  options: LibrarySchema | ApplicationSchema | MakeLibBuildableSchema
 ): { [key: string]: TargetConfiguration } {
   return {
     build: getBuildTarget(projectType, options),
@@ -24,11 +19,7 @@ export function getDefaultTargets(
 
 export function getBuildTarget(
   projectType: ProjectType,
-  options:
-    | LibrarySchema
-    | PWASchema
-    | ApplicationSchema
-    | MakeLibBuildableSchema
+  options: LibrarySchema | ApplicationSchema | MakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
@@ -51,11 +42,7 @@ export function getBuildTarget(
 
 export function getTestTarget(
   projectType: ProjectType,
-  options:
-    | LibrarySchema
-    | PWASchema
-    | ApplicationSchema
-    | MakeLibBuildableSchema
+  options: LibrarySchema | ApplicationSchema | MakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
@@ -72,11 +59,7 @@ export function getTestTarget(
 
 export function getE2eTarget(
   projectType: ProjectType,
-  options:
-    | LibrarySchema
-    | PWASchema
-    | ApplicationSchema
-    | MakeLibBuildableSchema
+  options: LibrarySchema | ApplicationSchema | MakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
@@ -93,11 +76,7 @@ export function getE2eTarget(
 
 export function getServeTarget(
   projectType: ProjectType,
-  options:
-    | LibrarySchema
-    | PWASchema
-    | ApplicationSchema
-    | MakeLibBuildableSchema
+  options: LibrarySchema | ApplicationSchema | MakeLibBuildableSchema
 ): TargetConfiguration {
   const tsconfigAddition = projectType === 'application' ? 'app' : 'lib';
   return {
