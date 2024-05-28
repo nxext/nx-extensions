@@ -42,7 +42,6 @@ Generate your projects:
 
 ```
 nx g @nxext/stencil:app my-app
-nx g @nxext/stencil:pwa my-app
 nx g @nxext/stencil:lib my-lib
 ```
 

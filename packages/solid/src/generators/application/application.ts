@@ -5,6 +5,7 @@ import {
   Tree,
   runTasksInSerial,
   GeneratorCallback,
+  readNxJson,
 } from '@nx/devkit';
 import { createOrEditViteConfig } from '@nx/vite';
 import { NormalizedSchema, Schema } from './schema';
@@ -38,8 +39,20 @@ async function normalizeOptions<T extends Schema = Schema>(
   options.rootProject = appProjectRoot === '.';
   options.projectNameAndRootFormat = projectNameAndRootFormat;
 
+  const nxJson = readNxJson(host);
+
+  let e2eWebServerTarget = 'serve';
+  let e2ePort = 4200;
+  if (
+    nxJson.targetDefaults?.[e2eWebServerTarget] &&
+    nxJson.targetDefaults?.[e2eWebServerTarget].options?.port
+  ) {
+    e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
+  }
+
   const e2eProjectName = options.rootProject ? 'e2e' : `${appProjectName}-e2e`;
   const e2eProjectRoot = options.rootProject ? 'e2e' : `${appProjectRoot}-e2e`;
+  const e2eWebServerAddress = `http://localhost:${e2ePort}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -53,6 +66,8 @@ async function normalizeOptions<T extends Schema = Schema>(
     appProjectRoot,
     e2eProjectName,
     e2eProjectRoot,
+    e2eWebServerAddress,
+    e2eWebServerTarget,
     parsedTags,
     fileName,
     skipFormat: false,

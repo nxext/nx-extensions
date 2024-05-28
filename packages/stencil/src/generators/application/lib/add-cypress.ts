@@ -1,19 +1,56 @@
-import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
+import {
+  addProjectConfiguration,
+  ensurePackage,
+  joinPathFragments,
+  NX_VERSION,
+  Tree,
+} from '@nx/devkit';
 import { ApplicationSchema } from '../schema';
-import { readNxVersion } from '../../../utils/utillities';
 
-export async function addCypress(host: Tree, options: ApplicationSchema) {
+export async function addCypress(tree: Tree, options: ApplicationSchema) {
   if (options.e2eTestRunner !== 'cypress') {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    return () => {};
+    return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
   }
 
-  await ensurePackage('@nx/cypress', NX_VERSION);
-  const { cypressProjectGenerator } = await import('@nx/cypress');
-  return await cypressProjectGenerator(host, {
+  const { webStaticServeGenerator } = ensurePackage<typeof import('@nx/web')>(
+    '@nx/web',
+    NX_VERSION
+  );
+
+  await webStaticServeGenerator(tree, {
+    buildTarget: `${options.projectName}:build`,
+    targetName: 'serve-static',
+    spa: true,
+  });
+
+  const { configurationGenerator } = ensurePackage<
+    typeof import('@nx/cypress')
+  >('@nx/cypress', NX_VERSION);
+
+  addProjectConfiguration(tree, options.e2eProjectName, {
+    projectType: 'application',
+    root: options.e2eProjectRoot,
+    sourceRoot: joinPathFragments(options.e2eProjectRoot, 'src'),
+    targets: {},
+    implicitDependencies: [options.projectName],
+    tags: [],
+  });
+
+  return await configurationGenerator(tree, {
     ...options,
-    name: `${options.name}-e2e`,
-    directory: options.directory,
-    project: options.name,
+    project: options.e2eProjectName,
+    directory: 'src',
+    // the name and root are already normalized, instruct the generator to use them as is
+    bundler: 'webpack',
+    skipFormat: true,
+    devServerTarget: `${options.projectName}:${options.e2eWebServerTarget}`,
+    baseUrl: options.e2eWebServerAddress,
+    jsx: true,
+    rootProject: false,
+    webServerCommands: {
+      default: `nx run ${options.projectName}:${options.e2eWebServerTarget}`,
+      production: `nx run ${options.projectName}:preview`,
+    },
+    ciWebServerCommand: `nx run ${options.projectName}:serve-static`,
   });
 }

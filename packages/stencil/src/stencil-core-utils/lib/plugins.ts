@@ -6,7 +6,7 @@ import {
   StringChange,
   Tree,
 } from '@nx/devkit';
-import { findNodes } from 'nx/src/utils/typescript';
+import { findNodes } from '@nx/js';
 
 function addCodeIntoArray(
   source: ts.SourceFile,

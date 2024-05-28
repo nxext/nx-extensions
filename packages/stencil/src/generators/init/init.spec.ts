@@ -29,11 +29,4 @@ describe('init', () => {
     expect(packageJson.devDependencies['@stencil/router']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
-
-  it('should add stencil pwa dependencies', async () => {
-    await initGenerator(host, { name: 'test', appType: AppType.pwa });
-    const packageJson = readJson(host, 'package.json');
-    expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
-    expect(packageJson.devDependencies['@ionic/core']).toBeDefined();
-  });
 });

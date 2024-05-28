@@ -15,12 +15,6 @@
       "description": "Generate Stencil application",
       "aliases": ["app"]
     },
-    "ionic-pwa": {
-      "factory": "./src/generators/ionic-pwa/generator",
-      "schema": "./src/generators/ionic-pwa/schema.json",
-      "description": "Generate Stencil ionic pwa",
-      "aliases": ["pwa"]
-    },
     "library": {
       "factory": "./src/generators/library/generator",
       "schema": "./src/generators/library/schema.json",

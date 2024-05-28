@@ -1,7 +1,6 @@
 import {
   autoprefixerTypesVersion,
   autoprefixerVersion,
-  ionicVersion,
   puppeteer,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
@@ -12,7 +11,6 @@ import { SupportedStyles } from '../stencil-core-utils';
 export enum AppType {
   application = 'application',
   library = 'library',
-  pwa = 'pwa',
 }
 
 export type ProjectType = 'application' | 'library';
@@ -41,13 +39,6 @@ export const PROJECT_TYPE_DEPENDENCIES: {
     devDependencies: {
       ...stencilDependencies,
       '@stencil/router': stencilRouterVersion,
-    },
-  },
-  [AppType.pwa]: {
-    dependencies: {},
-    devDependencies: {
-      ...stencilDependencies,
-      '@ionic/core': ionicVersion,
     },
   },
   [AppType.library]: {

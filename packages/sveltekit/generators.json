@@ -15,12 +15,12 @@
       "description": "component generator"
     },
     "library": {
-      "factory": "./src/generators/library/library#libraryGenerator",
+      "factory": "./src/generators/library/library",
       "schema": "./src/generators/library/schema.json",
       "description": "route generator"
     },
     "route": {
-      "factory": "./src/generators/route/route#routeGenerator",
+      "factory": "./src/generators/route/route",
       "schema": "./src/generators/route/schema.json",
       "description": "route generator"
     }

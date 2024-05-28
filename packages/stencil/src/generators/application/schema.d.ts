@@ -21,5 +21,9 @@ export interface ApplicationSchema extends RawApplicationSchema {
   projectDirectory: string;
   parsedTags: string[];
   appType: AppType;
+  e2eProjectName: string;
+  e2eProjectRoot: string;
+  e2eWebServerAddress: string;
+  e2eWebServerTarget: string;
   style: SupportedStyles;
 }

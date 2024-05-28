@@ -8,6 +8,7 @@ import {
   offsetFromRoot,
   Tree,
   runTasksInSerial,
+  readNxJson,
 } from '@nx/devkit';
 import { ApplicationSchema, RawApplicationSchema } from './schema';
 import { calculateStyle } from '../../utils/utillities';
@@ -31,6 +32,21 @@ function normalizeOptions(
     ? options.tags.split(',').map((s) => s.trim())
     : [];
 
+  const nxJson = readNxJson(host);
+
+  let e2eWebServerTarget = 'serve';
+  let e2ePort = 4200;
+  if (
+    nxJson.targetDefaults?.[e2eWebServerTarget] &&
+    nxJson.targetDefaults?.[e2eWebServerTarget].options?.port
+  ) {
+    e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
+  }
+
+  const e2eProjectName = `${projectName}-e2e`;
+  const e2eProjectRoot = `${projectRoot}-e2e`;
+  const e2eWebServerAddress = `http://localhost:${e2ePort}`;
+
   const style = calculateStyle(options.style);
 
   const appType = AppType.application;
@@ -41,6 +57,10 @@ function normalizeOptions(
     projectRoot,
     projectDirectory,
     parsedTags,
+    e2eProjectName,
+    e2eProjectRoot,
+    e2eWebServerAddress,
+    e2eWebServerTarget,
     style,
     appType,
   };
