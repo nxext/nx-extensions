@@ -10,7 +10,6 @@ import {
 } from '@nx/devkit';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore } from '../../../utils/utillities';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
 import * as ts from 'typescript';
 import { relative } from 'path';
@@ -49,8 +48,6 @@ async function prepareAngularLibrary(
       '@stencil/angular-output-target': STENCIL_OUTPUTTARGET_VERSION['angular'],
     }
   );
-
-  addToGitignore(host, `${libsDir}/${angularProjectName}/**/generated`);
 
   return libraryTarget;
 }

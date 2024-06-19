@@ -12,7 +12,6 @@ import { initGenerator as jsInitGenerator } from '@nx/js';
 import { AddOutputtargetSchematicSchema } from '../schema';
 import { Linter } from '@nx/eslint';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
-import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import { addImport } from '@nxext/common';
@@ -59,8 +58,6 @@ async function prepareReactLibrary(
     `${libsDir}/${reactProjectName}/src/index.ts`,
     `export * from './generated/components';`
   );
-
-  addToGitignore(host, `${libsDir}/${reactProjectName}/**/generated`);
 
   return runTasksInSerial(jsInitTask, libraryTarget);
 }
