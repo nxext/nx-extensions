@@ -12,7 +12,6 @@ import {
   nxextSvelteVersion,
   STENCIL_OUTPUTTARGET_VERSION,
 } from '../../../utils/versions';
-import { addToGitignore } from '../../../utils/utillities';
 import * as ts from 'typescript';
 import { getDistDir, getRelativePath } from '../../../utils/fileutils';
 import { addImport } from '@nxext/common';
@@ -50,8 +49,6 @@ async function prepareSvelteLibrary(
     `${libsDir}/${svelteProjectName}/src/index.ts`,
     `export * from './generated/components';`
   );
-
-  addToGitignore(host, `${libsDir}/${svelteProjectName}/**/generated`);
 
   return libraryTarget;
 }

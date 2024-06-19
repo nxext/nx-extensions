@@ -41,7 +41,6 @@
     "@nx/jest": "19.3.0",
     "@nx/storybook": "19.3.0",
     "@phenomnomnominal/tsquery": "~5.0.1",
-    "ignore": "^5.2.4",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
