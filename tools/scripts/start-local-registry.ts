@@ -17,7 +17,7 @@ export default async () => {
     verbose: false,
   });
   await releaseVersion({
-    specifier: '999.99.9:e2e',
+    specifier: '999.99.9-e2e',
     stageChanges: false,
     gitCommit: false,
     gitTag: false,

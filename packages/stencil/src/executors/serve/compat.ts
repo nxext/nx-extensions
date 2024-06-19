@@ -1,5 +1,5 @@
 import { convertNxExecutor } from '@nx/devkit';
 
-import serveExecutor from './executor';
+import { serveExecutor } from './serve.impl';
 
 export default convertNxExecutor(serveExecutor);

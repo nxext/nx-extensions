@@ -1,4 +1,4 @@
-import { StencilTestOptions } from './schema';
+import { StencilE2EOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {
   prepareConfigAndOutputargetPaths,
@@ -11,27 +11,20 @@ import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
-  options: StencilTestOptions
+  options: StencilE2EOptions
 ): ConfigFlags {
   let runOptions: string[] = [taskCommand];
-  runOptions.push(`--spec`);
+  runOptions.push(`--e2e`);
   runOptions = parseRunParameters(runOptions, options);
 
   return parseFlags(runOptions);
 }
 
-export default async function runExecutor(
-  options: StencilTestOptions,
+export async function e2eExecutor(
+  options: StencilE2EOptions,
   context: ExecutorContext
 ) {
   const taskCommand: TaskCommand = 'test';
-
-  logger.info(`
-  ###
-  ### You have to downgrade the Jest packages to Jest 27. We won't do this automatically cause it could break other Nx projects.
-  ### Stencil itself supports just Jest 27, Nx uses Jest 28 by default. Downgrade with caution!
-  ###
-  `);
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const { strictConfig, pathCollection } = await initializeStencilConfig(

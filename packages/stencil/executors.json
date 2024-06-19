@@ -24,22 +24,22 @@
   },
   "executors": {
     "build": {
-      "implementation": "./src/executors/build/executor",
+      "implementation": "./src/executors/build/build.impl",
       "schema": "./src/executors/build/schema.json",
       "description": "stencil build"
     },
     "test": {
-      "implementation": "./src/executors/test/executor",
+      "implementation": "./src/executors/test/test.impl",
       "schema": "./src/executors/test/schema.json",
       "description": "stencil test"
     },
     "e2e": {
-      "implementation": "./src/executors/e2e/executor",
+      "implementation": "./src/executors/e2e/e2e.impl",
       "schema": "./src/executors/e2e/schema.json",
       "description": "stencil e2e"
     },
     "serve": {
-      "implementation": "./src/executors/serve/executor",
+      "implementation": "./src/executors/serve/serve.impl",
       "schema": "./src/executors/serve/schema.json",
       "description": "serve executor"
     }
