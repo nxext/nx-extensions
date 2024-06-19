@@ -60,3 +60,4 @@ e2e/stencil-e2e/tests/dev.test.ts
 /docs/.vitepress/cache
 
 .nx/cache
+.nx/workspace-data
