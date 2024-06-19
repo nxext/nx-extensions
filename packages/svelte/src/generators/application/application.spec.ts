@@ -1,6 +1,6 @@
 import { Schema } from './schema';
 import { Linter } from '@nx/eslint';
-import applicationGenerator from './application';
+import { applicationGenerator } from './application';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { readJson } from '@nx/devkit';
 

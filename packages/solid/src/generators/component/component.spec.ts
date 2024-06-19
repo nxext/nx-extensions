@@ -1,4 +1,4 @@
-import componentGenerator, { SolidComponentSchema } from './component';
+import { componentGenerator, SolidComponentSchema } from './component';
 import { createTestProject } from '../utils/testing';
 import { uniq } from '@nx/plugin/testing';
 import { names, Tree } from '@nx/devkit';

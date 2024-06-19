@@ -1,7 +1,6 @@
 // import {
 //   addDependenciesToPackageJson,
 //   applyChangesToString,
-//   convertNxGenerator,
 //   getWorkspaceLayout,
 //   joinPathFragments,
 //   readProjectConfiguration,
@@ -125,6 +124,3 @@
 //
 //   return libraryTarget;
 // }
-//
-// export default addVueGenerator;
-// export const addVueSchematic = convertNxGenerator(addVueGenerator);

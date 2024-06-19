@@ -2,7 +2,7 @@ import { InitSchema } from './schema';
 import { addStyledDependencies } from './lib/add-style-module-dependencies';
 import { addPuppeteer } from './lib/add-e2e-dependencies';
 import { addDependenciesByApptype } from './lib/add-dependencies-for-apptype';
-import { convertNxGenerator, formatFiles, Tree } from '@nx/devkit';
+import { formatFiles, Tree } from '@nx/devkit';
 import { runTasksInSerial } from '@nx/devkit';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
@@ -29,5 +29,3 @@ export async function initGenerator<T extends InitSchema>(
     jestInitTask
   );
 }
-
-export const initSchematic = convertNxGenerator(initGenerator);

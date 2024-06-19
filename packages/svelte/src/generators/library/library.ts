@@ -2,13 +2,7 @@ import { NormalizedSchema, SvelteLibrarySchema } from './schema';
 import { initGenerator } from '../init/init';
 import { addProject } from './lib/add-project';
 import { updateTsConfig } from './lib/update-tsconfig';
-import {
-  convertNxGenerator,
-  formatFiles,
-  Tree,
-  updateJson,
-  runTasksInSerial,
-} from '@nx/devkit';
+import { formatFiles, Tree, updateJson, runTasksInSerial } from '@nx/devkit';
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
@@ -73,6 +67,3 @@ export async function libraryGenerator(
 
   return runTasksInSerial(initTask, lintTask, viteTask, jestTask, vitestTask);
 }
-
-export default libraryGenerator;
-export const librarySchematic = convertNxGenerator(libraryGenerator);

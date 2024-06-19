@@ -1,4 +1,4 @@
-import componentGenerator, { SvelteComponentSchema } from './component';
+import { componentGenerator, SvelteComponentSchema } from './component';
 import { uniq } from '@nx/plugin/testing';
 import { names, Tree } from '@nx/devkit';
 import { createTestProject } from '../utils/testing';

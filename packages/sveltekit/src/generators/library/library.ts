@@ -15,5 +15,3 @@ export async function libraryGenerator(
   createLibInProject(tree, options);
   addExportsToBarrel(tree, options);
 }
-
-export default libraryGenerator;

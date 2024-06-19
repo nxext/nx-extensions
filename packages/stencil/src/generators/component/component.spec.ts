@@ -1,8 +1,8 @@
-import componentGenerator, { ComponentSchema } from './component';
+import { componentGenerator, ComponentSchema } from './component';
 import { createTestUILib } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { names, Tree } from '@nx/devkit';
-import storybookConfigurationGenerator from '../storybook-configuration/generator';
+import { storybookConfigurationGenerator } from '../storybook-configuration/generator';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');

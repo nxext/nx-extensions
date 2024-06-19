@@ -1,5 +1,4 @@
 import {
-  convertNxGenerator,
   formatFiles,
   Tree,
   runTasksInSerial,
@@ -62,6 +61,3 @@ export async function applicationGeneratorInternal(host: Tree, schema: Schema) {
 
   return runTasksInSerial(initTask, viteTask, lintTask, jestTask, cypressTask);
 }
-
-export default applicationGenerator;
-export const applicationSchematic = convertNxGenerator(applicationGenerator);

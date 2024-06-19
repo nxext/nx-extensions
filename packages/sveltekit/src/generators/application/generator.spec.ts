@@ -1,7 +1,7 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { readProjectConfiguration, Tree } from '@nx/devkit';
 
-import generator from './generator';
+import { applicationGenerator } from './generator';
 import { SveltekitGeneratorSchema } from './schema';
 import { Linter } from '@nx/eslint';
 
@@ -19,7 +19,7 @@ describe('sveltekit generator', () => {
   });
 
   it('should run successfully', async () => {
-    await generator(tree, options);
+    await applicationGenerator(tree, options);
     const config = readProjectConfiguration(tree, 'test');
     expect(config).toBeDefined();
   });

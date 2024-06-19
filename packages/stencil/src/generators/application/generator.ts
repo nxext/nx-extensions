@@ -1,6 +1,5 @@
 import { AppType } from './../../utils/typings';
 import {
-  convertNxGenerator,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -107,6 +106,3 @@ export async function applicationGenerator(
 
   return runTasksInSerial(initTask, lintTask, cypressTask);
 }
-
-export default applicationGenerator;
-export const applicationSchematic = convertNxGenerator(applicationGenerator);
