@@ -1,5 +1,5 @@
 import { convertNxExecutor } from '@nx/devkit';
 
-import buildExecutor from './executor';
+import { buildExecutor } from './build.impl';
 
 export default convertNxExecutor(buildExecutor);

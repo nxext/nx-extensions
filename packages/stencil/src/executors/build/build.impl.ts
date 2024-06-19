@@ -1,9 +1,9 @@
-import { StencilServeOptions } from './schema';
+import { StencilBuildOptions } from './schema';
 import { ConfigFlags, parseFlags, TaskCommand } from '@stencil/core/cli';
 import {
   prepareConfigAndOutputargetPaths,
-  initializeStencilConfig,
   createStencilProcess,
+  initializeStencilConfig,
 } from '../stencil-runtime';
 import { createProjectGraphAsync } from '@nx/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
@@ -17,7 +17,7 @@ import {
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
-  options: StencilServeOptions
+  options: StencilBuildOptions
 ): ConfigFlags {
   let runOptions: string[] = [taskCommand];
   runOptions = parseRunParameters(runOptions, options);
@@ -34,14 +34,12 @@ function createStencilCompilerOptions(
   if (options.maxWorkers) {
     runOptions.push(`--max-workers ${options.maxWorkers}`);
   }
-  runOptions.push('--serve');
-  runOptions.push('--watch');
 
   return parseFlags(runOptions);
 }
 
-export default async function* runExecutor(
-  options: StencilServeOptions,
+export async function buildExecutor(
+  options: StencilBuildOptions,
   context: ExecutorContext
 ) {
   const taskCommand: TaskCommand = 'build';
@@ -56,6 +54,7 @@ export default async function* runExecutor(
   );
 
   if (
+    !context.target.dependsOn &&
     !checkDependentProjectsHaveBeenBuilt(
       context.root,
       context.projectName,
@@ -63,7 +62,7 @@ export default async function* runExecutor(
       dependencies
     )
   ) {
-    yield { success: false };
+    return { success: false };
   }
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
@@ -74,7 +73,7 @@ export default async function* runExecutor(
     flags
   );
 
-  const config = await prepareConfigAndOutputargetPaths(
+  const stencilConfig = await prepareConfigAndOutputargetPaths(
     strictConfig,
     pathCollection
   );
@@ -89,9 +88,9 @@ export default async function* runExecutor(
   );
 
   try {
-    await createStencilProcess(config);
+    await createStencilProcess(stencilConfig);
 
-    if (config.flags.e2e) {
+    if (stencilConfig.flags.e2e) {
       cleanupE2eTesting(pathCollection);
     }
 
