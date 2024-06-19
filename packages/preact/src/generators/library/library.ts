@@ -3,7 +3,6 @@ import { initGenerator } from '../init/init';
 import { addProject } from './lib/add-project';
 import { updateTsConfig } from './lib/update-tsconfig';
 import {
-  convertNxGenerator,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -119,6 +118,3 @@ export async function libraryGenerator(
 
   return runTasksInSerial(initTask, viteTask, vitestTask, lintTask, jestTask);
 }
-
-export default libraryGenerator;
-export const librarySchematic = convertNxGenerator(libraryGenerator);

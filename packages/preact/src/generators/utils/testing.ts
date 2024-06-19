@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import applicationGenerator from '../application/application';
+import { applicationGenerator } from '../application/application';
 import { ProjectType, Tree } from '@nx/devkit';
 import { Linter } from '@nx/eslint';
 import { libraryGenerator } from '../library/library';

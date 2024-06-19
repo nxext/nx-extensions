@@ -1,7 +1,6 @@
 import {
   addDependenciesToPackageJson,
   applyChangesToString,
-  convertNxGenerator,
   ensurePackage,
   getWorkspaceLayout,
   readProjectConfiguration,
@@ -117,6 +116,3 @@ export async function addSvelteGenerator(
 
   return libraryTarget;
 }
-
-export default addSvelteGenerator;
-export const addSvelteSchematic = convertNxGenerator(addSvelteGenerator);

@@ -1,5 +1,4 @@
 import {
-  convertNxGenerator,
   formatFiles,
   logger,
   readProjectConfiguration,
@@ -9,10 +8,10 @@ import {
 } from '@nx/devkit';
 import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
-import addAngularGenerator from './add-angular/generator';
-import addReactGenerator from './add-react/generator';
-//import addVueGenerator from './add-vue/generator';
-import addSvelteGenerator from './add-svelte/generator';
+import { addAngularGenerator } from './add-angular/generator';
+import { addReactGenerator } from './add-react/generator';
+//import { addVueGenerator } from './add-vue/generator';
+import { addSvelteGenerator } from './add-svelte/generator';
 
 export async function outputtargetGenerator(
   host: Tree,
@@ -55,6 +54,3 @@ export async function outputtargetGenerator(
 
   return runTasksInSerial(...tasks);
 }
-
-export default outputtargetGenerator;
-export const outputtargetSchematic = convertNxGenerator(outputtargetGenerator);

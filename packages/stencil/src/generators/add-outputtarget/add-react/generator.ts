@@ -1,7 +1,6 @@
 import {
   addDependenciesToPackageJson,
   applyChangesToString,
-  convertNxGenerator,
   ensurePackage,
   getWorkspaceLayout,
   NX_VERSION,
@@ -126,6 +125,3 @@ export async function addReactGenerator(
 
   return libraryTarget;
 }
-
-export default addReactGenerator;
-export const addReactSchematic = convertNxGenerator(addReactGenerator);

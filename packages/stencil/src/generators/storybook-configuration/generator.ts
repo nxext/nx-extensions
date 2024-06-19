@@ -1,5 +1,4 @@
 import {
-  convertNxGenerator,
   ensurePackage,
   formatFiles,
   generateFiles,
@@ -275,8 +274,3 @@ function addStorybookTask(
 
   updateProjectConfiguration(tree, projectName, projectConfig);
 }
-
-export default storybookConfigurationGenerator;
-export const storybookConfigurationSchematic = convertNxGenerator(
-  storybookConfigurationGenerator
-);

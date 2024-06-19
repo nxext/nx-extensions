@@ -1,4 +1,4 @@
-import pageGenerator, { SvelteRouteSchema } from './route';
+import { routeGenerator, SvelteRouteSchema } from './route';
 import { uniq } from '@nx/plugin/testing';
 import { names, Tree } from '@nx/devkit';
 import { createTestProject } from '../utils/testing';
@@ -18,11 +18,11 @@ describe('page schematic', () => {
   });
 
   it('should run successfully', async () => {
-    await expect(pageGenerator(tree, options)).resolves.not.toThrowError();
+    await expect(routeGenerator(tree, options)).resolves.not.toThrowError();
   });
 
   it('should add file', async () => {
-    await pageGenerator(tree, options);
+    await routeGenerator(tree, options);
     const name = names(pageName);
     expect(
       tree.exists(

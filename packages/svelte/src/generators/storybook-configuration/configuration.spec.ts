@@ -1,13 +1,8 @@
-import {
-  readJson,
-  readProjectConfiguration,
-  Tree,
-  updateJson,
-} from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from '@nx/js';
 
-import configurationGenerator from './configuration';
+import { configurationGenerator } from './configuration';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');

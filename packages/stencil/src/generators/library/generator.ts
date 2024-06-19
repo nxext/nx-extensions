@@ -1,5 +1,4 @@
 import {
-  convertNxGenerator,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -16,7 +15,7 @@ import { initGenerator } from '../../generators/init/init';
 import { MakeLibBuildableSchema } from '../../generators/make-lib-buildable/schema';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { addProject } from './lib/add-project';
-import makeLibBuildableGenerator from '../../generators/make-lib-buildable/make-lib-buildable';
+import { makeLibBuildableGenerator } from '../../generators/make-lib-buildable/make-lib-buildable';
 import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
 
 function normalizeOptions(
@@ -102,6 +101,3 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
 
   return runTasksInSerial(initTask);
 }
-
-export default libraryGenerator;
-export const librarySchematic = convertNxGenerator(libraryGenerator);

@@ -1,7 +1,6 @@
 import {
   addDependenciesToPackageJson,
   applyChangesToString,
-  convertNxGenerator,
   ensurePackage,
   getWorkspaceLayout,
   joinPathFragments,
@@ -182,6 +181,3 @@ export async function addAngularGenerator(
 
   return libraryTarget;
 }
-
-export default addAngularGenerator;
-export const addAngularSchematic = convertNxGenerator(addAngularGenerator);

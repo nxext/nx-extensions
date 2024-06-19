@@ -1,6 +1,5 @@
 import { Schema } from './schema';
 import {
-  convertNxGenerator,
   formatFiles,
   GeneratorCallback,
   Tree,
@@ -30,5 +29,3 @@ export async function initGenerator(host: Tree, schema: Schema) {
   }
   return runTasksInSerial(...tasks);
 }
-
-export const initSchematic = convertNxGenerator(initGenerator);

@@ -1,5 +1,4 @@
 import {
-  convertNxGenerator,
   generateFiles,
   joinPathFragments,
   readProjectConfiguration,
@@ -102,8 +101,3 @@ export async function makeLibBuildableGenerator(
 
   await formatFiles(host);
 }
-
-export default makeLibBuildableGenerator;
-export const makeLibBuildableSchematic = convertNxGenerator(
-  makeLibBuildableGenerator
-);

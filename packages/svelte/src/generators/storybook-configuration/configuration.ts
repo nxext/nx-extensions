@@ -1,6 +1,5 @@
 import {
   addDependenciesToPackageJson,
-  convertNxGenerator,
   ensurePackage,
   formatFiles,
   GeneratorCallback,
@@ -66,8 +65,3 @@ function normalizeSchema(
     ...schema,
   };
 }
-
-export default configurationGenerator;
-export const configurationSchematic = convertNxGenerator(
-  configurationGenerator
-);
