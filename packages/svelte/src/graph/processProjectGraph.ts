@@ -58,7 +58,7 @@ export function buildExplicitTypeScriptDependencies(
   Object.keys(filesToProcess).forEach((source) => {
     Object.values(filesToProcess[source]).forEach((f) => {
       importLocator.fromFile(f.file, (importExpr: any) => {
-        const target = targetProjectLocator.findProjectWithImport(
+        const target = targetProjectLocator.findNpmProjectFromImport(
           importExpr,
           f.file
         );
