@@ -14,3 +14,4 @@ export async function initGenerator(host: Tree, options: Schema) {
   }
   return runTasksInSerial(installTask, jestTask, cypressTask);
 }
+export default initGenerator;

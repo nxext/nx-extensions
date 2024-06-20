@@ -23,7 +23,7 @@ describe('svelte e2e', () => {
     it('should be able to run linter', async () => {
       const plugin = uniq('svelteliblint');
       await runNxCommandAsync(
-        `generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:lib ${plugin} --directory=libs --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
@@ -33,7 +33,7 @@ describe('svelte e2e', () => {
     it('should be able to run check', async () => {
       const plugin = uniq('sveltelibcheck');
       await runNxCommandAsync(
-        `generate @nxext/svelte:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:lib ${plugin} --directory=libs --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`check ${plugin}`);
@@ -45,7 +45,7 @@ describe('svelte e2e', () => {
     it('should be able build lib if buildable', async () => {
       const plugin = uniq('sveltelib');
       await runNxCommandAsync(
-        `generate @nxext/svelte:lib ${plugin} --buildable --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/svelte:lib ${plugin} --directory=libs --buildable --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
@@ -58,7 +58,7 @@ describe('svelte e2e', () => {
       it('with jest', async () => {
         const plugin = uniq('jest');
         await runNxCommandAsync(
-          `generate @nxext/svelte:lib ${plugin} --unitTestRunner=jest --e2eTestRunner='none'`
+          `generate @nxext/svelte:lib ${plugin} --directory=libs --unitTestRunner=jest --e2eTestRunner='none'`
         );
         await runNxCommandAsync(
           `generate @nxext/svelte:component test --project=${plugin}`
@@ -73,7 +73,7 @@ describe('svelte e2e', () => {
       it('with vitest', async () => {
         const plugin = uniq('vitest');
         await runNxCommandAsync(
-          `generate @nxext/svelte:lib ${plugin} --unitTestRunner=vitest --e2eTestRunner='none'`
+          `generate @nxext/svelte:lib ${plugin} --directory=libs --unitTestRunner=vitest --e2eTestRunner='none'`
         );
         await runNxCommandAsync(
           `generate @nxext/svelte:component test --project=${plugin}`
@@ -89,7 +89,7 @@ describe('svelte e2e', () => {
     it('should be able to run storybook', async () => {
       const plugin = uniq('sveltestories');
       await runNxCommandAsync(
-        `generate @nxext/svelte:lib ${plugin} --unitTestRunner='none' --e2eTestRunner='none'`
+        `generate @nxext/svelte:lib ${plugin} --directory=libs --unitTestRunner='none' --e2eTestRunner='none'`
       );
       await runNxCommandAsync(
         `generate @nxext/svelte:storybook-configuration ${plugin}`

@@ -1,7 +1,7 @@
 import * as ts from 'typescript';
 import { addToPlugins } from './plugins';
 import { applyChangesToString, StringChange, Tree } from '@nx/devkit';
-import { readTsSourceFile, addImport } from '@nxext/common';
+import { readTsSourceFile, addImport } from '../../utils/ast-utils';
 
 export enum SupportedStyles {
   css = 'css',

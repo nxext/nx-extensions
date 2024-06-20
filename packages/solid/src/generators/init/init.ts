@@ -29,3 +29,4 @@ export async function initGenerator(host: Tree, schema: Schema) {
   }
   return runTasksInSerial(...tasks);
 }
+export default initGenerator;

@@ -22,7 +22,7 @@ describe('solid e2e', () => {
     it('should build solid application', async () => {
       const plugin = uniq('solid');
       await runNxCommandAsync(
-        `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/solid:app ${plugin} --directory=apps --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);
@@ -34,7 +34,7 @@ describe('solid e2e', () => {
     it('should be able to run linter', async () => {
       const plugin = uniq('solidlint');
       await runNxCommandAsync(
-        `generate @nxext/solid:app ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/solid:app ${plugin} --directory=apps --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
@@ -45,7 +45,7 @@ describe('solid e2e', () => {
   describe('solid lib', () => {
     it('should generate lib into directory', async () => {
       await runNxCommandAsync(
-        `generate @nxext/solid:lib project/uilib --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/solid:lib uilib --directory=libs/project --e2eTestRunner='none' --junitTestRunner='none'`
       );
       expect(() =>
         checkFilesExist(`libs/project/uilib/src/index.ts`)
@@ -55,7 +55,7 @@ describe('solid e2e', () => {
     it('should be able to run linter', async () => {
       const plugin = uniq('solidliblint');
       await runNxCommandAsync(
-        `generate @nxext/solid:lib ${plugin} --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/solid:lib ${plugin} --directory=libs --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`lint ${plugin}`);
@@ -65,7 +65,7 @@ describe('solid e2e', () => {
     it('should be able build lib if buildable', async () => {
       const plugin = uniq('solidlib');
       await runNxCommandAsync(
-        `generate @nxext/solid:lib ${plugin} --buildable --e2eTestRunner='none' --junitTestRunner='none'`
+        `generate @nxext/solid:lib ${plugin} --directory=libs --buildable --e2eTestRunner='none' --junitTestRunner='none'`
       );
 
       const result = await runNxCommandAsync(`build ${plugin}`);

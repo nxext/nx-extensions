@@ -29,3 +29,4 @@ export async function initGenerator<T extends InitSchema>(
     jestInitTask
   );
 }
+export default initGenerator;

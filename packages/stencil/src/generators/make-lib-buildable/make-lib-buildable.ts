@@ -101,3 +101,4 @@ export async function makeLibBuildableGenerator(
 
   await formatFiles(host);
 }
+export default makeLibBuildableGenerator;

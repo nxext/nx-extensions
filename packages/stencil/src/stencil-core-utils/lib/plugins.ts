@@ -1,5 +1,5 @@
 import * as ts from 'typescript';
-import { readTsSourceFile } from '@nxext/common';
+import { readTsSourceFile } from '../../utils/ast-utils';
 import {
   applyChangesToString,
   ChangeType,
