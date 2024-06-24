@@ -238,7 +238,7 @@ Default: `vitest`
 
 Type: `string`
 
-Possible values: `jest`, `vitest`, `none`
+Possible values: `vitest`, `none`
 
 Test runner to use for unit tests.
 

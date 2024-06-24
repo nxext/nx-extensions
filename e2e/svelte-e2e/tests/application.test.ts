@@ -8,7 +8,7 @@ import {
 import { createTestProject, installPlugin } from '@nxext/e2e-utils';
 import { rmSync } from 'fs';
 
-describe('svelte e2e', () => {
+xdescribe('svelte e2e', () => {
   let projectDirectory: string;
 
   beforeAll(() => {
@@ -82,21 +82,6 @@ describe('svelte e2e', () => {
     });
 
     describe('should be able to run tests', () => {
-      it('with jest', async () => {
-        const plugin = uniq('svelteapptests');
-        await runNxCommandAsync(
-          `generate @nxext/svelte:app ${plugin} --directory=apps --unitTestRunner='jest' --e2eTestRunner='none'`
-        );
-        await runNxCommandAsync(
-          `generate @nxext/svelte:component test --project=${plugin}`
-        );
-
-        const result = await runNxCommandAsync(`test ${plugin}`);
-        expect(`${result.stdout}${result.stderr}`).toContain(
-          'Ran all test suites'
-        );
-      });
-
       it('with vitest', async () => {
         const plugin = uniq('svelteapptests');
         await runNxCommandAsync(

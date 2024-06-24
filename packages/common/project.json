@@ -27,5 +27,18 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "release": {
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}",
+        "currentVersionResolver": "git-tag"
+      }
+    }
+  },
+  "nx-release-publish": {
+    "options": {
+      "packageRoot": "dist/{projectRoot}"
+    }
+  }
 }

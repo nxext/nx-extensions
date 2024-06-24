@@ -13,10 +13,10 @@ describe('svelte e2e', () => {
 
   afterAll(() => {
     // Cleanup the test project
-    rmSync(projectDirectory, {
+    /*rmSync(projectDirectory, {
       recursive: true,
       force: true,
-    });
+    });*/
   });
 
   describe('Svelte lib', () => {
@@ -55,21 +55,6 @@ describe('svelte e2e', () => {
     });
 
     describe('should be able to run tests', () => {
-      it('with jest', async () => {
-        const plugin = uniq('jest');
-        await runNxCommandAsync(
-          `generate @nxext/svelte:lib ${plugin} --directory=libs --unitTestRunner=jest --e2eTestRunner='none'`
-        );
-        await runNxCommandAsync(
-          `generate @nxext/svelte:component test --project=${plugin}`
-        );
-
-        const result = await runNxCommandAsync(`test ${plugin}`);
-        expect(`${result.stdout}${result.stderr}`).toContain(
-          'Ran all test suites'
-        );
-      });
-
       it('with vitest', async () => {
         const plugin = uniq('vitest');
         await runNxCommandAsync(

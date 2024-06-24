@@ -12,10 +12,10 @@ describe('solid e2e', () => {
 
   afterAll(() => {
     // Cleanup the test project
-    rmSync(projectDirectory, {
+    /*rmSync(projectDirectory, {
       recursive: true,
       force: true,
-    });
+    });*/
   });
 
   describe('solid app', () => {

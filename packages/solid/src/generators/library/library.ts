@@ -93,20 +93,6 @@ export async function libraryGeneratorInternal(
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
   const viteTask = await addVite(host, options);
-  createOrEditViteConfig(
-    host,
-    {
-      project: options.name,
-      includeLib: false,
-      includeVitest: options.unitTestRunner === 'vitest',
-      inSourceTests: false,
-      rollupOptionsExternal: [],
-      imports: [`import solidPlugin from 'vite-plugin-solid'`],
-      plugins: [`solidPlugin()`],
-    },
-    false
-  );
-
   const vitestTask = await addVitest(host, options);
 
   updateTsConfig(host, options);
