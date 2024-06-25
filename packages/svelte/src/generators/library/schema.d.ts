@@ -6,7 +6,7 @@ export interface SvelteLibrarySchema {
   tags?: string;
   projectNameAndRootFormat?: ProjectNameAndRootFormat;
   linter: Linter;
-  unitTestRunner: 'jest' | 'vitest' | 'none';
+  unitTestRunner: 'vitest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
   buildable?: boolean;
   directory?: string;

@@ -6,6 +6,16 @@ import { startLocalRegistry } from '@nx/js/plugins/jest/local-registry';
 import { releasePublish, releaseVersion } from 'nx/release';
 
 export default async () => {
+  if (
+    process.env.SKIP_LOCAL_REGISTRY_GLOBAL_SETUP &&
+    process.env.SKIP_LOCAL_REGISTRY_GLOBAL_SETUP !== 'false'
+  ) {
+    console.log(
+      "Environment variable 'SKIP_LOCAL_REGISTRY_GLOBAL_SETUP' is set. Skipping global setup of Verdaccio's Local Registry..."
+    );
+    return;
+  }
+
   // local registry target to run
   const localRegistryTarget = 'nxext:local-registry';
   // storage folder for the local registry
@@ -17,11 +27,14 @@ export default async () => {
     verbose: false,
   });
   await releaseVersion({
-    specifier: '999.99.9:e2e',
+    specifier: '0.0.0-e2e',
     stageChanges: false,
     gitCommit: false,
     gitTag: false,
     firstRelease: true,
+    generatorOptionsOverrides: {
+      skipLockFileUpdate: true,
+    },
   });
   await releasePublish({
     tag: 'e2e',

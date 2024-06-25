@@ -9,15 +9,14 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
-    "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom", "es2020"],
+    "module": "commonjs",
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@nxext/common": ["packages/common/src/index.ts"],
-      "@nxext/e2e-utils": ["e2e/utils/index.ts"],
+      "@nxext/e2e-utils": ["e2e/e2e-utils/src/index.ts"],
       "@nxext/preact": ["packages/preact/src/index.ts"],
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"]

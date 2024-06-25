@@ -118,3 +118,4 @@ export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
 
   return runTasksInSerial(initTask, viteTask, lintTask, jestTask, cypressTask);
 }
+export default applicationGenerator;

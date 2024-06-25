@@ -22,13 +22,13 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nx/devkit": "19.3.0",
-    "nx": "19.3.0",
-    "@nx/vite": "19.3.0",
-    "@nx/eslint": "19.3.0",
+    "@nx/devkit": "^19.3.0",
+    "nx": "^19.3.0",
+    "@nx/vite": "^19.3.0",
+    "@nx/eslint": "^19.3.0",
     "typescript": "5.4.5",
-    "@nx/js": "19.3.0",
-    "@nx/workspace": "19.3.0",
+    "@nx/js": "^19.3.0",
+    "@nx/workspace": "^19.3.0",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {}

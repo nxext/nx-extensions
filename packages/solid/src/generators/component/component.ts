@@ -16,3 +16,4 @@ export async function componentGenerator(
   createComponentInProject(tree, options);
   addExportsToBarrel(tree, options);
 }
+export default componentGenerator;

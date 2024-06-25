@@ -2,7 +2,7 @@ import { join, dirname } from 'path';
 import { mkdirSync, rmSync } from 'fs';
 import { execSync } from 'child_process';
 
-export { runNxCommandUntil } from './run-commands-until';
+export { runNxCommandUntil } from './lib/run-commands-until';
 
 /**
  * Creates a test project with create-nx-workspace and installs the plugin
@@ -22,7 +22,7 @@ export function createTestProject() {
   });
 
   execSync(
-    `npx --yes create-nx-workspace@latest ${projectName} --preset apps --nxCloud skip --interactive false`,
+    `npx --yes create-nx-workspace@latest ${projectName} --preset apps --nxCloud=skip --no-interactive`,
     {
       cwd: dirname(projectDirectory),
       stdio: 'inherit',
@@ -37,7 +37,7 @@ export function createTestProject() {
 export function installPlugin(projectDirectory: string, pluginName: string) {
   // The plugin has been built and published to a local registry in the jest globalSetup
   // Install the plugin built with the latest source code into the test repo
-  execSync(`npm install @nxext/${pluginName}@e2e`, {
+  execSync(`npm install @nxext/${pluginName}@e2e `, {
     cwd: projectDirectory,
     stdio: 'inherit',
     env: process.env,

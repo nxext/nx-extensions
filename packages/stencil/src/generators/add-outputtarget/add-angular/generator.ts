@@ -21,7 +21,7 @@ import {
   addExportToModule,
 } from '../../../utils/angular-ast-utils';
 import { getProjectTsImportPath } from '../../storybook-configuration/generator';
-import { addAfterLastImport, addImport } from '@nxext/common';
+import { addAfterLastImport, addImport } from '../../../utils/ast-utils';
 import { addGlobal } from '@nx/js';
 import { existsSync } from 'fs-extra';
 

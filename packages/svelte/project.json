@@ -58,11 +58,20 @@
           "dependencies": true
         }
       ]
-    },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs svelte {args.ver} {args.tag}",
-      "dependsOn": ["build"]
     }
   },
-  "tags": []
+  "tags": [],
+  "release": {
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}",
+        "currentVersionResolver": "git-tag"
+      }
+    }
+  },
+  "nx-release-publish": {
+    "options": {
+      "packageRoot": "dist/{projectRoot}"
+    }
+  }
 }

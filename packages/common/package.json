@@ -9,15 +9,15 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/nxext/nx-extensions",
-    "directory": "packages/core"
+    "directory": "packages/common"
   },
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"
   },
   "dependencies": {
-    "@nx/devkit": "19.3.0",
+    "@nx/devkit": "^19.3.0",
     "typescript": "5.4.5",
-    "@nx/js": "19.3.0",
+    "@nx/js": "^19.3.0",
     "tslib": "^2.3.0"
   }
 }

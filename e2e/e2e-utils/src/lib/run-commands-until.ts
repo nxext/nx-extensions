@@ -7,7 +7,7 @@ export function runNxCommandUntil(
   criteria: (output: string) => boolean
 ): Promise<ChildProcess> {
   const pm = getPackageManagerCommand();
-  const p = exec(pm.run('nx', command), {
+  const childProcess: ChildProcess = exec(pm.run('nx', command), {
     cwd: tmpProjPath(),
     env: {
       ...process.env,
@@ -19,21 +19,21 @@ export function runNxCommandUntil(
     let output = '';
     let complete = false;
 
-    function checkCriteria(c) {
+    function checkCriteria(c: any) {
       output += c.toString();
       if (criteria(stripConsoleColors(output)) && !complete) {
         complete = true;
-        res(p);
+        res(childProcess);
       }
     }
 
-    p.stdout.on('data', checkCriteria);
-    p.stderr.on('data', checkCriteria);
-    p.on('exit', (code) => {
+    childProcess.stdout?.on('data', checkCriteria);
+    childProcess.stderr?.on('data', checkCriteria);
+    childProcess.on('exit', (code) => {
       if (!complete) {
         rej(`Exited with ${code}`);
       } else {
-        res(p);
+        res(childProcess);
       }
     });
   });

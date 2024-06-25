@@ -119,6 +119,9 @@ importers:
       '@types/node':
         specifier: ^18.16.9
         version: 18.16.9
+      '@types/semver':
+        specifier: ^7.5.8
+        version: 7.5.8
       '@types/yargs':
         specifier: ^17.0.32
         version: 17.0.32
@@ -206,6 +209,9 @@ importers:
       pretty-quick:
         specifier: ^3.1.3
         version: 3.1.3(prettier@2.7.1)
+      semver:
+        specifier: ^7.6.2
+        version: 7.6.2
       svelte:
         specifier: ^4.2.12
         version: 4.2.12
@@ -11161,10 +11167,10 @@ packages:
     engines: { node: '>=10' }
     hasBin: true
 
-  semver@7.6.0:
+  semver@7.6.2:
     resolution:
       {
-        integrity: sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==,
+        integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==,
       }
     engines: { node: '>=10' }
     hasBin: true
@@ -13365,7 +13371,7 @@ snapshots:
       chokidar: 3.5.3
       convert-source-map: 1.8.0
       reflect-metadata: 0.1.13
-      semver: 7.6.0
+      semver: 7.6.2
       tslib: 2.6.2
       typescript: 5.4.5
       yargs: 17.7.2
@@ -15787,7 +15793,7 @@ snapshots:
       minimatch: 9.0.3
       piscina: 4.4.0
       rxjs: 7.8.1
-      semver: 7.6.0
+      semver: 7.6.2
       tslib: 2.6.2
       webpack: 5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2)
       webpack-merge: 5.9.0
@@ -15852,7 +15858,7 @@ snapshots:
       ignore: 5.3.1
       minimatch: 9.0.3
       nx: 19.3.0(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11))
-      semver: 7.6.0
+      semver: 7.6.2
       tmp: 0.2.1
       tslib: 2.6.2
       yargs-parser: 21.1.1
@@ -15868,7 +15874,7 @@ snapshots:
       chalk: 4.1.0
       confusing-browser-globals: 1.0.11
       jsonc-eslint-parser: 2.3.0
-      semver: 7.6.0
+      semver: 7.6.2
       tslib: 2.6.2
     optionalDependencies:
       eslint-config-prettier: 9.0.0(eslint@8.57.0)
@@ -15891,7 +15897,7 @@ snapshots:
       '@nx/js': 19.3.0(@babel/traverse@7.24.0)(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11))(@types/node@18.16.9)(nx@19.3.0(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11)))(typescript@5.4.5)(verdaccio@5.18.0(typanion@3.12.1))
       '@nx/linter': 19.3.0(@babel/traverse@7.24.0)(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11))(@types/node@18.16.9)(@zkochan/js-yaml@0.0.7)(eslint@8.57.0)(nx@19.3.0(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11)))(verdaccio@5.18.0(typanion@3.12.1))
       eslint: 8.57.0
-      semver: 7.6.0
+      semver: 7.6.2
       tslib: 2.6.2
       typescript: 5.4.5
     optionalDependencies:
@@ -15964,7 +15970,7 @@ snapshots:
       npm-package-arg: 11.0.1
       npm-run-path: 4.0.1
       ora: 5.3.0
-      semver: 7.6.0
+      semver: 7.6.2
       source-map-support: 0.5.19
       ts-node: 10.9.1(@swc/core@1.5.7(@swc/helpers@0.5.11))(@types/node@18.16.9)(typescript@5.4.5)
       tsconfig-paths: 4.1.2
@@ -16135,7 +16141,7 @@ snapshots:
       '@nx/eslint': 19.3.0(@babel/traverse@7.24.0)(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11))(@types/node@18.16.9)(@zkochan/js-yaml@0.0.7)(eslint@8.57.0)(nx@19.3.0(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11)))(verdaccio@5.18.0(typanion@3.12.1))
       '@nx/js': 19.3.0(@babel/traverse@7.24.0)(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11))(@types/node@18.16.9)(nx@19.3.0(@swc-node/register@1.9.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(@swc/types@0.1.7)(typescript@5.4.5))(@swc/core@1.5.7(@swc/helpers@0.5.11)))(typescript@5.4.5)(verdaccio@5.18.0(typanion@3.12.1))
       '@phenomnomnominal/tsquery': 5.0.1(typescript@5.4.5)
-      semver: 7.6.0
+      semver: 7.6.2
       tslib: 2.6.2
     transitivePeerDependencies:
       - '@babel/traverse'
@@ -16524,7 +16530,7 @@ snapshots:
       fast-glob: 3.3.2
       minimatch: 9.0.4
       piscina: 4.4.0
-      semver: 7.6.0
+      semver: 7.6.2
       slash: 3.0.0
       source-map: 0.7.4
     optionalDependencies:
@@ -16827,7 +16833,7 @@ snapshots:
       graphemer: 1.4.0
       ignore: 5.3.1
       natural-compare: 1.4.0
-      semver: 7.6.0
+      semver: 7.6.2
       ts-api-utils: 1.3.0(typescript@5.4.5)
     optionalDependencies:
       typescript: 5.4.5
@@ -16874,7 +16880,7 @@ snapshots:
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.4
-      semver: 7.6.0
+      semver: 7.6.2
       ts-api-utils: 1.3.0(typescript@5.4.5)
     optionalDependencies:
       typescript: 5.4.5
@@ -16890,7 +16896,7 @@ snapshots:
       '@typescript-eslint/types': 7.6.0
       '@typescript-eslint/typescript-estree': 7.6.0(typescript@5.4.5)
       eslint: 8.57.0
-      semver: 7.6.0
+      semver: 7.6.2
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -17589,7 +17595,7 @@ snapshots:
   bin-version-check@5.0.0:
     dependencies:
       bin-version: 6.0.0
-      semver: 7.6.0
+      semver: 7.6.2
       semver-truncate: 2.0.0
 
   bin-version@6.0.0:
@@ -17676,7 +17682,7 @@ snapshots:
 
   builtins@5.0.1:
     dependencies:
-      semver: 7.6.0
+      semver: 7.6.2
 
   bytes@3.0.0: {}
 
@@ -18075,7 +18081,7 @@ snapshots:
       postcss-modules-scope: 3.0.0(postcss@8.4.38)
       postcss-modules-values: 4.0.0(postcss@8.4.38)
       postcss-value-parser: 4.2.0
-      semver: 7.6.0
+      semver: 7.6.2
       webpack: 5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.18.17)
 
   css-loader@6.8.1(webpack@5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2)):
@@ -18087,7 +18093,7 @@ snapshots:
       postcss-modules-scope: 3.0.0(postcss@8.4.38)
       postcss-modules-values: 4.0.0(postcss@8.4.38)
       postcss-value-parser: 4.2.0
-      semver: 7.6.0
+      semver: 7.6.2
       webpack: 5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2)
 
   css-minimizer-webpack-plugin@5.0.1(esbuild@0.20.2)(webpack@5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2)):
@@ -18988,7 +18994,7 @@ snapshots:
       minimatch: 3.1.2
       node-abort-controller: 3.0.1
       schema-utils: 3.3.0
-      semver: 7.6.0
+      semver: 7.6.2
       tapable: 2.2.1
       typescript: 5.4.5
       webpack: 5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2)
@@ -19902,7 +19908,7 @@ snapshots:
       jest-util: 29.6.3
       natural-compare: 1.4.0
       pretty-format: 29.7.0
-      semver: 7.6.0
+      semver: 7.6.2
     transitivePeerDependencies:
       - supports-color
 
@@ -20074,7 +20080,7 @@ snapshots:
       acorn: 8.10.0
       eslint-visitor-keys: 3.4.3
       espree: 9.6.1
-      semver: 7.5.4
+      semver: 7.6.2
 
   jsonc-parser@3.2.0: {}
 
@@ -20649,7 +20655,7 @@ snapshots:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.13.0
-      semver: 7.6.0
+      semver: 7.6.2
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
@@ -20662,7 +20668,7 @@ snapshots:
     dependencies:
       hosted-git-info: 7.0.1
       proc-log: 3.0.0
-      semver: 7.6.0
+      semver: 7.6.2
       validate-npm-package-name: 5.0.0
 
   npm-run-path@2.0.2:
@@ -20710,7 +20716,7 @@ snapshots:
       npm-run-path: 4.0.1
       open: 8.4.2
       ora: 5.3.0
-      semver: 7.6.0
+      semver: 7.6.2
       string-width: 4.2.3
       strong-log-transformer: 2.1.0
       tar-stream: 2.2.0
@@ -21053,7 +21059,7 @@ snapshots:
       cosmiconfig: 7.0.1
       klona: 2.0.6
       postcss: 8.4.38
-      semver: 7.6.0
+      semver: 7.6.2
       webpack: 5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2)
 
   postcss-loader@7.3.3(postcss@8.4.27)(webpack@5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.18.17)):
@@ -21061,7 +21067,7 @@ snapshots:
       cosmiconfig: 8.2.0
       jiti: 1.19.3
       postcss: 8.4.27
-      semver: 7.6.0
+      semver: 7.6.2
       webpack: 5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.18.17)
 
   postcss-merge-longhand@6.0.0(postcss@8.4.38):
@@ -21625,9 +21631,7 @@ snapshots:
     dependencies:
       lru-cache: 6.0.0
 
-  semver@7.6.0:
-    dependencies:
-      lru-cache: 6.0.0
+  semver@7.6.2: {}
 
   send@0.18.0:
     dependencies:
@@ -22196,7 +22200,7 @@ snapshots:
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
-      semver: 7.6.0
+      semver: 7.6.2
       typescript: 5.4.5
       yargs-parser: 21.1.1
     optionalDependencies:
@@ -22210,7 +22214,7 @@ snapshots:
       chalk: 4.1.0
       enhanced-resolve: 5.15.0
       micromatch: 4.0.5
-      semver: 7.6.0
+      semver: 7.6.2
       typescript: 5.4.5
       webpack: 5.88.2(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2)
 

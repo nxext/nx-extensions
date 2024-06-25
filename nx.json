@@ -69,6 +69,11 @@
     }
   },
   "targetDefaults": {
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/packages/{projectName}"
+      }
+    },
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"],
@@ -120,5 +125,18 @@
   },
   "nxCloudAccessToken": "NTlhMGE3ZTYtYjk5OC00Mzc5LWE2ZTAtNzE4ODEzNDY5MjlmfHJlYWQ=",
   "parallel": 1,
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "release": {
+    "projects": ["*", "!docs", "!stencil", "!common", "!*-e2e", "!e2e-*"],
+    "releaseTagPattern": "release/{version}",
+    "git": {
+      "commitMessage": "chore(release): {version}"
+    },
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist/packages/{projectName}",
+        "currentVersionResolver": "git-tag"
+      }
+    }
+  }
 }

@@ -54,3 +54,5 @@ export async function outputtargetGenerator(
 
   return runTasksInSerial(...tasks);
 }
+
+export default outputtargetGenerator;
