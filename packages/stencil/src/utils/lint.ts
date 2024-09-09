@@ -1,6 +1,6 @@
 import {
   eslintPluginImportVersion,
-  eslintPluginStencilVersion,
+  eslintPluginStencilCommunityVersion,
 } from './versions';
 import { offsetFromRoot } from '@nx/devkit';
 
@@ -8,7 +8,7 @@ export const extraEslintDependencies = {
   dependencies: {},
   devDependencies: {
     'eslint-plugin-import': eslintPluginImportVersion,
-    '@stencil/eslint-plugin': eslintPluginStencilVersion,
+    '@stencil-community/eslint-plugin': eslintPluginStencilCommunityVersion,
   },
 };
 
