@@ -11,7 +11,7 @@ import { AddOutputtargetSchematicSchema } from './schema';
 import { addAngularGenerator } from './add-angular/generator';
 import { addReactGenerator } from './add-react/generator';
 //import { addVueGenerator } from './add-vue/generator';
-import { addSvelteGenerator } from './add-svelte/generator';
+// import { addSvelteGenerator } from './add-svelte/generator';
 
 export async function outputtargetGenerator(
   host: Tree,
@@ -33,9 +33,9 @@ export async function outputtargetGenerator(
     //  tasks.push(await addVueGenerator(host, options));
     //}
 
-    if (options.outputType === 'svelte') {
-      tasks.push(await addSvelteGenerator(host, options));
-    }
+    // if (options.outputType === 'svelte') {
+    //   tasks.push(await addSvelteGenerator(host, options));
+    // }
 
     if (!options.skipFormat) {
       await formatFiles(host);
