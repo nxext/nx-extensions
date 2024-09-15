@@ -5,7 +5,7 @@
 We at Nxext believe the key to productivity is faster builds. [Nrwl NX](https://nx.dev) has done an amazing job with the enterprise-level monorepo. However, the crocks are still tied in [Angular](https://angular.io) and as a result [Webpack](https://webpack.js.org/). So we've turned to [Vite](https://vitejs.dev/) a build system that's bother quicker and smaller bundles.
 
 ::: danger
-The @nxext/vite package will be deprecated soon in favor of the new œnrwl/vite package
+The @nxext/vite package will be deprecated soon in favor of the new @nx/vite package
 :::
 
 ## Adding Vite builds
