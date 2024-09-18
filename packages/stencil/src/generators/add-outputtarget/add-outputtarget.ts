@@ -10,10 +10,8 @@ import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
 import { addAngularGenerator } from './add-angular/generator';
 import { addReactGenerator } from './add-react/generator';
-//import { addVueGenerator } from './add-vue/generator';
-// import { addSvelteGenerator } from './add-svelte/generator';
 
-export async function outputtargetGenerator(
+export async function outputTargetGenerator(
   host: Tree,
   options: AddOutputtargetSchematicSchema
 ) {
@@ -28,14 +26,6 @@ export async function outputtargetGenerator(
     if (options.outputType === 'react') {
       tasks.push(await addReactGenerator(host, options));
     }
-
-    //if (options.outputType === 'vue') {
-    //  tasks.push(await addVueGenerator(host, options));
-    //}
-
-    // if (options.outputType === 'svelte') {
-    //   tasks.push(await addSvelteGenerator(host, options));
-    // }
 
     if (!options.skipFormat) {
       await formatFiles(host);

@@ -13,17 +13,10 @@ export const STENCIL_OUTPUTTARGET_VERSION: {
 } = {
   react: '^0.5.3',
   angular: '^0.8.3',
-  // vue: '^0.8.6',
-  // svelte: '^0.0.3',
 };
 
 export const STENCIL_STYLE_PLUGIN_VERSION: {
   [style: string]: string;
 } = {
-  // less: '1.0.0',
   scss: '3.0.7',
-  // pcss: '2.1.0',
-  // styl: '1.0.1',
 };
-
-// export const nxextSvelteVersion = '^16.4.0';

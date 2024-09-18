@@ -1,6 +1,4 @@
 import {
-  autoprefixerTypesVersion,
-  autoprefixerVersion,
   puppeteer,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
@@ -68,30 +66,10 @@ export const STYLE_PLUGIN_DEPENDENCIES: {
     dependencies: {},
     devDependencies: {},
   },
-  // [SupportedStyles.less]: {
-  //   dependencies: {},
-  //   devDependencies: {
-  //     '@stencil/less': STENCIL_STYLE_PLUGIN_VERSION[SupportedStyles.less],
-  //   },
-  // },
   [SupportedStyles.scss]: {
     dependencies: {},
     devDependencies: {
       '@stencil/sass': STENCIL_STYLE_PLUGIN_VERSION[SupportedStyles.scss],
     },
   },
-  // [SupportedStyles.styl]: {
-  //   dependencies: {},
-  //   devDependencies: {
-  //     '@stencil/stylus': STENCIL_STYLE_PLUGIN_VERSION[SupportedStyles.styl],
-  //   },
-  // },
-  // [SupportedStyles.pcss]: {
-  //   dependencies: {},
-  //   devDependencies: {
-  //     '@stencil/postcss': STENCIL_STYLE_PLUGIN_VERSION[SupportedStyles.pcss],
-  //     autoprefixer: autoprefixerVersion,
-  //     '@types/autoprefixer': autoprefixerTypesVersion,
-  //   },
-  // },
 };
