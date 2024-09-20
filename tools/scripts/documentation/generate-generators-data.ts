@@ -4,7 +4,7 @@
 import { removeSync, readJsonSync } from 'fs-extra';
 import * as chalk from 'chalk';
 import * as path from 'path';
-import { dedent } from 'tslint/lib/utils';
+import dedent from 'dedent';
 import { FileSystemSchematicJsonDescription } from '@angular-devkit/schematics/tools';
 import {
   htmlSelectorFormat,

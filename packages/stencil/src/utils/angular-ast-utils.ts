@@ -133,7 +133,7 @@ function _addSymbolToNgModuleMetadata(
   expression: string
 ): ts.SourceFile {
   const nodes = getDecoratorMetadata(source, 'NgModule', '@angular/core');
-  let node: any = nodes[0]; // tslint:disable-line:no-any
+  let node: any = nodes[0];
 
   // Find the decorator declaration.
   if (!node) {

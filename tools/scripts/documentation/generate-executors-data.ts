@@ -5,7 +5,7 @@ import { readFileSync } from 'fs';
 import { readJsonSync } from 'fs-extra';
 import { join, relative } from 'path';
 import { parseJsonSchemaToOptions } from './json-parser';
-import { dedent } from 'tslint/lib/utils';
+import dedent from 'dedent';
 import { FileSystemSchematicJsonDescription } from '@angular-devkit/schematics/tools';
 import {
   htmlSelectorFormat,
