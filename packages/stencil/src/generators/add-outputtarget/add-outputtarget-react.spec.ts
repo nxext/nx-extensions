@@ -1,7 +1,7 @@
 import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nx/plugin/testing';
 import { Tree } from '@nx/devkit';
-import { outputTargetGenerator } from './add-outputtarget';
+import { outputtargetGenerator } from './add-outputtarget';
 import { AddOutputtargetSchematicSchema } from './schema';
 
 xdescribe('add-outputtarget react', () => {
@@ -25,7 +25,7 @@ xdescribe('add-outputtarget react', () => {
     };
 
     it('should not generate default react library', async () => {
-      await outputTargetGenerator(tree, reactOptions);
+      await outputtargetGenerator(tree, reactOptions);
 
       expect(
         tree.exists(
@@ -52,7 +52,7 @@ xdescribe('add-outputtarget react', () => {
     });
 
     it('should add reactOutputTarget', async () => {
-      await outputTargetGenerator(tree, reactOptions);
+      await outputtargetGenerator(tree, reactOptions);
 
       expect(
         tree
@@ -70,7 +70,7 @@ xdescribe('add-outputtarget react', () => {
     });
 
     it('should be able to generate a publishable lib', async () => {
-      await outputTargetGenerator(tree, {
+      await outputtargetGenerator(tree, {
         ...reactOptions,
         publishable: true,
         importPath: '@proj/mylib',

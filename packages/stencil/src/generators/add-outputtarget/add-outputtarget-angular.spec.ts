@@ -1,7 +1,7 @@
 import { createTestUILib } from '../../utils/testing';
 import { uniq } from '@nx/plugin/testing';
 import { names, Tree } from '@nx/devkit';
-import { outputTargetGenerator } from './add-outputtarget';
+import { outputtargetGenerator } from './add-outputtarget';
 import { AddOutputtargetSchematicSchema } from './schema';
 
 xdescribe('add-outputtarget angular', () => {
@@ -25,7 +25,7 @@ xdescribe('add-outputtarget angular', () => {
     };
 
     it('should generate default angular library', async () => {
-      await outputTargetGenerator(tree, angularOptions);
+      await outputtargetGenerator(tree, angularOptions);
 
       const fileName = names(projectName + '-angular').fileName;
       expect(
@@ -34,7 +34,7 @@ xdescribe('add-outputtarget angular', () => {
     });
 
     it('should add default directive definitions', async () => {
-      await outputTargetGenerator(tree, angularOptions);
+      await outputtargetGenerator(tree, angularOptions);
 
       const fileName = names(projectName + '-angular').fileName;
       expect(
@@ -55,7 +55,7 @@ xdescribe('add-outputtarget angular', () => {
     });
 
     it('should add angularOutputTarget', async () => {
-      await outputTargetGenerator(tree, angularOptions);
+      await outputtargetGenerator(tree, angularOptions);
 
       expect(
         tree
@@ -81,7 +81,7 @@ xdescribe('add-outputtarget angular', () => {
     });
 
     it('should be able to generate a publishable lib', async () => {
-      await outputTargetGenerator(tree, {
+      await outputtargetGenerator(tree, {
         ...angularOptions,
         publishable: true,
         importPath: '@proj/mylib',

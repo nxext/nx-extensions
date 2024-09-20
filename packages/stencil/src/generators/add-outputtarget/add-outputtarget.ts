@@ -11,7 +11,7 @@ import { AddOutputtargetSchematicSchema } from './schema';
 import { addAngularGenerator } from './add-angular/generator';
 import { addReactGenerator } from './add-react/generator';
 
-export async function outputTargetGenerator(
+export async function outputtargetGenerator(
   host: Tree,
   options: AddOutputtargetSchematicSchema
 ) {
