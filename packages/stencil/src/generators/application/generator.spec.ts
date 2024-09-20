@@ -11,6 +11,8 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { Linter } from '@nx/eslint';
+import { getEsLintPluginBaseName } from '../../utils/lint';
+import { eslintImportPlugin, stencilEslintPlugin } from '../../utils/versions';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
@@ -61,9 +63,9 @@ describe('schematic:application', () => {
 
     const eslintJson = readJson(host, 'apps/test/.eslintrc.json');
     expect(eslintJson.extends).toEqual([
-      'plugin:@stencil/recommended',
-      'plugin:import/recommended',
-      'plugin:import/typescript',
+      `plugin:${getEsLintPluginBaseName(stencilEslintPlugin)}/recommended`,
+      `plugin:${getEsLintPluginBaseName(eslintImportPlugin)}/recommended`,
+      `plugin:${getEsLintPluginBaseName(eslintImportPlugin)}/typescript`,
       '../../.eslintrc.json',
     ]);
   });
