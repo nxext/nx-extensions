@@ -5,11 +5,14 @@ import { ConfigurationGeneratorSchema } from './schema';
 import { applicationGenerator } from '@nx/angular/generators';
 
 describe('configuration schematic', () => {
-
   let host: Tree;
   const appName = 'my-app';
   const projectRoot = `apps/${appName}`;
-  const options: ConfigurationGeneratorSchema = { project: appName, capacitor: true, skipFormat: true };
+  const options: ConfigurationGeneratorSchema = {
+    project: appName,
+    capacitor: true,
+    skipFormat: true,
+  };
 
   beforeEach(async () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
