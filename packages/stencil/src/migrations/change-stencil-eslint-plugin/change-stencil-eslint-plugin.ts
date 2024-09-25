@@ -77,28 +77,28 @@ async function updateEslintConfigFiles(
       );
       const eslintConfigContent = host.read(eslintConfigFileRootPath, 'utf-8');
       if (eslintConfigContent) {
-        host.write(
-          eslintConfigFileRootPath,
-          eslintConfigContent
-            .replace(
-              new RegExp(
-                `plugin:${getEsLintPluginBaseName(
-                  deprecatedStencilEslintPlugin
-                )}/`,
-                'g'
-              ),
-              `plugin:${getEsLintPluginBaseName(stencilEslintPlugin)}/`
-            )
-            .replace(
-              new RegExp(deprecatedStencilEslintPlugin, 'g'),
-              stencilEslintPlugin
-            )
-        );
-      }
-      if (project.lint) {
-        generatorCallbacks.push(() => {
-          runNxSync(`run ${project.name}:lint`, { stdio: 'inherit' });
-        });
+        const eslintConfigContentChanged = eslintConfigContent
+          .replace(
+            new RegExp(
+              `plugin:${getEsLintPluginBaseName(
+                deprecatedStencilEslintPlugin
+              )}/`,
+              'g'
+            ),
+            `plugin:${getEsLintPluginBaseName(stencilEslintPlugin)}/`
+          )
+          .replace(
+            new RegExp(deprecatedStencilEslintPlugin, 'g'),
+            stencilEslintPlugin
+          );
+        if (eslintConfigContentChanged !== eslintConfigContent) {
+          host.write(eslintConfigFileRootPath, eslintConfigContentChanged);
+          if (project.lint) {
+            generatorCallbacks.push(() => {
+              runNxSync(`run ${project.name}:lint`, { stdio: 'inherit' });
+            });
+          }
+        }
       }
     }
   }
