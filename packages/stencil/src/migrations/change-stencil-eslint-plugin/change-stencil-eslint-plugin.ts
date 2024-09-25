@@ -79,15 +79,20 @@ async function updateEslintConfigFiles(
       if (eslintConfigContent) {
         host.write(
           eslintConfigFileRootPath,
-          eslintConfigContent.replace(
-            new RegExp(
-              `plugin:${getEsLintPluginBaseName(
-                deprecatedStencilEslintPlugin
-              )}/`,
-              'g'
-            ),
-            `plugin:${getEsLintPluginBaseName(stencilEslintPlugin)}/`
-          )
+          eslintConfigContent
+            .replace(
+              new RegExp(
+                `plugin:${getEsLintPluginBaseName(
+                  deprecatedStencilEslintPlugin
+                )}/`,
+                'g'
+              ),
+              `plugin:${getEsLintPluginBaseName(stencilEslintPlugin)}/`
+            )
+            .replace(
+              new RegExp(deprecatedStencilEslintPlugin, 'g'),
+              stencilEslintPlugin
+            )
         );
       }
       if (project.lint) {
