@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "http://json-schema.org/schema",
+  "title": "Command executor",
+  "description": "Run a Capacitor command.",
+  "type": "object",
+  "properties": {
+    "cmd": {
+      "description": "The Capacitor command.",
+      "type": "string"
+    },
+    "preserveProjectNodeModules": {
+      "description": "Preserve the node_modules folder inside the project dir.",
+      "type": "boolean"
+    }
+  },
+  "required": []
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "executors": {
+    "cap": {
+      "implementation": "./src/executors/cap/executor",
+      "schema": "./src/executors/cap/schema.json",
+      "description": "Run a Capacitor command"
+    }
+  },
+  "builders": {
+    "cap": {
+      "implementation": "./src/executors/cap/compat",
+      "schema": "./src/executors/cap/schema.json",
+      "description": "Run a Capacitor command"
+    }
+  }
+}

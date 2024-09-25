@@ -1,0 +1,54 @@
+import { Component, inject } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import { RefresherCustomEvent, IonicModule } from '@ionic/angular';
+import { DataService, Message } from '../services/data.service';
+import {MessageComponent} from '../message/message.component';
+
+@Component({
+  selector: '<%= prefix %>-home',
+  standalone: true,
+  imports: [CommonModule, IonicModule, MessageComponent],
+  template: `
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-title>
+          Inbox
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content [fullscreen]="true">
+      <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">
+            Inbox
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-list>
+        <<%= prefix %>-message *ngFor="let message of getMessages()" [message]="message"></<%= prefix %>-message>
+      </ion-list>
+    </ion-content>
+  `,
+  styles: `
+  `
+})
+export class HomePage {
+  private data = inject(DataService);
+  constructor() {}
+
+  refresh(ev: any) {
+    setTimeout(() => {
+      (ev as RefresherCustomEvent).detail.complete();
+    }, 3000);
+  }
+
+  getMessages(): Message[] {
+    return this.data.getMessages();
+  }
+}

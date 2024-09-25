@@ -1,0 +1,33 @@
+{
+  "name": "@nxext/ionic-angular",
+  "version": "19.0.0",
+  "description": "An Nx plugin for developing Ionic React applications and libraries",
+  "homepage": "https://nxext.github.io/nx-extensions/docs/ionic-angular/overview.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nxext/nx-extensions",
+    "directory": "packages/ionic-angular"
+  },
+  "bugs": {
+    "url": "https://github.com/nxext/nx-extensions/issues"
+  },
+  "license": "MIT",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  },
+  "schematics": "./generators.json",
+  "builders": "./executors.json",
+  "dependencies": {
+    "@nxext/capacitor": "^19.0.0",
+    "@nx/devkit": "^19.0.0",
+    "@nx/eslint": "^19.0.0",
+    "@nx/angular": "^19.0.0",
+    "@nx/js": "^19.0.0",
+    "@phenomnomnominal/tsquery": "~5.0.1",
+    "typescript": "5.4.5",
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {}
+}

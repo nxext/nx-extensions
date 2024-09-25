@@ -1,0 +1,62 @@
+{
+  "name": "capacitor",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/capacitor/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/capacitor",
+        "main": "packages/capacitor/src/index.ts",
+        "packageJson": "packages/capacitor/package.json",
+        "tsConfig": "packages/capacitor/tsconfig.lib.json",
+        "assets": [
+          "packages/capacitor/*.md",
+          {
+            "input": "./packages/capacitor/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/capacitor/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/capacitor",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/capacitor",
+            "glob": "executors.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/capacitor",
+            "glob": "migrations.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/capacitor"],
+      "options": {
+        "jestConfig": "packages/capacitor/jest.config.ts"
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs capacitor {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}

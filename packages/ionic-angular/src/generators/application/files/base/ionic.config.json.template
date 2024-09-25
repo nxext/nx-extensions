@@ -1,0 +1,7 @@
+{
+  "name": "<%= name %>",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

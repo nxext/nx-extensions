@@ -1,0 +1,26 @@
+{
+  "generators": {},
+  "packageJsonUpdates": {
+    "18.0.4": {
+      "version": "18.0.4",
+      "packages": {
+        "@capacitor/core": {
+          "version": "^5.7.0",
+          "alwaysAddToPackageJson": true
+        },
+        "@capacitor/cli": {
+          "version": "^5.7.0",
+          "alwaysAddToPackageJson": true
+        },
+        "@capacitor/ios": {
+          "version": "^5.7.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@capacitor/android": {
+          "version": "^5.7.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
+}
