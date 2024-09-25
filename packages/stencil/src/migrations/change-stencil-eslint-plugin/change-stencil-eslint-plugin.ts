@@ -61,7 +61,7 @@ async function updateEslintConfigFiles(
     name: string;
     root: string;
     lint: boolean;
-  }[] = [{ name: 'root', root: void 0, lint: false } /* root config */].concat(
+  }[] = [{ name: 'root', root: '', lint: false } /* root config */].concat(
     Array.from(projects).map((value) => ({
       name: value[1].name,
       root: value[1].root,
