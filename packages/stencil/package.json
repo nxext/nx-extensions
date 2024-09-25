@@ -38,7 +38,10 @@
     "@nx/jest": "19.4.4",
     "@nx/storybook": "19.4.4",
     "@phenomnomnominal/tsquery": "~5.0.1",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "fs-extra": "^10.1.0",
+    "@nx/angular": "19.4.4",
+    "@nx/react": "19.4.4"
   },
   "peerDependencies": {
     "@nxext/svelte": "^19.0.0"
