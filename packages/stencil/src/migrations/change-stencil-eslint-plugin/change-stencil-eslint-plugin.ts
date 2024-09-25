@@ -6,6 +6,8 @@ import {
   removeDependenciesFromPackageJson,
   runTasksInSerial,
   Tree,
+  logger,
+  readJson,
 } from '@nx/devkit';
 import {
   extraEslintDependencies,
@@ -17,8 +19,18 @@ import {
   stencilEslintPlugin,
 } from '../../utils/versions';
 import { runNxSync } from 'nx/src/utils/child-process';
+import { PackageJson } from 'nx/src/utils/package-json';
 
 export default async function update(host: Tree) {
+  if (!isDepInstalled(host, deprecatedStencilEslintPlugin)) {
+    logger.info(
+      `[@nxext/stencil - migration - change-stencil-eslint-plugin] ${deprecatedStencilEslintPlugin} is not installed. Nothing to be done.`
+    );
+    logger.info(
+      `[@nxext/stencil - migration - change-stencil-eslint-plugin] ${stencilEslintPlugin} will be installed the first time the Stencil app is generated.`
+    );
+    return;
+  }
   const updatePackageJsonTask = updatePackageJson(host);
   const updateEslintConfigFilesCallbacks = await updateEslintConfigFiles(host);
   return runTasksInSerial(
@@ -86,4 +98,24 @@ async function updateEslintConfigFiles(
     }
   }
   return generatorCallbacks;
+}
+
+function isDepInstalled(
+  host: Tree,
+  depName: string
+): null | 'dep' | 'devDep' | 'peerDep' | 'optDep' {
+  const json = readJson<PackageJson>(host, './package.json');
+  if (json.dependencies?.[depName]) {
+    return 'dep';
+  }
+  if (json.devDependencies?.[depName]) {
+    return 'devDep';
+  }
+  if (json.peerDependencies?.[depName]) {
+    return 'peerDep';
+  }
+  if (json.optionalDependencies?.[depName]) {
+    return 'optDep';
+  }
+  return null;
 }
