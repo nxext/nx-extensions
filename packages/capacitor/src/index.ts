@@ -1,2 +1,2 @@
-export { capacitorProjectGenerator } from './generators/capacitor-project/generator';
-export { CapacitorGeneratorSchema } from './generators/capacitor-project/schema';
+export { capacitorConfigurationGenerator } from './generators/configuration/generator';
+export { CapacitorConfigurationSchema } from './generators/configuration/schema';

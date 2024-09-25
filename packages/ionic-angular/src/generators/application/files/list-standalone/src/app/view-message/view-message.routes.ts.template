@@ -1,8 +1,0 @@
-import {Routes} from '@angular/router';
-
-export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./view-message.page').then(p => p.ViewMessagePage)
-  }
-];

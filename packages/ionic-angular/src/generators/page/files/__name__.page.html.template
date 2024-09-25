@@ -1,9 +1,0 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title><%= className %></ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>

@@ -3,16 +3,10 @@
   "name": "Nxext Ionic Angular",
   "version": "0.0.1",
   "generators": {
-    "application": {
-      "factory": "./src/generators/application/generator",
-      "schema": "./src/generators/application/schema.json",
-      "aliases": ["app"],
-      "description": "Create an Ionic Angular application."
-    },
-    "page": {
-      "factory": "./src/generators/page/generator",
-      "schema": "./src/generators/page/schema.json",
-      "description": "Generate an Ionic page component"
+    "configuration": {
+      "factory": "./src/generators/configuration/generator",
+      "schema": "./src/generators/configuration/schema.json",
+      "description": "Configure Ionic for an Angular application."
     }
   }
 }

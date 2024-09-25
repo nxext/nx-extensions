@@ -1,2 +1,2 @@
-export { applicationGenerator } from './generators/application/generator';
-export { ApplicationGeneratorSchema } from './generators/application/schema';
+export { configurationGenerator } from './generators/configuration/generator';
+export { ConfigurationGeneratorSchema } from './generators/configuration/schema';
