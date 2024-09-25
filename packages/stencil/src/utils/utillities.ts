@@ -11,7 +11,7 @@ export function calculateStyle(
     return styleDefault;
   }
 
-  return /^(css|scss|less|styl|pcss)$/.test(style) ? style : styleDefault;
+  return /^(css|scss)$/.test(style) ? style : styleDefault;
 }
 
 export function isBuildableStencilProject(project: any): boolean {

@@ -115,7 +115,6 @@
     "ts-jest": "29.1.2",
     "ts-node": "10.9.2",
     "tslib": "^2.3.0",
-    "tslint": "6.1.3",
     "typescript": "5.4.5",
     "verdaccio": "5.18.0",
     "verdaccio-auth-memory": "^10.2.2",
