@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "IonicAngularConfiguration",
+  "title": "Configure Ionic for an Angular Application",
+  "type": "object",
+  "properties": {
+    "project": {
+      "description": "The name of the project.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Which project would you like to configure?"
+    },
+    "capacitor": {
+      "type": "boolean",
+      "description": "Generate a Capacitor project.",
+      "default": true
+    },
+    "skipFormat": {
+      "description": "Skip formatting files.",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["project"]
+}

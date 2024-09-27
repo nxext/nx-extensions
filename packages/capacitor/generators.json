@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "nxextCapacitor",
+  "version": "0.0.1",
+  "generators": {
+    "configuration": {
+      "factory": "./src/generators/configuration/generator",
+      "schema": "./src/generators/configuration/schema.json",
+      "description": "Configure Capacitor for an Nx project"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "ionic-angular",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/ionic-angular/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/ionic-angular",
+        "main": "packages/ionic-angular/src/index.ts",
+        "packageJson": "packages/ionic-angular/package.json",
+        "tsConfig": "packages/ionic-angular/tsconfig.lib.json",
+        "assets": [
+          "packages/ionic-angular/*.md",
+          {
+            "input": "./packages/ionic-angular/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/ionic-angular/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/ionic-angular",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/ionic-angular",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/ionic-angular"],
+      "options": {
+        "jestConfig": "packages/ionic-angular/jest.config.ts"
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs ionic-angular {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": []
+}
