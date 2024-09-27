@@ -12,10 +12,12 @@ export function updateWorkspace(
 ) {
   const projectConfig = readProjectConfiguration(host, options.project);
   const projectRoot = projectConfig.root;
+
   projectConfig.targets.build.options.assets = [
     ...projectConfig.targets.build.options.assets.filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (asset: any) => !asset.toString().includes('src/favicon.ico')
+      (asset: string | Record<string, string>) =>
+        asset.toString().includes('src/favicon.ico') ||
+        asset.toString().includes(`public/favicon.ico`)
     ),
     {
       glob: '**/*.svg',
@@ -26,45 +28,18 @@ export function updateWorkspace(
 
   projectConfig.targets.build.options.styles = [
     ...projectConfig.targets.build.options.styles,
-    {
-      input: normalizePath(`${projectRoot}/src/theme/variables.scss`),
-    },
-    {
-      input: normalizePath('node_modules/@ionic/angular/css/core.css'),
-    },
-    {
-      input: normalizePath('node_modules/@ionic/angular/css/normalize.css'),
-    },
-    {
-      input: normalizePath('node_modules/@ionic/angular/css/structure.css'),
-    },
-    {
-      input: normalizePath('node_modules/@ionic/angular/css/typography.css'),
-    },
-    {
-      input: normalizePath('node_modules/@ionic/angular/css/display.css'),
-    },
-    {
-      input: normalizePath('node_modules/@ionic/angular/css/padding.css'),
-    },
-    {
-      input: normalizePath(
-        'node_modules/@ionic/angular/css/float-elements.css'
-      ),
-    },
-    {
-      input: normalizePath(
-        'node_modules/@ionic/angular/css/text-alignment.css'
-      ),
-    },
-    {
-      input: normalizePath(
-        'node_modules/@ionic/angular/css/text-transformation.css'
-      ),
-    },
-    {
-      input: normalizePath('node_modules/@ionic/angular/css/flex-utils.css'),
-    },
+    normalizePath(`${projectRoot}/src/theme/variables.scss`),
+    normalizePath('node_modules/@ionic/angular/css/core.css'),
+    normalizePath('node_modules/@ionic/angular/css/normalize.css'),
+    normalizePath('node_modules/@ionic/angular/css/structure.css'),
+    normalizePath('node_modules/@ionic/angular/css/typography.css'),
+    normalizePath('node_modules/@ionic/angular/css/display.css'),
+    normalizePath('node_modules/@ionic/angular/css/padding.css'),
+    normalizePath('node_modules/@ionic/angular/css/float-elements.css'),
+    normalizePath('node_modules/@ionic/angular/css/text-alignment.css'),
+    normalizePath('node_modules/@ionic/angular/css/text-transformation.css'),
+    normalizePath('node_modules/@ionic/angular/css/flex-utils.css'),
+    normalizePath('node_modules/@ionic/angular/css/palettes/dark.system.css'),
   ];
 
   updateProjectConfiguration(host, options.project, projectConfig);

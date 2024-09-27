@@ -8,15 +8,20 @@ import { addCapacitor } from './lib/add-capacitor';
 import { addDependencies } from './lib/add-dependencies';
 import { updateWorkspace } from './lib/update-workspace';
 import { ConfigurationGeneratorSchema } from './schema';
+import { addFiles, removeFiles } from './lib/files';
+import { normalizeOptions } from './lib/normalize-options';
 
 export async function configurationGenerator(
   host: Tree,
   schema: ConfigurationGeneratorSchema
 ) {
+  const options = normalizeOptions(host, schema);
   const installTask = addDependencies(host);
-  updateWorkspace(host, schema);
+  addFiles(host, options);
+  removeFiles(host, options);
+  updateWorkspace(host, options);
 
-  const capacitorTask = await addCapacitor(host, schema);
+  const capacitorTask = await addCapacitor(host, options);
 
   if (!schema.skipFormat) {
     await formatFiles(host);
