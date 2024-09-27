@@ -4,8 +4,8 @@ import { NormalizedSchema } from '../schema';
 
 export async function addCapacitor(host: Tree, options: NormalizedSchema) {
   return await capacitorConfigurationGenerator(host, {
-    project: options.appProjectName,
-    appName: options.appName,
+    project: options.project,
+    appName: options.project,
     appId: 'io.ionic.starter',
     skipFormat: options.skipFormat,
   });
