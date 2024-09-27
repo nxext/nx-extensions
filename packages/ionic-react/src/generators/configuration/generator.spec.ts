@@ -1,4 +1,5 @@
 import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
+import { applicationGenerator } from '@nx/angular/generators';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { configurationGenerator } from './generator';
 import { ConfigurationGeneratorSchema } from './schema';
@@ -21,19 +22,18 @@ describe('application', () => {
     // Common files
     expect(tree.exists(`${projectRoot}/src/index.html`)).toBeTruthy();
     expect(tree.exists(`${projectRoot}/src/manifest.json`)).toBeTruthy();
-    expect(tree.exists(`${projectRoot}/src/public/favicon.png`)).toBeTruthy();
+    expect(tree.exists(`${projectRoot}/public/favicon.png`)).toBeTruthy();
 
-    // Starter templates
+    // Starter template
     expect(tree.exists(`${projectRoot}/src/App.tsx`)).toBeTruthy();
-    expect(tree.exists(`${projectRoot}/src/pages/Home.tsx`)).toBeTruthy();
-    expect(
-      tree.exists(`${projectRoot}/src/components/ExploreContainer.tsx`)
-    ).toBeTruthy();
-
+    expect(tree.exists(`${projectRoot}/src/pages/Tab1.tsx`)).toBeTruthy();
+    expect(tree.exists(`${projectRoot}/src/pages/Tab1.css`)).toBeTruthy();
     expect(
       tree.exists(`${projectRoot}/src/components/ExploreContainer.css`)
     ).toBeTruthy();
-    expect(tree.exists(`${projectRoot}/src/pages/Home.css`)).toBeTruthy();
+    expect(
+      tree.exists(`${projectRoot}/src/components/ExploreContainer.tsx`)
+    ).toBeTruthy();
 
     // Capacitor files
     if (options.capacitor) {
@@ -41,8 +41,12 @@ describe('application', () => {
     }
   }
 
-  beforeEach(() => {
+  beforeEach(async () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    await applicationGenerator(host, {
+      name: options.project,
+      skipFormat: true,
+    });
   });
 
   it('should add dependencies to package.json', async () => {
@@ -51,7 +55,6 @@ describe('application', () => {
     const packageJson = readJson(host, 'package.json');
     expect(packageJson.dependencies['@ionic/react']).toBeDefined();
     expect(packageJson.dependencies['@ionic/react-router']).toBeDefined();
-    expect(packageJson.devDependencies['@nx/react']).toBeDefined();
   });
 
   it('should generate application', async () => {

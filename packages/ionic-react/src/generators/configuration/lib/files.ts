@@ -24,6 +24,7 @@ export function addFiles(host: Tree, options: NormalizedSchema) {
 }
 
 export function deleteFiles(host: Tree, options: NormalizedSchema) {
+  host.delete(options.projectRoot + '/public/favicon.ico');
   host.delete(options.projectRoot + '/src/favicon.ico');
   host.delete(options.projectRoot + `/src/app`);
   host.delete(options.projectRoot + `/src/styles.css`);
