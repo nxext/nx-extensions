@@ -46,11 +46,7 @@ describe('configuration schematic', () => {
     expect(assets).not.toContain(`${projectRoot}/src/favicon.ico`);
 
     expect(styles).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          input: `${projectRoot}/src/theme/variables.scss`,
-        }),
-      ])
+      expect.arrayContaining([`${projectRoot}/src/theme/variables.scss`])
     );
   });
 
