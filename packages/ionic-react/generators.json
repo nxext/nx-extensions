@@ -3,19 +3,10 @@
   "name": "IonicReact",
   "version": "0.0.1",
   "generators": {
-    "application": {
-      "factory": "./src/generators/application/generator",
-      "schema": "./src/generators/application/schema.json",
-      "aliases": ["app"],
-      "description": "Create an Ionic React application."
-    }
-  },
-  "schematics": {
-    "application": {
-      "factory": "./src/generators/application/generator",
-      "schema": "./src/generators/application/schema.json",
-      "aliases": ["app"],
-      "description": "Create an Ionic React application."
+    "configuration": {
+      "factory": "./src/generators/configuration/generator",
+      "schema": "./src/generators/configuration/schema.json",
+      "description": "Configure Ionic for a React application."
     }
   }
 }
