@@ -20,9 +20,7 @@ export function addFiles(host: Tree, options: NormalizedOptions) {
 }
 
 export function removeFiles(host: Tree, options: NormalizedOptions) {
-  if (host.exists(`${options.projectRoot}/public/favicon.ico`)) {
-    host.delete(`${options.projectRoot}/public/favicon.ico`);
-  } else if (host.exists(`${options.projectRoot}/src/favicon.ico`)) {
-    host.delete(`${options.projectRoot}/src/favicon.ico`);
-  }
+  host.delete(`${options.projectRoot}/public/favicon.ico`);
+  host.delete(`${options.projectRoot}/src/favicon.ico`);
+  host.delete(`${options.projectRoot}/src/app`);
 }

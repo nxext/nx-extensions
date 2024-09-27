@@ -15,10 +15,10 @@ export async function configurationGenerator(
   host: Tree,
   schema: ConfigurationGeneratorSchema
 ) {
-  const options = normalizeOptions(host, schema);
+  const options = await normalizeOptions(host, schema);
   const installTask = addDependencies(host);
-  addFiles(host, options);
   removeFiles(host, options);
+  addFiles(host, options);
   updateWorkspace(host, options);
 
   const capacitorTask = await addCapacitor(host, options);
