@@ -74,7 +74,7 @@ Default: `css`
 
 Type: `string`
 
-Possible values: `css`, `scss`, `styl`, `less`, `pcss`
+Possible values: `css`, `scss`
 
 The file extension to be used for style files.
 
@@ -198,7 +198,7 @@ Default: `css`
 
 Type: `string`
 
-Possible values: `css`, `scss`, `styl`, `less`, `pcss`
+Possible values: `css`, `scss`
 
 The file extension to be used for style files.
 
@@ -388,7 +388,7 @@ Default: `css`
 
 Type: `string`
 
-Possible values: `css`, `scss`, `styl`, `less`, `pcss`
+Possible values: `css`, `scss`
 
 The file extension to be used for style files.
 

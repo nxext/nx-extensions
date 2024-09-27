@@ -1,5 +1,11 @@
 {
-  "generators": {},
+  "generators": {
+    "change-stencil-eslint-plugin": {
+      "version": "19.1.0",
+      "description": "Changes @stencil/eslint-plugin to @stencil-community/eslint-plugin",
+      "implementation": "./src/migrations/change-stencil-eslint-plugin/change-stencil-eslint-plugin"
+    }
+  },
   "packageJsonUpdates": {
     "1.1.0": {
       "version": "1.1.0",

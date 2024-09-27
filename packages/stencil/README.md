@@ -50,9 +50,6 @@ each generator is able to generate your template with different style variants. 
 ```
 --style=css (default)
 --style=scss
---style=less
---style=styl
---style=pcss
 ```
 
 You can generate components with:
