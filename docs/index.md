@@ -16,22 +16,18 @@ hero:
       link: https://github.com/nxext/nx-extensions
 
 features:
-  - title: StencilJs
-    details: Stencil is a toolchain for building reusable, scalable Design Systems. Generate small, blazing fast, and 100% standards based Web Components that run in every browser.
-  - title: Nx devtools
-    details: Nx is a set of extensible dev tools for monorepos, which helps you develop like Google, Facebook, and Microsoft.
+  - title: Stencil
+    details: Stencil is a library for building reusable, scalable component libraries. Generate small, blazing fast Web Components that run everywhere.
   - title: Svelte
     details: Svelte is a radical new approach to building user interfaces. Whereas traditional frameworks like React and Vue do the bulk of their work in the browser, Svelte shifts that work into a compile step that happens when you build your app.
+  - title: SvelteKit
+    details: SvelteKit is built on Svelte, a UI framework that uses a compiler to let you write breathtakingly concise components that do minimal work in the browser, using languages you already know — HTML, CSS and JavaScript.
   - title: SolidJS
     details: Simple and performant reactivity for building user interfaces.
-  - title: Vite
-    details: Next Generation Frontend Tooling
-  - title: React
-    details: A JavaScript library for building user interfaces.
-  - title: Vue
-    details: An approachable, performant and versatile framework for building web user interfaces.
-  - title: Nuxt (Alpha)
-    details: The Intuitive Web Framework
+  - title: Preact
+    details: Fast 3kB alternative to React with the same modern API.
   - title: Ionic
     details: A new way to build and ship for mobile.
+  - title: Capacitor
+    details: A cross-platform native runtime for web apps.
 ---

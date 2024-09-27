@@ -33,10 +33,6 @@ function nav() {
       text: 'Links',
       items: [
         {
-          text: 'Twitter',
-          link: 'https://twitter.com/nxext_dev',
-        },
-        {
           text: 'Nx Discord Chat',
           link: 'https://discord.gg/SWyp4xfGjn',
         },
@@ -72,6 +68,7 @@ function sideNavDocs() {
     {
       text: 'Nxext',
       collapsible: true,
+      collapsed: false,
       items: [
         {
           text: 'Overview',
@@ -87,221 +84,145 @@ function sideNavDocs() {
         },
       ],
     },
+
     {
-      text: 'Vite projects',
+      text: 'Capacitor',
       collapsible: true,
       collapsed: true,
       items: [
         {
-          text: 'Vue',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/vue/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/vue/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/vue/generators',
-            },
-          ],
+          text: 'Generators',
+          link: '/docs/capacitor/generators',
         },
         {
-          text: 'Svelte',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/svelte/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/svelte/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/svelte/generators',
-            },
-          ],
-        },
-        {
-          text: 'Preact',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/preact/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/preact/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/preact/generators',
-            },
-          ],
-        },
-        {
-          text: 'Solid',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/solid/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/solid/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/solid/generators',
-            },
-          ],
+          text: 'Executors',
+          link: '/docs/stencil/executors',
         },
       ],
     },
     {
-      text: 'Ionic projects',
+      text: 'Ionic Angular',
       collapsible: true,
       collapsed: true,
       items: [
         {
-          text: 'Stencil',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/stencil/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/stencil/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/stencil/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/stencil/executors',
-            },
-          ],
+          text: 'Generators',
+          link: '/docs/ionic-angular/generators',
         },
       ],
     },
     {
-      text: 'Unstable/Alpha projects',
+      text: 'Ionic React',
       collapsible: true,
       collapsed: true,
       items: [
         {
-          text: 'Sveltekit',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/sveltekit/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/sveltekit/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/sveltekit/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/sveltekit/executors',
-            },
-          ],
-        },
-        {
-          text: 'Nuxt',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/nuxt/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/nuxt/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/nuxt/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/nuxt/executors',
-            },
-          ],
+          text: 'Generators',
+          link: '/docs/ionic-react/generators',
         },
       ],
     },
     {
-      text: 'Deprecated projects',
+      text: 'Preact',
       collapsible: true,
       collapsed: true,
       items: [
         {
-          text: 'Vite',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/vite/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/vite/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/vite/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/vite/executors',
-            },
-          ],
+          text: 'Overview',
+          link: '/docs/preact/overview',
         },
         {
-          text: 'Vitest',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/vitest/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/vitest/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/vitest/generators',
-            },
-            {
-              text: 'Executors',
-              link: '/docs/vitest/executors',
-            },
-          ],
+          text: 'Installation',
+          link: '/docs/preact/installation',
         },
         {
-          text: 'React',
-          items: [
-            {
-              text: 'Overview',
-              link: '/docs/react/overview',
-            },
-            {
-              text: 'Installation',
-              link: '/docs/react/installation',
-            },
-            {
-              text: 'Generators',
-              link: '/docs/react/generators',
-            },
-          ],
+          text: 'Generators',
+          link: '/docs/preact/generators',
+        },
+      ],
+    },
+    {
+      text: 'Solid',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          text: 'Overview',
+          link: '/docs/solid/overview',
+        },
+        {
+          text: 'Installation',
+          link: '/docs/solid/installation',
+        },
+        {
+          text: 'Generators',
+          link: '/docs/solid/generators',
+        },
+      ],
+    },
+    {
+      text: 'Stencil',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          text: 'Overview',
+          link: '/docs/stencil/overview',
+        },
+        {
+          text: 'Installation',
+          link: '/docs/stencil/installation',
+        },
+        {
+          text: 'Generators',
+          link: '/docs/stencil/generators',
+        },
+        {
+          text: 'Executors',
+          link: '/docs/stencil/executors',
+        },
+      ],
+    },
+    {
+      text: 'Svelte',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          text: 'Overview',
+          link: '/docs/svelte/overview',
+        },
+        {
+          text: 'Installation',
+          link: '/docs/svelte/installation',
+        },
+        {
+          text: 'Generators',
+          link: '/docs/svelte/generators',
+        },
+        ,
+      ],
+    },
+    {
+      text: 'SvelteKit',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        {
+          text: 'Overview',
+          link: '/docs/sveltekit/overview',
+        },
+        {
+          text: 'Installation',
+          link: '/docs/sveltekit/installation',
+        },
+        {
+          text: 'Generators',
+          link: '/docs/sveltekit/generators',
+        },
+        {
+          text: 'Executors',
+          link: '/docs/sveltekit/executors',
         },
       ],
     },
