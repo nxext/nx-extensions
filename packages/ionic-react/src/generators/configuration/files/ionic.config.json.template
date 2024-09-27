@@ -1,5 +1,5 @@
 {
-  "name": "<%= appName %>",
+  "name": "<%= name %>",
   "integrations": {
     "capacitor": {}
   },

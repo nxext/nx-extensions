@@ -8,6 +8,12 @@ import { NormalizedSchema } from '../schema';
 
 export function updateWorkspace(host: Tree, options: NormalizedSchema) {
   const project = readProjectConfiguration(host, options.project);
+  project.targets.build ??= {
+    options: {
+      assets: [],
+      styles: [],
+    },
+  };
   project.targets.build.options.assets = [
     ...project.targets.build.options.assets.filter(
       (asset: string | Record<string, string>) =>

@@ -22,10 +22,6 @@
   "dependencies": {
     "@nxext/capacitor": "^19.0.0",
     "@nx/devkit": "^19.0.0",
-    "@nx/eslint": "^19.0.0",
-    "@nx/react": "^19.0.0",
-    "typescript": "5.4.5",
-    "@phenomnomnominal/tsquery": "~5.0.1",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {}
