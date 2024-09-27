@@ -2,14 +2,14 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-- [StencilJS](https://stenciljs.com) plugin for NX
-- [SvelteJS](https://svelte.dev) plugin for NX
-- [SolidJS](https://www.solidjs.com) plugin for NX
-- [Angular](https://angular.io/) plugin for NX
-- [React](https://reactjs.org/) plugin for NX
-- [Preact](https://preactjs.com/) plugin for NX
-
-The Ionic and Capacitor packages are now located [here](https://github.com/nxext/nx-extensions-ionic)
+- [Capacitor](https://capacitorjs.com/) plugin for Nx
+- [Ionic & Angular](https://ionicframework.com/docs/angular/overview) plugin for Nx
+- [Ionic & React](https://ionicframework.com/docs/react) plugin for Nx
+- [Stencil](https://stenciljs.com) plugin for Nx
+- [Svelte](https://svelte.dev) plugin for Nx
+- [SvelteKit](https://kit.svelte.dev/) plugin for Nx
+- [SolidJS](https://www.solidjs.com) plugin for Nx
+- [Preact](https://preactjs.com/) plugin for Nx
 
 ## Attention
 
