@@ -385,6 +385,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/17010054?v=4",
       "profile": "http://localhost:4200/",
       "contributions": ["code"]
+    },
+    {
+      "login": "64BitAsura",
+      "name": "Sambath Kumar Logakrishnan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6957824?v=4",
+      "profile": "http://doyoubuzz.com/sambath-kumar",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
