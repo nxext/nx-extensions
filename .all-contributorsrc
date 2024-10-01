@@ -399,6 +399,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/29104510?v=4",
       "profile": "https://github.com/paulmojicatech",
       "contributions": ["code"]
+    },
+    {
+      "login": "mrtnvh",
+      "name": "Maarten Van Hoof",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2543633?v=4",
+      "profile": "https://github.com/mrtnvh",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,

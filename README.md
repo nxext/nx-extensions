@@ -106,6 +106,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://doyoubuzz.com/sambath-kumar"><img src="https://avatars.githubusercontent.com/u/6957824?v=4?s=100" width="100px;" alt="Sambath Kumar Logakrishnan"/><br /><sub><b>Sambath Kumar Logakrishnan</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=64BitAsura" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/paulmojicatech"><img src="https://avatars.githubusercontent.com/u/29104510?v=4?s=100" width="100px;" alt="paulmojicatech"/><br /><sub><b>paulmojicatech</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=paulmojicatech" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mrtnvh"><img src="https://avatars.githubusercontent.com/u/2543633?v=4?s=100" width="100px;" alt="Maarten Van Hoof"/><br /><sub><b>Maarten Van Hoof</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=mrtnvh" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
