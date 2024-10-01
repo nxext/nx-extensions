@@ -2,6 +2,15 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
+- [Capacitor](https://capacitorjs.com/) plugin for Nx
+- [Ionic & Angular](https://ionicframework.com/docs/angular/overview) plugin for Nx
+- [Ionic & React](https://ionicframework.com/docs/react) plugin for Nx
+- [Stencil](https://stenciljs.com) plugin for Nx
+- [Svelte](https://svelte.dev) plugin for Nx
+- [SvelteKit](https://kit.svelte.dev/) plugin for Nx
+- [SolidJS](https://www.solidjs.com) plugin for Nx
+- [Preact](https://preactjs.com/) plugin for Nx
+
 ## Attention
 
 If you use the e.g. 17.0 package of any package, be sure to use the Nx version 16.2. The Version numbers have to match. Nxext packages with 16.7 aren't compatible with Nx 16.8
