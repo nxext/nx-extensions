@@ -22,9 +22,6 @@ export default async () => {
     gitCommit: false,
     gitTag: false,
     firstRelease: true,
-    "generatorOptionsOverrides": {
-      "packageRoot": "dist/{projectRoot}"
-    }
   });
   await releasePublish({
     tag: 'e2e',
