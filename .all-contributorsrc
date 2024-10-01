@@ -378,6 +378,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/30649656?v=4",
       "profile": "https://github.com/santhoshdasari786",
       "contributions": ["code"]
+    },
+    {
+      "login": "relliv",
+      "name": "Eyüp",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17010054?v=4",
+      "profile": "http://localhost:4200/",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,

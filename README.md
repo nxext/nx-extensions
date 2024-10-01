@@ -102,6 +102,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/pawel-twardziak"><img src="https://avatars.githubusercontent.com/u/180847852?v=4?s=100" width="100px;" alt="pawel-twardziak"/><br /><sub><b>pawel-twardziak</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=pawel-twardziak" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://mastodon.online/@SantoshYadavDev"><img src="https://avatars.githubusercontent.com/u/11923975?v=4?s=100" width="100px;" alt="Santosh Yadav"/><br /><sub><b>Santosh Yadav</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=santoshyadavdev" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/santhoshdasari786"><img src="https://avatars.githubusercontent.com/u/30649656?v=4?s=100" width="100px;" alt="santhoshdasari786"/><br /><sub><b>santhoshdasari786</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=santhoshdasari786" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://localhost:4200/"><img src="https://avatars.githubusercontent.com/u/17010054?v=4?s=100" width="100px;" alt="Eyüp"/><br /><sub><b>Eyüp</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=relliv" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
