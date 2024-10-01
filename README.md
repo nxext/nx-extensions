@@ -23,7 +23,7 @@ PRs, ideas and discussions accepted. Take a look at [the contributing file](CONT
 
 ## License
 
-MIT © 2020 - 2022 Nxext Team
+MIT © 2020 - 2024 Nxext Team
 
 ## Contributors ✨
 
