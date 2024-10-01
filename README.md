@@ -2,13 +2,6 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-- [StencilJS](https://stenciljs.com) plugin for NX
-- [SvelteJS](https://svelte.dev) plugin for NX
-- [SolidJS](https://www.solidjs.com) plugin for NX
-- [Angular](https://angular.io/) plugin for NX
-- [React](https://reactjs.org/) plugin for NX
-- [Preact](https://preactjs.com/) plugin for NX
-
 ## Attention
 
 If you use the e.g. 17.0 package of any package, be sure to use the Nx version 16.2. The Version numbers have to match. Nxext packages with 16.7 aren't compatible with Nx 16.8
