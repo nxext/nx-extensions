@@ -97,6 +97,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://psyber.city/"><img src="https://avatars.githubusercontent.com/u/6603745?v=4?s=100" width="100px;" alt="Katerina Skroumpelou"/><br /><sub><b>Katerina Skroumpelou</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=mandarini" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/devinrhode2"><img src="https://avatars.githubusercontent.com/u/539816?v=4?s=100" width="100px;" alt="Devin Rhode"/><br /><sub><b>Devin Rhode</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=devinrhode2" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/edbzn"><img src="https://avatars.githubusercontent.com/u/8522558?v=4?s=100" width="100px;" alt="Edouard Bozon"/><br /><sub><b>Edouard Bozon</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=edbzn" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
