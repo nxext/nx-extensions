@@ -94,6 +94,12 @@
         "{workspaceRoot}/eslint.config.js"
       ],
       "cache": true
+    },
+    "@nx/js:release-publish": {
+      "dependsOn": ["build"],
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",

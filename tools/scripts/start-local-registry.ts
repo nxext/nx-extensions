@@ -17,11 +17,14 @@ export default async () => {
     verbose: false,
   });
   await releaseVersion({
-    specifier: '999.99.9:e2e',
+    specifier: 'minor',
     stageChanges: false,
     gitCommit: false,
     gitTag: false,
     firstRelease: true,
+    "generatorOptionsOverrides": {
+      "packageRoot": "dist/{projectRoot}"
+    }
   });
   await releasePublish({
     tag: 'e2e',
