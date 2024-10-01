@@ -99,6 +99,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/edbzn"><img src="https://avatars.githubusercontent.com/u/8522558?v=4?s=100" width="100px;" alt="Edouard Bozon"/><br /><sub><b>Edouard Bozon</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=edbzn" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pawel-twardziak"><img src="https://avatars.githubusercontent.com/u/180847852?v=4?s=100" width="100px;" alt="pawel-twardziak"/><br /><sub><b>pawel-twardziak</b></sub></a><br /><a href="https://github.com/nxext/nx-extensions/commits?author=pawel-twardziak" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
