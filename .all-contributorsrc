@@ -392,6 +392,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/6957824?v=4",
       "profile": "http://doyoubuzz.com/sambath-kumar",
       "contributions": ["code"]
+    },
+    {
+      "login": "paulmojicatech",
+      "name": "paulmojicatech",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29104510?v=4",
+      "profile": "https://github.com/paulmojicatech",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,
