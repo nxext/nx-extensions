@@ -96,17 +96,18 @@
       "cache": true
     },
     "@nx/js:release-publish": {
-      "dependsOn": ["build"],
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
     }
   },
-  "release": {
-    "projects": ["packages/*"],
-    "projectsRelationship": "independent",
-    "version": {
-      "fallbackCurrentVersionResolver": "disk"
+  "projects": ["packages/*"],
+  "projectsRelationship": "fixed",
+  "version": {
+    "preVersionCommand": "pnpm nx run-many -t build",
+    "conventionalCommits": true,
+    "generatorOptions": {
+      "packageRoot": "dist/{projectRoot}"
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",

@@ -14,16 +14,19 @@ export default async () => {
   global.stopLocalRegistry = await startLocalRegistry({
     localRegistryTarget,
     storage,
-    verbose: false,
+    verbose: process.env.NX_VERBOSE_LOGGING === 'true',
   });
 
   await releaseVersion({
-    specifier: 'prerelease',
-    preid: 'e2e',
+    specifier: '0.0.0-e2e',
     stageChanges: false,
     gitCommit: false,
     gitTag: false,
     firstRelease: true,
+    generatorOptionsOverrides: {
+      skipLockFileUpdate: true,
+      currentVersionResolver: 'registry',
+    },
   });
   await releasePublish({
     tag: 'e2e',
