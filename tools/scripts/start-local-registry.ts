@@ -16,8 +16,11 @@ export default async () => {
     storage,
     verbose: false,
   });
+
+  if (global.published) return;
   await releaseVersion({
-    specifier: 'minor',
+    specifier: 'prerelease',
+    preid: 'e2e',
     stageChanges: false,
     gitCommit: false,
     gitTag: false,
@@ -27,4 +30,5 @@ export default async () => {
     tag: 'e2e',
     firstRelease: true,
   });
+  global.published = true;
 };
