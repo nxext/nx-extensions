@@ -21,7 +21,7 @@ jobs:
         pnpm exec nx affected --target=lint --parallel=3
         pnpm exec nx affected --target=test --parallel=3 --ci --code-coverage
         pnpm exec nx affected --target=build --parallel=3
-        pnpm exec nx affected --target=e2e --parallel=1 --verbose
+        pnpm exec nx affected --target=e2e --parallel=1
 
   agents:
     name: Nx Cloud - Agents
