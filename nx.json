@@ -99,6 +99,9 @@
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
+    },
+    "e2e": {
+      "parallelism": false
     }
   },
   "projects": ["packages/*"],
