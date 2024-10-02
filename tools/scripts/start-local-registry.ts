@@ -25,10 +25,12 @@ export default async () => {
     gitCommit: false,
     gitTag: false,
     firstRelease: true,
+    verbose: true,
   });
   await releasePublish({
     tag: 'e2e',
     firstRelease: true,
+    verbose: true,
   });
   global.published = true;
 };
