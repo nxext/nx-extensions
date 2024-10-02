@@ -10,8 +10,7 @@
       "options": {
         "jestConfig": "e2e/capacitor-e2e/jest.config.ts",
         "runInBand": true
-      },
-      "dependsOn": ["^build"]
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
