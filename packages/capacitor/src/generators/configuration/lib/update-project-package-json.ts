@@ -18,8 +18,12 @@ export function updateProjectPackageJson(
   const rootPath = offsetFromRoot(options.projectRoot);
   const isRoot = rootPath === './';
   const capacitorDependencies = {
-    '@capacitor/ios': isRoot ? capacitorVersion : `${rootPath}node_modules/@capacitor/ios`,
-    '@capacitor/android': isRoot ? capacitorVersion : `${rootPath}node_modules/@capacitor/android`,
+    '@capacitor/ios': isRoot
+      ? capacitorVersion
+      : `${rootPath}node_modules/@capacitor/ios`,
+    '@capacitor/android': isRoot
+      ? capacitorVersion
+      : `${rootPath}node_modules/@capacitor/android`,
   };
   const capacitorDevDependencies = {
     '@capacitor/cli': capacitorVersion,

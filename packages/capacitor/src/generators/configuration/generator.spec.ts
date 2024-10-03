@@ -192,8 +192,12 @@ describe('capacitor-project', () => {
       projectRoot = project.projectRoot;
       await generator(appTree, options);
       const packageJson = readJson(appTree, 'package.json');
-      expect(packageJson.dependencies['@capacitor/android']).toEqual(capacitorVersion);
-      expect(packageJson.dependencies['@capacitor/ios']).toEqual(capacitorVersion);
+      expect(packageJson.dependencies['@capacitor/android']).toEqual(
+        capacitorVersion
+      );
+      expect(packageJson.dependencies['@capacitor/ios']).toEqual(
+        capacitorVersion
+      );
     });
   });
 });
