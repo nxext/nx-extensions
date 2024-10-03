@@ -1,8 +1,13 @@
 import { existsSync, lstatSync, copySync, renameSync } from 'fs-extra';
-import { readCachedProjectGraph, readProjectsConfigurationFromProjectGraph } from "@nx/devkit";
+import {
+  readCachedProjectGraph,
+  readProjectsConfigurationFromProjectGraph,
+} from '@nx/devkit';
 
 export function getPublishableLibNames(
-  workspaceJson = readProjectsConfigurationFromProjectGraph(readCachedProjectGraph())
+  workspaceJson = readProjectsConfigurationFromProjectGraph(
+    readCachedProjectGraph()
+  )
 ) {
   const { projects } = workspaceJson;
 
