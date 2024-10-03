@@ -1,5 +1,5 @@
 import { addDependenciesToPackageJson, Tree } from '@nx/devkit';
-import { ionicAngularVersion, ioniconsVersion } from '../../../utils/versions';
+import { capacitorPluginsVersion, ionicAngularVersion, ioniconsVersion } from '../../../utils/versions';
 
 export function addDependencies(host: Tree) {
   return addDependenciesToPackageJson(
@@ -7,6 +7,9 @@ export function addDependencies(host: Tree) {
     {
       '@ionic/angular': ionicAngularVersion,
       ionicons: ioniconsVersion,
+      "@capacitor/haptics": capacitorPluginsVersion,
+      "@capacitor/keyboard": capacitorPluginsVersion,
+      "@capacitor/status-bar": capacitorPluginsVersion,
     },
     {}
   );
