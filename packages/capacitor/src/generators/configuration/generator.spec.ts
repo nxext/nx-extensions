@@ -22,8 +22,10 @@ describe('capacitor-project', () => {
     skipFormat: true,
   };
 
-  function createProject(standalone = false) {
-    const projectRoot = standalone ? '' : `apps/${options.project}`;
+  function createProject({
+    standalone = false,
+  }: { standalone?: boolean } = {}) {
+    projectRoot = standalone ? '' : `apps/${options.project}`;
     appTree = createTreeWithEmptyWorkspace(
       standalone ? undefined : { layout: 'apps-libs' }
     );
@@ -35,14 +37,10 @@ describe('capacitor-project', () => {
         },
       },
     });
-    return { projectRoot };
   }
 
   describe('monorepo', () => {
-    beforeEach(() => {
-      const project = createProject();
-      projectRoot = project.projectRoot;
-    });
+    beforeEach(() => createProject());
 
     it('should add files', async () => {
       await generator(appTree, options);
@@ -188,8 +186,7 @@ describe('capacitor-project', () => {
 
   describe('standalone', () => {
     it('should add Capacitor platform dependencies for standalone projects', async () => {
-      const project = createProject(true);
-      projectRoot = project.projectRoot;
+      createProject({ standalone: true });
       await generator(appTree, options);
       const packageJson = readJson(appTree, 'package.json');
       expect(packageJson.dependencies['@capacitor/android']).toEqual(
