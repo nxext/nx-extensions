@@ -12,37 +12,36 @@ export function updateProjectPackageJson(
   host: Tree,
   options: NormalizedSchema
 ) {
-  const projectPackageJson = normalizePath(
-    options.projectRoot + '/package.json'
+  const projectPackageJsonPath = normalizePath(
+    `${options.projectRoot}/package.json`
   );
-  if (host.exists(projectPackageJson)) {
-    updateJson(host, projectPackageJson, (json) => {
-      return {
-        ...json,
-        devDependencies: {
-          ...json.devDependencies,
-          '@capacitor/cli': capacitorVersion,
-          '@capacitor/ios': `${offsetFromRoot(
-            options.projectRoot
-          )}node_modules/@capacitor/ios`,
-          '@capacitor/android': `${offsetFromRoot(
-            options.projectRoot
-          )}node_modules/@capacitor/android`,
-        },
-      };
-    });
-  } else {
-    writeJson(host, projectPackageJson, {
-      name: options.project,
-      devDependencies: {
-        '@capacitor/cli': capacitorVersion,
-        '@capacitor/ios': `${offsetFromRoot(
-          options.projectRoot
-        )}node_modules/@capacitor/ios`,
-        '@capacitor/android': `${offsetFromRoot(
-          options.projectRoot
-        )}node_modules/@capacitor/android`,
+  const rootPath = offsetFromRoot(options.projectRoot);
+  const isRoot = rootPath === './';
+  const capacitorDependencies = {
+    '@capacitor/ios': isRoot ? capacitorVersion : `${rootPath}node_modules/@capacitor/ios`,
+    '@capacitor/android': isRoot ? capacitorVersion : `${rootPath}node_modules/@capacitor/android`,
+  };
+  const capacitorDevDependencies = {
+    '@capacitor/cli': capacitorVersion,
+  };
+
+  if (host.exists(projectPackageJsonPath)) {
+    updateJson(host, projectPackageJsonPath, (json) => ({
+      ...json,
+      dependencies: {
+        ...json.dependencies,
+        ...capacitorDependencies,
       },
+      devDependencies: {
+        ...json.devDependencies,
+        ...capacitorDevDependencies,
+      },
+    }));
+  } else {
+    writeJson(host, projectPackageJsonPath, {
+      name: options.project,
+      dependencies: capacitorDependencies,
+      devDependencies: capacitorDevDependencies,
     });
   }
 }
