@@ -10,6 +10,7 @@ import { updateWorkspace } from './lib/update-workspace';
 import { ConfigurationGeneratorSchema } from './schema';
 import { addFiles, removeFiles } from './lib/files';
 import { normalizeOptions } from './lib/normalize-options';
+import { updateJestConfig } from './lib/update-jest-config';
 
 export async function configurationGenerator(
   host: Tree,
@@ -20,6 +21,7 @@ export async function configurationGenerator(
   removeFiles(host, options);
   addFiles(host, options);
   updateWorkspace(host, options);
+  updateJestConfig(host, options);
 
   const capacitorTask = await addCapacitor(host, options);
 
