@@ -114,12 +114,7 @@
   },
   "release": {
     "projects": ["packages/*"],
-    "projectsRelationship": "independent",
-    "version": {
-      "generatorOptions": {
-        "packageRoot": "dist/{projectRoot}"
-      }
-    }
+    "projectsRelationship": "independent"
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
