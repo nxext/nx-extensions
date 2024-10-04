@@ -108,13 +108,15 @@
         "runInBand": true
       },
       "parallelism": false,
-      "dependsOn": ["^build"],
       "cache": true
     }
   },
   "release": {
     "projects": ["packages/*"],
-    "projectsRelationship": "independent"
+    "projectsRelationship": "independent",
+    "version": {
+      "preVersionCommand": "pnpm nx run-many -t build --exclude=docs,common"
+    }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
