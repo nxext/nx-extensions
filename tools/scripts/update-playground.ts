@@ -7,13 +7,15 @@ import {
   readCachedProjectGraph,
   readJsonFile,
   readProjectsConfigurationFromProjectGraph,
-  workspaceRoot
-} from "@nx/devkit";
+  workspaceRoot,
+} from '@nx/devkit';
 import * as glob from 'glob';
 
 console.log('\nUpdating playground...');
 
-const workspaceJson = readProjectsConfigurationFromProjectGraph(readCachedProjectGraph());
+const workspaceJson = readProjectsConfigurationFromProjectGraph(
+  readCachedProjectGraph()
+);
 
 const publishableLibNames = getPublishableLibNames(workspaceJson);
 
