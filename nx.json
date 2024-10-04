@@ -115,7 +115,11 @@
     "projects": ["packages/*"],
     "projectsRelationship": "independent",
     "version": {
-      "preVersionCommand": "pnpm nx run-many -t build --exclude=docs,common"
+      "preVersionCommand": "pnpm nx run-many -t build --exclude=docs,common",
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}",
+        "updateDependents": "auto"
+      }
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
