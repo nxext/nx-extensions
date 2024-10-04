@@ -30,6 +30,14 @@ describe('configuration schematic', () => {
     expect(packageJson.dependencies['@ionic/angular']).toBeDefined();
   });
 
+  it('should update jest config', async () => {
+    await configurationGenerator(host, options);
+
+    expect(host.read(`${projectRoot}/jest.config.ts`, 'utf8')).toContain(
+      "transformIgnorePatterns: ['<rootDir>/node_modules/(?!(@ionic/core|@ionic/angular|@stencil/core|.*\\.mjs$))']"
+    );
+  });
+
   it('should update assets in project configuration', async () => {
     await configurationGenerator(host, options);
     const project = readProjectConfiguration(host, appName);

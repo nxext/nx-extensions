@@ -14,7 +14,7 @@ export function updateJestConfig(tree: Tree, options: NormalizedOptions) {
 }
 
 function updateTransformIgnorePattern(fileContents: string): string {
-  let TRANSFORM_IGNORE_PATTERN_STRING =
+  const TRANSFORM_IGNORE_PATTERN_STRING =
     "transformIgnorePatterns: ['<rootDir>/node_modules/(?!(@ionic/core|@ionic/angular|@stencil/core|.*\\.mjs$))'],";
 
   if (
@@ -28,17 +28,14 @@ function updateTransformIgnorePattern(fileContents: string): string {
   const ast = tsquery.ast(fileContents);
   const transformIgnorePatterns = tsquery(
     ast,
-    'PropertyAssignment > Identifier[name="transformIgnorePatterns"]'
+    'PropertyAssignment:has(Identifier[name="transformIgnorePatterns"])'
   )[0] as PropertyAssignment;
   const transformIgnorePatternsStart = transformIgnorePatterns.getStart();
   const transformIgnorePatternsEnd = transformIgnorePatterns.getEnd();
-  const transformIgnorePatternsString = fileContents.slice(
-    transformIgnorePatternsStart,
-    transformIgnorePatternsEnd
-  );
 
-  return fileContents.replace(
-    transformIgnorePatternsString,
-    TRANSFORM_IGNORE_PATTERN_STRING
+  return (
+    fileContents.slice(0, transformIgnorePatternsStart) +
+    TRANSFORM_IGNORE_PATTERN_STRING +
+    fileContents.slice(transformIgnorePatternsEnd + 1)
   );
 }
