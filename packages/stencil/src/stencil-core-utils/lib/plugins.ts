@@ -90,7 +90,7 @@ function addCodeIntoArray(
 
 function getLastEntryOfOutputtargetArray(node: ts.Node): ts.Node {
   const arrayEntryList = node.getChildren()[2].getChildren()[1].getChildren();
-  return arrayEntryList
+  return [...arrayEntryList]
     .sort(
       (first: ts.Node, second: ts.Node) => first.getStart() - second.getStart()
     )
