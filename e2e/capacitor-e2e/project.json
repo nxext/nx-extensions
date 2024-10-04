@@ -4,14 +4,7 @@
   "projectType": "application",
   "sourceRoot": "e2e/capacitor-e2e/src",
   "targets": {
-    "e2e": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "e2e/capacitor-e2e/jest.config.ts",
-        "runInBand": true
-      }
-    },
+    "e2e": {},
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]

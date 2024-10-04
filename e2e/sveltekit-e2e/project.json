@@ -5,12 +5,6 @@
   "sourceRoot": "e2e/sveltekit-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "e2e/sveltekit-e2e/jest.config.ts",
-        "runInBand": true
-      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
