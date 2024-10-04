@@ -4,8 +4,7 @@
   "projectType": "application",
   "sourceRoot": "e2e/sveltekit-e2e/src",
   "targets": {
-    "e2e": {
-    },
+    "e2e": {},
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]

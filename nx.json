@@ -107,16 +107,17 @@
         "jestConfig": "{projectRoot}/jest.config.ts",
         "runInBand": true
       },
-      "parallelism": false
+      "parallelism": false,
+      "dependsOn": ["^build"]
     }
   },
-  "projects": ["packages/*"],
-  "projectsRelationship": "fixed",
-  "version": {
-    "preVersionCommand": "pnpm nx run-many -t build",
-    "conventionalCommits": true,
-    "generatorOptions": {
-      "packageRoot": "dist/{projectRoot}"
+  "release": {
+    "projects": ["packages/*"],
+    "projectsRelationship": "independent",
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}"
+      }
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
