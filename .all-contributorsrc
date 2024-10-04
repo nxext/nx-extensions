@@ -350,6 +350,62 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/539816?v=4",
       "profile": "https://github.com/devinrhode2",
       "contributions": ["code"]
+    },
+    {
+      "login": "edbzn",
+      "name": "Edouard Bozon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8522558?v=4",
+      "profile": "https://github.com/edbzn",
+      "contributions": ["code"]
+    },
+    {
+      "login": "pawel-twardziak",
+      "name": "pawel-twardziak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/180847852?v=4",
+      "profile": "https://github.com/pawel-twardziak",
+      "contributions": ["code"]
+    },
+    {
+      "login": "santoshyadavdev",
+      "name": "Santosh Yadav",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11923975?v=4",
+      "profile": "https://mastodon.online/@SantoshYadavDev",
+      "contributions": ["code"]
+    },
+    {
+      "login": "santhoshdasari786",
+      "name": "santhoshdasari786",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30649656?v=4",
+      "profile": "https://github.com/santhoshdasari786",
+      "contributions": ["code"]
+    },
+    {
+      "login": "relliv",
+      "name": "Eyüp",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17010054?v=4",
+      "profile": "http://localhost:4200/",
+      "contributions": ["code"]
+    },
+    {
+      "login": "64BitAsura",
+      "name": "Sambath Kumar Logakrishnan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6957824?v=4",
+      "profile": "http://doyoubuzz.com/sambath-kumar",
+      "contributions": ["code"]
+    },
+    {
+      "login": "paulmojicatech",
+      "name": "paulmojicatech",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29104510?v=4",
+      "profile": "https://github.com/paulmojicatech",
+      "contributions": ["code"]
+    },
+    {
+      "login": "mrtnvh",
+      "name": "Maarten Van Hoof",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2543633?v=4",
+      "profile": "https://github.com/mrtnvh",
+      "contributions": ["code"]
     }
   ],
   "contributorsPerLine": 7,

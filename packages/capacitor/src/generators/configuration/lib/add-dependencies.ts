@@ -6,10 +6,11 @@ export function addDependencies(host: Tree) {
     host,
     {
       '@capacitor/core': capacitorVersion,
-    },
-    {
+      '@capacitor/app': capacitorVersion,
       '@capacitor/android': capacitorVersion,
       '@capacitor/ios': capacitorVersion,
+    },
+    {
       '@capacitor/cli': capacitorVersion,
     }
   );

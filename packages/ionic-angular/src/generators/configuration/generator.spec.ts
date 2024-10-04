@@ -18,6 +18,7 @@ describe('configuration schematic', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     await applicationGenerator(host, {
       name: appName,
+      prefix: 'app',
       skipFormat: true,
     });
   });
@@ -48,6 +49,17 @@ describe('configuration schematic', () => {
     expect(styles).toEqual(
       expect.arrayContaining([`${projectRoot}/src/theme/variables.scss`])
     );
+  });
+
+  it('should use the prefix', async () => {
+    await configurationGenerator(host, options);
+
+    expect(host.read(`${projectRoot}/src/index.html`, 'utf8')).toContain(
+      'app-root'
+    );
+    expect(
+      host.read(`${projectRoot}/src/app/app.component.ts`, 'utf8')
+    ).toMatch(/selector: 'app-root'/);
   });
 
   describe('--capacitor', () => {
