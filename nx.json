@@ -108,7 +108,8 @@
         "runInBand": true
       },
       "parallelism": false,
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "cache": true
     }
   },
   "release": {
