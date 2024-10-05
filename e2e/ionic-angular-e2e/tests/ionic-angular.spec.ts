@@ -1,8 +1,6 @@
 import { runNxCommandAsync, uniq } from '@nx/plugin/testing';
-import { createTestProject, installPlugin } from '@nxext/e2e-utils';
+import { createTestProject, installPlugin, stripAnsi } from '@nxext/e2e-utils';
 import { rmSync } from 'fs';
-
-const ansiEscapeCodeRegex = /\x1B\[[0-?]*[ -/]*[@-~]/g;
 
 describe('ionic-angular-project e2e', () => {
   let projectDirectory: string;
@@ -30,14 +28,14 @@ describe('ionic-angular-project e2e', () => {
 
   it('should build successfully', async () => {
     const buildResults = await runNxCommandAsync(`build ${app}`);
-    expect(buildResults.stdout.replace(ansiEscapeCodeRegex, '')).toContain(
+    expect(stripAnsi(buildResults.stdout)).toContain(
       `Successfully ran target build for project ${app}`
     );
   });
 
   it('should run tests successfully', async () => {
     const testResults = await runNxCommandAsync(`test ${app}`);
-    expect(testResults.stdout.replace(ansiEscapeCodeRegex, '')).toContain(
+    expect(stripAnsi(testResults.stdout)).toContain(
       `Successfully ran target test for project ${app}`
     );
   });
