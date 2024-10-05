@@ -8,6 +8,10 @@ export function updateJestConfig(tree: Tree, options: NormalizedOptions) {
     options.projectRoot,
     'jest.config.ts'
   );
+  if (!tree.exists(jestConfigPath)) {
+    return;
+  }
+
   const jestFileContents = tree.read(jestConfigPath, 'utf-8');
   const changedFileContents = updateTransformIgnorePattern(jestFileContents);
   tree.write(jestConfigPath, changedFileContents);
