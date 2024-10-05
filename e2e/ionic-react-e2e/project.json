@@ -1,8 +1,8 @@
 {
-  "name": "sveltekit-e2e",
+  "name": "ionic-react-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "e2e/sveltekit-e2e/tests",
+  "sourceRoot": "e2e/ionic-react-e2e/tests",
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -10,5 +10,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["sveltekit"]
+  "implicitDependencies": ["ionic-react"]
 }

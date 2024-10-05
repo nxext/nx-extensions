@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { TabsPage } from './tabs.page.ts.template';
+import { TabsPage } from './tabs.page';
 
 export const routes: Routes = [
   {

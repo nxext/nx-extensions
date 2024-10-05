@@ -94,6 +94,32 @@
         "{workspaceRoot}/eslint.config.js"
       ],
       "cache": true
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts",
+        "runInBand": true
+      },
+      "parallelism": false,
+      "cache": true
+    }
+  },
+  "release": {
+    "projects": ["packages/*"],
+    "projectsRelationship": "independent",
+    "version": {
+      "preVersionCommand": "pnpm nx run-many -t build --exclude=docs,common",
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}",
+        "updateDependents": "auto"
+      }
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
@@ -118,6 +144,6 @@
     ]
   },
   "nxCloudAccessToken": "NTlhMGE3ZTYtYjk5OC00Mzc5LWE2ZTAtNzE4ODEzNDY5MjlmfHJlYWQ=",
-  "parallel": 1,
+  "parallel": 3,
   "defaultBase": "main"
 }
