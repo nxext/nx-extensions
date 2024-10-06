@@ -29,3 +29,24 @@ jobs:
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.15
     with:
       number-of-agents: 3
+
+  release:
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/main'
+
+    needs:
+      - main
+      - agents
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          git_bot_token: ${{ secrets.GIT_BOT_TOKEN }}
+      - name: Release
+        uses: ./.github/actions/release
+        with:
+          git_bot_token: ${{ secrets.GIT_BOT_TOKEN }}
+          npm_token: ${{ secrets.NPM_TOKEN }}
