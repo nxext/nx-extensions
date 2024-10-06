@@ -25,7 +25,8 @@ export default async () => {
     firstRelease: true,
     generatorOptionsOverrides: {
       skipLockFileUpdate: true,
-      currentVersionResolver: 'registry',
+      packageRoot: 'dist/{projectRoot}',
+      updateDependents: 'auto',
     },
   });
   await releasePublish({
