@@ -1,3 +1,17 @@
+## 19.1.1 (2024-10-06)
+
+
+### 🩹 Fixes
+
+- **capacitor:** add `@capacitor/app` dependency ([842418f2](https://github.com/nxext/nx-extensions/commit/842418f2))
+
+- **capacitor:** support standalone workspaces ([7ff4baf8](https://github.com/nxext/nx-extensions/commit/7ff4baf8))
+
+
+### ❤️  Thank You
+
+- Edouard Bozon @edbzn
+
 # Changelog
 
 # 13.0.0
