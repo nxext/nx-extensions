@@ -24,6 +24,9 @@ runs:
       shell: bash
       run: git config user.email "-" && git config user.name "Nxext Bot"
 
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
