@@ -1,6 +1,6 @@
 {
   "name": "@nxext/solid",
-  "version": "19.0.0",
+  "version": "19.1.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for solid",
