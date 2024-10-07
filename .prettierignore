@@ -10,3 +10,5 @@
 /.nx/workspace-data
 
 pnpm-lock.yaml
+
+**/CHANGELOG.md
