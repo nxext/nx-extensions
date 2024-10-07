@@ -23,11 +23,6 @@ export default async () => {
     gitCommit: false,
     gitTag: false,
     firstRelease: true,
-    generatorOptionsOverrides: {
-      skipLockFileUpdate: true,
-      packageRoot: 'dist/{projectRoot}',
-      updateDependents: 'auto',
-    },
   });
   await releasePublish({
     tag: 'e2e',

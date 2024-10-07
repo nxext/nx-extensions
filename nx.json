@@ -96,6 +96,7 @@
       "cache": true
     },
     "nx-release-publish": {
+      "dependsOn": ["build"],
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
@@ -115,7 +116,6 @@
     "projects": ["packages/*", "!common"],
     "projectsRelationship": "independent",
     "version": {
-      "preVersionCommand": "pnpm nx run-many -t build --exclude=docs,common",
       "generatorOptions": {
         "currentVersionResolver": "git-tag",
         "fallbackCurrentVersionResolver": "disk",
