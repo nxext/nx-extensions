@@ -17,21 +17,26 @@ export default async () => {
     verbose: process.env.NX_VERBOSE_LOGGING === 'true',
   });
 
-  await releaseVersion({
-    specifier: '0.0.0-e2e',
-    stageChanges: false,
-    gitCommit: false,
-    gitTag: false,
-    firstRelease: true,
-    generatorOptionsOverrides: {
-      skipLockFileUpdate: true,
-      packageRoot: '{projectRoot}',
-      updateDependents: 'auto',
-    },
-  });
+  try {
+    await releaseVersion({
+      specifier: '0.0.0-e2e',
+      stageChanges: false,
+      gitCommit: false,
+      gitTag: false,
+      firstRelease: true,
+      generatorOptionsOverrides: {
+        skipLockFileUpdate: true,
+        packageRoot: '{projectRoot}',
+        updateDependents: 'auto',
+      },
+    });
 
-  await releasePublish({
-    tag: 'e2e',
-    firstRelease: true,
-  });
+    await releasePublish({
+      tag: 'e2e',
+      firstRelease: true,
+      verbose: true,
+    });
+  } catch (e) {
+    console.error(e);
+  }
 };
