@@ -22,7 +22,7 @@ export function createTestProject() {
   });
 
   execSync(
-    `npx --yes create-nx-workspace@latest ${projectName} --preset apps --nxCloud skip --interactive false`,
+    `npx --yes create-nx-workspace@19 ${projectName} --preset apps --nxCloud skip --interactive false --packageManager pnpm`,
     {
       cwd: dirname(projectDirectory),
       stdio: 'inherit',
@@ -37,7 +37,7 @@ export function createTestProject() {
 export function installPlugin(projectDirectory: string, pluginName: string) {
   // The plugin has been built and published to a local registry in the jest globalSetup
   // Install the plugin built with the latest source code into the test repo
-  execSync(`npm install @nxext/${pluginName}@e2e`, {
+  execSync(`pnpm install @nxext/${pluginName}@e2e`, {
     cwd: projectDirectory,
     stdio: 'inherit',
     env: process.env,

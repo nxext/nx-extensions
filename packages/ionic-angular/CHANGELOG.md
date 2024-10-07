@@ -1,30 +1,3 @@
-## 19.1.1 (2024-10-06)
-
-
-### 🩹 Fixes
-
-- **ionic-angular:** use the prefix for components ([b084cd97](https://github.com/nxext/nx-extensions/commit/b084cd97))
-
-- **ionic-angular:** add missing capacitor plugins ([7b39d7df](https://github.com/nxext/nx-extensions/commit/7b39d7df))
-
-- **ionic-angular:** resolve routes import correctly ([e447abc4](https://github.com/nxext/nx-extensions/commit/e447abc4))
-
-- **ionic-angular:** move main.ts to src ([104065eb](https://github.com/nxext/nx-extensions/commit/104065eb))
-
-- **ionic-angular:** update jest config to work with ionic ([91003d18](https://github.com/nxext/nx-extensions/commit/91003d18))
-
-- **ionic-angular:** update jest config correctly ([b0a6ef82](https://github.com/nxext/nx-extensions/commit/b0a6ef82))
-
-
-### 🧱 Updated Dependencies
-
-- Updated capacitor to 19.1.1
-
-
-### ❤️  Thank You
-
-- Edouard Bozon @edbzn
-
 # Changelog
 
 # 14.0.0
