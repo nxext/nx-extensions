@@ -1,3 +1,10 @@
+## 19.1.1 (2024-10-07)
+
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 19.1.1
+
 # Changelog
 
 # 14.0.0
