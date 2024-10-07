@@ -23,14 +23,14 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "peerDependencies": {
-    "@nx/devkit": "19.8.3",
-    "@nx/vite": "19.8.3",
-    "@nx/web": "19.8.3",
-    "@nx/cypress": "19.8.3",
-    "@nx/jest": "19.8.3",
-    "@nx/eslint": "19.8.3",
+    "@nx/devkit": "20.0.0",
+    "@nx/vite": "20.0.0",
+    "@nx/web": "20.0.0",
+    "@nx/cypress": "20.0.0",
+    "@nx/jest": "20.0.0",
+    "@nx/eslint": "20.0.0",
     "typescript": "5.5.4",
-    "@nx/js": "19.8.3",
+    "@nx/js": "20.0.0",
     "tslib": "^2.3.0"
   },
   "dependencies": {}
