@@ -44,10 +44,7 @@ export async function initializeStencilConfig<
     logger.enableColors(false);
   }
 
-  const projects = context.workspace
-    ? context.workspace.projects
-    : context.projectsConfigurations.projects;
-  const projectDir = projects[context.projectName].root;
+  const projectDir = context.projectsConfigurations.projects[context.projectName].root;
   const projectRoot = normalizePath(join(context.root, projectDir));
   const distDir = normalizePath(join(context.root, options.outputPath));
   const configPath = normalizePath(join(context.root, options.configPath));
