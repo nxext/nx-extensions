@@ -91,12 +91,16 @@ function sideNavDocs() {
       collapsed: true,
       items: [
         {
+          text: 'Overview',
+          link: '/docs/capacitor/overview',
+        },
+        {
           text: 'Generators',
           link: '/docs/capacitor/generators',
         },
         {
           text: 'Executors',
-          link: '/docs/stencil/executors',
+          link: '/docs/capacitor/executors',
         },
       ],
     },
