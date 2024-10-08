@@ -21,8 +21,9 @@
   "builders": "./executors.json",
   "dependencies": {
     "@nxext/capacitor": "^19.1.1",
-    "@nx/devkit": "^19.0.0",
     "tslib": "^2.3.0"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "@nx/devkit": "^19.0.0"
+  }
 }
