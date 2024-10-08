@@ -4,7 +4,9 @@ import {
   ionicReactVersion,
   ionIconsVersion,
   reactRouterVersion,
-  reactVersion,
+  capacitorPluginsVersion,
+  reactRouterDomTypesVersion,
+  reactRouterTypesVersion,
 } from '../../../utils/versions';
 
 export function addDependencies(host: Tree) {
@@ -14,25 +16,18 @@ export function addDependencies(host: Tree) {
       '@ionic/react': ionicReactVersion,
       '@ionic/react-router': ionicReactRouterVersion,
       ionicons: ionIconsVersion,
-
-      '@capacitor/haptics': '6.0.1',
-      '@capacitor/keyboard': '6.0.2',
-      '@capacitor/status-bar': '6.0.1',
-
+      '@capacitor/haptics': capacitorPluginsVersion,
+      '@capacitor/keyboard': capacitorPluginsVersion,
+      '@capacitor/status-bar': capacitorPluginsVersion,
       /**
        * Following deps are overwrite because React Router v6 is not compatible with Ionic React Router
        */
-
-      react: '^18.2.0',
-      'react-dom': '^18.2.0',
-      'react-router': '^5.3.4',
-      'react-router-dom': '^5.3.4',
+      'react-router': reactRouterVersion,
+      'react-router-dom': reactRouterVersion,
     },
     {
-      '@types/react-router': '^5.1.20',
-      '@types/react-router-dom': '^5.3.3',
-      '@types/react': '^18.0.27',
-      '@types/react-dom': '^18.0.10',
+      '@types/react-router': reactRouterTypesVersion,
+      '@types/react-router-dom': reactRouterDomTypesVersion,
     }
   );
 }
