@@ -96,7 +96,7 @@
       "cache": true
     },
     "nx-release-publish": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build"],
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
