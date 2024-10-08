@@ -1,0 +1,42 @@
+name: Setup
+
+description: Setup Node.js, cache and install dependencies
+
+inputs:
+  git_bot_token:
+    description: Git Bot token used to push to protected branches because github token can't
+    required: false
+  node_version:
+    description: Node.js version
+    required: false
+    default: 'lts/*'
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout all commits
+      uses: actions/checkout@v4
+      with:
+        token: ${{ inputs.git_bot_token || github.token }}
+        fetch-depth: 0
+
+    - name: Setup git user to "Nxext Bot"
+      shell: bash
+      run: git config user.email "-" && git config user.name "Nxext Bot"
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        cache: pnpm
+        node-version: ${{ inputs.node_version }}
+        registry-url: https://registry.npmjs.org
+
+    - name: Set nx base & head commit hashes in env vars
+      uses: nrwl/nx-set-shas@v4
+
+    - name: yarn install
+      shell: bash
+      run: pnpm install --frozen-lockfile

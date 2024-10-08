@@ -96,6 +96,7 @@
       "cache": true
     },
     "nx-release-publish": {
+      "dependsOn": ["build"],
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
@@ -112,13 +113,20 @@
     }
   },
   "release": {
-    "projects": ["packages/*"],
+    "projects": ["packages/*", "!common"],
     "projectsRelationship": "independent",
     "version": {
-      "preVersionCommand": "pnpm nx run-many -t build --exclude=docs,common",
       "generatorOptions": {
-        "packageRoot": "dist/{projectRoot}",
-        "updateDependents": "auto"
+        "currentVersionResolver": "git-tag",
+        "fallbackCurrentVersionResolver": "disk",
+        "updateDependents": "auto",
+        "specifierSource": "conventional-commits"
+      }
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "projectChangelogs": {
+        "createRelease": "github"
       }
     }
   },

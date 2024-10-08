@@ -25,9 +25,11 @@ export default async () => {
     firstRelease: true,
     generatorOptionsOverrides: {
       skipLockFileUpdate: true,
-      currentVersionResolver: 'registry',
+      packageRoot: '{projectRoot}',
+      updateDependents: 'auto',
     },
   });
+
   await releasePublish({
     tag: 'e2e',
     firstRelease: true,
