@@ -1,3 +1,22 @@
+## 19.1.2 (2024-10-08)
+
+
+### 🩹 Fixes
+
+- **ionic-react:** fix build target + fix e2e tests ([2c087507](https://github.com/nxext/nx-extensions/commit/2c087507))
+
+- **ionic-react:** move nx deps to peer deps ([e14c576e](https://github.com/nxext/nx-extensions/commit/e14c576e))
+
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 19.1.2
+
+
+### ❤️  Thank You
+
+- Edouard Bozon @edbzn
+
 ## 19.1.1 (2024-10-07)
 
 

@@ -1,3 +1,20 @@
+## 19.1.2 (2024-10-08)
+
+
+### 🩹 Fixes
+
+- **ionic-angular:** move nx deps to peer deps ([dd64b892](https://github.com/nxext/nx-extensions/commit/dd64b892))
+
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 19.1.2
+
+
+### ❤️  Thank You
+
+- Edouard Bozon @edbzn
+
 ## 19.1.1 (2024-10-07)
 
 
