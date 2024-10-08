@@ -96,7 +96,7 @@
       "cache": true
     },
     "nx-release-publish": {
-      "dependsOn": ["build"],
+      "dependsOn": ["^build"],
       "options": {
         "packageRoot": "dist/{projectRoot}"
       }
@@ -116,11 +116,10 @@
     "projects": ["packages/*", "!common"],
     "projectsRelationship": "independent",
     "version": {
+      "conventionalCommits": true,
       "generatorOptions": {
-        "currentVersionResolver": "git-tag",
         "fallbackCurrentVersionResolver": "disk",
-        "updateDependents": "auto",
-        "specifierSource": "conventional-commits"
+        "updateDependents": "auto"
       }
     },
     "changelog": {

@@ -3,6 +3,7 @@
  * It is meant to be called in jest's globalSetup.
  */
 import { startLocalRegistry } from '@nx/js/plugins/jest/local-registry';
+import { execFileSync } from 'child_process';
 import { releasePublish, releaseVersion } from 'nx/release';
 
 export default async () => {
@@ -29,6 +30,15 @@ export default async () => {
       updateDependents: 'auto',
     },
   });
+
+  execFileSync('pnpm', [
+    'nx',
+    'run-many',
+    '-t',
+    'build',
+    '--exclude',
+    'docs,common',
+  ]);
 
   await releasePublish({
     tag: 'e2e',
