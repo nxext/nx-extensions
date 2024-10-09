@@ -1,7 +1,7 @@
 import {
   CreateNodesV2,
   getPackageManagerCommand,
-  ProjectConfiguration
+  ProjectConfiguration,
 } from '@nx/devkit';
 import { dirname } from 'node:path';
 
