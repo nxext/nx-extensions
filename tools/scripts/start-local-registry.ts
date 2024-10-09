@@ -37,7 +37,7 @@ export default async () => {
     '-t',
     'build',
     '--exclude',
-    'docs,common',
+    'docs'
   ]);
 
   await releasePublish({
