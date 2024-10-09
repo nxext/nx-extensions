@@ -12,8 +12,6 @@ export default async () => {
   // storage folder for the local registry
   const storage = './tmp/local-registry/storage';
 
-  console.log('Verbose: ', process.env.NX_VERBOSE_LOGGING === 'true');
-
   global.stopLocalRegistry = await startLocalRegistry({
     localRegistryTarget,
     storage,
@@ -32,18 +30,8 @@ export default async () => {
     },
   });
 
-  console.log('Running build for all packages...');
-  execFileSync('pnpm', [
-    'nx',
-    'run-many',
-    '-t',
-    'build',
-    '--exclude',
-    'docs',
-    '--skipNxCache',
-  ]);
+  execFileSync('pnpm', ['nx', 'run-many', '-t', 'build', '--exclude', 'docs']);
 
-  console.log('Running Publish...');
   await releasePublish({
     tag: 'e2e',
     firstRelease: true,
