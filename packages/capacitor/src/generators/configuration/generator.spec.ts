@@ -2,6 +2,7 @@ import {
   addProjectConfiguration,
   normalizePath,
   readJson,
+  readNxJson,
   readProjectConfiguration,
   Tree,
   writeJson,
@@ -90,84 +91,10 @@ describe('capacitor-project', () => {
       );
     });
 
-    it('should update workspace.json', async () => {
+    it('should update nx.json', async () => {
       await generator(appTree, options);
-      const projectConfiguration = readProjectConfiguration(
-        appTree,
-        options.project
-      );
-
-      expect(projectConfiguration.targets.cap.executor).toEqual(
-        '@nxext/capacitor:cap'
-      );
-      expect(projectConfiguration.targets.cap.options).toEqual({
-        cmd: '--help',
-      });
-
-      expect(projectConfiguration.targets.add.executor).toEqual(
-        '@nxext/capacitor:cap'
-      );
-      expect(projectConfiguration.targets.add.options).toEqual({
-        cmd: 'add',
-      });
-      expect(
-        projectConfiguration.targets.add.configurations['ios'].cmd
-      ).toEqual('add ios');
-      expect(
-        projectConfiguration.targets.add.configurations['android'].cmd
-      ).toEqual('add android');
-
-      expect(projectConfiguration.targets.copy.executor).toEqual(
-        '@nxext/capacitor:cap'
-      );
-      expect(projectConfiguration.targets.copy.options).toEqual({
-        cmd: 'copy',
-      });
-      expect(
-        projectConfiguration.targets.copy.configurations['ios'].cmd
-      ).toEqual('copy ios');
-      expect(
-        projectConfiguration.targets.copy.configurations['android'].cmd
-      ).toEqual('copy android');
-
-      expect(projectConfiguration.targets.open.executor).toEqual(
-        '@nxext/capacitor:cap'
-      );
-      expect(projectConfiguration.targets.open.options).toEqual({
-        cmd: 'open',
-      });
-      expect(
-        projectConfiguration.targets.open.configurations['ios'].cmd
-      ).toEqual('open ios');
-      expect(
-        projectConfiguration.targets.open.configurations['android'].cmd
-      ).toEqual('open android');
-
-      expect(projectConfiguration.targets.sync.executor).toEqual(
-        '@nxext/capacitor:cap'
-      );
-      expect(projectConfiguration.targets.sync.options).toEqual({
-        cmd: 'sync',
-      });
-      expect(
-        projectConfiguration.targets.sync.configurations['ios'].cmd
-      ).toEqual('sync ios');
-      expect(
-        projectConfiguration.targets.sync.configurations['android'].cmd
-      ).toEqual('sync android');
-
-      expect(projectConfiguration.targets.update.executor).toEqual(
-        '@nxext/capacitor:cap'
-      );
-      expect(projectConfiguration.targets.update.options).toEqual({
-        cmd: 'update',
-      });
-      expect(
-        projectConfiguration.targets.update.configurations['ios'].cmd
-      ).toEqual('update ios');
-      expect(
-        projectConfiguration.targets.update.configurations['android'].cmd
-      ).toEqual('update android');
+      const nxJson = readNxJson(appTree);
+      expect(nxJson.plugins).toContain('@nxext/capacitor');
     });
 
     it('should not remove existing target configurations', async () => {
