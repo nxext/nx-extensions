@@ -2,7 +2,7 @@
 
 ## Install Plugin
 
-This plugin does need the angular and capacitor plugin, so add them to your Nx workspace:
+This plugin configures Ionic and Capacitor for an Angular application.
 
 ```bash
 npm install @nx/angular --save-dev
