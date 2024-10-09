@@ -18,8 +18,9 @@ npm install @nxext/ionic-angular --save-dev
 
 ### Capacitor
 
-Running the configuration generator will set up the Capacitor CLI by 
-- Adding new targets inside your `project.json`.  
+Running the configuration generator will set up the Capacitor CLI by
+
+- Adding new targets inside your `project.json`.
 
 These targets let you interact with the [Capacitor CLI](https://capacitorjs.com/docs/cli).  
 _See the [related documentation](/docs/capacitor/overview) for more details._
