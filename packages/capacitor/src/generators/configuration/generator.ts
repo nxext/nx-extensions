@@ -1,12 +1,12 @@
 import { convertNxGenerator, formatFiles, Tree } from '@nx/devkit';
 import { addCapacitorConfig } from './lib/add-capacitor-config';
 import { addDependencies } from './lib/add-dependencies';
-import { addProject } from './lib/add-project';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateProjectGitignore } from './lib/update-project-gitignore';
 import { updateProjectPackageJson } from './lib/update-project-package-json';
 import { CapacitorConfigurationSchema } from './schema';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { addPluginToNxJson } from '@nxext/common';
 
 export async function capacitorConfigurationGenerator(
   host: Tree,
@@ -18,8 +18,8 @@ export async function capacitorConfigurationGenerator(
   const installTask = addDependencies(host);
   addCapacitorConfig(host, normalizedOptions);
   updateProjectGitignore(host, normalizedOptions);
-  addProject(host, normalizedOptions);
   updateProjectPackageJson(host, normalizedOptions);
+  addPluginToNxJson('@nxext/capacitor', host);
 
   if (!options.skipFormat) {
     await formatFiles(host);
