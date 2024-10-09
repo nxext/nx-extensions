@@ -40,5 +40,5 @@ packages:
     unpublish: $all
     proxy: npmjs
 
-logs:
+log:
   - { type: stdout, format: pretty, level: debug }
