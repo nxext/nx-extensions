@@ -31,7 +31,14 @@ export default async () => {
     },
   });
 
-  execFileSync('pnpm', ['nx', 'run-many', '-t', 'build', '--exclude', 'docs']);
+  execFileSync('pnpm', [
+    'nx',
+    'run-many',
+    '-t',
+    'build',
+    '--exclude',
+    'docs'
+  ]);
 
   await releasePublish({
     tag: 'e2e',
