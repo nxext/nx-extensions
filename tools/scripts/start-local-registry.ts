@@ -36,5 +36,6 @@ export default async () => {
   await releasePublish({
     tag: 'e2e',
     firstRelease: true,
+    verbose: process.env.NX_VERBOSE_LOGGING === 'true',
   });
 };
