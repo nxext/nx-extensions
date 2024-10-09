@@ -17,11 +17,10 @@ export default async () => {
   global.stopLocalRegistry = await startLocalRegistry({
     localRegistryTarget,
     storage,
-    verbose: true,
   });
 
   await releaseVersion({
-    specifier: '0.0.0-e2e',
+    specifier: '0.0.1-e2e',
     stageChanges: false,
     gitCommit: false,
     gitTag: false,
@@ -31,7 +30,6 @@ export default async () => {
       packageRoot: '{projectRoot}',
       updateDependents: 'auto',
     },
-    verbose: true,
   });
 
   console.log('Running build for all packages...');
@@ -49,6 +47,5 @@ export default async () => {
   await releasePublish({
     tag: 'e2e',
     firstRelease: true,
-    verbose: true,
   });
 };
