@@ -1,11 +1,17 @@
 # Getting Started
 
-## Install Plugin
-
 This plugin configures Ionic and Capacitor for an Angular application.
 
+## Install Plugin
+
+:::info
+
+This plugin configures an already existing Angular application.  
+Please, visit the [Nx documentation](https://nx.dev/nx-api/angular) to generate an application before continuing.
+
+:::
+
 ```bash
-npm install @nx/angular --save-dev
 npm install @nxext/ionic-angular --save-dev
 ```
 
