@@ -17,7 +17,7 @@ export default async () => {
   global.stopLocalRegistry = await startLocalRegistry({
     localRegistryTarget,
     storage,
-    verbose: process.env.NX_VERBOSE_LOGGING === 'true',
+    verbose: true,
   });
 
   await releaseVersion({
@@ -31,6 +31,7 @@ export default async () => {
       packageRoot: '{projectRoot}',
       updateDependents: 'auto',
     },
+    verbose: true,
   });
 
   console.log('Running build for all packages...');
@@ -40,6 +41,6 @@ export default async () => {
   await releasePublish({
     tag: 'e2e',
     firstRelease: true,
-    verbose: process.env.NX_VERBOSE_LOGGING === 'true',
+    verbose: true,
   });
 };
