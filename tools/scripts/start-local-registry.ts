@@ -35,7 +35,15 @@ export default async () => {
   });
 
   console.log('Running build for all packages...');
-  execFileSync('pnpm', ['nx', 'run-many', '-t', 'build', '--exclude', 'docs']);
+  execFileSync('pnpm', [
+    'nx',
+    'run-many',
+    '-t',
+    'build',
+    '--exclude',
+    'docs',
+    '--skipNxCache',
+  ]);
 
   console.log('Running Publish...');
   await releasePublish({
