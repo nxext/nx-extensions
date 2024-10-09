@@ -5,7 +5,6 @@
 This plugin does need the angular and capacitor plugin, so add them to your Nx workspace:
 
 ```bash
-npm install @nxext/capacitor --save-dev
 npm install @nx/angular --save-dev
 npm install @nxext/ionic-angular --save-dev
 ```
@@ -17,21 +16,21 @@ npm install @nxext/ionic-angular --save-dev
 2. Now, change the configuration of the app, to support ionic-angular: _[Nxext doc](./generators)_  
    `nx g @nxext/ionic-angular:configuration my-app`
 
-### project.json
+### Capacitor
 
-[`project.json`](https://nx.dev/reference/project-configuration) does replace the `angular.json` file.  
-Running the configuration will :
+Running the configuration generator will set up the Capacitor CLI by 
+- Adding new targets inside your `project.json`.  
 
-- Add new `targets` inside your `project.json` directly from the [capacitor cli](https://capacitorjs.com/docs/cli)
-- Enable new cli references like `nx run my-app:add` `nx run my-app:add:ios`, ...
+These targets let you interact with the [Capacitor CLI](https://capacitorjs.com/docs/cli).  
+_See the [related documentation](/docs/capacitor/overview) for more details._
 
-## Add Capacitor to Existing Project
+## Add Capacitor to an existing project
 
 3. Follow the step `1.` and `2.` as they are **required**.  
    _This library isn't ment to replace `@nx/angular` but just to add an additional logic_
 4. Now, every `@capacitor` module will have to be declared inside the newly created `package.json` like follow
 
-```json
+```jsonc
 // ./apps/my-app/package.json
 {
   "name": "my-app",
