@@ -32,13 +32,13 @@ packages:
     access: $all
     publish: $all
     unpublish: $all
-    proxy: npmjs
+    # proxy: npmjs
 
   '**':
     access: $all
     publish: $all
     unpublish: $all
-    proxy: npmjs
+    # proxy: npmjs
 
 log:
   - { type: stdout, format: pretty, level: debug }
