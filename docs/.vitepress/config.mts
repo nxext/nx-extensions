@@ -110,6 +110,10 @@ function sideNavDocs() {
       collapsed: true,
       items: [
         {
+          text: 'Installation',
+          link: '/docs/ionic-angular/installation',
+        },
+        {
           text: 'Generators',
           link: '/docs/ionic-angular/generators',
         },
