@@ -15,11 +15,10 @@ export default async () => {
   global.stopLocalRegistry = await startLocalRegistry({
     localRegistryTarget,
     storage,
-    verbose: process.env.NX_VERBOSE_LOGGING === 'true',
   });
 
   await releaseVersion({
-    specifier: '0.0.0-e2e',
+    specifier: '0.0.1-e2e',
     stageChanges: false,
     gitCommit: false,
     gitTag: false,
@@ -31,14 +30,7 @@ export default async () => {
     },
   });
 
-  execFileSync('pnpm', [
-    'nx',
-    'run-many',
-    '-t',
-    'build',
-    '--exclude',
-    'docs,common',
-  ]);
+  execFileSync('pnpm', ['nx', 'run-many', '-t', 'build', '--exclude', 'docs']);
 
   await releasePublish({
     tag: 'e2e',
