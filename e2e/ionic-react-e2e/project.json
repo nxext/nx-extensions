@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "e2e/ionic-react-e2e/tests",
   "targets": {
+    "e2e": {},
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]

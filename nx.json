@@ -116,11 +116,10 @@
     "projects": ["packages/*", "!common"],
     "projectsRelationship": "independent",
     "version": {
+      "conventionalCommits": true,
       "generatorOptions": {
-        "currentVersionResolver": "git-tag",
         "fallbackCurrentVersionResolver": "disk",
-        "updateDependents": "auto",
-        "specifierSource": "conventional-commits"
+        "updateDependents": "auto"
       }
     },
     "changelog": {

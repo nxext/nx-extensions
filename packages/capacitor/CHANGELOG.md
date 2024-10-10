@@ -1,3 +1,15 @@
+## 19.1.2 (2024-10-08)
+
+
+### 🩹 Fixes
+
+- **capacitor:** move nx deps to peer deps ([2ed1edc6](https://github.com/nxext/nx-extensions/commit/2ed1edc6))
+
+
+### ❤️  Thank You
+
+- Edouard Bozon @edbzn
+
 ## 19.1.1 (2024-10-07)
 
 
