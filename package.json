@@ -13,6 +13,7 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
+    "start:docs": "nx serve docs",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx lint",
