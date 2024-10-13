@@ -1,27 +1,34 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "Nxext-Application",
+  "$id": "Stencil-Application",
   "title": "",
   "type": "object",
   "properties": {
-    "name": {
+    "directory": {
       "type": "string",
-      "description": "",
+      "description": "A directory where the project is placed.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What directory would you like to use? (full path; e.g. apps/<my-app-name>)",
+      "alias": "d"
+    },
+    "name": {
+      "type": "string",
+      "description": "A name of the project.",
+      "alias": "n"
     },
     "tags": {
       "type": "string",
       "description": "Add tags to the project (used for linting)",
       "alias": "t"
     },
-    "directory": {
+    "linter": {
+      "description": "The tool to use for running lint checks.",
       "type": "string",
-      "description": "A directory where the project is placed",
-      "alias": "d"
+      "enum": ["eslint", "none"],
+      "default": "eslint"
     },
     "e2eTestRunner": {
       "type": "string",
@@ -38,12 +45,6 @@
     "skipFormat": {
       "type": "boolean",
       "default": false
-    },
-    "linter": {
-      "description": "The tool to use for running lint checks.",
-      "type": "string",
-      "enum": ["eslint", "none"],
-      "default": "eslint"
     },
     "style": {
       "description": "The file extension to be used for style files.",
@@ -66,5 +67,5 @@
       }
     }
   },
-  "required": ["name"]
+  "required": ["directory"]
 }

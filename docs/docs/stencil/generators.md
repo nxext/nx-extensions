@@ -28,17 +28,13 @@ nx g application ... --dry-run
 
 ### Options
 
-#### name (_**required**_)
-
-Type: `string`
-
-#### directory
+#### directory (_**required**_)
 
 Alias(es): d
 
 Type: `string`
 
-A directory where the project is placed
+A directory where the project is placed.
 
 #### e2eTestRunner
 
@@ -59,6 +55,14 @@ Type: `string`
 Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
+
+#### name
+
+Alias(es): n
+
+Type: `string`
+
+A name of the project.
 
 #### skipFormat
 
@@ -126,9 +130,13 @@ nx g library ... --dry-run
 
 ### Options
 
-#### name (_**required**_)
+#### directory (_**required**_)
+
+Alias(es): d
 
 Type: `string`
+
+A directory where the project is placed.
 
 #### buildable
 
@@ -143,14 +151,6 @@ Default: `true`
 Type: `boolean`
 
 Generate a default component.
-
-#### directory
-
-Alias(es): d
-
-Type: `string`
-
-A directory where the project is placed
 
 #### e2eTestRunner
 
@@ -177,6 +177,14 @@ Type: `string`
 Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
+
+#### name
+
+Alias(es): n
+
+Type: `string`
+
+A name of the project.
 
 #### publishable
 
@@ -268,7 +276,7 @@ Alias(es): d
 
 Type: `string`
 
-A directory where the project is placed
+A directory where the project is placed.
 
 #### skipFormat
 

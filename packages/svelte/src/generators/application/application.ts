@@ -21,7 +21,6 @@ export async function applicationGenerator(
   schema: Schema
 ): Promise<GeneratorCallback> {
   return await applicationGeneratorInternal(host, {
-    projectNameAndRootFormat: 'derived',
     ...schema,
   });
 }

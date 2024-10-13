@@ -7,7 +7,7 @@ import { Tree } from '@nx/devkit';
 describe('Preact app schematic', () => {
   let host: Tree;
   const options: PreactApplicationSchema = {
-    name: 'test',
+    directory: 'apps/test',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
@@ -20,8 +20,8 @@ describe('Preact app schematic', () => {
   describe('Vite bundle', () => {
     it('should add vite specific files', async () => {
       await applicationGenerator(host, { ...options });
-      expect(host.exists(`apps/${options.name}/public/index.html`)).toBeFalsy();
-      expect(host.exists(`apps/${options.name}/index.html`)).toBeTruthy();
+      expect(host.exists(`apps/test/public/index.html`)).toBeFalsy();
+      expect(host.exists(`apps/test/index.html`)).toBeTruthy();
     });
   });
 });

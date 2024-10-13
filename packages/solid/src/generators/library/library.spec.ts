@@ -7,7 +7,7 @@ import { libraryGenerator } from './library';
 describe('solid library schematic', () => {
   let tree: Tree;
   const options: SolidLibrarySchema = {
-    name: 'myLib',
+    directory: 'libs/my-lib',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',

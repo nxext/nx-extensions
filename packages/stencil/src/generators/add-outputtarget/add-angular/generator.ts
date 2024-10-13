@@ -30,12 +30,12 @@ async function prepareAngularLibrary(
   options: AddOutputtargetSchematicSchema
 ) {
   const angularProjectName = `${options.projectName}-angular`;
-  const { libsDir } = getWorkspaceLayout(host);
+  const angularProjectDir = `libs/${angularProjectName}`;
 
   await ensurePackage('@nx/angular', NX_VERSION);
   const generators = await import('@nx/angular/generators');
   const libraryTarget = await generators.libraryGenerator(host, {
-    name: angularProjectName,
+    directory: angularProjectDir,
     skipFormat: true,
     publishable: options.publishable,
     importPath: options.importPath,

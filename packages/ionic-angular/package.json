@@ -26,7 +26,7 @@
     "@phenomnomnominal/tsquery": "~5.0.1"
   },
   "peerDependencies": {
-    "@nx/devkit": "^19.0.0",
-    "@nx/angular": "^19.0.0"
+    "@nx/devkit": "^20.0.0",
+    "@nx/angular": "^20.0.0"
   }
 }

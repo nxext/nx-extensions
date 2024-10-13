@@ -1,12 +1,12 @@
 import { Linter } from '@nx/eslint';
 
 export interface PreactApplicationSchema {
-  name: string;
+  directory: string;
+  name?: string;
   tags?: string;
   linter: Linter;
   unitTestRunner: 'vitest' | 'jest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
-  directory?: string;
   host?: string;
   port?: number;
 }

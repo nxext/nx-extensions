@@ -7,14 +7,22 @@ const options: AddExecutorSchema = {
 };
 
 describe('Add Executor', () => {
-  let context: ExecutorContext;
+  let context: Pick<
+    ExecutorContext,
+    | 'root'
+    | 'cwd'
+    | 'projectsConfigurations'
+    | 'isVerbose'
+    | 'projectName'
+    | 'targetName'
+  >;
 
   beforeEach(async () => {
     const projectName = 'example';
     context = {
       root: '/root',
       cwd: '/root',
-      workspace: {
+      projectsConfigurations: {
         version: 2,
         projects: {
           [projectName]: {
@@ -30,7 +38,7 @@ describe('Add Executor', () => {
   });
 
   xit('can run', async () => {
-    const output = await executor(options, context);
+    const output = await executor(options, context as ExecutorContext);
     expect(output.success).toBe(true);
   });
 });

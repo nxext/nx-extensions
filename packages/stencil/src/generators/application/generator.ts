@@ -16,17 +16,25 @@ import { join } from 'path';
 import { addProject } from './lib/add-project';
 import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
+import {
+  determineProjectNameAndRootOptions,
+  ensureProjectName,
+} from '@nx/devkit/src/generators/project-name-and-root-utils';
 
-function normalizeOptions(
+async function normalizeOptions(
   host: Tree,
   options: RawApplicationSchema
-): ApplicationSchema {
-  const { appsDir } = getWorkspaceLayout(host);
-  const projectName = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${projectName}`
-    : projectName;
-  const projectRoot = `${appsDir}/${projectDirectory}`;
+): Promise<ApplicationSchema> {
+  await ensureProjectName(host, options, 'application');
+  const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
+    host,
+    {
+      name: options.name,
+      projectType: 'application',
+      directory: options.directory,
+    }
+  );
+
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -52,9 +60,10 @@ function normalizeOptions(
 
   return {
     ...options,
+    name: projectName,
     projectName,
     projectRoot,
-    projectDirectory,
+    projectDirectory: projectRoot,
     parsedTags,
     e2eProjectName,
     e2eProjectRoot,
@@ -89,7 +98,7 @@ export async function applicationGenerator(
   host: Tree,
   schema: RawApplicationSchema
 ) {
-  const options = normalizeOptions(host, schema);
+  const options = await normalizeOptions(host, schema);
   const initTask = await initGenerator(host, {
     ...options,
     skipFormat: true,

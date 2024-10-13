@@ -3,6 +3,7 @@ import { createTestUILib } from '../../utils/testing';
 import { SupportedStyles } from '../../stencil-core-utils';
 import { names, Tree } from '@nx/devkit';
 import { storybookConfigurationGenerator } from '../storybook-configuration/generator';
+import { uniq } from '@nx/plugin/testing';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
@@ -14,14 +15,16 @@ describe('component schematic', () => {
   jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('15.7.0');
 
   let tree: Tree;
-  const projectName = 'test-project';
+  const projectName = uniq('testprojekt');
+  const projectAppDirectory = `apps/${projectName}`;
+  const projectLibDirectory = `libs/${projectName}`;
   const options: ComponentSchema = {
     name: 'test-component',
     project: projectName,
   };
 
   beforeEach(async () => {
-    tree = await createTestUILib(projectName, SupportedStyles.scss);
+    tree = await createTestUILib(projectLibDirectory, SupportedStyles.scss);
   });
 
   it('should generate files', async () => {
@@ -29,27 +32,27 @@ describe('component schematic', () => {
 
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.tsx'
+        `${projectLibDirectory}/src/components/test-component/test-component.tsx`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.e2e.ts'
+        `${projectLibDirectory}/src/components/test-component/test-component.e2e.ts`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.spec.tsx'
+        `${projectLibDirectory}/src/components/test-component/test-component.spec.tsx`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.scss'
+        `${projectLibDirectory}/src/components/test-component/test-component.scss`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.stories.tsx'
+        `${projectLibDirectory}/src/components/test-component/test-component.stories.tsx`
       )
     ).toBeFalsy();
   });
@@ -62,22 +65,22 @@ describe('component schematic', () => {
 
     expect(
       tree.exists(
-        'libs/test-project/src/components/sub-dir/test-component/test-component.tsx'
+        `${projectLibDirectory}/src/components/sub-dir/test-component/test-component.tsx`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/sub-dir/test-component/test-component.e2e.ts'
+        `${projectLibDirectory}/src/components/sub-dir/test-component/test-component.e2e.ts`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/sub-dir/test-component/test-component.spec.tsx'
+        `${projectLibDirectory}/src/components/sub-dir/test-component/test-component.spec.tsx`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/sub-dir/test-component/test-component.scss'
+        `${projectLibDirectory}/src/components/sub-dir/test-component/test-component.scss`
       )
     ).toBeTruthy();
   });
@@ -91,27 +94,27 @@ describe('component schematic', () => {
 
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.tsx'
+        `${projectLibDirectory}/src/components/test-component/test-component.tsx`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.e2e.ts'
+        `${projectLibDirectory}/src/components/test-component/test-component.e2e.ts`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.spec.tsx'
+        `${projectLibDirectory}/src/components/test-component/test-component.spec.tsx`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.scss'
+        `${projectLibDirectory}/src/components/test-component/test-component.scss`
       )
     ).toBeTruthy();
     expect(
       tree.exists(
-        'libs/test-project/src/components/test-component/test-component.stories.tsx'
+        `${projectLibDirectory}/src/components/test-component/test-component.stories.tsx`
       )
     ).toBeTruthy();
   });
@@ -131,7 +134,7 @@ describe('component schematic', () => {
       classPathValue = `@proj/${options.project}/${options.name}`;
       className = names(options.name).className;
       contents = tree.read(
-        'libs/test-project/src/components/test-component/test-component.stories.tsx',
+        `${projectLibDirectory}/src/components/test-component/test-component.stories.tsx`,
         'utf-8'
       );
     };

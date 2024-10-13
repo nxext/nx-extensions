@@ -8,9 +8,11 @@ import { libraryGenerator } from '../library/generator';
 
 describe('make-lib-buildable schematic', () => {
   let host: Tree;
-  const name = uniq('testproject');
+  const projectName = uniq('testprojekt');
+  const projectAppDirectory = `apps/${projectName}`;
+  const projectLibDirectory = `libs/${projectName}`;
   const options: MakeLibBuildableSchema = {
-    name,
+    name: projectName,
     style: SupportedStyles.css,
     importPath: '@my/lib',
   };
@@ -24,7 +26,7 @@ describe('make-lib-buildable schematic', () => {
       return json;
     });
     await libraryGenerator(host, {
-      name: options.name,
+      directory: projectLibDirectory,
       style: SupportedStyles.css,
       importPath: options.importPath,
       buildable: false,
@@ -35,12 +37,12 @@ describe('make-lib-buildable schematic', () => {
   it('should add outputTargets', async () => {
     await makeLibBuildableGenerator(host, options);
 
-    expect(host.read(`libs/${name}/stencil.config.ts`).toString('utf-8'))
+    expect(host.read(`libs/${projectName}/stencil.config.ts`).toString('utf-8'))
       .toMatchInlineSnapshot(`
       "import { Config } from '@stencil/core';
 
       export const config: Config = {
-        namespace: '${name}',
+        namespace: '${projectName}',
         taskQueue: 'async',
         sourceMap: true,
 
@@ -80,7 +82,7 @@ describe('make-lib-buildable schematic', () => {
   it('should add outputTargets', async () => {
     await makeLibBuildableGenerator(host, options);
 
-    const packageJson = readJson(host, `libs/${name}/package.json`);
+    const packageJson = readJson(host, `libs/${projectName}/package.json`);
     expect(packageJson['name']).toEqual(`@my/lib`);
   });
 
@@ -89,16 +91,18 @@ describe('make-lib-buildable schematic', () => {
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
     expect(tsConfig.compilerOptions.paths['@my/lib']).toEqual([
-      `dist/libs/${name}`,
+      `dist/libs/${projectName}`,
     ]);
   });
 });
 
 describe('make-lib-buildable schematic using defaults', () => {
   let host: Tree;
-  const name = uniq('testproject');
+  const projectName = uniq('testprojekt');
+  const projectAppDirectory = `apps/${projectName}`;
+  const projectLibDirectory = `libs/${projectName}`;
   const options: MakeLibBuildableSchema = {
-    name,
+    name: projectName,
     style: SupportedStyles.css,
   };
 
@@ -106,7 +110,7 @@ describe('make-lib-buildable schematic using defaults', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
 
     await libraryGenerator(host, {
-      name: options.name,
+      directory: projectLibDirectory,
       style: SupportedStyles.css,
       importPath: options.importPath,
       buildable: false,
@@ -118,8 +122,8 @@ describe('make-lib-buildable schematic using defaults', () => {
     await makeLibBuildableGenerator(host, options);
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
-    expect(tsConfig.compilerOptions.paths[`@proj/${name}`]).toEqual([
-      `dist/libs/${name}`,
+    expect(tsConfig.compilerOptions.paths[`@proj/${projectName}`]).toEqual([
+      `dist/libs/${projectName}`,
     ]);
   });
 });

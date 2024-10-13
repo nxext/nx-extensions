@@ -7,7 +7,7 @@ import { libraryGenerator } from './library';
 describe('preact library schematic', () => {
   let host;
   const options: PreactLibrarySchema = {
-    name: 'test',
+    directory: 'libs/test',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
@@ -29,11 +29,11 @@ describe('preact library schematic', () => {
     await libraryGenerator(host, options);
 
     // expect(tree.exists(`libs/${options.name}/preact.config.cjs`)).toBeTruthy();
-    expect(host.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
-    expect(host.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
-    expect(host.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
-    expect(host.exists(`libs/${options.name}/.eslintrc.json`)).toBeFalsy();
-    expect(host.exists(`libs/${options.name}/.eslintrc.js`)).toBeTruthy();
+    expect(host.exists(`libs/test/tsconfig.lib.json`)).toBeTruthy();
+    expect(host.exists(`libs/test/tsconfig.spec.json`)).toBeTruthy();
+    expect(host.exists(`libs/test/tsconfig.json`)).toBeTruthy();
+    expect(host.exists(`libs/test/.eslintrc.json`)).toBeFalsy();
+    expect(host.exists(`libs/test/.eslintrc.js`)).toBeTruthy();
   });
 
   it('should fail if no importPath is provided with publishable', async () => {

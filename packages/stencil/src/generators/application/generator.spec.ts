@@ -24,7 +24,10 @@ describe('schematic:application', () => {
   jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('17.0.0');
 
   let host: Tree;
-  const options: RawApplicationSchema = { name: 'test', linter: Linter.None };
+  const options: RawApplicationSchema = {
+    directory: 'apps/test',
+    linter: Linter.None,
+  };
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
@@ -39,7 +42,10 @@ describe('schematic:application', () => {
   it('should add tags to nx.json', async () => {
     await applicationGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
 
-    const projectConfig = readProjectConfiguration(host, options.name);
+    const projectConfig = readProjectConfiguration(
+      host,
+      options.directory.replace('apps/', '')
+    );
     expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
 
@@ -55,7 +61,7 @@ describe('schematic:application', () => {
     await applicationGenerator(host, { ...options, linter: Linter.EsLint });
 
     const fileList = fileListForAppType(
-      options.name,
+      options.directory,
       SupportedStyles.css,
       'application'
     );
@@ -74,10 +80,9 @@ describe('schematic:application', () => {
     await applicationGenerator(host, { ...options, directory: 'subdir' });
 
     const fileList = fileListForAppType(
-      options.name,
+      options.directory,
       SupportedStyles.css,
-      'application',
-      'subdir'
+      'application'
     );
     fileList.forEach((file) => expect(host.exists(file)));
   });
@@ -106,7 +111,10 @@ describe('schematic:application', () => {
         style: SupportedStyles[style],
       });
 
-      const projectConfig = readProjectConfiguration(host, options.name);
+      const projectConfig = readProjectConfiguration(
+        host,
+        options.directory.replace('apps/', '')
+      );
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,

@@ -35,10 +35,8 @@ export async function configurationGenerator(
   const storybookTask = await configurationGenerator(host, {
     project: options.name,
     uiFramework,
-    configureCypress: options.configureCypress,
     js: options.js,
     linter: options.linter,
-    cypressDirectory: options.cypressDirectory,
     standaloneConfig: options.standaloneConfig,
     tsConfiguration: options.tsConfiguration,
     interactionTests: options.interactionTests,

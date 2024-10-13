@@ -6,7 +6,8 @@ export default async function runExecutor(
   options: SveltekitExecutorOptions,
   context: ExecutorContext
 ) {
-  const projectDir = context.workspace.projects[context.projectName].root;
+  const projectDir =
+    context.projectsConfigurations.projects[context.projectName].root;
   const projectRoot = joinPathFragments(`${context.root}/${projectDir}`);
   const portOption = options.command === 'dev' ? ` --port ${options.port}` : '';
 

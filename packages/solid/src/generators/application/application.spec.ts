@@ -7,11 +7,10 @@ import { Tree } from '@nx/devkit';
 describe('Solid app generator', () => {
   let tree: Tree;
   const options: Schema = {
-    name: 'myApp',
+    directory: 'apps/my-app',
     linter: Linter.EsLint,
     unitTestRunner: 'vitest',
     e2eTestRunner: 'cypress',
-    projectNameAndRootFormat: 'derived',
   };
 
   beforeEach(() => {
@@ -26,7 +25,12 @@ describe('Solid app generator', () => {
     });
 
     it('should add vite specific files as rootProject', async () => {
-      await applicationGenerator(tree, { ...options, rootProject: true });
+      await applicationGenerator(tree, {
+        ...options,
+        directory: '.',
+        name: options.directory.replace('apps/', ''),
+        rootProject: true,
+      });
       expect(tree.exists(`public/index.html`)).toBeFalsy();
       expect(tree.exists(`index.html`)).toBeTruthy();
     });
