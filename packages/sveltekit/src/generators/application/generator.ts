@@ -100,3 +100,5 @@ export async function applicationGenerator(
 
   return runTasksInSerial(...tasks);
 }
+
+export default applicationGenerator;

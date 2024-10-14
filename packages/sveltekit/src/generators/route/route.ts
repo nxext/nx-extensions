@@ -21,3 +21,5 @@ export interface SvelteRouteSchema {
 export async function routeGenerator(tree: Tree, options: SvelteRouteSchema) {
   createRouteInProject(tree, options);
 }
+
+export default routeGenerator;
