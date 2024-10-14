@@ -118,3 +118,5 @@ export async function libraryGeneratorInternal(
 
   return runTasksInSerial(initTask, viteTask, vitestTask, lintTask, jestTask);
 }
+
+export default libraryGenerator;
