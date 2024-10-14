@@ -130,3 +130,5 @@ export async function applicationGenerator(
 
   return runTasksInSerial(initTask, viteTask, lintTask, jestTask, cypressTask);
 }
+
+export default applicationGenerator;

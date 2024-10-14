@@ -82,3 +82,5 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
     await formatFiles(host);
   }
 }
+
+export default componentGenerator;

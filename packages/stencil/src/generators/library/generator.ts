@@ -108,3 +108,5 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
 
   return runTasksInSerial(initTask);
 }
+
+export default libraryGenerator;
