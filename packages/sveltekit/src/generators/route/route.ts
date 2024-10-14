@@ -1,5 +1,6 @@
 import { createRouteInProject } from './lib/create-route-in-project';
 import { Tree } from '@nx/devkit';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 export interface SvelteRouteSchema {
   name: string;
   project: string;
@@ -19,6 +20,8 @@ export interface SvelteRouteSchema {
 }
 
 export async function routeGenerator(tree: Tree, options: SvelteRouteSchema) {
+  assertNotUsingTsSolutionSetup(tree, '@nxext/sveltekit', 'route');
+
   createRouteInProject(tree, options);
 }
 

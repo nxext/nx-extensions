@@ -17,6 +17,7 @@ import { addFiles } from './lib/add-project-files';
 import { createSvelteCheckTarget } from './lib/targets';
 import { addVite } from './lib/add-vite';
 import { createOrEditViteConfig } from '@nx/vite';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 function normalizeOptions(
   host: Tree,
@@ -52,6 +53,8 @@ export async function applicationGenerator(
   host: Tree,
   schema: SveltekitGeneratorSchema
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/sveltekit', 'application');
+
   const tasks: GeneratorCallback[] = [];
   const options = normalizeOptions(host, schema);
 
