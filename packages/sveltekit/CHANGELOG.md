@@ -1,3 +1,13 @@
+## 20.0.1 (2024-10-14)
+
+### 🩹 Fixes
+
+- **sveltekit:** export default for all generators ([61df76d4](https://github.com/nxext/nx-extensions/commit/61df76d4))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 # 20.0.0 (2024-10-14)
 
 ### 🚀 Features

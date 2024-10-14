@@ -1,3 +1,13 @@
+## 20.0.1 (2024-10-14)
+
+### 🩹 Fixes
+
+- **preact:** export default for all generators ([ae156f78](https://github.com/nxext/nx-extensions/commit/ae156f78))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 # 20.0.0 (2024-10-14)
 
 ### 🚀 Features

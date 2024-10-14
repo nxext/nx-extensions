@@ -1,3 +1,13 @@
+## 20.0.1 (2024-10-14)
+
+### 🩹 Fixes
+
+- **solid:** export default for all generators ([cdd34de8](https://github.com/nxext/nx-extensions/commit/cdd34de8))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 # 20.0.0 (2024-10-14)
 
 ### 🚀 Features

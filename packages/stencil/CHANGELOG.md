@@ -1,3 +1,13 @@
+## 20.0.1 (2024-10-14)
+
+### 🩹 Fixes
+
+- **stencil:** export default for all generators ([7df02a4b](https://github.com/nxext/nx-extensions/commit/7df02a4b))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 # 20.0.0 (2024-10-14)
 
 ### 🚀 Features

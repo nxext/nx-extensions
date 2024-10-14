@@ -1,3 +1,13 @@
+## 20.0.1 (2024-10-14)
+
+### 🩹 Fixes
+
+- **svelte:** export default for all generators ([a931f048](https://github.com/nxext/nx-extensions/commit/a931f048))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 # 20.0.0 (2024-10-14)
 
 ### 🚀 Features
