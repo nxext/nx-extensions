@@ -11,11 +11,18 @@ import { Linter } from '@nx/eslint';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
 import { updateMainJs } from './lib/update-main-js';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function configurationGenerator(
   host: Tree,
   schema: StorybookConfigureSchema
 ) {
+  assertNotUsingTsSolutionSetup(
+    host,
+    '@nxext/svelte',
+    'storybook-configuration'
+  );
+
   const uiFramework = '@storybook/svelte-vite';
   const options = normalizeSchema(schema);
   const tasks: GeneratorCallback[] = [];
