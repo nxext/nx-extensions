@@ -11,11 +11,14 @@ import { ConfigurationGeneratorSchema } from './schema';
 import { addFiles, removeFiles } from './lib/files';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateJestConfig } from './lib/update-jest-config';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function configurationGenerator(
   host: Tree,
   schema: ConfigurationGeneratorSchema
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/ionic-angular', 'configuration');
+
   const options = await normalizeOptions(host, schema);
   const installTask = addDependencies(host);
   removeFiles(host, options);
