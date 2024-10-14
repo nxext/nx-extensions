@@ -6,11 +6,14 @@ import { formatFiles, Tree } from '@nx/devkit';
 import { runTasksInSerial } from '@nx/devkit';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function initGenerator<T extends InitSchema>(
   host: Tree,
   options: T
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'init');
+
   const dependenciesTask = addDependenciesByApptype(host, options.appType);
   const styleDependenciesTask = addStyledDependencies(host, options);
   const addPuppeteerTask = await addPuppeteer(host, options);

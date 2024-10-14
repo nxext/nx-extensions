@@ -18,6 +18,7 @@ import {
 } from '../../utils/targets';
 import { AppType } from '../../utils/typings';
 import { getProjectTsImportPath } from '../storybook-configuration/generator';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 function normalize(
   host: Tree,
@@ -59,6 +60,8 @@ export async function makeLibBuildableGenerator(
   host: Tree,
   schema: MakeLibBuildableSchema
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'make-lib-buildable');
+
   const options = normalize(host, schema);
 
   updateProjectConfig(host, options);

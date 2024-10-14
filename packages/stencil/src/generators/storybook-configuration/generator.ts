@@ -25,6 +25,7 @@ import { updateDependencies } from './lib/add-dependencies';
 import { updateLintConfig } from './lib/update-lint-config';
 import { StorybookConfigureSchema } from './schema';
 import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 /**
  * With Nx `npmScope` (eg: nx-workspace) and `projectName` (eg: nx-project), returns a path portion to be used for import statements or
@@ -43,6 +44,12 @@ export async function storybookConfigurationGenerator(
   host: Tree,
   rawSchema: StorybookConfigureSchema
 ) {
+  assertNotUsingTsSolutionSetup(
+    host,
+    '@nxext/stencil',
+    'storybook-configuration'
+  );
+
   const tasks: GeneratorCallback[] = [];
   const uiFramework = '@storybook/html-webpack5';
   const options = normalizeSchema(rawSchema);

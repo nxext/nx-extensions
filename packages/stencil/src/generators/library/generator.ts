@@ -20,6 +20,7 @@ import {
   determineProjectNameAndRootOptions,
   ensureProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 async function normalizeOptions(
   host: Tree,
@@ -81,6 +82,8 @@ function createFiles(host: Tree, options: LibrarySchema) {
 }
 
 export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'library');
+
   const options = await normalizeOptions(host, schema);
 
   if (options.publishable === true && !options.importPath) {

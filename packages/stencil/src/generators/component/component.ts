@@ -11,6 +11,7 @@ import {
 import { join } from 'path';
 import { insertStatement } from '../../utils/insert-statement';
 import { getProjectTsImportPath } from '../storybook-configuration/generator';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export interface ComponentSchema {
   name: string;
@@ -21,6 +22,8 @@ export interface ComponentSchema {
 }
 
 export async function componentGenerator(host: Tree, options: ComponentSchema) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'component');
+
   if (!/[-]/.test(options.name)) {
     throw new Error(stripIndents`
       "${options.name}" tag must contain a dash (-) to work as a valid web component. Please refer to
