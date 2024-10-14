@@ -63,3 +63,5 @@ function normalizeSchema(
     ...schema,
   };
 }
+
+export default configurationGenerator;
