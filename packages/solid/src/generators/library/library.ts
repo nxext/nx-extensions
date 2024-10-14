@@ -15,13 +15,17 @@ import { updateJestConfig } from './lib/update-jest-config';
 import { createFiles } from './lib/create-project-files';
 import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
-import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
+import {
+  determineProjectNameAndRootOptions,
+  ensureProjectName,
+} from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { createOrEditViteConfig } from '@nx/vite';
 
 async function normalizeOptions(
   host: Tree,
   options: SolidLibrarySchema
 ): Promise<NormalizedSchema> {
+  await ensureProjectName(host, options, 'library');
   const {
     projectName,
     names: projectNames,
@@ -32,16 +36,12 @@ async function normalizeOptions(
     projectType: 'library',
     directory: options.directory,
     importPath: options.importPath,
-    projectNameAndRootFormat: options.projectNameAndRootFormat,
-    callingGenerator: '@nxext/solid:library',
+    rootProject: false,
   });
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
   const fileName = options.simpleName
     ? projectNames.projectSimpleName
     : projectNames.projectFileName;
+
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -53,7 +53,7 @@ async function normalizeOptions(
     projectRoot,
     parsedTags,
     fileName,
-    projectDirectory,
+    projectDirectory: projectRoot,
     importPath,
   };
 }
@@ -69,7 +69,6 @@ function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
 
 export async function libraryGenerator(host: Tree, schema: SolidLibrarySchema) {
   return await libraryGeneratorInternal(host, {
-    projectNameAndRootFormat: 'derived',
     ...schema,
   });
 }

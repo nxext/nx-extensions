@@ -38,7 +38,7 @@
     },
     "directory": {
       "type": "string",
-      "description": "A directory where the lib is placed.",
+      "description": "A directory where the project is placed.",
       "alias": "d"
     },
     "publishable": {
@@ -60,5 +60,5 @@
       "default": false
     }
   },
-  "required": ["name"]
+  "required": ["directory"]
 }

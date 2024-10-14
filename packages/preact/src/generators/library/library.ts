@@ -19,19 +19,33 @@ import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
 import { createOrEditViteConfig } from '@nx/vite';
+import {
+  determineProjectNameAndRootOptions,
+  ensureProjectName,
+} from '@nx/devkit/src/generators/project-name-and-root-utils';
 
-function normalizeOptions(
+async function normalizeOptions(
   tree: Tree,
   options: PreactLibrarySchema
-): NormalizedSchema {
-  const { libsDir } = getWorkspaceLayout(tree);
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const fileName = projectName;
-  const projectRoot = joinPathFragments(`${libsDir}/${projectDirectory}`);
+): Promise<NormalizedSchema> {
+  await ensureProjectName(tree, options, 'library');
+  const {
+    projectName,
+    names: projectNames,
+    projectRoot,
+    importPath,
+  } = await determineProjectNameAndRootOptions(tree, {
+    name: options.name,
+    projectType: 'library',
+    directory: options.directory,
+    importPath: options.importPath,
+    rootProject: false,
+  });
+  const fileName =
+    /* options.simpleName
+    ? projectNames.projectSimpleName
+    :  */ projectNames.projectFileName;
+
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -42,7 +56,8 @@ function normalizeOptions(
     projectRoot,
     parsedTags,
     fileName,
-    projectDirectory,
+    projectDirectory: projectRoot,
+    importPath,
   };
 }
 
@@ -74,7 +89,7 @@ export async function libraryGenerator(
   host: Tree,
   schema: PreactLibrarySchema
 ) {
-  const options = normalizeOptions(host, schema);
+  const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(
       `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`

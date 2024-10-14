@@ -5,13 +5,14 @@ import { rmSync } from 'fs';
 describe('capacitor-project e2e', () => {
   let projectDirectory: string;
   const app = uniq('capacitor');
+  const appDir = `apps/${app}`;
 
   beforeAll(async () => {
     projectDirectory = createTestProject();
     installPlugin(projectDirectory, 'capacitor');
 
     await runNxCommandAsync(
-      `generate @nx/web:application ${app} --style=css --bundler=vite --e2eTestRunner=none --linter=none --projectNameAndRootFormat=derived --skipFormat=true`
+      `generate @nx/web:application ${appDir} --style=css --bundler=vite --e2eTestRunner=none --linter=none --skipFormat=true`
     );
     await runNxCommandAsync(
       `generate @nxext/capacitor:configuration --project=${app} --appName=test --appId=test --skipFormat=true`

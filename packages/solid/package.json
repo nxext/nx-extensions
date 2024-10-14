@@ -27,13 +27,13 @@
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@nx/devkit": "^19.0.0",
-    "@nx/vite": "^19.0.0",
-    "@nx/web": "^19.0.0",
-    "@nx/cypress": "^19.0.0",
-    "@nx/jest": "^19.0.0",
-    "@nx/eslint": "^19.0.0",
-    "@nx/js": "^19.0.0"
+    "@nx/devkit": "^20.0.0",
+    "@nx/vite": "^20.0.0",
+    "@nx/web": "^20.0.0",
+    "@nx/cypress": "^20.0.0",
+    "@nx/jest": "^20.0.0",
+    "@nx/eslint": "^20.0.0",
+    "@nx/js": "^20.0.0"
   },
   "nx-migrate": {
     "migrations": "./migrations.json"

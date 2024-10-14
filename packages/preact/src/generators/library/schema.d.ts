@@ -1,14 +1,13 @@
 import { Linter } from '@nx/eslint';
 
 export interface PreactLibrarySchema {
-  name: string;
+  directory: string;
+  name?: string;
   tags?: string;
-
   linter: Linter;
   unitTestRunner: 'vitest' | 'jest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
   buildable?: boolean;
-  directory?: string;
   publishable?: boolean;
   importPath?: string;
   skipFormat: boolean;
@@ -19,4 +18,5 @@ export interface NormalizedSchema extends PreactLibrarySchema {
   projectDirectory: string;
   fileName: string;
   parsedTags: string[];
+  importPath: string;
 }

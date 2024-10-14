@@ -16,33 +16,40 @@ import { MakeLibBuildableSchema } from '../../generators/make-lib-buildable/sche
 import { updateTsConfig } from './lib/update-tsconfig';
 import { addProject } from './lib/add-project';
 import { makeLibBuildableGenerator } from '../../generators/make-lib-buildable/make-lib-buildable';
-import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
+import {
+  determineProjectNameAndRootOptions,
+  ensureProjectName,
+} from '@nx/devkit/src/generators/project-name-and-root-utils';
 
-function normalizeOptions(
+async function normalizeOptions(
   host: Tree,
   options: RawLibrarySchema
-): LibrarySchema {
-  const { libsDir } = getWorkspaceLayout(host);
-  const npmScope = getNpmScope(host);
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${libsDir}/${projectDirectory}`;
+): Promise<LibrarySchema> {
+  await ensureProjectName(host, options, 'library');
+  const {
+    projectName,
+    names: projectNames,
+    projectRoot,
+    importPath,
+  } = await determineProjectNameAndRootOptions(host, {
+    name: options.name,
+    projectType: 'library',
+    directory: options.directory,
+    importPath: options.importPath,
+  });
+
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
 
   const style = calculateStyle(options.style);
   const appType = AppType.library;
-  const importPath = options.importPath || `@${npmScope}/${projectDirectory}`;
 
   return {
     ...options,
     projectName,
     projectRoot,
-    projectDirectory,
+    projectDirectory: projectRoot,
     parsedTags,
     style,
     appType,
@@ -74,7 +81,7 @@ function createFiles(host: Tree, options: LibrarySchema) {
 }
 
 export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
-  const options = normalizeOptions(host, schema);
+  const options = await normalizeOptions(host, schema);
 
   if (options.publishable === true && !options.importPath) {
     throw new Error(

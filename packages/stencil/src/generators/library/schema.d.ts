@@ -3,9 +3,9 @@ import { SupportedStyles } from '../../stencil-core-utils';
 import { Linter } from '@nx/eslint';
 
 export interface RawLibrarySchema {
-  name: string;
+  directory: string;
+  name?: string;
   tags?: string;
-  directory?: string;
   skipFormat?: boolean;
   buildable: boolean;
   publishable: boolean;
@@ -18,6 +18,7 @@ export interface RawLibrarySchema {
 }
 
 export interface LibrarySchema extends RawLibrarySchema {
+  name: string;
   projectName: string;
   projectRoot: string;
   projectDirectory: string;

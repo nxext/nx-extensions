@@ -1,14 +1,12 @@
 import { Linter } from '@nx/eslint';
-import { ProjectNameAndRootFormat } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 export interface Schema {
-  name: string;
+  directory: string;
+  name?: string;
   tags?: string;
   linter: Linter;
   unitTestRunner: 'jest' | 'vitest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
-  directory?: string;
-  projectNameAndRootFormat?: ProjectNameAndRootFormat;
   rootProject?: boolean;
   host?: string;
   port?: number;

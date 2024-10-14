@@ -3,9 +3,9 @@ import { SupportedStyles } from '../../stencil-core-utils';
 import { Linter } from '@nx/eslint';
 
 export interface RawApplicationSchema {
-  name: string;
+  directory: string;
+  name?: string;
   tags?: string;
-  directory?: string;
   style?: SupportedStyles;
   skipFormat?: boolean;
   appType?: AppType;
@@ -16,6 +16,7 @@ export interface RawApplicationSchema {
 }
 
 export interface ApplicationSchema extends RawApplicationSchema {
+  name: string;
   projectName: string;
   projectRoot: string;
   projectDirectory: string;

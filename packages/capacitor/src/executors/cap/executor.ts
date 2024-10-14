@@ -16,7 +16,8 @@ export default async function* runExecutor(
   options: CommandExecutorSchema,
   context: ExecutorContext
 ) {
-  const projectConfig = context.workspace.projects[context.projectName];
+  const projectConfig =
+    context.projectsConfigurations.projects[context.projectName];
   const projectRoot = projectConfig.root;
   const projectDistDir = projectConfig.targets['build'].options.outputPath;
   const projectRootPath = normalizePath(`${context.root}/${projectRoot}`);

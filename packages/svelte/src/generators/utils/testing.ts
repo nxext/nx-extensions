@@ -5,7 +5,7 @@ import { Linter } from '@nx/eslint';
 import { libraryGenerator } from '../library/library';
 
 export async function createTestProject(
-  name: string,
+  directory: string,
   type: ProjectType = 'application',
   tree: Tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' }),
   unitTestrunner: 'none' | 'jest' = 'none',
@@ -26,7 +26,7 @@ export async function createTestProject(
 
   if (type === 'application') {
     await applicationGenerator(tree, {
-      name: name,
+      directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
       e2eTestRunner: e2eTestrunner,
@@ -34,7 +34,7 @@ export async function createTestProject(
   }
   if (type === 'library') {
     await libraryGenerator(tree, {
-      name: name,
+      directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
       e2eTestRunner: e2eTestrunner,

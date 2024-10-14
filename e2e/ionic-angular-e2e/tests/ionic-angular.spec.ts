@@ -5,13 +5,14 @@ import { rmSync } from 'fs';
 describe('ionic-angular-project e2e', () => {
   let projectDirectory: string;
   const app = uniq('ionic-angular');
+  const appDir = `apps/${app}`;
 
   beforeAll(async () => {
     projectDirectory = createTestProject();
     installPlugin(projectDirectory, 'ionic-angular');
 
     await runNxCommandAsync(
-      `generate @nx/angular:application ${app} --style=css --minimal --e2eTestRunner=none --linter=none --projectNameAndRootFormat=derived --skipFormat=true`
+      `generate @nx/angular:application ${appDir} --style=css --minimal --e2eTestRunner=none --linter=none --skipFormat=true`
     );
     await runNxCommandAsync(
       `generate @nxext/ionic-angular:configuration --project=${app} --appName=test --appId=test --skipFormat=true`

@@ -14,7 +14,7 @@ import { libraryGenerator } from './generator';
 describe('library', () => {
   let host: Tree;
   const options: RawLibrarySchema = {
-    name: 'test',
+    directory: 'libs/test',
     buildable: false,
     publishable: false,
     component: true,
@@ -35,7 +35,10 @@ describe('library', () => {
   it('should add tags to nx.json', async () => {
     await libraryGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
 
-    const projectConfig = readProjectConfiguration(host, options.name);
+    const projectConfig = readProjectConfiguration(
+      host,
+      options.directory.replace('libs/', '')
+    );
     expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
 
@@ -43,7 +46,7 @@ describe('library', () => {
     await libraryGenerator(host, options);
 
     const fileList = fileListForAppType(
-      options.name,
+      options.directory,
       SupportedStyles.css,
       'library'
     );
@@ -73,13 +76,12 @@ describe('library', () => {
   });
 
   it('should create files in specified dir', async () => {
-    await libraryGenerator(host, { ...options, directory: 'subdir' });
+    await libraryGenerator(host, { ...options, directory: 'libs/subdir/test' });
 
     const fileList = fileListForAppType(
-      options.name,
+      options.directory,
       SupportedStyles.css,
-      'library',
-      'subdir'
+      'library'
     );
     fileList.forEach((file) => expect(host.exists(file)));
   });
@@ -125,7 +127,7 @@ describe('library', () => {
 
   describe('default libraries', () => {
     const options: RawLibrarySchema = {
-      name: 'testlib',
+      directory: 'libs/testlib',
       buildable: false,
       publishable: false,
     };
@@ -158,7 +160,7 @@ describe('library', () => {
 
   describe('buildable libraries', () => {
     const options: RawLibrarySchema = {
-      name: 'testlib',
+      directory: 'libs/testlib',
       buildable: true,
       publishable: false,
       component: true,
@@ -210,7 +212,7 @@ describe('library', () => {
 
   describe('publishable libraries', () => {
     const options: RawLibrarySchema = {
-      name: 'testlib',
+      directory: 'libs/testlib',
       buildable: false,
       publishable: true,
       importPath: '@myorg/mylib',
@@ -220,10 +222,8 @@ describe('library', () => {
     it('should throw error if publishable without importPath', async () => {
       try {
         await libraryGenerator(host, {
-          name: options.name,
-          component: true,
-          buildable: false,
-          publishable: true,
+          ...options,
+          importPath: void 0,
         });
       } catch (error) {
         expect(error.message).toContain(

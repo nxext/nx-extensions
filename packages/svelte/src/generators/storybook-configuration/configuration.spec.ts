@@ -16,7 +16,7 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
 
     await libraryGenerator(tree, {
-      name: 'test-ui-lib',
+      directory: 'libs/test-ui-lib',
     });
   });
 
@@ -68,7 +68,7 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
 `;
     // Setup a new lib
     await libraryGenerator(tree, {
-      name: 'test-ui-lib-2',
+      directory: 'libs/test-ui-lib-2',
     });
 
     tree.write('.storybook/main.js', newContents);
@@ -83,7 +83,7 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
   it('should update workspace file for libs', async () => {
     // Setup a new lib
     await libraryGenerator(tree, {
-      name: 'test-ui-lib-2',
+      directory: 'libs/test-ui-lib-2',
     });
     await configurationGenerator(tree, {
       name: 'test-ui-lib-2',

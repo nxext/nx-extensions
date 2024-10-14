@@ -24,6 +24,7 @@ async function prepareReactLibrary(
 ) {
   const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
+  const reactProjectDir = `libs/${reactProjectName}`;
 
   const jsInitTask = await jsInitGenerator(host, {
     ...options,
@@ -34,7 +35,7 @@ async function prepareReactLibrary(
   ensurePackage('@nx/react', NX_VERSION);
   const { libraryGenerator } = await import('@nx/react');
   const libraryTarget = await libraryGenerator(host, {
-    name: reactProjectName,
+    directory: reactProjectDir,
     style: 'css',
     publishable: options.publishable,
     bundler: options.publishable ? 'rollup' : 'none',

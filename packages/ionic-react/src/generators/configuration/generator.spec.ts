@@ -44,7 +44,7 @@ describe('application', () => {
   beforeEach(async () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     await applicationGenerator(host, {
-      name: options.project,
+      directory: projectRoot,
       skipFormat: true,
     });
   });

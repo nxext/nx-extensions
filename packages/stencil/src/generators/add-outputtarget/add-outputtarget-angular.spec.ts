@@ -6,7 +6,9 @@ import { AddOutputtargetSchematicSchema } from './schema';
 
 xdescribe('add-outputtarget angular', () => {
   let tree: Tree;
-  const projectName = uniq('testproject');
+  const projectName = uniq('testprojekt');
+  const projectAppDirectory = `apps/${projectName}`;
+  const projectLibDirectory = `libs/${projectName}`;
   const options = {
     projectName: projectName,
     publishable: false,
@@ -14,7 +16,7 @@ xdescribe('add-outputtarget angular', () => {
   };
 
   beforeEach(async () => {
-    tree = await createTestUILib(projectName);
+    tree = await createTestUILib(projectLibDirectory);
   });
 
   describe('using angular', () => {

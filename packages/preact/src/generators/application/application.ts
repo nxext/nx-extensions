@@ -18,19 +18,32 @@ import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
 import { createOrEditViteConfig } from '@nx/vite';
+import {
+  determineProjectNameAndRootOptions,
+  ensureProjectName,
+} from '@nx/devkit/src/generators/project-name-and-root-utils';
 
-function normalizeOptions(
+async function normalizeOptions(
   tree: Tree,
   options: PreactApplicationSchema
-): NormalizedSchema {
-  const { appsDir } = getWorkspaceLayout(tree);
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? joinPathFragments(`${names(options.directory).fileName}/${name}`)
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const fileName = projectName;
-  const projectRoot = joinPathFragments(`${appsDir}/${projectDirectory}`);
+): Promise<NormalizedSchema> {
+  await ensureProjectName(tree, options, 'application');
+  const {
+    projectName,
+    projectRoot,
+    names: projectNames,
+  } = await determineProjectNameAndRootOptions(tree, {
+    name: options.name,
+    projectType: 'application',
+    directory: options.directory,
+    rootProject: false,
+  });
+  // options.rootProject = appProjectRoot === '.';
+  const fileName =
+    /* options.simpleName
+    ? projectNames.projectSimpleName
+    :  */ projectNames.projectFileName;
+
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -46,7 +59,7 @@ function normalizeOptions(
     e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
   }
 
-  const e2eProjectName = `${name}-e2e`;
+  const e2eProjectName = `${projectName}-e2e`;
   const e2eProjectRoot = `${projectRoot}-e2e`;
   const e2eWebServerAddress = `http://localhost:${e2ePort}`;
 
@@ -60,7 +73,7 @@ function normalizeOptions(
     e2eProjectName,
     e2eProjectRoot,
     fileName,
-    projectDirectory,
+    projectDirectory: projectRoot,
     skipFormat: false,
   };
 }
@@ -84,7 +97,7 @@ export async function applicationGenerator(
   tree: Tree,
   schema: PreactApplicationSchema
 ) {
-  const options = normalizeOptions(tree, schema);
+  const options = await normalizeOptions(tree, schema);
 
   const initTask = await initGenerator(tree, { ...options, skipFormat: true });
 

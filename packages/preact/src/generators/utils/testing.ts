@@ -5,7 +5,7 @@ import { Linter } from '@nx/eslint';
 import { libraryGenerator } from '../library/library';
 
 export async function createTestProject(
-  name: string,
+  directory: string,
   type: ProjectType = 'application',
   unitTestrunner: 'none' | 'jest' = 'none',
   e2eTestrunner: 'none' | 'cypress' = 'none'
@@ -14,7 +14,7 @@ export async function createTestProject(
 
   if (type === 'application') {
     await applicationGenerator(host, {
-      name: name,
+      directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
       e2eTestRunner: e2eTestrunner,
@@ -22,7 +22,7 @@ export async function createTestProject(
   }
   if (type === 'library') {
     await libraryGenerator(host, {
-      name: name,
+      directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
       e2eTestRunner: e2eTestrunner,

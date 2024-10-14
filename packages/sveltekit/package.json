@@ -26,11 +26,11 @@
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@nx/devkit": "^19.0.0",
-    "nx": "^19.0.0",
-    "@nx/vite": "^19.0.0",
-    "@nx/eslint": "^19.0.0",
-    "@nx/js": "^19.0.0",
-    "@nx/workspace": "^19.0.0"
+    "@nx/devkit": "^20.0.0",
+    "nx": "^20.0.0",
+    "@nx/vite": "^20.0.0",
+    "@nx/eslint": "^20.0.0",
+    "@nx/js": "^20.0.0",
+    "@nx/workspace": "^20.0.0"
   }
 }

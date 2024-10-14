@@ -28,17 +28,13 @@ nx g application ... --dry-run
 
 ### Options
 
-#### name (_**required**_)
-
-Type: `string`
-
-#### directory
+#### directory (_**required**_)
 
 Alias(es): d
 
 Type: `string`
 
-A directory where the lib is placed.
+A directory where the project is placed.
 
 #### e2eTestRunner
 
@@ -64,9 +60,17 @@ Default: `eslint`
 
 Type: `string`
 
-Possible values: `eslint`
+Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
+
+#### name
+
+Alias(es): n
+
+Type: `string`
+
+A name of the project.
 
 #### port
 
@@ -132,9 +136,13 @@ nx g library ... --dry-run
 
 ### Options
 
-#### name (_**required**_)
+#### directory (_**required**_)
+
+Alias(es): d
 
 Type: `string`
+
+A directory where the project is placed.
 
 #### buildable
 
@@ -143,14 +151,6 @@ Default: `false`
 Type: `boolean`
 
 Generate a buildable library.
-
-#### directory
-
-Alias(es): d
-
-Type: `string`
-
-A directory where the lib is placed.
 
 #### e2eTestRunner
 
@@ -177,6 +177,10 @@ Type: `string`
 Possible values: `eslint`
 
 The tool to use for running lint checks.
+
+#### name
+
+Type: `string`
 
 #### publishable
 

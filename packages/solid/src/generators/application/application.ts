@@ -16,27 +16,31 @@ import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { addVite } from './lib/add-vite';
 import { createFiles } from './lib/create-project-files';
-import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
+import {
+  determineProjectNameAndRootOptions,
+  ensureProjectName,
+} from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 async function normalizeOptions<T extends Schema = Schema>(
   host: Tree,
-  options: Schema,
-  callingGenerator = '@nxext/solid:application'
+  options: Schema
 ): Promise<NormalizedSchema<T>> {
+  await ensureProjectName(host, options, 'application');
   const {
-    projectName: appProjectName,
-    projectRoot: appProjectRoot,
-    projectNameAndRootFormat,
+    projectName,
+    projectRoot,
+    names: projectNames,
   } = await determineProjectNameAndRootOptions(host, {
     name: options.name,
     projectType: 'application',
     directory: options.directory,
-    projectNameAndRootFormat: options.projectNameAndRootFormat,
     rootProject: options.rootProject,
-    callingGenerator,
   });
-  options.rootProject = appProjectRoot === '.';
-  options.projectNameAndRootFormat = projectNameAndRootFormat;
+  options.rootProject = projectRoot === '.';
+  const fileName =
+    /* options.simpleName
+    ? projectNames.projectSimpleName
+    :  */ projectNames.projectFileName;
 
   const nxJson = readNxJson(host);
 
@@ -49,20 +53,18 @@ async function normalizeOptions<T extends Schema = Schema>(
     e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
   }
 
-  const e2eProjectName = options.rootProject ? 'e2e' : `${appProjectName}-e2e`;
-  const e2eProjectRoot = options.rootProject ? 'e2e' : `${appProjectRoot}-e2e`;
+  const e2eProjectName = options.rootProject ? 'e2e' : `${projectName}-e2e`;
+  const e2eProjectRoot = options.rootProject ? 'e2e' : `${projectRoot}-e2e`;
   const e2eWebServerAddress = `http://localhost:${e2ePort}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
-  //const fileName = options.pascalCaseFiles ? 'App' : 'app';
-  const fileName = 'App';
 
   return {
     ...options,
     name: names(options.name).fileName,
-    projectName: appProjectName,
-    appProjectRoot,
+    projectName,
+    appProjectRoot: projectRoot,
     e2eProjectName,
     e2eProjectRoot,
     e2eWebServerAddress,
@@ -78,7 +80,6 @@ export async function applicationGenerator(
   schema: Schema
 ): Promise<GeneratorCallback> {
   return await applicationGeneratorInternal(host, {
-    projectNameAndRootFormat: 'derived',
     ...schema,
   });
 }

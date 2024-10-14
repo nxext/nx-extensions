@@ -1,27 +1,34 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "Nxext-Library",
+  "$id": "Stencil-Library",
   "title": "",
   "type": "object",
   "properties": {
-    "name": {
+    "directory": {
       "type": "string",
-      "description": "",
+      "description": "A directory where the project is placed.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What directory would you like to use? (full path; e.g. libs/<my-lib-name>)",
+      "alias": "d"
+    },
+    "name": {
+      "type": "string",
+      "description": "A name of the project.",
+      "alias": "n"
     },
     "tags": {
       "type": "string",
       "description": "Add tags to the project (used for linting)",
       "alias": "t"
     },
-    "directory": {
+    "linter": {
+      "description": "The tool to use for running lint checks.",
       "type": "string",
-      "description": "A directory where the project is placed",
-      "alias": "d"
+      "enum": ["eslint", "none"],
+      "default": "eslint"
     },
     "skipFormat": {
       "type": "boolean",
@@ -51,12 +58,6 @@
       "description": "Test runner to use for unit tests.",
       "default": "jest"
     },
-    "linter": {
-      "description": "The tool to use for running lint checks.",
-      "type": "string",
-      "enum": ["eslint", "none"],
-      "default": "eslint"
-    },
     "component": {
       "type": "boolean",
       "description": "Generate a default component.",
@@ -83,5 +84,5 @@
       }
     }
   },
-  "required": ["name"]
+  "required": ["directory"]
 }

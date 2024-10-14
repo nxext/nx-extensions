@@ -7,7 +7,7 @@ import { libraryGenerator } from './library';
 describe('svelte library schematic', () => {
   let tree;
   const options: SvelteLibrarySchema = {
-    name: 'test',
+    directory: 'libs/my-lib',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
@@ -30,12 +30,12 @@ describe('svelte library schematic', () => {
   it('should add Svelte project files', async () => {
     await libraryGenerator(tree, options);
 
-    expect(tree.exists(`libs/${options.name}/svelte.config.cjs`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.lib.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.spec.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/tsconfig.json`)).toBeTruthy();
-    expect(tree.exists(`libs/${options.name}/.eslintrc.json`)).toBeFalsy();
-    expect(tree.exists(`libs/${options.name}/.eslintrc.js`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/svelte.config.cjs`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/tsconfig.lib.json`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/tsconfig.spec.json`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/tsconfig.json`)).toBeTruthy();
+    expect(tree.exists(`libs/my-lib/.eslintrc.json`)).toBeFalsy();
+    expect(tree.exists(`libs/my-lib/.eslintrc.js`)).toBeTruthy();
   });
 
   it('should fail if no importPath is provided with publishable', async () => {
@@ -56,19 +56,13 @@ describe('svelte library schematic', () => {
       ...options,
       unitTestRunner: 'vitest',
     });
-    const tsconfigApp = readJson(
-      tree,
-      `libs/${options.name}/tsconfig.lib.json`
-    );
+    const tsconfigApp = readJson(tree, `libs/my-lib/tsconfig.lib.json`);
     expect(tsconfigApp.compilerOptions.types).toEqual([
       'svelte',
       'node',
       'vite/client',
     ]);
-    const tsconfigSpec = readJson(
-      tree,
-      `libs/${options.name}/tsconfig.spec.json`
-    );
+    const tsconfigSpec = readJson(tree, `libs/my-lib/tsconfig.spec.json`);
     expect(tsconfigSpec.compilerOptions.types).toEqual([
       'vitest/globals',
       'vitest/importMeta',

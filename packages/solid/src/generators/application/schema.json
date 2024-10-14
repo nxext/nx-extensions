@@ -4,14 +4,20 @@
   "title": "",
   "type": "object",
   "properties": {
-    "name": {
+    "directory": {
       "type": "string",
-      "description": "",
+      "description": "A directory where the project is placed.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What directory would you like to use? (full path; e.g. apps/<my-app-name>)",
+      "alias": "d"
+    },
+    "name": {
+      "type": "string",
+      "description": "A name of the project.",
+      "alias": "n"
     },
     "tags": {
       "type": "string",
@@ -21,13 +27,8 @@
     "linter": {
       "description": "The tool to use for running lint checks.",
       "type": "string",
-      "enum": ["eslint"],
+      "enum": ["eslint", "none"],
       "default": "eslint"
-    },
-    "projectNameAndRootFormat": {
-      "description": "Whether to generate the project name and root directory as provided (`as-provided`) or generate them composing their values and taking the configured layout into account (`derived`).",
-      "type": "string",
-      "enum": ["as-provided", "derived"]
     },
     "unitTestRunner": {
       "type": "string",
@@ -41,11 +42,6 @@
       "description": "Test runner to use for end to end (e2e) tests.",
       "default": "cypress"
     },
-    "directory": {
-      "type": "string",
-      "description": "A directory where the lib is placed.",
-      "alias": "d"
-    },
     "rootProject": {
       "description": "Create a application at the root of the workspace",
       "type": "boolean",
@@ -58,5 +54,5 @@
       "default": false
     }
   },
-  "required": ["name"]
+  "required": ["directory"]
 }

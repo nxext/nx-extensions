@@ -1,14 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  ProjectGraph,
-  ProjectGraphProcessorContext,
-  ProjectGraphBuilder,
-  DependencyType,
-  ProjectFileMap,
-} from '@nx/devkit';
+import { ProjectGraph, DependencyType, ProjectFileMap } from '@nx/devkit';
 
 import { TypeScriptSvelteImportLocator } from './TypeScriptSvelteImportLocator';
 import { TargetProjectLocator } from 'nx/src/plugins/js/project-graph/build-dependencies/target-project-locator';
+import { ProjectGraphBuilder } from 'nx/src/project-graph/project-graph-builder';
+import { ProjectGraphProcessorContext } from 'nx/src/config/project-graph';
 
 export type ExplicitDependency = {
   sourceProjectName: string;
