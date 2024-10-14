@@ -274,3 +274,5 @@ function addStorybookTask(
 
   updateProjectConfiguration(tree, projectName, projectConfig);
 }
+
+export default storybookConfigurationGenerator;

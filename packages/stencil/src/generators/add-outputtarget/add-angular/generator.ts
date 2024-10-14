@@ -178,3 +178,5 @@ export async function addAngularGenerator(
 
   return libraryTarget;
 }
+
+export default addAngularGenerator;

@@ -123,3 +123,5 @@ export async function addReactGenerator(
 
   return libraryTarget;
 }
+
+export default addReactGenerator;
