@@ -1,7 +1,7 @@
 {
   "name": "@nxext/ionic-angular",
   "description": "An Nx plugin for developing Ionic Angular applications",
-  "version": "19.1.2",
+  "version": "20.0.0",
   "homepage": "https://nxext.github.io/nx-extensions/docs/ionic-angular/overview.html",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "dependencies": {
-    "@nxext/capacitor": "^19.1.2",
+    "@nxext/capacitor": "^20.0.0",
     "tslib": "^2.3.0",
     "typescript": "5.5.4",
     "@phenomnomnominal/tsquery": "~5.0.1"

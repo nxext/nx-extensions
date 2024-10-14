@@ -1,3 +1,21 @@
+# 20.0.0 (2024-10-14)
+
+### 🚀 Features
+
+- ⚠️  migrate workspace to Nx 20 ([#1136](https://github.com/nxext/nx-extensions/pull/1136))
+
+### ⚠️  Breaking Changes
+
+- generator option `name` is replaced by `directory`, and the minimal required Nx version is `20.x`."
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 20.0.0
+
+### ❤️  Thank You
+
+- pawel-twardziak
+
 ## 19.1.2 (2024-10-08)
 
 
