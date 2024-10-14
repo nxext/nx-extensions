@@ -8,8 +8,11 @@ import {
 import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function initGenerator(host: Tree, schema: Schema) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/solid', 'init');
+
   const tasks: GeneratorCallback[] = [];
 
   if (!schema.unitTestRunner || schema.unitTestRunner === 'jest') {
