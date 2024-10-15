@@ -1,6 +1,6 @@
 {
   "name": "@nxext/capacitor",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "description": "An Nx plugin for developing cross-platform applications using Capacitor",
   "homepage": "https://nxext.github.io/nx-extensions/docs/capacitor/getting-started.html",
   "repository": {

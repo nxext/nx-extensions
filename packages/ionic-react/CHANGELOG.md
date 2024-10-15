@@ -1,3 +1,17 @@
+## 20.0.1 (2024-10-15)
+
+### 🩹 Fixes
+
+- add assert-not-using-ts-solution-setup to the generators ([#1140](https://github.com/nxext/nx-extensions/pull/1140))
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 20.0.1
+
+### ❤️  Thank You
+
+- pawel-twardziak
+
 # 20.0.0 (2024-10-14)
 
 ### 🚀 Features
