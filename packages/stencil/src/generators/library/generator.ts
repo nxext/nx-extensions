@@ -22,6 +22,7 @@ import {
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 import { initGenerator as jsInitGenerator } from '@nx/js';
+import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-command';
 
 async function normalizeOptions(
   host: Tree,
@@ -117,7 +118,9 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(jsInitTask, initTask);
+  return runTasksInSerial(jsInitTask, initTask, () =>
+    logShowProjectCommand(options.projectName)
+  );
 }
 
 export default libraryGenerator;
