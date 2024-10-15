@@ -20,6 +20,7 @@ import {
   ensureProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { createOrEditViteConfig } from '@nx/vite';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 async function normalizeOptions(
   host: Tree,
@@ -77,6 +78,8 @@ export async function libraryGeneratorInternal(
   host: Tree,
   schema: SolidLibrarySchema
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/solid', 'library');
+
   const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(

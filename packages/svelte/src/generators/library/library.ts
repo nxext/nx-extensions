@@ -11,6 +11,7 @@ import { createProjectFiles } from './lib/create-project-files';
 import { addVitest } from './lib/add-vitest';
 import { normalizeOptions } from './lib/normalize-options';
 import { createOrEditViteConfig } from '@nx/vite';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
   return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
@@ -23,6 +24,8 @@ export async function libraryGenerator(
   host: Tree,
   schema: SvelteLibrarySchema
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/svelte', 'library');
+
   const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(

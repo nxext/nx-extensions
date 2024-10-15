@@ -10,11 +10,14 @@ import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
 import { addAngularGenerator } from './add-angular/generator';
 import { addReactGenerator } from './add-react/generator';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function outputtargetGenerator(
   host: Tree,
   options: AddOutputtargetSchematicSchema
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'add-outputtarget');
+
   const projectConfig = readProjectConfiguration(host, options.projectName);
   const tasks = [];
 

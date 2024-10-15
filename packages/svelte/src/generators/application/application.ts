@@ -15,6 +15,7 @@ import { addVite } from './lib/add-vite';
 import { createApplicationFiles } from './lib/create-project-files';
 import { normalizeOptions } from './lib/normalize-options';
 import { createOrEditViteConfig } from '@nx/vite';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function applicationGenerator(
   host: Tree,
@@ -26,6 +27,8 @@ export async function applicationGenerator(
 }
 
 export async function applicationGeneratorInternal(host: Tree, schema: Schema) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/svelte', 'application');
+
   const options = await normalizeOptions(host, schema);
 
   const initTask = await initGenerator(host, { ...options, skipFormat: true });

@@ -22,6 +22,7 @@ import {
   determineProjectNameAndRootOptions,
   ensureProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 async function normalizeOptions(
   tree: Tree,
@@ -97,6 +98,8 @@ export async function applicationGenerator(
   tree: Tree,
   schema: PreactApplicationSchema
 ) {
+  assertNotUsingTsSolutionSetup(tree, '@nxext/preact', 'application');
+
   const options = await normalizeOptions(tree, schema);
 
   const initTask = await initGenerator(tree, { ...options, skipFormat: true });

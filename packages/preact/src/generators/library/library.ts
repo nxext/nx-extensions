@@ -23,6 +23,7 @@ import {
   determineProjectNameAndRootOptions,
   ensureProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 async function normalizeOptions(
   tree: Tree,
@@ -89,6 +90,8 @@ export async function libraryGenerator(
   host: Tree,
   schema: PreactLibrarySchema
 ) {
+  assertNotUsingTsSolutionSetup(host, '@nxext/preact', 'library');
+
   const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(
