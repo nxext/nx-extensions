@@ -21,6 +21,7 @@ import {
   ensureProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { initGenerator as jsInitGenerator } from '@nx/js';
 
 async function normalizeOptions(
   host: Tree,
@@ -91,6 +92,13 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
       `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`
     );
   }
+
+  const jsInitTask = await jsInitGenerator(host, {
+    ...options,
+    tsConfigName: 'tsconfig.base.json',
+    skipFormat: true,
+  });
+
   const initTask = await initGenerator(host, options);
 
   addProject(host, options);
@@ -109,7 +117,7 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask);
+  return runTasksInSerial(jsInitTask, initTask);
 }
 
 export default libraryGenerator;
