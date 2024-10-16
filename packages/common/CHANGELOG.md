@@ -1,0 +1,20 @@
+# 20.0.0 (2024-10-16)
+
+### 🚀 Features
+
+- **common:** add is-verbose and a terminal-printer for clickable uri ([04bbec9e](https://github.com/nxext/nx-extensions/commit/04bbec9e))
+- ⚠️  migrate workspace to Nx 20 ([#1136](https://github.com/nxext/nx-extensions/pull/1136))
+
+### 🩹 Fixes
+
+- bump deps ([5d7fe4f1](https://github.com/nxext/nx-extensions/commit/5d7fe4f1))
+
+### ⚠️  Breaking Changes
+
+- generator option `name` is replaced by `directory`, and the minimal required Nx version is `20.x`."
+
+### ❤️  Thank You
+
+- Edouard Bozon @edbzn
+- Paweł Twardziak
+- pawel-twardziak

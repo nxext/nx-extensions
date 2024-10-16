@@ -1,3 +1,9 @@
+## 20.0.4 (2024-10-16)
+
+### 🧱 Updated Dependencies
+
+- Updated common to 20.0.0
+
 ## 20.0.3 (2024-10-16)
 
 ### 🩹 Fixes

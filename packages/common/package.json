@@ -1,6 +1,6 @@
 {
   "name": "@nxext/common",
-  "version": "19.0.0",
+  "version": "20.0.0",
   "description": "Common utilities for Nxext Nx plugins",
   "author": {
     "name": "Gion Kunz",
