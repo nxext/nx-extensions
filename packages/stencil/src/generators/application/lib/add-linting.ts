@@ -20,10 +20,8 @@ import { useFlatConfig } from '@nx/eslint/src/utils/flat-config';
 
 export async function addLinting(host: Tree, options: ApplicationSchema) {
   if (options.linter === Linter.EsLint) {
-    const { lintProjectGenerator } = ensurePackage<typeof import('@nx/eslint')>(
-      '@nx/eslint',
-      NX_VERSION
-    );
+    await ensurePackage('@nx/eslint', NX_VERSION);
+    const { lintProjectGenerator } = await import('@nx/eslint');
 
     const tasks: GeneratorCallback[] = [];
 
