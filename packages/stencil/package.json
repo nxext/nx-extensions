@@ -26,7 +26,7 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nxext/common": "^19.1.0 || ^20.0.0",
+    "@nxext/common": "^20.0.0",
     "@nx/devkit": "^20.0.0",
     "@stencil/core": "^4.12.6",
     "@nx/workspace": "^20.0.0",
