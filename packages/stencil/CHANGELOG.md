@@ -1,3 +1,14 @@
+## 20.0.3 (2024-10-16)
+
+### 🩹 Fixes
+
+- **stencil:** show project command on lib generation ([76f1b318](https://github.com/nxext/nx-extensions/commit/76f1b318))
+- **stencil:** init js libs when creating stencil lib ([f476ef84](https://github.com/nxext/nx-extensions/commit/f476ef84))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 ## 20.0.2 (2024-10-15)
 
 ### 🩹 Fixes
