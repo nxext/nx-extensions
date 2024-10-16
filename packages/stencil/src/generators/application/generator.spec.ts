@@ -32,6 +32,7 @@ describe('schematic:application', () => {
     directory: 'apps/test',
     linter: Linter.None,
   };
+  const projectName = options.directory.replace('apps/', '');
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
@@ -46,10 +47,7 @@ describe('schematic:application', () => {
   it('should add tags to project.json', async () => {
     await applicationGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
 
-    const projectConfig = readProjectConfiguration(
-      host,
-      options.directory.replace('apps/', '')
-    );
+    const projectConfig = readProjectConfiguration(host, projectName);
     expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
 
@@ -75,10 +73,7 @@ describe('schematic:application', () => {
   it('should configure lint target', async () => {
     await applicationGenerator(host, { ...options, linter: Linter.EsLint });
 
-    const projectConfig = readProjectConfiguration(
-      host,
-      options.directory.replace('apps/', '')
-    );
+    const projectConfig = readProjectConfiguration(host, projectName);
     const eslintConfigPath = 'apps/test/.eslintrc.json';
 
     /**
@@ -109,10 +104,7 @@ describe('schematic:application', () => {
 
     await applicationGenerator(host, { ...options, linter: Linter.EsLint });
 
-    const projectConfig = readProjectConfiguration(
-      host,
-      options.directory.replace('apps/', '')
-    );
+    const projectConfig = readProjectConfiguration(host, projectName);
     const eslintConfigPath = 'apps/test/eslint.config.js';
 
     /**
@@ -176,10 +168,7 @@ describe('schematic:application', () => {
         style: SupportedStyles[style],
       });
 
-      const projectConfig = readProjectConfiguration(
-        host,
-        options.directory.replace('apps/', '')
-      );
+      const projectConfig = readProjectConfiguration(host, projectName);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,
