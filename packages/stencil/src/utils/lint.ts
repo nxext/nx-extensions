@@ -16,6 +16,7 @@ import { insertChange, replaceChange } from '@nx/js';
 import { EOL } from 'node:os';
 import { join } from 'node:path';
 import { getTerminalLinkForAbsolutePath } from '@nxext/common';
+import { stripIndent } from 'nx/src/utils/logger';
 
 export const extraEslintDependencies = {
   dependencies: {},
@@ -46,6 +47,16 @@ export function getEsLintPluginBaseName<
   throw Error(`[stencil] unsupported eslint plugin name: ${packageName}`);
 }
 
+export const beginningOfEsLintConfigJs = `const importPlugin = require('eslint-plugin-import');
+/**
+ * @stencil-community/eslint-plugin may not support the flat config yet
+ *
+ * TODO: activate @stencil-community/eslint-plugin when it supports the flat config
+ *
+ * const stencilPlugin = require('@stencil-community/eslint-plugin');
+ */
+`;
+
 export const augmentStencilEslintFlatConfig = (
   tree: Tree,
   eslintFlatConfigFileContent: string,
@@ -62,15 +73,7 @@ export const augmentStencilEslintFlatConfig = (
     sourceFile,
     eslintFlatConfigFilePath,
     0,
-    `const importPlugin = require('eslint-plugin-import');
-/**
- * @stencil-community/eslint-plugin may not support the flat config yet
- *
- * TODO: activate @stencil-community/eslint-plugin when it supports the flat config
- *
- * const stencilPlugin = require('@stencil-community/eslint-plugin');
- */
-`
+    beginningOfEsLintConfigJs
   );
 
   const [configArrayNode] = tsquery
