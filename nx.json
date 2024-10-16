@@ -113,7 +113,7 @@
     }
   },
   "release": {
-    "projects": ["packages/*", "!common"],
+    "projects": ["packages/*"],
     "projectsRelationship": "independent",
     "version": {
       "conventionalCommits": true,
