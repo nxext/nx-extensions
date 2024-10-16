@@ -1,7 +1,7 @@
 {
   "name": "@nxext/common",
   "version": "19.0.0",
-  "description": "Core utilities for nxext Nx plugins",
+  "description": "Common utilities for Nxext Nx plugins",
   "author": {
     "name": "Gion Kunz",
     "email": "gion@syncrea.ch"
@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/nxext/nx-extensions",
-    "directory": "packages/core"
+    "directory": "packages/Common"
   },
   "bugs": {
     "url": "https://github.com/nxext/nx-extensions/issues"
