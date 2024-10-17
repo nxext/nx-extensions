@@ -1,3 +1,16 @@
+## 20.0.5 (2024-10-17)
+
+### 🩹 Fixes
+
+- **stencil:** align peer deps ([41a9bd78](https://github.com/nxext/nx-extensions/commit/41a9bd78))
+- **stencil:** use dynamic import after ensuring package ([92b0630b](https://github.com/nxext/nx-extensions/commit/92b0630b))
+- init js config on app generation and populate ignore files ([93c5508e](https://github.com/nxext/nx-extensions/commit/93c5508e))
+- **stencil:** fix eslint configuration for app generator ([74182d4c](https://github.com/nxext/nx-extensions/commit/74182d4c))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 ## 20.0.4 (2024-10-16)
 
 ### 🧱 Updated Dependencies
