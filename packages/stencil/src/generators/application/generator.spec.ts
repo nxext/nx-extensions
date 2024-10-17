@@ -11,8 +11,12 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import { Linter } from '@nx/eslint';
-import { getEsLintPluginBaseName } from '../../utils/lint';
+import {
+  beginningOfEsLintConfigJs,
+  getEsLintPluginBaseName,
+} from '../../utils/lint';
 import { eslintImportPlugin, stencilEslintPlugin } from '../../utils/versions';
+import { useFlatConfig } from '@nx/eslint/src/utils/flat-config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
@@ -28,24 +32,22 @@ describe('schematic:application', () => {
     directory: 'apps/test',
     linter: Linter.None,
   };
+  const projectName = options.directory.replace('apps/', '');
 
   beforeEach(() => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
-        '@nx/workspace': '15.7.0',
+        '@nx/workspace': '^20.0.0',
       };
       return json;
     });
   });
 
-  it('should add tags to nx.json', async () => {
+  it('should add tags to project.json', async () => {
     await applicationGenerator(host, { ...options, tags: 'e2etag,e2ePackage' });
 
-    const projectConfig = readProjectConfiguration(
-      host,
-      options.directory.replace('apps/', '')
-    );
+    const projectConfig = readProjectConfiguration(host, projectName);
     expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
 
@@ -58,7 +60,7 @@ describe('schematic:application', () => {
   });
 
   it('should create files', async () => {
-    await applicationGenerator(host, { ...options, linter: Linter.EsLint });
+    await applicationGenerator(host, { ...options });
 
     const fileList = fileListForAppType(
       options.directory,
@@ -66,14 +68,69 @@ describe('schematic:application', () => {
       'application'
     );
     fileList.forEach((file) => expect(host.exists(file)));
+  });
 
-    const eslintJson = readJson(host, 'apps/test/.eslintrc.json');
+  it('should configure lint target', async () => {
+    await applicationGenerator(host, { ...options, linter: Linter.EsLint });
+
+    const projectConfig = readProjectConfiguration(host, projectName);
+    const eslintConfigPath = 'apps/test/.eslintrc.json';
+
+    /**
+     * useFlatConfig() should return false by default because in this repo we are utilizing eslint of version < 9.0.0
+     * This test case will fail when migrate to eslint@^9.0.0 - add:
+     *    - process.env.ESLINT_USE_FLAT_CONFIG = 'false'; -> at the beginning of this test case
+     *    - delete process.env.ESLINT_USE_FLAT_CONFIG; -> at the end of this test case
+     *
+     * https://eslint.org/blog/2023/10/flat-config-rollout-plans/
+     * Since eslint@^10.0.0, the legacy configuration will no longer be supported - remove this test case and align the generator code
+     */
+    expect(useFlatConfig()).toBeFalsy();
+    expect(projectConfig.targets.lint).toBeDefined();
+    expect(host.exists(eslintConfigPath)).toBeTruthy();
+
+    const eslintJson = readJson(host, eslintConfigPath);
+
     expect(eslintJson.extends).toEqual([
       `plugin:${getEsLintPluginBaseName(stencilEslintPlugin)}/recommended`,
       `plugin:${getEsLintPluginBaseName(eslintImportPlugin)}/recommended`,
       `plugin:${getEsLintPluginBaseName(eslintImportPlugin)}/typescript`,
       '../../.eslintrc.json',
     ]);
+  });
+
+  it('should configure lint target with flat config', async () => {
+    process.env.ESLINT_USE_FLAT_CONFIG = 'true';
+
+    await applicationGenerator(host, { ...options, linter: Linter.EsLint });
+
+    const projectConfig = readProjectConfiguration(host, projectName);
+    const eslintConfigPath = 'apps/test/eslint.config.js';
+
+    /**
+     * useFlatConfig() should return false by default because in this repo we are utilizing eslint of version < 9.0.0
+     * This works for now because of the overwritten value of process.env.ESLINT_USE_FLAT_CONFIG = 'true';
+     *
+     * When migrate to eslint@^9.0.0 do:
+     *    - process.env.ESLINT_USE_FLAT_CONFIG = 'true'; - remove it from the beginning of this test case
+     *    - delete process.env.ESLINT_USE_FLAT_CONFIG; - remove it from the beginning of this test case
+     */
+    expect(useFlatConfig()).toBeTruthy();
+    expect(projectConfig.targets.lint).toBeDefined();
+    expect(host.exists(eslintConfigPath)).toBeTruthy();
+
+    const eslintConfigJs = host.read(eslintConfigPath, 'utf-8');
+
+    expect(eslintConfigJs).toContain(beginningOfEsLintConfigJs);
+    expect(eslintConfigJs).toContain('* stencilPlugin.flatConfigs.recommended');
+    expect(eslintConfigJs).toContain('importPlugin.flatConfigs.recommended,');
+    expect(eslintConfigJs).toContain('importPlugin.flatConfigs.typescript,');
+    expect(eslintConfigJs).toContain(
+      '* Having an empty rules object present makes it more obvious to the user where they would'
+    );
+    expect(eslintConfigJs).toContain('* extend things from if they needed to');
+
+    delete process.env.ESLINT_USE_FLAT_CONFIG;
   });
 
   it('should create files in specified dir', async () => {
@@ -111,10 +168,7 @@ describe('schematic:application', () => {
         style: SupportedStyles[style],
       });
 
-      const projectConfig = readProjectConfiguration(
-        host,
-        options.directory.replace('apps/', '')
-      );
+      const projectConfig = readProjectConfiguration(host, projectName);
       expect(projectConfig.generators).toEqual({
         '@nxext/stencil:component': {
           style: style,

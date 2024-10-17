@@ -8,7 +8,7 @@ export const stencilEslintPlugin = '@stencil-community/eslint-plugin';
 export const eslintImportPlugin = 'eslint-plugin-import';
 export const ESLINT_PLUGIN_VERSIONS = {
   [deprecatedStencilEslintPlugin]: '0.3.1',
-  [stencilEslintPlugin]: '^0.6.0',
+  [stencilEslintPlugin]: '^0.8.0',
   [eslintImportPlugin]: '^2.28.0',
 };
 

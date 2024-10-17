@@ -2,17 +2,18 @@ import { AppType } from './../../utils/typings';
 import {
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
   runTasksInSerial,
   readNxJson,
 } from '@nx/devkit';
+import { initGenerator as jsInitGenerator } from '@nx/js';
 import { ApplicationSchema, RawApplicationSchema } from './schema';
 import { calculateStyle } from '../../utils/utillities';
 import { initGenerator } from '../init/init';
 import { join } from 'path';
+import { EOL } from 'node:os';
 import { addProject } from './lib/add-project';
 import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
@@ -21,6 +22,7 @@ import {
   ensureProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-command';
 
 async function normalizeOptions(
   host: Tree,
@@ -102,6 +104,13 @@ export async function applicationGenerator(
   assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'application');
 
   const options = await normalizeOptions(host, schema);
+
+  const jsInitTask = await jsInitGenerator(host, {
+    ...options,
+    tsConfigName: 'tsconfig.base.json',
+    skipFormat: true,
+  });
+
   const initTask = await initGenerator(host, {
     ...options,
     skipFormat: true,
@@ -112,11 +121,30 @@ export async function applicationGenerator(
   const lintTask = await addLinting(host, options);
   const cypressTask = await addCypress(host, options);
 
+  const ignoresToUpdate = ['.gitignore', '.prettierignore', '.nxignore'];
+  const toBeIgnored = ['.stencil'].join(EOL);
+  ignoresToUpdate.forEach((ignoreFile) => {
+    if (host.exists(ignoreFile)) {
+      const gitignoreContent = host.read(ignoreFile, 'utf-8');
+      if (!gitignoreContent.includes('.stencil')) {
+        host.write(
+          ignoreFile,
+          `${gitignoreContent}
+
+${toBeIgnored}
+`
+        );
+      }
+    }
+  });
+
   if (!options.skipFormat) {
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, lintTask, cypressTask);
+  return runTasksInSerial(jsInitTask, initTask, lintTask, cypressTask, () =>
+    logShowProjectCommand(options.projectName)
+  );
 }
 
 export default applicationGenerator;
