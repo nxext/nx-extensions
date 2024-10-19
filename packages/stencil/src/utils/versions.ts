@@ -12,15 +12,11 @@ export const ESLINT_PLUGIN_VERSIONS = {
   [eslintImportPlugin]: '^2.28.0',
 };
 
-export const STENCIL_OUTPUTTARGET_VERSION: {
-  [style: string]: string;
-} = {
+export const STENCIL_OUTPUTTARGET_VERSION = {
   react: '^0.5.3',
   angular: '^0.8.3',
 };
 
-export const STENCIL_STYLE_PLUGIN_VERSION: {
-  [style: string]: string;
-} = {
+export const STENCIL_STYLE_PLUGIN_VERSION = {
   scss: '3.0.7',
 };
