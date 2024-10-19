@@ -180,7 +180,11 @@ The tool to use for running lint checks.
 
 #### name
 
+Alias(es): n
+
 Type: `string`
+
+A name of the project.
 
 #### publishable
 
