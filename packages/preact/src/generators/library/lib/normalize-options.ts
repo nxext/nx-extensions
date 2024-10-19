@@ -2,7 +2,7 @@ import { Tree } from '@nx/devkit';
 import { NormalizedSchema, PreactLibrarySchema } from '../schema';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName
+  ensureProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 export async function normalizeOptions(
