@@ -4,14 +4,20 @@
   "title": "",
   "type": "object",
   "properties": {
-    "name": {
+    "directory": {
       "type": "string",
-      "description": "",
+      "description": "A directory where the project is placed.",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What directory would you like to use? (full path; e.g. libs/<my-lib-name>)",
+      "alias": "d"
+    },
+    "name": {
+      "type": "string",
+      "description": "A name of the project.",
+      "alias": "n"
     },
     "tags": {
       "type": "string",
@@ -35,11 +41,6 @@
       "enum": ["cypress", "none"],
       "description": "Test runner to use for end to end (e2e) tests.",
       "default": "cypress"
-    },
-    "directory": {
-      "type": "string",
-      "description": "A directory where the project is placed.",
-      "alias": "d"
     },
     "publishable": {
       "type": "boolean",

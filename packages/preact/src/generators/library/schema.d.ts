@@ -14,6 +14,7 @@ export interface PreactLibrarySchema {
 }
 
 export interface NormalizedSchema extends PreactLibrarySchema {
+  projectName: string;
   projectRoot: string;
   projectDirectory: string;
   fileName: string;
