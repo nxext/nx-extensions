@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@nx/devkit": "^20.0.0",
-    "typescript": "5.5.4",
+    "typescript": "^5.4.2",
     "@nx/js": "^20.0.0",
     "tslib": "^2.3.0"
   }
