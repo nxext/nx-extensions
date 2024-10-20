@@ -23,7 +23,7 @@
   "main": "src/index.js",
   "generators": "./generators.json",
   "dependencies": {
-    "typescript": "5.5.4",
+    "typescript": "^5.4.2",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
