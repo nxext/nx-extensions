@@ -1,3 +1,17 @@
+## 20.0.6 (2024-10-21)
+
+### 🩹 Fixes
+
+- ts version with minor and patch being flexible ([60686d4f](https://github.com/nxext/nx-extensions/commit/60686d4f))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 20.0.1
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 ## 20.0.5 (2024-10-17)
 
 ### 🩹 Fixes

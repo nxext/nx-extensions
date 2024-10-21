@@ -1,3 +1,13 @@
+## 20.0.1 (2024-10-21)
+
+### 🩹 Fixes
+
+- ts version with minor and patch being flexible ([60686d4f](https://github.com/nxext/nx-extensions/commit/60686d4f))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 # 20.0.0 (2024-10-16)
 
 ### 🚀 Features

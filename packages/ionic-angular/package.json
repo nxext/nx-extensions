@@ -1,7 +1,7 @@
 {
   "name": "@nxext/ionic-angular",
   "description": "An Nx plugin for developing Ionic Angular applications",
-  "version": "20.0.1",
+  "version": "20.0.2",
   "homepage": "https://nxext.github.io/nx-extensions/docs/ionic-angular/overview.html",
   "repository": {
     "type": "git",
