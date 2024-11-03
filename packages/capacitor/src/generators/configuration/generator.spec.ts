@@ -1,5 +1,6 @@
 import {
   addProjectConfiguration,
+  joinPathFragments,
   normalizePath,
   readJson,
   readProjectConfiguration,
@@ -32,6 +33,12 @@ describe('capacitor-project', () => {
     addProjectConfiguration(appTree, options.project, {
       root: projectRoot,
       targets: {
+        build: {
+          executor: '',
+          options: {
+            outputPath: joinPathFragments('dist', projectRoot),
+          },
+        },
         test: {
           executor: '@nx/jest:jest',
         },
