@@ -11,10 +11,24 @@ export function normalizeOptions(
   options: CapacitorConfigurationSchema
 ): NormalizedSchema {
   const appName = options.appName ? options.appName : options.project;
-  const { root } = readProjectConfiguration(host, options.project);
+  const { root, targets } = readProjectConfiguration(host, options.project);
+  const executor = targets?.build?.executor;
+  const outputPath = targets?.build?.options?.outputPath;
+  const browser = targets?.build?.options?.browser;
+
+  const esbuildBrowser =
+    [
+      '@angular-devkit/build-angular:application',
+      '@nx/angular:application',
+      '@angular-devkit/build-angular:browser-esbuild',
+      '@nx/angular:browser-esbuild',
+    ].includes(executor) && browser;
+
   const webDir = options.webDir
     ? options.webDir
-    : joinPathFragments(`dist/${root}`);
+    : outputPath
+    ? joinPathFragments(`${outputPath}${esbuildBrowser ? '/browser' : ''}`)
+    : joinPathFragments('dist', root);
 
   return {
     ...options,
