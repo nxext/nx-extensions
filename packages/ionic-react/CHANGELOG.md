@@ -1,3 +1,9 @@
+## 20.0.2 (2024-11-04)
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 20.0.2
+
 ## 20.0.1 (2024-10-15)
 
 ### 🩹 Fixes

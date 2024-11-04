@@ -1,3 +1,14 @@
+## 20.0.2 (2024-11-04)
+
+### 🩹 Fixes
+
+- **capacitor:** align default web-dir for esbuild executor ([df7d67d8](https://github.com/nxext/nx-extensions/commit/df7d67d8))
+- **capacitor:** align default web-dir for esbuild executor ([25160590](https://github.com/nxext/nx-extensions/commit/25160590))
+
+### ❤️  Thank You
+
+- Paweł Twardziak
+
 ## 20.0.1 (2024-10-15)
 
 ### 🩹 Fixes
