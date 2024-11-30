@@ -33,8 +33,8 @@ features:
     link: /docs/preact/overview.html
   - title: Ionic
     details: A new way to build and ship for mobile.
-    link: /docs/ionic-angular/installation.html
+    link: /docs/ionic-angular/overview.html
   - title: Capacitor
     details: A cross-platform native runtime for web apps.
-    link: /docs/capacitor/generators.html
+    link: /docs/capacitor/overview.html
 ---
