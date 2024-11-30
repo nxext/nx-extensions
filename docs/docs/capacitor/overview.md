@@ -1,92 +1,78 @@
-The `@nxext/capacitor` plugin lets you interact with the Capacitor CLI using Nx targets.
+## `@nxext/capacitor` Plugin
 
-## Install Plugin
+### Overview
 
-```
-# npm
-npm install --save-dev --exact @nxext/capacitor
+The `@nxext/capacitor` plugin provides Nx targets to interact with the Capacitor CLI.
 
-# yarn
-yarn add --save-dev --exact @nxext/capacitor
-```
+### Installation
 
-## Add Capacitor to Existing Project
+Install the plugin in your Nx workspace:
 
-First, ensure that the frontend project has been built:
-
-```
-nx build {frontend project name}
-
-nx build mobile-app
+```bash
+npm install --save-dev @nxext/capacitor
 ```
 
-Once the plugin has been added to your Nx workspace you can generate a Capacitor project from an existing frontend project:
+#### Configure Capacitor
 
-```
-nx generate @nxext/capacitor:configuration --project {frontend project name}
-
-nx generate @nxext/capacitor:configuration --project mobile-app
+```bash
+nx generate @nxext/capacitor:configuration --project=my-app
 ```
 
-Nx will ask you some questions about the application, but you can customize it further by passing these options:
+:::info  
+This plugin configures an existing application.
+If you don't have an application yet, visit the [Nx documentation](https://nx.dev/getting-started/intro#pick-your-stack) to generate one.  
+:::
 
-```
-nx generate @nxext/capacitor:configuration [options,...]
+### Usage
 
-Options:
-  --project               The name of the frontend project for Capacitor.
-  --appId                 The app ID for the project. (default: io.ionic.starter)
-  --appName               The application name for the project.
-  --webDir                The directory of your projects built web assets.
-  --skipFormat            Skip formatting files.
-  --dryRun                Runs through and reports activity without writing to disk.
-  --skip-nx-cache         Skip the use of Nx cache.
-  --help                  Show available options for project target.
-```
+#### Add Native Platforms
 
-Finally, you will need to `cd` into your applications directory and install the npm dependencies. (e.g. `npm install`)
+Add support for native platforms like Android and iOS:
 
-## Add Native Platforms
-
-Now that a Capacitor project has been added to your Nx workspace you can begin adding support for native platforms. Currently, Capacitor supports Android and iOS, but other platforms can be added with Capacitor plugins.
-
-```
-nx run {frontend project}:add:ios
-nx run {frontend project}:add:android
-nx run {frontend project}:add --platform {native platform}
-
+```bash
 nx run my-app:add:android
-nx run my-app:cap --cmd="add android"
+nx run my-app:add:ios
 ```
 
-## Sync Native Platform
+#### Sync Native Platforms
 
-Running the sync command will update the native platform dependencies and copy a build of your frontend project to the Capacitor project:
+Sync the native platforms to update dependencies and copy the built frontend:
 
-```
-nx run {frontend project}:sync:ios
-nx run {frontend project}:sync:android
-nx run {frontend project}:sync --platform {native platform}
-
+```bash
 nx run my-app:sync:android
-nx run my-app:cap --cmd="sync android"
+nx run my-app:sync:ios
 ```
 
-## Open Native Platform
+**For iOS Podfile Initialization:**
 
-Finally, you can open the native platform in it's respective IDE:
+1. Navigate to the `ios/App` folder:
+   ```bash
+   cd apps/my-app/ios/App
+   ```
+2. Run `pod install`.
 
-```
-nx run {frontend project}:open:ios
-nx run {frontend project}:open:android
-nx run {frontend project}:open --platform {native platform}
+#### Open Native Platforms
 
+Open the native project in the respective IDE:
+
+```bash
 nx run my-app:open:android
-nx run my-app:cap --cmd="open android"
+nx run my-app:open:ios
 ```
 
-## Adding Capacitor Plugins
+### Notes on Capacitor Plugins
 
 Capacitor plugin dependencies must be added to the project-level `package.json`.
 
-To learn more about Capacitor, including the native API's available, please read the [official Capacitor documentation](https://capacitorjs.com/docs).
+```jsonc
+// ./apps/my-app/package.json
+{
+  "name": "my-app",
+  "dependencies": {
+    "@capacitor/android": "../../node_modules/@capacitor/android",
+    "@capacitor/ios": "../../node_modules/@capacitor/ios",
+    // Example plugin
+    "@capacitor-community/apple-sign-in": "../../node_modules/@capacitor-community/apple-sign-in"
+  }
+}
+```
