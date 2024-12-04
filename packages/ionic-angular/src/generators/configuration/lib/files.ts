@@ -22,5 +22,7 @@ export function addFiles(host: Tree, options: NormalizedOptions) {
 export function removeFiles(host: Tree, options: NormalizedOptions) {
   host.delete(`${options.projectRoot}/public/favicon.ico`);
   host.delete(`${options.projectRoot}/src/favicon.ico`);
-  host.delete(`${options.projectRoot}/src/app`);
+  for (const child of host.children(`${options.projectRoot}/src/app`)) {
+    host.delete(`${options.projectRoot}/src/app/${child}`);
+  }
 }

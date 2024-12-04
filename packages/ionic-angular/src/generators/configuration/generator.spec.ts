@@ -38,6 +38,15 @@ describe('configuration schematic', () => {
     );
   });
 
+  it('should remove app files', async () => {
+    await configurationGenerator(host, options);
+
+    expect(
+      host.exists(`${projectRoot}/src/app/nx-welcome.component.ts`)
+    ).toBeFalsy();
+    expect(host.exists(`${projectRoot}/src/app/app.config.ts`)).toBeFalsy();
+  });
+
   it('should update assets in project configuration', async () => {
     await configurationGenerator(host, options);
     const project = readProjectConfiguration(host, appName);
