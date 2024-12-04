@@ -1,3 +1,13 @@
+## 20.0.4 (2024-12-04)
+
+### 🩹 Fixes
+
+- **ionic-angular:** correctly remove app files ([7a4d78a1](https://github.com/nxext/nx-extensions/commit/7a4d78a1))
+
+### ❤️  Thank You
+
+- Edouard Bozon @edbzn
+
 ## 20.0.3 (2024-11-04)
 
 ### 🧱 Updated Dependencies
