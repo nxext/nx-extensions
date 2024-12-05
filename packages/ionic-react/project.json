@@ -47,10 +47,6 @@
       "options": {
         "jestConfig": "packages/ionic-react/jest.config.ts"
       }
-    },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs ionic-react {args.ver} {args.tag}",
-      "dependsOn": ["build"]
     }
   },
   "tags": []

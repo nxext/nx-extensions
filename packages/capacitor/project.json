@@ -52,10 +52,6 @@
       "options": {
         "jestConfig": "packages/capacitor/jest.config.ts"
       }
-    },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs capacitor {args.ver} {args.tag}",
-      "dependsOn": ["build"]
     }
   },
   "tags": []

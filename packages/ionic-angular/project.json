@@ -47,10 +47,6 @@
       "options": {
         "jestConfig": "packages/ionic-angular/jest.config.ts"
       }
-    },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs ionic-angular {args.ver} {args.tag}",
-      "dependsOn": ["build"]
     }
   },
   "tags": []
