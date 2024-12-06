@@ -6,7 +6,7 @@ PR's, ideas and discussions are welcome.
 
 This project uses the Nx CLI with pnpm.
 
-This project is built with Nx and follows the OSS project structure. The [Getting Started](https://nx.dev/angular/getting-started/what-is-nx) guide shows how to work with Nx workspaces.
+This project is built with Nx and follows the OSS project structure. The [Getting Started](https://nx.dev/getting-started/intro) guide shows how to work with Nx workspaces.
 
 ## Build
 
