@@ -15,7 +15,7 @@ describe('capacitor-project e2e', () => {
       `generate @nx/web:application ${appDir} --style=css --bundler=vite --e2eTestRunner=none --linter=none --skipFormat=true`
     );
     await runNxCommandAsync(
-      `generate @nxext/capacitor:configuration --project=${app} --appName=test --appId=test --skipFormat=true`
+      `generate @nxext/capacitor:configuration --project=${app} --appName=test --appId=test.example.app --skipFormat=true`
     );
   });
 
@@ -54,5 +54,17 @@ describe('capacitor-project e2e', () => {
       `run ${app}:cap --cmd="--help"`
     );
     expect(capHelpResults.stdout).toContain('Usage: cap');
+  });
+
+  it('should add platform', async () => {
+    const capResults = await runNxCommandAsync(`run ${app}:add:android`);
+    expect(stripAnsi(capResults.stdout)).toContain(
+      '[success] android platform added!'
+    );
+  });
+
+  it('should sync platform', async () => {
+    const capResults = await runNxCommandAsync(`run ${app}:sync:android`);
+    expect(stripAnsi(capResults.stdout)).toContain('✔ update android');
   });
 });

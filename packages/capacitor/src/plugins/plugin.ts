@@ -1,11 +1,5 @@
-import {
-  CreateNodesV2,
-  getPackageManagerCommand,
-  ProjectConfiguration,
-} from '@nx/devkit';
+import { CreateNodesV2, ProjectConfiguration } from '@nx/devkit';
 import { dirname } from 'node:path';
-
-const pmc = getPackageManagerCommand();
 
 export interface CapacitorPluginOptions {}
 
@@ -20,7 +14,7 @@ export const createNodesV2: CreateNodesV2<CapacitorPluginOptions> = [
           projects: {
             [projectRoot]: {
               projectType: 'application',
-              targets: buildTargets(projectRoot),
+              targets: buildTargets(),
             },
           },
         },
@@ -29,7 +23,7 @@ export const createNodesV2: CreateNodesV2<CapacitorPluginOptions> = [
   },
 ];
 
-function buildTargets(projectRoot: string): ProjectConfiguration['targets'] {
+function buildTargets(): ProjectConfiguration['targets'] {
   const targetNames = ['add', 'copy', 'open', 'run', 'sync', 'update'];
   const platforms = ['ios', 'android'];
 
@@ -38,6 +32,10 @@ function buildTargets(projectRoot: string): ProjectConfiguration['targets'] {
       executor: '@nxext/capacitor:cap',
       options: {
         cmd: '--help',
+      },
+      cache: false,
+      metadata: {
+        technologies: ['capacitor'],
       },
     },
   };
@@ -48,14 +46,14 @@ function buildTargets(projectRoot: string): ProjectConfiguration['targets'] {
       options: {
         cmd: `${command}`,
       },
-      configurations: {},
       cache: false,
       metadata: {
-        technologies: ['Capacitor'],
+        technologies: ['capacitor'],
       },
     };
 
     for (const platform of platforms) {
+      targets[command].configurations ??= {};
       targets[command].configurations[platform] = {
         cmd: `${command} ${platform}`,
       };
