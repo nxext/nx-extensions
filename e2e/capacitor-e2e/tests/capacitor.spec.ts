@@ -56,15 +56,27 @@ describe('capacitor-project e2e', () => {
     expect(capHelpResults.stdout).toContain('Usage: cap');
   });
 
-  it('should add platform', async () => {
+  it('should add android platform', async () => {
     const capResults = await runNxCommandAsync(`run ${app}:add:android`);
     expect(stripAnsi(capResults.stdout)).toContain(
       '[success] android platform added!'
     );
   });
 
-  it('should sync platform', async () => {
+  it('should sync android platform', async () => {
     const capResults = await runNxCommandAsync(`run ${app}:sync:android`);
     expect(stripAnsi(capResults.stdout)).toContain('✔ update android');
+  });
+
+  it('should add ios platform', async () => {
+    const capResults = await runNxCommandAsync(`run ${app}:add:ios`);
+    expect(stripAnsi(capResults.stdout)).toContain(
+      '[success] ios platform added!'
+    );
+  });
+
+  it('should sync ios platform', async () => {
+    const capResults = await runNxCommandAsync(`run ${app}:sync:ios`);
+    expect(stripAnsi(capResults.stdout)).toContain('✔ update ios');
   });
 });
