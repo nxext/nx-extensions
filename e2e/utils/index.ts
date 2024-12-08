@@ -22,7 +22,7 @@ export function createTestProject() {
   });
 
   execSync(
-    `npx --yes create-nx-workspace@19 ${projectName} --preset apps --nxCloud skip --interactive false --packageManager pnpm`,
+    `npx --yes create-nx-workspace@latest ${projectName} --preset apps --nxCloud skip --interactive false --packageManager pnpm`,
     {
       cwd: dirname(projectDirectory),
       stdio: 'inherit',
