@@ -94,7 +94,7 @@ describe('capacitor-project', () => {
     it('should update nx.json', async () => {
       await generator(appTree, options);
       const nxJson = readNxJson(appTree);
-      expect(nxJson.plugins).toContain('@nxext/capacitor');
+      expect(nxJson.plugins).toContain('@nxext/capacitor/plugin');
     });
 
     it('should not remove existing target configurations', async () => {

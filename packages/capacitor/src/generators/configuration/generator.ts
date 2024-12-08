@@ -19,7 +19,7 @@ export async function capacitorConfigurationGenerator(
   addCapacitorConfig(host, normalizedOptions);
   updateProjectGitignore(host, normalizedOptions);
   updateProjectPackageJson(host, normalizedOptions);
-  addPluginToNxJson('@nxext/capacitor', host);
+  addPluginToNxJson('@nxext/capacitor/plugin', host);
 
   if (!options.skipFormat) {
     await formatFiles(host);

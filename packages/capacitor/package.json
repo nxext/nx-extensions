@@ -9,7 +9,11 @@
     "directory": "packages/capacitor"
   },
   "license": "MIT",
-  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json",
+    "./plugin": "./src/plugins/plugin.js"
+  },
   "generators": "./generators.json",
   "executors": "./executors.json",
   "nx-migrations": {
