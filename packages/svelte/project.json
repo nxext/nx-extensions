@@ -58,10 +58,6 @@
           "dependencies": true
         }
       ]
-    },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs svelte {args.ver} {args.tag}",
-      "dependsOn": ["build"]
     }
   },
   "tags": []
