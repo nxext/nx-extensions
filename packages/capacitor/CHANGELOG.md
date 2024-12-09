@@ -1,3 +1,13 @@
+## 20.1.0 (2024-12-09)
+
+### 🚀 Features
+
+- **capacitor:** add inference plugin ([6f2d7a51](https://github.com/nxext/nx-extensions/commit/6f2d7a51))
+
+### ❤️  Thank You
+
+- Edouard Bozon @edbzn
+
 ## 20.0.2 (2024-11-04)
 
 ### 🩹 Fixes
