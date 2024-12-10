@@ -120,6 +120,21 @@ describe('library e2e', () => {
       ).not.toThrow();
     });
 
+    it(`should generate vue lib`, async () => {
+      const plugin = uniq('lib');
+      await runNxCommandAsync(
+        `generate @nxext/stencil:lib ${plugin} --style='css' --buildable --e2eTestRunner='none' --junitTestRunner='none'`
+      );
+      await runNxCommandAsync(
+        `generate @nxext/stencil:add-outputtarget ${plugin} --outputType=vue`
+      );
+      await runNxCommandAsync(`build ${plugin}`);
+
+      expect(() =>
+        checkFilesExist(`libs/${plugin}-vue/src/index.ts`)
+      ).not.toThrow();
+    });
+
     it(`should generate angular lib`, async () => {
       const plugin = uniq('lib');
       await runNxCommandAsync(
