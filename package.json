@@ -62,6 +62,7 @@
     "@nx/playwright": "20.0.0",
     "@nx/plugin": "20.0.0",
     "@nx/react": "20.0.0",
+    "@nx/vue": "20.0.0",
     "@nx/storybook": "20.0.0",
     "@nx/vite": "20.0.0",
     "@nx/web": "20.0.0",

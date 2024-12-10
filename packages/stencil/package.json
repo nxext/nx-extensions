@@ -42,7 +42,8 @@
     "nx": "^20.0.0",
     "fs-extra": "^10.1.0",
     "@nx/angular": "^20.0.0",
-    "@nx/react": "^20.0.0"
+    "@nx/react": "^20.0.0",
+    "@nx/vue": "^20.0.0"
   },
   "peerDependencies": {},
   "peerDependenciesMeta": {
@@ -53,6 +54,9 @@
       "optional": true
     },
     "@nx/react": {
+      "optional": true
+    },
+    "@nx/vue": {
       "optional": true
     },
     "@nx/angular": {

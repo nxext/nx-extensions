@@ -286,7 +286,7 @@ Type: `boolean`
 
 ## @nxext/stencil:add-outputtarget
 
-Add react/angular libraries for the component library
+Add react/angular/vue libraries for the component library
 
 ### Usage
 
@@ -314,7 +314,7 @@ nx g add-outputtarget ... --dry-run
 
 Type: `string`
 
-Possible values: `angular`, `react`, `svelte`
+Possible values: `angular`, `react`, `svelte`, `vue`
 
 Select what kind of library you want to generate.
 

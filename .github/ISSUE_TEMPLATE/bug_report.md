@@ -1,7 +1,7 @@
 ---
 name: '🐞 Bug Report'
 about: Create a report to help us improve
-title: 'Stencil | Svelte | Sveltekit | Solid | Vite | Vitest | React | Angular: <your title>'
+title: 'Stencil | Svelte | Sveltekit | Solid | Vite | Vitest | Vue | React  | Angular: <your title>'
 labels: bug
 assignees: ''
 ---

@@ -30,7 +30,7 @@
     "add-outputtarget": {
       "factory": "./src/generators/add-outputtarget/add-outputtarget",
       "schema": "./src/generators/add-outputtarget/schema.json",
-      "description": "Add react/angular libraries for the component library"
+      "description": "Add react/angular/vue libraries for the component library"
     },
     "add-outputtarget/add-angular": {
       "factory": "./src/generators/add-outputtarget/add-angular/generator",

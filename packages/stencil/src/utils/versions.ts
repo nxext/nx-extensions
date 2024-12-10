@@ -15,6 +15,7 @@ export const ESLINT_PLUGIN_VERSIONS = {
 export const STENCIL_OUTPUTTARGET_VERSION = {
   react: '^0.5.3',
   angular: '^0.8.3',
+  vue: '^0.9.0',
 };
 
 export const STENCIL_STYLE_PLUGIN_VERSION = {
