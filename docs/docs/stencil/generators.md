@@ -314,7 +314,7 @@ nx g add-outputtarget ... --dry-run
 
 Type: `string`
 
-Possible values: `angular`, `react`, `vue`, `svelte`
+Possible values: `angular`, `react`, `svelte`, `vue`
 
 Select what kind of library you want to generate.
 
