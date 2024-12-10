@@ -286,7 +286,7 @@ Type: `boolean`
 
 ## @nxext/stencil:add-outputtarget
 
-Add react/angular libraries for the component library
+Add react/angular/vue libraries for the component library
 
 ### Usage
 
