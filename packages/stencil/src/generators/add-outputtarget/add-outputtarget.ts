@@ -15,7 +15,7 @@ import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-so
 
 export async function outputtargetGenerator(
   host: Tree,
-  options: AddOutputtargetSchematicSchema,
+  options: AddOutputtargetSchematicSchema
 ) {
   assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'add-outputtarget');
 

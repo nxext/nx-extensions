@@ -30,22 +30,22 @@ xdescribe('add-outputtarget vue', () => {
       await outputtargetGenerator(tree, vueOptions);
 
       expect(
-        tree.exists(`libs/${projectName}-vue/src/lib/${projectName}-vue.tsx`),
+        tree.exists(`libs/${projectName}-vue/src/lib/${projectName}-vue.tsx`)
       ).toBeFalsy();
       expect(
         tree.exists(
-          `libs/${projectName}-vue/src/lib/${projectName}-vue.spec.tsx`,
-        ),
+          `libs/${projectName}-vue/src/lib/${projectName}-vue.spec.tsx`
+        )
       ).toBeFalsy();
       expect(
-        tree.exists(`libs/${projectName}-vue/src/lib/${projectName}-vue.css`),
+        tree.exists(`libs/${projectName}-vue/src/lib/${projectName}-vue.css`)
       ).toBeFalsy();
 
       const indexFile: Buffer = tree.read(
-        `libs/${projectName}-vue/src/index.ts`,
+        `libs/${projectName}-vue/src/index.ts`
       );
       expect(indexFile.toString()).toMatch(
-        `export * from './generated/components';`,
+        `export * from './generated/components';`
       );
     });
 
@@ -56,14 +56,14 @@ xdescribe('add-outputtarget vue', () => {
         tree
           .read(`libs/${projectName}/stencil.config.ts`)
           .includes(
-            `import { vueOutputTarget } from '@stencil/vue-output-target';`,
-          ),
+            `import { vueOutputTarget } from '@stencil/vue-output-target';`
+          )
       ).toBeTruthy();
 
       expect(
         tree
           .read(`libs/${projectName}/stencil.config.ts`)
-          .includes(`vueOutputTarget({`),
+          .includes(`vueOutputTarget({`)
       ).toBeTruthy();
     });
 
