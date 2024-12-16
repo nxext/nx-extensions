@@ -38,7 +38,7 @@ describe('component schematic', () => {
 
     const indexFile = tree.read(`${projectLibDirectory}/src/index.ts`);
     expect(indexFile.toString('utf-8')).toMatch(
-      `export { default as ${name.className} } from './components/${name.fileName}/${name.className}.ts';`
+      `export { default as ${name.className} } from './components/${name.fileName}/${name.className}';`
     );
   });
 });

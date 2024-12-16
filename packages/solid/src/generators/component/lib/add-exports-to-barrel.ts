@@ -17,7 +17,7 @@ export function addExportsToBarrel(tree: Tree, options: SolidComponentSchema) {
 
   const { className, fileName } = names(options.name);
   const indexFilePath = joinPathFragments(projectConfig.sourceRoot, 'index.ts');
-  const componentFile = `./components/${fileName}/${className}.ts`;
+  const componentFile = `./components/${fileName}/${className}`;
 
   if (projectConfig.projectType === 'library') {
     const { content, source } = readSourceFile(tree, indexFilePath);
