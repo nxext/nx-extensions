@@ -13,8 +13,11 @@
       "options": {
         "jestConfig": "packages/stencil/jest.config.ts"
       },
-      "outputs": ["{workspaceRoot}/coverage/packages/stencil"]
+      "outputs": [
+        "{workspaceRoot}/coverage/packages/stencil"
+      ]
     },
+    "e2e": {},
     "build": {
       "executor": "@nx/js:tsc",
       "options": {
@@ -62,7 +65,9 @@
         ],
         "srcRootForCompilationRoot": "packages/stencil"
       },
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "dependsOn": [
         {
           "target": "build",
