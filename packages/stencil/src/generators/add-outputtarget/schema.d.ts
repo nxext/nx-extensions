@@ -1,6 +1,6 @@
 import { OutputTargetType } from './lib/add-outputtarget-to-config';
 
-export type OutputTargetType = 'angular' | 'react' | 'vue' | 'svelte';
+export type OutputTargetType = 'angular' | 'react' | 'svelte' | 'vue';
 
 export interface AddOutputtargetSchematicSchema {
   projectName: string;
