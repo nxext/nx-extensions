@@ -4,7 +4,7 @@ import { Tree } from '@nx/devkit';
 import { outputtargetGenerator } from './add-outputtarget';
 import { AddOutputtargetSchematicSchema } from './schema';
 
-xdescribe('add-outputtarget vue', () => {
+describe('add-outputtarget vue', () => {
   let tree: Tree;
   const projectName = uniq('testprojekt');
   const projectAppDirectory = `apps/${projectName}`;
