@@ -22,7 +22,7 @@ import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-so
 
 function normalize(
   host: Tree,
-  options: MakeLibBuildableSchema
+  options: MakeLibBuildableSchema,
 ): MakeLibBuildableSchema {
   options.projectRoot = readProjectConfiguration(host, options.name).root;
 
@@ -37,7 +37,7 @@ function createFiles(host: Tree, options: MakeLibBuildableSchema) {
     host,
     joinPathFragments(__dirname, './files/lib'),
     options.projectRoot,
-    options
+    options,
   );
 }
 
@@ -50,7 +50,7 @@ function updateProjectConfig(host: Tree, options: MakeLibBuildableSchema) {
   projectConfig.targets.e2e = getE2eTarget(AppType.library, options);
   projectConfig.targets.lint = getLintTarget(
     AppType.library,
-    options.projectRoot
+    options.projectRoot,
   );
 
   updateProjectConfiguration(host, options.name, projectConfig);
@@ -58,7 +58,7 @@ function updateProjectConfig(host: Tree, options: MakeLibBuildableSchema) {
 
 export async function makeLibBuildableGenerator(
   host: Tree,
-  schema: MakeLibBuildableSchema
+  schema: MakeLibBuildableSchema,
 ) {
   assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'make-lib-buildable');
 
@@ -69,7 +69,7 @@ export async function makeLibBuildableGenerator(
   addStylePluginToConfig(
     host,
     joinPathFragments(options.projectRoot, 'stencil.config.ts'),
-    options.style
+    options.style,
   );
   addToOutputTargets(
     host,
@@ -94,11 +94,11 @@ export async function makeLibBuildableGenerator(
       }`,
       `{
         type: 'dist-custom-elements',
-        autoDefineCustomElements: true,
+        customElementsExportBehavior: 'auto-define-custom-elements',
         includeGlobalScripts: false,
       }`,
     ],
-    joinPathFragments(options.projectRoot, 'stencil.config.ts')
+    joinPathFragments(options.projectRoot, 'stencil.config.ts'),
   );
   updateTsConfig(host, options);
 
