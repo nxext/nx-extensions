@@ -94,7 +94,7 @@ export async function makeLibBuildableGenerator(
       }`,
       `{
         type: 'dist-custom-elements',
-        autoDefineCustomElements: true,
+        customElementsExportBehavior: 'auto-define-custom-elements',
         includeGlobalScripts: false,
       }`,
     ],
