@@ -148,12 +148,12 @@ nx storybook my-lib
 
 _The Storybook startup needs an successful `nx build` cause of the generated loaders to work_
 
-## React and Angular
+## React, Angular and Vue
 
-You're able to generate angular/react libraries for yout stencil libraries using stencils outputtargets:
+You're able to generate angular/react/vue libraries for yout stencil libraries using stencils outputtargets:
 
 ```
 nx g @nxext/stencil:add-outputtarget my-lib
 ```
 
-With the `--outputType='react'` or `--outputType='angular'` you can define the kind of library.
+With the `--outputType='react'` or `--outputType='angular'` or `--outputType='vue'` you can define the kind of library.

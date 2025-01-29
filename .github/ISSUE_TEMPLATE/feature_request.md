@@ -1,7 +1,7 @@
 ---
 name: "\U0001F680 Feature Request"
 about: Suggest an idea for this project
-title: 'Stencil | Svelte | Sveltekit | Solid | Vite | Vitest | React | Angular: <your title>'
+title: 'Stencil | Svelte | Sveltekit | Solid | Vite | Vitest | Vue | React | Angular: <your title>'
 labels: feature request
 assignees: ''
 ---

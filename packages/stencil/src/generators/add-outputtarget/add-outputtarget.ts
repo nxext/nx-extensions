@@ -10,6 +10,7 @@ import { isBuildableStencilProject } from '../../utils/utillities';
 import { AddOutputtargetSchematicSchema } from './schema';
 import { addAngularGenerator } from './add-angular/generator';
 import { addReactGenerator } from './add-react/generator';
+import addVueGenerator from './add-vue/generator';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function outputtargetGenerator(
@@ -28,6 +29,10 @@ export async function outputtargetGenerator(
 
     if (options.outputType === 'react') {
       tasks.push(await addReactGenerator(host, options));
+    }
+
+    if (options.outputType === 'vue') {
+      tasks.push(await addVueGenerator(host, options));
     }
 
     if (!options.skipFormat) {
