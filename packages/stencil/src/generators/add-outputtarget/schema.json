@@ -15,7 +15,7 @@
     },
     "outputType": {
       "type": "string",
-      "enum": ["angular", "react", "svelte"],
+      "enum": ["angular", "react", "svelte", "vue"],
       "description": "Select what kind of library you want to generate.",
       "x-prompt": "Which framework do you use?"
     },

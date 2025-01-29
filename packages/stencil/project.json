@@ -15,6 +15,7 @@
       },
       "outputs": ["{workspaceRoot}/coverage/packages/stencil"]
     },
+    "e2e": {},
     "build": {
       "executor": "@nx/js:tsc",
       "options": {

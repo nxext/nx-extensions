@@ -4,7 +4,7 @@ import { Tree } from '@nx/devkit';
 import { outputtargetGenerator } from './add-outputtarget';
 import { AddOutputtargetSchematicSchema } from './schema';
 
-describe('add-outputtarget react', () => {
+describe('add-outputtarget vue', () => {
   let tree: Tree;
   const projectName = uniq('testprojekt');
   const projectAppDirectory = `apps/${projectName}`;
@@ -19,61 +19,57 @@ describe('add-outputtarget react', () => {
     tree = await createTestUILib(projectLibDirectory);
   });
 
-  describe('using react', () => {
-    const reactOptions: AddOutputtargetSchematicSchema = {
+  describe('using vue', () => {
+    const vueOptions: AddOutputtargetSchematicSchema = {
       ...options,
       unitTestRunner: 'none',
-      outputType: 'react',
+      outputType: 'vue',
     };
 
-    it('should not generate default react library', async () => {
-      await outputtargetGenerator(tree, reactOptions);
+    it('should not generate default vue library', async () => {
+      await outputtargetGenerator(tree, vueOptions);
 
       expect(
-        tree.exists(
-          `libs/${projectName}-react/src/lib/${projectName}-react.tsx`
-        )
+        tree.exists(`libs/${projectName}-vue/src/lib/${projectName}-vue.tsx`)
       ).toBeFalsy();
       expect(
         tree.exists(
-          `libs/${projectName}-react/src/lib/${projectName}-react.spec.tsx`
+          `libs/${projectName}-vue/src/lib/${projectName}-vue.spec.tsx`
         )
       ).toBeFalsy();
       expect(
-        tree.exists(
-          `libs/${projectName}-react/src/lib/${projectName}-react.css`
-        )
+        tree.exists(`libs/${projectName}-vue/src/lib/${projectName}-vue.css`)
       ).toBeFalsy();
 
       const indexFile: Buffer = tree.read(
-        `libs/${projectName}-react/src/index.ts`
+        `libs/${projectName}-vue/src/index.ts`
       );
       expect(indexFile.toString()).toMatch(
         `export * from './generated/components';`
       );
     });
 
-    it('should add reactOutputTarget', async () => {
-      await outputtargetGenerator(tree, reactOptions);
+    it('should add vueOutputTarget', async () => {
+      await outputtargetGenerator(tree, vueOptions);
 
       expect(
         tree
           .read(`libs/${projectName}/stencil.config.ts`)
           .includes(
-            `import { reactOutputTarget } from '@stencil/react-output-target';`
+            `import { vueOutputTarget } from '@stencil/vue-output-target';`
           )
       ).toBeTruthy();
 
       expect(
         tree
           .read(`libs/${projectName}/stencil.config.ts`)
-          .includes(`reactOutputTarget({`)
+          .includes(`vueOutputTarget({`)
       ).toBeTruthy();
     });
 
     it('should be able to generate a publishable lib', async () => {
       await outputtargetGenerator(tree, {
-        ...reactOptions,
+        ...vueOptions,
         publishable: true,
         importPath: '@proj/mylib',
       });

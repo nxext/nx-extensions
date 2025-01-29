@@ -60,10 +60,10 @@ const stencilpkgs = [
     pkg: '@stencil/react-output-target',
     version: STENCIL_OUTPUTTARGET_VERSION['react'],
   },
-  // {
-  //   pkg: '@stencil/vue-output-target',
-  //   version: STENCIL_OUTPUTTARGET_VERSION['vue'],
-  // },
+  {
+    pkg: '@stencil/vue-output-target',
+    version: STENCIL_OUTPUTTARGET_VERSION['vue'],
+  },
   {
     pkg: '@stencil/angular-output-target',
     version: STENCIL_OUTPUTTARGET_VERSION['angular'],
