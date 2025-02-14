@@ -72,10 +72,10 @@ export async function initializeStencilConfig<
     ...loadedConfig,
     flags: flags,
     logger,
-    outputTargets: loadedConfig.outputTargets ?? [],
-    rootDir: loadedConfig.rootDir ?? '/',
-    sys: sys ?? loadedConfig.sys,
-    testing: loadedConfig.testing ?? {},
+    outputTargets: loadedConfig?.outputTargets ?? [],
+    rootDir: loadedConfig?.rootDir ?? '/',
+    sys: sys ?? loadedConfig?.sys,
+    testing: loadedConfig?.testing ?? {},
   };
 
   if (strictConfig.flags.task === 'build') {
