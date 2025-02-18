@@ -70,7 +70,7 @@ describe('make-lib-buildable schematic', () => {
           },
           {
             type: 'dist-custom-elements',
-            autoDefineCustomElements: true,
+            customElementsExportBehavior: 'auto-define-custom-elements',
             includeGlobalScripts: false,
           },
         ],
