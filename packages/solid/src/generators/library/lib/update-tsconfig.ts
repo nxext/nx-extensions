@@ -7,7 +7,6 @@ import {
 } from '@nx/devkit';
 
 export function updateTsConfig(tree: Tree, options: NormalizedSchema) {
-  const { libsDir } = getWorkspaceLayout(tree);
 
   return updateJson(tree, 'tsconfig.base.json', (json) => {
     const c = json.compilerOptions;
@@ -21,7 +20,7 @@ export function updateTsConfig(tree: Tree, options: NormalizedSchema) {
     }
 
     c.paths[options.importPath] = [
-      joinPathFragments(`${libsDir}/${options.projectDirectory}/src/index.ts`),
+      joinPathFragments(`${options.projectDirectory}/src/index.ts`),
     ];
     return json;
   });

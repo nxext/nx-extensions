@@ -34,7 +34,7 @@ const baseName = basename(tmpProjPath());
 
 logger.info('Creating nx workspace...');
 execSync(
-  `npx --yes create-nx-workspace@latest ${baseName} --preset empty --nxCloud skip --no-interactive`,
+  `npx --yes create-nx-workspace@latest ${baseName} --preset apps --nxCloud skip --no-interactive`,
   {
     cwd: localTmpDir,
     stdio: 'inherit',
