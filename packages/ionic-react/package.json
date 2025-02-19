@@ -2,7 +2,7 @@
   "name": "@nxext/ionic-react",
   "version": "20.0.3",
   "description": "An Nx plugin for developing Ionic React applications and libraries",
-  "homepage": "https://nxext.github.io/nx-extensions/docs/ionic-react/overview.html",
+  "homepage": "https://nxext.dev/docs/ionic-react/overview.html",
   "repository": {
     "type": "git",
     "url": "https://github.com/nxext/nx-extensions",
