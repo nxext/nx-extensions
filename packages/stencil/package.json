@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "20.0.6",
+  "version": "0.0.1-e2e",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -26,12 +26,11 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nxext/common": "^20.0.1",
+    "@nxext/common": "^0.0.1-e2e",
     "@nx/devkit": "^20.0.0",
     "@stencil/core": "^4.12.6",
     "@nx/workspace": "^20.0.0",
     "@nx/js": "^20.0.0",
-    "typescript": "^5.4.2",
     "@nx/eslint": "^20.0.0",
     "@nx/web": "^20.0.0",
     "@nx/cypress": "^20.0.0",
@@ -43,7 +42,8 @@
     "fs-extra": "^10.1.0",
     "@nx/angular": "^20.0.0",
     "@nx/react": "^20.0.0",
-    "@nx/vue": "^20.0.0"
+    "@nx/vue": "^20.0.0",
+    "typescript": "5.7.3"
   },
   "peerDependencies": {},
   "peerDependenciesMeta": {

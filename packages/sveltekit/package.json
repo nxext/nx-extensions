@@ -1,6 +1,6 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "20.0.3",
+  "version": "0.0.1-e2e",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Sveltekit",
@@ -22,8 +22,8 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "typescript": "^5.4.2",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "typescript": "5.7.3"
   },
   "peerDependencies": {
     "@nx/devkit": "^20.0.0",

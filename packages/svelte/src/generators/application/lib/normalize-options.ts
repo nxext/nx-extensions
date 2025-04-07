@@ -8,14 +8,20 @@ import {
 import { NormalizedSchema, Schema } from '../schema';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName,
+  ensureRootProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 export async function normalizeOptions(
   host: Tree,
   options: Schema
 ): Promise<NormalizedSchema> {
-  await ensureProjectName(host, options, 'application');
+  if (!options.name) {
+    throw new Error('The option "name" must be defined.');
+  }
+  await ensureRootProjectName(
+    { directory: options.directory, name: options.name },
+    'application'
+  );
   const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
     host,
     {

@@ -117,10 +117,9 @@
     "projectsRelationship": "independent",
     "version": {
       "conventionalCommits": true,
-      "generatorOptions": {
-        "fallbackCurrentVersionResolver": "disk",
-        "updateDependents": "auto"
-      }
+      "fallbackCurrentVersionResolver": "disk",
+      "updateDependents": "auto",
+      "preserveLocalDependencyProtocols": false
     },
     "changelog": {
       "automaticFromRef": true,

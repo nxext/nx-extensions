@@ -11,9 +11,11 @@ export async function createTestProject(
   e2eTestrunner: 'none' | 'cypress' = 'none'
 ): Promise<Tree> {
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+  const name = directory.split('/').pop();
 
   if (type === 'application') {
     await applicationGenerator(host, {
+      name,
       directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
@@ -22,6 +24,7 @@ export async function createTestProject(
   }
   if (type === 'library') {
     await libraryGenerator(host, {
+      name,
       directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,

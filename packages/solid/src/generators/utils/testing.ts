@@ -26,6 +26,7 @@ export async function createTestProject(
 
   if (type === 'application') {
     await applicationGenerator(tree, {
+      name: directory.split('/').pop(),
       directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,
@@ -34,6 +35,7 @@ export async function createTestProject(
   }
   if (type === 'library') {
     await libraryGenerator(tree, {
+      name: directory.split('/').pop(),
       directory,
       linter: Linter.EsLint,
       unitTestRunner: unitTestrunner,

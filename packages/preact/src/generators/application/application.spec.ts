@@ -7,6 +7,7 @@ import { Tree } from '@nx/devkit';
 describe('Preact app schematic', () => {
   let host: Tree;
   const options: PreactApplicationSchema = {
+    name: 'test',
     directory: 'apps/test',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',

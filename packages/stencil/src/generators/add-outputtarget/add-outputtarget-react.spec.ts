@@ -13,6 +13,7 @@ describe('add-outputtarget react', () => {
     projectName: projectName,
     publishable: false,
     skipFormat: false,
+    name: 'test-react',
   };
 
   beforeEach(async () => {

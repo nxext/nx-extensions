@@ -2,14 +2,17 @@ import { Tree } from '@nx/devkit';
 import { NormalizedSchema, PreactLibrarySchema } from '../schema';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName,
+  ensureRootProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 export async function normalizeOptions(
   tree: Tree,
   options: PreactLibrarySchema
 ): Promise<NormalizedSchema> {
-  await ensureProjectName(tree, options, 'library');
+  await ensureRootProjectName(
+    { directory: options.directory, name: options.name },
+    'library'
+  );
   const {
     projectName,
     names: projectNames,
