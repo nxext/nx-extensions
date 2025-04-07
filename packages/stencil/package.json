@@ -31,7 +31,6 @@
     "@stencil/core": "^4.12.6",
     "@nx/workspace": "^20.0.0",
     "@nx/js": "^20.0.0",
-    "typescript": "^5.4.2",
     "@nx/eslint": "^20.0.0",
     "@nx/web": "^20.0.0",
     "@nx/cypress": "^20.0.0",

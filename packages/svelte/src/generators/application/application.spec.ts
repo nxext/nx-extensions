@@ -7,6 +7,7 @@ import { readJson } from '@nx/devkit';
 describe('svelte app generator', () => {
   let tree;
   const options: Schema = {
+    name: 'my-svelte-app',
     directory: 'apps/my-app',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',

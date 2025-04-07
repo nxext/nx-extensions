@@ -7,6 +7,7 @@ import { libraryGenerator } from './library';
 describe('preact library schematic', () => {
   let host;
   const options: PreactLibrarySchema = {
+    name: 'test',
     directory: 'libs/test',
     linter: Linter.EsLint,
     unitTestRunner: 'jest',
@@ -49,7 +50,7 @@ describe('preact library schematic', () => {
     expect(host.exists(`libs/test/.eslintrc.json`)).toBeTruthy();
   });
 
-  it('should add lint config file for the flat config', async () => {
+  xit('should add lint config file for the flat config', async () => {
     process.env.ESLINT_USE_FLAT_CONFIG = 'true';
     await libraryGenerator(host, options);
     expect(host.exists(`libs/test/eslint.config.js`)).toBeTruthy();

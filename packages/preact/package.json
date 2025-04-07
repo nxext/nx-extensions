@@ -32,7 +32,6 @@
     "@nx/js": "^20.0.0"
   },
   "dependencies": {
-    "typescript": "^5.4.2",
     "tslib": "^2.3.0"
   }
 }

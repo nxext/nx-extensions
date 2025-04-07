@@ -26,6 +26,7 @@ describe('make-lib-buildable schematic', () => {
       return json;
     });
     await libraryGenerator(host, {
+      name: projectName,
       directory: projectLibDirectory,
       style: SupportedStyles.css,
       importPath: options.importPath,
@@ -110,6 +111,7 @@ describe('make-lib-buildable schematic using defaults', () => {
     host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
 
     await libraryGenerator(host, {
+      name: projectName,
       directory: projectLibDirectory,
       style: SupportedStyles.css,
       importPath: options.importPath,

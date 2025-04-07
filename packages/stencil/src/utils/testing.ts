@@ -22,6 +22,7 @@ export async function createTestUILib(
   });
 
   await libraryGenerator(host, {
+    name: libDirectory.split('/').pop(),
     directory: libDirectory,
     style: style,
     buildable,

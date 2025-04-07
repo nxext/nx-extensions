@@ -7,6 +7,7 @@ import { Tree } from '@nx/devkit';
 describe('Solid app generator', () => {
   let tree: Tree;
   const options: Schema = {
+    name: 'my-app',
     directory: 'apps/my-app',
     linter: Linter.EsLint,
     unitTestRunner: 'vitest',

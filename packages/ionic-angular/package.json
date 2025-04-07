@@ -22,7 +22,6 @@
   "dependencies": {
     "@nxext/capacitor": "^20.1.0",
     "tslib": "^2.3.0",
-    "typescript": "^5.4.2",
     "@phenomnomnominal/tsquery": "~5.0.1"
   },
   "peerDependencies": {
