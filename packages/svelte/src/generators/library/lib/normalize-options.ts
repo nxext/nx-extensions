@@ -2,14 +2,17 @@ import { names, Tree } from '@nx/devkit';
 import { NormalizedSchema, SvelteLibrarySchema } from '../schema';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName,
+  ensureRootProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 export async function normalizeOptions(
   host: Tree,
   options: SvelteLibrarySchema
 ): Promise<NormalizedSchema> {
-  await ensureProjectName(host, options, 'library');
+  await ensureRootProjectName(
+    { directory: options.directory, name: options.name },
+    'library'
+  );
   const {
     projectName,
     names: projectNames,

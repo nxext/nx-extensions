@@ -62,3 +62,5 @@ e2e/stencil-e2e/tests/dev.test.ts
 .nx/cache
 .nx/workspace-data
 migrations.json
+
+/.cursor

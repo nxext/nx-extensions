@@ -13,6 +13,7 @@ xdescribe('add-outputtarget angular', () => {
     projectName: projectName,
     publishable: false,
     skipFormat: false,
+    name: 'test-angular',
   };
 
   beforeEach(async () => {
