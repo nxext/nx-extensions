@@ -1,0 +1,14 @@
+{
+  "name": "nxext",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "postCreateCommand": "pnpm config set store-dir /home/node && pnpm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "orta.vscode-jest",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  }
+}
