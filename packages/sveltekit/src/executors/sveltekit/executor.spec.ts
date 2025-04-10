@@ -4,6 +4,7 @@ import { ExecutorContext } from '@nx/devkit';
 
 const options: SveltekitExecutorOptions = {
   command: 'build',
+  name: 'sveltekit-example',
 };
 
 describe('Sveltekit Executor', () => {

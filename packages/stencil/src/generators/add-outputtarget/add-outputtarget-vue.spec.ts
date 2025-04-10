@@ -13,6 +13,7 @@ describe('add-outputtarget vue', () => {
     projectName: projectName,
     publishable: false,
     skipFormat: false,
+    name: 'test-vue',
   };
 
   beforeEach(async () => {

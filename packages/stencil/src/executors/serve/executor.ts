@@ -11,9 +11,10 @@ import { ExecutorContext, logger } from '@nx/devkit';
 import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
 import {
   calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies,
 } from '@nx/js/src/utils/buildable-libs-utils';
+import { checkDependencies } from '@nx/js/src/utils/check-dependencies';
+import { join } from 'path';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
@@ -44,7 +45,7 @@ export default async function* runExecutor(
   options: StencilServeOptions,
   context: ExecutorContext
 ) {
-  const taskCommand: TaskCommand = 'build';
+  const taskCommand: TaskCommand = 'serve';
 
   const projGraph = await createProjectGraphAsync();
   const { target, dependencies } = calculateProjectDependencies(
@@ -55,15 +56,12 @@ export default async function* runExecutor(
     context.configurationName
   );
 
-  if (
-    !checkDependentProjectsHaveBeenBuilt(
-      context.root,
-      context.projectName,
-      context.targetName,
-      dependencies
-    )
-  ) {
-    yield { success: false };
+  if (!context.target.dependsOn) {
+    const tsConfigPath = join(context.root, target.data.root, 'tsconfig.json');
+    const result = await checkDependencies(context, tsConfigPath);
+    if (!result.tmpTsConfig) {
+      return { success: false };
+    }
   }
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
