@@ -11,7 +11,6 @@ import { ExecutorContext, logger } from '@nx/devkit';
 import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
 import {
   calculateProjectDependencies,
-  checkDependentProjectsHaveBeenBuilt,
   updateBuildableProjectPackageJsonDependencies,
 } from '@nx/js/src/utils/buildable-libs-utils';
 
@@ -54,17 +53,6 @@ export default async function* runExecutor(
     context.targetName,
     context.configurationName
   );
-
-  if (
-    !checkDependentProjectsHaveBeenBuilt(
-      context.root,
-      context.projectName,
-      context.targetName,
-      dependencies
-    )
-  ) {
-    yield { success: false };
-  }
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
   const { strictConfig, pathCollection } = await initializeStencilConfig(

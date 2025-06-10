@@ -13,4 +13,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/packages/ionic-angular',
+  testEnvironment: 'node',
 };

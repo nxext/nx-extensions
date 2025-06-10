@@ -13,4 +13,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html', 'json'],
   coverageDirectory: '../../coverage/packages/ionic-react',
+  testEnvironment: 'node',
 };

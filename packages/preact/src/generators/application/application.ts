@@ -20,7 +20,7 @@ import { addVite } from './lib/add-vite';
 import { createOrEditViteConfig } from '@nx/vite';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName,
+  ensureRootProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
@@ -28,7 +28,7 @@ async function normalizeOptions(
   tree: Tree,
   options: PreactApplicationSchema
 ): Promise<NormalizedSchema> {
-  await ensureProjectName(tree, options, 'application');
+  await ensureRootProjectName(options, 'application');
   const {
     projectName,
     projectRoot,
@@ -39,6 +39,7 @@ async function normalizeOptions(
     directory: options.directory,
     rootProject: false,
   });
+  options.name ??= projectName;
   // options.rootProject = appProjectRoot === '.';
   const fileName =
     /* options.simpleName

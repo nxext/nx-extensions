@@ -1,6 +1,6 @@
 {
   "name": "@nxext/ionic-react",
-  "version": "20.0.3",
+  "version": "0.0.1-e2e",
   "description": "An Nx plugin for developing Ionic React applications and libraries",
   "homepage": "https://nxext.dev/docs/ionic-react/overview.html",
   "repository": {
@@ -20,11 +20,8 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "dependencies": {
-    "@nxext/capacitor": "^20.1.0",
+    "@nxext/capacitor": "^0.0.1-e2e",
     "tslib": "^2.3.0"
   },
-  "peerDependencies": {
-    "@nx/devkit": "^20.0.0",
-    "@nx/js": "^20.0.0"
-  }
+  "peerDependencies": {}
 }

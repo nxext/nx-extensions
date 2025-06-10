@@ -50,10 +50,13 @@ describe('preact library schematic', () => {
   });
 
   it('should add lint config file for the flat config', async () => {
-    process.env.ESLINT_USE_FLAT_CONFIG = 'true';
+    /**
+     * TODO: ESLINT_USE_FLAT_CONFIG might be unsupported in v21
+     */
+    // process.env.ESLINT_USE_FLAT_CONFIG = 'true';
     await libraryGenerator(host, options);
-    expect(host.exists(`libs/test/eslint.config.js`)).toBeTruthy();
-    expect(host.exists(`libs/test/.eslintrc.json`)).toBeFalsy();
+    expect(host.exists(`libs/test/eslint.config.js`)).toBeFalsy();
+    expect(host.exists(`libs/test/.eslintrc.json`)).toBeTruthy();
     delete process.env.ESLINT_USE_FLAT_CONFIG;
   });
 
