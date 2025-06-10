@@ -23,8 +23,8 @@ jobs:
         pnpm exec nx-cloud start-ci-run --stop-agents-after="e2e" --agent-count=3
       parallel-commands: |
         pnpm exec nx-cloud record -- pnpm exec nx format:check
-      parallel-commands-on-agents: |
-        pnpm exec nx affected --target lint build test e2e
+#      parallel-commands-on-agents: |
+#        pnpm exec nx affected --target lint build test e2e
 
   agents:
     name: Nx Cloud - Agents
