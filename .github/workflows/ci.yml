@@ -24,7 +24,7 @@ jobs:
       parallel-commands: |
         pnpm exec nx-cloud record -- pnpm exec nx format:check
       parallel-commands-on-agents: |
-        pnpm exec nx affected --target lint build test --exclude="tag:e2e"
+        pnpm exec nx affected --target build lint test --exclude="tag:e2e"
   #        e2e tests are to be fixed
   #      parallel-commands-on-agents: |
   #        pnpm exec nx affected --target lint build test e2e
