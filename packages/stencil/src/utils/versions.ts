@@ -1,4 +1,4 @@
-export const stencilVersion = '^4.12.6';
+export const stencilVersion = '^4.22.0';
 export const stencilRouterVersion = '^1.0.1';
 
 export const puppeteer = '^21.4.1';

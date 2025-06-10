@@ -36,6 +36,9 @@ export const PROJECT_TYPE_DEPENDENCIES: {
     dependencies: {},
     devDependencies: {
       ...stencilDependencies,
+      /**
+       * @deprecated - 7-year-old one
+       */
       '@stencil/router': stencilRouterVersion,
     },
   },

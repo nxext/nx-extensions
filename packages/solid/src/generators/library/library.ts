@@ -17,7 +17,7 @@ import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName,
+  ensureRootProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { createOrEditViteConfig } from '@nx/vite';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
@@ -26,7 +26,7 @@ async function normalizeOptions(
   host: Tree,
   options: SolidLibrarySchema
 ): Promise<NormalizedSchema> {
-  await ensureProjectName(host, options, 'library');
+  await ensureRootProjectName(options, 'library');
   const {
     projectName,
     names: projectNames,

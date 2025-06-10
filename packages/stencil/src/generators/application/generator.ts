@@ -19,7 +19,7 @@ import { addLinting } from './lib/add-linting';
 import { addCypress } from './lib/add-cypress';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName,
+  ensureRootProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-command';
@@ -28,7 +28,7 @@ async function normalizeOptions(
   host: Tree,
   options: RawApplicationSchema
 ): Promise<ApplicationSchema> {
-  await ensureProjectName(host, options, 'application');
+  await ensureRootProjectName(options, 'application');
   const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
     host,
     {
@@ -37,6 +37,7 @@ async function normalizeOptions(
       directory: options.directory,
     }
   );
+  options.name ??= projectName;
 
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())

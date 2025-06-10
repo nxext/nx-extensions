@@ -8,14 +8,14 @@ import {
 import { NormalizedSchema, Schema } from '../schema';
 import {
   determineProjectNameAndRootOptions,
-  ensureProjectName,
+  ensureRootProjectName,
 } from '@nx/devkit/src/generators/project-name-and-root-utils';
 
 export async function normalizeOptions(
   host: Tree,
   options: Schema
 ): Promise<NormalizedSchema> {
-  await ensureProjectName(host, options, 'application');
+  await ensureRootProjectName(options, 'application');
   const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
     host,
     {
@@ -25,6 +25,7 @@ export async function normalizeOptions(
       rootProject: options.rootProject,
     }
   );
+  options.name ??= projectName;
   options.rootProject = projectRoot === '.';
 
   const nxJson = readNxJson(host);
