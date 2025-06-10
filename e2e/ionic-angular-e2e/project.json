@@ -10,6 +10,6 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "tags": [],
+  "tags": ["e2e"],
   "implicitDependencies": ["ionic-angular"]
 }
