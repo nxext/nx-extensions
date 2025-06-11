@@ -30,7 +30,6 @@
     "tslib": "^2.3.0",
     "@nx/devkit": "^21.0.0",
     "@nx/js": "^21.0.0",
-    "@stencil/core": "^4.28.0",
     "@nx/workspace": "^21.0.0",
     "typescript": "^5.7.3",
     "fs-extra": "^10.1.0",
