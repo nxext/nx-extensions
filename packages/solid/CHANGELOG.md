@@ -1,3 +1,13 @@
+## 20.1.0 (2025-06-11)
+
+### 🚀 Features
+
+- 1184 add nx 21 support ([4a20602b](https://github.com/nxext/nx-extensions/commit/4a20602b))
+
+### ❤️ Thank You
+
+- Paweł Twardziak
+
 ## 20.0.3 (2024-10-21)
 
 ### 🩹 Fixes

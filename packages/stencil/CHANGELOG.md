@@ -1,3 +1,22 @@
+## 20.1.0 (2025-06-11)
+
+### 🚀 Features
+
+- 1184 add nx 21 support ([4a20602b](https://github.com/nxext/nx-extensions/commit/4a20602b))
+
+### 🩹 Fixes
+
+- **Stencil:** ensure `strictConfig` object has default values if `loadedConfig` is undefined ([d3357f9c](https://github.com/nxext/nx-extensions/commit/d3357f9c))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 20.1.0
+
+### ❤️ Thank You
+
+- Dabiel González Ramos
+- Paweł Twardziak
+
 ## 20.0.6 (2024-10-21)
 
 ### 🩹 Fixes

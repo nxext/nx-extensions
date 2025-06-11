@@ -1,3 +1,22 @@
+## 20.1.0 (2025-06-11)
+
+### 🚀 Features
+
+- 1184 add nx 21 support ([4a20602b](https://github.com/nxext/nx-extensions/commit/4a20602b))
+
+### 🩹 Fixes
+
+- **url:** update docs url ([035d8eda](https://github.com/nxext/nx-extensions/commit/035d8eda))
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 20.2.0
+
+### ❤️ Thank You
+
+- Abdelaziz Bennouna
+- Paweł Twardziak
+
 ## 20.0.3 (2024-12-09)
 
 ### 🧱 Updated Dependencies
