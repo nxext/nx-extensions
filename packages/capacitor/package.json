@@ -23,7 +23,7 @@
   "builders": "./executors.json",
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nxext/common": "^21.0.0",
+    "@nxext/common": "20.0.1",
     "@nx/devkit": "^21.0.0",
     "nx": "^21.0.0",
     "@nx/js": "^21.0.0",
