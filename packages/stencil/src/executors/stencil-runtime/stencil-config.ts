@@ -10,6 +10,7 @@ import { ExecutorContext } from '@nx/devkit';
 import { join } from 'path';
 import { normalizePath } from '../../utils/normalize-path';
 import type { Config } from '@stencil/core/compiler';
+import type { Config as CoreConfig } from '@stencil/core';
 import { ValidatedConfig } from '@stencil/core/internal';
 
 function getCompilerExecutingPath(): string {
