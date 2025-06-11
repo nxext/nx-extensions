@@ -20,7 +20,7 @@
   "schematics": "./generators.json",
   "builders": "./executors.json",
   "dependencies": {
-    "@nxext/capacitor": "^21.0.0",
+    "@nxext/capacitor": "20.1.0",
     "tslib": "^2.3.0",
     "@nx/devkit": "^21.0.0",
     "@nx/js": "^21.0.0"
