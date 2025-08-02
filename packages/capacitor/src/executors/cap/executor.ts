@@ -7,10 +7,10 @@ import {
   readJsonFile,
   runExecutor as nxRunExecutor,
 } from '@nx/devkit';
+import { execSync, spawn } from 'node:child_process';
+import { existsSync, rmSync } from 'node:fs';
 import runCommands from 'nx/src/executors/run-commands/run-commands.impl';
 import { CommandExecutorSchema } from './schema';
-import { existsSync, rmSync } from 'node:fs';
-import { execSync } from 'node:child_process';
 
 export default async function* runExecutor(
   options: CommandExecutorSchema,
@@ -59,14 +59,41 @@ export default async function* runExecutor(
   const cmd = sanitizeCapacitorCommand(options.cmd);
 
   let success = false;
-  try {
-    execSync(`npx --package=${packageName}@${packageVersion} cap ${cmd}`, {
+  // Use spawn for long-running commands (when -l or --livereload is present)
+  const isLongRunning =
+    /(^|\s)-(l|\-livereload)(\s|$)/.test(cmd) ||
+    /(^|\s)--livereload(\s|$)/.test(cmd);
+  if (isLongRunning) {
+    // Split the command into args for spawn
+    const args = [
+      `--package=${packageName}@${packageVersion}`,
+      'cap',
+      ...cmd.split(' '),
+    ];
+    const child = spawn('npx', args, {
       stdio: 'inherit',
       cwd: projectRootPath,
+      shell: false,
     });
-    success = true;
-  } catch {
-    success = false;
+    // Wait for the process to exit
+    success = await new Promise((resolve) => {
+      child.on('exit', (code) => {
+        resolve(code === 0);
+      });
+      child.on('error', () => {
+        resolve(false);
+      });
+    });
+  } else {
+    try {
+      execSync(`npx --package=${packageName}@${packageVersion} cap ${cmd}`, {
+        stdio: 'inherit',
+        cwd: projectRootPath,
+      });
+      success = true;
+    } catch {
+      success = false;
+    }
   }
 
   const nodeModulesPath = normalizePath(`${projectRootPath}/node_modules`);
