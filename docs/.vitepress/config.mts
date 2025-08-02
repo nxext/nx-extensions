@@ -16,6 +16,19 @@ export default defineConfig({
       '/docs/': sideNavDocs(),
     },
 
+    editLink: {
+      pattern: 'https://github.com/nxext/nx-extensions/tree/main/docs/:path',
+      text: 'Edit this page on GitHub',
+    },
+
+    socialLinks: [
+      {
+        icon: 'discord',
+        link: 'https://discord.gg/SWyp4xfGjn',
+      },
+      { icon: 'github', link: 'https://github.com/nxext/nx-extensions' },
+    ],
+
     footer: {
       message:
         'MIT Licensed | Copyright © 2020-present Nxext Developers & Contributors',
@@ -29,19 +42,6 @@ function nav() {
   return [
     { text: 'Guide', link: '/guide/' },
     { text: 'Docs', link: '/docs/nxext/overview' },
-    {
-      text: 'Links',
-      items: [
-        {
-          text: 'Nx Discord Chat',
-          link: 'https://discord.gg/SWyp4xfGjn',
-        },
-        {
-          text: 'Github',
-          link: 'https://github.com/nxext/nx-extensions',
-        },
-      ],
-    },
   ];
 }
 
