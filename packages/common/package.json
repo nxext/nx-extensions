@@ -1,6 +1,7 @@
 {
   "name": "@nxext/common",
   "version": "21.0.0",
+  "license": "MIT",
   "description": "Common utilities for Nxext Nx plugins",
   "author": {
     "name": "Gion Kunz",
