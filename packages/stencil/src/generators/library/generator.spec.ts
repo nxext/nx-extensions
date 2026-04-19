@@ -90,6 +90,7 @@ describe('library', () => {
     await libraryGenerator(host, options);
     const packageJson = readJson(host, 'package.json');
     expect(packageJson.devDependencies['@stencil/core']).toBeDefined();
+    expect(packageJson.devDependencies['@types/node']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
 
