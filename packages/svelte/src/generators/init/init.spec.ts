@@ -22,5 +22,7 @@ describe('init schematic', () => {
     expect(packageJson.devDependencies['svelte']).toBeDefined();
     expect(packageJson.devDependencies['svelte-preprocess']).toBeDefined();
     expect(packageJson.devDependencies['svelte-jester']).toBeDefined();
+    expect(packageJson.devDependencies['@types/node']).toBeDefined();
+    expect(packageJson.devDependencies['vite-plugin-dts']).toBeDefined();
   });
 });
