@@ -79,6 +79,12 @@ function createFiles(host: Tree, options: LibrarySchema) {
     );
   }
 
+  if (options.e2eTestRunner === 'none') {
+    host.delete(
+      `${options.projectRoot}/src/components/my-component/my-component.e2e.ts`
+    );
+  }
+
   if (!options.component) {
     host.delete(`${options.projectRoot}/src/components/my-component`);
   }
