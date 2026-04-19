@@ -36,7 +36,7 @@ describe('@nxext/stencil: application', () => {
     const app = uniq('stencil-app');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/stencil:app ${app} --style=css --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+      `generate @nxext/stencil:app apps/${app} --style=css --e2eTestRunner=none --junitTestRunner=none --no-interactive`
     );
 
     const build = await runNxCommandAsync(
@@ -57,7 +57,7 @@ describe('@nxext/stencil: application', () => {
     const app = uniq('stencil-app-prerender');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/stencil:app ${app} --style=css --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+      `generate @nxext/stencil:app apps/${app} --style=css --e2eTestRunner=none --junitTestRunner=none --no-interactive`
     );
 
     const build = await runNxCommandAsync(

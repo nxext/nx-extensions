@@ -71,7 +71,7 @@
     "@phenomnomnominal/tsquery": "~5.0.1",
     "@preact/preset-vite": "^2.10.1",
     "@schematics/angular": "16.0.0",
-    "@stencil/core": "4.33.1",
+    "@stencil/core": "4.43.4",
     "@swc-node/register": "1.11.1",
     "@swc/cli": "0.7.10",
     "@swc/core": "1.15.8",
