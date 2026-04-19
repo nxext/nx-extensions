@@ -8,14 +8,13 @@ import { NormalizedSchema } from '../schema';
 
 export function updateWorkspace(host: Tree, options: NormalizedSchema) {
   const project = readProjectConfiguration(host, options.project);
-  project.targets.build ??= {
-    options: {
-      assets: [],
-      styles: [],
-    },
-  };
+  project.targets.build ??= {};
+  project.targets.build.options ??= {};
+  const existingAssets = project.targets.build.options.assets ?? [];
+  const existingStyles = project.targets.build.options.styles ?? [];
+
   project.targets.build.options.assets = [
-    ...project.targets.build.options.assets.filter(
+    ...existingAssets.filter(
       (asset: string | Record<string, string>) =>
         asset.toString().includes('src/favicon.ico') ||
         asset.toString().includes(`public/favicon.ico`)
@@ -29,7 +28,7 @@ export function updateWorkspace(host: Tree, options: NormalizedSchema) {
   ];
 
   project.targets.build.options.styles = [
-    ...project.targets.build.options.styles,
+    ...existingStyles,
     normalizePath(`${options.projectRoot}/src/theme/variables.css`),
   ];
 
