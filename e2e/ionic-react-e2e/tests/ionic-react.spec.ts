@@ -1,58 +1,71 @@
-import { runNxCommandAsync, uniq } from '@nx/plugin/testing';
-import { createTestProject, installPlugin, stripAnsi } from '@nxext/e2e-utils';
-import { rmSync } from 'fs';
+/**
+ * Reference real-install e2e for @nxext/ionic-react. See stencil-e2e for flow.
+ *
+ * Layers its configuration on top of an `@nx/react:application` (vite + vitest).
+ */
+import {
+  cleanupTestProject,
+  createTestProject,
+  installNxPlugins,
+  installPlugin,
+  runNxCommandAsync,
+  stripAnsi,
+  uniq,
+} from '@nxext/e2e-utils';
 
-describe('ionic-react-project e2e', () => {
+jest.setTimeout(600_000);
+
+describe('@nxext/ionic-react', () => {
   let projectDirectory: string;
   const app = uniq('ionic-react');
-  const appDir = `apps/${app}`;
 
   beforeAll(async () => {
     projectDirectory = createTestProject();
+    installNxPlugins(projectDirectory, ['@nx/react', '@nx/vite']);
     installPlugin(projectDirectory, 'ionic-react');
 
     await runNxCommandAsync(
-      `generate @nx/react:application ${appDir} --style=css --bundler=vite --unitTestRunner=vitest --minimal --e2eTestRunner=none --linter=none --skipFormat=true`
+      projectDirectory,
+      `generate @nx/react:application apps/${app} --style=css --bundler=vite --unitTestRunner=vitest --minimal --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`
     );
     await runNxCommandAsync(
-      `generate @nxext/ionic-react:configuration --project=${app} --appName=test --appId=test --skipFormat=true`
+      projectDirectory,
+      `generate @nxext/ionic-react:configuration --project=${app} --appName=test --appId=test --skipFormat=true --no-interactive`
     );
   });
 
   afterAll(() => {
-    // Cleanup the test project
-    rmSync(projectDirectory, {
-      recursive: true,
-      force: true,
-    });
+    cleanupTestProject(projectDirectory);
   });
 
-  it('should build successfully', async () => {
-    const buildResults = await runNxCommandAsync(`build ${app}`);
-    expect(stripAnsi(buildResults.stdout)).toContain(
+  it('builds the ionic-react-configured app', async () => {
+    const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
+    expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
       `Successfully ran target build for project ${app}`
     );
   });
 
-  it('should run tests successfully', async () => {
-    const testResults = await runNxCommandAsync(`test ${app}`);
-    expect(stripAnsi(testResults.stdout)).toContain(
+  it('runs the app unit tests', async () => {
+    const result = await runNxCommandAsync(projectDirectory, `test ${app}`);
+    expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
       `Successfully ran target test for project ${app}`
     );
   });
 
-  it('should run cap successfully', async () => {
-    const capResults = await runNxCommandAsync(`run ${app}:cap`);
-    expect(capResults.stdout).toContain('Usage');
+  it('exposes the cap executor', async () => {
+    const base = await runNxCommandAsync(projectDirectory, `run ${app}:cap`);
+    expect(base.stdout).toContain('Usage');
 
-    const capPackageInstallResults = await runNxCommandAsync(
+    const noInstall = await runNxCommandAsync(
+      projectDirectory,
       `run ${app}:cap --packageInstall false`
     );
-    expect(capPackageInstallResults.stdout).toContain('Usage: cap');
+    expect(noInstall.stdout).toContain('Usage: cap');
 
-    const capHelpResults = await runNxCommandAsync(
+    const help = await runNxCommandAsync(
+      projectDirectory,
       `run ${app}:cap --cmd="--help"`
     );
-    expect(capHelpResults.stdout).toContain('Usage: cap');
+    expect(help.stdout).toContain('Usage: cap');
   });
 });

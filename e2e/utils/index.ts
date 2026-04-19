@@ -124,6 +124,24 @@ export function installPlugin(
   });
 }
 
+/**
+ * Installs one or more first-party Nx plugins (e.g. `@nx/angular`, `@nx/web`)
+ * into the test project. Needed for the ionic/capacitor e2e suites that layer
+ * their configuration on top of a base-framework application generator which
+ * `create-nx-workspace --preset=apps` does not ship by default.
+ */
+export function installNxPlugins(
+  projectDirectory: string,
+  packages: string[]
+): void {
+  if (packages.length === 0) return;
+  execSync(`pnpm add -D ${packages.join(' ')}`, {
+    cwd: projectDirectory,
+    stdio: 'inherit',
+    env: E2E_ENV,
+  });
+}
+
 export type RunNxCommandResult = { stdout: string; stderr: string };
 
 /**
