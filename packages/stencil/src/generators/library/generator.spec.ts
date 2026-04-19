@@ -273,5 +273,25 @@ describe('library', () => {
         )
       ).toBeFalsy();
     });
+
+    it(`shouldn't create e2e files if e2eTestRunner is 'none'`, async () => {
+      await libraryGenerator(host, { ...options, e2eTestRunner: 'none' });
+
+      expect(
+        host.exists(
+          `libs/testlib/src/components/my-component/my-component.e2e.ts`
+        )
+      ).toBeFalsy();
+    });
+
+    it(`creates e2e files when e2eTestRunner is 'puppeteer'`, async () => {
+      await libraryGenerator(host, { ...options, e2eTestRunner: 'puppeteer' });
+
+      expect(
+        host.exists(
+          `libs/testlib/src/components/my-component/my-component.e2e.ts`
+        )
+      ).toBeTruthy();
+    });
   });
 });

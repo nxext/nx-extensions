@@ -194,4 +194,35 @@ describe('schematic:application', () => {
       host.exists(`apps/test/src/components/app-profile/app-profile.spec.ts`)
     ).toBeFalsy();
   });
+
+  it(`shouldn't create e2e files if e2eTestRunner is 'none'`, async () => {
+    await applicationGenerator(host, { ...options, e2eTestRunner: 'none' });
+
+    expect(
+      host.exists(`apps/test/src/components/app-home/app-home.e2e.ts`)
+    ).toBeFalsy();
+    expect(
+      host.exists(`apps/test/src/components/app-root/app-root.e2e.ts`)
+    ).toBeFalsy();
+    expect(
+      host.exists(`apps/test/src/components/app-profile/app-profile.e2e.ts`)
+    ).toBeFalsy();
+  });
+
+  it(`creates e2e files when e2eTestRunner is 'puppeteer'`, async () => {
+    await applicationGenerator(host, {
+      ...options,
+      e2eTestRunner: 'puppeteer',
+    });
+
+    expect(
+      host.exists(`apps/test/src/components/app-home/app-home.e2e.ts`)
+    ).toBeTruthy();
+    expect(
+      host.exists(`apps/test/src/components/app-root/app-root.e2e.ts`)
+    ).toBeTruthy();
+    expect(
+      host.exists(`apps/test/src/components/app-profile/app-profile.e2e.ts`)
+    ).toBeTruthy();
+  });
 });

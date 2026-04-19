@@ -96,6 +96,18 @@ function createFiles(host: Tree, options: ApplicationSchema) {
       `${options.projectRoot}/src/components/app-profile/app-profile.spec.ts`
     );
   }
+
+  if (options.e2eTestRunner === 'none') {
+    host.delete(
+      `${options.projectRoot}/src/components/app-home/app-home.e2e.ts`
+    );
+    host.delete(
+      `${options.projectRoot}/src/components/app-root/app-root.e2e.ts`
+    );
+    host.delete(
+      `${options.projectRoot}/src/components/app-profile/app-profile.e2e.ts`
+    );
+  }
 }
 
 export async function applicationGenerator(
