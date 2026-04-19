@@ -51,6 +51,18 @@ describe('svelte library schematic', () => {
     }
   });
 
+  it('registers the import path in tsconfig.base.json', async () => {
+    await libraryGenerator(tree, options);
+    const tsconfigBase = readJson(tree, 'tsconfig.base.json');
+    expect(tsconfigBase.compilerOptions.paths).toBeDefined();
+    // determineProjectNameAndRootOptions derives the import path from the
+    // workspace npm scope (empty in createTreeWithEmptyWorkspace) + the
+    // project name, yielding '@proj/my-lib'.
+    expect(tsconfigBase.compilerOptions.paths['@proj/my-lib']).toEqual([
+      'libs/my-lib/src/index.ts',
+    ]);
+  });
+
   it('should add vite types to tsconfigs', async () => {
     await libraryGenerator(tree, {
       ...options,

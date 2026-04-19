@@ -139,12 +139,7 @@ describe('@nxext/svelte: application', () => {
     });
   });
 
-  // TODO: the `@proj/<lib>` path alias isn't registered in the generated
-  // workspace's tsconfig.base.json, so Vite/Rolldown fails to resolve the
-  // sibling import. Separate from the @types/node fix — it's the library
-  // generator not updating the root tsconfig's `paths` map. Needs its own
-  // follow-up PR.
-  it.skip('builds a svelte app with a library dependency', async () => {
+  it('builds a svelte app with a library dependency', async () => {
     const app = uniq('svelte-app-deps');
     const lib = uniq('svelte-lib-dep');
 
@@ -161,12 +156,29 @@ describe('@nxext/svelte: application', () => {
       `generate @nxext/svelte:c testcomp --project=${lib} --no-interactive`
     );
 
+    // The scope is derived from the scaffolded workspace, not always `@proj`.
+    // Look up the path alias the library generator just registered in
+    // tsconfig.base.json and import under that exact key.
+    const tsconfigBase = readJson<{
+      compilerOptions: { paths: Record<string, string[]> };
+    }>(projectDirectory, 'tsconfig.base.json');
+    const importPath = Object.keys(tsconfigBase.compilerOptions.paths).find(
+      (key) => key.endsWith(`/${lib}`)
+    );
+    if (!importPath) {
+      throw new Error(
+        `No tsconfig path registered for lib "${lib}". Registered keys: ${Object.keys(
+          tsconfigBase.compilerOptions.paths
+        ).join(', ')}`
+      );
+    }
+
     updateFile(
       projectDirectory,
       `apps/${app}/src/App.svelte`,
       `<script lang="ts">
   export let name: string;
-  import { Testcomp } from '@proj/${lib}';
+  import { Testcomp } from '${importPath}';
 </script>
 
 <main>
