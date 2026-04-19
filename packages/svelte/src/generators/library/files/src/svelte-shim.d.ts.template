@@ -1,0 +1,8 @@
+// Ambient type declaration so TypeScript (and ts-jest) accept
+// `import X from './X.svelte'`. svelte-jester / the svelte preprocess still
+// handle the actual runtime transform.
+declare module '*.svelte' {
+  import type { ComponentType } from 'svelte';
+  const component: ComponentType;
+  export default component;
+}

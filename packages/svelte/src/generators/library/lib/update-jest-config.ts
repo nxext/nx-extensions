@@ -16,17 +16,18 @@ export function updateJestConfig(host: Tree, options: NormalizedSchema) {
     return;
   }
 
-  const svelteConfigPath = `${options.projectRoot}/svelte.config.cjs`;
   const originalContent = host.read(configPath).toString();
-  const content = updateJestConfigContent(originalContent, svelteConfigPath);
-  host.write(configPath, content);
+  host.write(configPath, updateJestConfigContent(originalContent));
 }
 
-function updateJestConfigContent(content: string, svelteConfigPath: string) {
+function updateJestConfigContent(content: string) {
+  // See application/lib/update-jest-config.ts for why the preprocess value is
+  // emitted as a `require('path').resolve(...)` expression rather than a
+  // literal string.
   return content
     .replace('moduleFileExtensions: [', "moduleFileExtensions: ['svelte', ")
     .replace(
       'transform: {',
-      `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      'preprocess': '${svelteConfigPath}'\n    }\n    ],`
+      `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      preprocess: require('path').resolve(__dirname, 'svelte.config.cjs')\n    }],`
     );
 }
