@@ -6,6 +6,7 @@ import {
   cleanupTestProject,
   createTestProject,
   installPlugin,
+  readJson,
   runNxCommandAsync,
   stripAnsi,
   uniq,
@@ -131,10 +132,7 @@ describe('@nxext/svelte: library', () => {
     );
   });
 
-  // TODO: same `@proj/<lib>` path-alias resolution gap as the application
-  // "library dependency" test — the lib generator doesn't update
-  // tsconfig.base.json paths, so Vite can't resolve the sibling import.
-  it.skip('builds a svelte app that imports a sibling svelte lib', async () => {
+  it('builds a svelte app that imports a sibling svelte lib', async () => {
     const app = uniq('svelte-link-app');
     const lib = uniq('svelte-link-lib');
     const libClassName = names(lib).className;
@@ -152,11 +150,27 @@ describe('@nxext/svelte: library', () => {
       `generate @nxext/svelte:c ${libClassName} --project=${lib} --no-interactive`
     );
 
+    // Scope is derived from the scaffolded workspace, not always `@proj`.
+    // Look up the path alias the library generator just registered.
+    const tsconfigBase = readJson<{
+      compilerOptions: { paths: Record<string, string[]> };
+    }>(projectDirectory, 'tsconfig.base.json');
+    const importPath = Object.keys(tsconfigBase.compilerOptions.paths).find(
+      (key) => key.endsWith(`/${lib}`)
+    );
+    if (!importPath) {
+      throw new Error(
+        `No tsconfig path registered for lib "${lib}". Registered keys: ${Object.keys(
+          tsconfigBase.compilerOptions.paths
+        ).join(', ')}`
+      );
+    }
+
     updateFile(
       projectDirectory,
       `apps/${app}/src/App.svelte`,
       `<script lang="ts">
-  import { ${libClassName} } from '@proj/${lib}';
+  import { ${libClassName} } from '${importPath}';
 </script>
 
 <main>

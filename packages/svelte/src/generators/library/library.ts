@@ -1,8 +1,13 @@
 import { NormalizedSchema, SvelteLibrarySchema } from './schema';
 import { initGenerator } from '../init/init';
 import { addProject } from './lib/add-project';
-import { updateTsConfig } from './lib/update-tsconfig';
-import { formatFiles, Tree, updateJson, runTasksInSerial } from '@nx/devkit';
+import {
+  formatFiles,
+  joinPathFragments,
+  Tree,
+  updateJson,
+  runTasksInSerial,
+} from '@nx/devkit';
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
@@ -11,6 +16,7 @@ import { createProjectFiles } from './lib/create-project-files';
 import { addVitest } from './lib/add-vitest';
 import { normalizeOptions } from './lib/normalize-options';
 import { createOrEditViteConfig } from '@nx/vite';
+import { addTsConfigPath } from '@nx/js';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
@@ -57,12 +63,15 @@ export async function libraryGenerator(
 
   const vitestTask = await addVitest(host, options);
 
-  updateTsConfig(host, options);
   updateJestConfig(host, options);
 
   if (options.publishable || options.buildable) {
     updateLibPackageNpmScope(host, options);
   }
+
+  addTsConfigPath(host, options.importPath, [
+    joinPathFragments(options.projectRoot, './src', 'index.ts'),
+  ]);
 
   if (!options.skipFormat) {
     await formatFiles(host);
