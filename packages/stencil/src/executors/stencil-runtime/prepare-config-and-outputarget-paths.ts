@@ -1,5 +1,3 @@
-import { OutputTarget } from '@stencil/core/internal';
-import { prepareE2eTesting } from './e2e-testing';
 import { PathCollection } from './types';
 import {
   createDirectory,
@@ -9,6 +7,7 @@ import {
 import { joinPathFragments, writeJsonFile } from '@nx/devkit';
 import { existsSync } from 'fs';
 import type { Config } from '@stencil/core/compiler';
+import { prepareE2eTesting } from './e2e-testing';
 
 function copyOrCreatePackageJson(pathCollection: PathCollection) {
   const libPackageJson = {
@@ -37,37 +36,6 @@ function copyOrCreatePackageJson(pathCollection: PathCollection) {
   }
 }
 
-function calculateOutputTargetPathVariables(
-  config: Config,
-  pathCollection: PathCollection,
-  pathVariables: string[]
-) {
-  return config.outputTargets.map((outputTarget: OutputTarget) => {
-    // don't change the angular, react, vue or svelte output targets
-    if (outputTarget.type === 'custom') {
-      return outputTarget;
-    }
-
-    pathVariables.forEach((pathVar) => {
-      if (
-        outputTarget[pathVar] != null &&
-        !(outputTarget[pathVar] as string).endsWith('src')
-      ) {
-        const origPath = outputTarget[pathVar];
-
-        outputTarget = Object.assign(outputTarget, {
-          [pathVar]: origPath.replace(
-            pathCollection.projectRoot,
-            pathCollection.distDir
-          ),
-        });
-      }
-    });
-
-    return outputTarget;
-  });
-}
-
 function prepareDistDirAndPkgJson(pathCollection: PathCollection) {
   if (!existsSync(pathCollection.distDir)) {
     createDirectory(pathCollection.distDir);
@@ -75,6 +43,15 @@ function prepareDistDirAndPkgJson(pathCollection: PathCollection) {
   copyOrCreatePackageJson(pathCollection);
 }
 
+/**
+ * Bootstraps the stencil config for an executor run: ensures the dist
+ * directory exists, scaffolds the publishable package.json inside it,
+ * and (for e2e) stages a `package.e2e.json` at the project root.
+ *
+ * Output-target paths themselves are not rewritten. `initializeStencilConfig`
+ * already overrides `config.rootDir` to the distDir, which redirects every
+ * default output target — user-defined `dir`s are respected as-is.
+ */
 export async function prepareConfigAndOutputargetPaths(
   config: Config,
   pathCollection: PathCollection
@@ -83,55 +60,16 @@ export async function prepareConfigAndOutputargetPaths(
 
   if (config.flags.e2e) {
     prepareE2eTesting(pathCollection);
-  }
-
-  const pathVariables = [
-    'dir',
-    'appDir',
-    'buildDir',
-    'indexHtml',
-    'esmDir',
-    'systemDir',
-    'systemLoaderFile',
-    'file',
-    'esmLoaderPath',
-    'collectionDir',
-    'typesDir',
-    'legacyLoaderFile',
-    'esmEs5Dir',
-    'cjsDir',
-    'cjsIndexFile',
-    'esmIndexFile',
-    'componentDts',
-  ];
-  const outputTargets: OutputTarget[] = calculateOutputTargetPathVariables(
-    config,
-    pathCollection,
-    pathVariables
-  );
-  const devServerConfig = Object.assign(config.devServer, {
-    root: config.devServer.root.replace(
-      pathCollection.projectRoot,
-      pathCollection.distDir
-    ),
-    openBrowser: config.flags.open,
-  });
-
-  if (!config.flags.e2e) {
-    config.packageJsonFilePath = config.packageJsonFilePath.replace(
-      pathCollection.projectRoot,
-      pathCollection.distDir
-    );
-  } else {
     config.packageJsonFilePath = config.packageJsonFilePath.replace(
       'package.json',
       'package.e2e.json'
     );
+  } else {
+    config.packageJsonFilePath = config.packageJsonFilePath.replace(
+      pathCollection.projectRoot,
+      pathCollection.distDir
+    );
   }
 
-  return {
-    ...config,
-    outputTargets: outputTargets,
-    devServer: devServerConfig,
-  };
+  return config;
 }
