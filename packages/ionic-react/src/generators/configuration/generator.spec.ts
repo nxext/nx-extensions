@@ -1,5 +1,6 @@
 import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { applicationGenerator } from '@nx/angular/generators';
+import type { UnitTestRunner } from '@nx/angular/src/utils/test-runners';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { configurationGenerator } from './generator';
 import { ConfigurationGeneratorSchema } from './schema';
@@ -46,6 +47,7 @@ describe('application', () => {
     await applicationGenerator(host, {
       directory: projectRoot,
       skipFormat: true,
+      unitTestRunner: 'none' as UnitTestRunner,
     });
   });
 

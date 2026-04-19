@@ -54,6 +54,10 @@ module.exports = [
     rules: { '@nx/dependency-checks': 'error' },
   })),
   {
-    ignores: ['**/vite.config.*.timestamp*', '**/vitest.config.*.timestamp*'],
+    ignores: [
+      '**/vite.config.*.timestamp*',
+      '**/vitest.config.*.timestamp*',
+      '**/eslint.config.*',
+    ],
   },
 ];

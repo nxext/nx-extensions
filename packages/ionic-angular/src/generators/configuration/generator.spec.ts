@@ -3,6 +3,7 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { configurationGenerator } from './generator';
 import { ConfigurationGeneratorSchema } from './schema';
 import { applicationGenerator } from '@nx/angular/generators';
+import type { UnitTestRunner } from '@nx/angular/src/utils/test-runners';
 
 describe('configuration schematic', () => {
   let host: Tree;
@@ -20,6 +21,7 @@ describe('configuration schematic', () => {
       directory: projectRoot,
       prefix: 'app',
       skipFormat: true,
+      unitTestRunner: 'jest' as UnitTestRunner,
     });
   });
 
@@ -33,7 +35,12 @@ describe('configuration schematic', () => {
   it('should update jest config', async () => {
     await configurationGenerator(host, options);
 
-    expect(host.read(`${projectRoot}/jest.config.ts`, 'utf8')).toContain(
+    const jestConfigPath = ['ts', 'cts', 'js', 'cjs']
+      .map((ext) => `${projectRoot}/jest.config.${ext}`)
+      .find((path) => host.exists(path));
+
+    expect(jestConfigPath).toBeDefined();
+    expect(host.read(jestConfigPath, 'utf8')).toContain(
       "transformIgnorePatterns: ['<rootDir>/node_modules/(?!(@ionic/core|@ionic/angular|@stencil/core|.*\\.mjs$))']"
     );
   });

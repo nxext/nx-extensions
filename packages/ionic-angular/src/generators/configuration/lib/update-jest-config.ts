@@ -3,12 +3,14 @@ import { Tree, joinPathFragments } from '@nx/devkit';
 import { tsquery } from '@phenomnomnominal/tsquery';
 import { NormalizedOptions } from './normalize-options';
 
+const JEST_CONFIG_EXTENSIONS = ['ts', 'cts', 'js', 'cjs'] as const;
+
 export function updateJestConfig(tree: Tree, options: NormalizedOptions) {
-  const jestConfigPath = joinPathFragments(
-    options.projectRoot,
-    'jest.config.ts'
-  );
-  if (!tree.exists(jestConfigPath)) {
+  const jestConfigPath = JEST_CONFIG_EXTENSIONS.map((ext) =>
+    joinPathFragments(options.projectRoot, `jest.config.${ext}`)
+  ).find((path) => tree.exists(path));
+
+  if (!jestConfigPath) {
     return;
   }
 

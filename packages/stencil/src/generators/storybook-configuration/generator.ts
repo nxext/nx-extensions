@@ -89,20 +89,9 @@ export async function storybookConfigurationGenerator(
   updateDependencies(host);
 
   if (options.configureCypress) {
-    await ensurePackage('@nx/storybook', NX_VERSION);
-    const { cypressProjectGenerator } = await import('@nx/storybook');
-    if (projectConfig.projectType !== 'application') {
-      const cypressTask = await cypressProjectGenerator(host, {
-        name: options.name,
-        js: false,
-        linter: options.linter,
-        directory: options.cypressDirectory,
-        standaloneConfig: options.standaloneConfig,
-      });
-      tasks.push(cypressTask);
-    } else {
-      logger.warn('There is already an e2e project setup');
-    }
+    logger.warn(
+      '`configureCypress` was removed from @nx/storybook in v22. Storybook now ships `interactionTests` (Play functions) for UI testing; the option is ignored.'
+    );
   }
 
   await formatFiles(host);

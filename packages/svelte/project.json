@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/svelte/src",
   "projectType": "library",
+  "tags": [],
   "generators": {},
   "targets": {
     "lint": {
@@ -59,6 +60,5 @@
         }
       ]
     }
-  },
-  "tags": []
+  }
 }
