@@ -1,58 +1,73 @@
-import { runNxCommandAsync, uniq } from '@nx/plugin/testing';
-import { createTestProject, installPlugin, stripAnsi } from '@nxext/e2e-utils';
-import { rmSync } from 'fs';
+/**
+ * Reference real-install e2e for @nxext/ionic-angular. See stencil-e2e for flow.
+ *
+ * Layers its configuration on top of an `@nx/angular:application`. We pin
+ * `unitTestRunner=jest` because Nx 22's Angular default is vitest-angular,
+ * which hard-gates against vitest >=4 and our workspace ships vitest 3.x.
+ */
+import {
+  cleanupTestProject,
+  createTestProject,
+  installNxPlugins,
+  installPlugin,
+  runNxCommandAsync,
+  stripAnsi,
+  uniq,
+} from '@nxext/e2e-utils';
 
-describe('ionic-angular-project e2e', () => {
+jest.setTimeout(600_000);
+
+describe('@nxext/ionic-angular', () => {
   let projectDirectory: string;
   const app = uniq('ionic-angular');
-  const appDir = `apps/${app}`;
 
   beforeAll(async () => {
     projectDirectory = createTestProject();
+    installNxPlugins(projectDirectory, ['@nx/angular']);
     installPlugin(projectDirectory, 'ionic-angular');
 
     await runNxCommandAsync(
-      `generate @nx/angular:application ${appDir} --style=css --minimal --e2eTestRunner=none --linter=none --skipFormat=true`
+      projectDirectory,
+      `generate @nx/angular:application apps/${app} --style=css --minimal --unitTestRunner=jest --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`
     );
     await runNxCommandAsync(
-      `generate @nxext/ionic-angular:configuration --project=${app} --appName=test --appId=test --skipFormat=true`
+      projectDirectory,
+      `generate @nxext/ionic-angular:configuration --project=${app} --appName=test --appId=test --skipFormat=true --no-interactive`
     );
   });
 
   afterAll(() => {
-    // Cleanup the test project
-    rmSync(projectDirectory, {
-      recursive: true,
-      force: true,
-    });
+    cleanupTestProject(projectDirectory);
   });
 
-  it('should build successfully', async () => {
-    const buildResults = await runNxCommandAsync(`build ${app}`);
-    expect(stripAnsi(buildResults.stdout)).toContain(
+  it('builds the ionic-angular-configured app', async () => {
+    const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
+    expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
       `Successfully ran target build for project ${app}`
     );
   });
 
-  it('should run tests successfully', async () => {
-    const testResults = await runNxCommandAsync(`test ${app}`);
-    expect(stripAnsi(testResults.stdout)).toContain(
+  it('runs the app unit tests', async () => {
+    const result = await runNxCommandAsync(projectDirectory, `test ${app}`);
+    expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
       `Successfully ran target test for project ${app}`
     );
   });
 
-  it('should run cap successfully', async () => {
-    const capResults = await runNxCommandAsync(`run ${app}:cap`);
-    expect(capResults.stdout).toContain('Usage');
+  it('exposes the cap executor', async () => {
+    const base = await runNxCommandAsync(projectDirectory, `run ${app}:cap`);
+    expect(base.stdout).toContain('Usage');
 
-    const capPackageInstallResults = await runNxCommandAsync(
+    const noInstall = await runNxCommandAsync(
+      projectDirectory,
       `run ${app}:cap --packageInstall false`
     );
-    expect(capPackageInstallResults.stdout).toContain('Usage: cap');
+    expect(noInstall.stdout).toContain('Usage: cap');
 
-    const capHelpResults = await runNxCommandAsync(
+    const help = await runNxCommandAsync(
+      projectDirectory,
       `run ${app}:cap --cmd="--help"`
     );
-    expect(capHelpResults.stdout).toContain('Usage: cap');
+    expect(help.stdout).toContain('Usage: cap');
   });
 });
