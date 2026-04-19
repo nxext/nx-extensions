@@ -1,12 +1,11 @@
 import { addProjectConfiguration, Tree } from '@nx/devkit';
-import { getTestTarget } from '../../../utils/targets';
 import { LibrarySchema } from '../schema';
 
 export function addProject(tree: Tree, options: LibrarySchema) {
-  const targets = {
-    test: getTestTarget('library', options),
-  };
-
+  // `test` (and `build`/`serve`/`e2e` for buildable libs) is inferred by
+  // `@nxext/stencil/plugin` from the presence of `stencil.config.ts`. Plain
+  // libraries without a stencil config get no runtime targets here — just
+  // project metadata.
   addProjectConfiguration(tree, options.name, {
     root: options.projectRoot,
     sourceRoot: `${options.projectRoot}/src`,
@@ -17,6 +16,6 @@ export function addProject(tree: Tree, options: LibrarySchema) {
       },
     },
     tags: options.parsedTags,
-    targets,
+    targets: {},
   });
 }

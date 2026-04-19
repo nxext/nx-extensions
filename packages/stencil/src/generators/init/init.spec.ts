@@ -29,4 +29,14 @@ describe('init', () => {
     expect(packageJson.devDependencies['@stencil/router']).toBeDefined();
     expect(packageJson.devDependencies['@ionic/core']).toBeUndefined();
   });
+
+  it('registers @nxext/stencil/plugin in nx.json so Crystal can infer tasks', async () => {
+    await initGenerator(host, { name: 'test', appType: AppType.library });
+
+    const nxJson = readJson(host, 'nx.json');
+    const pluginNames = (nxJson.plugins ?? []).map(
+      (p: string | { plugin: string }) => (typeof p === 'string' ? p : p.plugin)
+    );
+    expect(pluginNames).toContain('@nxext/stencil/plugin');
+  });
 });

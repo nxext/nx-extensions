@@ -22,7 +22,7 @@ export async function outputtargetGenerator(
   const projectConfig = readProjectConfiguration(host, options.projectName);
   const tasks = [];
 
-  if (isBuildableStencilProject(projectConfig)) {
+  if (isBuildableStencilProject(projectConfig, host)) {
     if (options.outputType === 'angular') {
       tasks.push(await addAngularGenerator(host, options));
     }

@@ -6,6 +6,7 @@ import { formatFiles, Tree } from '@nx/devkit';
 import { runTasksInSerial } from '@nx/devkit';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
+import { addPluginToNxJson } from '@nxext/common';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function initGenerator<T extends InitSchema>(
@@ -19,6 +20,8 @@ export async function initGenerator<T extends InitSchema>(
   const addPuppeteerTask = await addPuppeteer(host, options);
   const addCypressTask = await addCypress(host, options);
   const jestInitTask = await addJest(host, options);
+
+  addPluginToNxJson('@nxext/stencil/plugin', host);
 
   if (!options.skipFormat) {
     await formatFiles(host);
