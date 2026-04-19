@@ -1,6 +1,6 @@
 {
   "name": "@nxext/svelte",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",
@@ -27,16 +27,16 @@
   "typings": "./src/index.d.ts",
   "schematics": "./generators.json",
   "peerDependencies": {
-    "@nx/devkit": "^21.0.0",
-    "@nx/vite": "^21.0.0",
-    "@nx/js": "^21.0.0",
-    "@nx/web": "^21.0.0",
-    "@nx/cypress": "^21.0.0",
-    "@nx/jest": "^21.0.0",
-    "@nx/eslint": "^21.0.0",
-    "typescript": "5.7.3",
-    "@nx/storybook": "^21.0.0",
-    "nx": "^21.0.0"
+    "@nx/devkit": "^22.0.0",
+    "@nx/vite": "^22.0.0",
+    "@nx/js": "^22.0.0",
+    "@nx/web": "^22.0.0",
+    "@nx/cypress": "^22.0.0",
+    "@nx/jest": "^22.0.0",
+    "@nx/eslint": "^22.0.0",
+    "typescript": "^5.7.3",
+    "@nx/storybook": "^22.0.0",
+    "nx": "^22.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

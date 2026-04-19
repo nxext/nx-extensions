@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/ionic-react/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -48,6 +49,5 @@
         "jestConfig": "packages/ionic-react/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

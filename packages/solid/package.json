@@ -1,6 +1,6 @@
 {
   "name": "@nxext/solid",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for solid",
@@ -24,13 +24,13 @@
   "generators": "./generators.json",
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "^21.0.0",
-    "@nx/vite": "^21.0.0",
-    "@nx/js": "^21.0.0",
-    "@nx/web": "^21.0.0",
-    "@nx/cypress": "^21.0.0",
-    "@nx/jest": "^21.0.0",
-    "@nx/eslint": "^21.0.0",
+    "@nx/devkit": "^22.0.0",
+    "@nx/vite": "^22.0.0",
+    "@nx/js": "^22.0.0",
+    "@nx/web": "^22.0.0",
+    "@nx/cypress": "^22.0.0",
+    "@nx/jest": "^22.0.0",
+    "@nx/eslint": "^22.0.0",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {},
