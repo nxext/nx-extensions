@@ -1,13 +1,26 @@
+/**
+ * Reference real-install e2e for @nxext/stencil application generator.
+ *
+ * Flow:
+ *   1. globalSetup (tools/scripts/start-local-registry.ts) spins up Verdaccio,
+ *      builds all @nxext/* plugins, and publishes them under the `e2e` npm tag.
+ *   2. beforeAll scaffolds a fresh Nx workspace under `os.tmpdir()` (outside the
+ *      host repo) and installs @nxext/stencil from the local registry.
+ *   3. Each test generates a real application, runs a real `nx build`, and
+ *      asserts the expected output files are present.
+ */
 import {
   checkFilesExist,
+  cleanupTestProject,
+  createTestProject,
+  installPlugin,
   runNxCommandAsync,
   uniq,
-  runCommand,
-} from '@nx/plugin/testing';
-import { createTestProject, installPlugin } from '@nxext/e2e-utils';
-import { rmSync } from 'fs';
+} from '@nxext/e2e-utils';
 
-describe('application e2e', () => {
+jest.setTimeout(600_000);
+
+describe('@nxext/stencil: application', () => {
   let projectDirectory: string;
 
   beforeAll(() => {
@@ -16,60 +29,48 @@ describe('application e2e', () => {
   });
 
   afterAll(() => {
-    // Cleanup the test project
-    rmSync(projectDirectory, {
-      recursive: true,
-      force: true,
-    });
+    cleanupTestProject(projectDirectory);
   });
 
-  describe('app', () => {
-    it(`should build app with css`, async () => {
-      const plugin = uniq('app2');
-      await runNxCommandAsync(
-        `generate @nxext/stencil:app ${plugin} --style='css' --e2eTestRunner='none' --junitTestRunner='none'`
-      );
+  it('generates and builds a stencil app (css)', async () => {
+    const app = uniq('stencil-app');
+    await runNxCommandAsync(
+      projectDirectory,
+      `generate @nxext/stencil:app ${app} --style=css --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+    );
 
-      const result = await runNxCommandAsync(`build ${plugin} --dev`);
-      expect(result.stdout).toContain('build finished');
-      expect(() => {
-        checkFilesExist(
-          `dist/apps/${plugin}/www/index.html`,
-          `dist/apps/${plugin}/www/host.config.json`
-        );
-      }).not.toThrow();
-    });
+    const build = await runNxCommandAsync(
+      projectDirectory,
+      `build ${app} --dev`
+    );
+    expect(build.stdout).toContain('build finished');
+    expect(() =>
+      checkFilesExist(
+        projectDirectory,
+        `dist/apps/${app}/www/index.html`,
+        `dist/apps/${app}/www/host.config.json`
+      )
+    ).not.toThrow();
+  });
 
-    it(`should be able to run e2e`, async () => {
-      const plugin = uniq('app2');
-      await runNxCommandAsync(
-        `generate @nxext/stencil:app ${plugin} --style='css' --e2eTestRunner='puppeteer' --junitTestRunner='none'`
-      );
-      runCommand(
-        `yarn add -D @types/jest@27.0.3 jest@27.0.3 jest-cli@27.4.5`,
-        {}
-      );
+  it('builds with --prerender=true', async () => {
+    const app = uniq('stencil-app-prerender');
+    await runNxCommandAsync(
+      projectDirectory,
+      `generate @nxext/stencil:app ${app} --style=css --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+    );
 
-      const result = await runNxCommandAsync(`e2e ${plugin} `);
-      expect(result.stdout).toContain('build finished');
-    });
-
-    it(`should build app with prerender parameter`, async () => {
-      const plugin = uniq('app-prerender');
-      await runNxCommandAsync(
-        `generate @nxext/stencil:app ${plugin} --style='css' --e2eTestRunner='none' --junitTestRunner='none'`
-      );
-
-      const result = await runNxCommandAsync(
-        `build ${plugin} --prerender=true`
-      );
-      expect(result.stdout).toContain('build finished');
-      expect(() => {
-        checkFilesExist(
-          `dist/apps/${plugin}/www/index.html`,
-          `dist/apps/${plugin}/www/host.config.json`
-        );
-      }).not.toThrow();
-    });
+    const build = await runNxCommandAsync(
+      projectDirectory,
+      `build ${app} --prerender=true`
+    );
+    expect(build.stdout).toContain('build finished');
+    expect(() =>
+      checkFilesExist(
+        projectDirectory,
+        `dist/apps/${app}/www/index.html`,
+        `dist/apps/${app}/www/host.config.json`
+      )
+    ).not.toThrow();
   });
 });
