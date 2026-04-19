@@ -56,7 +56,7 @@ export async function storybookConfigurationGenerator(
 
   const projectConfig = readProjectConfiguration(host, options.name);
 
-  if (!isBuildableStencilProject(projectConfig)) {
+  if (!isBuildableStencilProject(projectConfig, host)) {
     logger.info(stripIndents`
       Please use a buildable library for storybook. Storybook needs a generated
       Stencil loader to work (yet). They're working on native Stencil support, but

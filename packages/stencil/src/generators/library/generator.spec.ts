@@ -171,13 +171,10 @@ describe('library', () => {
       [SupportedStyles.scss]: 'sass',
     };
 
-    it('should create build targets', async () => {
+    it('emits a stencil.config.ts so the Crystal plugin infers build targets', async () => {
       await libraryGenerator(host, options);
 
-      const projectConfig = readProjectConfiguration(host, options.name);
-      expect(projectConfig.targets['build']).toBeDefined();
-      expect(projectConfig.targets['e2e']).toBeDefined();
-      expect(projectConfig.targets['serve']).toBeDefined();
+      expect(host.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
     });
 
     it('should export bundle', async () => {
@@ -233,13 +230,10 @@ describe('library', () => {
       }
     });
 
-    it('should create build targets', async () => {
+    it('emits a stencil.config.ts so the Crystal plugin infers build targets', async () => {
       await libraryGenerator(host, options);
 
-      const projectConfig = readProjectConfiguration(host, options.name);
-      expect(projectConfig.targets['build']).toBeDefined();
-      expect(projectConfig.targets['e2e']).toBeDefined();
-      expect(projectConfig.targets['serve']).toBeDefined();
+      expect(host.exists('libs/testlib/stencil.config.ts')).toBeTruthy();
     });
 
     it('should export bundle', async () => {

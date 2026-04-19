@@ -14,10 +14,27 @@ export function calculateStyle(
   return /^(css|scss)$/.test(style) ? style : styleDefault;
 }
 
-export function isBuildableStencilProject(project: any): boolean {
+export function isBuildableStencilProject(
+  project: { root: string; targets?: Record<string, { executor?: string }> },
+  tree?: Tree
+): boolean {
+  // Back-compat: workspaces that still ship an explicit
+  // `@nxext/stencil:build` target in project.json.
   const target =
     project.targets && project.targets['build'] ? project.targets['build'] : {};
-  return target && target.executor === `@nxext/stencil:build`;
+  if (target && target.executor === `@nxext/stencil:build`) {
+    return true;
+  }
+
+  // Crystal path: only buildable libs get a `package.json` at the project
+  // root (written by `make-lib-buildable` / the library generator when
+  // `buildable: true`). Non-buildable libs ship a `stencil.config.ts` too,
+  // but strictly for component authoring — they aren't shippable.
+  if (tree && tree.exists(`${project.root}/package.json`)) {
+    return true;
+  }
+
+  return false;
 }
 
 export const hasError = (diagnostics: Diagnostic[]): boolean => {

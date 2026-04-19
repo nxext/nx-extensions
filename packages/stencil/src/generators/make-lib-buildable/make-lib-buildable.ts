@@ -10,13 +10,7 @@ import { MakeLibBuildableSchema } from './schema';
 import { addStylePluginToConfig } from '../../stencil-core-utils';
 import { addToOutputTargets } from '../../stencil-core-utils';
 import { updateTsConfig } from './lib/update-tsconfig';
-import {
-  getBuildTarget,
-  getE2eTarget,
-  getLintTarget,
-  getServeTarget,
-} from '../../utils/targets';
-import { AppType } from '../../utils/typings';
+import { getLintTarget } from '../../utils/targets';
 import { getProjectTsImportPath } from '../storybook-configuration/generator';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
@@ -45,13 +39,9 @@ function updateProjectConfig(host: Tree, options: MakeLibBuildableSchema) {
   const projectConfig = readProjectConfiguration(host, options.name);
 
   projectConfig.targets = projectConfig.targets || {};
-  projectConfig.targets.build = getBuildTarget(AppType.library, options);
-  projectConfig.targets.serve = getServeTarget(AppType.library, options);
-  projectConfig.targets.e2e = getE2eTarget(AppType.library, options);
-  projectConfig.targets.lint = getLintTarget(
-    AppType.library,
-    options.projectRoot
-  );
+  // `build` / `serve` / `e2e` are inferred by `@nxext/stencil/plugin` once the
+  // new `stencil.config.ts` (written below in createFiles) is on disk.
+  projectConfig.targets.lint = getLintTarget(options.projectRoot);
 
   updateProjectConfiguration(host, options.name, projectConfig);
 }
