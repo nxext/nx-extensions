@@ -3,6 +3,7 @@ import {
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
   stencilVersion,
+  typesNodeVersion,
 } from './versions';
 import { SupportedStyles } from '../stencil-core-utils';
 
@@ -24,6 +25,7 @@ export interface DependencyEntries {
 
 const stencilDependencies = {
   '@stencil/core': stencilVersion,
+  '@types/node': typesNodeVersion,
 };
 const e2ePuppeteerDependencies = {
   puppeteer: puppeteer,

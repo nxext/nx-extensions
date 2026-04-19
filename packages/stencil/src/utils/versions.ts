@@ -2,6 +2,7 @@ export const stencilVersion = '^4.22.0';
 export const stencilRouterVersion = '^1.0.1';
 
 export const puppeteer = '^21.4.1';
+export const typesNodeVersion = '^20.0.0';
 
 export const deprecatedStencilEslintPlugin = '@stencil/eslint-plugin';
 export const stencilEslintPlugin = '@stencil-community/eslint-plugin';
