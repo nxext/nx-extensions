@@ -1,8 +1,19 @@
-import { checkFilesExist, runNxCommandAsync, uniq } from '@nx/plugin/testing';
-import { createTestProject, installPlugin } from '@nxext/e2e-utils';
-import { rmSync } from 'fs';
+/**
+ * Reference real-install e2e for @nxext/preact. See stencil-e2e for flow overview.
+ */
+import {
+  checkFilesExist,
+  cleanupTestProject,
+  createTestProject,
+  installPlugin,
+  runNxCommandAsync,
+  stripAnsi,
+  uniq,
+} from '@nxext/e2e-utils';
 
-describe('preact e2e', () => {
+jest.setTimeout(600_000);
+
+describe('@nxext/preact', () => {
   let projectDirectory: string;
 
   beforeAll(() => {
@@ -11,65 +22,64 @@ describe('preact e2e', () => {
   });
 
   afterAll(() => {
-    // Cleanup the test project
-    rmSync(projectDirectory, {
-      recursive: true,
-      force: true,
-    });
+    cleanupTestProject(projectDirectory);
   });
 
-  describe('preact app', () => {
-    xit('should build preact application', async () => {
-      const plugin = uniq('preact');
-      await runNxCommandAsync(`generate @nxext/preact:app ${plugin}`);
-
-      const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain(
-        `Successfully ran target build for project ${plugin}`
-      );
-    });
-
-    it('should generate app into directory', async () => {
-      await runNxCommandAsync(`generate @nxext/preact:app project/ui`);
-      expect(() =>
-        checkFilesExist(`apps/project/ui/src/App.tsx`)
-      ).not.toThrow();
-    });
-
-    it('should be able to run linter', async () => {
-      const plugin = uniq('preactlint');
-      await runNxCommandAsync(`generate @nxext/preact:app ${plugin}`);
-
-      const result = await runNxCommandAsync(`lint ${plugin}`);
-      expect(result.stdout).toContain('All files pass linting');
-    });
-  });
-
-  describe('preact lib', () => {
-    it('should generate lib into directory', async () => {
-      await runNxCommandAsync(`generate @nxext/preact:lib project/uilib`);
-      expect(() =>
-        checkFilesExist(`libs/project/uilib/src/index.ts`)
-      ).not.toThrow();
-    });
-
-    it('should be able to run linter', async () => {
-      const plugin = uniq('preactliblint');
-      await runNxCommandAsync(`generate @nxext/preact:lib ${plugin}`);
-
-      const result = await runNxCommandAsync(`lint ${plugin}`);
-      expect(result.stdout).toContain('All files pass linting');
-    });
-
-    it('should be able build lib if buildable', async () => {
-      const plugin = uniq('preactlib');
+  describe('application', () => {
+    it('generates an app into a nested directory', async () => {
       await runNxCommandAsync(
-        `generate @nxext/preact:lib ${plugin} --buildable`
+        projectDirectory,
+        `generate @nxext/preact:app apps/project/ui --no-interactive`
+      );
+      expect(() =>
+        checkFilesExist(projectDirectory, `apps/project/ui/src/App.tsx`)
+      ).not.toThrow();
+    });
+
+    it('lints a preact app', async () => {
+      const app = uniq('preact-app-lint');
+      await runNxCommandAsync(
+        projectDirectory,
+        `generate @nxext/preact:app apps/${app} --no-interactive`
       );
 
-      const result = await runNxCommandAsync(`build ${plugin}`);
-      expect(result.stdout).toContain(
-        `Successfully ran target build for project ${plugin}`
+      const result = await runNxCommandAsync(projectDirectory, `lint ${app}`);
+      expect(result.stdout).toContain('All files pass linting');
+    });
+  });
+
+  describe('library', () => {
+    it('generates a lib into a nested directory', async () => {
+      await runNxCommandAsync(
+        projectDirectory,
+        `generate @nxext/preact:lib libs/project/uilib --no-interactive`
+      );
+      expect(() =>
+        checkFilesExist(projectDirectory, `libs/project/uilib/src/index.ts`)
+      ).not.toThrow();
+    });
+
+    it('lints a preact lib', async () => {
+      const lib = uniq('preact-lib-lint');
+      await runNxCommandAsync(
+        projectDirectory,
+        `generate @nxext/preact:lib libs/${lib} --no-interactive`
+      );
+
+      const result = await runNxCommandAsync(projectDirectory, `lint ${lib}`);
+      expect(result.stdout).toContain('All files pass linting');
+    });
+
+    it('builds a buildable preact lib', async () => {
+      const lib = uniq('preact-lib');
+      await runNxCommandAsync(
+        projectDirectory,
+        `generate @nxext/preact:lib libs/${lib} --buildable --no-interactive`
+      );
+
+      const result = await runNxCommandAsync(projectDirectory, `build ${lib}`);
+      expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
+        `Successfully ran target build for project ${lib}`
       );
     });
   });
