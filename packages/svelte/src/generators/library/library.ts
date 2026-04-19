@@ -45,7 +45,7 @@ export async function libraryGenerator(
     host,
     {
       project: options.name,
-      includeLib: false,
+      includeLib: true,
       includeVitest: options.unitTestRunner === 'vitest',
       inSourceTests: false,
       rollupOptionsExternal: [],

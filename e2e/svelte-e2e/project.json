@@ -7,6 +7,16 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]
+    },
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "e2e/svelte-e2e/jest.config.ts",
+        "runInBand": true
+      },
+      "parallelism": false,
+      "cache": false
     }
   },
   "tags": ["e2e"],
