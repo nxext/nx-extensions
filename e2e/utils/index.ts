@@ -199,6 +199,33 @@ export function readJson<T = unknown>(
   ) as T;
 }
 
+export function readFile(
+  projectDirectory: string,
+  relativePath: string
+): string {
+  return readFileSync(join(projectDirectory, relativePath), 'utf-8');
+}
+
+/**
+ * Writes `contents` to a file in the test project, creating parent dirs if
+ * needed. `contents` may be a string or a callback that receives the current
+ * contents and returns the updated string — matching the
+ * `@nx/plugin/testing#updateFile` signature.
+ */
+export function updateFile(
+  projectDirectory: string,
+  relativePath: string,
+  contents: string | ((current: string) => string)
+): void {
+  const absolute = join(projectDirectory, relativePath);
+  mkdirSync(dirname(absolute), { recursive: true });
+  const next =
+    typeof contents === 'function'
+      ? contents(existsSync(absolute) ? readFileSync(absolute, 'utf-8') : '')
+      : contents;
+  writeFileSync(absolute, next);
+}
+
 export function uniq(prefix: string): string {
   return `${prefix}${Math.floor(Math.random() * 10_000_000)}`;
 }
