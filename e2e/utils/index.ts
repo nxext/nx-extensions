@@ -3,6 +3,7 @@ import {
   mkdirSync,
   rmSync,
   existsSync,
+  readFileSync,
   renameSync,
   unlinkSync,
   writeFileSync,
@@ -187,6 +188,15 @@ export function renameFile(
   to: string
 ): void {
   renameSync(join(projectDirectory, from), join(projectDirectory, to));
+}
+
+export function readJson<T = unknown>(
+  projectDirectory: string,
+  relativePath: string
+): T {
+  return JSON.parse(
+    readFileSync(join(projectDirectory, relativePath), 'utf-8')
+  ) as T;
 }
 
 export function uniq(prefix: string): string {
