@@ -8,7 +8,7 @@ export async function addVite(host: Tree, options: NormalizedSchema) {
 
   const config: ViteConfigurationGeneratorSchema = {
     uiFramework: 'none',
-    project: options.name,
+    project: options.projectName,
     newProject: true,
     includeVitest: options.unitTestRunner === 'vitest',
     inSourceTests: false,
