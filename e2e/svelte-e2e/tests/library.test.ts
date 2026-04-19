@@ -51,11 +51,7 @@ describe('@nxext/svelte: library', () => {
     );
   });
 
-  // TODO: tsconfig.lib.json template has `types: ['svelte']` but tsconfig.json
-  // pulls in 'node' (from a parent template), and the svelte init generator
-  // doesn't install @types/node. Build fails with TS2688 "Cannot find type
-  // definition file for 'node'". Same class as stencil's a973f14b fix.
-  it.skip('builds a buildable svelte lib', async () => {
+  it('builds a buildable svelte lib', async () => {
     const lib = uniq('svelte-lib');
     await runNxCommandAsync(
       projectDirectory,
@@ -88,11 +84,7 @@ describe('@nxext/svelte: library', () => {
       );
     });
 
-    // TODO: flipping `includeLib: true` on the svelte lib vite config (needed
-    // for the build to work) makes createOrEditViteConfig import
-    // vite-plugin-dts, but the svelte init generator doesn't install it. Add
-    // vite-plugin-dts to the plugin's installed devDeps and unskip.
-    it.skip('runs vitest tests on a lib', async () => {
+    it('runs vitest tests on a lib', async () => {
       const lib = uniq('svelte-lib-vitest');
       await runNxCommandAsync(
         projectDirectory,
@@ -139,7 +131,9 @@ describe('@nxext/svelte: library', () => {
     );
   });
 
-  // TODO: blocked on the same @types/node issue as the standalone lib build.
+  // TODO: same `@proj/<lib>` path-alias resolution gap as the application
+  // "library dependency" test — the lib generator doesn't update
+  // tsconfig.base.json paths, so Vite can't resolve the sibling import.
   it.skip('builds a svelte app that imports a sibling svelte lib', async () => {
     const app = uniq('svelte-link-app');
     const lib = uniq('svelte-link-lib');

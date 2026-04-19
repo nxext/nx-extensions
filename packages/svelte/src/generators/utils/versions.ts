@@ -7,3 +7,5 @@ export const eslintPluginSvelteVersion = '^4.0.0';
 export const tsconfigSvelteVersion = '^4.0.1';
 export const testingLibrarySvelteVersion = '^3.2.2';
 export const vitePluginSvelteVersion = '^1.0.1';
+export const vitePluginDtsVersion = '^3.9.1';
+export const typesNodeVersion = '^20.0.0';
