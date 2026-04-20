@@ -19,6 +19,7 @@ export function normalizeOptions(
   const esbuildBrowser =
     [
       '@angular-devkit/build-angular:application',
+      '@angular/build:application',
       '@nx/angular:application',
       '@angular-devkit/build-angular:browser-esbuild',
       '@nx/angular:browser-esbuild',
