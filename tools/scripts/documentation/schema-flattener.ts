@@ -2,7 +2,6 @@
  * Originally from the Nx repo: https://github.com/nrwl/nx
  */
 import { deepCopy, json, schema } from '@angular-devkit/core';
-import { visitJsonSchema } from '@angular-devkit/core/src/json/schema';
 import * as Ajv from 'ajv';
 import * as Url from 'url';
 
@@ -67,7 +66,7 @@ export function createSchemaFlattener(
         }
       }
       const schemaCopy = deepCopy(validate.schema) as json.JsonObject;
-      visitJsonSchema(schemaCopy, visitor);
+      json.schema.visitJsonSchema(schemaCopy, visitor);
       return schemaCopy;
     },
   };
