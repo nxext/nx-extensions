@@ -12,8 +12,6 @@ import { execSync, exec, ExecOptions } from 'child_process';
 import { tmpdir } from 'os';
 import { promisify } from 'util';
 
-export { runNxCommandUntil } from './run-commands-until';
-
 const execAsync = promisify(exec);
 
 const E2E_ENV: NodeJS.ProcessEnv = {
