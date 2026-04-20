@@ -29,7 +29,7 @@ export interface StencilPluginOptions {
  * locally in their project.json.
  */
 export const createNodesV2: CreateNodesV2<StencilPluginOptions> = [
-  '**/stencil.config.ts',
+  '**/stencil.config*.ts',
   (configFiles, rawOptions, context) => {
     const options = normalizeOptions(rawOptions);
     const workspaceRoot = context.workspaceRoot;

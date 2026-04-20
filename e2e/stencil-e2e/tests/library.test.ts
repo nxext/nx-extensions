@@ -78,12 +78,12 @@ describe('@nxext/stencil: library', () => {
 
       const build = await runNxCommandAsync(
         projectDirectory,
-        `build ${lib} --configPath=libs/${lib}/${renamed}.ts`
+        `build ${lib} --config=${renamed}.ts`
       );
       expect(build.stdout).toContain('build finished');
     });
 
-    it('honors an explicit --configPath', async () => {
+    it('honors an explicit --config', async () => {
       const lib = uniq('stencil-lib');
       await runNxCommandAsync(
         projectDirectory,
@@ -92,7 +92,7 @@ describe('@nxext/stencil: library', () => {
 
       const build = await runNxCommandAsync(
         projectDirectory,
-        `build ${lib} --configPath=libs/${lib}/stencil.config.ts`
+        `build ${lib} --config=stencil.config.ts`
       );
       expect(build.stdout).toContain('build finished');
     });
