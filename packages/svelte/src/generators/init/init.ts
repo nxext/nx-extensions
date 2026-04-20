@@ -9,7 +9,7 @@ import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
 import { addLinterPlugin } from './lib/add-linter-plugin';
-import { addPluginToNxJson } from '../utils/add-plugin-to-nx-json';
+import { addPluginToNxJson } from '@nxext/common';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
 
 export async function initGenerator(host: Tree, schema: Schema) {
