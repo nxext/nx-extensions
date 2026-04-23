@@ -16,17 +16,20 @@ export function updateJestConfig(host: Tree, options: NormalizedSchema) {
     return;
   }
 
-  const svelteConfigPath = `${options.projectRoot}/svelte.config.cjs`;
   const originalContent = host.read(jestConfigPath).toString();
-  const content = updateJestConfigContent(originalContent, svelteConfigPath);
-  host.write(jestConfigPath, content);
+  host.write(jestConfigPath, updateJestConfigContent(originalContent));
 }
 
-function updateJestConfigContent(content: string, svelteConfigPath: string) {
+function updateJestConfigContent(content: string) {
+  // svelte-jester's `preprocess` option is passed to `require()` at transform
+  // time. A relative string resolves against `node_modules/svelte-jester`, not
+  // the project, so the require fails. Emit a runtime expression that
+  // resolves the path against `__dirname` (the jest config's directory) so
+  // svelte-jester receives an absolute path.
   return content
     .replace('moduleFileExtensions: [', "moduleFileExtensions: ['svelte', ")
     .replace(
       'transform: {',
-      `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      'preprocess': '${svelteConfigPath}'\n    }\n    ],`
+      `transform: {\n    '^(.+\\\\.svelte$)': ['svelte-jester', {\n      preprocess: require('path').resolve(__dirname, 'svelte.config.cjs')\n    }],`
     );
 }
