@@ -1,6 +1,6 @@
 import { createRouteInProject } from './lib/create-route-in-project';
 import { Tree } from '@nx/devkit';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 export interface SvelteRouteSchema {
   name: string;
   project: string;

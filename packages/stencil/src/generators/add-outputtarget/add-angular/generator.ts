@@ -33,6 +33,11 @@ async function prepareAngularLibrary(
   const angularProjectDir = `libs/${angularProjectName}`;
 
   await ensurePackage('@nx/angular', NX_VERSION);
+  // `@nx/angular`'s root entry ships the Angular-framework build (no Node
+  // exports); `/generators` is Node-only and, unlike other `@nx/*` optional
+  // peers, has no top-level .d.ts stub for classic `moduleResolution: "node"`
+  // to resolve its exports-map-only subpath.
+  // @ts-expect-error -- see comment above; resolves fine at runtime
   const generators = await import('@nx/angular/generators');
   const libraryTarget = await generators.libraryGenerator(host, {
     directory: angularProjectDir,

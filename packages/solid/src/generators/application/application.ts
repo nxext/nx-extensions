@@ -19,8 +19,8 @@ import { createFiles } from './lib/create-project-files';
 import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
-} from '@nx/devkit/src/generators/project-name-and-root-utils';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+} from '@nx/devkit/internal';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 async function normalizeOptions<T extends Schema = Schema>(
   host: Tree,
@@ -105,7 +105,7 @@ export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
       includeLib: false,
       includeVitest: options.unitTestRunner === 'vitest',
       inSourceTests: false,
-      rollupOptionsExternal: [],
+      rolldownOptionsExternal: [],
       imports: [`import solidPlugin from 'vite-plugin-solid'`],
       plugins: [`solidPlugin()`],
     },

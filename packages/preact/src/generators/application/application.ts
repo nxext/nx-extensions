@@ -21,8 +21,8 @@ import { createOrEditViteConfig } from '@nx/vite';
 import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
-} from '@nx/devkit/src/generators/project-name-and-root-utils';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+} from '@nx/devkit/internal';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 async function normalizeOptions(
   tree: Tree,
@@ -116,7 +116,7 @@ export async function applicationGenerator(
       includeLib: false,
       includeVitest: options.unitTestRunner === 'vitest',
       inSourceTests: false,
-      rollupOptionsExternal: [],
+      rolldownOptionsExternal: [],
       imports: [`import preact from '@preact/preset-vite'`],
       plugins: [`preact()`],
     },

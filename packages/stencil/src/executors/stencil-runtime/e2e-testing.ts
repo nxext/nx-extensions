@@ -1,5 +1,5 @@
 import { deleteFile } from '../../utils/fileutils';
-import { fileExists } from '@nx/workspace/src/utilities/fileutils';
+import { existsSync } from 'node:fs';
 import { PathCollection } from './types';
 import { relative } from 'path';
 import { joinPathFragments, writeJsonFile } from '@nx/devkit';
@@ -56,7 +56,7 @@ export function cleanupE2eTesting(pathCollection: PathCollection) {
   const pkgJsonPath = joinPathFragments(
     `${pathCollection.projectRoot}/package.e2e.json`
   );
-  if (fileExists(pkgJsonPath)) {
+  if (existsSync(pkgJsonPath)) {
     deleteFile(pkgJsonPath);
   }
 }

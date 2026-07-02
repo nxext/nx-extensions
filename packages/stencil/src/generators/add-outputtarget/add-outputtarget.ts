@@ -11,7 +11,7 @@ import { AddOutputtargetSchematicSchema } from './schema';
 import { addAngularGenerator } from './add-angular/generator';
 import { addReactGenerator } from './add-react/generator';
 import addVueGenerator from './add-vue/generator';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function outputtargetGenerator(
   host: Tree,

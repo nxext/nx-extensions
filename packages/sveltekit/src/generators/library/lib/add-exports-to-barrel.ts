@@ -1,6 +1,5 @@
 import * as ts from 'typescript';
 
-import { ProjectType } from '@nx/workspace';
 import { SvelteLibrarySchema } from '../library';
 import {
   applyChangesToString,
@@ -20,7 +19,7 @@ export function addExportsToBarrel(tree: Tree, options: SvelteLibrarySchema) {
   const indexFilePath = joinPathFragments(projectConfig.sourceRoot, 'index.ts');
   const libraryFile = `./lib/${fileName}/${className}.svelte`;
 
-  if (projectConfig.projectType === ProjectType.Library) {
+  if (projectConfig.projectType === 'library') {
     const { content, source } = readSourceFile(tree, indexFilePath);
 
     const changes = applyChangesToString(

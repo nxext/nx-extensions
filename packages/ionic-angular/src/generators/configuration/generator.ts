@@ -11,7 +11,7 @@ import { ConfigurationGeneratorSchema } from './schema';
 import { addFiles, removeFiles } from './lib/files';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateJestConfig } from './lib/update-jest-config';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function configurationGenerator(
   host: Tree,

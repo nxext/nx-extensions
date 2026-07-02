@@ -11,7 +11,7 @@ import { Linter } from '@nx/eslint';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
 import { updateMainJs } from './lib/update-main-js';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function configurationGenerator(
   host: Tree,
@@ -44,7 +44,6 @@ export async function configurationGenerator(
     uiFramework,
     js: options.js,
     linter: options.linter,
-    standaloneConfig: options.standaloneConfig,
     tsConfiguration: options.tsConfiguration,
     interactionTests: options.interactionTests,
   });

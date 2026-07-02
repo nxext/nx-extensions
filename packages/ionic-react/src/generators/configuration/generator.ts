@@ -11,7 +11,7 @@ import { addFiles, deleteFiles } from './lib/files';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateWorkspace } from './lib/update-workspace';
 import { ConfigurationGeneratorSchema } from './schema';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function configurationGenerator(
   host: Tree,

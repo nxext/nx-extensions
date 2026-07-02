@@ -17,7 +17,7 @@ import { addFiles } from './lib/add-project-files';
 import { createSvelteCheckTarget } from './lib/targets';
 import { addVite } from './lib/add-vite';
 import { createOrEditViteConfig } from '@nx/vite';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 function normalizeOptions(
   host: Tree,
@@ -85,7 +85,7 @@ export async function applicationGenerator(
       includeLib: false,
       includeVitest: options.unitTestRunner === 'vitest',
       inSourceTests: false,
-      rollupOptionsExternal: [],
+      rolldownOptionsExternal: [],
       imports: [`import { sveltekit } from '@sveltejs/kit/vite'`],
       plugins: [`sveltekit()`],
     },

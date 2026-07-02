@@ -13,7 +13,7 @@ import {
   extraEslintDependencies,
   getEsLintPluginBaseName,
 } from '../../utils/lint';
-import { findEslintFile } from '@nx/eslint/src/generators/utils/eslint-file';
+import { findEslintFile } from '@nx/eslint/internal';
 import {
   deprecatedStencilEslintPlugin,
   stencilEslintPlugin,

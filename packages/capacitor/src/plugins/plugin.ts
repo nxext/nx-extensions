@@ -1,5 +1,5 @@
 import {
-  CreateNodesV2,
+  CreateNodes,
   ProjectConfiguration,
   TargetConfiguration,
 } from '@nx/devkit';
@@ -14,7 +14,7 @@ export type CapCommandFormat =
   | `cap ${CapCommand}`
   | `cap ${CapCommand} ${CapPlatform}`;
 
-export const createNodesV2: CreateNodesV2<CapacitorPluginOptions> = [
+export const createNodesV2: CreateNodes<CapacitorPluginOptions> = [
   '**/capacitor.config.ts',
   (configFiles) => {
     return configFiles.map((configFile) => {

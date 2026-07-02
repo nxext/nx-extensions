@@ -9,8 +9,8 @@ import {
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { extraEslintDependencies } from '../../utils/lint';
-import { useFlatConfig } from '@nx/eslint/src/utils/flat-config';
-import { findEslintFile } from '@nx/eslint/src/generators/utils/eslint-file';
+import { useFlatConfig } from '@nx/eslint/internal';
+import { findEslintFile } from '@nx/eslint/internal';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   if (options.linter !== 'eslint') {

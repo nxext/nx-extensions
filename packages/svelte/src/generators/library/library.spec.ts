@@ -59,7 +59,7 @@ describe('svelte library schematic', () => {
     // workspace npm scope (empty in createTreeWithEmptyWorkspace) + the
     // project name, yielding '@proj/my-lib'.
     expect(tsconfigBase.compilerOptions.paths['@proj/my-lib']).toEqual([
-      'libs/my-lib/src/index.ts',
+      './libs/my-lib/src/index.ts',
     ]);
   });
 

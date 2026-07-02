@@ -6,7 +6,7 @@ import {
   Tree,
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
-import { useFlatConfig } from '@nx/eslint/src/utils/flat-config';
+import { useFlatConfig } from '@nx/eslint/internal';
 
 export function createFiles(host: Tree, options: NormalizedSchema) {
   generateFiles(

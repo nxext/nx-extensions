@@ -18,9 +18,9 @@ import { addVitest } from './lib/add-vitest';
 import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
-} from '@nx/devkit/src/generators/project-name-and-root-utils';
+} from '@nx/devkit/internal';
 import { createOrEditViteConfig } from '@nx/vite';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 async function normalizeOptions(
   host: Tree,
@@ -102,7 +102,7 @@ export async function libraryGeneratorInternal(
       includeLib: true,
       includeVitest: options.unitTestRunner === 'vitest',
       inSourceTests: false,
-      rollupOptionsExternal: [],
+      rolldownOptionsExternal: [],
       imports: [`import solidPlugin from 'vite-plugin-solid'`],
       plugins: [`solidPlugin()`],
     },

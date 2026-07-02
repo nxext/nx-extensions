@@ -1,8 +1,8 @@
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { createComponentInProject } from './lib/create-component-in-project';
 import { Tree } from '@nx/devkit';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
-import { determineProjectNameAndRootOptions } from '@nx/devkit/src/generators/project-name-and-root-utils';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
+import { determineProjectNameAndRootOptions } from '@nx/devkit/internal';
 
 export interface PreactComponentSchema {
   name: string;
