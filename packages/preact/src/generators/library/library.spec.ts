@@ -1,6 +1,6 @@
 import { PreactLibrarySchema } from './schema';
 import { Linter } from '@nx/eslint';
-import { readJson } from '@nx/devkit';
+import { readJson, readProjectConfiguration } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
 
@@ -58,6 +58,18 @@ describe('preact library schematic', () => {
     expect(host.exists(`libs/test/eslint.config.js`)).toBeFalsy();
     expect(host.exists(`libs/test/.eslintrc.json`)).toBeTruthy();
     delete process.env.ESLINT_USE_FLAT_CONFIG;
+  });
+
+  it('should configure a vitest test target when unitTestRunner is vitest', async () => {
+    await libraryGenerator(host, {
+      ...options,
+      unitTestRunner: 'vitest',
+      buildable: false,
+      publishable: false,
+    });
+    const { targets } = readProjectConfiguration(host, 'test');
+    expect(targets.test.executor).toBe('@nx/vitest:test');
+    expect(host.exists('libs/test/vite.config.ts')).toBeTruthy();
   });
 
   it('should fail if no importPath is provided with publishable', async () => {

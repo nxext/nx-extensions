@@ -12,7 +12,6 @@ import { initGenerator as jsInitGenerator } from '@nx/js';
 import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { addVite } from './lib/add-vite';
-import { addVitest } from './lib/add-vitest';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 import { normalizeOptions } from './lib/normalize-options';
 import { createFiles } from './lib/create-files';
@@ -48,7 +47,6 @@ export async function libraryGenerator(
   createFiles(host, options);
 
   tasks.push(await addVite(host, options));
-  tasks.push(await addVitest(host, options));
   tasks.push(await addLinting(host, options));
   tasks.push(await addJest(host, options));
 

@@ -14,7 +14,6 @@ import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { createFiles } from './lib/create-project-files';
 import { addVite } from './lib/add-vite';
-import { addVitest } from './lib/add-vitest';
 import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
@@ -109,8 +108,6 @@ export async function libraryGeneratorInternal(
     false
   );
 
-  const vitestTask = await addVitest(host, options);
-
   updateTsConfig(host, options);
   updateJestConfig(host, options);
   updateLibPackageNpmScope(host, options);
@@ -119,7 +116,7 @@ export async function libraryGeneratorInternal(
     await formatFiles(host);
   }
 
-  return runTasksInSerial(initTask, viteTask, vitestTask, lintTask, jestTask);
+  return runTasksInSerial(initTask, viteTask, lintTask, jestTask);
 }
 
 export default libraryGenerator;

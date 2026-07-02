@@ -1,6 +1,6 @@
 import { SvelteLibrarySchema } from './schema';
 import { Linter } from '@nx/eslint';
-import { readJson } from '@nx/devkit';
+import { readJson, readProjectConfiguration } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
 
@@ -82,5 +82,26 @@ describe('svelte library schematic', () => {
       'node',
       'vitest',
     ]);
+  });
+
+  it('should configure a vitest test target when unitTestRunner is vitest and the lib is not buildable/publishable', async () => {
+    await libraryGenerator(tree, {
+      ...options,
+      unitTestRunner: 'vitest',
+    });
+    const { targets } = readProjectConfiguration(tree, 'my-lib');
+    expect(targets.test.executor).toBe('@nx/vitest:test');
+    expect(tree.exists('libs/my-lib/vite.config.ts')).toBeTruthy();
+  });
+
+  it('should configure a vitest test target when unitTestRunner is vitest and the lib is buildable', async () => {
+    await libraryGenerator(tree, {
+      ...options,
+      unitTestRunner: 'vitest',
+      buildable: true,
+    });
+    const { targets } = readProjectConfiguration(tree, 'my-lib');
+    expect(targets.test.executor).toBe('@nx/vitest:test');
+    expect(tree.exists('libs/my-lib/vite.config.ts')).toBeTruthy();
   });
 });
