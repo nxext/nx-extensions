@@ -70,7 +70,7 @@
     "@nx/workspace": "23.0.1",
     "@phenomnomnominal/tsquery": "~5.0.1",
     "@preact/preset-vite": "^2.10.1",
-    "@stencil/core": "4.43.4",
+    "@stencil/core": "4.43.5",
     "@swc-node/register": "1.11.1",
     "@swc/cli": "0.8.1",
     "@swc/core": "1.15.8",

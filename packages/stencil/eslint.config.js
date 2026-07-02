@@ -31,10 +31,24 @@ module.exports = [
       'packages/stencil/package.json',
       'packages/stencil/generators.json',
       'packages/stencil/executors.json',
-      'packages/stencil/generators.json',
-      'packages/stencil/executors.json',
       'packages/stencil/migrations.json',
     ],
     rules: { '@nx/nx-plugin-checks': 'error' },
+  })),
+  ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
+    ...config,
+    files: ['packages/stencil/package.json'],
+    rules: {
+      '@nx/dependency-checks': [
+        'error',
+        {
+          buildTargets: ['build'],
+          // Only imported via non-public subpaths (@stencil/core/cli,
+          // /compiler, /internal, /sys/node) that the checker can't map
+          // back to the base package.
+          ignoredDependencies: ['@stencil/core'],
+        },
+      ],
+    },
   })),
 ];
