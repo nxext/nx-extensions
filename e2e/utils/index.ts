@@ -46,6 +46,19 @@ export function createTestProject(projectName = 'proj'): string {
 
   downgradeToLegacyWorkspace(projectDirectory);
 
+  // `create-nx-workspace@latest` pulls whatever `typescript` is currently
+  // latest on npm, with no version constraint. TypeScript's `ignoreDeprecations`
+  // literal (below, in downgradeToLegacyWorkspace) tracks the installed major —
+  // "5.0" only silences the moduleResolution/baseUrl deprecation on TS 5.x; a
+  // fresh TS 6.x install demands "6.0" instead, and there is no single literal
+  // that satisfies both. Pin to the range every @nxext/* package's peerDependencies
+  // already declare so the resolved compiler matches what a real install gets.
+  execSync(`pnpm add -D typescript@^5.7.3`, {
+    cwd: projectDirectory,
+    stdio: 'inherit',
+    env: E2E_ENV,
+  });
+
   console.log(`Created test project in "${projectDirectory}"`);
   return projectDirectory;
 }
@@ -84,7 +97,9 @@ function downgradeToLegacyWorkspace(projectDirectory: string): void {
           // (still required by @nxext generators' emitted moduleResolution)
           // in favor of bundler/node16/nodenext; silence rather than migrate,
           // since that's the whole point of this legacy-shape downgrade.
-          ignoreDeprecations: '6.0',
+          // "5.0" is the only value TypeScript currently accepts here — it's
+          // a fixed literal tied to the deprecation cycle, not a version knob.
+          ignoreDeprecations: '5.0',
           emitDecoratorMetadata: true,
           experimentalDecorators: true,
           importHelpers: true,
