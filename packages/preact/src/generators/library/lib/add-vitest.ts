@@ -7,12 +7,10 @@ export async function addVitest(host: Tree, options: NormalizedSchema) {
     !options.publishable &&
     options.unitTestRunner === 'vitest'
   ) {
-    const { vitestGenerator } = ensurePackage<typeof import('@nx/vite')>(
-      '@nx/vite',
-      NX_VERSION
-    );
+    ensurePackage('@nx/vitest', NX_VERSION);
+    const { configurationGenerator } = await import('@nx/vitest/generators');
 
-    return await vitestGenerator(host, {
+    return await configurationGenerator(host, {
       uiFramework: 'none',
       project: options.name,
       coverageProvider: 'v8',

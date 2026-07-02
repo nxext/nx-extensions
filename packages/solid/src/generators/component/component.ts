@@ -1,7 +1,7 @@
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { createComponentInProject } from './lib/create-component-in-project';
 import { Tree } from '@nx/devkit';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export interface SolidComponentSchema {
   name: string;

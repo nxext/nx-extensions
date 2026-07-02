@@ -15,8 +15,8 @@ import {
   createStencilEslintJson,
   extraEslintDependencies,
 } from '../../../utils/lint';
-import { findEslintFile } from '@nx/eslint/src/generators/utils/eslint-file';
-import { useFlatConfig } from '@nx/eslint/src/utils/flat-config';
+import { findEslintFile } from '@nx/eslint/internal';
+import { useFlatConfig } from '@nx/eslint/internal';
 
 export async function addLinting(host: Tree, options: ApplicationSchema) {
   if (options.linter === Linter.EsLint) {

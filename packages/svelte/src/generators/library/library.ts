@@ -17,7 +17,7 @@ import { addVitest } from './lib/add-vitest';
 import { normalizeOptions } from './lib/normalize-options';
 import { createOrEditViteConfig } from '@nx/vite';
 import { addTsConfigPath } from '@nx/js';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
   return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
@@ -54,7 +54,7 @@ export async function libraryGenerator(
       includeLib: true,
       includeVitest: options.unitTestRunner === 'vitest',
       inSourceTests: false,
-      rollupOptionsExternal: [],
+      rolldownOptionsExternal: [],
       imports: [`import { svelte } from '@sveltejs/vite-plugin-svelte'`],
       plugins: [`svelte()`],
     },

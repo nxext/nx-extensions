@@ -1,5 +1,5 @@
 import {
-  CreateNodesV2,
+  CreateNodes,
   ProjectConfiguration,
   TargetConfiguration,
 } from '@nx/devkit';
@@ -28,7 +28,7 @@ export interface StencilPluginOptions {
  * with non-standard stencil output paths should override the inferred `outputs`
  * locally in their project.json.
  */
-export const createNodesV2: CreateNodesV2<StencilPluginOptions> = [
+export const createNodesV2: CreateNodes<StencilPluginOptions> = [
   '**/stencil.config*.ts',
   (configFiles, rawOptions, context) => {
     const options = normalizeOptions(rawOptions);

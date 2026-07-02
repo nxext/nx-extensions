@@ -3,7 +3,7 @@ import { formatFiles, Tree, runTasksInSerial } from '@nx/devkit';
 import { addJestPlugin } from './lib/add-jest-plugin';
 import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function initGenerator(host: Tree, options: Schema) {
   assertNotUsingTsSolutionSetup(host, '@nxext/preact', 'init');

@@ -24,8 +24,8 @@ import { isBuildableStencilProject } from '../../utils/utillities';
 import { updateDependencies } from './lib/add-dependencies';
 import { updateLintConfig } from './lib/update-lint-config';
 import { StorybookConfigureSchema } from './schema';
-import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { getNpmScope } from '@nx/js/internal';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 /**
  * With Nx `npmScope` (eg: nx-workspace) and `projectName` (eg: nx-project), returns a path portion to be used for import statements or

@@ -5,14 +5,11 @@ import {
   initializeStencilConfig,
   createStencilProcess,
 } from '../stencil-runtime';
-import { createProjectGraphAsync } from '@nx/workspace/src/core/project-graph';
 import { parseRunParameters } from '../stencil-runtime/stencil-parameters';
-import { ExecutorContext, logger } from '@nx/devkit';
+import { createProjectGraphAsync, ExecutorContext, logger } from '@nx/devkit';
 import { cleanupE2eTesting } from '../stencil-runtime/e2e-testing';
-import {
-  calculateProjectDependencies,
-  updateBuildableProjectPackageJsonDependencies,
-} from '@nx/js/src/utils/buildable-libs-utils';
+import { updateBuildableProjectPackageJsonDependencies } from '../stencil-runtime/update-buildable-package-json-dependencies';
+import { calculateProjectDependencies } from '@nx/js/internal';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,

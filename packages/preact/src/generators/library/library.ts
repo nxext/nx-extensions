@@ -13,7 +13,7 @@ import { addLinting } from './lib/add-linting';
 import { addJest } from './lib/add-jest';
 import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 import { normalizeOptions } from './lib/normalize-options';
 import { createFiles } from './lib/create-files';
 import { updateNpmScopeIfBuildableOrPublishable } from './lib/update-npm-scope';

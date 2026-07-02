@@ -1,5 +1,5 @@
 import { readProjectConfiguration, Tree } from '@nx/devkit';
-import { getNpmScope } from '@nx/js/src/utils/package-json/get-npm-scope';
+import { getNpmScope } from '@nx/js/internal';
 import * as ts from 'typescript';
 import { readTsSourceFile } from '@nxext/common';
 

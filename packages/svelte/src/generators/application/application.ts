@@ -15,7 +15,7 @@ import { addVite } from './lib/add-vite';
 import { createApplicationFiles } from './lib/create-project-files';
 import { normalizeOptions } from './lib/normalize-options';
 import { createOrEditViteConfig } from '@nx/vite';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function applicationGenerator(
   host: Tree,
@@ -44,7 +44,7 @@ export async function applicationGeneratorInternal(host: Tree, schema: Schema) {
       includeLib: false,
       includeVitest: options.unitTestRunner === 'vitest',
       inSourceTests: false,
-      rollupOptionsExternal: [],
+      rolldownOptionsExternal: [],
       imports: [`import { svelte } from '@sveltejs/vite-plugin-svelte'`],
       plugins: [`svelte()`],
     },

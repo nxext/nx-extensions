@@ -7,7 +7,7 @@ import { runTasksInSerial } from '@nx/devkit';
 import { addCypress } from './lib/add-cypress';
 import { addJest } from './lib/add-jest';
 import { addPluginToNxJson } from '@nxext/common';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function initGenerator<T extends InitSchema>(
   host: Tree,

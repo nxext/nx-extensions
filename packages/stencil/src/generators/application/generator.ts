@@ -20,9 +20,9 @@ import { addCypress } from './lib/add-cypress';
 import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
-} from '@nx/devkit/src/generators/project-name-and-root-utils';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
-import { logShowProjectCommand } from '@nx/devkit/src/utils/log-show-project-command';
+  logShowProjectCommand,
+} from '@nx/devkit/internal';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 async function normalizeOptions(
   host: Tree,

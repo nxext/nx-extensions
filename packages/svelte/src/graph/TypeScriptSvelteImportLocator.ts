@@ -2,7 +2,7 @@ import * as path from 'path';
 import type * as ts from 'typescript';
 import { DependencyType, workspaceRoot } from '@nx/devkit';
 import { Scanner } from 'typescript';
-import { stripSourceCode } from 'nx/src/plugins/js/project-graph/build-dependencies/strip-source-code';
+import { stripSourceCode } from './strip-source-code';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 

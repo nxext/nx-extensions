@@ -12,7 +12,7 @@ import { addToOutputTargets } from '../../stencil-core-utils';
 import { updateTsConfig } from './lib/update-tsconfig';
 import { getLintTarget } from '../../utils/targets';
 import { getProjectTsImportPath } from '../storybook-configuration/generator';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 function normalize(
   host: Tree,

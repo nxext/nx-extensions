@@ -1,6 +1,10 @@
 import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
+// `@nx/angular`'s Node-only `/generators` and `/internal` subpaths have no
+// top-level .d.ts stub for classic `moduleResolution: "node"` to resolve.
+// @ts-expect-error -- see comment above; resolves fine at runtime
 import { applicationGenerator } from '@nx/angular/generators';
-import type { UnitTestRunner } from '@nx/angular/src/utils/test-runners';
+// @ts-expect-error -- see comment above; resolves fine at runtime
+import type { UnitTestRunner } from '@nx/angular/internal';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { configurationGenerator } from './generator';
 import { ConfigurationGeneratorSchema } from './schema';

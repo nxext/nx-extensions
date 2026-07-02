@@ -16,7 +16,7 @@ import {
   getEsLintPluginBaseName,
 } from '../../utils/lint';
 import { eslintImportPlugin, stencilEslintPlugin } from '../../utils/versions';
-import { useFlatConfig } from '@nx/eslint/src/utils/flat-config';
+import { useFlatConfig } from '@nx/eslint/internal';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');

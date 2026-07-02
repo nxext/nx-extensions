@@ -9,7 +9,7 @@ import { NormalizedSchema, Schema } from '../schema';
 import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
-} from '@nx/devkit/src/generators/project-name-and-root-utils';
+} from '@nx/devkit/internal';
 
 export async function normalizeOptions(
   host: Tree,

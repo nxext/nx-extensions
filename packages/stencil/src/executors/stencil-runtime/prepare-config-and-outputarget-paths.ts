@@ -1,11 +1,7 @@
 import { PathCollection } from './types';
-import {
-  createDirectory,
-  fileExists,
-  copyFile,
-} from '@nx/workspace/src/utilities/fileutils';
 import { joinPathFragments, writeJsonFile } from '@nx/devkit';
-import { existsSync } from 'fs';
+import { copyFileSync, existsSync, mkdirSync } from 'fs';
+import { basename, join } from 'path';
 import type { Config } from '@stencil/core/compiler';
 import { prepareE2eTesting } from './e2e-testing';
 
@@ -24,9 +20,12 @@ function copyOrCreatePackageJson(pathCollection: PathCollection) {
     files: ['dist/', 'loader/'],
   };
 
-  if (fileExists(pathCollection.pkgJson)) {
+  if (existsSync(pathCollection.pkgJson)) {
     if (pathCollection.projectRoot !== pathCollection.distDir) {
-      copyFile(pathCollection.pkgJson, pathCollection.distDir);
+      copyFileSync(
+        pathCollection.pkgJson,
+        join(pathCollection.distDir, basename(pathCollection.pkgJson))
+      );
     }
   } else {
     writeJsonFile(
@@ -38,7 +37,7 @@ function copyOrCreatePackageJson(pathCollection: PathCollection) {
 
 function prepareDistDirAndPkgJson(pathCollection: PathCollection) {
   if (!existsSync(pathCollection.distDir)) {
-    createDirectory(pathCollection.distDir);
+    mkdirSync(pathCollection.distDir, { recursive: true });
   }
   copyOrCreatePackageJson(pathCollection);
 }

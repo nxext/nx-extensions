@@ -11,7 +11,7 @@ import {
 import { join } from 'path';
 import { insertStatement } from '../../utils/insert-statement';
 import { getProjectTsImportPath } from '../storybook-configuration/generator';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export interface ComponentSchema {
   name: string;

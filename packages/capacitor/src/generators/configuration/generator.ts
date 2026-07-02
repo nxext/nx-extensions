@@ -5,7 +5,7 @@ import { normalizeOptions } from './lib/normalize-options';
 import { updateProjectGitignore } from './lib/update-project-gitignore';
 import { updateProjectPackageJson } from './lib/update-project-package-json';
 import { CapacitorConfigurationSchema } from './schema';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/src/utils/typescript/ts-solution-setup';
+import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 import { addPluginToNxJson } from '@nxext/common';
 
 export async function capacitorConfigurationGenerator(
