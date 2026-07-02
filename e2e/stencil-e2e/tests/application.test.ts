@@ -15,6 +15,7 @@ import {
   createTestProject,
   installPlugin,
   runNxCommandAsync,
+  stripAnsi,
   uniq,
 } from '@nxext/e2e-utils';
 
@@ -76,6 +77,19 @@ describe('@nxext/stencil: application', () => {
 
     const e2e = await runNxCommandAsync(projectDirectory, `e2e ${app}`);
     expect(e2e.stdout).toContain('passed');
+  });
+
+  it('lints a generated app', async () => {
+    const app = uniq('stencil-app-lint');
+    await runNxCommandAsync(
+      projectDirectory,
+      `generate @nxext/stencil:app apps/${app} --style=css --e2eTestRunner=none --no-interactive`
+    );
+
+    const lint = await runNxCommandAsync(projectDirectory, `lint ${app}`);
+    expect(stripAnsi(lint.stdout)).toContain(
+      `Successfully ran target lint for project ${app}`
+    );
   });
 
   it('builds with --prerender=true', async () => {

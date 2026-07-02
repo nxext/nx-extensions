@@ -47,7 +47,7 @@ export function getEsLintPluginBaseName<
   throw Error(`[stencil] unsupported eslint plugin name: ${packageName}`);
 }
 
-export const beginningOfEsLintConfigJs = `const importPlugin = require('eslint-plugin-import');
+export const beginningOfEsLintConfigJsCjs = `const importPlugin = require('eslint-plugin-import');
 /**
  * @stencil-community/eslint-plugin may not support the flat config yet
  *
@@ -56,6 +56,20 @@ export const beginningOfEsLintConfigJs = `const importPlugin = require('eslint-p
  * const stencilPlugin = require('@stencil-community/eslint-plugin');
  */
 `;
+
+export const beginningOfEsLintConfigJsEsm = `import importPlugin from 'eslint-plugin-import';
+/**
+ * @stencil-community/eslint-plugin may not support the flat config yet
+ *
+ * TODO: activate @stencil-community/eslint-plugin when it supports the flat config
+ *
+ * import stencilPlugin from '@stencil-community/eslint-plugin';
+ */
+`;
+
+// Kept for backwards compatibility with existing imports/tests; the CJS form
+// only fits a module.exports-shaped config (see augmentStencilEslintFlatConfig).
+export const beginningOfEsLintConfigJs = beginningOfEsLintConfigJsCjs;
 
 export const augmentStencilEslintFlatConfig = (
   tree: Tree,
@@ -68,12 +82,29 @@ export const augmentStencilEslintFlatConfig = (
     ScriptKind.JS
   );
 
+  const [configArrayNodeBeforeInsert] = tsquery
+    .query<ArrayLiteralExpression>(sourceFile, 'ArrayLiteralExpression')
+    .filter((configArrayNode: ArrayLiteralExpression) => {
+      const ejsExport =
+        configArrayNode.parent?.kind === SyntaxKind.ExportAssignment;
+      const cjsExport =
+        configArrayNode.parent?.kind === SyntaxKind.BinaryExpression &&
+        (configArrayNode.parent.getText().startsWith('module.exports =') ||
+          configArrayNode.parent.getText().startsWith('exports ='));
+      return ejsExport || cjsExport;
+    });
+  // `eslint.config.mjs` (Nx's current default) is a real ES module — a CJS
+  // `require()` there throws at load time. Emit the matching import form
+  // instead of always assuming CommonJS.
+  const isEsm =
+    configArrayNodeBeforeInsert?.parent?.kind === SyntaxKind.ExportAssignment;
+
   sourceFile = insertChange(
     tree,
     sourceFile,
     eslintFlatConfigFilePath,
     0,
-    beginningOfEsLintConfigJs
+    isEsm ? beginningOfEsLintConfigJsEsm : beginningOfEsLintConfigJsCjs
   );
 
   const [configArrayNode] = tsquery
@@ -110,11 +141,20 @@ export const augmentStencilEslintFlatConfig = (
   },
   {
     files: ['*.ts', '*.tsx'],
-    /**
-     * Having an empty rules object present makes it more obvious to the user where they would
-     * extend things from if they needed to
-     */
     rules: {},
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      /**
+       * Stencil's own generated \`src/index.ts\` re-exports \`./components\`,
+       * resolved only via the sibling \`components.d.ts\` ambient declaration
+       * (a type-only file, valid to tsc) — eslint-plugin-import's default
+       * resolver doesn't follow that convention without extra TypeScript
+       * resolver config, so it flags a false positive here.
+       */
+      'import/no-unresolved': 'off',
+    },
   },
   {
     files: ['*.js', '*.jsx'],
