@@ -4,7 +4,7 @@ import { names, Tree } from '@nx/devkit';
 import { outputtargetGenerator } from './add-outputtarget';
 import { AddOutputtargetSchematicSchema } from './schema';
 
-xdescribe('add-outputtarget angular', () => {
+describe('add-outputtarget angular', () => {
   let tree: Tree;
   const projectName = uniq('testprojekt');
   const projectAppDirectory = `apps/${projectName}`;
@@ -31,7 +31,7 @@ xdescribe('add-outputtarget angular', () => {
 
       const fileName = names(projectName + '-angular').fileName;
       expect(
-        tree.exists(`libs/${projectName}-angular/src/lib/${fileName}.module.ts`)
+        tree.exists(`libs/${projectName}-angular/src/lib/${fileName}-module.ts`)
       ).toBeTruthy();
     });
 
@@ -41,17 +41,17 @@ xdescribe('add-outputtarget angular', () => {
       const fileName = names(projectName + '-angular').fileName;
       expect(
         tree
-          .read(`libs/${projectName}-angular/src/lib/${fileName}.module.ts`)
+          .read(`libs/${projectName}-angular/src/lib/${fileName}-module.ts`)
           .includes(`import { DIRECTIVES } from '../generated/directives';`)
       ).toBeTruthy();
       expect(
         tree
-          .read(`libs/${projectName}-angular/src/lib/${fileName}.module.ts`)
+          .read(`libs/${projectName}-angular/src/lib/${fileName}-module.ts`)
           .includes(`declarations: [...DIRECTIVES]`)
       ).toBeTruthy();
       expect(
         tree
-          .read(`libs/${projectName}-angular/src/lib/${fileName}.module.ts`)
+          .read(`libs/${projectName}-angular/src/lib/${fileName}-module.ts`)
           .includes(`exports: [...DIRECTIVES]`)
       ).toBeTruthy();
     });

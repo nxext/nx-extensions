@@ -23,7 +23,6 @@ import {
 import { getProjectTsImportPath } from '../../storybook-configuration/generator';
 import { addAfterLastImport, addImport } from '@nxext/common';
 import { addGlobal } from '@nx/js';
-import { existsSync } from 'fs-extra';
 
 async function prepareAngularLibrary(
   host: Tree,
@@ -44,6 +43,14 @@ async function prepareAngularLibrary(
     skipFormat: true,
     publishable: options.publishable,
     importPath: options.importPath,
+    // `addLibraryDirectives`/`angular-ast-utils.ts` below patch a generated
+    // `*.module.ts` to wire up the Stencil directive proxies — Angular 21's
+    // `standalone: true` default skips creating that module entirely.
+    standalone: false,
+    // Forward the schema's own unitTestRunner choice; left unset, Angular
+    // 21+ defaults publishable libraries to `vitest-angular`, which then
+    // hard-validates against a vitest version this workspace doesn't pin.
+    unitTestRunner: options.unitTestRunner,
   });
 
   addDependenciesToPackageJson(
@@ -116,11 +123,13 @@ function addLibraryDirectives(
   const angularProjectName = `${options.projectName}-angular`;
   const { libsDir } = getWorkspaceLayout(host);
 
+  // `@nx/angular`'s libraryGenerator (Angular 21+) names the module file
+  // `<project>-module.ts`, not the older `<project>.module.ts`.
   const modulePath = joinPathFragments(
-    `${libsDir}/${angularProjectName}/src/lib/${angularProjectName}.module.ts`
+    `${libsDir}/${angularProjectName}/src/lib/${angularProjectName}-module.ts`
   );
 
-  if (!existsSync(modulePath)) {
+  if (!host.exists(modulePath)) {
     return;
   }
 
