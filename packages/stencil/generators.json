@@ -42,6 +42,11 @@
       "schema": "./src/generators/add-outputtarget/schema.json",
       "hidden": true
     },
+    "add-outputtarget/add-vue": {
+      "factory": "./src/generators/add-outputtarget/add-vue/generator",
+      "schema": "./src/generators/add-outputtarget/schema.json",
+      "hidden": true
+    },
     "make-lib-buildable": {
       "factory": "./src/generators/make-lib-buildable/make-lib-buildable",
       "schema": "./src/generators/make-lib-buildable/schema.json",

@@ -2,7 +2,7 @@
   "version": 2,
   "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
-  "title": "Stencil build",
+  "title": "Stencil test",
   "description": "",
   "type": "object",
   "properties": {

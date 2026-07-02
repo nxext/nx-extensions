@@ -55,11 +55,6 @@
             "input": "./packages/stencil",
             "glob": "**/files/lib/.storybook/**",
             "output": "/"
-          },
-          {
-            "input": "./packages/stencil",
-            "glob": "migrations.json",
-            "output": "."
           }
         ],
         "srcRootForCompilationRoot": "packages/stencil"

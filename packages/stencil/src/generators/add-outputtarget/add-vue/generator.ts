@@ -13,7 +13,8 @@ import { AddOutputtargetSchematicSchema } from '../schema';
 import { Linter } from '@nx/eslint';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import * as ts from 'typescript';
-import { getDistDir, getRelativePath } from '../../../utils/fileutils';
+import { relative } from 'node:path';
+import { getDistDir } from '../../../utils/fileutils';
 import { addImport } from '@nxext/common';
 import { addOutputTarget } from '../../../stencil-core-utils';
 import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-options';
@@ -71,7 +72,7 @@ function addVueOutputtarget(
   packageName: string
 ) {
   const vueProjectConfig = readProjectConfiguration(tree, `${projectName}-vue`);
-  const realtivePath = getRelativePath(
+  const realtivePath = relative(
     getDistDir(stencilProjectConfig.root),
     vueProjectConfig.root
   );
