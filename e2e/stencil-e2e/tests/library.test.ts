@@ -30,7 +30,7 @@ describe('@nxext/stencil: library', () => {
     const lib = uniq('stencil-lib');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/stencil:lib libs/${lib} --style=scss --buildable --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+      `generate @nxext/stencil:lib libs/${lib} --style=scss --buildable --e2eTestRunner=none --no-interactive`
     );
 
     const build = await runNxCommandAsync(
@@ -44,7 +44,7 @@ describe('@nxext/stencil: library', () => {
     const lib = uniq('stencil-lib');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/stencil:lib libs/${lib} --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+      `generate @nxext/stencil:lib libs/${lib} --e2eTestRunner=none --no-interactive`
     );
     await runNxCommandAsync(
       projectDirectory,
@@ -66,7 +66,7 @@ describe('@nxext/stencil: library', () => {
       const lib = uniq('stencil-lib');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/stencil:lib libs/${lib} --style=scss --buildable --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+        `generate @nxext/stencil:lib libs/${lib} --style=scss --buildable --e2eTestRunner=none --no-interactive`
       );
 
       const renamed = uniq('stencil.config');
@@ -87,7 +87,7 @@ describe('@nxext/stencil: library', () => {
       const lib = uniq('stencil-lib');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/stencil:lib libs/${lib} --style=scss --buildable --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+        `generate @nxext/stencil:lib libs/${lib} --style=scss --buildable --e2eTestRunner=none --no-interactive`
       );
 
       const build = await runNxCommandAsync(
@@ -107,7 +107,7 @@ describe('@nxext/stencil: library', () => {
       const lib = uniq('stencil-lib');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/stencil:lib libs/${lib} --style=css --buildable --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+        `generate @nxext/stencil:lib libs/${lib} --style=css --buildable --e2eTestRunner=none --no-interactive`
       );
       await runNxCommandAsync(
         projectDirectory,
@@ -124,7 +124,7 @@ describe('@nxext/stencil: library', () => {
       const lib = uniq('stencil-lib');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/stencil:lib libs/${lib} --style=css --e2eTestRunner=none --junitTestRunner=none --no-interactive`
+        `generate @nxext/stencil:lib libs/${lib} --style=css --e2eTestRunner=none --no-interactive`
       );
       const result = await runNxCommandAsync(
         projectDirectory,
