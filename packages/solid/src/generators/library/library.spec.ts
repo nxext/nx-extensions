@@ -1,6 +1,6 @@
 import { SolidLibrarySchema } from './schema';
 import { Linter } from '@nx/eslint';
-import { readJson, Tree } from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
 
@@ -47,6 +47,18 @@ describe('solid library schematic', () => {
     expect(tree.exists(`libs/my-lib/tsconfig.json`)).toBeTruthy();
     expect(tree.exists(`libs/my-lib/.eslintrc.json`)).toBeFalsy();
     expect(tree.exists(`libs/my-lib/.eslintrc.js`)).toBeTruthy();
+  });
+
+  it('should configure a vitest test target when unitTestRunner is vitest', async () => {
+    await libraryGenerator(tree, {
+      ...options,
+      unitTestRunner: 'vitest',
+      buildable: false,
+      publishable: false,
+    });
+    const { targets } = readProjectConfiguration(tree, 'my-lib');
+    expect(targets.test.executor).toBe('@nx/vitest:test');
+    expect(tree.exists('libs/my-lib/vite.config.ts')).toBeTruthy();
   });
 
   it('should fail if no importPath is provided with publishable', async () => {

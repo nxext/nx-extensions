@@ -1,6 +1,12 @@
-import { Tree, ensurePackage, NX_VERSION } from '@nx/devkit';
+import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 
+/**
+ * addVite() only sets up vite (and, via includeVitest, vitest) for
+ * buildable/publishable libs. Non-buildable, non-publishable libs still
+ * need a test target when unitTestRunner is vitest, so this configures
+ * @nx/vitest directly for that case.
+ */
 export async function addVitest(host: Tree, options: NormalizedSchema) {
   if (
     !options.buildable &&
