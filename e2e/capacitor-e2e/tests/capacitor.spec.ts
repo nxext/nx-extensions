@@ -4,6 +4,8 @@
  * Unlike the framework plugins, @nxext/capacitor layers its configuration on
  * top of an already-generated `@nx/web:application`, so beforeAll does both.
  */
+import { readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import {
   cleanupTestProject,
   createTestProject,
@@ -33,6 +35,21 @@ describe('@nxext/capacitor', () => {
       projectDirectory,
       `generate @nxext/capacitor:configuration --project=${app} --appName=test --appId=test.example.app --skipFormat=true --no-interactive`
     );
+
+    // `@nx/web:application --bundler=vite --style=css` generates
+    // tsconfig.app.json with `"types": ["node"]`, which fully overrides (not
+    // merges with) the workspace-level tsconfig.base.json's `types` down the
+    // `extends` chain. Without `vite/client`'s ambient `*.css` module
+    // declaration, the plain CSS side-effect import in the generated
+    // app.element.ts fails to type-check (TS2882). Patch it in directly since
+    // this tsconfig is regenerated fresh by Nx's own generator every run.
+    const tsconfigAppPath = join(
+      projectDirectory,
+      `apps/${app}/tsconfig.app.json`
+    );
+    const tsconfigApp = JSON.parse(readFileSync(tsconfigAppPath, 'utf-8'));
+    tsconfigApp.compilerOptions.types.push('vite/client');
+    writeFileSync(tsconfigAppPath, JSON.stringify(tsconfigApp, null, 2));
   });
 
   afterAll(() => {

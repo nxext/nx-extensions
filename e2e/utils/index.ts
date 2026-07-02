@@ -80,12 +80,18 @@ function downgradeToLegacyWorkspace(projectDirectory: string): void {
           sourceMap: true,
           declaration: false,
           moduleResolution: 'node',
+          // TS 5.9+ deprecated the legacy `node` resolution and `baseUrl`
+          // (still required by @nxext generators' emitted moduleResolution)
+          // in favor of bundler/node16/nodenext; silence rather than migrate,
+          // since that's the whole point of this legacy-shape downgrade.
+          ignoreDeprecations: '6.0',
           emitDecoratorMetadata: true,
           experimentalDecorators: true,
           importHelpers: true,
           target: 'es2022',
           module: 'esnext',
           lib: ['es2020', 'dom'],
+          types: ['vite/client'],
           skipLibCheck: true,
           skipDefaultLibCheck: true,
           baseUrl: '.',
