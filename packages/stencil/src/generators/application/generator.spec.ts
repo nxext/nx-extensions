@@ -226,4 +226,16 @@ describe('schematic:application', () => {
       host.exists(`apps/test/src/components/app-profile/app-profile.e2e.ts`)
     ).toBeTruthy();
   });
+
+  it("declares the jest@29 line Stencil's own `test --e2e` requires when e2eTestRunner is puppeteer", async () => {
+    await applicationGenerator(host, {
+      ...options,
+      e2eTestRunner: 'puppeteer',
+    });
+
+    const packageJson = readJson(host, 'package.json');
+    expect(packageJson.devDependencies.jest).toBe('^29.0.0');
+    expect(packageJson.devDependencies['jest-cli']).toBe('^29.0.0');
+    expect(packageJson.devDependencies['@types/jest']).toBe('^29.0.0');
+  });
 });

@@ -2,6 +2,9 @@ import {
   puppeteer,
   STENCIL_STYLE_PLUGIN_VERSION,
   stencilRouterVersion,
+  stencilTestJestCliVersion,
+  stencilTestJestVersion,
+  stencilTestTypesJestVersion,
   stencilVersion,
   typesNodeVersion,
 } from './versions';
@@ -29,6 +32,9 @@ const stencilDependencies = {
 };
 const e2ePuppeteerDependencies = {
   puppeteer: puppeteer,
+  jest: stencilTestJestVersion,
+  'jest-cli': stencilTestJestCliVersion,
+  '@types/jest': stencilTestTypesJestVersion,
 };
 
 export const PROJECT_TYPE_DEPENDENCIES: {

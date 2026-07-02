@@ -2,6 +2,13 @@ export const stencilVersion = '^4.43.0';
 export const stencilRouterVersion = '^1.0.1';
 
 export const puppeteer = '^21.4.1';
+// Stencil's own integrated `test --e2e`/`--spec` task hard-validates that
+// these exact majors are installed in the consumer's node_modules,
+// independent of whatever `unitTestRunner` (Nx's own jest/vitest target)
+// the project was generated with.
+export const stencilTestJestVersion = '^29.0.0';
+export const stencilTestJestCliVersion = '^29.0.0';
+export const stencilTestTypesJestVersion = '^29.0.0';
 export const typesNodeVersion = '^22.0.0';
 
 export const deprecatedStencilEslintPlugin = '@stencil/eslint-plugin';
