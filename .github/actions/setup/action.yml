@@ -7,9 +7,12 @@ inputs:
     description: Git Bot token used to push to protected branches because github token can't
     required: false
   node_version:
-    description: Node.js version
+    description: Node.js version (leave unset to use node_version_file instead)
     required: false
-    default: 'lts/*'
+  node_version_file:
+    description: File to read the Node.js version from
+    required: false
+    default: '.node-version'
 
 runs:
   using: composite
@@ -32,6 +35,7 @@ runs:
       with:
         cache: pnpm
         node-version: ${{ inputs.node_version }}
+        node-version-file: ${{ inputs.node_version_file }}
         registry-url: https://registry.npmjs.org
 
     - name: Set nx base & head commit hashes in env vars

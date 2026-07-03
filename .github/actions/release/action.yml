@@ -24,9 +24,8 @@ runs:
       run: npx nx release --yes
 
     - name: Push changes
-      uses: ad-m/github-push-action@master
+      uses: ad-m/github-push-action@v1
       with:
         github_token: ${{ inputs.git_bot_token }}
         branch: ${{ github.ref }}
-        force: true
         tags: true

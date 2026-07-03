@@ -8,6 +8,9 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
@@ -34,6 +37,10 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: write
 
     if: github.ref == 'refs/heads/main'
 
