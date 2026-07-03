@@ -444,6 +444,12 @@ Type: `string`
 
 A directory where the Cypress project will be placed. Added at root by default.
 
+#### interactionTests
+
+Type: `boolean`
+
+Set up Storybook interaction tests.
+
 #### linter
 
 Default: `eslint`
