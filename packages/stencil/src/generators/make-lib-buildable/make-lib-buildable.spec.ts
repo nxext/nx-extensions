@@ -90,6 +90,15 @@ describe('make-lib-buildable schematic', () => {
       `dist/libs/${projectName}`,
     ]);
   });
+
+  it('should point the /loader path at the project root loader/index.js, not the dist/libs output dir', async () => {
+    await makeLibBuildableGenerator(host, options);
+    const tsConfig = readJson(host, 'tsconfig.base.json');
+
+    expect(tsConfig.compilerOptions.paths['@my/lib/loader']).toEqual([
+      `${projectLibDirectory}/loader/index.js`,
+    ]);
+  });
 });
 
 describe('make-lib-buildable schematic using defaults', () => {

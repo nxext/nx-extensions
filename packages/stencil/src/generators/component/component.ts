@@ -67,7 +67,7 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
   );
 
   const storiesPath = `${projectConfig.sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.tsx`;
-  if (!host.exists('.storybook')) {
+  if (!host.exists(`${projectConfig.root}/.storybook`)) {
     host.delete(joinPathFragments(storiesPath));
   } else {
     const classPathValue = `${getProjectTsImportPath(
