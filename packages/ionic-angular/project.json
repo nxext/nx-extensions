@@ -32,7 +32,7 @@
           },
           {
             "input": "./packages/ionic-angular",
-            "glob": "executors.json",
+            "glob": "migrations.json",
             "output": "."
           }
         ]
