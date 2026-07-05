@@ -1,4 +1,5 @@
-import { addDependenciesToPackageJson, Tree } from '@nx/devkit';
+import { Tree } from '@nx/devkit';
+import { addFrameworkDependencies } from '@nxext/common';
 import {
   eslintPluginSolidVersion,
   solidJestVersion,
@@ -8,15 +9,14 @@ import {
 } from '../../utils/versions';
 
 export function updateDependencies(tree: Tree) {
-  return addDependenciesToPackageJson(
-    tree,
-    {},
-    {
+  return addFrameworkDependencies(tree, {
+    dependencies: {},
+    devDependencies: {
       'solid-jest': solidJestVersion,
       'solid-js': solidVersion,
       '@solidjs/testing-library': solidTestingLibraryVersion,
       'eslint-plugin-solid': eslintPluginSolidVersion,
       'vite-plugin-solid': vitePluginSolidVersion,
-    }
-  );
+    },
+  });
 }

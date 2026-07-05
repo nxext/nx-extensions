@@ -2,49 +2,54 @@ import { NormalizedSchema, SolidLibrarySchema } from './schema';
 import { initGenerator } from '../init/init';
 import { addProject } from './lib/add-project';
 import { updateTsConfig } from './lib/update-tsconfig';
-import {
-  formatFiles,
-  names,
-  Tree,
-  updateJson,
-  runTasksInSerial,
-} from '@nx/devkit';
+import { formatFiles, Tree, runTasksInSerial } from '@nx/devkit';
 import { addLinting } from './lib/add-linting';
-import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
 import { createFiles } from './lib/create-project-files';
 import { addVite } from './lib/add-vite';
-import {
-  determineProjectNameAndRootOptions,
-  ensureRootProjectName,
-} from '@nx/devkit/internal';
-import { createOrEditViteConfig } from '@nx/vite';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
+import {
+  addJestConfiguration,
+  configureViteFrameworkPlugin,
+  normalizeViteLibCore,
+  shouldUpdateNpmScope,
+  updateLibPackageNpmScope as updateLibPackageNpmScopeCore,
+  ViteFrameworkConfig,
+} from '@nxext/common';
+
+const SOLID_VITE_CONFIG: ViteFrameworkConfig = {
+  frameworkName: 'solid',
+  plugin: {
+    importStatement: `import solidPlugin from 'vite-plugin-solid'`,
+    pluginCallExpression: 'solidPlugin()',
+  },
+};
 
 async function normalizeOptions(
   host: Tree,
   options: SolidLibrarySchema
 ): Promise<NormalizedSchema> {
-  await ensureRootProjectName(options, 'library');
-  const {
-    projectName,
-    names: projectNames,
-    projectRoot,
-    importPath,
-  } = await determineProjectNameAndRootOptions(host, {
-    name: options.name,
-    projectType: 'library',
-    directory: options.directory,
-    importPath: options.importPath,
-    rootProject: false,
-  });
-  const fileName = options.simpleName
-    ? projectNames.projectSimpleName
-    : projectNames.projectFileName;
-
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  const { projectName, projectRoot, parsedTags, importPath } =
+    await normalizeViteLibCore(host, {
+      name: options.name,
+      directory: options.directory,
+      tags: options.tags,
+      importPath: options.importPath,
+    });
+  // `fileName` is derived the same way `determineProjectNameAndRootOptions`
+  // computes `names.projectFileName`/`names.projectSimpleName` internally
+  // (scope-stripped, joined with '-' or last segment); kept local since
+  // normalizeViteLibCore intentionally doesn't expose it (see design doc
+  // 0/1.1 — fileName semantics diverge per framework).
+  const fileName = ((): string => {
+    if (!projectName.startsWith('@')) {
+      return projectName;
+    }
+    const segments = projectName.split('/').slice(1);
+    return options.simpleName
+      ? segments[segments.length - 1]
+      : segments.join('-');
+  })();
 
   return {
     ...options,
@@ -59,10 +64,10 @@ async function normalizeOptions(
 }
 
 function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
-  if (options.publishable || options.buildable) {
-    updateJson(host, `${options.projectRoot}/package.json`, (json) => {
-      json.name = options.importPath;
-      return json;
+  if (shouldUpdateNpmScope(options)) {
+    updateLibPackageNpmScopeCore(host, {
+      projectRoot: options.projectRoot,
+      importPath: options.importPath,
     });
   }
 }
@@ -92,20 +97,19 @@ export async function libraryGeneratorInternal(
   createFiles(host, options);
 
   const lintTask = await addLinting(host, options);
-  const jestTask = await addJest(host, options);
+  const jestTask = await addJestConfiguration(host, {
+    projectName: options.name,
+    unitTestRunner: options.unitTestRunner,
+  });
   const viteTask = await addVite(host, options);
-  createOrEditViteConfig(
+  configureViteFrameworkPlugin(
     host,
     {
       project: options.name,
       includeLib: true,
       includeVitest: options.unitTestRunner === 'vitest',
-      inSourceTests: false,
-      rolldownOptionsExternal: [],
-      imports: [`import solidPlugin from 'vite-plugin-solid'`],
-      plugins: [`solidPlugin()`],
     },
-    false
+    SOLID_VITE_CONFIG
   );
 
   updateTsConfig(host, options);

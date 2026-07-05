@@ -1,9 +1,10 @@
 import { NormalizedSchema } from '../schema';
 import { addProjectConfiguration, TargetConfiguration, Tree } from '@nx/devkit';
+import { createEslintLintTarget } from '@nxext/common';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   const targets: { [key: string]: TargetConfiguration } = {
-    lint: createLintTarget(options),
+    lint: createEslintLintTarget(options.projectRoot, 'tsconfig.lib.json'),
   };
 
   addProjectConfiguration(tree, options.name, {
@@ -13,15 +14,4 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
     tags: options.parsedTags,
     targets,
   });
-}
-
-function createLintTarget(options: NormalizedSchema): TargetConfiguration {
-  return {
-    executor: '@nx/eslint:lint',
-    options: {
-      linter: 'eslint',
-      tsConfig: `${options.projectRoot}/tsconfig.lib.json`,
-      exclude: ['**/node_modules/**', `!${options.projectRoot}/**/*`],
-    },
-  };
 }

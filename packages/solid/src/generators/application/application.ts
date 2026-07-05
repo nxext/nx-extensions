@@ -4,63 +4,64 @@ import {
   Tree,
   runTasksInSerial,
   GeneratorCallback,
-  readNxJson,
 } from '@nx/devkit';
-import { createOrEditViteConfig } from '@nx/vite';
 import { NormalizedSchema, Schema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
-import { addLinting } from './lib/add-linting';
-import { addCypress } from './lib/add-cypress';
-import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
-import { addVite } from './lib/add-vite';
 import { createFiles } from './lib/create-project-files';
-import {
-  determineProjectNameAndRootOptions,
-  ensureRootProjectName,
-} from '@nx/devkit/internal';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
+import {
+  addViteApplication,
+  configureViteFrameworkPlugin,
+  addJestConfiguration,
+  addCypressApplication,
+  addEslintLintProject,
+  normalizeViteAppCore,
+  ViteFrameworkConfig,
+} from '@nxext/common';
+import { extraEslintDependencies } from '../utils/lint';
+
+const SOLID_VITE_CONFIG: ViteFrameworkConfig = {
+  frameworkName: 'solid',
+  plugin: {
+    importStatement: `import solidPlugin from 'vite-plugin-solid'`,
+    pluginCallExpression: 'solidPlugin()',
+  },
+};
 
 async function normalizeOptions<T extends Schema = Schema>(
   host: Tree,
   options: Schema
 ): Promise<NormalizedSchema<T>> {
-  await ensureRootProjectName(options, 'application');
   const {
     projectName,
     projectRoot,
-    names: projectNames,
-  } = await determineProjectNameAndRootOptions(host, {
-    name: options.name,
-    projectType: 'application',
-    directory: options.directory,
-    rootProject: options.rootProject,
-  });
+    parsedTags,
+    e2eProjectName,
+    e2eProjectRoot,
+    e2eWebServerAddress,
+    e2eWebServerTarget,
+  } = await normalizeViteAppCore(
+    host,
+    {
+      name: options.name,
+      directory: options.directory,
+      tags: options.tags,
+      rootProject: options.rootProject,
+    },
+    'application'
+  );
   options.name ??= projectName;
   options.rootProject = projectRoot === '.';
-  const fileName =
-    /* options.simpleName
-    ? projectNames.projectSimpleName
-    :  */ projectNames.projectFileName;
-
-  const nxJson = readNxJson(host);
-
-  let e2eWebServerTarget = 'serve';
-  let e2ePort = 4200;
-  if (
-    nxJson.targetDefaults?.[e2eWebServerTarget] &&
-    nxJson.targetDefaults?.[e2eWebServerTarget].options?.port
-  ) {
-    e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
-  }
-
-  const e2eProjectName = options.rootProject ? 'e2e' : `${projectName}-e2e`;
-  const e2eProjectRoot = options.rootProject ? 'e2e' : `${projectRoot}-e2e`;
-  const e2eWebServerAddress = `http://localhost:${e2ePort}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  // `fileName` is derived the same way `determineProjectNameAndRootOptions`
+  // computes `names.projectFileName` internally (scope-stripped, joined
+  // with '-'); kept local since normalizeViteAppCore intentionally doesn't
+  // expose it (see design doc 0/1.1 — fileName semantics diverge per
+  // framework).
+  const fileName = projectName.startsWith('@')
+    ? projectName.split('/').slice(1).join('-')
+    : projectName;
 
   return {
     ...options,
@@ -96,24 +97,43 @@ export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
   addProject(tree, options);
   createFiles(tree, options);
 
-  const viteTask = await addVite(tree, options);
-  createOrEditViteConfig(
+  const viteTask = await addViteApplication(tree, {
+    projectName: options.name,
+    unitTestRunner: options.unitTestRunner,
+  });
+  configureViteFrameworkPlugin(
     tree,
     {
       project: options.projectName,
       includeLib: false,
       includeVitest: options.unitTestRunner === 'vitest',
-      inSourceTests: false,
-      rolldownOptionsExternal: [],
-      imports: [`import solidPlugin from 'vite-plugin-solid'`],
-      plugins: [`solidPlugin()`],
     },
-    false
+    SOLID_VITE_CONFIG
   );
 
-  const lintTask = await addLinting(tree, options);
-  const jestTask = await addJest(tree, options);
-  const cypressTask = await addCypress(tree, options);
+  const lintTask = await addEslintLintProject(
+    tree,
+    {
+      linter: options.linter,
+      projectName: options.name,
+      projectRoot: options.appProjectRoot,
+      tsConfigFileName: 'tsconfig.app.json',
+    },
+    extraEslintDependencies
+  );
+  const jestTask = await addJestConfiguration(tree, {
+    projectName: options.name,
+    unitTestRunner: options.unitTestRunner,
+  });
+  const cypressTask = await addCypressApplication(tree, {
+    projectName: options.projectName,
+    e2eTestRunner: options.e2eTestRunner,
+    e2eProjectName: options.e2eProjectName,
+    e2eProjectRoot: options.e2eProjectRoot,
+    e2eWebServerAddress: options.e2eWebServerAddress,
+    e2eWebServerTarget: options.e2eWebServerTarget,
+    rootProject: options.rootProject,
+  });
 
   updateJestConfig(tree, options);
 
