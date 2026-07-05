@@ -1,37 +1,44 @@
-import { names, Tree } from '@nx/devkit';
+import { Tree } from '@nx/devkit';
+import { normalizeViteLibCore } from '@nxext/common';
 import { NormalizedSchema, SvelteLibrarySchema } from '../schema';
-import {
-  determineProjectNameAndRootOptions,
-  ensureRootProjectName,
-} from '@nx/devkit/internal';
+
+/**
+ * Kernanteil (projectName/projectRoot/importPath-Auflösung via
+ * `determineProjectNameAndRootOptions`, `parsedTags`) kommt aus
+ * `@nxext/common`'s `normalizeViteLibCore` (identisch zu preact/solid).
+ *
+ * `fileName` bleibt svelte-eigen: `determineProjectNameAndRootOptions`
+ * liefert intern zusätzlich `names.projectFileName`/`projectSimpleName`
+ * (Scope-Split bei `@scope/name`-Importpfaden), die `normalizeViteLibCore`
+ * nicht mit exportiert (siehe `ViteLibCoreFields` in `@nxext/common`). Beide
+ * Werte werden ausschließlich aus `projectName` (== `name` innerhalb von
+ * `determineProjectNameAndRootOptions`) abgeleitet, daher wird die Ableitung
+ * hier 1:1 nachgebildet statt die Funktion ein zweites Mal aufzurufen.
+ */
+function deriveProjectFileNames(projectName: string): {
+  projectFileName: string;
+  projectSimpleName: string;
+} {
+  if (projectName.startsWith('@')) {
+    const [, ...rest] = projectName.split('/');
+    return {
+      projectFileName: rest.join('-'),
+      projectSimpleName: rest[rest.length - 1],
+    };
+  }
+  return { projectFileName: projectName, projectSimpleName: projectName };
+}
 
 export async function normalizeOptions(
   host: Tree,
   options: SvelteLibrarySchema
 ): Promise<NormalizedSchema> {
-  await ensureRootProjectName(options, 'library');
-  const {
-    projectName,
-    names: projectNames,
-    projectRoot,
-    importPath,
-  } = await determineProjectNameAndRootOptions(host, {
-    name: options.name,
-    projectType: 'library',
-    directory: options.directory,
-    importPath: options.importPath,
-  });
-  // const name = names(options.name).fileName;
-  // const projectDirectory = options.directory
-  //   ? `${names(options.directory).fileName}/${name}`
-  //   : name;
-  const fileName = options.simpleName
-    ? projectNames.projectSimpleName
-    : projectNames.projectFileName;
+  const { projectName, projectRoot, parsedTags, importPath } =
+    await normalizeViteLibCore(host, options);
 
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  const { projectFileName, projectSimpleName } =
+    deriveProjectFileNames(projectName);
+  const fileName = options.simpleName ? projectSimpleName : projectFileName;
 
   return {
     ...options,

@@ -1,11 +1,10 @@
-import { NormalizedSchema, SvelteLibrarySchema } from './schema';
+import { SvelteLibrarySchema } from './schema';
 import { initGenerator } from '../init/init';
 import { addProject } from './lib/add-project';
 import {
   formatFiles,
-  joinPathFragments,
   Tree,
-  updateJson,
+  joinPathFragments,
   runTasksInSerial,
 } from '@nx/devkit';
 import { addLinting } from './lib/add-linting';
@@ -15,16 +14,34 @@ import { addVite } from './lib/add-vite';
 import { addVitest } from './lib/add-vitest';
 import { createProjectFiles } from './lib/create-project-files';
 import { normalizeOptions } from './lib/normalize-options';
-import { createOrEditViteConfig } from '@nx/vite';
+import {
+  configureViteFrameworkPlugin,
+  updateLibPackageNpmScope,
+  ViteFrameworkConfig,
+} from '@nxext/common';
 import { addTsConfigPath } from '@nx/js';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
-function updateLibPackageNpmScope(host: Tree, options: NormalizedSchema) {
-  return updateJson(host, `${options.projectRoot}/package.json`, (json) => {
-    json.name = options.importPath;
-    return json;
-  });
-}
+const SVELTE_VITE_CONFIG: ViteFrameworkConfig = {
+  frameworkName: 'svelte',
+  plugin: {
+    importStatement: `import { svelte } from '@sveltejs/vite-plugin-svelte'`,
+    pluginCallExpression: 'svelte()',
+  },
+  extraPlugins: [
+    {
+      when: ({ includeVitest }) => includeVitest,
+      // svelteTesting() no-ops outside `vitest` runs (it checks
+      // process.env.VITEST) but is required for @testing-library/svelte v5:
+      // it marks the package ssr.noExternal so vite-plugin-svelte can
+      // transform its shipped .svelte sources, prefers the browser export
+      // condition, and wires up DOM auto-cleanup. See
+      // https://testing-library.com/docs/svelte-testing-library/setup
+      importStatement: `import { svelteTesting } from '@testing-library/svelte/vite'`,
+      pluginCallExpression: 'svelteTesting()',
+    },
+  ],
+};
 
 export async function libraryGenerator(
   host: Tree,
@@ -48,29 +65,14 @@ export async function libraryGenerator(
   const jestTask = await addJest(host, options);
   const viteTask = await addVite(host, options);
   const includeVitest = options.unitTestRunner === 'vitest';
-  createOrEditViteConfig(
+  configureViteFrameworkPlugin(
     host,
     {
       project: options.name,
       includeLib: true,
       includeVitest,
-      inSourceTests: false,
-      rolldownOptionsExternal: [],
-      imports: [
-        `import { svelte } from '@sveltejs/vite-plugin-svelte'`,
-        // svelteTesting() no-ops outside `vitest` runs (it checks
-        // process.env.VITEST) but is required for @testing-library/svelte v5:
-        // it marks the package ssr.noExternal so vite-plugin-svelte can
-        // transform its shipped .svelte sources, prefers the browser export
-        // condition, and wires up DOM auto-cleanup. See
-        // https://testing-library.com/docs/svelte-testing-library/setup
-        ...(includeVitest
-          ? [`import { svelteTesting } from '@testing-library/svelte/vite'`]
-          : []),
-      ],
-      plugins: [`svelte()`, ...(includeVitest ? [`svelteTesting()`] : [])],
     },
-    false
+    SVELTE_VITE_CONFIG
   );
 
   const vitestTask = await addVitest(host, options);

@@ -1,4 +1,5 @@
-import { joinPathFragments, TargetConfiguration } from '@nx/devkit';
+import { TargetConfiguration } from '@nx/devkit';
+import { createEslintLintTarget } from '@nxext/common';
 import { NormalizedSchema as ApplicationSchema } from '../application/schema';
 import { NormalizedSchema as LibrarySchema } from '../library/schema';
 
@@ -8,7 +9,10 @@ export function createLintAndCheckTargets(
   [key: string]: TargetConfiguration;
 } {
   return {
-    lint: createLintTarget(options),
+    // NB: hardcodes 'tsconfig.app.json' for both application AND library
+    // projects, exactly like the local createLintTarget it replaces did -
+    // not "fixed" to 'tsconfig.lib.json' for libraries.
+    lint: createEslintLintTarget(options.projectRoot, 'tsconfig.app.json'),
     check: createSvelteCheckTarget(options),
   };
 }
@@ -21,22 +25,6 @@ export function createSvelteCheckTarget(
     options: {
       command: 'svelte-check',
       cwd: options.projectRoot,
-    },
-  };
-}
-
-export function createLintTarget(
-  options: LibrarySchema | ApplicationSchema
-): TargetConfiguration {
-  return {
-    executor: '@nx/eslint:lint',
-    options: {
-      linter: 'eslint',
-      tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
-      exclude: [
-        '**/node_modules/**',
-        `!${joinPathFragments(options.projectRoot, '**/*')}`,
-      ],
     },
   };
 }
