@@ -1,14 +1,14 @@
 {
   "name": "<%= name %>",
   "$schema": "<%= offsetFromRoot %>/node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "<%= projectDirectory %>/<%= name %>/src",
+  "sourceRoot": "<%= projectRoot %>/src",
   "projectType": "application",
   "tags": ["scope:app"],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
       "options": {
-        "outputPath": "dist/<%= projectDirectory %>/<%= name %>"
+        "outputPath": "dist/<%= projectRoot %>"
       }
     },
     "test": {
@@ -43,8 +43,8 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["<%= projectDirectory %>/frontend/**/*.{ts,svelte,spec.ts}"],
-        "ignorePath": "<%= projectDirectory %>/<%= name %>/.gitignore"
+        "lintFilePatterns": ["<%= projectRoot %>/frontend/**/*.{ts,svelte,spec.ts}"],
+        "ignorePath": "<%= projectRoot %>/.gitignore"
       }
     },
     "check": {
@@ -59,7 +59,7 @@
       "executor": "@nx/workspace:run-commands",
       "options": {
         "command": "playwright test",
-        "cwd": "<%= projectDirectory %>/<%= name %>"
+        "cwd": "<%= projectRoot %>"
       },
       "dependsOn": [
         {

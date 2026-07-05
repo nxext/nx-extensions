@@ -3,14 +3,13 @@ import { readProjectConfiguration, Tree } from '@nx/devkit';
 
 import { applicationGenerator } from './generator';
 import { SveltekitGeneratorSchema } from './schema';
-import { Linter } from '@nx/eslint';
 
 describe('sveltekit generator', () => {
   let tree: Tree;
   const options: SveltekitGeneratorSchema = {
     name: 'test',
     skipFormat: false,
-    linter: Linter.EsLint,
+    linter: 'eslint',
     unitTestRunner: 'none',
   };
 

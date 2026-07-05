@@ -26,8 +26,8 @@ describe('component schematic', () => {
     const name = names(componentName);
     expect(
       tree.exists(
-        `apps/${projectName}/src/lib/${name.fileName}/${name.className}.svelte`
+        `${projectName}/src/lib/${name.fileName}/${name.className}.svelte`
       )
-    );
+    ).toBeTruthy();
   });
 });

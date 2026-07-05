@@ -24,10 +24,6 @@ describe('library schematic', () => {
   it('should add file', async () => {
     await libraryGenerator(tree, options);
     const name = names(libraryName);
-    expect(
-      tree.exists(
-        `apps/${projectName}/src/lib/${name.fileName}/${name.className}.svelte`
-      )
-    );
+    expect(tree.exists(`${projectName}/src/${name.fileName}.ts`)).toBeTruthy();
   });
 });

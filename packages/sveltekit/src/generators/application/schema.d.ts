@@ -1,4 +1,4 @@
-import { Linter } from '@nx/eslint';
+import { LinterType } from '@nx/eslint';
 
 export interface SveltekitGeneratorSchema {
   name: string;
@@ -7,17 +7,17 @@ export interface SveltekitGeneratorSchema {
   directory?: string;
   port?: number;
   skipFormat: boolean;
-  linter: Linter;
+  linter: LinterType;
   skipPackageJson?: boolean;
   adapterVersion?: string;
   svelteVersion?: string;
   svelteKitVersion?: string;
+  rootProject?: boolean;
 }
 
 export interface NormalizedSchema extends SveltekitGeneratorSchema {
   projectName: string;
   projectRoot: string;
-  projectDirectory: string;
   distDir: string;
   parsedTags: string[];
 }

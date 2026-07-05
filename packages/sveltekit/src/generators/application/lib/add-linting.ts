@@ -22,7 +22,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
 
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,
-    project: options.name,
+    project: options.projectName,
     tsConfigPaths: [
       joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
     ],

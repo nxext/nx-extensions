@@ -11,6 +11,7 @@ describe('page schematic', () => {
     name: pageName,
     project: projectName,
     unitTestRunner: 'vitest',
+    error: true,
   };
 
   beforeEach(async () => {
@@ -25,9 +26,7 @@ describe('page schematic', () => {
     await routeGenerator(tree, options);
     const name = names(pageName);
     expect(
-      tree.exists(
-        `apps/${projectName}/src/routes/${name.fileName}/${name.className}.svelte`
-      )
-    );
+      tree.exists(`${projectName}/src/routes/${name.fileName}/+error.svelte`)
+    ).toBeTruthy();
   });
 });

@@ -1,9 +1,0 @@
-{
-  "executors": {
-    "dev": {
-      "implementation": "./src/executors/dev/executor",
-      "schema": "./src/executors/dev/schema.json",
-      "description": "dev executor"
-    }
-  }
-}

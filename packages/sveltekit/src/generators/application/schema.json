@@ -20,7 +20,7 @@
     },
     "directory": {
       "type": "string",
-      "description": "A directory where the project is placed",
+      "description": "A directory where the project is placed (relative path from the workspace root, e.g. apps/<my-app-name>). If omitted, the project is generated at the workspace root using the provided name.",
       "alias": "d"
     },
     "linter": {
@@ -51,6 +51,12 @@
     "svelteKitVersion": {
       "type": "string",
       "description": "The sveltekit version to use"
+    },
+    "rootProject": {
+      "description": "Create the application at the root of the workspace.",
+      "type": "boolean",
+      "default": false,
+      "hidden": true
     }
   },
   "required": ["name"]
