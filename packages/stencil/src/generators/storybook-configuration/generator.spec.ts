@@ -12,6 +12,12 @@ const readNxVersionModule = require('../../utils/utillities');
 describe('storybook-configuration generator', () => {
   jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
   jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('17.0.0');
+  // @nx/storybook's ensureDependencies only adds `@storybook/web-components`
+  // (the builder-less package pnpm also needs) when it detects pnpm, which it
+  // does via `npm_config_user_agent` — set locally by `pnpm nx test`, but
+  // absent on Nx Cloud's distributed agents. Force it so the assertions below
+  // are deterministic rather than dependent on how the test process was invoked.
+  jest.spyOn(devkit, 'detectPackageManager').mockReturnValue('pnpm');
 
   const options: StorybookConfigureSchema = {
     name: 'test',
