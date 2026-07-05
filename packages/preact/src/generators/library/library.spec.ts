@@ -1,5 +1,4 @@
 import { PreactLibrarySchema } from './schema';
-import { Linter } from '@nx/eslint';
 import { readJson, readProjectConfiguration } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
@@ -8,7 +7,7 @@ describe('preact library schematic', () => {
   let host;
   const options: PreactLibrarySchema = {
     directory: 'libs/test',
-    linter: Linter.EsLint,
+    linter: 'eslint',
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
     skipFormat: false,

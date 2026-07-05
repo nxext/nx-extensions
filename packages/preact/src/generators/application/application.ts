@@ -1,7 +1,6 @@
 import {
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   joinPathFragments,
   names,
   offsetFromRoot,

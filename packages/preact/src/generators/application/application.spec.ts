@@ -1,5 +1,4 @@
 import { PreactApplicationSchema } from './schema';
-import { Linter } from '@nx/eslint';
 import { applicationGenerator } from './application';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { Tree } from '@nx/devkit';
@@ -8,7 +7,7 @@ describe('Preact app schematic', () => {
   let host: Tree;
   const options: PreactApplicationSchema = {
     directory: 'apps/test',
-    linter: Linter.EsLint,
+    linter: 'eslint',
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
   };
