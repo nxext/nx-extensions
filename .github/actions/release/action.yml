@@ -27,6 +27,11 @@ runs:
       shell: bash
       run: |
         if [ "${{ inputs.force_publish }}" = "true" ]; then
+          # A cached `build` can predate a manual package.json version
+          # correction (the cache hash doesn't track the version field),
+          # which would make nx-release-publish read the stale version
+          # back out of the cached dist output. Force a clean rebuild.
+          npx nx run-many -t build --skipNxCache
           npx nx release publish --yes
         else
           npx nx release --yes
