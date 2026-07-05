@@ -7,13 +7,12 @@ import {
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-export interface CapacitorPluginOptions {}
+export type CapacitorPluginOptions = Record<string, unknown>;
 
 export type CapCommand = 'add' | 'copy' | 'open' | 'run' | 'sync' | 'update';
 export type CapPlatform = 'ios' | 'android';
 export type CapCommandFormat =
-  | `cap ${CapCommand}`
-  | `cap ${CapCommand} ${CapPlatform}`;
+  `cap ${CapCommand}` | `cap ${CapCommand} ${CapPlatform}`;
 
 /**
  * Infers capacitor tasks for any project containing a `capacitor.config.ts`.
@@ -50,7 +49,7 @@ export const createNodesV2: CreateNodesV2<CapacitorPluginOptions> = [
       },
       projectConfigFiles,
       options,
-      context
+      context,
     );
   },
 ];
@@ -85,7 +84,7 @@ function buildTargets(projectRoot: string): ProjectConfiguration['targets'] {
 
   const formatCapCommand = (
     command: CapCommand,
-    platform?: CapPlatform
+    platform?: CapPlatform,
   ): CapCommandFormat => {
     if (platform) {
       return `cap ${command} ${platform}`;

@@ -26,7 +26,7 @@ import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 async function normalizeOptions(
   host: Tree,
-  options: RawApplicationSchema
+  options: RawApplicationSchema,
 ): Promise<ApplicationSchema> {
   await ensureRootProjectName(options, 'application');
   const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
@@ -35,7 +35,7 @@ async function normalizeOptions(
       name: options.name,
       projectType: 'application',
       directory: options.directory,
-    }
+    },
   );
   options.name ??= projectName;
 
@@ -45,7 +45,7 @@ async function normalizeOptions(
 
   const nxJson = readNxJson(host);
 
-  let e2eWebServerTarget = 'serve';
+  const e2eWebServerTarget = 'serve';
   let e2ePort = 4200;
   if (
     nxJson.targetDefaults?.[e2eWebServerTarget] &&
@@ -87,32 +87,32 @@ function createFiles(host: Tree, options: ApplicationSchema) {
 
   if (options.unitTestRunner === 'none') {
     host.delete(
-      `${options.projectRoot}/src/components/app-home/app-home.spec.ts`
+      `${options.projectRoot}/src/components/app-home/app-home.spec.ts`,
     );
     host.delete(
-      `${options.projectRoot}/src/components/app-root/app-root.spec.ts`
+      `${options.projectRoot}/src/components/app-root/app-root.spec.ts`,
     );
     host.delete(
-      `${options.projectRoot}/src/components/app-profile/app-profile.spec.ts`
+      `${options.projectRoot}/src/components/app-profile/app-profile.spec.ts`,
     );
   }
 
   if (options.e2eTestRunner === 'none') {
     host.delete(
-      `${options.projectRoot}/src/components/app-home/app-home.e2e.ts`
+      `${options.projectRoot}/src/components/app-home/app-home.e2e.ts`,
     );
     host.delete(
-      `${options.projectRoot}/src/components/app-root/app-root.e2e.ts`
+      `${options.projectRoot}/src/components/app-root/app-root.e2e.ts`,
     );
     host.delete(
-      `${options.projectRoot}/src/components/app-profile/app-profile.e2e.ts`
+      `${options.projectRoot}/src/components/app-profile/app-profile.e2e.ts`,
     );
   }
 }
 
 export async function applicationGenerator(
   host: Tree,
-  schema: RawApplicationSchema
+  schema: RawApplicationSchema,
 ) {
   assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'application');
 
@@ -145,7 +145,7 @@ export async function applicationGenerator(
           `${gitignoreContent}
 
 ${toBeIgnored}
-`
+`,
         );
       }
     }
@@ -156,7 +156,7 @@ ${toBeIgnored}
   }
 
   return runTasksInSerial(jsInitTask, initTask, lintTask, cypressTask, () =>
-    logShowProjectCommand(options.projectName)
+    logShowProjectCommand(options.projectName),
   );
 }
 

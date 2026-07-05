@@ -13,7 +13,7 @@ import { calculateProjectDependencies } from '@nx/js/internal';
 
 function createStencilCompilerOptions(
   taskCommand: TaskCommand,
-  options: StencilServeOptions
+  options: StencilServeOptions,
 ): ConfigFlags {
   let runOptions: string[] = [taskCommand];
   runOptions = parseRunParameters(runOptions, options);
@@ -36,9 +36,9 @@ function createStencilCompilerOptions(
   return parseFlags(runOptions);
 }
 
-export default async function* runExecutor(
+export default async function runExecutor(
   options: StencilServeOptions,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   const taskCommand: TaskCommand = 'build';
 
@@ -48,7 +48,7 @@ export default async function* runExecutor(
     context.root,
     context.projectName,
     context.targetName,
-    context.configurationName
+    context.configurationName,
   );
 
   const flags: ConfigFlags = createStencilCompilerOptions(taskCommand, options);
@@ -56,12 +56,12 @@ export default async function* runExecutor(
     taskCommand,
     options,
     context,
-    flags
+    flags,
   );
 
   const config = await prepareConfigAndOutputargetPaths(
     strictConfig,
-    pathCollection
+    pathCollection,
   );
 
   updateBuildableProjectPackageJsonDependencies(
@@ -70,7 +70,7 @@ export default async function* runExecutor(
     context.targetName,
     context.configurationName,
     target,
-    dependencies
+    dependencies,
   );
 
   try {

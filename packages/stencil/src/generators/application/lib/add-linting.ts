@@ -36,42 +36,42 @@ export async function addLinting(host: Tree, options: ApplicationSchema) {
         skipFormat: true,
         setParserOptionsProject: void 0, // this sets the default value,
         addPlugin: void 0, // this sets the default value,
-      })
+      }),
     );
 
     const eslintFile = findEslintFile(host, options.projectRoot);
-    let eslintFlatConfigTask: GeneratorCallback = () => {};
+    let eslintFlatConfigTask: GeneratorCallback = () => undefined;
     if (useFlatConfig(host)) {
       const eslintFlatConfigFilePath = joinPathFragments(
         options.projectRoot,
-        eslintFile
+        eslintFile,
       );
-      let eslintFlatConfigFileContent = host.read(
+      const eslintFlatConfigFileContent = host.read(
         eslintFlatConfigFilePath,
-        'utf8'
+        'utf8',
       );
       eslintFlatConfigTask = augmentStencilEslintFlatConfig(
         host,
         eslintFlatConfigFileContent,
-        eslintFlatConfigFilePath
+        eslintFlatConfigFilePath,
       );
     } else {
       const stencilEslintJson = createStencilEslintJson(options.projectRoot);
       updateJson(
         host,
         joinPathFragments(options.projectRoot, eslintFile),
-        () => stencilEslintJson
+        () => stencilEslintJson,
       );
     }
 
     const installTask = addDependenciesToPackageJson(
       host,
       extraEslintDependencies.dependencies,
-      extraEslintDependencies.devDependencies
+      extraEslintDependencies.devDependencies,
     );
     tasks.push(installTask);
 
     return runTasksInSerial(...tasks, eslintFlatConfigTask);
   }
-  return () => {};
+  return () => undefined;
 }

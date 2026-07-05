@@ -9,7 +9,7 @@ import { tsquery } from '@phenomnomnominal/tsquery';
 
 function _angularImportsFromNode(
   node: ts.ImportDeclaration,
-  _sourceFile: ts.SourceFile
+  _sourceFile: ts.SourceFile,
 ): { [name: string]: string } {
   const ms = node.moduleSpecifier;
   let modulePath: string;
@@ -42,7 +42,7 @@ function _angularImportsFromNode(
 
         return namedImports.elements
           .map((is: ts.ImportSpecifier) =>
-            is.propertyName ? is.propertyName.text : is.name.text
+            is.propertyName ? is.propertyName.text : is.name.text,
           )
           .reduce((acc: { [name: string]: string }, curr: string) => {
             acc[curr] = modulePath;
@@ -62,17 +62,17 @@ function _angularImportsFromNode(
 export function getDecoratorMetadata(
   source: ts.SourceFile,
   identifier: string,
-  module: string
+  module: string,
 ): ts.Node[] {
   const angularImports: { [name: string]: string } = tsquery(
     source,
-    'ImportDeclaration'
+    'ImportDeclaration',
   )
     .map((node: ts.ImportDeclaration) => _angularImportsFromNode(node, source))
     .reduce(
       (
         acc: { [name: string]: string },
-        current: { [name: string]: string }
+        current: { [name: string]: string },
       ) => {
         for (const key of Object.keys(current)) {
           acc[key] = current[key];
@@ -80,7 +80,7 @@ export function getDecoratorMetadata(
 
         return acc;
       },
-      {}
+      {},
     );
 
   return getSourceNodes(source)
@@ -120,7 +120,7 @@ export function getDecoratorMetadata(
     .filter(
       (expr) =>
         expr.arguments[0] &&
-        expr.arguments[0].kind == ts.SyntaxKind.ObjectLiteralExpression
+        expr.arguments[0].kind == ts.SyntaxKind.ObjectLiteralExpression,
     )
     .map((expr) => expr.arguments[0] as ts.ObjectLiteralExpression);
 }
@@ -130,7 +130,7 @@ function _addSymbolToNgModuleMetadata(
   source: ts.SourceFile,
   ngModulePath: string,
   metadataField: string,
-  expression: string
+  expression: string,
 ): ts.SourceFile {
   const nodes = getDecoratorMetadata(source, 'NgModule', '@angular/core');
   let node: any = nodes[0];
@@ -204,7 +204,7 @@ function _addSymbolToNgModuleMetadata(
 
   if (!node) {
     logger.warn(
-      'No app module found. Please add your new class to your component.'
+      'No app module found. Please add your new class to your component.',
     );
 
     return source;
@@ -212,8 +212,7 @@ function _addSymbolToNgModuleMetadata(
 
   const isArray = Array.isArray(node);
   if (isArray) {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const nodeArray = node as {} as Array<ts.Node>;
+    const nodeArray = node as unknown as Array<ts.Node>;
     const symbolsArray = nodeArray.map((node) => node.getText());
     if (symbolsArray.includes(expression)) {
       return source;
@@ -264,14 +263,14 @@ export function addExportToModule(
   host: Tree,
   source: ts.SourceFile,
   modulePath: string,
-  symbolName: string
+  symbolName: string,
 ): ts.SourceFile {
   return _addSymbolToNgModuleMetadata(
     host,
     source,
     modulePath,
     'exports',
-    symbolName
+    symbolName,
   );
 }
 
@@ -281,13 +280,13 @@ export function addDeclarationToModule(
   host: Tree,
   source: ts.SourceFile,
   modulePath: string,
-  symbolName: string
+  symbolName: string,
 ): ts.SourceFile {
   return _addSymbolToNgModuleMetadata(
     host,
     source,
     modulePath,
     'declarations',
-    symbolName
+    symbolName,
   );
 }

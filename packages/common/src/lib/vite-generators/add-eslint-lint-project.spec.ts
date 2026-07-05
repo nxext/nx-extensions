@@ -4,12 +4,24 @@ import { addEslintLintProject } from './add-eslint-lint-project';
 
 describe('addEslintLintProject', () => {
   let tree: Tree;
+  let originalEslintUseFlatConfig: string | undefined;
   const extraDependencies = {
     dependencies: {},
     devDependencies: { 'eslint-config-preact': '^1.2.0' },
   };
 
   beforeEach(() => {
+    // `@nx/eslint`'s `useFlatConfig()` falls back to the *actually installed*
+    // `eslint` package version whenever the virtual tree itself has no root
+    // flat config file (see `@nx/eslint/dist/src/utils/flat-config.js`). This
+    // repo's own tooling runs on ESLint 9, which would otherwise flip this
+    // test to the flat-config code path depending on what's installed in
+    // node_modules at test time. Pin it explicitly so the legacy-mode
+    // characterization below stays deterministic regardless of the host
+    // workspace's ESLint version.
+    originalEslintUseFlatConfig = process.env.ESLINT_USE_FLAT_CONFIG;
+    process.env.ESLINT_USE_FLAT_CONFIG = 'false';
+
     tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     addProjectConfiguration(tree, 'my-app', {
       root: 'apps/my-app',
@@ -18,6 +30,14 @@ describe('addEslintLintProject', () => {
       targets: {},
     });
     writeJson(tree, 'apps/my-app/tsconfig.app.json', { compilerOptions: {} });
+  });
+
+  afterEach(() => {
+    if (originalEslintUseFlatConfig === undefined) {
+      delete process.env.ESLINT_USE_FLAT_CONFIG;
+    } else {
+      process.env.ESLINT_USE_FLAT_CONFIG = originalEslintUseFlatConfig;
+    }
   });
 
   it('is a no-op when linter is not eslint (preact/solid add-linting.ts guard)', async () => {
@@ -29,13 +49,13 @@ describe('addEslintLintProject', () => {
         projectRoot: 'apps/my-app',
         tsConfigFileName: 'tsconfig.app.json',
       },
-      extraDependencies
+      extraDependencies,
     );
 
     expect(typeof task).toBe('function');
     const packageJson = readJson(tree, 'package.json');
     expect(
-      packageJson.devDependencies?.['eslint-config-preact']
+      packageJson.devDependencies?.['eslint-config-preact'],
     ).toBeUndefined();
   });
 
@@ -59,7 +79,7 @@ describe('addEslintLintProject', () => {
         projectRoot: 'apps/my-app',
         tsConfigFileName: 'tsconfig.app.json',
       },
-      extraDependencies
+      extraDependencies,
     );
 
     expect(tree.exists('apps/my-app/.eslintrc.js')).toBeFalsy();

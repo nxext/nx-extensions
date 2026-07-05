@@ -11,7 +11,7 @@ import {
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
 import {
-  beginningOfEsLintConfigJs,
+  beginningOfEsLintConfigJsEsm,
   getEsLintPluginBaseName,
 } from '../../utils/lint';
 import { eslintImportPlugin, stencilEslintPlugin } from '../../utils/versions';
@@ -65,26 +65,25 @@ describe('schematic:application', () => {
     const fileList = fileListForAppType(
       options.directory,
       SupportedStyles.css,
-      'application'
+      'application',
     );
     fileList.forEach((file) => expect(host.exists(file)));
   });
 
   it('should configure lint target', async () => {
+    // `@nx/eslint`'s `useFlatConfig()` falls back to the *installed* `eslint`
+    // major version whenever the virtual tree has no root flat config file
+    // (see `@nx/eslint/dist/src/utils/flat-config.js`). This workspace now
+    // runs ESLint 9, so pin the legacy mode explicitly to keep this
+    // characterization of the (still supported) eslintrc output
+    // deterministic regardless of the host's ESLint version.
+    process.env.ESLINT_USE_FLAT_CONFIG = 'false';
+
     await applicationGenerator(host, { ...options, linter: 'eslint' });
 
     const projectConfig = readProjectConfiguration(host, projectName);
     const eslintConfigPath = 'apps/test/.eslintrc.json';
 
-    /**
-     * useFlatConfig() should return false by default because in this repo we are utilizing eslint of version < 9.0.0
-     * This test case will fail when migrate to eslint@^9.0.0 - add:
-     *    - process.env.ESLINT_USE_FLAT_CONFIG = 'false'; -> at the beginning of this test case
-     *    - delete process.env.ESLINT_USE_FLAT_CONFIG; -> at the end of this test case
-     *
-     * https://eslint.org/blog/2023/10/flat-config-rollout-plans/
-     * Since eslint@^10.0.0, the legacy configuration will no longer be supported - remove this test case and align the generator code
-     */
     expect(useFlatConfig()).toBeFalsy();
     expect(projectConfig.targets.lint).toBeDefined();
     expect(host.exists(eslintConfigPath)).toBeTruthy();
@@ -97,42 +96,35 @@ describe('schematic:application', () => {
       `plugin:${getEsLintPluginBaseName(eslintImportPlugin)}/typescript`,
       '../../.eslintrc.json',
     ]);
+
+    delete process.env.ESLINT_USE_FLAT_CONFIG;
   });
 
   it('should configure lint target with flat config', async () => {
-    /**
-     * TODO: ESLINT_USE_FLAT_CONFIG might be unsupported in v21
-     */
-    // process.env.ESLINT_USE_FLAT_CONFIG = 'true';
+    // Pin flat-config mode explicitly (see comment above) so this
+    // characterization stays deterministic regardless of the host's ESLint
+    // version.
+    process.env.ESLINT_USE_FLAT_CONFIG = 'true';
 
     await applicationGenerator(host, { ...options, linter: 'eslint' });
 
     const projectConfig = readProjectConfiguration(host, projectName);
-    const eslintConfigPath = 'apps/test/eslint.config.js';
+    // Nx's flat-config generators default to the `.mjs` extension, not `.js`.
+    const eslintConfigPath = 'apps/test/eslint.config.mjs';
 
-    /**
-     * useFlatConfig() should return false by default because in this repo we are using eslint of a version < 9.0.0
-     * This works for now because of the overwritten value of process.env.ESLINT_USE_FLAT_CONFIG = 'true';
-     *
-     * When migrate to eslint@^9.0.0 do:
-     *    - process.env.ESLINT_USE_FLAT_CONFIG = 'true'; - remove it from the beginning of this test case
-     *    - delete process.env.ESLINT_USE_FLAT_CONFIG; - remove it from the beginning of this test case
-     */
-    expect(useFlatConfig()).toBeFalsy();
+    expect(useFlatConfig()).toBeTruthy();
     expect(projectConfig.targets.lint).toBeDefined();
-    expect(host.exists(eslintConfigPath)).toBeFalsy();
+    expect(host.exists(eslintConfigPath)).toBeTruthy();
 
     const eslintConfigJs = host.read(eslintConfigPath, 'utf-8');
-
-    expect(eslintConfigJs).toBeNull();
-    // expect(eslintConfigJs).toContain(beginningOfEsLintConfigJs);
-    // expect(eslintConfigJs).toContain('* stencilPlugin.flatConfigs.recommended');
-    // expect(eslintConfigJs).toContain('importPlugin.flatConfigs.recommended,');
-    // expect(eslintConfigJs).toContain('importPlugin.flatConfigs.typescript,');
-    // expect(eslintConfigJs).toContain(
-    //   '* Having an empty rules object present makes it more obvious to the user where they would'
-    // );
-    // expect(eslintConfigJs).toContain('* extend things from if they needed to');
+    // The generated root config is an ES module (`export default [...]`), so
+    // `augmentStencilEslintFlatConfig` emits the matching ESM import form
+    // rather than the CJS `beginningOfEsLintConfigJs` constant.
+    expect(eslintConfigJs).toContain(beginningOfEsLintConfigJsEsm);
+    expect(eslintConfigJs).toContain('* stencilPlugin.flatConfigs.recommended');
+    expect(eslintConfigJs).toContain('importPlugin.flatConfigs.recommended,');
+    expect(eslintConfigJs).toContain('importPlugin.flatConfigs.typescript,');
+    expect(eslintConfigJs).toContain("'import/no-unresolved': 'off',");
 
     delete process.env.ESLINT_USE_FLAT_CONFIG;
   });
@@ -143,7 +135,7 @@ describe('schematic:application', () => {
     const fileList = fileListForAppType(
       options.directory,
       SupportedStyles.css,
-      'application'
+      'application',
     );
     fileList.forEach((file) => expect(host.exists(file)));
   });
@@ -185,13 +177,13 @@ describe('schematic:application', () => {
     await applicationGenerator(host, { ...options, unitTestRunner: 'none' });
 
     expect(
-      host.exists(`apps/test/src/components/app-home/app-home.spec.ts`)
+      host.exists(`apps/test/src/components/app-home/app-home.spec.ts`),
     ).toBeFalsy();
     expect(
-      host.exists(`apps/test/src/components/app-root/app-root.spec.ts`)
+      host.exists(`apps/test/src/components/app-root/app-root.spec.ts`),
     ).toBeFalsy();
     expect(
-      host.exists(`apps/test/src/components/app-profile/app-profile.spec.ts`)
+      host.exists(`apps/test/src/components/app-profile/app-profile.spec.ts`),
     ).toBeFalsy();
   });
 
@@ -199,13 +191,13 @@ describe('schematic:application', () => {
     await applicationGenerator(host, { ...options, e2eTestRunner: 'none' });
 
     expect(
-      host.exists(`apps/test/src/components/app-home/app-home.e2e.ts`)
+      host.exists(`apps/test/src/components/app-home/app-home.e2e.ts`),
     ).toBeFalsy();
     expect(
-      host.exists(`apps/test/src/components/app-root/app-root.e2e.ts`)
+      host.exists(`apps/test/src/components/app-root/app-root.e2e.ts`),
     ).toBeFalsy();
     expect(
-      host.exists(`apps/test/src/components/app-profile/app-profile.e2e.ts`)
+      host.exists(`apps/test/src/components/app-profile/app-profile.e2e.ts`),
     ).toBeFalsy();
   });
 
@@ -216,13 +208,13 @@ describe('schematic:application', () => {
     });
 
     expect(
-      host.exists(`apps/test/src/components/app-home/app-home.e2e.ts`)
+      host.exists(`apps/test/src/components/app-home/app-home.e2e.ts`),
     ).toBeTruthy();
     expect(
-      host.exists(`apps/test/src/components/app-root/app-root.e2e.ts`)
+      host.exists(`apps/test/src/components/app-root/app-root.e2e.ts`),
     ).toBeTruthy();
     expect(
-      host.exists(`apps/test/src/components/app-profile/app-profile.e2e.ts`)
+      host.exists(`apps/test/src/components/app-profile/app-profile.e2e.ts`),
     ).toBeTruthy();
   });
 

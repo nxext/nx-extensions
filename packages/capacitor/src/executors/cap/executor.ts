@@ -14,7 +14,7 @@ import { CommandExecutorSchema } from './schema';
 
 export default async function* runExecutor(
   options: CommandExecutorSchema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   const projectConfig =
     context.projectsConfigurations.projects[context.projectName];
@@ -36,7 +36,7 @@ export default async function* runExecutor(
       color: true,
       __unparsed__: [],
     },
-    context
+    context,
   );
 
   if (!existsSync(projectDistPath)) {
@@ -44,7 +44,7 @@ export default async function* runExecutor(
 
     const parsedDevServerTarget = parseTargetString(
       `${context.projectName}:build`,
-      context.projectGraph
+      context.projectGraph,
     );
 
     for await (const output of await nxRunExecutor<{
@@ -61,7 +61,7 @@ export default async function* runExecutor(
   let success = false;
   // Use spawn for long-running commands (when -l or --livereload is present)
   const isLongRunning =
-    /(^|\s)-(l|\-livereload)(\s|$)/.test(cmd) ||
+    /(^|\s)-(l|-livereload)(\s|$)/.test(cmd) ||
     /(^|\s)--livereload(\s|$)/.test(cmd);
   if (isLongRunning) {
     // Split the command into args for spawn

@@ -1,10 +1,6 @@
-const { FlatCompat } = require('@eslint/eslintrc');
 const baseConfig = require('../../eslint.config.js');
-const js = require('@eslint/js');
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-});
+const jsoncEslintParser = require('jsonc-eslint-parser');
+
 module.exports = [
   ...baseConfig,
   { rules: {} },
@@ -20,14 +16,14 @@ module.exports = [
     files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
-  ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
-    ...config,
+  {
     files: ['package.json', 'generators.json'],
+    languageOptions: { parser: jsoncEslintParser },
     rules: { '@nx/nx-plugin-checks': 'error' },
-  })),
-  ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
-    ...config,
+  },
+  {
     files: ['package.json'],
+    languageOptions: { parser: jsoncEslintParser },
     rules: {
       '@nx/dependency-checks': [
         'error',
@@ -45,5 +41,5 @@ module.exports = [
         },
       ],
     },
-  })),
+  },
 ];

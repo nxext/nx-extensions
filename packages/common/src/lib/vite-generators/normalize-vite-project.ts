@@ -44,7 +44,7 @@ export async function normalizeViteAppCore(
   // Design-Dokument beschreibt dies als `string`; `ensureRootProjectName`
   // (@nx/devkit/internal) akzeptiert aber nur diese literale Union — enger
   // typisiert, damit der Aufruf ohne Cast durchkompiliert (siehe Bericht).
-  generatorName: 'application' | 'library'
+  generatorName: 'application' | 'library',
 ): Promise<ViteAppCoreFields> {
   await ensureRootProjectName(options, generatorName);
   const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
@@ -54,7 +54,7 @@ export async function normalizeViteAppCore(
       projectType: 'application',
       directory: options.directory,
       rootProject: options.rootProject,
-    }
+    },
   );
 
   const isRootProject = projectRoot === '.';
@@ -65,7 +65,7 @@ export async function normalizeViteAppCore(
 
   const nxJson = readNxJson(tree);
 
-  let e2eWebServerTarget = 'serve';
+  const e2eWebServerTarget = 'serve';
   let e2ePort = 4200;
   if (
     nxJson.targetDefaults?.[e2eWebServerTarget] &&
@@ -106,7 +106,7 @@ export interface ViteLibCoreFields {
 
 export async function normalizeViteLibCore(
   tree: Tree,
-  options: NormalizeViteLibCoreOptions
+  options: NormalizeViteLibCoreOptions,
 ): Promise<ViteLibCoreFields> {
   await ensureRootProjectName(options, 'library');
   const { projectName, projectRoot, importPath } =

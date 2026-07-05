@@ -43,9 +43,24 @@ describe('preact library schematic', () => {
   });
 
   it('should add lint config file', async () => {
-    await libraryGenerator(host, options);
-    expect(host.exists(`libs/test/eslint.config.js`)).toBeFalsy();
-    expect(host.exists(`libs/test/.eslintrc.json`)).toBeTruthy();
+    // `@nx/eslint`'s `useFlatConfig()` falls back to the *installed* `eslint`
+    // major version whenever the virtual tree has no root flat config file
+    // (see `@nx/eslint/dist/src/utils/flat-config.js`). This workspace now
+    // runs ESLint 9, so pin the legacy mode explicitly to keep this
+    // characterization deterministic regardless of the host's ESLint version.
+    const originalEslintUseFlatConfig = process.env.ESLINT_USE_FLAT_CONFIG;
+    process.env.ESLINT_USE_FLAT_CONFIG = 'false';
+    try {
+      await libraryGenerator(host, options);
+      expect(host.exists(`libs/test/eslint.config.js`)).toBeFalsy();
+      expect(host.exists(`libs/test/.eslintrc.json`)).toBeTruthy();
+    } finally {
+      if (originalEslintUseFlatConfig === undefined) {
+        delete process.env.ESLINT_USE_FLAT_CONFIG;
+      } else {
+        process.env.ESLINT_USE_FLAT_CONFIG = originalEslintUseFlatConfig;
+      }
+    }
   });
 
   it('should add lint config file for the flat config', async () => {
@@ -53,10 +68,19 @@ describe('preact library schematic', () => {
      * TODO: ESLINT_USE_FLAT_CONFIG might be unsupported in v21
      */
     // process.env.ESLINT_USE_FLAT_CONFIG = 'true';
-    await libraryGenerator(host, options);
-    expect(host.exists(`libs/test/eslint.config.js`)).toBeFalsy();
-    expect(host.exists(`libs/test/.eslintrc.json`)).toBeTruthy();
-    delete process.env.ESLINT_USE_FLAT_CONFIG;
+    const originalEslintUseFlatConfig = process.env.ESLINT_USE_FLAT_CONFIG;
+    process.env.ESLINT_USE_FLAT_CONFIG = 'false';
+    try {
+      await libraryGenerator(host, options);
+      expect(host.exists(`libs/test/eslint.config.js`)).toBeFalsy();
+      expect(host.exists(`libs/test/.eslintrc.json`)).toBeTruthy();
+    } finally {
+      if (originalEslintUseFlatConfig === undefined) {
+        delete process.env.ESLINT_USE_FLAT_CONFIG;
+      } else {
+        process.env.ESLINT_USE_FLAT_CONFIG = originalEslintUseFlatConfig;
+      }
+    }
   });
 
   it('should configure a vitest test target when unitTestRunner is vitest', async () => {
@@ -79,7 +103,7 @@ describe('preact library schematic', () => {
       });
     } catch (error) {
       expect(error.message).toContain(
-        'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)'
+        'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)',
       );
     }
   });
