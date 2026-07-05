@@ -7,6 +7,13 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
+    inputs:
+      force_publish:
+        description: Force `nx release publish` for the versions already committed in package.json, bypassing conventional-commits change detection (use after manually correcting versions)
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -59,3 +66,4 @@ jobs:
         with:
           git_bot_token: ${{ secrets.GIT_BOT_TOKEN }}
           npm_token: ${{ secrets.NPM_TOKEN }}
+          force_publish: ${{ inputs.force_publish }}

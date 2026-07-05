@@ -9,6 +9,10 @@ inputs:
   npm_token:
     description: NPM token
     required: true
+  force_publish:
+    description: Skip version bump/changelog/change-detection and just run `nx release publish` for the versions already committed in package.json
+    required: false
+    default: 'false'
 
 runs:
   using: composite
@@ -21,7 +25,12 @@ runs:
       # like NPM_CONFIG_REGISTRY so npm publish ends up ignoring the .npmrc file
       # which is set up by `setup-node` action.
       shell: bash
-      run: npx nx release --yes
+      run: |
+        if [ "${{ inputs.force_publish }}" = "true" ]; then
+          npx nx release publish --yes
+        else
+          npx nx release --yes
+        fi
 
     - name: Push changes
       uses: ad-m/github-push-action@v1
