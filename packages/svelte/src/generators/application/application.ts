@@ -37,16 +37,28 @@ export async function applicationGeneratorInternal(host: Tree, schema: Schema) {
   await createApplicationFiles(host, options);
 
   const viteTask = await addVite(host, options);
+  const includeVitest = options.unitTestRunner === 'vitest';
   createOrEditViteConfig(
     host,
     {
       project: options.name,
       includeLib: false,
-      includeVitest: options.unitTestRunner === 'vitest',
+      includeVitest,
       inSourceTests: false,
       rolldownOptionsExternal: [],
-      imports: [`import { svelte } from '@sveltejs/vite-plugin-svelte'`],
-      plugins: [`svelte()`],
+      imports: [
+        `import { svelte } from '@sveltejs/vite-plugin-svelte'`,
+        // svelteTesting() no-ops outside `vitest` runs (it checks
+        // process.env.VITEST) but is required for @testing-library/svelte v5:
+        // it marks the package ssr.noExternal so vite-plugin-svelte can
+        // transform its shipped .svelte sources, prefers the browser export
+        // condition, and wires up DOM auto-cleanup. See
+        // https://testing-library.com/docs/svelte-testing-library/setup
+        ...(includeVitest
+          ? [`import { svelteTesting } from '@testing-library/svelte/vite'`]
+          : []),
+      ],
+      plugins: [`svelte()`, ...(includeVitest ? [`svelteTesting()`] : [])],
     },
     false
   );

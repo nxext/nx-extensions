@@ -6,7 +6,10 @@ import {
 } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { lintProjectGenerator } from '@nx/eslint';
-import { extraEslintDependencies } from '../../utils/lint';
+import {
+  addSvelteEslintConfig,
+  extraEslintDependencies,
+} from '../../utils/lint';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const lintTask = await lintProjectGenerator(host, {
@@ -20,11 +23,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     skipFormat: true,
   });
 
-  host.rename(
-    joinPathFragments(options.projectRoot, 'eslintrc.js'),
-    joinPathFragments(options.projectRoot, '.eslintrc.js')
-  );
-  host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
+  addSvelteEslintConfig(host, options.projectRoot);
 
   const installTask = addDependenciesToPackageJson(
     host,

@@ -2,6 +2,7 @@ import { SvelteLibrarySchema } from './schema';
 import { readJson, readProjectConfiguration } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
+import { useFlatConfig } from '@nx/eslint/internal';
 
 describe('svelte library schematic', () => {
   let tree;
@@ -33,8 +34,25 @@ describe('svelte library schematic', () => {
     expect(tree.exists(`libs/my-lib/tsconfig.lib.json`)).toBeTruthy();
     expect(tree.exists(`libs/my-lib/tsconfig.spec.json`)).toBeTruthy();
     expect(tree.exists(`libs/my-lib/tsconfig.json`)).toBeTruthy();
-    expect(tree.exists(`libs/my-lib/.eslintrc.json`)).toBeFalsy();
-    expect(tree.exists(`libs/my-lib/.eslintrc.js`)).toBeTruthy();
+  });
+
+  it('should wire up eslint-plugin-svelte (flat config) or skip gracefully (legacy config)', async () => {
+    await libraryGenerator(tree, options);
+
+    const packageJson = readJson(tree, 'package.json');
+    expect(packageJson.devDependencies['eslint-plugin-svelte']).toBeDefined();
+    expect(
+      packageJson.devDependencies['eslint-plugin-svelte3']
+    ).toBeUndefined();
+
+    if (useFlatConfig(tree)) {
+      const eslintConfigPath = `libs/my-lib/eslint.config.mjs`;
+      expect(tree.exists(eslintConfigPath)).toBeTruthy();
+      const eslintConfig = tree.read(eslintConfigPath, 'utf-8');
+      expect(eslintConfig).toContain('eslint-plugin-svelte');
+    } else {
+      expect(tree.exists(`libs/my-lib/.eslintrc.json`)).toBeTruthy();
+    }
   });
 
   it('should fail if no importPath is provided with publishable', async () => {

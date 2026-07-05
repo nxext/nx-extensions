@@ -46,9 +46,15 @@ describe('@nxext/svelte: library', () => {
       `generate @nxext/svelte:lib libs/${lib} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
     );
 
+    // svelte-check v4 prints a machine-readable summary line when stdout is
+    // not a TTY (e.g. `... COMPLETED 12 FILES 0 ERRORS 0 WARNINGS ...`)
+    // instead of v2's human-readable "svelte-check found 0 errors ..." text.
+    // Accept both formats, asserting only on the error count.
     const result = await runNxCommandAsync(projectDirectory, `check ${lib}`);
-    expect(result.stdout).toContain(
-      'svelte-check found 0 errors, 0 warnings, and 0 hints'
+    const combined = stripAnsi(`${result.stdout}${result.stderr}`);
+    expect(combined).toMatch(/svelte-check found 0 errors|\b0 ERRORS\b/);
+    expect(combined).toContain(
+      `Successfully ran target check for project ${lib}`
     );
   });
 

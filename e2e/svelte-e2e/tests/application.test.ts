@@ -85,14 +85,16 @@ describe('@nxext/svelte: application', () => {
       `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
     );
 
-    // svelte-check in a freshly-scaffolded app emits a transient
-    // "Cannot find module .../svelte/compiler" preprocessing warning (0 errors,
-    // 1 warning). The target exits 0 regardless — assert the target-success
-    // marker rather than the full "0 errors, 0 warnings, 0 hints" line until
-    // the compiler-resolution warning is fixed in the svelte.config template.
+    // svelte-check v4 prints a machine-readable summary line when stdout is
+    // not a TTY (e.g. `1783270048818 COMPLETED 63 FILES 0 ERRORS 1 WARNINGS
+    // 1 FILES_WITH_PROBLEMS`) instead of v2's human-readable "svelte-check
+    // found 0 errors ..." text. Accept both formats, asserting only on the
+    // error count — warnings are tolerated (a freshly-scaffolded app
+    // currently reports one about `composite: true` in the referenced
+    // tsconfigs).
     const result = await runNxCommandAsync(projectDirectory, `check ${app}`);
     const combined = stripAnsi(`${result.stdout}${result.stderr}`);
-    expect(combined).toContain('svelte-check found 0 errors');
+    expect(combined).toMatch(/svelte-check found 0 errors|\b0 ERRORS\b/);
     expect(combined).toContain(
       `Successfully ran target check for project ${app}`
     );
