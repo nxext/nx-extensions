@@ -1,3 +1,22 @@
+## 20.1.1 (2026-07-05)
+
+### 🩹 Fixes
+
+- **e2e:** fix ignoreDeprecations drift breaking 5 e2e projects in CI ([#1201](https://github.com/nxext/nx-extensions/issues/1201))
+- **nxext:** correct the vitest-generator fix and add real test coverage ([e1b4367c](https://github.com/nxext/nx-extensions/commit/e1b4367c))
+- **svelte:** register library path alias correctly ([b9dd6e9e](https://github.com/nxext/nx-extensions/commit/b9dd6e9e))
+- **svelte:** install @types/node and vite-plugin-dts with generated projects ([793483dd](https://github.com/nxext/nx-extensions/commit/793483dd))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 20.1.1
+
+### ❤️ Thank You
+
+- Claude Opus 4.7 (1M context)
+- Claude Sonnet 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

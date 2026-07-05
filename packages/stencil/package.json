@@ -1,6 +1,6 @@
 {
   "name": "@nxext/stencil",
-  "version": "23.0.0",
+  "version": "20.2.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for stenciljs",
@@ -31,7 +31,7 @@
   "builders": "./executors.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nxext/common": "23.0.0",
+    "@nxext/common": "20.1.1",
     "tslib": "^2.3.0",
     "@nx/devkit": "^23.0.1",
     "@nx/js": "^23.0.1",

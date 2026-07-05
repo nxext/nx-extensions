@@ -1,3 +1,14 @@
+## 20.1.1 (2026-07-05)
+
+### 🩹 Fixes
+
+- **nxext:** correct the vitest-generator fix and add real test coverage ([e1b4367c](https://github.com/nxext/nx-extensions/commit/e1b4367c))
+
+### ❤️ Thank You
+
+- Claude Sonnet 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

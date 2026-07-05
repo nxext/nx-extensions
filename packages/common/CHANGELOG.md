@@ -1,3 +1,7 @@
+## 20.1.1 (2026-07-05)
+
+This was a version bump only for common to align it with other projects, there were no code changes.
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

@@ -1,3 +1,31 @@
+## 20.2.0 (2026-07-05)
+
+### 🚀 Features
+
+- **stencil:** adopt Project Crystal for inferred tasks ([ebea26a6](https://github.com/nxext/nx-extensions/commit/ebea26a6))
+
+### 🩹 Fixes
+
+- **stencil:** green CI after storybook migration ([#1160](https://github.com/nxext/nx-extensions/issues/1160))
+- **stencil:** migrate Storybook integration off discontinued webpack5 packages ([b165c695](https://github.com/nxext/nx-extensions/commit/b165c695))
+- **stencil:** flat-config eslint fixes and add e2e coverage for remaining generator gaps ([9db5f525](https://github.com/nxext/nx-extensions/commit/9db5f525))
+- **stencil:** re-enable the disabled angular output-target spec ([00437465](https://github.com/nxext/nx-extensions/commit/00437465))
+- **stencil:** declare @stencil/core peer dep and clean up version pins ([ab74ee9b](https://github.com/nxext/nx-extensions/commit/ab74ee9b))
+- **stencil:** green the library e2e after Project Crystal ([9d2b3bfa](https://github.com/nxext/nx-extensions/commit/9d2b3bfa))
+- **stencil:** honor build outputPath and update to stencil 4.43 ([d3304aa2](https://github.com/nxext/nx-extensions/commit/d3304aa2))
+- **stencil:** install @types/node with generated projects ([bb78b7a6](https://github.com/nxext/nx-extensions/commit/bb78b7a6))
+- **stencil:** honor --e2eTestRunner=none in lib and app generators ([458cccff](https://github.com/nxext/nx-extensions/commit/458cccff))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 20.1.1
+
+### ❤️ Thank You
+
+- Claude Opus 4.7 (1M context)
+- Claude Sonnet 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features
