@@ -36,10 +36,18 @@ export default async () => {
     },
   });
 
-  execFileSync('pnpm', ['nx', 'run-many', '-t', 'build', '--exclude', 'docs'], {
-    env: process.env,
-    stdio: 'inherit',
-  });
+  // --skip-nx-cache: the releaseVersion() call above rewrites every
+  // packages/*/package.json in place seconds before this build; cached task
+  // hashes can miss those rewrites and publish stale 23.x dists under the
+  // 0.0.1-e2e version, breaking installs with ERR_PNPM_NO_MATCHING_VERSION.
+  execFileSync(
+    'pnpm',
+    ['nx', 'run-many', '-t', 'build', '--exclude', 'docs', '--skip-nx-cache'],
+    {
+      env: process.env,
+      stdio: 'inherit',
+    }
+  );
 
   await releasePublish({
     tag: 'e2e',
