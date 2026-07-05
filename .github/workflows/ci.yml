@@ -25,22 +25,25 @@ concurrency:
 jobs:
   main:
     name: Nx Cloud - Main Job
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.15
-    with:
-      main-branch-name: main
-      number-of-agents: 3
-      init-commands: |
-        pnpm exec nx-cloud start-ci-run --stop-agents-after="e2e" --agent-count=3
-      parallel-commands: |
-        pnpm exec nx-cloud record -- pnpm exec nx format:check
-      parallel-commands-on-agents: |
-        pnpm exec nx affected --target build lint test e2e
+    runs-on: ubuntu-latest
 
-  agents:
-    name: Nx Cloud - Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.15
-    with:
-      number-of-agents: 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Start Nx Cloud CI run and distribute tasks to Nx Agents
+        run: pnpm exec nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
+
+      - name: Check formatting
+        run: pnpm exec nx-cloud record -- pnpm exec nx format:check
+
+      - name: Run build, lint, test and e2e for affected projects
+        run: pnpm exec nx affected --target build lint test e2e
 
   release:
     runs-on: ubuntu-latest
@@ -53,7 +56,6 @@ jobs:
 
     needs:
       - main
-      - agents
 
     steps:
       - uses: actions/checkout@v4
