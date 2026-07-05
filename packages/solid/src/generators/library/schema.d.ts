@@ -1,10 +1,10 @@
-import { Linter } from '@nx/eslint';
+import { LinterType } from '@nx/eslint';
 
 export interface SolidLibrarySchema {
   directory: string;
   name?: string;
   tags?: string;
-  linter: Linter;
+  linter: LinterType;
   unitTestRunner: 'vitest' | 'jest' | 'none';
   e2eTestRunner: 'cypress' | 'none';
   buildable?: boolean;

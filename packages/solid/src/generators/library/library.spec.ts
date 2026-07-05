@@ -1,5 +1,4 @@
 import { SolidLibrarySchema } from './schema';
-import { Linter } from '@nx/eslint';
 import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
@@ -8,7 +7,7 @@ describe('solid library schematic', () => {
   let tree: Tree;
   const options: SolidLibrarySchema = {
     directory: 'libs/my-lib',
-    linter: Linter.EsLint,
+    linter: 'eslint',
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
     skipFormat: false,

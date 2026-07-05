@@ -26,7 +26,6 @@ async function normalizeOptions<T extends Schema = Schema>(
   host: Tree,
   options: Schema
 ): Promise<NormalizedSchema<T>> {
-  console.log('normalizeOptions', options);
   await ensureRootProjectName(options, 'application');
   const {
     projectName,
