@@ -1,23 +1,3 @@
-## 20.2.1 (2026-07-05)
-
-### 🚀 Features
-
-- **cap/executor.ts:** livereload ([8ac7a69e](https://github.com/nxext/nx-extensions/commit/8ac7a69e))
-
-### 🩹 Fixes
-
-- **capacitor:** detect @angular/build:application esbuild output ([6611110d](https://github.com/nxext/nx-extensions/commit/6611110d))
-
-### 🧱 Updated Dependencies
-
-- Updated common to 20.1.1
-
-### ❤️ Thank You
-
-- Claude Opus 4.7 (1M context)
-- Dominik Pieper @DominikPieper
-- Raphaël Balet @rbalet
-
 ## 20.2.0 (2025-06-11)
 
 ### 🚀 Features

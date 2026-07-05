@@ -1,18 +1,3 @@
-## 20.1.1 (2026-07-05)
-
-### 🩹 Fixes
-
-- **ionic-react:** guard against undefined build.options in Nx 22 ([97bfc23a](https://github.com/nxext/nx-extensions/commit/97bfc23a))
-
-### 🧱 Updated Dependencies
-
-- Updated capacitor to 20.2.1
-
-### ❤️ Thank You
-
-- Claude Opus 4.7 (1M context)
-- Dominik Pieper @DominikPieper
-
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

@@ -1,6 +1,6 @@
 {
   "name": "@nxext/svelte",
-  "version": "20.1.1",
+  "version": "23.0.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Svelte",
@@ -41,6 +41,6 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nxext/common": "20.1.1"
+    "@nxext/common": "23.0.0"
   }
 }

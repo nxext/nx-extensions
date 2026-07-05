@@ -1,9 +1,3 @@
-## 20.1.1 (2026-07-05)
-
-### 🧱 Updated Dependencies
-
-- Updated capacitor to 20.2.1
-
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features
