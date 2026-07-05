@@ -2,7 +2,6 @@ import {
   addDependenciesToPackageJson,
   applyChangesToString,
   ensurePackage,
-  getWorkspaceLayout,
   NX_VERSION,
   readProjectConfiguration,
   runTasksInSerial,
@@ -10,7 +9,6 @@ import {
 } from '@nx/devkit';
 import { initGenerator as jsInitGenerator } from '@nx/js';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { Linter } from '@nx/eslint';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import * as ts from 'typescript';
 import { relative } from 'node:path';
@@ -23,7 +21,6 @@ async function prepareVueLibrary(
   host: Tree,
   options: AddOutputtargetSchematicSchema
 ) {
-  const { libsDir } = getWorkspaceLayout(host);
   const vueProjectName = `${options.projectName}-vue`;
   const vueProjectDir = `libs/${vueProjectName}`;
 
@@ -44,7 +41,7 @@ async function prepareVueLibrary(
     skipTsConfig: false,
     skipFormat: true,
     unitTestRunner: 'vitest',
-    linter: Linter.EsLint,
+    linter: 'eslint',
   });
 
   await addDependenciesToPackageJson(
@@ -55,8 +52,12 @@ async function prepareVueLibrary(
     }
   );
 
+  // The Vue library was already generated above, so its root is read
+  // from the project graph rather than re-derived from the (possibly
+  // non-default) workspace layout.
+  const vueProjectRoot = readProjectConfiguration(host, vueProjectName).root;
   host.write(
-    `${libsDir}/${vueProjectName}/src/index.ts`,
+    `${vueProjectRoot}/src/index.ts`,
     `export * from './generated/components';`
   );
 

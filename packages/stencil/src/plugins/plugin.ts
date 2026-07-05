@@ -1,5 +1,6 @@
 import {
-  CreateNodes,
+  createNodesFromFiles,
+  CreateNodesV2,
   ProjectConfiguration,
   TargetConfiguration,
 } from '@nx/devkit';
@@ -28,38 +29,40 @@ export interface StencilPluginOptions {
  * with non-standard stencil output paths should override the inferred `outputs`
  * locally in their project.json.
  */
-export const createNodesV2: CreateNodes<StencilPluginOptions> = [
+export const createNodesV2: CreateNodesV2<StencilPluginOptions> = [
   '**/stencil.config*.ts',
   (configFiles, rawOptions, context) => {
     const options = normalizeOptions(rawOptions);
     const workspaceRoot = context.workspaceRoot;
 
-    return configFiles.flatMap((configFile) => {
+    const projectConfigFiles = configFiles.filter((configFile) => {
       const projectRoot = dirname(configFile);
 
-      const isProject =
+      return (
         existsSync(join(workspaceRoot, projectRoot, 'project.json')) ||
-        existsSync(join(workspaceRoot, projectRoot, 'package.json'));
-      if (!isProject) {
-        return [];
-      }
+        existsSync(join(workspaceRoot, projectRoot, 'package.json'))
+      );
+    });
 
-      return [
-        [
-          configFile,
-          {
-            projects: {
-              [projectRoot]: {
-                targets: buildTargets(projectRoot, options),
-                metadata: {
-                  technologies: ['stencil'],
-                },
+    return createNodesFromFiles(
+      (configFile) => {
+        const projectRoot = dirname(configFile);
+
+        return {
+          projects: {
+            [projectRoot]: {
+              targets: buildTargets(projectRoot, options),
+              metadata: {
+                technologies: ['stencil'],
               },
             },
           },
-        ],
-      ];
-    });
+        };
+      },
+      projectConfigFiles,
+      rawOptions,
+      context
+    );
   },
 ];
 

@@ -9,14 +9,13 @@ import {
   runTasksInSerial,
 } from '@nx/devkit';
 import { LibrarySchema } from '../schema';
-import { Linter } from '@nx/eslint';
 import {
   createStencilEslintJson,
   extraEslintDependencies,
 } from '../../../utils/lint';
 
 export async function addLinting(host: Tree, options: LibrarySchema) {
-  if (options.linter !== Linter.EsLint) {
+  if (options.linter !== 'eslint') {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     return () => {};
   }

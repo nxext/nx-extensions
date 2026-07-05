@@ -67,9 +67,6 @@
       "optional": true
     }
   },
-  "nx-migrate": {
-    "migrations": "./migrations.json"
-  },
   "nx-migrations": {
     "migrations": "./migrations.json"
   }

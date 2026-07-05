@@ -1,6 +1,6 @@
 import { AppType } from './../../utils/typings';
 import { SupportedStyles } from '../../stencil-core-utils';
-import { Linter } from '@nx/eslint';
+import { LinterType } from '@nx/eslint';
 
 export interface RawLibrarySchema {
   directory: string;
@@ -13,7 +13,7 @@ export interface RawLibrarySchema {
   style?: SupportedStyles;
   e2eTestRunner?: string;
   unitTestRunner?: string;
-  linter?: Linter;
+  linter?: LinterType;
   component?: boolean;
 }
 

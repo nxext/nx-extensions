@@ -91,6 +91,15 @@
           "alwaysAddToPackageJson": false
         }
       }
+    },
+    "23.0.1": {
+      "version": "23.0.1",
+      "packages": {
+        "@stencil/core": {
+          "version": "^4.43.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
     }
   }
 }

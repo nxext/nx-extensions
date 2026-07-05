@@ -10,7 +10,6 @@ import {
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { applicationGenerator } from './generator';
-import { Linter } from '@nx/eslint';
 import {
   beginningOfEsLintConfigJs,
   getEsLintPluginBaseName,
@@ -30,7 +29,7 @@ describe('schematic:application', () => {
   let host: Tree;
   const options: RawApplicationSchema = {
     directory: 'apps/test',
-    linter: Linter.None,
+    linter: 'none',
   };
   const projectName = options.directory.replace('apps/', '');
 
@@ -72,7 +71,7 @@ describe('schematic:application', () => {
   });
 
   it('should configure lint target', async () => {
-    await applicationGenerator(host, { ...options, linter: Linter.EsLint });
+    await applicationGenerator(host, { ...options, linter: 'eslint' });
 
     const projectConfig = readProjectConfiguration(host, projectName);
     const eslintConfigPath = 'apps/test/.eslintrc.json';
@@ -106,7 +105,7 @@ describe('schematic:application', () => {
      */
     // process.env.ESLINT_USE_FLAT_CONFIG = 'true';
 
-    await applicationGenerator(host, { ...options, linter: Linter.EsLint });
+    await applicationGenerator(host, { ...options, linter: 'eslint' });
 
     const projectConfig = readProjectConfiguration(host, projectName);
     const eslintConfigPath = 'apps/test/eslint.config.js';

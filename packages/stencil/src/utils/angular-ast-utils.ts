@@ -4,7 +4,7 @@ Originally from nrwl nx: packages/angular/src/utils/nx-devkit/ast-utils.ts
 
 import * as ts from 'typescript';
 import { getSourceNodes, insertChange } from '@nx/js';
-import { Tree } from '@nx/devkit';
+import { logger, Tree } from '@nx/devkit';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 function _angularImportsFromNode(
@@ -203,7 +203,7 @@ function _addSymbolToNgModuleMetadata(
   }
 
   if (!node) {
-    console.log(
+    logger.warn(
       'No app module found. Please add your new class to your component.'
     );
 

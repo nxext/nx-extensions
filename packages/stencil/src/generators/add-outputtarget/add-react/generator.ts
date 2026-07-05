@@ -2,7 +2,6 @@ import {
   addDependenciesToPackageJson,
   applyChangesToString,
   ensurePackage,
-  getWorkspaceLayout,
   NX_VERSION,
   readProjectConfiguration,
   runTasksInSerial,
@@ -10,7 +9,6 @@ import {
 } from '@nx/devkit';
 import { initGenerator as jsInitGenerator } from '@nx/js';
 import { AddOutputtargetSchematicSchema } from '../schema';
-import { Linter } from '@nx/eslint';
 import { STENCIL_OUTPUTTARGET_VERSION } from '../../../utils/versions';
 import * as ts from 'typescript';
 import { relative } from 'node:path';
@@ -23,7 +21,6 @@ async function prepareReactLibrary(
   host: Tree,
   options: AddOutputtargetSchematicSchema
 ) {
-  const { libsDir } = getWorkspaceLayout(host);
   const reactProjectName = `${options.projectName}-react`;
   const reactProjectDir = `libs/${reactProjectName}`;
 
@@ -45,7 +42,7 @@ async function prepareReactLibrary(
     skipTsConfig: false,
     skipFormat: true,
     unitTestRunner: 'jest',
-    linter: Linter.EsLint,
+    linter: 'eslint',
   });
 
   await addDependenciesToPackageJson(
@@ -56,8 +53,15 @@ async function prepareReactLibrary(
     }
   );
 
+  // The React library was already generated above, so its root is read
+  // from the project graph rather than re-derived from the (possibly
+  // non-default) workspace layout.
+  const reactProjectRoot = readProjectConfiguration(
+    host,
+    reactProjectName
+  ).root;
   host.write(
-    `${libsDir}/${reactProjectName}/src/index.ts`,
+    `${reactProjectRoot}/src/index.ts`,
     `export * from './generated/components';`
   );
 

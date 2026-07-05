@@ -170,7 +170,7 @@ export const augmentStencilEslintFlatConfig = (
       `@stencil-community/eslint-plugin may not support the flat config yet.`
     );
     logger.warn(`update this file:`);
-    console.log(
+    logger.warn(
       getTerminalLinkForAbsolutePath(
         join(workspaceRoot, eslintFlatConfigFilePath)
       )

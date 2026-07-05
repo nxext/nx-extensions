@@ -2,7 +2,6 @@ import {
   ensurePackage,
   formatFiles,
   GeneratorCallback,
-  getWorkspaceLayout,
   logger,
   NX_VERSION,
   readProjectConfiguration,
@@ -10,7 +9,6 @@ import {
   stripIndents,
   Tree,
 } from '@nx/devkit';
-import { Linter } from '@nx/eslint';
 import { isBuildableStencilProject } from '../../utils/utillities';
 import { updatePreview } from './lib/update-preview';
 import { updateMain } from './lib/update-main';
@@ -27,7 +25,6 @@ import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
  * @returns path portion of an import statement
  */
 export function getProjectTsImportPath(tree: Tree, projectName: string) {
-  const workspaceLayout = getWorkspaceLayout(tree);
   const npmScope = getNpmScope(tree);
   return `@${npmScope}/${projectName}`;
 }
@@ -94,7 +91,7 @@ export async function storybookConfigurationGenerator(
 function normalizeSchema(schema: StorybookConfigureSchema) {
   const defaults = {
     configureCypress: true,
-    linter: Linter.EsLint,
+    linter: 'eslint' as const,
   };
   return {
     ...defaults,

@@ -9,7 +9,6 @@ import {
   runTasksInSerial,
 } from '@nx/devkit';
 import { ApplicationSchema } from '../schema';
-import { Linter } from '@nx/eslint';
 import {
   augmentStencilEslintFlatConfig,
   createStencilEslintJson,
@@ -19,7 +18,7 @@ import { findEslintFile } from '@nx/eslint/internal';
 import { useFlatConfig } from '@nx/eslint/internal';
 
 export async function addLinting(host: Tree, options: ApplicationSchema) {
-  if (options.linter === Linter.EsLint) {
+  if (options.linter === 'eslint') {
     await ensurePackage('@nx/eslint', NX_VERSION);
     const { lintProjectGenerator } = await import('@nx/eslint');
 
