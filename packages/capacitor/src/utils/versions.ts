@@ -1,1 +1,1 @@
-export const capacitorVersion = '^6.0.0';
+export const capacitorVersion = '^8.0.0';
