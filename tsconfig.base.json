@@ -22,8 +22,10 @@
       "@nxext/ionic-angular": ["packages/ionic-angular/src/index.ts"],
       "@nxext/ionic-react": ["packages/ionic-react/src/index.ts"],
       "@nxext/preact": ["packages/preact/src/index.ts"],
+      "@nxext/solid": ["packages/solid/src/index.ts"],
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
-      "@nxext/svelte": ["packages/svelte/src/index.ts"]
+      "@nxext/svelte": ["packages/svelte/src/index.ts"],
+      "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
