@@ -1,4 +1,18 @@
 {
   "generators": {},
-  "packageJsonUpdates": {}
+  "packageJsonUpdates": {
+    "23.1.0": {
+      "version": "23.1.0",
+      "packages": {
+        "solid-js": {
+          "version": "^1.9.0",
+          "alwaysAddToPackageJson": true
+        },
+        "vite-plugin-solid": {
+          "version": "^2.11.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
 }

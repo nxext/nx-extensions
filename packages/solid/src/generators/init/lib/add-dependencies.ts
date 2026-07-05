@@ -14,7 +14,7 @@ export function updateDependencies(tree: Tree) {
     {
       'solid-jest': solidJestVersion,
       'solid-js': solidVersion,
-      'solid-testing-library': solidTestingLibraryVersion,
+      '@solidjs/testing-library': solidTestingLibraryVersion,
       'eslint-plugin-solid': eslintPluginSolidVersion,
       'vite-plugin-solid': vitePluginSolidVersion,
     }

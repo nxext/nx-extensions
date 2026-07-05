@@ -1,5 +1,5 @@
 import <%= className %> from './<%= className %>'
-import { render } from 'solid-testing-library'
+import { render } from '@solidjs/testing-library'
 
 it('it works', async () => {
   const { getByText } = render(<%= className %>)
