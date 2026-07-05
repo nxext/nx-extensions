@@ -4,7 +4,7 @@
  */
 import { startLocalRegistry } from '@nx/js/plugins/jest/local-registry';
 import { execFileSync } from 'child_process';
-import { rmSync } from 'fs';
+import { existsSync, readdirSync, readFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { releasePublish, releaseVersion } from 'nx/release';
 
@@ -16,6 +16,21 @@ export default async () => {
   const storage = './tmp/local-registry/storage';
 
   rmSync(join(process.cwd(), storage), { recursive: true, force: true });
+
+  // Snapshot every publishable package.json BEFORE releaseVersion rewrites
+  // them in place. The teardown restores from this snapshot instead of
+  // `git checkout`, which would also destroy uncommitted package.json edits
+  // (and thereby corrupt the packages published by any later e2e suite in
+  // the same run).
+  global.packageJsonSnapshots = Object.fromEntries(
+    readdirSync(join(process.cwd(), 'packages'), { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) =>
+        join(process.cwd(), 'packages', entry.name, 'package.json')
+      )
+      .filter((file) => existsSync(file))
+      .map((file) => [file, readFileSync(file, 'utf-8')])
+  );
 
   global.stopLocalRegistry = await startLocalRegistry({
     localRegistryTarget,
