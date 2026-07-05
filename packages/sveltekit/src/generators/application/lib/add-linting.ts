@@ -6,7 +6,10 @@ import {
   NX_VERSION,
   ensurePackage,
 } from '@nx/devkit';
-import { extraEslintDependencies } from '../../utils/lint';
+import {
+  addSvelteEslintConfig,
+  extraEslintDependencies,
+} from '../../utils/lint';
 import { NormalizedSchema } from '../schema';
 
 export async function addLinting(host: Tree, options: NormalizedSchema) {
@@ -31,11 +34,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
     skipPackageJson: options.skipPackageJson,
   });
 
-  host.rename(
-    joinPathFragments(options.projectRoot, 'eslintrc.cjs'),
-    joinPathFragments(options.projectRoot, '.eslintrc.cjs')
-  );
-  host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
+  addSvelteEslintConfig(host, options.projectRoot);
 
   const installTask = addDependenciesToPackageJson(
     host,

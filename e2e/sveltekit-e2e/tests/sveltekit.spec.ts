@@ -35,11 +35,27 @@ describe('@nxext/sveltekit', () => {
     cleanupTestProject(projectDirectory);
   });
 
-  // TODO: sveltekit's kit plugin searches for svelte.config.js relative to
-  // Vite's cwd, which is the workspace root during `nx build`, not the project
-  // root. Build fails with "src/app.html does not exist". Needs either a `cwd`
-  // override on the generated build target or a svelte.config.js at workspace
-  // root that re-exports from the project root.
+  // TODO: still skipped after investigating for the Svelte 5 migration.
+  // Root cause confirmed (verified with a standalone `vite build` repro
+  // outside this e2e, not by unskipping and running it): `@sveltejs/kit`'s
+  // `sveltekit()` Vite plugin captures `cwd = process.cwd()` as a
+  // module-level constant in `@sveltejs/kit/src/exports/vite/index.js`,
+  // evaluated once when the plugin module is first imported - independent of
+  // Vite's `root` option. `nx build` runs with `process.cwd()` at the
+  // workspace root, not the project root, so the plugin's file lookups
+  // (`svelte.config.js`, `src/app.html`, ...) fail with "src/app.html does
+  // not exist".
+  // Passing SvelteKit's config directly to `sveltekit({ ...kit, preprocess })`
+  // (supported since kit 2.62.0, avoiding the `svelte.config.js` file lookup)
+  // does NOT fix it either - confirmed by reproducing both ways manually -
+  // because `process_config()` still resolves `files.appTemplate` etc.
+  // against that same module-level `cwd`, not against the passed-in config.
+  // The only real fixes are either an upstream SvelteKit change (accept an
+  // explicit cwd/root), or switching the generated `build` target away from
+  // `@nx/vite:build` to a `cwd`-scoped command runner (like `check`/`e2e`
+  // already use) - which is an invasive change to `packages/sveltekit`'s
+  // target generation that needs its own e2e-verified follow-up, not a
+  // Svelte-5-version-bump-scoped fix. Leaving skipped.
   it.skip('generates and builds a sveltekit app', async () => {
     const app = uniq('sveltekit-app');
     await runNxCommandAsync(
