@@ -9,29 +9,20 @@ module.exports = [
   ...baseConfig,
   { rules: {} },
   {
-    files: [
-      'packages/svelte/**/*.ts',
-      'packages/svelte/**/*.tsx',
-      'packages/svelte/**/*.js',
-      'packages/svelte/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/svelte/**/*.ts', 'packages/svelte/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/svelte/**/*.js', 'packages/svelte/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
-    files: [
-      'packages/svelte/package.json',
-      'packages/svelte/generators.json',
-      'packages/svelte/migrations.json',
-    ],
+    files: ['package.json', 'generators.json', 'migrations.json'],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),
   {
@@ -43,7 +34,7 @@ module.exports = [
     // transitive resolution through @nxext/common), it would otherwise flag
     // both peerDependencies as obsolete even though a real Vite workspace
     // using @nxext/svelte's cypress e2e wiring still needs them installed.
-    files: ['packages/svelte/package.json'],
+    files: ['package.json'],
     rules: {
       '@nx/dependency-checks': [
         'error',

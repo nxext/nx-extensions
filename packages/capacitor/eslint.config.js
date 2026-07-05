@@ -8,31 +8,26 @@ const compat = new FlatCompat({
 module.exports = [
   ...baseConfig,
   {
-    files: [
-      'packages/capacitor/**/*.ts',
-      'packages/capacitor/**/*.tsx',
-      'packages/capacitor/**/*.js',
-      'packages/capacitor/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/capacitor/**/*.ts', 'packages/capacitor/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/capacitor/**/*.js', 'packages/capacitor/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
     files: [
-      'packages/capacitor/package.json',
-      'packages/capacitor/generators.json',
-      'packages/capacitor/executors.json',
-      'packages/capacitor/generators.json',
-      'packages/capacitor/executors.json',
-      'packages/capacitor/migrations.json',
+      'package.json',
+      'generators.json',
+      'executors.json',
+      'generators.json',
+      'executors.json',
+      'migrations.json',
     ],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),

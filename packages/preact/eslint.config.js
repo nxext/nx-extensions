@@ -9,30 +9,25 @@ module.exports = [
   ...baseConfig,
   { rules: {} },
   {
-    files: [
-      'packages/preact/**/*.ts',
-      'packages/preact/**/*.tsx',
-      'packages/preact/**/*.js',
-      'packages/preact/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/preact/**/*.ts', 'packages/preact/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/preact/**/*.js', 'packages/preact/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
-    files: ['packages/preact/package.json', 'packages/preact/generators.json'],
+    files: ['package.json', 'generators.json'],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
-    files: ['packages/preact/package.json'],
+    files: ['package.json'],
     rules: {
       '@nx/dependency-checks': [
         'error',

@@ -8,25 +8,20 @@ const compat = new FlatCompat({
 module.exports = [
   ...baseConfig,
   {
-    files: [
-      'packages/core/**/*.ts',
-      'packages/core/**/*.tsx',
-      'packages/core/**/*.js',
-      'packages/core/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/core/**/*.ts', 'packages/core/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/core/**/*.js', 'packages/core/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
-    files: ['packages/core/**/*.json'],
+    files: ['**/*.json'],
     rules: { '@nx/dependency-checks': 'error' },
   })),
 ];

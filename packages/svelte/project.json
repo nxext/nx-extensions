@@ -6,18 +6,26 @@
   "tags": [],
   "generators": {},
   "targets": {
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
-      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "packages/svelte/jest.config.ts"
+        "passWithNoTests": true
       },
-      "outputs": ["{workspaceRoot}/coverage/packages/svelte"]
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "coverage": true
+        }
+      }
     },
     "build": {
       "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "dependsOn": [
+        {
+          "target": "build",
+          "dependencies": true
+        }
+      ],
       "options": {
         "outputPath": "dist/packages/svelte",
         "tsConfig": "packages/svelte/tsconfig.lib.json",
@@ -51,14 +59,7 @@
             "output": "."
           }
         ]
-      },
-      "outputs": ["{options.outputPath}"],
-      "dependsOn": [
-        {
-          "target": "build",
-          "dependencies": true
-        }
-      ]
+      }
     }
   }
 }

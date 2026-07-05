@@ -8,37 +8,26 @@ const compat = new FlatCompat({
 module.exports = [
   ...baseConfig,
   {
-    files: [
-      'packages/ionic-angular/**/*.ts',
-      'packages/ionic-angular/**/*.tsx',
-      'packages/ionic-angular/**/*.js',
-      'packages/ionic-angular/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: [
-      'packages/ionic-angular/**/*.ts',
-      'packages/ionic-angular/**/*.tsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: [
-      'packages/ionic-angular/**/*.js',
-      'packages/ionic-angular/**/*.jsx',
-    ],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
     files: [
-      'packages/ionic-angular/package.json',
-      'packages/ionic-angular/generators.json',
-      'packages/ionic-angular/executors.json',
-      'packages/ionic-angular/generators.json',
-      'packages/ionic-angular/executors.json',
-      'packages/ionic-angular/migrations.json',
+      'package.json',
+      'generators.json',
+      'executors.json',
+      'generators.json',
+      'executors.json',
+      'migrations.json',
     ],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),

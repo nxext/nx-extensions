@@ -6,18 +6,26 @@
   "tags": [],
   "generators": {},
   "targets": {
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
-      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "packages/stencil/jest.config.ts"
+        "passWithNoTests": true
       },
-      "outputs": ["{workspaceRoot}/coverage/packages/stencil"]
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "coverage": true
+        }
+      }
     },
     "build": {
       "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "dependsOn": [
+        {
+          "target": "build",
+          "dependencies": true
+        }
+      ],
       "options": {
         "outputPath": "dist/packages/stencil",
         "tsConfig": "packages/stencil/tsconfig.lib.json",
@@ -57,14 +65,7 @@
           }
         ],
         "srcRootForCompilationRoot": "packages/stencil"
-      },
-      "outputs": ["{options.outputPath}"],
-      "dependsOn": [
-        {
-          "target": "build",
-          "dependencies": true
-        }
-      ]
+      }
     }
   }
 }

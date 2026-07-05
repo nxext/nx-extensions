@@ -9,35 +9,30 @@ module.exports = [
   ...baseConfig,
   { rules: {} },
   {
-    files: [
-      'packages/stencil/**/*.ts',
-      'packages/stencil/**/*.tsx',
-      'packages/stencil/**/*.js',
-      'packages/stencil/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/stencil/**/*.ts', 'packages/stencil/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/stencil/**/*.js', 'packages/stencil/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
     files: [
-      'packages/stencil/package.json',
-      'packages/stencil/generators.json',
-      'packages/stencil/executors.json',
-      'packages/stencil/migrations.json',
+      'package.json',
+      'generators.json',
+      'executors.json',
+      'migrations.json',
     ],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
-    files: ['packages/stencil/package.json'],
+    files: ['package.json'],
     rules: {
       '@nx/dependency-checks': [
         'error',

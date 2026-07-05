@@ -8,31 +8,26 @@ const compat = new FlatCompat({
 module.exports = [
   ...baseConfig,
   {
-    files: [
-      'packages/ionic-react/**/*.ts',
-      'packages/ionic-react/**/*.tsx',
-      'packages/ionic-react/**/*.js',
-      'packages/ionic-react/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/ionic-react/**/*.ts', 'packages/ionic-react/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/ionic-react/**/*.js', 'packages/ionic-react/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
     files: [
-      'packages/ionic-react/package.json',
-      'packages/ionic-react/generators.json',
-      'packages/ionic-react/executors.json',
-      'packages/ionic-react/generators.json',
-      'packages/ionic-react/executors.json',
-      'packages/ionic-react/migrations.json',
+      'package.json',
+      'generators.json',
+      'executors.json',
+      'generators.json',
+      'executors.json',
+      'migrations.json',
     ],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),

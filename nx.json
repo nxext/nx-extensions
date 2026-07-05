@@ -3,71 +3,6 @@
     "appsDir": "e2e",
     "libsDir": "packages"
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "options": {
-        "useLightClient": true,
-        "canTrackAnalytics": true,
-        "showUsageWarnings": true
-      }
-    }
-  },
-  "generators": {
-    "@nx/next": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/nest": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/express": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/workspace": {
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/cypress": {
-      "cypress-project": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/web": {
-      "application": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/plugin": {
-      "plugin": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/react": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    },
-    "@nx/node": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      }
-    }
-  },
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
@@ -91,7 +26,6 @@
       "inputs": [
         "default",
         "^default",
-        "{workspaceRoot}/.eslintrc.json",
         "{workspaceRoot}/eslint.config.js",
         "{workspaceRoot}/tools/eslint-rules/**/*"
       ],
@@ -134,7 +68,6 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [
-      "{workspaceRoot}/workspace.json",
       "{workspaceRoot}/nx.json",
       "{workspaceRoot}/tsconfig.base.json"
     ],
@@ -151,8 +84,41 @@
       "!{projectRoot}/eslint.config.js"
     ]
   },
-  "nxCloudAccessToken": "NTlhMGE3ZTYtYjk5OC00Mzc5LWE2ZTAtNzE4ODEzNDY5MjlmfHJlYWQ=",
   "parallel": 3,
   "defaultBase": "main",
-  "nxCloudId": "67f3a24af80a3be42a4bc3a0"
+  "nxCloudId": "67f3a24af80a3be42a4bc3a0",
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      },
+      "include": [
+        "e2e/capacitor-e2e/**/*",
+        "e2e/ionic-angular-e2e/**/*",
+        "e2e/ionic-react-e2e/**/*",
+        "e2e/preact-e2e/**/*",
+        "e2e/solid-e2e/**/*",
+        "e2e/stencil-e2e/**/*",
+        "e2e/svelte-e2e/**/*",
+        "e2e/sveltekit-e2e/**/*",
+        "packages/capacitor/**/*",
+        "packages/common/**/*",
+        "packages/ionic-angular/**/*",
+        "packages/ionic-react/**/*",
+        "packages/preact/**/*",
+        "packages/solid/**/*",
+        "packages/stencil/**/*",
+        "packages/svelte/**/*",
+        "packages/sveltekit/**/*"
+      ]
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      },
+      "exclude": ["e2e/**"]
+    }
+  ]
 }

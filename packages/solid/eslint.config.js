@@ -9,30 +9,25 @@ module.exports = [
   ...baseConfig,
   { rules: {} },
   {
-    files: [
-      'packages/solid/**/*.ts',
-      'packages/solid/**/*.tsx',
-      'packages/solid/**/*.js',
-      'packages/solid/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/solid/**/*.ts', 'packages/solid/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/solid/**/*.js', 'packages/solid/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
-    files: ['packages/solid/package.json', 'packages/solid/generators.json'],
+    files: ['package.json', 'generators.json'],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
-    files: ['packages/solid/package.json'],
+    files: ['package.json'],
     rules: {
       '@nx/dependency-checks': [
         'error',

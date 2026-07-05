@@ -8,29 +8,24 @@ const compat = new FlatCompat({
 module.exports = [
   ...baseConfig,
   {
-    files: [
-      'packages/sveltekit/**/*.ts',
-      'packages/sveltekit/**/*.tsx',
-      'packages/sveltekit/**/*.js',
-      'packages/sveltekit/**/*.jsx',
-    ],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {},
   },
   {
-    files: ['packages/sveltekit/**/*.ts', 'packages/sveltekit/**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {},
   },
   {
-    files: ['packages/sveltekit/**/*.js', 'packages/sveltekit/**/*.jsx'],
+    files: ['**/*.js', '**/*.jsx'],
     rules: {},
   },
   ...compat.config({ parser: 'jsonc-eslint-parser' }).map((config) => ({
     ...config,
     files: [
-      'packages/sveltekit/package.json',
-      'packages/sveltekit/generators.json',
-      'packages/sveltekit/executors.json',
-      'packages/sveltekit/generators.json',
+      'package.json',
+      'generators.json',
+      'executors.json',
+      'generators.json',
     ],
     rules: { '@nx/nx-plugin-checks': 'error' },
   })),

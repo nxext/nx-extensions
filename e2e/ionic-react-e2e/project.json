@@ -3,22 +3,18 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "e2e/ionic-react-e2e/tests",
+  "tags": ["e2e"],
+  "implicitDependencies": ["ionic-react"],
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "parallelism": false,
+      "cache": false,
       "options": {
         "jestConfig": "e2e/ionic-react-e2e/jest.config.ts",
         "runInBand": true
-      },
-      "parallelism": false,
-      "cache": false
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      }
     }
-  },
-  "tags": ["e2e"],
-  "implicitDependencies": ["ionic-react"]
+  }
 }
