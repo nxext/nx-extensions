@@ -1,4 +1,26 @@
 {
   "generators": {},
-  "packageJsonUpdates": {}
+  "packageJsonUpdates": {
+    "23.1.0": {
+      "version": "23.1.0",
+      "packages": {
+        "ionicons": {
+          "version": "^8.0.0",
+          "alwaysAddToPackageJson": true
+        },
+        "@capacitor/haptics": {
+          "version": "^8.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@capacitor/keyboard": {
+          "version": "^8.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@capacitor/status-bar": {
+          "version": "^8.0.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
+    }
+  }
 }
