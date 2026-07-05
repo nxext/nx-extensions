@@ -1,5 +1,4 @@
 import { SvelteLibrarySchema } from './schema';
-import { Linter } from '@nx/eslint';
 import { readJson, readProjectConfiguration } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
@@ -8,7 +7,7 @@ describe('svelte library schematic', () => {
   let tree;
   const options: SvelteLibrarySchema = {
     directory: 'libs/my-lib',
-    linter: Linter.EsLint,
+    linter: 'eslint',
     unitTestRunner: 'jest',
     e2eTestRunner: 'cypress',
     skipFormat: false,

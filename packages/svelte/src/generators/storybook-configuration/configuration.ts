@@ -7,7 +7,6 @@ import {
   runTasksInSerial,
   NX_VERSION,
 } from '@nx/devkit';
-import { Linter } from '@nx/eslint';
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
 import { updateMainJs } from './lib/update-main-js';
@@ -61,7 +60,7 @@ function normalizeSchema(
 ): StorybookConfigureSchema {
   const defaults = {
     configureCypress: true,
-    linter: Linter.EsLint,
+    linter: 'eslint' as const,
     js: false,
   };
   return {

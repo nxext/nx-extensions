@@ -1,8 +1,8 @@
-import { Linter } from '@nx/eslint';
+import { LinterType } from '@nx/eslint';
 
 export interface StorybookConfigureSchema {
   name: string;
-  linter?: Linter;
+  linter?: LinterType;
   js?: boolean;
   standaloneConfig?: boolean;
   tsConfiguration?: boolean;

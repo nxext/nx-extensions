@@ -1,10 +1,4 @@
-import {
-  getWorkspaceLayout,
-  joinPathFragments,
-  names,
-  readNxJson,
-  Tree,
-} from '@nx/devkit';
+import { joinPathFragments, names, readNxJson, Tree } from '@nx/devkit';
 import { NormalizedSchema, Schema } from '../schema';
 import {
   determineProjectNameAndRootOptions,

@@ -26,6 +26,7 @@
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "schematics": "./generators.json",
+  "generators": "./generators.json",
   "peerDependencies": {
     "@nx/devkit": "^23.0.1",
     "@nx/vite": "^23.0.1",
