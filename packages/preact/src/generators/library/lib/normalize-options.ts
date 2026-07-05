@@ -1,44 +1,33 @@
 import { Tree } from '@nx/devkit';
+import { normalizeViteLibCore } from '@nxext/common';
 import { NormalizedSchema, PreactLibrarySchema } from '../schema';
-import {
-  determineProjectNameAndRootOptions,
-  ensureRootProjectName,
-} from '@nx/devkit/internal';
 
 export async function normalizeOptions(
   tree: Tree,
   options: PreactLibrarySchema
 ): Promise<NormalizedSchema> {
-  await ensureRootProjectName(options, 'library');
-  const {
-    projectName,
-    names: projectNames,
-    projectRoot,
-    importPath,
-  } = await determineProjectNameAndRootOptions(tree, {
+  const core = await normalizeViteLibCore(tree, {
     name: options.name,
-    projectType: 'library',
     directory: options.directory,
+    tags: options.tags,
     importPath: options.importPath,
-    rootProject: false,
   });
-  options.name ??= projectName;
-  const fileName =
-    /* options.simpleName
-    ? projectNames.projectSimpleName
-    :  */ projectNames.projectFileName;
 
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  // fileName stays a local computation (kept in sync with the
+  // `projectFileName` logic from `determineProjectNameAndRootOptions`),
+  // since `normalizeViteLibCore` intentionally doesn't expose it.
+  const fileName = core.projectName.startsWith('@')
+    ? core.projectName.split('/').slice(1).join('-')
+    : core.projectName;
 
   return {
     ...options,
-    projectName,
-    projectRoot,
-    parsedTags,
+    name: options.name ?? core.projectName,
+    projectName: core.projectName,
+    projectRoot: core.projectRoot,
+    parsedTags: core.parsedTags,
     fileName,
-    projectDirectory: projectRoot,
-    importPath,
+    projectDirectory: core.projectRoot,
+    importPath: core.importPath,
   };
 }

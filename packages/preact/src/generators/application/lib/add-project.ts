@@ -1,6 +1,6 @@
 import { NormalizedSchema } from '../schema';
 import { addProjectConfiguration, Tree } from '@nx/devkit';
-import { createLintTarget } from './create-lint-target';
+import { createEslintLintTarget } from '@nxext/common';
 
 export function addProject(tree: Tree, options: NormalizedSchema) {
   addProjectConfiguration(tree, options.name, {
@@ -8,6 +8,8 @@ export function addProject(tree: Tree, options: NormalizedSchema) {
     sourceRoot: `${options.projectRoot}/src`,
     projectType: 'application',
     tags: options.parsedTags,
-    targets: { lint: createLintTarget(options) },
+    targets: {
+      lint: createEslintLintTarget(options.projectRoot, 'tsconfig.app.json'),
+    },
   });
 }

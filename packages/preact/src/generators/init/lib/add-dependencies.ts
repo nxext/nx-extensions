@@ -1,4 +1,8 @@
-import { addDependenciesToPackageJson, Tree } from '@nx/devkit';
+import { Tree } from '@nx/devkit';
+import {
+  addFrameworkDependencies,
+  FrameworkDependencyMap,
+} from '@nxext/common';
 import {
   eslintPluginPreactVersion,
   preactVersion,
@@ -6,15 +10,16 @@ import {
   vitePluginPreactVersion,
 } from '../../utils/versions';
 
+const preactDependencies: FrameworkDependencyMap = {
+  dependencies: {},
+  devDependencies: {
+    preact: preactVersion,
+    '@testing-library/preact': testingLibraryPreactVersion,
+    '@preact/preset-vite': vitePluginPreactVersion,
+    'eslint-plugin-preact': eslintPluginPreactVersion,
+  },
+};
+
 export function updateDependencies(tree: Tree) {
-  return addDependenciesToPackageJson(
-    tree,
-    {},
-    {
-      preact: preactVersion,
-      '@testing-library/preact': testingLibraryPreactVersion,
-      '@preact/preset-vite': vitePluginPreactVersion,
-      'eslint-plugin-preact': eslintPluginPreactVersion,
-    }
-  );
+  return addFrameworkDependencies(tree, preactDependencies);
 }

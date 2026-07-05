@@ -6,75 +6,59 @@ import {
   offsetFromRoot,
   Tree,
   runTasksInSerial,
-  readNxJson,
 } from '@nx/devkit';
+import {
+  addCypressApplication,
+  addEslintLintProject,
+  addJestConfiguration,
+  addViteApplication,
+  configureViteFrameworkPlugin,
+  normalizeViteAppCore,
+} from '@nxext/common';
 import { NormalizedSchema, PreactApplicationSchema } from './schema';
 import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
-import { addLinting } from './lib/add-linting';
-import { addCypress } from './lib/add-cypress';
-import { addJest } from './lib/add-jest';
 import { updateJestConfig } from './lib/update-jest-config';
-import { addVite } from './lib/add-vite';
-import { createOrEditViteConfig } from '@nx/vite';
-import {
-  determineProjectNameAndRootOptions,
-  ensureRootProjectName,
-} from '@nx/devkit/internal';
+import { extraEslintDependencies } from '../utils/lint';
+import { preactViteFrameworkConfig } from '../utils/vite-config';
 import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 async function normalizeOptions(
   tree: Tree,
   options: PreactApplicationSchema
 ): Promise<NormalizedSchema> {
-  await ensureRootProjectName(options, 'application');
-  const {
-    projectName,
-    projectRoot,
-    names: projectNames,
-  } = await determineProjectNameAndRootOptions(tree, {
-    name: options.name,
-    projectType: 'application',
-    directory: options.directory,
-    rootProject: false,
-  });
-  options.name ??= projectName;
-  // options.rootProject = appProjectRoot === '.';
-  const fileName =
-    /* options.simpleName
-    ? projectNames.projectSimpleName
-    :  */ projectNames.projectFileName;
+  const core = await normalizeViteAppCore(
+    tree,
+    {
+      name: options.name,
+      directory: options.directory,
+      tags: options.tags,
+      // preact's schema has no `rootProject` option -> always undefined,
+      // which reproduces today's hardcoded "non-root" behavior.
+      rootProject: undefined,
+    },
+    'application'
+  );
 
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
-
-  const nxJson = readNxJson(tree);
-
-  let e2eWebServerTarget = 'serve';
-  let e2ePort = 4200;
-  if (
-    nxJson.targetDefaults?.[e2eWebServerTarget] &&
-    nxJson.targetDefaults?.[e2eWebServerTarget].options?.port
-  ) {
-    e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
-  }
-
-  const e2eProjectName = `${projectName}-e2e`;
-  const e2eProjectRoot = `${projectRoot}-e2e`;
-  const e2eWebServerAddress = `http://localhost:${e2ePort}`;
+  // fileName stays a local computation (kept in sync with the
+  // `projectFileName` logic from `determineProjectNameAndRootOptions`),
+  // since `normalizeViteAppCore` intentionally doesn't expose it.
+  const fileName = core.projectName.startsWith('@')
+    ? core.projectName.split('/').slice(1).join('-')
+    : core.projectName;
 
   return {
     ...options,
-    name: projectName,
-    projectRoot,
-    parsedTags,
-    e2eWebServerTarget,
-    e2eWebServerAddress,
-    e2eProjectName,
-    e2eProjectRoot,
+    // preact keeps `name` un-normalized (raw project name, no casing).
+    name: core.projectName,
+    projectRoot: core.projectRoot,
+    parsedTags: core.parsedTags,
+    e2eWebServerTarget: core.e2eWebServerTarget,
+    e2eWebServerAddress: core.e2eWebServerAddress,
+    e2eProjectName: core.e2eProjectName,
+    e2eProjectRoot: core.e2eProjectRoot,
     fileName,
-    projectDirectory: projectRoot,
+    projectDirectory: core.projectRoot,
     skipFormat: false,
   };
 }
@@ -107,24 +91,42 @@ export async function applicationGenerator(
   addProject(tree, options);
   createFiles(tree, options);
 
-  const viteTask = await addVite(tree, options);
-  createOrEditViteConfig(
+  const viteTask = await addViteApplication(tree, {
+    projectName: options.name,
+    unitTestRunner: options.unitTestRunner,
+  });
+  configureViteFrameworkPlugin(
     tree,
     {
       project: options.name,
       includeLib: false,
       includeVitest: options.unitTestRunner === 'vitest',
-      inSourceTests: false,
-      rolldownOptionsExternal: [],
-      imports: [`import preact from '@preact/preset-vite'`],
-      plugins: [`preact()`],
     },
-    false
+    preactViteFrameworkConfig
   );
 
-  const lintTask = await addLinting(tree, options);
-  const jestTask = await addJest(tree, options);
-  const cypressTask = await addCypress(tree, options);
+  const lintTask = await addEslintLintProject(
+    tree,
+    {
+      linter: options.linter,
+      projectName: options.name,
+      projectRoot: options.projectRoot,
+      tsConfigFileName: 'tsconfig.app.json',
+    },
+    extraEslintDependencies
+  );
+  const jestTask = await addJestConfiguration(tree, {
+    projectName: options.name,
+    unitTestRunner: options.unitTestRunner,
+  });
+  const cypressTask = await addCypressApplication(tree, {
+    projectName: options.name,
+    e2eTestRunner: options.e2eTestRunner,
+    e2eProjectName: options.e2eProjectName,
+    e2eProjectRoot: options.e2eProjectRoot,
+    e2eWebServerAddress: options.e2eWebServerAddress,
+    e2eWebServerTarget: options.e2eWebServerTarget,
+  });
   updateJestConfig(tree, options);
 
   if (!options.skipFormat) {

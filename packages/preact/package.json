@@ -36,6 +36,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@nxext/common": "23.0.0"
   }
 }

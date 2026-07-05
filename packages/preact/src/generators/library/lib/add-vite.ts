@@ -1,11 +1,11 @@
 import { ensurePackage, NX_VERSION, Tree } from '@nx/devkit';
+import { configureViteFrameworkPlugin } from '@nxext/common';
 import { NormalizedSchema } from '../schema';
+import { preactViteFrameworkConfig } from '../../utils/vite-config';
 
 export async function addVite(host: Tree, options: NormalizedSchema) {
   await ensurePackage('@nx/vite', NX_VERSION);
-  const { viteConfigurationGenerator, createOrEditViteConfig } = await import(
-    '@nx/vite'
-  );
+  const { viteConfigurationGenerator } = await import('@nx/vite');
 
   const addViteTask = await viteConfigurationGenerator(host, {
     uiFramework: 'none',
@@ -14,18 +14,14 @@ export async function addVite(host: Tree, options: NormalizedSchema) {
     includeVitest: options.unitTestRunner === 'vitest',
     inSourceTests: false,
   });
-  createOrEditViteConfig(
+  configureViteFrameworkPlugin(
     host,
     {
       project: options.name,
       includeLib: true,
       includeVitest: options.unitTestRunner === 'vitest',
-      inSourceTests: false,
-      rolldownOptionsExternal: [],
-      imports: [`import preact from '@preact/preset-vite'`],
-      plugins: [`preact()`],
     },
-    false
+    preactViteFrameworkConfig
   );
   return addViteTask;
 }
