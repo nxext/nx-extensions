@@ -3,6 +3,7 @@ import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
 } from '@nx/devkit/internal';
+import { isUsingTsSolutionSetup } from './ts-solution';
 
 /**
  * Deckt NUR den Teil ab, der im Design-Dokument als (b) parametrisierbar
@@ -36,6 +37,22 @@ export interface ViteAppCoreFields {
   e2eProjectRoot: string;
   e2eWebServerAddress: string;
   e2eWebServerTarget: string;
+  /**
+   * Additiv (Design 3.1/3.3): `determineProjectNameAndRootOptions` liefert
+   * `importPath` unabhängig von `projectType` (verifiziert gegen
+   * `@nx/devkit`s `project-name-and-root-utils.js` — auch Applications
+   * bekommen einen `importPath`, siehe react
+   * `application/lib/normalize-options.js`). Bestehende Aufrufer, die dieses
+   * Feld ignorieren, sind unberührt.
+   */
+  importPath: string;
+  /**
+   * Additiv (Design 1.1/3.1): einmal berechnet, analog zu Nx' eigenem
+   * `options.isUsingTsSolutionConfig`-Muster. Bestehende Aufrufer (svelte,
+   * solid, preact), die dieses Feld noch nicht auswerten, verhalten sich
+   * unverändert (Rückgabewert ist rein additiv).
+   */
+  isUsingTsSolutionConfig: boolean;
 }
 
 export async function normalizeViteAppCore(
@@ -47,17 +64,26 @@ export async function normalizeViteAppCore(
   generatorName: 'application' | 'library',
 ): Promise<ViteAppCoreFields> {
   await ensureRootProjectName(options, generatorName);
-  const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
-    tree,
-    {
-      name: options.name,
-      projectType: 'application',
-      directory: options.directory,
-      rootProject: options.rootProject,
-    },
-  );
+  const {
+    projectName: resolvedProjectName,
+    projectRoot,
+    importPath,
+  } = await determineProjectNameAndRootOptions(tree, {
+    name: options.name,
+    projectType: 'application',
+    directory: options.directory,
+    rootProject: options.rootProject,
+  });
 
   const isRootProject = projectRoot === '.';
+  const isUsingTsSolutionConfig = isUsingTsSolutionSetup(tree);
+  // Design 1.5, 1:1 nach react `application/lib/normalize-options.js:22-23`:
+  // ohne explizites `--name` wird der Nx-Projektname in TS-Solution-Mode auf
+  // den vollen `importPath` gesetzt statt auf den bloßen Verzeichnisnamen.
+  // Im Legacy-Fall (`isUsingTsSolutionConfig === false`) ist dieser Ausdruck
+  // immer `resolvedProjectName` — bestehendes Verhalten bleibt unverändert.
+  const projectName =
+    !isUsingTsSolutionConfig || options.name ? resolvedProjectName : importPath;
 
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
@@ -86,6 +112,8 @@ export async function normalizeViteAppCore(
     e2eProjectRoot,
     e2eWebServerAddress,
     e2eWebServerTarget,
+    importPath,
+    isUsingTsSolutionConfig,
   };
 }
 
@@ -102,6 +130,8 @@ export interface ViteLibCoreFields {
   projectRoot: string;
   parsedTags: string[];
   importPath: string;
+  /** Additiv — siehe Begründung bei `ViteAppCoreFields.isUsingTsSolutionConfig`. */
+  isUsingTsSolutionConfig: boolean;
 }
 
 export async function normalizeViteLibCore(
@@ -109,14 +139,24 @@ export async function normalizeViteLibCore(
   options: NormalizeViteLibCoreOptions,
 ): Promise<ViteLibCoreFields> {
   await ensureRootProjectName(options, 'library');
-  const { projectName, projectRoot, importPath } =
-    await determineProjectNameAndRootOptions(tree, {
-      name: options.name,
-      projectType: 'library',
-      directory: options.directory,
-      importPath: options.importPath,
-      rootProject: false,
-    });
+  const {
+    projectName: resolvedProjectName,
+    projectRoot,
+    importPath,
+  } = await determineProjectNameAndRootOptions(tree, {
+    name: options.name,
+    projectType: 'library',
+    directory: options.directory,
+    importPath: options.importPath,
+    rootProject: false,
+  });
+
+  const isUsingTsSolutionConfig = isUsingTsSolutionSetup(tree);
+  // Design 1.5, 1:1 nach react `library/lib/normalize-options.js`:
+  // `name: isUsingTsSolutionConfig && !options.name ? importPath : projectName`.
+  // Im Legacy-Fall bleibt das Ergebnis `resolvedProjectName` — unverändert.
+  const projectName =
+    isUsingTsSolutionConfig && !options.name ? importPath : resolvedProjectName;
 
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
@@ -125,6 +165,7 @@ export async function normalizeViteLibCore(
   return {
     projectName,
     projectRoot,
+    isUsingTsSolutionConfig,
     parsedTags,
     importPath,
   };

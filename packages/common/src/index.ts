@@ -16,3 +16,5 @@ export * from './lib/vite-generators/update-npm-scope';
 export * from './lib/vite-generators/init/add-dependencies';
 export * from './lib/vite-generators/init/add-jest-plugin';
 export * from './lib/vite-generators/init/add-cypress-plugin';
+export * from './lib/vite-generators/ts-solution';
+export * from './lib/vite-generators/testing';

@@ -4,6 +4,7 @@ import {
   normalizeViteAppCore,
   normalizeViteLibCore,
 } from './normalize-vite-project';
+import { createTsSolutionTree } from './testing';
 
 describe('normalizeViteAppCore', () => {
   let tree: Tree;
@@ -16,7 +17,7 @@ describe('normalizeViteAppCore', () => {
     const result = await normalizeViteAppCore(
       tree,
       { directory: 'apps/my-app', tags: 'one, two' },
-      'application'
+      'application',
     );
 
     expect(result.projectName).toBe('my-app');
@@ -32,7 +33,7 @@ describe('normalizeViteAppCore', () => {
     const result = await normalizeViteAppCore(
       tree,
       { directory: 'apps/my-app' },
-      'application'
+      'application',
     );
 
     expect(result.parsedTags).toEqual([]);
@@ -42,7 +43,7 @@ describe('normalizeViteAppCore', () => {
     const result = await normalizeViteAppCore(
       tree,
       { directory: 'apps/my-app', rootProject: true },
-      'application'
+      'application',
     );
 
     expect(result.projectRoot).toBe('apps/my-app');
@@ -54,7 +55,7 @@ describe('normalizeViteAppCore', () => {
     const result = await normalizeViteAppCore(
       tree,
       { name: 'root-app', directory: '', rootProject: true },
-      'application'
+      'application',
     );
 
     expect(result.projectRoot).toBe('.');
@@ -66,7 +67,7 @@ describe('normalizeViteAppCore', () => {
     const result = await normalizeViteAppCore(
       tree,
       { name: 'my-app', directory: '' },
-      'application'
+      'application',
     );
 
     expect(result.projectRoot).not.toBe('.');
@@ -84,10 +85,54 @@ describe('normalizeViteAppCore', () => {
     const result = await normalizeViteAppCore(
       tree,
       { directory: 'apps/my-app' },
-      'application'
+      'application',
     );
 
     expect(result.e2eWebServerAddress).toBe('http://localhost:4321');
+  });
+
+  it('additive: reports isUsingTsSolutionConfig=false and a string importPath on a legacy tree', async () => {
+    const result = await normalizeViteAppCore(
+      tree,
+      { directory: 'apps/my-app' },
+      'application',
+    );
+
+    expect(result.isUsingTsSolutionConfig).toBe(false);
+    expect(typeof result.importPath).toBe('string');
+  });
+});
+
+describe('normalizeViteAppCore (TS-solution mode)', () => {
+  let tsSolutionTree: Tree;
+
+  beforeEach(() => {
+    tsSolutionTree = createTsSolutionTree();
+  });
+
+  it('falls back projectName to importPath when no explicit name is given (Design 1.5)', async () => {
+    const result = await normalizeViteAppCore(
+      tsSolutionTree,
+      { directory: 'apps/my-app' },
+      'application',
+    );
+
+    expect(result.isUsingTsSolutionConfig).toBe(true);
+    expect(result.projectName).toBe(result.importPath);
+    // e2e naming derives from the (importPath-substituted) projectName,
+    // matching react application/lib/normalize-options.js.
+    expect(result.e2eProjectName).toBe(`${result.importPath}-e2e`);
+  });
+
+  it('keeps projectName as the resolved directory name when an explicit name is given', async () => {
+    const result = await normalizeViteAppCore(
+      tsSolutionTree,
+      { name: 'my-app', directory: 'apps/my-app' },
+      'application',
+    );
+
+    expect(result.projectName).toBe('my-app');
+    expect(result.e2eProjectName).toBe('my-app-e2e');
   });
 });
 
@@ -117,5 +162,40 @@ describe('normalizeViteLibCore', () => {
     });
 
     expect(result.importPath).toBe('@myorg/my-lib');
+  });
+
+  it('additive: reports isUsingTsSolutionConfig=false on a legacy tree', async () => {
+    const result = await normalizeViteLibCore(tree, {
+      directory: 'libs/my-lib',
+    });
+
+    expect(result.isUsingTsSolutionConfig).toBe(false);
+    expect(result.projectName).toBe('my-lib');
+  });
+});
+
+describe('normalizeViteLibCore (TS-solution mode)', () => {
+  let tsSolutionTree: Tree;
+
+  beforeEach(() => {
+    tsSolutionTree = createTsSolutionTree();
+  });
+
+  it('falls back projectName to importPath when no explicit name is given (Design 1.5)', async () => {
+    const result = await normalizeViteLibCore(tsSolutionTree, {
+      directory: 'packages/my-lib',
+    });
+
+    expect(result.isUsingTsSolutionConfig).toBe(true);
+    expect(result.projectName).toBe(result.importPath);
+  });
+
+  it('keeps projectName as the resolved directory name when an explicit name is given', async () => {
+    const result = await normalizeViteLibCore(tsSolutionTree, {
+      name: 'my-lib',
+      directory: 'packages/my-lib',
+    });
+
+    expect(result.projectName).toBe('my-lib');
   });
 });
