@@ -13,12 +13,10 @@
   },
   "license": "MIT",
   "generators": "./generators.json",
-  "executors": "./executors.json",
   "nx-migrations": {
     "migrations": "./migrations.json"
   },
   "schematics": "./generators.json",
-  "builders": "./executors.json",
   "dependencies": {
     "@nxext/capacitor": "23.0.0",
     "tslib": "^2.3.0",
