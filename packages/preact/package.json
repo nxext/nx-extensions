@@ -22,6 +22,9 @@
   },
   "main": "src/index.js",
   "generators": "./generators.json",
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  },
   "peerDependencies": {
     "@nx/devkit": "^23.0.1",
     "@nx/vite": "^23.0.1",

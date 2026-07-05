@@ -1,0 +1,14 @@
+{
+  "generators": {},
+  "packageJsonUpdates": {
+    "23.1.0": {
+      "version": "23.1.0",
+      "packages": {
+        "preact": {
+          "version": "^10.29.0",
+          "alwaysAddToPackageJson": true
+        }
+      }
+    }
+  }
+}
