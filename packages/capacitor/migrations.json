@@ -21,6 +21,27 @@
           "alwaysAddToPackageJson": false
         }
       }
+    },
+    "23.0.1": {
+      "version": "23.0.1",
+      "packages": {
+        "@capacitor/core": {
+          "version": "^6.0.0",
+          "alwaysAddToPackageJson": true
+        },
+        "@capacitor/cli": {
+          "version": "^6.0.0",
+          "alwaysAddToPackageJson": true
+        },
+        "@capacitor/ios": {
+          "version": "^6.0.0",
+          "alwaysAddToPackageJson": false
+        },
+        "@capacitor/android": {
+          "version": "^6.0.0",
+          "alwaysAddToPackageJson": false
+        }
+      }
     }
   }
 }

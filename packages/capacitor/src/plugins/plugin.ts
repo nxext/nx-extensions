@@ -1,7 +1,8 @@
 import {
-  CreateNodes,
+  CreateNodesV2,
   ProjectConfiguration,
   TargetConfiguration,
+  createNodesFromFiles,
 } from '@nx/devkit';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -14,31 +15,43 @@ export type CapCommandFormat =
   | `cap ${CapCommand}`
   | `cap ${CapCommand} ${CapPlatform}`;
 
-export const createNodesV2: CreateNodes<CapacitorPluginOptions> = [
+/**
+ * Infers capacitor tasks for any project containing a `capacitor.config.ts`.
+ *
+ * Scope-by-design: targets shell out to the local `cap` CLI via
+ * `nx:run-commands` with `cwd: projectRoot`. Every command additionally gets
+ * a per-platform (`ios`/`android`) configuration, e.g. `nx run app:sync:ios`.
+ */
+export const createNodesV2: CreateNodesV2<CapacitorPluginOptions> = [
   '**/capacitor.config.ts',
-  (configFiles) => {
-    return configFiles.map((configFile) => {
+  (configFiles, options, context) => {
+    const workspaceRoot = context.workspaceRoot;
+
+    const projectConfigFiles = configFiles.filter((configFile) => {
       const projectRoot = dirname(configFile);
+      return (
+        existsSync(join(workspaceRoot, projectRoot, 'project.json')) ||
+        existsSync(join(workspaceRoot, projectRoot, 'package.json'))
+      );
+    });
 
-      const isProject =
-        existsSync(join(projectRoot, 'project.json')) ||
-        existsSync(join(projectRoot, 'package.json'));
-      if (!isProject) {
-        return null;
-      }
+    return createNodesFromFiles(
+      (configFile) => {
+        const projectRoot = dirname(configFile);
 
-      return [
-        projectRoot,
-        {
+        return {
           projects: {
             [projectRoot]: {
               projectType: 'application',
               targets: buildTargets(projectRoot),
             },
           },
-        },
-      ];
-    });
+        };
+      },
+      projectConfigFiles,
+      options,
+      context
+    );
   },
 ];
 
