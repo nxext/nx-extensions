@@ -18,7 +18,7 @@ function checkLockFiles() {
   }
   try {
     const content = fs.readFileSync('pnpm-lock.yaml', 'utf-8');
-    if (content.match(/localhost:487/)) {
+    if (content.match(/localhost:4873/)) {
       errors.push(
         'The "pnpm-lock.yaml" has reference to local repository ("localhost:4873"). Please use ensure you disable local registry before running "pnpm install"'
       );

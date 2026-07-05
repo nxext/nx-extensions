@@ -41,6 +41,6 @@ runs:
     - name: Set nx base & head commit hashes in env vars
       uses: nrwl/nx-set-shas@v4
 
-    - name: yarn install
+    - name: pnpm install
       shell: bash
       run: pnpm install --frozen-lockfile

@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 pnpm format:check || {
   echo "Make sure to run \`pnpm format\` before pushing." >&2;
   exit 1;

@@ -1,7 +1,7 @@
 # path to a directory with all packages
 storage: ../tmp/local-registry/storage
 
-listen: localhost:4872
+listen: localhost:4873
 
 auth:
   auth-memory:

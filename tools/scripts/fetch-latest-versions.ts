@@ -1,7 +1,6 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { spawnSync } from 'child_process';
 import {
-  // ionicVersion,
   puppeteer,
   STENCIL_OUTPUTTARGET_VERSION,
   STENCIL_STYLE_PLUGIN_VERSION,
@@ -32,16 +31,6 @@ import {
   testingLibraryPreactVersion,
   vitePluginPreactVersion,
 } from '../../packages/preact/src/generators/utils/versions';
-// import {
-//   vueRouterVersion,
-//   vueTestUtilsVersion,
-//   vueTscVersion,
-//   vueVersion,
-//   vitePluginVueVersion,
-//   eslintPluginVueVersion,
-//   eslintPluginPrettierVueVersion,
-//   eslintPluginTypescriptVueVersion,
-// } from '../../packages/v';
 
 console.log('======================================');
 console.log('Stencil:');
@@ -53,7 +42,6 @@ const stencilpkgs = [
   { pkg: '@stencil/less', version: STENCIL_STYLE_PLUGIN_VERSION['less'] },
   { pkg: '@stencil/postcss', version: STENCIL_STYLE_PLUGIN_VERSION['pcss'] },
   { pkg: '@stencil/stylus', version: STENCIL_STYLE_PLUGIN_VERSION['styl'] },
-  // { pkg: '@ionic/core', version: ionicVersion },
   { pkg: '@stencil/router', version: stencilRouterVersion },
 
   {
@@ -68,10 +56,6 @@ const stencilpkgs = [
     pkg: '@stencil/angular-output-target',
     version: STENCIL_OUTPUTTARGET_VERSION['angular'],
   },
-  // {
-  //   pkg: '@stencil/svelte-output-target',
-  //   version: STENCIL_OUTPUTTARGET_VERSION['svelte'],
-  // },
   { pkg: 'puppeteer', version: puppeteer },
 ];
 
@@ -129,32 +113,6 @@ const solidPkgs = [
 solidPkgs.forEach(({ pkg, version }) => {
   checkVersion(pkg, version);
 });
-
-console.log('======================================');
-console.log('Vue:');
-console.log('======================================');
-
-// const vuePkgs = [
-//   { pkg: 'vue-router', version: vueRouterVersion },
-//   { pkg: '@vue/test-utils', version: vueTestUtilsVersion },
-//   { pkg: 'vue-tsc', version: vueTscVersion },
-//   { pkg: 'vue', version: vueVersion },
-//   { pkg: '@vitejs/plugin-vue', version: vitePluginVueVersion },
-//
-//   { pkg: 'eslint-plugin-vue', version: eslintPluginVueVersion },
-//   {
-//     pkg: '@vue/eslint-config-prettier',
-//     version: eslintPluginPrettierVueVersion,
-//   },
-//   {
-//     pkg: '@vue/eslint-config-typescript',
-//     version: eslintPluginTypescriptVueVersion,
-//   },
-// ];
-
-// vuePkgs.forEach(({ pkg, version }) => {
-//   checkVersion(pkg, version);
-// });
 
 function checkVersion(pkg: string, version: string = '') {
   const show = spawnSync(`npm`, ['show', pkg, 'version']);
