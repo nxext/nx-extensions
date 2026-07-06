@@ -1,5 +1,6 @@
-import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree, writeJson } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { createTsSolutionTree } from '@nxext/common';
 import { configurationGenerator } from './generator';
 import { ConfigurationGeneratorSchema } from './schema';
 // `@nx/angular`'s Node-only `/generators` and `/internal` subpaths have no
@@ -97,6 +98,84 @@ describe('configuration schematic', () => {
 
         expect(host.exists(`${projectRoot}/capacitor.config.ts`)).toBeDefined();
       });
+    });
+  });
+
+  describe('TS-solution mode', () => {
+    let tsSolutionTree: Tree;
+    const tsProjectRoot = `packages/${appName}`;
+
+    beforeEach(() => {
+      tsSolutionTree = createTsSolutionTree();
+      // `@nx/angular`'s own `application` generator still calls
+      // `assertNotUsingTsSolutionSetup` itself (checked directly against
+      // the installed @nx/angular@23.0.1 dist - its `application` generator
+      // has not been migrated for TS-solution setups yet), so it cannot be
+      // used here to scaffold the pre-existing app the way the suite above
+      // does. Instead the package.json-based project shape it *would*
+      // produce is fabricated directly (see @nx/angular's
+      // `create-project.js`: `targets.build.options.assets`/`.styles` are
+      // always plain arrays, with no defensive fallback), so
+      // `updateWorkspace`'s un-guarded
+      // `projectConfig.targets.build.options.assets = [...]` has something
+      // to spread.
+      writeJson(tsSolutionTree, `${tsProjectRoot}/package.json`, {
+        name: appName,
+        version: '0.0.1',
+        nx: {
+          prefix: 'app',
+          targets: {
+            build: {
+              executor: '@angular-devkit/build-angular:browser',
+              options: {
+                outputPath: `dist/${tsProjectRoot}`,
+                assets: [
+                  { glob: '**/*', input: `${tsProjectRoot}/public` },
+                ],
+                styles: [`${tsProjectRoot}/src/styles.scss`],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('configures Ionic Angular for a package.json-based (TS-solution) project without crashing', async () => {
+      await configurationGenerator(tsSolutionTree, {
+        ...options,
+        capacitor: false,
+      });
+
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/ionic.config.json`)
+      ).toBeTruthy();
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/src/app/app.component.ts`)
+      ).toBeTruthy();
+
+      // updateWorkspace patches targets via updateProjectConfiguration,
+      // which - for a package.json-based project - writes back into
+      // `package.json`'s `nx` field (Nx core dispatches on which of
+      // project.json/package.json exists; see
+      // `nx/src/generators/utils/project-configuration.js`).
+      const packageJson = readJson(
+        tsSolutionTree,
+        `${tsProjectRoot}/package.json`
+      );
+      expect(packageJson.nx.targets.build.options.styles).toEqual(
+        expect.arrayContaining([`${tsProjectRoot}/src/theme/variables.scss`])
+      );
+    });
+
+    it('also configures Capacitor transitively when --capacitor is set', async () => {
+      await configurationGenerator(tsSolutionTree, {
+        ...options,
+        capacitor: true,
+      });
+
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`)
+      ).toBeTruthy();
     });
   });
 });
