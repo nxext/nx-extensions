@@ -5,15 +5,12 @@ import { normalizeOptions } from './lib/normalize-options';
 import { updateProjectGitignore } from './lib/update-project-gitignore';
 import { updateProjectPackageJson } from './lib/update-project-package-json';
 import { CapacitorConfigurationSchema } from './schema';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 import { addPluginToNxJson } from '@nxext/common';
 
 export async function capacitorConfigurationGenerator(
   host: Tree,
   options: CapacitorConfigurationSchema
 ) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/capacitor', 'configuration');
-
   const normalizedOptions = normalizeOptions(host, options);
   const installTask = addDependencies(host);
   addCapacitorConfig(host, normalizedOptions);

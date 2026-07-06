@@ -26,7 +26,6 @@
     "@nxext/common": "23.0.0",
     "@nx/devkit": "^23.0.1",
     "nx": "^23.0.1",
-    "@nx/js": "^23.0.1",
     "ignore": "^5.3.2"
   },
   "peerDependencies": {}

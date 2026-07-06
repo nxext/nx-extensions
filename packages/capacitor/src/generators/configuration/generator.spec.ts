@@ -8,6 +8,7 @@ import {
   writeJson,
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { createTsSolutionTree } from '@nxext/common';
 import generator from './generator';
 import { CapacitorConfigurationSchema } from './schema';
 import { capacitorVersion } from '../../utils/versions';
@@ -122,6 +123,65 @@ describe('capacitor-project', () => {
       expect(packageJson.dependencies['@capacitor/ios']).toEqual(
         capacitorVersion
       );
+    });
+  });
+
+  describe('TS-solution mode', () => {
+    let tsSolutionTree: Tree;
+    const tsProjectRoot = `packages/${options.project}`;
+
+    beforeEach(() => {
+      tsSolutionTree = createTsSolutionTree();
+      // App/lib generators register projects in a TS-solution workspace as
+      // package.json-based projects by default (no project.json) - see e.g.
+      // @nx/web's `addProject`: `useProjectJson` defaults to
+      // `!isUsingTsSolutionConfig`. Nx core's `updateProjectConfiguration`/
+      // `readProjectConfiguration` (`nx/src/generators/utils/
+      // project-configuration.js`) dispatch transparently on whichever of
+      // `project.json`/`package.json` exists at the project root, so
+      // capacitor's generator - which only ever calls
+      // `readProjectConfiguration` - needs no code changes for this mode,
+      // only the `assertNotUsingTsSolutionSetup` guard removed.
+      writeJson(tsSolutionTree, `${tsProjectRoot}/package.json`, {
+        name: options.project,
+        version: '0.0.1',
+        nx: {
+          targets: {
+            build: {
+              executor: '@nx/vite:build',
+              options: { outputPath: `dist/${tsProjectRoot}` },
+            },
+          },
+        },
+      });
+    });
+
+    it('configures Capacitor for a package.json-based (TS-solution) project without crashing', async () => {
+      await generator(tsSolutionTree, options);
+
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`)
+      ).toBeTruthy();
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/.gitignore`)
+      ).toBeTruthy();
+
+      // updateProjectPackageJson merges capacitor deps into the project's
+      // EXISTING package.json (there is no separate project.json in this
+      // mode) - the pre-existing `nx.targets` must survive untouched.
+      const packageJson = readJson(
+        tsSolutionTree,
+        `${tsProjectRoot}/package.json`
+      );
+      expect(packageJson.nx.targets.build).toBeDefined();
+      expect(packageJson.dependencies['@capacitor/android']).toBeDefined();
+      expect(packageJson.devDependencies['@capacitor/cli']).toBeDefined();
+    });
+
+    it('registers @nxext/capacitor/plugin in nx.json', async () => {
+      await generator(tsSolutionTree, options);
+      const nxJson = readNxJson(tsSolutionTree);
+      expect(nxJson.plugins).toContain('@nxext/capacitor/plugin');
     });
   });
 });
