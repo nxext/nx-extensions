@@ -5,13 +5,19 @@ import {
   readProjectConfiguration,
   Tree,
 } from '@nx/devkit';
+import { getProjectSourceRoot } from '@nx/js/internal';
 import { SvelteComponentSchema } from '../component';
 
 export function createComponentInProject(
   tree: Tree,
-  options: SvelteComponentSchema
+  options: SvelteComponentSchema,
 ) {
   const projectConfig = readProjectConfiguration(tree, options.project);
+  // package.json-backed (TS-solution) projects don't carry an explicit
+  // `sourceRoot` - getProjectSourceRoot falls back to `<root>/src` for them,
+  // and returns the explicit value unchanged for legacy project.json
+  // projects.
+  const sourceRoot = getProjectSourceRoot(projectConfig, tree);
   const projectDirectory = options.directory
     ? joinPathFragments(options.directory)
     : '';
@@ -19,15 +25,15 @@ export function createComponentInProject(
   generateFiles(
     tree,
     joinPathFragments(__dirname, '../files/src'),
-    joinPathFragments(`${projectConfig.sourceRoot}/${projectDirectory}`),
-    generatedNames
+    joinPathFragments(`${sourceRoot}/${projectDirectory}`),
+    generatedNames,
   );
 
   if (!tree.exists(joinPathFragments(`${projectConfig.root}/.storybook`))) {
     tree.delete(
       joinPathFragments(
-        `${projectConfig.sourceRoot}/components/${generatedNames.fileName}/${generatedNames.fileName}.stories.ts`
-      )
+        `${sourceRoot}/components/${generatedNames.fileName}/${generatedNames.fileName}.stories.ts`,
+      ),
     );
   }
 }

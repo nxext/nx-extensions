@@ -10,18 +10,11 @@ import {
 import { StorybookConfigureSchema } from './schema';
 import { svelteLoaderVersion } from '../utils/versions';
 import { updateMainJs } from './lib/update-main-js';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function configurationGenerator(
   host: Tree,
-  schema: StorybookConfigureSchema
+  schema: StorybookConfigureSchema,
 ) {
-  assertNotUsingTsSolutionSetup(
-    host,
-    '@nxext/svelte',
-    'storybook-configuration'
-  );
-
   const uiFramework = '@storybook/svelte-vite';
   const options = normalizeSchema(schema);
   const tasks: GeneratorCallback[] = [];
@@ -31,7 +24,7 @@ export async function configurationGenerator(
     {},
     {
       'svelte-loader': svelteLoaderVersion,
-    }
+    },
   );
   tasks.push(installTask);
 
@@ -56,7 +49,7 @@ export async function configurationGenerator(
 }
 
 function normalizeSchema(
-  schema: StorybookConfigureSchema
+  schema: StorybookConfigureSchema,
 ): StorybookConfigureSchema {
   const defaults = {
     configureCypress: true,

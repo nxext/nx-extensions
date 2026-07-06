@@ -31,10 +31,15 @@ function deriveProjectFileNames(projectName: string): {
 
 export async function normalizeOptions(
   host: Tree,
-  options: SvelteLibrarySchema
+  options: SvelteLibrarySchema,
 ): Promise<NormalizedSchema> {
-  const { projectName, projectRoot, parsedTags, importPath } =
-    await normalizeViteLibCore(host, options);
+  const {
+    projectName,
+    projectRoot,
+    parsedTags,
+    importPath,
+    isUsingTsSolutionConfig,
+  } = await normalizeViteLibCore(host, options);
 
   const { projectFileName, projectSimpleName } =
     deriveProjectFileNames(projectName);
@@ -48,5 +53,10 @@ export async function normalizeOptions(
     fileName,
     projectDirectory: projectRoot,
     importPath,
+    isUsingTsSolutionConfig,
+    // Nx pattern (react/vue `normalize-options.js`): default is the exact
+    // negation of the TS-solution flag. Not exposed as a user-facing CLI
+    // option here - see report for the scope rationale.
+    useProjectJson: !isUsingTsSolutionConfig,
   };
 }

@@ -12,16 +12,11 @@ export function createTsConfig(
     bundler?: string;
     rootProject?: boolean;
     unitTestRunner?: string;
+    isUsingTsSolutionConfig?: boolean;
   },
-  relativePathToRootTsConfig: string
+  relativePathToRootTsConfig: string,
 ) {
   const json = {
-    compilerOptions: {
-      allowJs: false,
-      esModuleInterop: false,
-      allowSyntheticDefaultImports: true,
-      strict: options.strict,
-    },
     files: [],
     include: [],
     references: [
@@ -31,11 +26,29 @@ export function createTsConfig(
     ],
   } as any;
 
-  if (options.bundler === 'vite') {
-    json.compilerOptions.types =
-      options.unitTestRunner === 'vitest'
-        ? ['vite/client', 'vitest']
-        : ['vite/client'];
+  // In TS-solution mode the per-project wrapper tsconfig.json is meant to
+  // stay a thin "references" pointer (mirrors @nx/react/@nx/js's
+  // `createTsConfigForTsSolution`): no framework compilerOptions get baked
+  // in here, since the root tsconfig.base.json (which already exists in a
+  // TS-solution workspace) is the single source of truth for those, and the
+  // framework-specific overrides that DO need to differ per project
+  // (moduleResolution: 'bundler' etc.) are applied directly onto the
+  // runtime tsconfig.app.json/tsconfig.lib.json by `wireTsSolutionProject`
+  // instead (see application.ts/library.ts).
+  if (!options.isUsingTsSolutionConfig) {
+    json.compilerOptions = {
+      allowJs: false,
+      esModuleInterop: false,
+      allowSyntheticDefaultImports: true,
+      strict: options.strict,
+    };
+
+    if (options.bundler === 'vite') {
+      json.compilerOptions.types =
+        options.unitTestRunner === 'vitest'
+          ? ['vite/client', 'vitest']
+          : ['vite/client'];
+    }
   }
 
   // inline tsconfig.base.json into the project
@@ -75,7 +88,7 @@ export function extractTsConfigBase(host: Tree) {
     const vite = host.read('vite.config.ts').toString();
     host.write(
       'vite.config.ts',
-      vite.replace(`projects: []`, `projects: ['tsconfig.base.json']`)
+      vite.replace(`projects: []`, `projects: ['tsconfig.base.json']`),
     );
   }
 }

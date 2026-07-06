@@ -22,4 +22,10 @@ export interface NormalizedSchema extends Schema {
   fileName: string;
   parsedTags: string[];
   skipFormat: boolean;
+  /** npm-scoped import path, e.g. `@proj/my-app` (see `@nxext/common`'s `normalizeViteAppCore`). */
+  importPath: string;
+  /** Single source of truth for the TS-solution branch, computed once in `normalizeOptions`. */
+  isUsingTsSolutionConfig: boolean;
+  /** Default `!isUsingTsSolutionConfig` (Nx pattern, not exposed as a CLI flag here). */
+  useProjectJson: boolean;
 }

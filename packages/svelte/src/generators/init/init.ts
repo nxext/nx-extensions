@@ -10,11 +10,8 @@ import { addCypressPlugin } from './lib/add-cypress-plugin';
 import { updateDependencies } from './lib/add-dependencies';
 import { addLinterPlugin } from './lib/add-linter-plugin';
 import { addPluginToNxJson } from '@nxext/common';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function initGenerator(host: Tree, schema: Schema) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/svelte', 'init');
-
   const tasks: GeneratorCallback[] = [];
 
   const jestTask = await addJestPlugin(host, schema);

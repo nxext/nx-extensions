@@ -15,7 +15,7 @@ import { NormalizedSchema, Schema } from '../schema';
  */
 export async function normalizeOptions(
   host: Tree,
-  options: Schema
+  options: Schema,
 ): Promise<NormalizedSchema> {
   const {
     projectName,
@@ -25,6 +25,8 @@ export async function normalizeOptions(
     e2eProjectRoot,
     e2eWebServerAddress,
     e2eWebServerTarget,
+    importPath,
+    isUsingTsSolutionConfig,
   } = await normalizeViteAppCore(host, options, 'application');
 
   options.name ??= projectName;
@@ -44,5 +46,11 @@ export async function normalizeOptions(
     e2eWebServerAddress,
     e2eWebServerTarget,
     skipFormat: false,
+    importPath,
+    isUsingTsSolutionConfig,
+    // Nx pattern (react/vue `normalize-options.js`): default is the exact
+    // negation of the TS-solution flag. Not exposed as a user-facing CLI
+    // option here - see report for the scope rationale.
+    useProjectJson: !isUsingTsSolutionConfig,
   };
 }

@@ -16,11 +16,11 @@ import { createProjectFiles } from './lib/create-project-files';
 import { normalizeOptions } from './lib/normalize-options';
 import {
   configureViteFrameworkPlugin,
+  maybeAddTsConfigPath,
   updateLibPackageNpmScope,
   ViteFrameworkConfig,
+  wireTsSolutionProject,
 } from '@nxext/common';
-import { addTsConfigPath } from '@nx/js';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 const SVELTE_VITE_CONFIG: ViteFrameworkConfig = {
   frameworkName: 'svelte',
@@ -45,14 +45,12 @@ const SVELTE_VITE_CONFIG: ViteFrameworkConfig = {
 
 export async function libraryGenerator(
   host: Tree,
-  schema: SvelteLibrarySchema
+  schema: SvelteLibrarySchema,
 ) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/svelte', 'library');
-
   const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(
-      `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`
+      `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`,
     );
   }
 
@@ -60,6 +58,25 @@ export async function libraryGenerator(
 
   addProject(host, options);
   await createProjectFiles(host, options);
+
+  if (options.isUsingTsSolutionConfig) {
+    // The runtime tsconfig.lib.json must already exist on disk (written by
+    // createProjectFiles above) before `updateTsconfigFiles` can patch it -
+    // see Design 1.3/`@nxext/common`'s `wireTsSolutionProject`.
+    // compilerOptions mirror what @nx/vue passes for its own vite-based
+    // application/library generators (library.js:109-115), minus the
+    // jsx-specific entries svelte has no use for.
+    await wireTsSolutionProject(
+      host,
+      options.projectRoot,
+      'tsconfig.lib.json',
+      {
+        module: 'esnext',
+        moduleResolution: 'bundler',
+        resolveJsonModule: true,
+      },
+    );
+  }
 
   const lintTask = await addLinting(host, options);
   const jestTask = await addJest(host, options);
@@ -72,7 +89,7 @@ export async function libraryGenerator(
       includeLib: true,
       includeVitest,
     },
-    SVELTE_VITE_CONFIG
+    SVELTE_VITE_CONFIG,
   );
 
   const vitestTask = await addVitest(host, options);
@@ -83,9 +100,12 @@ export async function libraryGenerator(
     updateLibPackageNpmScope(host, options);
   }
 
-  addTsConfigPath(host, options.importPath, [
-    joinPathFragments(options.projectRoot, './src', 'index.ts'),
-  ]);
+  maybeAddTsConfigPath(
+    host,
+    options.importPath,
+    [joinPathFragments(options.projectRoot, './src', 'index.ts')],
+    options.isUsingTsSolutionConfig,
+  );
 
   if (!options.skipFormat) {
     await formatFiles(host);
