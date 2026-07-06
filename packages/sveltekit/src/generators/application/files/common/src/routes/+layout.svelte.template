@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Snippet } from 'svelte';
+    import { resolve } from '$app/paths';
     import '../app.css'
 
     let { children }: { children: Snippet } = $props();
@@ -8,7 +9,7 @@
 <nav>
     <ul>
         <li>
-            <a href="/">Home</a>
+            <a href={resolve('/')}>Home</a>
         </li>
     </ul>
 </nav>
