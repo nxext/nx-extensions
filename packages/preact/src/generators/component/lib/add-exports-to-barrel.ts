@@ -11,23 +11,37 @@ import {
   Tree,
 } from '@nx/devkit';
 import { findNodes } from '@nx/js';
+import { getProjectSourceRoot, getProjectType } from '@nx/js/internal';
 
 export function addExportsToBarrel(tree: Tree, options: PreactComponentSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);
 
   const { className, fileName } = names(options.name);
-  const indexFilePath = joinPathFragments(projectConfig.sourceRoot, 'index.ts');
+  // package.json-backed (TS-solution) projects don't carry an explicit
+  // `sourceRoot` - getProjectSourceRoot falls back to `<root>/src` for them.
+  const indexFilePath = joinPathFragments(
+    getProjectSourceRoot(projectConfig, tree),
+    'index.ts',
+  );
   const componentFile = `./components/${fileName}/${className}.ts`;
 
-  if (projectConfig.projectType === 'library') {
+  // package.json-backed (TS-solution) projects don't carry an explicit
+  // `projectType` unless nx.json configures a workspaceLayout -
+  // getProjectType falls back to tsconfig.lib.json/tsconfig.app.json
+  // existence, and returns the explicit value unchanged for legacy
+  // project.json projects.
+  if (
+    getProjectType(tree, projectConfig.root, projectConfig.projectType) ===
+    'library'
+  ) {
     const { content, source } = readSourceFile(tree, indexFilePath);
 
     const changes = applyChangesToString(
       content,
       addExport(
         source,
-        `export { default as ${className} } from '${componentFile}';`
-      )
+        `export { default as ${className} } from '${componentFile}';`,
+      ),
     );
     tree.write(indexFilePath, changes);
   }
@@ -35,7 +49,7 @@ export function addExportsToBarrel(tree: Tree, options: PreactComponentSchema) {
 
 export function addExport(
   source: ts.SourceFile,
-  statement: string
+  statement: string,
 ): StringChange[] {
   const allExports = findNodes(source, ts.SyntaxKind.ExportDeclaration);
   if (allExports.length > 0) {
@@ -60,7 +74,7 @@ export function addExport(
 
 function readSourceFile(
   host: Tree,
-  path: string
+  path: string,
 ): { content: string; source: ts.SourceFile } {
   if (!host.exists(path)) {
     throw new Error(`Cannot find ${path}`);
@@ -72,7 +86,7 @@ function readSourceFile(
     path,
     content,
     ts.ScriptTarget.Latest,
-    true
+    true,
   );
 
   return { content, source };

@@ -1,7 +1,8 @@
 import { PreactLibrarySchema } from './schema';
-import { readJson, readProjectConfiguration } from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './library';
+import { createTsSolutionTree } from '@nxext/common';
 
 describe('preact library schematic', () => {
   let host;
@@ -106,5 +107,104 @@ describe('preact library schematic', () => {
         'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)',
       );
     }
+  });
+
+  describe('TS-solution mode', () => {
+    let tsSolutionTree: Tree;
+
+    beforeEach(() => {
+      tsSolutionTree = createTsSolutionTree();
+    });
+
+    it('writes a package.json instead of a project.json, named after the import path', async () => {
+      await libraryGenerator(tsSolutionTree, {
+        ...options,
+        buildable: false,
+        publishable: false,
+      });
+
+      expect(tsSolutionTree.exists('libs/test/project.json')).toBe(false);
+      expect(tsSolutionTree.exists('libs/test/package.json')).toBe(true);
+
+      const packageJson = readJson(tsSolutionTree, 'libs/test/package.json');
+      // determineProjectNameAndRootOptions derives the import path from the
+      // workspace npm scope (`@proj`, from createTsSolutionTree's root
+      // package.json) + the directory basename.
+      expect(packageJson.name).toBe('@proj/test');
+    });
+
+    it('points a non-buildable lib package.json straight at its source (no dist step)', async () => {
+      await libraryGenerator(tsSolutionTree, {
+        ...options,
+        buildable: false,
+        publishable: false,
+      });
+
+      const packageJson = readJson(tsSolutionTree, 'libs/test/package.json');
+      expect(packageJson.main).toBe('./src/index.ts');
+      expect(packageJson.exports['.']).toEqual({
+        types: './src/index.ts',
+        import: './src/index.ts',
+        default: './src/index.ts',
+      });
+    });
+
+    it('registers the project in pnpm-workspace.yaml and adds a root tsconfig.json reference', async () => {
+      await libraryGenerator(tsSolutionTree, {
+        ...options,
+        buildable: false,
+        publishable: false,
+      });
+
+      const workspaceYaml = tsSolutionTree.read('pnpm-workspace.yaml', 'utf-8');
+      expect(workspaceYaml).toContain('libs');
+
+      const rootTsconfig = readJson(tsSolutionTree, 'tsconfig.json');
+      expect(rootTsconfig.references).toEqual(
+        expect.arrayContaining([{ path: './libs/test' }]),
+      );
+    });
+
+    it('wires the runtime tsconfig.lib.json to extend tsconfig.base.json directly, with preact JSX + bundler resolution', async () => {
+      await libraryGenerator(tsSolutionTree, {
+        ...options,
+        buildable: false,
+        publishable: false,
+      });
+
+      const tsconfigLib = readJson(
+        tsSolutionTree,
+        'libs/test/tsconfig.lib.json',
+      );
+      expect(tsconfigLib.extends).toBe('../../tsconfig.base.json');
+      // `moduleResolution: 'bundler'`/`module: 'esnext'` are already declared
+      // on the root tsconfig.base.json (createTsSolutionTree) -
+      // updateTsconfigFiles' getNeededCompilerOptionOverrides correctly
+      // omits them here as redundant instead of duplicating the inherited
+      // value, so assert against the base directly.
+      const tsconfigBase = readJson(tsSolutionTree, 'tsconfig.base.json');
+      expect(tsconfigBase.compilerOptions.moduleResolution).toBe('bundler');
+      expect(tsconfigBase.compilerOptions.module).toBe('esnext');
+      // resolveJsonModule and the preact-specific JSX settings are NOT set
+      // on the base, so they must show up here.
+      expect(tsconfigLib.compilerOptions.resolveJsonModule).toBe(true);
+      expect(tsconfigLib.compilerOptions.jsx).toBe('preserve');
+      expect(tsconfigLib.compilerOptions.jsxFactory).toBe('h');
+      expect(tsconfigLib.compilerOptions.jsxFragmentFactory).toBe('Fragment');
+      expect(tsconfigLib.compilerOptions.jsxImportSource).toBe('preact');
+    });
+
+    it('does not register a tsconfig.base.json paths entry (workspace symlinks resolve cross-project imports instead)', async () => {
+      await libraryGenerator(tsSolutionTree, {
+        ...options,
+        buildable: false,
+        publishable: false,
+      });
+
+      const tsconfigBase = readJson(tsSolutionTree, 'tsconfig.base.json');
+      expect(
+        tsconfigBase.compilerOptions.paths?.['@proj/test'],
+      ).toBeUndefined();
+    });
   });
 });

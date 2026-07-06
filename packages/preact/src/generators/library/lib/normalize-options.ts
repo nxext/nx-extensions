@@ -4,7 +4,7 @@ import { NormalizedSchema, PreactLibrarySchema } from '../schema';
 
 export async function normalizeOptions(
   tree: Tree,
-  options: PreactLibrarySchema
+  options: PreactLibrarySchema,
 ): Promise<NormalizedSchema> {
   const core = await normalizeViteLibCore(tree, {
     name: options.name,
@@ -29,5 +29,10 @@ export async function normalizeOptions(
     fileName,
     projectDirectory: core.projectRoot,
     importPath: core.importPath,
+    isUsingTsSolutionConfig: core.isUsingTsSolutionConfig,
+    // Nx pattern (react/vue `normalize-options.js`): default is the exact
+    // negation of the TS-solution flag. Not exposed as a user-facing CLI
+    // option here - see report for the scope rationale.
+    useProjectJson: !core.isUsingTsSolutionConfig,
   };
 }
