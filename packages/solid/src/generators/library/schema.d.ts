@@ -21,4 +21,8 @@ export interface NormalizedSchema extends SolidLibrarySchema {
   parsedTags: string[];
   importPath: string;
   inSourceTests: boolean;
+  /** Single source of truth for the TS-solution branch, computed once in `normalizeOptions`. */
+  isUsingTsSolutionConfig: boolean;
+  /** Default `!isUsingTsSolutionConfig` (Nx pattern, not exposed as a CLI flag here). */
+  useProjectJson: boolean;
 }

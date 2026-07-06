@@ -7,7 +7,6 @@ import { addLinting } from './lib/add-linting';
 import { updateJestConfig } from './lib/update-jest-config';
 import { createFiles } from './lib/create-project-files';
 import { addVite } from './lib/add-vite';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 import {
   addJestConfiguration,
   configureViteFrameworkPlugin,
@@ -15,6 +14,7 @@ import {
   shouldUpdateNpmScope,
   updateLibPackageNpmScope as updateLibPackageNpmScopeCore,
   ViteFrameworkConfig,
+  wireTsSolutionProject,
 } from '@nxext/common';
 
 const SOLID_VITE_CONFIG: ViteFrameworkConfig = {
@@ -27,15 +27,20 @@ const SOLID_VITE_CONFIG: ViteFrameworkConfig = {
 
 async function normalizeOptions(
   host: Tree,
-  options: SolidLibrarySchema
+  options: SolidLibrarySchema,
 ): Promise<NormalizedSchema> {
-  const { projectName, projectRoot, parsedTags, importPath } =
-    await normalizeViteLibCore(host, {
-      name: options.name,
-      directory: options.directory,
-      tags: options.tags,
-      importPath: options.importPath,
-    });
+  const {
+    projectName,
+    projectRoot,
+    parsedTags,
+    importPath,
+    isUsingTsSolutionConfig,
+  } = await normalizeViteLibCore(host, {
+    name: options.name,
+    directory: options.directory,
+    tags: options.tags,
+    importPath: options.importPath,
+  });
   // `fileName` is derived the same way `determineProjectNameAndRootOptions`
   // computes `names.projectFileName`/`names.projectSimpleName` internally
   // (scope-stripped, joined with '-' or last segment); kept local since
@@ -60,6 +65,11 @@ async function normalizeOptions(
     fileName,
     projectDirectory: projectRoot,
     importPath,
+    isUsingTsSolutionConfig,
+    // Nx pattern (react/vue `normalize-options.js`): default is the exact
+    // negation of the TS-solution flag. Not exposed as a user-facing CLI
+    // option here.
+    useProjectJson: !isUsingTsSolutionConfig,
   };
 }
 
@@ -80,14 +90,12 @@ export async function libraryGenerator(host: Tree, schema: SolidLibrarySchema) {
 
 export async function libraryGeneratorInternal(
   host: Tree,
-  schema: SolidLibrarySchema
+  schema: SolidLibrarySchema,
 ) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/solid', 'library');
-
   const options = await normalizeOptions(host, schema);
   if (options.publishable === true && !schema.importPath) {
     throw new Error(
-      `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`
+      `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`,
     );
   }
 
@@ -95,6 +103,33 @@ export async function libraryGeneratorInternal(
 
   addProject(host, options);
   createFiles(host, options);
+
+  if (options.isUsingTsSolutionConfig) {
+    // The runtime tsconfig.lib.json must already exist on disk (written by
+    // createFiles above) before `updateTsconfigFiles` can patch it - see
+    // Design 1.3/`@nxext/common`'s `wireTsSolutionProject`. This must run
+    // before addLinting/addJestConfiguration/addVite/etc below: those
+    // resolve the project by name through the project graph, which for a
+    // package.json-backed (TS-solution) project only becomes resolvable
+    // once it's registered in pnpm-workspace.yaml here.
+    // compilerOptions mirror what @nx/vue passes for its own vite-based
+    // application/library generators, plus `jsx`/`jsxImportSource` since
+    // those are Solid-specific settings that today live on the per-project
+    // wrapper tsconfig.json - a file `updateTsconfigFiles` bypasses by
+    // pointing tsconfig.lib.json's `extends` directly at tsconfig.base.json.
+    await wireTsSolutionProject(
+      host,
+      options.projectRoot,
+      'tsconfig.lib.json',
+      {
+        module: 'esnext',
+        moduleResolution: 'bundler',
+        resolveJsonModule: true,
+        jsx: 'preserve',
+        jsxImportSource: 'solid-js',
+      },
+    );
+  }
 
   const lintTask = await addLinting(host, options);
   const jestTask = await addJestConfiguration(host, {
@@ -109,7 +144,7 @@ export async function libraryGeneratorInternal(
       includeLib: true,
       includeVitest: options.unitTestRunner === 'vitest',
     },
-    SOLID_VITE_CONFIG
+    SOLID_VITE_CONFIG,
   );
 
   updateTsConfig(host, options);

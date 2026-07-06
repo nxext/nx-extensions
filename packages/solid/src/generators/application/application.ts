@@ -10,7 +10,6 @@ import { addProject } from './lib/add-project';
 import { initGenerator } from '../init/init';
 import { updateJestConfig } from './lib/update-jest-config';
 import { createFiles } from './lib/create-project-files';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 import {
   addViteApplication,
   configureViteFrameworkPlugin,
@@ -19,6 +18,7 @@ import {
   addEslintLintProject,
   normalizeViteAppCore,
   ViteFrameworkConfig,
+  wireTsSolutionProject,
 } from '@nxext/common';
 import { extraEslintDependencies } from '../utils/lint';
 
@@ -32,7 +32,7 @@ const SOLID_VITE_CONFIG: ViteFrameworkConfig = {
 
 async function normalizeOptions<T extends Schema = Schema>(
   host: Tree,
-  options: Schema
+  options: Schema,
 ): Promise<NormalizedSchema<T>> {
   const {
     projectName,
@@ -42,6 +42,8 @@ async function normalizeOptions<T extends Schema = Schema>(
     e2eProjectRoot,
     e2eWebServerAddress,
     e2eWebServerTarget,
+    importPath,
+    isUsingTsSolutionConfig,
   } = await normalizeViteAppCore(
     host,
     {
@@ -50,7 +52,7 @@ async function normalizeOptions<T extends Schema = Schema>(
       tags: options.tags,
       rootProject: options.rootProject,
     },
-    'application'
+    'application',
   );
   options.name ??= projectName;
   options.rootProject = projectRoot === '.';
@@ -75,12 +77,18 @@ async function normalizeOptions<T extends Schema = Schema>(
     parsedTags,
     fileName,
     skipFormat: false,
+    importPath,
+    isUsingTsSolutionConfig,
+    // Nx pattern (react/vue `normalize-options.js`): default is the exact
+    // negation of the TS-solution flag. Not exposed as a user-facing CLI
+    // option here.
+    useProjectJson: !isUsingTsSolutionConfig,
   };
 }
 
 export async function applicationGenerator(
   host: Tree,
-  schema: Schema
+  schema: Schema,
 ): Promise<GeneratorCallback> {
   return await applicationGeneratorInternal(host, {
     ...schema,
@@ -88,14 +96,39 @@ export async function applicationGenerator(
 }
 
 export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
-  assertNotUsingTsSolutionSetup(tree, '@nxext/solid', 'application');
-
   const options = await normalizeOptions(tree, schema);
 
   const initTask = await initGenerator(tree, { ...options, skipFormat: true });
 
   addProject(tree, options);
   createFiles(tree, options);
+
+  if (options.isUsingTsSolutionConfig) {
+    // The runtime tsconfig.app.json must already exist on disk (written by
+    // createFiles above) before `updateTsconfigFiles` can patch it - see
+    // Design 1.3/`@nxext/common`'s `wireTsSolutionProject`. This must run
+    // before addViteApplication/addEslintLintProject/etc below: those
+    // resolve the project by name through the project graph, which for a
+    // package.json-backed (TS-solution) project only becomes resolvable
+    // once it's registered in pnpm-workspace.yaml here.
+    // compilerOptions mirror what @nx/vue passes for its own vite-based
+    // application/library generators, plus `jsx`/`jsxImportSource` since
+    // those are Solid-specific settings that today live on the per-project
+    // wrapper tsconfig.json - a file `updateTsconfigFiles` bypasses by
+    // pointing tsconfig.app.json's `extends` directly at tsconfig.base.json.
+    await wireTsSolutionProject(
+      tree,
+      options.appProjectRoot,
+      'tsconfig.app.json',
+      {
+        module: 'esnext',
+        moduleResolution: 'bundler',
+        resolveJsonModule: true,
+        jsx: 'preserve',
+        jsxImportSource: 'solid-js',
+      },
+    );
+  }
 
   const viteTask = await addViteApplication(tree, {
     projectName: options.name,
@@ -108,7 +141,7 @@ export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
       includeLib: false,
       includeVitest: options.unitTestRunner === 'vitest',
     },
-    SOLID_VITE_CONFIG
+    SOLID_VITE_CONFIG,
   );
 
   const lintTask = await addEslintLintProject(
@@ -119,7 +152,7 @@ export async function applicationGeneratorInternal(tree: Tree, schema: Schema) {
       projectRoot: options.appProjectRoot,
       tsConfigFileName: 'tsconfig.app.json',
     },
-    extraEslintDependencies
+    extraEslintDependencies,
   );
   const jestTask = await addJestConfiguration(tree, {
     projectName: options.name,
