@@ -149,11 +149,20 @@ describe('@nxext/preact: TS-solution mode', () => {
     const appProjectName = appPackageJson.name;
     const importPath = libPackageJson.name;
     expect(libPackageJson.main).toBe('./src/index.ts');
-    expect(libPackageJson.exports?.['.']).toEqual({
-      types: './src/index.ts',
-      import: './src/index.ts',
-      default: './src/index.ts',
-    });
+    // objectContaining, not toEqual: in a real TS-solution workspace the
+    // root tsconfig.base.json declares `customConditions` (named after the
+    // root package, e.g. `@org/source`), and @nx/vite's configuration
+    // generator adds that development condition to exports['.'] pointing at
+    // the source too. That's desired Nx behavior - the contract this test
+    // cares about is only that types/import/default resolve straight to
+    // src (no dist step).
+    expect(libPackageJson.exports?.['.']).toEqual(
+      expect.objectContaining({
+        types: './src/index.ts',
+        import: './src/index.ts',
+        default: './src/index.ts',
+      }),
+    );
 
     // Written directly (not via the `component` generator): the component
     // generator's barrel-export re-export line for library targets uses a

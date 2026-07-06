@@ -1,12 +1,11 @@
-import '@testing-library/jest-dom'
 import {h} from 'preact'
-import {render, fireEvent} from '@testing-library/preact'
+import {render} from '@testing-library/preact'
 
 import <%= className %> from './<%= className %>'
 
 
 it('it works', async () => {
-  const { getByText } = render(<%= className %>)
+  const { getByText } = render(h(<%= className %>, null))
 
   expect(getByText('Hello component!'));
 })
