@@ -1,7 +1,6 @@
 import { addExportsToBarrel } from './lib/add-exports-to-barrel';
 import { createLibInProject } from './lib/create-library-in-project';
 import { Tree } from '@nx/devkit';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 export interface SvelteLibrarySchema {
   name: string;
   project: string;
@@ -13,8 +12,6 @@ export async function libraryGenerator(
   tree: Tree,
   options: SvelteLibrarySchema
 ) {
-  assertNotUsingTsSolutionSetup(tree, '@nxext/sveltekit', 'library');
-
   createLibInProject(tree, options);
   addExportsToBarrel(tree, options);
 }

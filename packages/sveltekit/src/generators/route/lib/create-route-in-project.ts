@@ -5,10 +5,14 @@ import {
   readProjectConfiguration,
   Tree,
 } from '@nx/devkit';
+import { getProjectSourceRoot } from '@nx/js/internal';
 import { SvelteRouteSchema } from '../route';
 
 export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
   const projectConfig = readProjectConfiguration(tree, options.project);
+  // package.json-backed (TS-solution) projects don't carry an explicit
+  // `sourceRoot` - getProjectSourceRoot falls back to `<root>/src` for them.
+  const sourceRoot = getProjectSourceRoot(projectConfig, tree);
   const projectDirectory = options.directory ?? '';
 
   options.methodList = (options.methods || '').split(',');
@@ -24,7 +28,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
   const shouldWriteErrorPage = options.error;
   const shouldWriteServerAPI = options.api;
 
-  const routesFolder = `${projectConfig.sourceRoot}/${projectDirectory}/routes`;
+  const routesFolder = `${sourceRoot}/${projectDirectory}/routes`;
   const destinationFolder = targetPath
     ? `${routesFolder}/${targetPath}`
     : routesFolder;

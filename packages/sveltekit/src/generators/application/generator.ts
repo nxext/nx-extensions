@@ -1,44 +1,46 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   Tree,
   runTasksInSerial,
   GeneratorCallback,
 } from '@nx/devkit';
+import { wireTsSolutionProject } from '@nxext/common';
 import { SveltekitGeneratorSchema } from './schema';
 import { addLinting } from './lib/add-linting';
 import { installDependencies } from './lib/install-dependencies';
 import { addFiles } from './lib/add-project-files';
-import { createSvelteCheckTarget } from './lib/targets';
+import { addProject } from './lib/add-project';
 import { addVite } from './lib/add-vite';
 import { normalizeOptions } from './lib/normalize-options';
 import { createOrEditViteConfig } from '@nx/vite';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function applicationGenerator(
   host: Tree,
   schema: SveltekitGeneratorSchema
 ) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/sveltekit', 'application');
-
   const tasks: GeneratorCallback[] = [];
   const options = await normalizeOptions(host, schema);
 
-  const targets = {
-    check: createSvelteCheckTarget(options),
-    add: {
-      executor: '@nxext/sveltekit:add',
-    },
-  };
-
-  addProjectConfiguration(host, options.projectName, {
-    root: options.projectRoot,
-    projectType: 'application',
-    sourceRoot: `${options.projectRoot}/src`,
-    targets: targets,
-    tags: options.parsedTags,
-  });
+  addProject(host, options);
   addFiles(host, options);
+
+  if (options.isUsingTsSolutionConfig) {
+    // The runtime tsconfig.app.json must already exist on disk (written by
+    // addFiles above) before `updateTsconfigFiles` can patch it - see
+    // Design 1.3 / @nxext/common's wireTsSolutionProject. compilerOptions
+    // mirror what @nxext/svelte passes for its own vite-based application
+    // generator (application.ts).
+    await wireTsSolutionProject(
+      host,
+      options.projectRoot,
+      'tsconfig.app.json',
+      {
+        module: 'esnext',
+        moduleResolution: 'bundler',
+        resolveJsonModule: true,
+      }
+    );
+  }
 
   const lintTask = await addLinting(host, options);
   tasks.push(lintTask);

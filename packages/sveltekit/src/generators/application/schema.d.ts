@@ -20,4 +20,8 @@ export interface NormalizedSchema extends SveltekitGeneratorSchema {
   projectRoot: string;
   distDir: string;
   parsedTags: string[];
+  importPath: string;
+  isUsingTsSolutionConfig: boolean;
+  /** Default (see normalize-options.ts): `!isUsingTsSolutionConfig`. */
+  useProjectJson: boolean;
 }

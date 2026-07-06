@@ -4,9 +4,12 @@ import { applicationGenerator } from '../application/generator';
 
 export async function createTestProject(
   name: string,
-  unitTestrunner: 'none' | 'vitest' = 'none'
+  unitTestrunner: 'none' | 'vitest' = 'none',
+  // Same pattern as @nxext/svelte's utils/testing.ts: pass
+  // `createTsSolutionTree()` (from @nxext/common) here to scaffold the test
+  // project into a TS-solution workspace instead of the default legacy one.
+  tree: Tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' })
 ): Promise<Tree> {
-  const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   tree.write(
     'package.json',
     `
