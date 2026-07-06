@@ -1,4 +1,4 @@
-import { readJson, readProjectConfiguration, Tree } from '@nx/devkit';
+import { readJson, readProjectConfiguration, Tree, writeJson } from '@nx/devkit';
 // `@nx/angular`'s Node-only `/generators` and `/internal` subpaths have no
 // top-level .d.ts stub for classic `moduleResolution: "node"` to resolve.
 // @ts-expect-error -- see comment above; resolves fine at runtime
@@ -6,6 +6,7 @@ import { applicationGenerator } from '@nx/angular/generators';
 // @ts-expect-error -- see comment above; resolves fine at runtime
 import type { UnitTestRunner } from '@nx/angular/internal';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { createTsSolutionTree } from '@nxext/common';
 import { configurationGenerator } from './generator';
 import { ConfigurationGeneratorSchema } from './schema';
 
@@ -96,6 +97,74 @@ describe('application', () => {
 
         testGeneratedFiles(host, { ...options, capacitor: true });
       });
+    });
+  });
+
+  describe('TS-solution mode', () => {
+    let tsSolutionTree: Tree;
+    const tsProjectRoot = `packages/${options.project}`;
+
+    beforeEach(() => {
+      tsSolutionTree = createTsSolutionTree();
+      // `@nx/angular`'s `application` generator (used above purely as a
+      // lightweight app-scaffolding harness - ionic-react itself has no
+      // dependency on Angular) still calls `assertNotUsingTsSolutionSetup`
+      // itself and cannot run against a TS-solution tree, so the
+      // pre-existing project is fabricated directly here instead, mirroring
+      // how an app/lib generator would register a project in a TS-solution
+      // workspace by default (package.json + `nx` field, no project.json -
+      // see e.g. @nx/web's `addProject`).
+      writeJson(tsSolutionTree, `${tsProjectRoot}/package.json`, {
+        name: options.project,
+        version: '0.0.1',
+        nx: {
+          targets: {
+            build: {
+              executor: '@nx/vite:build',
+              options: {
+                outputPath: `dist/${tsProjectRoot}`,
+                assets: [],
+                styles: [],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('configures Ionic React for a package.json-based (TS-solution) project without crashing', async () => {
+      await configurationGenerator(tsSolutionTree, options);
+
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/src/App.tsx`)
+      ).toBeTruthy();
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/ionic.config.json`)
+      ).toBeTruthy();
+
+      // updateWorkspace patches targets via updateProjectConfiguration,
+      // which - for a package.json-based project - writes back into
+      // `package.json`'s `nx` field (Nx core dispatches on which of
+      // project.json/package.json exists; see
+      // `nx/src/generators/utils/project-configuration.js`).
+      const project = readProjectConfiguration(
+        tsSolutionTree,
+        options.project
+      );
+      expect(project.targets.build.options.assets).toContain(
+        `${tsProjectRoot}/src/manifest.json`
+      );
+    });
+
+    it('also configures Capacitor transitively when --capacitor is set', async () => {
+      await configurationGenerator(tsSolutionTree, {
+        ...options,
+        capacitor: true,
+      });
+
+      expect(
+        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`)
+      ).toBeTruthy();
     });
   });
 });

@@ -11,14 +11,11 @@ import { addFiles, deleteFiles } from './lib/files';
 import { normalizeOptions } from './lib/normalize-options';
 import { updateWorkspace } from './lib/update-workspace';
 import { ConfigurationGeneratorSchema } from './schema';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 export async function configurationGenerator(
   host: Tree,
   options: ConfigurationGeneratorSchema
 ) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/ionic-react', 'configuration');
-
   const normalizedOptions = normalizeOptions(host, options);
   const installTask = addDependencies(host);
   addFiles(host, normalizedOptions);
