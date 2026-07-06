@@ -6,7 +6,7 @@ import { startLocalRegistry } from '@nx/js/plugins/jest/local-registry';
 import { execFileSync } from 'child_process';
 import { existsSync, readdirSync, readFileSync, rmSync } from 'fs';
 import { join } from 'path';
-import { releasePublish, releaseVersion } from 'nx/release';
+import { releaseVersion } from 'nx/release';
 
 export default async () => {
   process.env.NX_NO_CLOUD = 'true';
@@ -26,10 +26,10 @@ export default async () => {
     readdirSync(join(process.cwd(), 'packages'), { withFileTypes: true })
       .filter((entry) => entry.isDirectory())
       .map((entry) =>
-        join(process.cwd(), 'packages', entry.name, 'package.json')
+        join(process.cwd(), 'packages', entry.name, 'package.json'),
       )
       .filter((file) => existsSync(file))
-      .map((file) => [file, readFileSync(file, 'utf-8')])
+      .map((file) => [file, readFileSync(file, 'utf-8')]),
   );
 
   global.stopLocalRegistry = await startLocalRegistry({
@@ -61,11 +61,35 @@ export default async () => {
     {
       env: process.env,
       stdio: 'inherit',
-    }
+    },
   );
 
-  await releasePublish({
-    tag: 'e2e',
-    firstRelease: true,
-  });
+  // Publish in a CHILD process, not via the programmatic `releasePublish()`
+  // in this long-lived globalSetup process. The in-process variant re-runs
+  // each project's build (nx-release-publish dependsOn build) against this
+  // process's already-populated workspace file-hash state, which still
+  // reflects the package.json contents from BEFORE the in-process
+  // `releaseVersion()` rewrites above. Those stale hashes match older cache
+  // entries, so the publish phase restored pre-releaseVersion dists via
+  // `[local cache]` and published old versions (observed: @nxext/common as
+  // 23.0.0 instead of 0.0.1-e2e, breaking every dependent install with a
+  // stale-package error). A fresh process re-hashes from disk;
+  // --skipNxCache additionally forces the dependsOn builds to be real
+  // builds, mirroring the run-many above.
+  execFileSync(
+    'pnpm',
+    [
+      'nx',
+      'release',
+      'publish',
+      '--tag',
+      'e2e',
+      '--first-release',
+      '--skipNxCache',
+    ],
+    {
+      env: process.env,
+      stdio: 'inherit',
+    },
+  );
 };
