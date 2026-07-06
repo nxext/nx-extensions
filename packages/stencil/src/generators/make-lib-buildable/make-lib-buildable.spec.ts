@@ -82,12 +82,12 @@ describe('make-lib-buildable schematic', () => {
     expect(packageJson['name']).toEqual(`@my/lib`);
   });
 
-  it(`should set path in tsconfig for buildable libs`, async () => {
+  it(`should set path in tsconfig for buildable libs, colocated with the project's own dist output (not a dist/libs workspace-level convention)`, async () => {
     await makeLibBuildableGenerator(host, options);
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
     expect(tsConfig.compilerOptions.paths['@my/lib']).toEqual([
-      `dist/libs/${projectName}`,
+      `${projectLibDirectory}/dist`,
     ]);
   });
 
@@ -123,12 +123,12 @@ describe('make-lib-buildable schematic using defaults', () => {
     });
   });
 
-  it(`should set default path in tsconfig for buildable libs`, async () => {
+  it(`should set default path in tsconfig for buildable libs, colocated with the project's own dist output (not a dist/libs workspace-level convention)`, async () => {
     await makeLibBuildableGenerator(host, options);
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
     expect(tsConfig.compilerOptions.paths[`@proj/${projectName}`]).toEqual([
-      `dist/libs/${projectName}`,
+      `${projectLibDirectory}/dist`,
     ]);
   });
 });

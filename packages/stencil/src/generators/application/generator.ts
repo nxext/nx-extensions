@@ -22,21 +22,55 @@ import {
   ensureRootProjectName,
   logShowProjectCommand,
 } from '@nx/devkit/internal';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
+import { isUsingTsSolutionSetup, wireTsSolutionProject } from '@nxext/common';
+
+// Stencil-specific compilerOptions Stencil's own JSX pragma (`h`) needs -
+// unrelated to React/Solid's `jsx`/`jsxImportSource` runtime conventions
+// (Design 3.3: "stencil nutzt eigene JSX-Typen via @stencil/core"). Applied
+// identically in both modes: in legacy mode they're baked into the
+// project's outer `tsconfig.json` (see `files/non-ts-solution`), in
+// TS-solution mode they're applied directly onto `tsconfig.app.json` by
+// `wireTsSolutionProject` since the outer `tsconfig.json` becomes a thin
+// references-only wrapper (Design 3.2, mirrors `files/ts-solution`).
+const STENCIL_APP_TSCONFIG_COMPILER_OPTIONS = {
+  allowSyntheticDefaultImports: true,
+  allowUnreachableCode: false,
+  declaration: false,
+  experimentalDecorators: true,
+  lib: ['dom', 'es2015'],
+  moduleResolution: 'node',
+  module: 'esnext',
+  target: 'es2017',
+  noUnusedLocals: true,
+  noUnusedParameters: true,
+  jsx: 'react',
+  jsxFactory: 'h',
+};
 
 async function normalizeOptions(
   host: Tree,
   options: RawApplicationSchema,
 ): Promise<ApplicationSchema> {
   await ensureRootProjectName(options, 'application');
-  const { projectName, projectRoot } = await determineProjectNameAndRootOptions(
-    host,
-    {
-      name: options.name,
-      projectType: 'application',
-      directory: options.directory,
-    },
-  );
+  const {
+    projectName: resolvedProjectName,
+    projectRoot,
+    importPath,
+  } = await determineProjectNameAndRootOptions(host, {
+    name: options.name,
+    projectType: 'application',
+    directory: options.directory,
+    importPath: options.importPath,
+  });
+
+  const isUsingTsSolutionConfig = isUsingTsSolutionSetup(host);
+  // Design 1.5 (mirrors @nxext/common's normalizeViteAppCore/@nx/react):
+  // without an explicit --name, the Nx project identifier defaults to the
+  // full scoped importPath in TS-solution mode.
+  const projectName =
+    !isUsingTsSolutionConfig || options.name
+      ? resolvedProjectName
+      : importPath;
   options.name ??= projectName;
 
   const parsedTags = options.tags
@@ -75,15 +109,46 @@ async function normalizeOptions(
     e2eWebServerTarget,
     style,
     appType,
+    importPath,
+    // Always the plain, pre-importPath-substitution name (see schema doc).
+    simpleProjectName: resolvedProjectName,
+    isUsingTsSolutionConfig,
+    useProjectJson: !isUsingTsSolutionConfig,
   };
 }
 
 function createFiles(host: Tree, options: ApplicationSchema) {
-  generateFiles(host, join(__dirname, './files/app'), options.projectRoot, {
+  const substitutions = {
     ...options,
     ...names(options.name),
     offsetFromRoot: offsetFromRoot(options.projectRoot),
-  });
+  };
+
+  // Files identical in both modes (Design 3.2): app source, stencil config,
+  // the runtime tsconfigs (tsconfig.app.json's TS-solution-specific
+  // `extends`/compilerOptions divergence is applied programmatically
+  // afterwards by `wireTsSolutionProject`, see applicationGenerator below).
+  generateFiles(
+    host,
+    join(__dirname, './files/common'),
+    options.projectRoot,
+    substitutions,
+  );
+
+  // The outer `tsconfig.json` is the one file that genuinely differs by
+  // mode: legacy mode bakes Stencil's JSX compilerOptions into it (extended
+  // by tsconfig.app.json); TS-solution mode keeps it a thin
+  // references-only pointer (mirrors @nxext/svelte/@nxext/sveltekit -
+  // Design 3.2).
+  generateFiles(
+    host,
+    join(
+      __dirname,
+      options.isUsingTsSolutionConfig ? './files/ts-solution' : './files/non-ts-solution',
+    ),
+    options.projectRoot,
+    substitutions,
+  );
 
   if (options.unitTestRunner === 'none') {
     host.delete(
@@ -114,8 +179,6 @@ export async function applicationGenerator(
   host: Tree,
   schema: RawApplicationSchema,
 ) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'application');
-
   const options = await normalizeOptions(host, schema);
 
   const jsInitTask = await jsInitGenerator(host, {
@@ -131,6 +194,23 @@ export async function applicationGenerator(
 
   createFiles(host, options);
   addProject(host, options);
+
+  if (options.isUsingTsSolutionConfig) {
+    // The runtime tsconfig.app.json must already exist on disk (written by
+    // createFiles above) before `updateTsconfigFiles` can patch it - see
+    // Design 1.3/`@nxext/common`'s `wireTsSolutionProject`. Must also run
+    // AFTER `addProject`: this project is package.json-backed (no
+    // project.json) in TS-solution mode, and `addLinting` below resolves
+    // the project via the project graph, which depends on the
+    // pnpm-workspace.yaml registration `wireTsSolutionProject` performs.
+    await wireTsSolutionProject(
+      host,
+      options.projectRoot,
+      'tsconfig.app.json',
+      STENCIL_APP_TSCONFIG_COMPILER_OPTIONS,
+    );
+  }
+
   const lintTask = await addLinting(host, options);
   const cypressTask = await addCypress(host, options);
 

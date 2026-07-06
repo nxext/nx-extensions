@@ -2,8 +2,10 @@ import {
   ensurePackage,
   formatFiles,
   GeneratorCallback,
+  joinPathFragments,
   logger,
   NX_VERSION,
+  readJson,
   readProjectConfiguration,
   runTasksInSerial,
   stripIndents,
@@ -15,16 +17,32 @@ import { updateMain } from './lib/update-main';
 import { updateLintConfig } from './lib/update-lint-config';
 import { StorybookConfigureSchema } from './schema';
 import { getNpmScope } from '@nx/js/internal';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
 
 /**
- * With Nx `npmScope` (eg: nx-workspace) and `projectName` (eg: nx-project), returns a path portion to be used for import statements or
- * a tsconfig.json `paths` entry.
+ * Returns the path portion to be used for import statements or a
+ * tsconfig.json `paths` entry for `projectName`.
+ *
+ * TS-solution (package.json-backed) projects already carry their real
+ * import path as `package.json.name` (Design 1.4/2.5) - which may differ
+ * from the `@<npmScope>/<projectName>` guess below (e.g. an explicit
+ * `--importPath` given at generation time). Prefer reading it directly;
+ * fall back to the historical npmScope-based guess only when no
+ * project-level package.json exists yet (legacy, non-buildable projects
+ * never get one).
  *
  * @example `@nx-workspace/nx-project`
  * @returns path portion of an import statement
  */
 export function getProjectTsImportPath(tree: Tree, projectName: string) {
+  const { root } = readProjectConfiguration(tree, projectName);
+  const packageJsonPath = joinPathFragments(root, 'package.json');
+  if (tree.exists(packageJsonPath)) {
+    const { name } = readJson(tree, packageJsonPath);
+    if (name) {
+      return name;
+    }
+  }
+
   const npmScope = getNpmScope(tree);
   return `@${npmScope}/${projectName}`;
 }
@@ -33,12 +51,6 @@ export async function storybookConfigurationGenerator(
   host: Tree,
   rawSchema: StorybookConfigureSchema
 ) {
-  assertNotUsingTsSolutionSetup(
-    host,
-    '@nxext/stencil',
-    'storybook-configuration'
-  );
-
   const tasks: GeneratorCallback[] = [];
   const uiFramework = '@storybook/web-components-vite';
   const options = normalizeSchema(rawSchema);

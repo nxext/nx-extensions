@@ -16,14 +16,29 @@ import {
 } from '../../utils/lint';
 import { eslintImportPlugin, stencilEslintPlugin } from '../../utils/versions';
 import { useFlatConfig } from '@nx/eslint/internal';
+import { createTsSolutionTree } from '@nxext/common';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../../utils/utillities');
+// `@nx/js`'s TS-solution tsconfig wiring (`getNeededCompilerOptionOverrides`,
+// invoked via `wireTsSolutionProject`) resolves the TypeScript compiler
+// through this SAME `ensurePackage` export, synchronously, and dereferences
+// the result immediately (`ts.readConfigFile(...)`) - unlike every other
+// caller in this spec, which only awaits/discards the return value. Keep the
+// broad `Promise.resolve()` stub for everything else, but let `'typescript'`
+// through to the real implementation so that path keeps working.
+const actualEnsurePackage = jest.requireActual('@nx/devkit').ensurePackage;
 
 describe('schematic:application', () => {
-  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
+  jest
+    .spyOn(devkit, 'ensurePackage')
+    .mockImplementation((pkg: string, ...rest: unknown[]) =>
+      pkg === 'typescript'
+        ? actualEnsurePackage(pkg, ...rest)
+        : Promise.resolve(),
+    );
   jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('17.0.0');
 
   let host: Tree;
@@ -228,5 +243,99 @@ describe('schematic:application', () => {
     expect(packageJson.devDependencies.jest).toBe('^29.0.0');
     expect(packageJson.devDependencies['jest-cli']).toBe('^29.0.0');
     expect(packageJson.devDependencies['@types/jest']).toBe('^29.0.0');
+  });
+
+  describe('TS-solution mode', () => {
+    let tsSolutionTree: Tree;
+    // `normalizeOptions` mutates whatever options object it's given
+    // (`options.name ??= ...`) - the shared top-level `options` const is
+    // passed directly (not spread) by earlier tests in this file (e.g.
+    // 'should add Stencil dependencies'), which permanently poisons it with
+    // `name: 'test'` for the rest of the suite. Use an entirely independent
+    // literal here instead of deriving from `options`.
+    let tsOptions: RawApplicationSchema;
+
+    beforeEach(() => {
+      tsSolutionTree = createTsSolutionTree();
+      tsOptions = { directory: 'apps/test', linter: 'none' };
+    });
+
+    it('writes a package.json instead of a project.json, named after the import path', async () => {
+      await applicationGenerator(tsSolutionTree, tsOptions);
+
+      expect(tsSolutionTree.exists('apps/test/project.json')).toBe(false);
+      expect(tsSolutionTree.exists('apps/test/package.json')).toBe(true);
+
+      const packageJson = readJson(tsSolutionTree, 'apps/test/package.json');
+      // determineProjectNameAndRootOptions derives the import path from the
+      // workspace npm scope (`@proj`, from createTsSolutionTree's root
+      // package.json) + the directory basename.
+      expect(packageJson.name).toBe('@proj/test');
+      // The Nx project identifier itself also becomes the importPath
+      // (Design 1.5) since no explicit `--name` was given, so no `nx.name`
+      // override is necessary (unlike `nx.targets`/`nx.generators`, which
+      // are always written - see the dedicated test below).
+      expect(packageJson.nx?.name).toBeUndefined();
+    });
+
+    it('registers the project in pnpm-workspace.yaml and adds a root tsconfig.json reference', async () => {
+      await applicationGenerator(tsSolutionTree, tsOptions);
+
+      const workspaceYaml = tsSolutionTree.read('pnpm-workspace.yaml', 'utf-8');
+      expect(workspaceYaml).toContain('apps');
+
+      const rootTsconfig = readJson(tsSolutionTree, 'tsconfig.json');
+      expect(rootTsconfig.references).toEqual(
+        expect.arrayContaining([{ path: './apps/test' }]),
+      );
+    });
+
+    it('wires the runtime tsconfig.app.json to extend tsconfig.base.json directly, keeping Stencil-specific JSX compilerOptions', async () => {
+      await applicationGenerator(tsSolutionTree, tsOptions);
+
+      const tsconfigApp = readJson(
+        tsSolutionTree,
+        'apps/test/tsconfig.app.json',
+      );
+      expect(tsconfigApp.extends).toBe('../../tsconfig.base.json');
+      // Stencil's own JSX pragma (`h`), not React/Solid's JSX runtime
+      // conventions (Design 3.3).
+      expect(tsconfigApp.compilerOptions.jsx).toBe('react');
+      expect(tsconfigApp.compilerOptions.jsxFactory).toBe('h');
+      // `moduleResolution` differs from the base's `bundler` default, so it
+      // must be kept explicitly rather than stripped as redundant.
+      expect(tsconfigApp.compilerOptions.moduleResolution).toBe('node');
+    });
+
+    it('keeps the outer tsconfig.json a thin references-only wrapper (no baked-in compilerOptions)', async () => {
+      await applicationGenerator(tsSolutionTree, tsOptions);
+
+      const tsconfigJson = readJson(tsSolutionTree, 'apps/test/tsconfig.json');
+      expect(tsconfigJson.compilerOptions).toBeUndefined();
+      expect(tsconfigJson.references).toEqual([{ path: './tsconfig.app.json' }]);
+    });
+
+    it("uses the plain, scope-free project name for Stencil's own generated values", async () => {
+      await applicationGenerator(tsSolutionTree, tsOptions);
+
+      const stencilConfig = tsSolutionTree
+        .read('apps/test/stencil.config.ts')
+        .toString('utf-8');
+      // Not `https://@proj/test.local/` - the npm scope must never leak into
+      // Stencil's own generated config values.
+      expect(stencilConfig).toContain("baseUrl: 'https://test.local/'");
+    });
+
+    it('patches the lint target + component-generator defaults onto package.json.nx (no project.json)', async () => {
+      await applicationGenerator(tsSolutionTree, { ...tsOptions, linter: 'eslint' });
+
+      const packageJson = readJson(tsSolutionTree, 'apps/test/package.json');
+      expect(packageJson.nx.targets.lint).toBeDefined();
+      expect(packageJson.nx.generators).toEqual({
+        '@nxext/stencil:component': {
+          style: SupportedStyles.css,
+        },
+      });
+    });
   });
 });

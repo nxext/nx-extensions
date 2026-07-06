@@ -10,6 +10,7 @@ import {
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { libraryGenerator } from './generator';
+import { createTsSolutionTree } from '@nxext/common';
 
 describe('library', () => {
   let host: Tree;
@@ -57,8 +58,13 @@ describe('library', () => {
     await libraryGenerator(host, { ...options });
     const tsConfig = readJson(host, 'tsconfig.base.json');
 
+    // Behavior change (deliberate, see report): now routed through
+    // `@nxext/common`'s `maybeAddTsConfigPath` -> `@nx/js`'s `addTsConfigPath`
+    // (Design 1.6/3.3 item 3) instead of a hand-rolled `updateJson`, which
+    // normalizes the entry to a leading `./` (`ensureRelativePath`) -
+    // functionally identical for TS path resolution, cosmetic only.
     expect(tsConfig.compilerOptions.paths['@e2e/test']).toEqual([
-      `libs/test/src/index.ts`,
+      `./libs/test/src/index.ts`,
     ]);
   });
 
@@ -287,6 +293,141 @@ describe('library', () => {
           `libs/testlib/src/components/my-component/my-component.e2e.ts`
         )
       ).toBeTruthy();
+    });
+  });
+
+  describe('TS-solution mode', () => {
+    let tsSolutionTree: Tree;
+    // `normalizeOptions` mutates whatever options object it's given
+    // (`options.name ??= ...`) - the shared top-level `options` const is
+    // passed directly (not spread) by earlier tests in this file, which
+    // permanently poisons it for the rest of the suite. Use an entirely
+    // independent literal here instead of deriving from `options`.
+    let tsOptions: RawLibrarySchema;
+
+    beforeEach(() => {
+      tsSolutionTree = createTsSolutionTree();
+      tsOptions = {
+        directory: 'libs/test',
+        buildable: false,
+        publishable: false,
+        component: true,
+        e2eTestRunner: 'none',
+        importPath: '@e2e/test',
+      };
+    });
+
+    it('writes a package.json instead of a project.json, named after the import path', async () => {
+      await libraryGenerator(tsSolutionTree, tsOptions);
+
+      expect(tsSolutionTree.exists('libs/test/project.json')).toBe(false);
+      expect(tsSolutionTree.exists('libs/test/package.json')).toBe(true);
+
+      const packageJson = readJson(tsSolutionTree, 'libs/test/package.json');
+      expect(packageJson.name).toBe('@e2e/test');
+    });
+
+    it('points a non-buildable lib package.json straight at its source (no dist step)', async () => {
+      await libraryGenerator(tsSolutionTree, tsOptions);
+
+      const packageJson = readJson(tsSolutionTree, 'libs/test/package.json');
+      expect(packageJson.main).toBe('./src/index.ts');
+      expect(packageJson.exports['.']).toEqual({
+        types: './src/index.ts',
+        import: './src/index.ts',
+        default: './src/index.ts',
+      });
+    });
+
+    it('registers the project in pnpm-workspace.yaml and adds a root tsconfig.json reference', async () => {
+      await libraryGenerator(tsSolutionTree, tsOptions);
+
+      const workspaceYaml = tsSolutionTree.read('pnpm-workspace.yaml', 'utf-8');
+      expect(workspaceYaml).toContain('libs');
+
+      const rootTsconfig = readJson(tsSolutionTree, 'tsconfig.json');
+      expect(rootTsconfig.references).toEqual(
+        expect.arrayContaining([{ path: './libs/test' }]),
+      );
+    });
+
+    it('wires the runtime tsconfig.lib.json to extend tsconfig.base.json directly, keeping Stencil-specific JSX compilerOptions', async () => {
+      await libraryGenerator(tsSolutionTree, tsOptions);
+
+      const tsconfigLib = readJson(
+        tsSolutionTree,
+        'libs/test/tsconfig.lib.json',
+      );
+      expect(tsconfigLib.extends).toBe('../../tsconfig.base.json');
+      expect(tsconfigLib.compilerOptions.jsx).toBe('react');
+      expect(tsconfigLib.compilerOptions.jsxFactory).toBe('h');
+      expect(tsconfigLib.compilerOptions.moduleResolution).toBe('node');
+    });
+
+    it('keeps the outer tsconfig.json a thin references-only wrapper (no baked-in compilerOptions)', async () => {
+      await libraryGenerator(tsSolutionTree, tsOptions);
+
+      const tsconfigJson = readJson(tsSolutionTree, 'libs/test/tsconfig.json');
+      expect(tsconfigJson.compilerOptions).toBeUndefined();
+      expect(tsconfigJson.references).toEqual([{ path: './tsconfig.lib.json' }]);
+    });
+
+    it("uses the plain, scope-free project name for Stencil's own `namespace`, never the scoped importPath", async () => {
+      await libraryGenerator(tsSolutionTree, tsOptions);
+
+      const stencilConfig = tsSolutionTree
+        .read('libs/test/stencil.config.ts')
+        .toString('utf-8');
+      expect(stencilConfig).toContain("namespace: 'test'");
+    });
+
+    it('does not register a tsconfig.base.json paths entry (workspace symlinks resolve cross-project imports instead)', async () => {
+      await libraryGenerator(tsSolutionTree, tsOptions);
+
+      const tsconfigBase = readJson(tsSolutionTree, 'tsconfig.base.json');
+      expect(tsconfigBase.compilerOptions.paths?.['@e2e/test']).toBeUndefined();
+    });
+
+    describe('buildable libraries', () => {
+      let buildableOptions: RawLibrarySchema;
+
+      beforeEach(() => {
+        buildableOptions = {
+          directory: 'libs/test',
+          buildable: true,
+          publishable: false,
+          component: true,
+          importPath: '@e2e/test',
+        };
+      });
+
+      it('preserves the nx.targets/nx.generators metadata across make-lib-buildable overwriting package.json', async () => {
+        await libraryGenerator(tsSolutionTree, buildableOptions);
+
+        const packageJson = readJson(tsSolutionTree, 'libs/test/package.json');
+        // make-lib-buildable's package.json.template has no `nx` field of its
+        // own - without the priorNx capture/reapply in
+        // make-lib-buildable.ts's createFiles, this would be lost entirely.
+        expect(packageJson.nx.targets.lint).toBeDefined();
+        expect(packageJson.nx.generators).toEqual({
+          '@nxext/stencil:component': {
+            style: SupportedStyles.css,
+          },
+        });
+        // The buildable package.json template is now the authoritative
+        // source for `name`/dist-output fields.
+        expect(packageJson.name).toBe('@e2e/test');
+        expect(packageJson.main).toBe('./dist/index.cjs.js');
+      });
+
+      it("still doesn't register a tsconfig.base.json paths entry for buildable libs in TS-solution mode", async () => {
+        await libraryGenerator(tsSolutionTree, buildableOptions);
+
+        const tsconfigBase = readJson(tsSolutionTree, 'tsconfig.base.json');
+        expect(
+          tsconfigBase.compilerOptions.paths?.['@e2e/test'],
+        ).toBeUndefined();
+      });
     });
   });
 });

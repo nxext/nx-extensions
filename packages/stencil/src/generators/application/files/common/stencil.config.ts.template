@@ -13,7 +13,7 @@ export const config: Config = {
       dir: '<%= offsetFromRoot %>dist/<%= projectRoot %>/www',
       // comment the following line to disable service workers in production
       serviceWorker: null,
-      baseUrl: 'https://<%= projectName %>.local/',
+      baseUrl: 'https://<%= simpleProjectName %>.local/',
     },
   ],
   extras: {

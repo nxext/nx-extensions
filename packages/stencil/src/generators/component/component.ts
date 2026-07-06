@@ -11,7 +11,7 @@ import {
 import { join } from 'path';
 import { insertStatement } from '../../utils/insert-statement';
 import { getProjectTsImportPath } from '../storybook-configuration/generator';
-import { assertNotUsingTsSolutionSetup } from '@nx/js/internal';
+import { getProjectSourceRoot } from '@nx/js/internal';
 
 export interface ComponentSchema {
   name: string;
@@ -22,8 +22,6 @@ export interface ComponentSchema {
 }
 
 export async function componentGenerator(host: Tree, options: ComponentSchema) {
-  assertNotUsingTsSolutionSetup(host, '@nxext/stencil', 'component');
-
   if (!/[-]/.test(options.name)) {
     throw new Error(stripIndents`
       "${options.name}" tag must contain a dash (-) to work as a valid web component. Please refer to
@@ -34,6 +32,11 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
   const componentFileName = names(options.name).fileName;
   const className = names(options.name).className;
   const projectConfig = readProjectConfiguration(host, options.project);
+  // package.json-backed (TS-solution) projects don't carry an explicit
+  // `sourceRoot` - getProjectSourceRoot falls back to `<root>/src` for
+  // them, and returns the explicit value unchanged for legacy project.json
+  // projects.
+  const sourceRoot = getProjectSourceRoot(projectConfig, host);
 
   const componentDirectory = options.directory
     ? joinPathFragments(`${options.directory}/${componentFileName}`)
@@ -56,9 +59,7 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
   generateFiles(
     host,
     join(__dirname, './files/component'),
-    joinPathFragments(
-      `${projectConfig.sourceRoot}/components/${componentDirectory}`
-    ),
+    joinPathFragments(`${sourceRoot}/components/${componentDirectory}`),
     {
       componentFileName: componentFileName,
       className: className,
@@ -66,7 +67,7 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
     }
   );
 
-  const storiesPath = `${projectConfig.sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.tsx`;
+  const storiesPath = `${sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.tsx`;
   if (!host.exists(`${projectConfig.root}/.storybook`)) {
     host.delete(joinPathFragments(storiesPath));
   } else {

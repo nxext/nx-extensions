@@ -13,6 +13,7 @@ export interface RawApplicationSchema {
   unitTestRunner?: string;
   projectRoot?: string;
   linter?: LinterType;
+  importPath?: string;
 }
 
 export interface ApplicationSchema extends RawApplicationSchema {
@@ -27,4 +28,15 @@ export interface ApplicationSchema extends RawApplicationSchema {
   e2eWebServerAddress: string;
   e2eWebServerTarget: string;
   style: SupportedStyles;
+  importPath: string;
+  /**
+   * Always the plain, scope-free directory-derived project name - even when
+   * `name`/`projectName` become the full scoped `importPath` in TS-solution
+   * mode (Design 1.5). Used for Stencil's own generated values (namespace,
+   * cosmetic dev-server URL) that must never contain the npm scope.
+   */
+  simpleProjectName: string;
+  isUsingTsSolutionConfig: boolean;
+  /** Default (mirrors @nxext/svelte/@nxext/sveltekit): `!isUsingTsSolutionConfig`. */
+  useProjectJson: boolean;
 }

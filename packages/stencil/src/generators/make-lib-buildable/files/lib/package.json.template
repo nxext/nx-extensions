@@ -8,7 +8,7 @@
   "types": "./dist/types/index.d.ts",
   "collection": "./dist/collection/collection-manifest.json",
   "collection:main": "./dist/collection/index.js",
-  "unpkg": "./dist/<%= name %>/<%= name %>.js",
+  "unpkg": "./dist/<%= simpleProjectName %>/<%= simpleProjectName %>.js",
   "files": [
     "dist/",
     "loader/"

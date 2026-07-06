@@ -9,4 +9,10 @@ export interface MakeLibBuildableSchema
    * `@nx-workspace/nx-library`
    */
   importPath?: string;
+  /**
+   * Always the plain, scope-free project name - see
+   * `toSimpleProjectName` in `make-lib-buildable.ts`. Computed internally by
+   * `normalize()`; callers don't need to (and shouldn't) provide it.
+   */
+  simpleProjectName?: string;
 }
