@@ -18,14 +18,14 @@ import { TypeScriptSvelteImportLocator } from './TypeScriptSvelteImportLocator';
 
 function isRoot(
   projects: CreateDependenciesContext['projects'],
-  projectName: string
+  projectName: string,
 ): boolean {
   return projects[projectName]?.root === '.';
 }
 
 export const createDependencies: CreateDependencies = (
   _options,
-  context: CreateDependenciesContext
+  context: CreateDependenciesContext,
 ): RawProjectGraphDependency[] => {
   const filesToProcess = context.filesToProcess.projectFileMap;
   if (Object.keys(filesToProcess).length === 0) {
@@ -45,7 +45,7 @@ export const createDependencies: CreateDependencies = (
   }
   const targetProjectLocator = new TargetProjectLocator(
     nodes,
-    context.externalNodes
+    context.externalNodes,
   );
 
   const importLocator = new TypeScriptSvelteImportLocator();
@@ -60,7 +60,7 @@ export const createDependencies: CreateDependencies = (
 
         const target = targetProjectLocator.findProjectFromImport(
           importExpr,
-          filePath
+          filePath,
         );
         if (!target) {
           return;

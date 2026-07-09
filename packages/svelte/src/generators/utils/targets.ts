@@ -4,7 +4,7 @@ import { NormalizedSchema as ApplicationSchema } from '../application/schema';
 import { NormalizedSchema as LibrarySchema } from '../library/schema';
 
 export function createLintAndCheckTargets(
-  options: LibrarySchema | ApplicationSchema
+  options: LibrarySchema | ApplicationSchema,
 ): {
   [key: string]: TargetConfiguration;
 } {
@@ -18,7 +18,7 @@ export function createLintAndCheckTargets(
 }
 
 export function createSvelteCheckTarget(
-  options: LibrarySchema | ApplicationSchema
+  options: LibrarySchema | ApplicationSchema,
 ): TargetConfiguration {
   return {
     executor: 'nx:run-commands',

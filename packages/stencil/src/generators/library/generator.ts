@@ -28,7 +28,7 @@ import { addProjectToTsSolutionWorkspace } from '@nx/js/internal';
 
 async function normalizeOptions(
   host: Tree,
-  options: RawLibrarySchema
+  options: RawLibrarySchema,
 ): Promise<LibrarySchema> {
   await ensureRootProjectName(options, 'library');
   const {
@@ -47,9 +47,7 @@ async function normalizeOptions(
   // without an explicit --name, the Nx project identifier defaults to the
   // full scoped importPath in TS-solution mode.
   const projectName =
-    !isUsingTsSolutionConfig || options.name
-      ? resolvedProjectName
-      : importPath;
+    !isUsingTsSolutionConfig || options.name ? resolvedProjectName : importPath;
   options.name ??= projectName;
 
   const parsedTags = options.tags
@@ -93,7 +91,7 @@ function createFiles(host: Tree, options: LibrarySchema) {
     host,
     joinPathFragments(__dirname, './files/common'),
     options.projectRoot,
-    substitutions
+    substitutions,
   );
 
   // The outer `tsconfig.json` is the one file that genuinely differs by
@@ -104,21 +102,21 @@ function createFiles(host: Tree, options: LibrarySchema) {
       __dirname,
       options.isUsingTsSolutionConfig
         ? './files/ts-solution'
-        : './files/non-ts-solution'
+        : './files/non-ts-solution',
     ),
     options.projectRoot,
-    substitutions
+    substitutions,
   );
 
   if (options.unitTestRunner === 'none') {
     host.delete(
-      `${options.projectRoot}/src/components/my-component/my-component.spec.ts`
+      `${options.projectRoot}/src/components/my-component/my-component.spec.ts`,
     );
   }
 
   if (options.e2eTestRunner === 'none') {
     host.delete(
-      `${options.projectRoot}/src/components/my-component/my-component.e2e.ts`
+      `${options.projectRoot}/src/components/my-component/my-component.e2e.ts`,
     );
   }
 
@@ -132,7 +130,7 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
 
   if (options.publishable === true && !options.importPath) {
     throw new Error(
-      `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`
+      `For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)`,
     );
   }
 
@@ -175,7 +173,7 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
     host,
     options.importPath,
     [joinPathFragments(options.projectRoot, 'src/index.ts')],
-    options.isUsingTsSolutionConfig
+    options.isUsingTsSolutionConfig,
   );
 
   if (options.buildable || options.publishable) {
@@ -191,7 +189,7 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
   }
 
   return runTasksInSerial(jsInitTask, initTask, () =>
-    logShowProjectCommand(options.projectName)
+    logShowProjectCommand(options.projectName),
   );
 }
 

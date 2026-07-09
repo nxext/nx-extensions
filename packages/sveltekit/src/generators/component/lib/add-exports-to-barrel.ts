@@ -21,7 +21,7 @@ export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
   // `sourceRoot` - getProjectSourceRoot falls back to `<root>/src` for them.
   const indexFilePath = joinPathFragments(
     getProjectSourceRoot(projectConfig, tree),
-    'index.ts'
+    'index.ts',
   );
   const componentFile = `./components/${fileName}/${className}.svelte`;
 
@@ -40,8 +40,8 @@ export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
       content,
       addExport(
         source,
-        `export { default as default } from '${componentFile}';`
-      )
+        `export { default as default } from '${componentFile}';`,
+      ),
     );
     tree.write(indexFilePath, changes);
   }
@@ -49,7 +49,7 @@ export function addExportsToBarrel(tree: Tree, options: SvelteComponentSchema) {
 
 export function addExport(
   source: ts.SourceFile,
-  statement: string
+  statement: string,
 ): StringChange[] {
   const allExports = findNodes(source, ts.SyntaxKind.ExportDeclaration);
   if (allExports.length > 0) {
@@ -74,7 +74,7 @@ export function addExport(
 
 function readSourceFile(
   host: Tree,
-  path: string
+  path: string,
 ): { content: string; source: ts.SourceFile } {
   if (!host.exists(path)) {
     throw new Error(`Cannot find ${path}`);
@@ -86,7 +86,7 @@ function readSourceFile(
     path,
     content,
     ts.ScriptTarget.Latest,
-    true
+    true,
   );
 
   return { content, source };

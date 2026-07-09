@@ -38,13 +38,13 @@ export async function addLinting(host: Tree, options: LibrarySchema) {
   updateJson(
     host,
     joinPathFragments(options.projectRoot, '.eslintrc.json'),
-    () => stencilEslintJson
+    () => stencilEslintJson,
   );
 
   const installTask = await addDependenciesToPackageJson(
     host,
     extraEslintDependencies.dependencies,
-    extraEslintDependencies.devDependencies
+    extraEslintDependencies.devDependencies,
   );
   tasks.push(installTask);
 

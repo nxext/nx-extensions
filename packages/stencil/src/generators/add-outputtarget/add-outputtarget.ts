@@ -14,7 +14,7 @@ import addVueGenerator from './add-vue/generator';
 
 export async function outputtargetGenerator(
   host: Tree,
-  options: AddOutputtargetSchematicSchema
+  options: AddOutputtargetSchematicSchema,
 ) {
   const projectConfig = readProjectConfiguration(host, options.projectName);
   const tasks = [];

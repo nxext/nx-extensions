@@ -1,4 +1,9 @@
-import { readJson, readProjectConfiguration, Tree, writeJson } from '@nx/devkit';
+import {
+  readJson,
+  readProjectConfiguration,
+  Tree,
+  writeJson,
+} from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { createTsSolutionTree } from '@nxext/common';
 import { configurationGenerator } from './generator';
@@ -46,7 +51,7 @@ describe('configuration schematic', () => {
 
     expect(jestConfigPath).toBeDefined();
     expect(host.read(jestConfigPath, 'utf8')).toContain(
-      "transformIgnorePatterns: ['<rootDir>/node_modules/(?!(@ionic/core|@ionic/angular|@stencil/core|.*\\.mjs$))']"
+      "transformIgnorePatterns: ['<rootDir>/node_modules/(?!(@ionic/core|@ionic/angular|@stencil/core|.*\\.mjs$))']",
     );
   });
 
@@ -54,7 +59,7 @@ describe('configuration schematic', () => {
     await configurationGenerator(host, options);
 
     expect(
-      host.exists(`${projectRoot}/src/app/nx-welcome.component.ts`)
+      host.exists(`${projectRoot}/src/app/nx-welcome.component.ts`),
     ).toBeFalsy();
     expect(host.exists(`${projectRoot}/src/app/app.config.ts`)).toBeFalsy();
   });
@@ -71,12 +76,12 @@ describe('configuration schematic', () => {
         expect.objectContaining({
           input: 'node_modules/ionicons/dist/ionicons/svg',
         }),
-      ])
+      ]),
     );
     expect(assets).not.toContain(`${projectRoot}/src/favicon.ico`);
 
     expect(styles).toEqual(
-      expect.arrayContaining([`${projectRoot}/src/theme/variables.scss`])
+      expect.arrayContaining([`${projectRoot}/src/theme/variables.scss`]),
     );
   });
 
@@ -84,10 +89,10 @@ describe('configuration schematic', () => {
     await configurationGenerator(host, options);
 
     expect(host.read(`${projectRoot}/src/index.html`, 'utf8')).toContain(
-      'app-root'
+      'app-root',
     );
     expect(
-      host.read(`${projectRoot}/src/app/app.component.ts`, 'utf8')
+      host.read(`${projectRoot}/src/app/app.component.ts`, 'utf8'),
     ).toMatch(/selector: 'app-root'/);
   });
 
@@ -129,9 +134,7 @@ describe('configuration schematic', () => {
               executor: '@angular-devkit/build-angular:browser',
               options: {
                 outputPath: `dist/${tsProjectRoot}`,
-                assets: [
-                  { glob: '**/*', input: `${tsProjectRoot}/public` },
-                ],
+                assets: [{ glob: '**/*', input: `${tsProjectRoot}/public` }],
                 styles: [`${tsProjectRoot}/src/styles.scss`],
               },
             },
@@ -147,10 +150,10 @@ describe('configuration schematic', () => {
       });
 
       expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/ionic.config.json`)
+        tsSolutionTree.exists(`${tsProjectRoot}/ionic.config.json`),
       ).toBeTruthy();
       expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/src/app/app.component.ts`)
+        tsSolutionTree.exists(`${tsProjectRoot}/src/app/app.component.ts`),
       ).toBeTruthy();
 
       // updateWorkspace patches targets via updateProjectConfiguration,
@@ -160,10 +163,10 @@ describe('configuration schematic', () => {
       // `nx/src/generators/utils/project-configuration.js`).
       const packageJson = readJson(
         tsSolutionTree,
-        `${tsProjectRoot}/package.json`
+        `${tsProjectRoot}/package.json`,
       );
       expect(packageJson.nx.targets.build.options.styles).toEqual(
-        expect.arrayContaining([`${tsProjectRoot}/src/theme/variables.scss`])
+        expect.arrayContaining([`${tsProjectRoot}/src/theme/variables.scss`]),
       );
     });
 
@@ -174,7 +177,7 @@ describe('configuration schematic', () => {
       });
 
       expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`)
+        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`),
       ).toBeTruthy();
     });
   });

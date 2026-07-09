@@ -73,7 +73,7 @@ describe('@nxext/ionic-angular (TS-solution)', () => {
     updateFile(
       projectDirectory,
       '.env',
-      'NX_IGNORE_UNSUPPORTED_TS_SETUP=true\n'
+      'NX_IGNORE_UNSUPPORTED_TS_SETUP=true\n',
     );
 
     installNxPlugins(projectDirectory, ['@nx/angular']);
@@ -81,11 +81,11 @@ describe('@nxext/ionic-angular (TS-solution)', () => {
 
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nx/angular:application ${appRoot} --name=${app} --style=css --minimal --unitTestRunner=jest --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`
+      `generate @nx/angular:application ${appRoot} --name=${app} --style=css --minimal --unitTestRunner=jest --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/ionic-angular:configuration --project=${app} --appName=test --appId=test --skipFormat=true --no-interactive`
+      `generate @nxext/ionic-angular:configuration --project=${app} --appName=test --appId=test --skipFormat=true --no-interactive`,
     );
   });
 
@@ -100,7 +100,7 @@ describe('@nxext/ionic-angular (TS-solution)', () => {
   it('registers the workspace as TS-solution (pnpm-workspace.yaml present, untouched by ionic-angular)', () => {
     const workspaceYaml = readFileSync(
       join(projectDirectory, 'pnpm-workspace.yaml'),
-      'utf-8'
+      'utf-8',
     );
     expect(workspaceYaml).toBeDefined();
     expect(workspaceYaml.length).toBeGreaterThan(0);
@@ -112,7 +112,7 @@ describe('@nxext/ionic-angular (TS-solution)', () => {
 
     const help = await runNxCommandAsync(
       projectDirectory,
-      `run ${app}:cap --cmd="--help"`
+      `run ${app}:cap --cmd="--help"`,
     );
     expect(help.stdout).toContain('Usage: cap');
   });
@@ -127,7 +127,7 @@ describe('@nxext/ionic-angular (TS-solution)', () => {
   it.skip('builds the ionic-angular-configured app', async () => {
     const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target build for project ${app}`
+      `Successfully ran target build for project ${app}`,
     );
   });
 });

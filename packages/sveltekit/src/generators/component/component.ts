@@ -10,7 +10,7 @@ export interface SvelteComponentSchema {
 
 export async function componentGenerator(
   tree: Tree,
-  options: SvelteComponentSchema
+  options: SvelteComponentSchema,
 ) {
   createComponentInProject(tree, options);
   addExportsToBarrel(tree, options);

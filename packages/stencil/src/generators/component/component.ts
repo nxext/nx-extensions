@@ -64,7 +64,7 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
       componentFileName: componentFileName,
       className: className,
       style: options.style,
-    }
+    },
   );
 
   const storiesPath = `${sourceRoot}/components/${componentDirectory}/${componentFileName}.stories.tsx`;
@@ -73,12 +73,12 @@ export async function componentGenerator(host: Tree, options: ComponentSchema) {
   } else {
     const classPathValue = `${getProjectTsImportPath(
       host,
-      options.project
+      options.project,
     )}/${componentFileName}`;
     insertStatement(
       host,
       storiesPath,
-      `import { ${className} } from '${classPathValue}'`
+      `import { ${className} } from '${classPathValue}'`,
     );
   }
 

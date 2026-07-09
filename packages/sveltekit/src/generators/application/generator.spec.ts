@@ -31,7 +31,7 @@ describe('sveltekit generator', () => {
     const packageJson = readJson(tree, 'package.json');
     expect(packageJson.devDependencies['eslint-plugin-svelte']).toBeDefined();
     expect(
-      packageJson.devDependencies['eslint-plugin-svelte3']
+      packageJson.devDependencies['eslint-plugin-svelte3'],
     ).toBeUndefined();
 
     if (useFlatConfig(tree)) {
@@ -85,7 +85,7 @@ describe('sveltekit generator', () => {
 
       const rootTsconfig = readJson(tsSolutionTree, 'tsconfig.json');
       expect(rootTsconfig.references).toEqual(
-        expect.arrayContaining([{ path: './test' }])
+        expect.arrayContaining([{ path: './test' }]),
       );
     });
 
@@ -102,7 +102,7 @@ describe('sveltekit generator', () => {
         expect.arrayContaining([
           { path: './tsconfig.app.json' },
           { path: './tsconfig.spec.json' },
-        ])
+        ]),
       );
     });
 

@@ -33,7 +33,11 @@ describe('library schematic', () => {
     // explicit sourceRoot - the generator has to fall back to `<root>/src`
     // via getProjectSourceRoot instead of reading projectConfig.sourceRoot.
     beforeEach(async () => {
-      tree = await createTestProject(projectName, 'none', createTsSolutionTree());
+      tree = await createTestProject(
+        projectName,
+        'none',
+        createTsSolutionTree(),
+      );
     });
 
     it('should run successfully', async () => {
@@ -45,7 +49,7 @@ describe('library schematic', () => {
       const name = names(libraryName);
       expect(tree.exists(`${projectName}/project.json`)).toBeFalsy();
       expect(
-        tree.exists(`${projectName}/src/${name.fileName}.ts`)
+        tree.exists(`${projectName}/src/${name.fileName}.ts`),
       ).toBeTruthy();
     });
   });

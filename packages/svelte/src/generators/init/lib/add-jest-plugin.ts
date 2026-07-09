@@ -14,10 +14,10 @@ import { Schema } from '../schema';
  */
 export async function addJestPlugin(
   tree: Tree,
-  schema: Schema
+  schema: Schema,
 ): Promise<GeneratorCallback> {
   return await addJestInitPlugin(
     tree,
-    () => !(!schema.unitTestRunner || schema.unitTestRunner === 'jest')
+    () => !(!schema.unitTestRunner || schema.unitTestRunner === 'jest'),
   );
 }

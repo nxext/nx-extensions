@@ -19,7 +19,7 @@ import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-o
 
 async function prepareReactLibrary(
   host: Tree,
-  options: AddOutputtargetSchematicSchema
+  options: AddOutputtargetSchematicSchema,
 ) {
   const reactProjectName = `${options.projectName}-react`;
   const reactProjectDir = `libs/${reactProjectName}`;
@@ -50,7 +50,7 @@ async function prepareReactLibrary(
     {},
     {
       '@stencil/react-output-target': STENCIL_OUTPUTTARGET_VERSION['react'],
-    }
+    },
   );
 
   // The React library was already generated above, so its root is read
@@ -58,11 +58,11 @@ async function prepareReactLibrary(
   // non-default) workspace layout.
   const reactProjectRoot = readProjectConfiguration(
     host,
-    reactProjectName
+    reactProjectName,
   ).root;
   host.write(
     `${reactProjectRoot}/src/index.ts`,
-    `export * from './generated/components';`
+    `export * from './generated/components';`,
   );
 
   return runTasksInSerial(jsInitTask, libraryTarget);
@@ -74,21 +74,21 @@ function addReactOutputtarget(
   stencilProjectConfig,
   stencilConfigPath: string,
   stencilConfigSource: ts.SourceFile,
-  packageName: string
+  packageName: string,
 ) {
   const reactProjectConfig = readProjectConfiguration(
     tree,
-    `${projectName}-react`
+    `${projectName}-react`,
   );
   const realtivePath = relative(
     getDistDir(stencilProjectConfig.root),
-    reactProjectConfig.root
+    reactProjectConfig.root,
   );
 
   const changes = applyChangesToString(stencilConfigSource.text, [
     ...addImport(
       stencilConfigSource,
-      `import { reactOutputTarget } from '@stencil/react-output-target';`
+      `import { reactOutputTarget } from '@stencil/react-output-target';`,
     ),
     ...addOutputTarget(
       stencilConfigSource,
@@ -98,7 +98,7 @@ function addReactOutputtarget(
         proxiesFile: '${realtivePath}/src/generated/components.ts',
         includeDefineCustomElements: true,
       })
-      `
+      `,
     ),
   ]);
   tree.write(stencilConfigPath, changes);
@@ -106,7 +106,7 @@ function addReactOutputtarget(
 
 export async function addReactGenerator(
   host: Tree,
-  options: AddOutputtargetSchematicSchema
+  options: AddOutputtargetSchematicSchema,
 ) {
   const libraryTarget = await prepareReactLibrary(host, options);
 
@@ -123,7 +123,7 @@ export async function addReactGenerator(
     stencilProjectConfig,
     stencilConfigPath,
     stencilConfigSource,
-    packageName
+    packageName,
   );
 
   return libraryTarget;

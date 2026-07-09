@@ -8,7 +8,7 @@ export async function createTestProject(
   // Same pattern as @nxext/svelte's utils/testing.ts: pass
   // `createTsSolutionTree()` (from @nxext/common) here to scaffold the test
   // project into a TS-solution workspace instead of the default legacy one.
-  tree: Tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' })
+  tree: Tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' }),
 ): Promise<Tree> {
   tree.write(
     'package.json',
@@ -20,7 +20,7 @@ export async function createTestProject(
           "@nx/workspace": "0.0.0"
         }
       }
-    `
+    `,
   );
 
   await applicationGenerator(tree, {

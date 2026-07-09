@@ -38,7 +38,7 @@ describe('library', () => {
 
     const projectConfig = readProjectConfiguration(
       host,
-      options.directory.replace('libs/', '')
+      options.directory.replace('libs/', ''),
     );
     expect(projectConfig.tags).toEqual(['e2etag', 'e2ePackage']);
   });
@@ -49,7 +49,7 @@ describe('library', () => {
     const fileList = fileListForAppType(
       options.directory,
       SupportedStyles.css,
-      'library'
+      'library',
     );
     fileList.forEach((file) => expect(host.exists(file)));
   });
@@ -72,12 +72,12 @@ describe('library', () => {
     await libraryGenerator(host, { ...options, component: false });
 
     expect(
-      host.exists(`libs/${options.name}/src/components/my-component`)
+      host.exists(`libs/${options.name}/src/components/my-component`),
     ).toBeFalsy();
     expect(
       host.exists(
-        `libs/${options.name}/src/components/my-component/my-component.tsx`
-      )
+        `libs/${options.name}/src/components/my-component/my-component.tsx`,
+      ),
     ).toBeFalsy();
   });
 
@@ -87,7 +87,7 @@ describe('library', () => {
     const fileList = fileListForAppType(
       options.directory,
       SupportedStyles.css,
-      'library'
+      'library',
     );
     fileList.forEach((file) => expect(host.exists(file)));
   });
@@ -152,7 +152,7 @@ describe('library', () => {
       await libraryGenerator(host, options);
 
       expect(
-        host.read('libs/testlib/src/components.d.ts').toString('utf-8')
+        host.read('libs/testlib/src/components.d.ts').toString('utf-8'),
       ).toContain("export * from './components/my-component/my-component';");
     });
 
@@ -187,7 +187,7 @@ describe('library', () => {
       await libraryGenerator(host, options);
 
       expect(
-        host.read('libs/testlib/src/index.ts').toString('utf-8')
+        host.read('libs/testlib/src/index.ts').toString('utf-8'),
       ).toContain("export * from './components';");
     });
 
@@ -208,7 +208,7 @@ describe('library', () => {
         });
 
         expect(
-          host.read('libs/testlib/stencil.config.ts').toString('utf-8')
+          host.read('libs/testlib/stencil.config.ts').toString('utf-8'),
         ).toContain(`import { ${plugin} } from '@stencil/${plugin}'`);
       });
     });
@@ -231,7 +231,7 @@ describe('library', () => {
         });
       } catch (error) {
         expect(error.message).toContain(
-          'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)'
+          'For publishable libs you have to provide a proper "--importPath" which needs to be a valid npm package name (e.g. my-awesome-lib or @myorg/my-lib)',
         );
       }
     });
@@ -246,7 +246,7 @@ describe('library', () => {
       await libraryGenerator(host, options);
 
       expect(
-        host.read('libs/testlib/src/index.ts').toString('utf-8')
+        host.read('libs/testlib/src/index.ts').toString('utf-8'),
       ).toContain("export * from './components';");
     });
 
@@ -270,8 +270,8 @@ describe('library', () => {
 
       expect(
         host.exists(
-          `libs/testlib/src/components/my-component/my-component.spec.ts`
-        )
+          `libs/testlib/src/components/my-component/my-component.spec.ts`,
+        ),
       ).toBeFalsy();
     });
 
@@ -280,8 +280,8 @@ describe('library', () => {
 
       expect(
         host.exists(
-          `libs/testlib/src/components/my-component/my-component.e2e.ts`
-        )
+          `libs/testlib/src/components/my-component/my-component.e2e.ts`,
+        ),
       ).toBeFalsy();
     });
 
@@ -290,8 +290,8 @@ describe('library', () => {
 
       expect(
         host.exists(
-          `libs/testlib/src/components/my-component/my-component.e2e.ts`
-        )
+          `libs/testlib/src/components/my-component/my-component.e2e.ts`,
+        ),
       ).toBeTruthy();
     });
   });

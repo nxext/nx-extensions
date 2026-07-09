@@ -22,7 +22,7 @@ describe('@nxext/capacitor/plugin', () => {
     const results = await createNodesFn(
       [`${projectRoot}/capacitor.config.ts`],
       {},
-      fakeContext(workspaceRoot)
+      fakeContext(workspaceRoot),
     );
 
     expect(results).toHaveLength(1);
@@ -54,10 +54,10 @@ describe('@nxext/capacitor/plugin', () => {
     for (const command of ['add', 'copy', 'open', 'run', 'sync', 'update']) {
       expect(targets[command]).toBeDefined();
       expect(targets[command].configurations.ios.command).toEqual(
-        `cap ${command} ios`
+        `cap ${command} ios`,
       );
       expect(targets[command].configurations.android.command).toEqual(
-        `cap ${command} android`
+        `cap ${command} android`,
       );
     }
   });
@@ -67,18 +67,18 @@ describe('@nxext/capacitor/plugin', () => {
     mkdirSync(join(workspaceRoot, projectRoot), { recursive: true });
     writeFileSync(
       join(workspaceRoot, projectRoot, 'capacitor.config.ts'),
-      'export const config = {};'
+      'export const config = {};',
     );
     writeFileSync(
       join(workspaceRoot, projectRoot, 'package.json'),
-      JSON.stringify({ name: 'package-json-only' })
+      JSON.stringify({ name: 'package-json-only' }),
     );
 
     const [, createNodesFn] = createNodesV2;
     const results = await createNodesFn(
       [`${projectRoot}/capacitor.config.ts`],
       {},
-      fakeContext(workspaceRoot)
+      fakeContext(workspaceRoot),
     );
 
     expect(results).toHaveLength(1);
@@ -91,14 +91,14 @@ describe('@nxext/capacitor/plugin', () => {
     mkdirSync(join(workspaceRoot, orphanRoot), { recursive: true });
     writeFileSync(
       join(workspaceRoot, orphanRoot, 'capacitor.config.ts'),
-      'export const config = {};'
+      'export const config = {};',
     );
 
     const [, createNodesFn] = createNodesV2;
     const results = await createNodesFn(
       [`${orphanRoot}/capacitor.config.ts`],
       {},
-      fakeContext(workspaceRoot)
+      fakeContext(workspaceRoot),
     );
 
     expect(results).toEqual([]);
@@ -109,11 +109,11 @@ function scaffoldCapacitorProject(workspaceRoot: string, projectRoot: string) {
   mkdirSync(join(workspaceRoot, projectRoot), { recursive: true });
   writeFileSync(
     join(workspaceRoot, projectRoot, 'capacitor.config.ts'),
-    'export const config = {};'
+    'export const config = {};',
   );
   writeFileSync(
     join(workspaceRoot, projectRoot, 'project.json'),
-    JSON.stringify({ name: projectRoot.split('/').pop(), root: projectRoot })
+    JSON.stringify({ name: projectRoot.split('/').pop(), root: projectRoot }),
   );
 }
 

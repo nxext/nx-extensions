@@ -13,11 +13,11 @@ import { FrameworkDependencyMap } from '../types';
  */
 export function addFrameworkDependencies(
   tree: Tree,
-  deps: FrameworkDependencyMap
+  deps: FrameworkDependencyMap,
 ): GeneratorCallback {
   return addDependenciesToPackageJson(
     tree,
     deps.dependencies,
-    deps.devDependencies
+    deps.devDependencies,
   );
 }

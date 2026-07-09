@@ -26,7 +26,7 @@ export async function addEslintLintProject(
     projectRoot: string;
     tsConfigFileName: 'tsconfig.app.json';
   },
-  extraDependencies: FrameworkDependencyMap
+  extraDependencies: FrameworkDependencyMap,
 ): Promise<GeneratorCallback> {
   if (options.linter !== 'eslint') {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -35,7 +35,7 @@ export async function addEslintLintProject(
 
   const { lintProjectGenerator } = ensurePackage<typeof import('@nx/eslint')>(
     '@nx/eslint',
-    NX_VERSION
+    NX_VERSION,
   );
 
   const lintTask = await lintProjectGenerator(host, {
@@ -50,14 +50,14 @@ export async function addEslintLintProject(
 
   host.rename(
     joinPathFragments(options.projectRoot, 'eslintrc.js'),
-    joinPathFragments(options.projectRoot, '.eslintrc.js')
+    joinPathFragments(options.projectRoot, '.eslintrc.js'),
   );
   host.delete(joinPathFragments(options.projectRoot, '.eslintrc.json'));
 
   const installTask = await addDependenciesToPackageJson(
     host,
     extraDependencies.dependencies,
-    extraDependencies.devDependencies
+    extraDependencies.devDependencies,
   );
 
   return runTasksInSerial(lintTask, installTask);

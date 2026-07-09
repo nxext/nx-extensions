@@ -9,7 +9,7 @@ import { SveltekitGeneratorSchema } from '../schema';
 
 export function installDependencies(
   host: Tree,
-  options: SveltekitGeneratorSchema
+  options: SveltekitGeneratorSchema,
 ) {
   return addDependenciesToPackageJson(
     host,
@@ -22,6 +22,6 @@ export function installDependencies(
       // required peerDependency of @sveltejs/kit; also imported directly by
       // the generated svelte.config.js for `vitePreprocess`.
       '@sveltejs/vite-plugin-svelte': vitePluginSvelteVersion,
-    }
+    },
   );
 }

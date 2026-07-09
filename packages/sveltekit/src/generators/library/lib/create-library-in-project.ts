@@ -19,6 +19,6 @@ export function createLibInProject(tree: Tree, options: SvelteLibrarySchema) {
     tree,
     joinPathFragments(__dirname, '../files/src'),
     joinPathFragments(`${sourceRoot}/${projectDirectory}`),
-    names(options.name)
+    names(options.name),
   );
 }

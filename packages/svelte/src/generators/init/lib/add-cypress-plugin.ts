@@ -14,10 +14,10 @@ import { Schema } from '../schema';
  */
 export async function addCypressPlugin(
   tree: Tree,
-  schema: Schema
+  schema: Schema,
 ): Promise<GeneratorCallback> {
   return await addCypressInitPlugin(
     tree,
-    () => !(!schema.unitTestRunner || schema.unitTestRunner === 'jest')
+    () => !(!schema.unitTestRunner || schema.unitTestRunner === 'jest'),
   );
 }

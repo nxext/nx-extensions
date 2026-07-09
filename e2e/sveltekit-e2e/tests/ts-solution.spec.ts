@@ -60,15 +60,15 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
     const app = uniq('sveltekit-ts-solution');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --no-interactive`,
     );
 
     // package.json-backed project instead of project.json.
     expect(() =>
-      checkFilesExist(projectDirectory, `${app}/package.json`)
+      checkFilesExist(projectDirectory, `${app}/package.json`),
     ).not.toThrow();
     expect(() =>
-      checkFilesExist(projectDirectory, `${app}/project.json`)
+      checkFilesExist(projectDirectory, `${app}/project.json`),
     ).toThrow();
 
     const appPackageJson = readJson<{
@@ -99,8 +99,8 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
         `${app}/src/routes/+layout.svelte`,
         `${app}/tsconfig.json`,
         `${app}/tsconfig.app.json`,
-        `${app}/tsconfig.spec.json`
-      )
+        `${app}/tsconfig.spec.json`,
+      ),
     ).not.toThrow();
 
     // TS-solution tsconfig chain: the wrapper tsconfig.json is a thin
@@ -117,12 +117,12 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
       expect.arrayContaining([
         { path: './tsconfig.app.json' },
         { path: './tsconfig.spec.json' },
-      ])
+      ]),
     );
 
     const appTsconfig = readJson<{ extends: string }>(
       projectDirectory,
-      `${app}/tsconfig.app.json`
+      `${app}/tsconfig.app.json`,
     );
     expect(appTsconfig.extends).toBe('../tsconfig.base.json');
   });
@@ -131,7 +131,7 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
     const app = uniq('sveltekit-ts-registration');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --no-interactive`,
     );
 
     const workspaceYaml = readFile(projectDirectory, 'pnpm-workspace.yaml');
@@ -139,10 +139,10 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
 
     const rootTsconfig = readJson<{ references: { path: string }[] }>(
       projectDirectory,
-      'tsconfig.json'
+      'tsconfig.json',
     );
     expect(rootTsconfig.references).toEqual(
-      expect.arrayContaining([{ path: `./${app}` }])
+      expect.arrayContaining([{ path: `./${app}` }]),
     );
 
     // TS-solution: no tsconfig.base.json paths entry gets registered -
@@ -153,8 +153,8 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
     }>(projectDirectory, 'tsconfig.base.json');
     expect(
       Object.keys(tsconfigBase.compilerOptions.paths ?? {}).some((key) =>
-        key.endsWith(app)
-      )
+        key.endsWith(app),
+      ),
     ).toBe(false);
   });
 
@@ -162,7 +162,7 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
     const app = uniq('sveltekit-ts-lint');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --no-interactive`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `lint ${app}`);

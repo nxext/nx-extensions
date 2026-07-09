@@ -15,7 +15,7 @@ import {
 export async function addLinting(host: Tree, options: NormalizedSchema) {
   const { lintProjectGenerator } = ensurePackage<typeof import('@nx/eslint')>(
     '@nx/eslint',
-    NX_VERSION
+    NX_VERSION,
   );
   const lintTask = await lintProjectGenerator(host, {
     linter: options.linter,
@@ -32,7 +32,7 @@ export async function addLinting(host: Tree, options: NormalizedSchema) {
   const installTask = await addDependenciesToPackageJson(
     host,
     extraEslintDependencies.dependencies,
-    extraEslintDependencies.devDependencies
+    extraEslintDependencies.devDependencies,
   );
 
   return runTasksInSerial(lintTask, installTask);

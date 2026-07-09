@@ -4,7 +4,7 @@ import { NormalizedSchema } from '../schema';
 
 export function updateNpmScopeIfBuildableOrPublishable(
   host: Tree,
-  options: NormalizedSchema
+  options: NormalizedSchema,
 ) {
   if (shouldUpdateNpmScope(options)) {
     updateLibPackageNpmScope(host, options);

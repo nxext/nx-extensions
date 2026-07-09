@@ -27,7 +27,7 @@ function toSimpleProjectName(name: string): string {
 
 function normalize(
   host: Tree,
-  options: MakeLibBuildableSchema
+  options: MakeLibBuildableSchema,
 ): MakeLibBuildableSchema {
   options.projectRoot = readProjectConfiguration(host, options.name).root;
 
@@ -48,7 +48,10 @@ function createFiles(host: Tree, options: MakeLibBuildableSchema) {
   // which has no `nx` field at all - capture whatever was there beforehand
   // and reapply it afterwards so registration/target metadata survives
   // becoming buildable.
-  const packageJsonPath = joinPathFragments(options.projectRoot, 'package.json');
+  const packageJsonPath = joinPathFragments(
+    options.projectRoot,
+    'package.json',
+  );
   const priorNx = host.exists(packageJsonPath)
     ? readJson(host, packageJsonPath).nx
     : undefined;
@@ -57,7 +60,7 @@ function createFiles(host: Tree, options: MakeLibBuildableSchema) {
     host,
     joinPathFragments(__dirname, './files/lib'),
     options.projectRoot,
-    options
+    options,
   );
 
   if (priorNx) {
@@ -81,7 +84,7 @@ function updateProjectConfig(host: Tree, options: MakeLibBuildableSchema) {
 
 export async function makeLibBuildableGenerator(
   host: Tree,
-  schema: MakeLibBuildableSchema
+  schema: MakeLibBuildableSchema,
 ) {
   const options = normalize(host, schema);
 
@@ -90,7 +93,7 @@ export async function makeLibBuildableGenerator(
   addStylePluginToConfig(
     host,
     joinPathFragments(options.projectRoot, 'stencil.config.ts'),
-    options.style
+    options.style,
   );
   addToOutputTargets(
     host,
@@ -119,7 +122,7 @@ export async function makeLibBuildableGenerator(
         includeGlobalScripts: false,
       }`,
     ],
-    joinPathFragments(options.projectRoot, 'stencil.config.ts')
+    joinPathFragments(options.projectRoot, 'stencil.config.ts'),
   );
   updateTsConfig(host, options);
 

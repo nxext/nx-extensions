@@ -21,7 +21,7 @@ export async function addVite(host: Tree, options: NormalizedSchema) {
       includeLib: true,
       includeVitest: options.unitTestRunner === 'vitest',
     },
-    preactViteFrameworkConfig
+    preactViteFrameworkConfig,
   );
   return addViteTask;
 }

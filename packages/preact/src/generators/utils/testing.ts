@@ -7,7 +7,7 @@ export async function createTestProject(
   directory: string,
   type: ProjectType = 'application',
   unitTestrunner: 'none' | 'jest' = 'none',
-  e2eTestrunner: 'none' | 'cypress' = 'none'
+  e2eTestrunner: 'none' | 'cypress' = 'none',
 ): Promise<Tree> {
   const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
 

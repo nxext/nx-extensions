@@ -18,13 +18,13 @@ const { createDependencies } = require('./create-dependencies');
 
 function createContext(
   filesByProject: Record<string, string[]>,
-  projects: Record<string, Partial<ProjectConfiguration>>
+  projects: Record<string, Partial<ProjectConfiguration>>,
 ): CreateDependenciesContext {
   const projectFileMap = Object.fromEntries(
     Object.entries(filesByProject).map(([project, files]) => [
       project,
       files.map((file) => ({ file, hash: 'hash' })),
-    ])
+    ]),
   );
   const fileMap = { projectFileMap, nonProjectFiles: [] };
 
@@ -61,13 +61,13 @@ describe('createDependencies', () => {
     jest
       .spyOn(fs, 'readFileSync')
       .mockReturnValue(
-        `<script>\n  import Foo from '../../lib1/src/index';\n</script>\n<div>hello</div>\n`
+        `<script>\n  import Foo from '../../lib1/src/index';\n</script>\n<div>hello</div>\n`,
       );
     findProjectFromImportMock.mockReturnValue('lib1');
 
     const context = createContext(
       { app1: ['apps/app1/src/App.svelte'] },
-      { app1: { root: 'apps/app1' }, lib1: { root: 'libs/lib1' } }
+      { app1: { root: 'apps/app1' }, lib1: { root: 'libs/lib1' } },
     );
 
     const result = await createDependencies(undefined, context);
@@ -82,7 +82,7 @@ describe('createDependencies', () => {
     ]);
     expect(findProjectFromImportMock).toHaveBeenCalledWith(
       '../../lib1/src/index',
-      'apps/app1/src/App.svelte'
+      'apps/app1/src/App.svelte',
     );
   });
 
@@ -90,13 +90,13 @@ describe('createDependencies', () => {
     jest
       .spyOn(fs, 'readFileSync')
       .mockReturnValue(
-        `<script>\n  const mod = import('../../lib1/src/index');\n</script>\n`
+        `<script>\n  const mod = import('../../lib1/src/index');\n</script>\n`,
       );
     findProjectFromImportMock.mockReturnValue('lib1');
 
     const context = createContext(
       { app1: ['apps/app1/src/App.svelte'] },
-      { app1: { root: 'apps/app1' }, lib1: { root: 'libs/lib1' } }
+      { app1: { root: 'apps/app1' }, lib1: { root: 'libs/lib1' } },
     );
 
     const result = await createDependencies(undefined, context);
@@ -114,7 +114,7 @@ describe('createDependencies', () => {
   it('ignores non-.svelte files', async () => {
     const context = createContext(
       { app1: ['apps/app1/src/main.ts'] },
-      { app1: { root: 'apps/app1' } }
+      { app1: { root: 'apps/app1' } },
     );
 
     const result = await createDependencies(undefined, context);
@@ -127,13 +127,13 @@ describe('createDependencies', () => {
     jest
       .spyOn(fs, 'readFileSync')
       .mockReturnValue(
-        `<script>\n  import Foo from 'not-a-real-package';\n</script>\n`
+        `<script>\n  import Foo from 'not-a-real-package';\n</script>\n`,
       );
     findProjectFromImportMock.mockReturnValue(null);
 
     const context = createContext(
       { app1: ['apps/app1/src/App.svelte'] },
-      { app1: { root: 'apps/app1' } }
+      { app1: { root: 'apps/app1' } },
     );
 
     const result = await createDependencies(undefined, context);
@@ -145,13 +145,13 @@ describe('createDependencies', () => {
     jest
       .spyOn(fs, 'readFileSync')
       .mockReturnValue(
-        `<script>\n  import Foo from '../../root-config';\n</script>\n`
+        `<script>\n  import Foo from '../../root-config';\n</script>\n`,
       );
     findProjectFromImportMock.mockReturnValue('root-project');
 
     const context = createContext(
       { app1: ['apps/app1/src/App.svelte'] },
-      { app1: { root: 'apps/app1' }, 'root-project': { root: '.' } }
+      { app1: { root: 'apps/app1' }, 'root-project': { root: '.' } },
     );
 
     const result = await createDependencies(undefined, context);

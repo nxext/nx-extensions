@@ -49,11 +49,11 @@ describe('@nxext/ionic-react (TS-solution)', () => {
 
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nx/react:application ${appRoot} --name=${app} --style=css --bundler=vite --unitTestRunner=vitest --minimal --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`
+      `generate @nx/react:application ${appRoot} --name=${app} --style=css --bundler=vite --unitTestRunner=vitest --minimal --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/ionic-react:configuration --project=${app} --appName=test --appId=test --skipFormat=true --no-interactive`
+      `generate @nxext/ionic-react:configuration --project=${app} --appName=test --appId=test --skipFormat=true --no-interactive`,
     );
   });
 
@@ -65,14 +65,14 @@ describe('@nxext/ionic-react (TS-solution)', () => {
     checkFilesExist(
       projectDirectory,
       `${appRoot}/src/App.tsx`,
-      `${appRoot}/ionic.config.json`
+      `${appRoot}/ionic.config.json`,
     );
   });
 
   it('registers the project in pnpm-workspace.yaml (TS-solution registration untouched by ionic-react)', () => {
     const workspaceYaml = readFileSync(
       join(projectDirectory, 'pnpm-workspace.yaml'),
-      'utf-8'
+      'utf-8',
     );
     expect(workspaceYaml).toContain('packages');
   });
@@ -80,14 +80,14 @@ describe('@nxext/ionic-react (TS-solution)', () => {
   it('builds the ionic-react-configured app', async () => {
     const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target build for project ${app}`
+      `Successfully ran target build for project ${app}`,
     );
   });
 
   it('runs the app unit tests', async () => {
     const result = await runNxCommandAsync(projectDirectory, `test ${app}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target test for project ${app}`
+      `Successfully ran target test for project ${app}`,
     );
   });
 
@@ -98,11 +98,11 @@ describe('@nxext/ionic-react (TS-solution)', () => {
     beforeAll(async () => {
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nx/react:application ${capAppRoot} --name=${capApp} --style=css --bundler=vite --unitTestRunner=vitest --minimal --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`
+        `generate @nx/react:application ${capAppRoot} --name=${capApp} --style=css --bundler=vite --unitTestRunner=vitest --minimal --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`,
       );
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/ionic-react:configuration --project=${capApp} --appName=test --appId=test --capacitor=true --skipFormat=true --no-interactive`
+        `generate @nxext/ionic-react:configuration --project=${capApp} --appName=test --appId=test --capacitor=true --skipFormat=true --no-interactive`,
       );
     });
 
@@ -113,7 +113,7 @@ describe('@nxext/ionic-react (TS-solution)', () => {
     it('exposes the cap executor', async () => {
       const help = await runNxCommandAsync(
         projectDirectory,
-        `run ${capApp}:cap --cmd="--help"`
+        `run ${capApp}:cap --cmd="--help"`,
       );
       expect(help.stdout).toContain('Usage: cap');
     });

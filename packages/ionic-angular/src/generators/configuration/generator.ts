@@ -14,7 +14,7 @@ import { updateJestConfig } from './lib/update-jest-config';
 
 export async function configurationGenerator(
   host: Tree,
-  schema: ConfigurationGeneratorSchema
+  schema: ConfigurationGeneratorSchema,
 ) {
   const options = await normalizeOptions(host, schema);
   const installTask = addDependencies(host);

@@ -49,9 +49,7 @@ async function normalizeOptions(
   // without an explicit --name, the Nx project identifier defaults to the
   // full scoped importPath in TS-solution mode.
   const projectName =
-    !isUsingTsSolutionConfig || options.name
-      ? resolvedProjectName
-      : importPath;
+    !isUsingTsSolutionConfig || options.name ? resolvedProjectName : importPath;
   options.name ??= projectName;
 
   const parsedTags = options.tags
@@ -125,7 +123,9 @@ function createFiles(host: Tree, options: ApplicationSchema) {
     host,
     join(
       __dirname,
-      options.isUsingTsSolutionConfig ? './files/ts-solution' : './files/non-ts-solution',
+      options.isUsingTsSolutionConfig
+        ? './files/ts-solution'
+        : './files/non-ts-solution',
     ),
     options.projectRoot,
     substitutions,

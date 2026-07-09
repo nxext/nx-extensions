@@ -19,7 +19,7 @@ import { calculateStencilSourceOptions } from '../lib/calculate-stencil-source-o
 
 async function prepareVueLibrary(
   host: Tree,
-  options: AddOutputtargetSchematicSchema
+  options: AddOutputtargetSchematicSchema,
 ) {
   const vueProjectName = `${options.projectName}-vue`;
   const vueProjectDir = `libs/${vueProjectName}`;
@@ -49,7 +49,7 @@ async function prepareVueLibrary(
     {},
     {
       '@stencil/vue-output-target': STENCIL_OUTPUTTARGET_VERSION['vue'],
-    }
+    },
   );
 
   // The Vue library was already generated above, so its root is read
@@ -58,7 +58,7 @@ async function prepareVueLibrary(
   const vueProjectRoot = readProjectConfiguration(host, vueProjectName).root;
   host.write(
     `${vueProjectRoot}/src/index.ts`,
-    `export * from './generated/components';`
+    `export * from './generated/components';`,
   );
 
   return runTasksInSerial(jsInitTask, libraryTarget);
@@ -70,18 +70,18 @@ function addVueOutputtarget(
   stencilProjectConfig,
   stencilConfigPath: string,
   stencilConfigSource: ts.SourceFile,
-  packageName: string
+  packageName: string,
 ) {
   const vueProjectConfig = readProjectConfiguration(tree, `${projectName}-vue`);
   const realtivePath = relative(
     getDistDir(stencilProjectConfig.root),
-    vueProjectConfig.root
+    vueProjectConfig.root,
   );
 
   const changes = applyChangesToString(stencilConfigSource.text, [
     ...addImport(
       stencilConfigSource,
-      `import { vueOutputTarget } from '@stencil/vue-output-target';`
+      `import { vueOutputTarget } from '@stencil/vue-output-target';`,
     ),
     ...addOutputTarget(
       stencilConfigSource,
@@ -91,7 +91,7 @@ function addVueOutputtarget(
         proxiesFile: '${realtivePath}/src/generated/components.ts',
         includeDefineCustomElements: true,
       })
-      `
+      `,
     ),
   ]);
   tree.write(stencilConfigPath, changes);
@@ -99,7 +99,7 @@ function addVueOutputtarget(
 
 export async function addVueGenerator(
   host: Tree,
-  options: AddOutputtargetSchematicSchema
+  options: AddOutputtargetSchematicSchema,
 ) {
   const libraryTarget = await prepareVueLibrary(host, options);
 
@@ -116,7 +116,7 @@ export async function addVueGenerator(
     stencilProjectConfig,
     stencilConfigPath,
     stencilConfigSource,
-    packageName
+    packageName,
   );
 
   return libraryTarget;

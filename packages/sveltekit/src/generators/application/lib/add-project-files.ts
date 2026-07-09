@@ -19,7 +19,7 @@ export function addFiles(host: Tree, options: NormalizedSchema) {
       host,
       path.join(__dirname, '../files/common'),
       options.projectRoot,
-      templateOptions
+      templateOptions,
     );
 
     if (options.isUsingTsSolutionConfig) {
@@ -34,7 +34,7 @@ export function addFiles(host: Tree, options: NormalizedSchema) {
         host,
         path.join(__dirname, '../files/ts-solution'),
         options.projectRoot,
-        templateOptions
+        templateOptions,
       );
     } else {
       // Legacy-only files: the wrapper tsconfig.json with the historical
@@ -48,7 +48,7 @@ export function addFiles(host: Tree, options: NormalizedSchema) {
         host,
         path.join(__dirname, '../files/non-ts-solution'),
         options.projectRoot,
-        templateOptions
+        templateOptions,
       );
     }
   } catch (e) {

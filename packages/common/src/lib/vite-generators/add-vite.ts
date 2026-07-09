@@ -8,7 +8,7 @@ import { ViteFrameworkConfig } from './types';
  */
 export async function addViteApplication(
   host: Tree,
-  options: { projectName: string; unitTestRunner: string }
+  options: { projectName: string; unitTestRunner: string },
 ): Promise<GeneratorCallback> {
   const { viteConfigurationGenerator } = ensurePackage<
     typeof import('@nx/vite')
@@ -41,15 +41,15 @@ export function configureViteFrameworkPlugin(
     includeLib: boolean;
     includeVitest: boolean;
   },
-  frameworkConfig: ViteFrameworkConfig
+  frameworkConfig: ViteFrameworkConfig,
 ): void {
   const { createOrEditViteConfig } = ensurePackage<typeof import('@nx/vite')>(
     '@nx/vite',
-    NX_VERSION
+    NX_VERSION,
   );
 
   const activeExtras = (frameworkConfig.extraPlugins ?? []).filter((extra) =>
-    extra.when({ includeVitest: options.includeVitest })
+    extra.when({ includeVitest: options.includeVitest }),
   );
 
   createOrEditViteConfig(
@@ -69,6 +69,6 @@ export function configureViteFrameworkPlugin(
         ...activeExtras.map((extra) => extra.pluginCallExpression),
       ],
     },
-    false
+    false,
   );
 }

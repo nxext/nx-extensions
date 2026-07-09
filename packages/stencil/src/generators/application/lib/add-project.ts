@@ -52,6 +52,6 @@ export function addProject(host: Tree, options: ApplicationSchema) {
   addStylePluginToConfig(
     host,
     join(options.projectRoot, 'stencil.config.ts'),
-    options.style
+    options.style,
   );
 }

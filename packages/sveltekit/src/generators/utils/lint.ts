@@ -32,7 +32,7 @@ export const extraEslintDependencies = {
 export function addSvelteEslintConfig(tree: Tree, projectRoot: string): void {
   if (!useFlatConfig(tree)) {
     logger.warn(
-      `eslint-plugin-svelte requires a flat ESLint config, so Svelte-specific lint rules were not added for "${projectRoot}" (the workspace is still using a legacy .eslintrc config). Migrate to flat config (or set ESLINT_USE_FLAT_CONFIG=true) to lint .svelte files.`
+      `eslint-plugin-svelte requires a flat ESLint config, so Svelte-specific lint rules were not added for "${projectRoot}" (the workspace is still using a legacy .eslintrc config). Migrate to flat config (or set ESLINT_USE_FLAT_CONFIG=true) to lint .svelte files.`,
     );
     return;
   }

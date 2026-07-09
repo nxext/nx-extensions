@@ -16,7 +16,7 @@ import { NormalizedSchema, SveltekitGeneratorSchema } from '../schema';
  */
 export async function normalizeOptions(
   host: Tree,
-  options: SveltekitGeneratorSchema
+  options: SveltekitGeneratorSchema,
 ): Promise<NormalizedSchema> {
   const {
     projectName,
@@ -36,14 +36,14 @@ export async function normalizeOptions(
       tags: options.tags,
       rootProject: options.rootProject,
     },
-    'application'
+    'application',
   );
   options.name ??= projectName;
   options.rootProject = projectRoot === '.';
 
   const distDir = relative(
     joinPathFragments(`${workspaceRoot}/${projectRoot}`),
-    joinPathFragments(`${workspaceRoot}/dist/${projectRoot}`)
+    joinPathFragments(`${workspaceRoot}/dist/${projectRoot}`),
   );
 
   return {

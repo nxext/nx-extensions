@@ -10,7 +10,7 @@ import { SvelteComponentSchema } from '../component';
 
 export function createComponentInProject(
   tree: Tree,
-  options: SvelteComponentSchema
+  options: SvelteComponentSchema,
 ) {
   const projectConfig = readProjectConfiguration(tree, options.project);
   // package.json-backed (TS-solution) projects don't carry an explicit
@@ -24,6 +24,6 @@ export function createComponentInProject(
     tree,
     joinPathFragments(__dirname, '../files/src'),
     joinPathFragments(`${sourceRoot}/${projectDirectory}`),
-    names(options.name)
+    names(options.name),
   );
 }

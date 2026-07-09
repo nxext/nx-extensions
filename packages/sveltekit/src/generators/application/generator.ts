@@ -16,7 +16,7 @@ import { createOrEditViteConfig } from '@nx/vite';
 
 export async function applicationGenerator(
   host: Tree,
-  schema: SveltekitGeneratorSchema
+  schema: SveltekitGeneratorSchema,
 ) {
   const tasks: GeneratorCallback[] = [];
   const options = await normalizeOptions(host, schema);
@@ -38,7 +38,7 @@ export async function applicationGenerator(
         module: 'esnext',
         moduleResolution: 'bundler',
         resolveJsonModule: true,
-      }
+      },
     );
   }
 
@@ -57,7 +57,7 @@ export async function applicationGenerator(
       imports: [`import { sveltekit } from '@sveltejs/kit/vite'`],
       plugins: [`sveltekit()`],
     },
-    false
+    false,
   );
 
   if (!options.skipFormat) {

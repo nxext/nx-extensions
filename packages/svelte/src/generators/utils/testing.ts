@@ -8,7 +8,7 @@ export async function createTestProject(
   type: ProjectType = 'application',
   tree: Tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' }),
   unitTestrunner: 'none' | 'jest' = 'none',
-  e2eTestrunner: 'none' | 'cypress' = 'none'
+  e2eTestrunner: 'none' | 'cypress' = 'none',
 ): Promise<Tree> {
   tree.write(
     'package.json',
@@ -20,7 +20,7 @@ export async function createTestProject(
           "@nx/workspace": "0.0.0"
         }
       }
-    `
+    `,
   );
 
   if (type === 'application') {

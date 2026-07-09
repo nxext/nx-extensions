@@ -342,7 +342,10 @@ describe('schematic:application', () => {
     });
 
     it('patches the lint target + component-generator defaults onto package.json.nx (no project.json)', async () => {
-      await applicationGenerator(tsSolutionTree, { ...tsOptions, linter: 'eslint' });
+      await applicationGenerator(tsSolutionTree, {
+        ...tsOptions,
+        linter: 'eslint',
+      });
 
       const packageJson = readJson(tsSolutionTree, 'apps/test/package.json');
       expect(packageJson.nx.targets.lint).toBeDefined();

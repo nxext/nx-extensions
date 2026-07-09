@@ -32,7 +32,7 @@ describe('@nxext/svelte: library', () => {
     const lib = uniq('svelte-lib-lint');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:lib libs/${lib} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:lib libs/${lib} --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `lint ${lib}`);
@@ -43,7 +43,7 @@ describe('@nxext/svelte: library', () => {
     const lib = uniq('svelte-lib-check');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:lib libs/${lib} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:lib libs/${lib} --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
 
     // svelte-check v4 prints a machine-readable summary line when stdout is
@@ -54,7 +54,7 @@ describe('@nxext/svelte: library', () => {
     const combined = stripAnsi(`${result.stdout}${result.stderr}`);
     expect(combined).toMatch(/svelte-check found 0 errors|\b0 ERRORS\b/);
     expect(combined).toContain(
-      `Successfully ran target check for project ${lib}`
+      `Successfully ran target check for project ${lib}`,
     );
   });
 
@@ -62,12 +62,12 @@ describe('@nxext/svelte: library', () => {
     const lib = uniq('svelte-lib');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:lib libs/${lib} --buildable --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:lib libs/${lib} --buildable --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `build ${lib}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target build for project ${lib}`
+      `Successfully ran target build for project ${lib}`,
     );
   });
 
@@ -78,16 +78,16 @@ describe('@nxext/svelte: library', () => {
       const lib = uniq('svelte-lib-jest');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:lib libs/${lib} --unitTestRunner=jest --e2eTestRunner=none --no-interactive`
+        `generate @nxext/svelte:lib libs/${lib} --unitTestRunner=jest --e2eTestRunner=none --no-interactive`,
       );
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:component test --project=${lib} --no-interactive`
+        `generate @nxext/svelte:component test --project=${lib} --no-interactive`,
       );
 
       const result = await runNxCommandAsync(projectDirectory, `test ${lib}`);
       expect(`${result.stdout}${result.stderr}`).toContain(
-        'Ran all test suites'
+        'Ran all test suites',
       );
     });
 
@@ -95,16 +95,16 @@ describe('@nxext/svelte: library', () => {
       const lib = uniq('svelte-lib-vitest');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:lib libs/${lib} --unitTestRunner=vitest --e2eTestRunner=none --no-interactive`
+        `generate @nxext/svelte:lib libs/${lib} --unitTestRunner=vitest --e2eTestRunner=none --no-interactive`,
       );
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:component test --project=${lib} --no-interactive`
+        `generate @nxext/svelte:component test --project=${lib} --no-interactive`,
       );
 
       const result = await runNxCommandAsync(projectDirectory, `test ${lib}`);
       expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-        `Successfully ran target test for project ${lib}`
+        `Successfully ran target test for project ${lib}`,
       );
     });
   });
@@ -118,23 +118,23 @@ describe('@nxext/svelte: library', () => {
     const lib = uniq('svelte-storybook');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:lib libs/${lib} --unitTestRunner=none --e2eTestRunner=none --no-interactive`
+      `generate @nxext/svelte:lib libs/${lib} --unitTestRunner=none --e2eTestRunner=none --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:storybook-configuration ${lib} --no-interactive`
+      `generate @nxext/svelte:storybook-configuration ${lib} --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:component test --project=${lib} --no-interactive`
+      `generate @nxext/svelte:component test --project=${lib} --no-interactive`,
     );
 
     const result = await runNxCommandAsync(
       projectDirectory,
-      `build-storybook ${lib}`
+      `build-storybook ${lib}`,
     );
     expect(`${result.stdout}${result.stderr}`).toContain(
-      'Storybook builder finished'
+      'Storybook builder finished',
     );
   });
 
@@ -145,15 +145,15 @@ describe('@nxext/svelte: library', () => {
 
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:app apps/${app} --unitTestRunner=none --e2eTestRunner=none --no-interactive`
+      `generate @nxext/svelte:app apps/${app} --unitTestRunner=none --e2eTestRunner=none --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:lib libs/${lib} --buildable --unitTestRunner=none --e2eTestRunner=none --no-interactive`
+      `generate @nxext/svelte:lib libs/${lib} --buildable --unitTestRunner=none --e2eTestRunner=none --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:c ${libClassName} --project=${lib} --no-interactive`
+      `generate @nxext/svelte:c ${libClassName} --project=${lib} --no-interactive`,
     );
 
     // Scope is derived from the scaffolded workspace, not always `@proj`.
@@ -162,13 +162,13 @@ describe('@nxext/svelte: library', () => {
       compilerOptions: { paths: Record<string, string[]> };
     }>(projectDirectory, 'tsconfig.base.json');
     const importPath = Object.keys(tsconfigBase.compilerOptions.paths).find(
-      (key) => key.endsWith(`/${lib}`)
+      (key) => key.endsWith(`/${lib}`),
     );
     if (!importPath) {
       throw new Error(
         `No tsconfig path registered for lib "${lib}". Registered keys: ${Object.keys(
-          tsconfigBase.compilerOptions.paths
-        ).join(', ')}`
+          tsconfigBase.compilerOptions.paths,
+        ).join(', ')}`,
       );
     }
 
@@ -182,12 +182,12 @@ describe('@nxext/svelte: library', () => {
 <main>
   <${libClassName} msg="Yey"></${libClassName}>
 </main>
-`
+`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target build for project ${app}`
+      `Successfully ran target build for project ${app}`,
     );
   });
 });

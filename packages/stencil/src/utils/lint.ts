@@ -29,11 +29,11 @@ export const extraEslintDependencies = {
 export type EsLintPluginBaseName<R> = R extends `eslint-plugin-${infer U}`
   ? U
   : R extends `${infer U}/eslint-plugin`
-  ? U
-  : never;
+    ? U
+    : never;
 
 export function getEsLintPluginBaseName<
-  R extends keyof typeof ESLINT_PLUGIN_VERSIONS
+  R extends keyof typeof ESLINT_PLUGIN_VERSIONS,
 >(packageName: R): EsLintPluginBaseName<typeof packageName> {
   if (packageName.startsWith('eslint-plugin-')) {
     return packageName.replace('eslint-plugin-', '') as EsLintPluginBaseName<
@@ -74,12 +74,12 @@ export const beginningOfEsLintConfigJs = beginningOfEsLintConfigJsCjs;
 export const augmentStencilEslintFlatConfig = (
   tree: Tree,
   eslintFlatConfigFileContent: string,
-  eslintFlatConfigFilePath: string
+  eslintFlatConfigFilePath: string,
 ): GeneratorCallback => {
   let sourceFile = tsquery.ast(
     eslintFlatConfigFileContent,
     eslintFlatConfigFilePath,
-    ScriptKind.JS
+    ScriptKind.JS,
   );
 
   const [configArrayNodeBeforeInsert] = tsquery
@@ -104,7 +104,7 @@ export const augmentStencilEslintFlatConfig = (
     sourceFile,
     eslintFlatConfigFilePath,
     0,
-    isEsm ? beginningOfEsLintConfigJsEsm : beginningOfEsLintConfigJsCjs
+    isEsm ? beginningOfEsLintConfigJsEsm : beginningOfEsLintConfigJsCjs,
   );
 
   const [configArrayNode] = tsquery
@@ -161,19 +161,19 @@ export const augmentStencilEslintFlatConfig = (
     rules: {},
   },
 ]`,
-      configArrayNode.getFullText()
+      configArrayNode.getFullText(),
     );
   }
 
   return () => {
     logger.warn(
-      `@stencil-community/eslint-plugin may not support the flat config yet.`
+      `@stencil-community/eslint-plugin may not support the flat config yet.`,
     );
     logger.warn(`update this file:`);
     logger.warn(
       getTerminalLinkForAbsolutePath(
-        join(workspaceRoot, eslintFlatConfigFilePath)
-      )
+        join(workspaceRoot, eslintFlatConfigFilePath),
+      ),
     );
     logger.warn(`once the plugin does support the flat config.`);
   };

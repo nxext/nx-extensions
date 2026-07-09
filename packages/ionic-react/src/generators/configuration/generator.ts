@@ -14,7 +14,7 @@ import { ConfigurationGeneratorSchema } from './schema';
 
 export async function configurationGenerator(
   host: Tree,
-  options: ConfigurationGeneratorSchema
+  options: ConfigurationGeneratorSchema,
 ) {
   const normalizedOptions = normalizeOptions(host, options);
   const installTask = addDependencies(host);

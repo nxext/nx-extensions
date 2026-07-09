@@ -60,14 +60,14 @@ describe('@nxext/sveltekit', () => {
     const app = uniq('sveltekit-app');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --no-interactive`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
     const combined = stripAnsi(`${result.stdout}${result.stderr}`);
     expect(combined).toContain('modules transformed');
     expect(combined).toContain(
-      `Successfully ran target build for project ${app}`
+      `Successfully ran target build for project ${app}`,
     );
   });
 
@@ -81,18 +81,18 @@ describe('@nxext/sveltekit', () => {
 
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:component -p ${app} ${component} --no-interactive`
+      `generate @nxext/sveltekit:component -p ${app} ${component} --no-interactive`,
     );
 
     expect(() =>
       checkFilesExist(
         projectDirectory,
-        `apps/${app}/src/lib/${component}/${component}.spec.ts`
-      )
+        `apps/${app}/src/lib/${component}/${component}.spec.ts`,
+      ),
     ).not.toThrow();
   });
 
@@ -100,7 +100,7 @@ describe('@nxext/sveltekit', () => {
     const app = uniq('sveltekit-lint');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --no-interactive`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `lint ${app}`);
@@ -116,10 +116,10 @@ describe('@nxext/sveltekit', () => {
     const app = uniq('sveltekit-dir');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --directory=subdir --linter=none --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --directory=subdir --linter=none --no-interactive`,
     );
     expect(() =>
-      checkFilesExist(projectDirectory, `apps/subdir/${app}/src/app.html`)
+      checkFilesExist(projectDirectory, `apps/subdir/${app}/src/app.html`),
     ).not.toThrow();
   });
 
@@ -129,11 +129,11 @@ describe('@nxext/sveltekit', () => {
     const app = uniq('sveltekit-tags');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/sveltekit:app ${app} --tags=e2etag,e2ePackage --no-interactive`
+      `generate @nxext/sveltekit:app ${app} --tags=e2etag,e2ePackage --no-interactive`,
     );
     const project = readJson<{ tags: string[] }>(
       projectDirectory,
-      `apps/${app}/project.json`
+      `apps/${app}/project.json`,
     );
     expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
   });

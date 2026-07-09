@@ -18,7 +18,7 @@ describe('addFrameworkDependencies', () => {
     const packageJson = readJson(tree, 'package.json');
     expect(packageJson.dependencies['preact']).toBe('10.0.0');
     expect(packageJson.devDependencies['@testing-library/preact']).toBe(
-      '3.0.0'
+      '3.0.0',
     );
   });
 });

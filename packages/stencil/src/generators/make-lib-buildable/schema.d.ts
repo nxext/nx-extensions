@@ -1,7 +1,9 @@
 import { InitSchema } from '../../generators/init/schema';
 
-export interface MakeLibBuildableSchema
-  extends Pick<InitSchema, 'name' | 'style' | 'projectRoot'> {
+export interface MakeLibBuildableSchema extends Pick<
+  InitSchema,
+  'name' | 'style' | 'projectRoot'
+> {
   /**
    * The TS `paths` entry to be used across Nx projects.
    *

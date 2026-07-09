@@ -8,7 +8,7 @@ import { Tree, updateJson } from '@nx/devkit';
  */
 export function updateLibPackageNpmScope(
   host: Tree,
-  options: { projectRoot: string; importPath: string }
+  options: { projectRoot: string; importPath: string },
 ): void {
   updateJson(host, `${options.projectRoot}/package.json`, (json) => {
     json.name = options.importPath;

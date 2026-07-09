@@ -44,7 +44,7 @@ Alias(es): d
 
 Type: `string`
 
-A directory where the project is placed
+A directory where the project is placed (relative path from the workspace root, e.g. apps/<my-app-name>). If omitted, the project is generated at the workspace root using the provided name.
 
 #### linter
 
@@ -55,6 +55,14 @@ Type: `string`
 Possible values: `eslint`, `none`
 
 The tool to use for running lint checks.
+
+#### rootProject (**hidden**)
+
+Default: `false`
+
+Type: `boolean`
+
+Create the application at the root of the workspace.
 
 #### skipFormat
 

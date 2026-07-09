@@ -61,7 +61,7 @@ export const createNodesV2: CreateNodesV2<StencilPluginOptions> = [
       },
       projectConfigFiles,
       rawOptions,
-      context
+      context,
     );
   },
 ];
@@ -69,7 +69,7 @@ export const createNodesV2: CreateNodesV2<StencilPluginOptions> = [
 type NormalizedOptions = Required<StencilPluginOptions>;
 
 function normalizeOptions(
-  options: StencilPluginOptions | undefined
+  options: StencilPluginOptions | undefined,
 ): NormalizedOptions {
   return {
     buildTargetName: options?.buildTargetName ?? 'build',
@@ -81,7 +81,7 @@ function normalizeOptions(
 
 function buildTargets(
   projectRoot: string,
-  options: NormalizedOptions
+  options: NormalizedOptions,
 ): ProjectConfiguration['targets'] {
   const commonOptions: Partial<TargetConfiguration> = {
     options: { cwd: projectRoot },

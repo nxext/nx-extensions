@@ -49,7 +49,7 @@ export function getProjectTsImportPath(tree: Tree, projectName: string) {
 
 export async function storybookConfigurationGenerator(
   host: Tree,
-  rawSchema: StorybookConfigureSchema
+  rawSchema: StorybookConfigureSchema,
 ) {
   const tasks: GeneratorCallback[] = [];
   const uiFramework = '@storybook/web-components-vite';
@@ -91,7 +91,7 @@ export async function storybookConfigurationGenerator(
 
   if (options.configureCypress) {
     logger.warn(
-      '`configureCypress` was removed from @nx/storybook in v22. Storybook now ships `interactionTests` (Play functions) for UI testing; the option is ignored.'
+      '`configureCypress` was removed from @nx/storybook in v22. Storybook now ships `interactionTests` (Play functions) for UI testing; the option is ignored.',
     );
   }
 

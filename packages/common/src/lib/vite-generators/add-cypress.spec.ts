@@ -60,12 +60,12 @@ describe('addCypressApplication', () => {
     const e2eConfig = readProjectConfiguration(tree, 'my-app-e2e');
     expect(e2eConfig.targets.e2e.options.devServerTarget).toBe('my-app:serve');
     expect(e2eConfig.targets.e2e.configurations.ci.devServerTarget).toBe(
-      'my-app:serve-static'
+      'my-app:serve-static',
     );
 
     const cypressConfig = tree.read(
       'apps/my-app-e2e/cypress.config.ts',
-      'utf-8'
+      'utf-8',
     );
     expect(cypressConfig).toContain('http://localhost:4200');
   });

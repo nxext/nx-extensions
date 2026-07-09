@@ -10,7 +10,7 @@ import { ensurePackage, GeneratorCallback, NX_VERSION, Tree } from '@nx/devkit';
  */
 export async function addCypressInitPlugin(
   tree: Tree,
-  shouldRun: () => boolean
+  shouldRun: () => boolean,
 ): Promise<GeneratorCallback> {
   if (!shouldRun()) {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
@@ -18,7 +18,7 @@ export async function addCypressInitPlugin(
 
   const { cypressInitGenerator } = ensurePackage<typeof import('@nx/cypress')>(
     '@nx/cypress',
-    NX_VERSION
+    NX_VERSION,
   );
 
   return await cypressInitGenerator(tree, {});

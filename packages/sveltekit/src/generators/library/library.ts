@@ -10,7 +10,7 @@ export interface SvelteLibrarySchema {
 
 export async function libraryGenerator(
   tree: Tree,
-  options: SvelteLibrarySchema
+  options: SvelteLibrarySchema,
 ) {
   createLibInProject(tree, options);
   addExportsToBarrel(tree, options);

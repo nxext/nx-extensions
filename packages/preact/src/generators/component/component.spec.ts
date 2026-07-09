@@ -26,8 +26,8 @@ describe('component schematic', () => {
     const name = names(componentName);
     expect(
       tree.exists(
-        `${projectAppDirectory}/src/components/${name.fileName}/${name.className}.ts`
-      )
+        `${projectAppDirectory}/src/components/${name.fileName}/${name.className}.ts`,
+      ),
     );
   });
 
@@ -38,7 +38,7 @@ describe('component schematic', () => {
 
     const specFile = tree
       .read(
-        `${projectAppDirectory}/src/components/${name.fileName}/${name.fileName}.spec.tsx`
+        `${projectAppDirectory}/src/components/${name.fileName}/${name.fileName}.spec.tsx`,
       )
       .toString('utf-8');
     // Regression guard (found by the ts-solution e2e, but mode-independent):
@@ -59,7 +59,7 @@ describe('component schematic', () => {
 
     const indexFile = tree.read(`${projectLibDirectory}/src/index.ts`);
     expect(indexFile.toString('utf-8')).toMatch(
-      `export { default as ${name.className} } from './components/${name.fileName}/${name.className}.ts';`
+      `export { default as ${name.className} } from './components/${name.fileName}/${name.className}.ts';`,
     );
   });
 });

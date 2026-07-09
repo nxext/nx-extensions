@@ -46,6 +46,6 @@ describe('shouldUpdateNpmScope', () => {
     'returns $expected for buildable=$buildable, publishable=$publishable',
     ({ buildable, publishable, expected }) => {
       expect(shouldUpdateNpmScope({ buildable, publishable })).toBe(expected);
-    }
+    },
   );
 });

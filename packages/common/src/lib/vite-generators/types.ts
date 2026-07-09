@@ -23,8 +23,7 @@ export interface MinimalNormalizedViteSchema {
  * Feld nicht) -> optional; `undefined` reproduziert preacts heutiges
  * Verhalten (immer "non-root"-Pfade).
  */
-export interface MinimalNormalizedViteAppSchema
-  extends MinimalNormalizedViteSchema {
+export interface MinimalNormalizedViteAppSchema extends MinimalNormalizedViteSchema {
   projectName: string;
   e2eTestRunner: 'cypress' | 'none';
   e2eProjectName: string;
@@ -34,8 +33,7 @@ export interface MinimalNormalizedViteAppSchema
   rootProject?: boolean;
 }
 
-export interface MinimalNormalizedViteLibSchema
-  extends MinimalNormalizedViteSchema {
+export interface MinimalNormalizedViteLibSchema extends MinimalNormalizedViteSchema {
   buildable?: boolean;
   publishable?: boolean;
   importPath?: string;

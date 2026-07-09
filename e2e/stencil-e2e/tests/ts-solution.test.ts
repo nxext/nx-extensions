@@ -78,10 +78,10 @@ describe('@nxext/stencil: TS-solution mode', () => {
     // TS-solution: no explicit --name was given, so the registered Nx
     // project identifier is the resolved import path (package.json name),
     // not the bare directory basename `app`.
-    const appPackageJson = readJson<{ name: string; nx?: { targets?: unknown } }>(
-      projectDirectory,
-      `apps/${app}/package.json`,
-    );
+    const appPackageJson = readJson<{
+      name: string;
+      nx?: { targets?: unknown };
+    }>(projectDirectory, `apps/${app}/package.json`);
     const appProjectName = appPackageJson.name;
     // `lint` is the one target @nxext/stencil writes explicitly (build/serve/
     // test/e2e are inferred by the Crystal plugin from stencil.config.ts) -

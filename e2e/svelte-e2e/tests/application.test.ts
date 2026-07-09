@@ -32,15 +32,15 @@ describe('@nxext/svelte: application', () => {
     const app = uniq('svelte-app');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target build for project ${app}`
+      `Successfully ran target build for project ${app}`,
     );
     expect(() =>
-      checkFilesExist(projectDirectory, `dist/apps/${app}/index.html`)
+      checkFilesExist(projectDirectory, `dist/apps/${app}/index.html`),
     ).not.toThrow();
   });
 
@@ -48,11 +48,11 @@ describe('@nxext/svelte: application', () => {
     const app = uniq('svelte-tags');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:app apps/${app} --tags=e2etag,e2ePackage --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:app apps/${app} --tags=e2etag,e2ePackage --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
     const project = readJson<{ tags: string[] }>(
       projectDirectory,
-      `apps/${app}/project.json`
+      `apps/${app}/project.json`,
     );
     expect(project.tags).toEqual(['e2etag', 'e2ePackage']);
   });
@@ -60,10 +60,10 @@ describe('@nxext/svelte: application', () => {
   it('generates an app into a nested directory', async () => {
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:app apps/project/ui --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:app apps/project/ui --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
     expect(() =>
-      checkFilesExist(projectDirectory, `apps/project/ui/src/main.ts`)
+      checkFilesExist(projectDirectory, `apps/project/ui/src/main.ts`),
     ).not.toThrow();
   });
 
@@ -71,7 +71,7 @@ describe('@nxext/svelte: application', () => {
     const app = uniq('svelte-lint');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `lint ${app}`);
@@ -82,7 +82,7 @@ describe('@nxext/svelte: application', () => {
     const app = uniq('svelte-check');
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
 
     // svelte-check v4 prints a machine-readable summary line when stdout is
@@ -96,7 +96,7 @@ describe('@nxext/svelte: application', () => {
     const combined = stripAnsi(`${result.stdout}${result.stderr}`);
     expect(combined).toMatch(/svelte-check found 0 errors|\b0 ERRORS\b/);
     expect(combined).toContain(
-      `Successfully ran target check for project ${app}`
+      `Successfully ran target check for project ${app}`,
     );
   });
 
@@ -110,16 +110,16 @@ describe('@nxext/svelte: application', () => {
       const app = uniq('svelte-jest');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:app apps/${app} --unitTestRunner=jest --e2eTestRunner=none --no-interactive`
+        `generate @nxext/svelte:app apps/${app} --unitTestRunner=jest --e2eTestRunner=none --no-interactive`,
       );
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:component test --project=${app} --no-interactive`
+        `generate @nxext/svelte:component test --project=${app} --no-interactive`,
       );
 
       const result = await runNxCommandAsync(projectDirectory, `test ${app}`);
       expect(`${result.stdout}${result.stderr}`).toContain(
-        'Ran all test suites'
+        'Ran all test suites',
       );
     });
 
@@ -127,16 +127,16 @@ describe('@nxext/svelte: application', () => {
       const app = uniq('svelte-vitest');
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:app apps/${app} --unitTestRunner=vitest --e2eTestRunner=none --no-interactive`
+        `generate @nxext/svelte:app apps/${app} --unitTestRunner=vitest --e2eTestRunner=none --no-interactive`,
       );
       await runNxCommandAsync(
         projectDirectory,
-        `generate @nxext/svelte:component test --project=${app} --no-interactive`
+        `generate @nxext/svelte:component test --project=${app} --no-interactive`,
       );
 
       const result = await runNxCommandAsync(projectDirectory, `test ${app}`);
       expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-        `Successfully ran target test for project ${app}`
+        `Successfully ran target test for project ${app}`,
       );
     });
   });
@@ -147,15 +147,15 @@ describe('@nxext/svelte: application', () => {
 
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:app apps/${app} --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:lib libs/${lib} --e2eTestRunner=none --unitTestRunner=none --no-interactive`
+      `generate @nxext/svelte:lib libs/${lib} --e2eTestRunner=none --unitTestRunner=none --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/svelte:c testcomp --project=${lib} --no-interactive`
+      `generate @nxext/svelte:c testcomp --project=${lib} --no-interactive`,
     );
 
     // The scope is derived from the scaffolded workspace, not always `@proj`.
@@ -165,13 +165,13 @@ describe('@nxext/svelte: application', () => {
       compilerOptions: { paths: Record<string, string[]> };
     }>(projectDirectory, 'tsconfig.base.json');
     const importPath = Object.keys(tsconfigBase.compilerOptions.paths).find(
-      (key) => key.endsWith(`/${lib}`)
+      (key) => key.endsWith(`/${lib}`),
     );
     if (!importPath) {
       throw new Error(
         `No tsconfig path registered for lib "${lib}". Registered keys: ${Object.keys(
-          tsconfigBase.compilerOptions.paths
-        ).join(', ')}`
+          tsconfigBase.compilerOptions.paths,
+        ).join(', ')}`,
       );
     }
 
@@ -187,15 +187,15 @@ describe('@nxext/svelte: application', () => {
   <h1>Welcome {name}!</h1>
   <Testcomp />
 </main>
-`
+`,
     );
 
     const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target build for project ${app}`
+      `Successfully ran target build for project ${app}`,
     );
     expect(() =>
-      checkFilesExist(projectDirectory, `dist/apps/${app}/index.html`)
+      checkFilesExist(projectDirectory, `dist/apps/${app}/index.html`),
     ).not.toThrow();
   });
 });

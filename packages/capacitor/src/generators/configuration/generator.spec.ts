@@ -29,7 +29,7 @@ describe('capacitor-project', () => {
   }: { standalone?: boolean } = {}) {
     projectRoot = standalone ? '' : `apps/${options.project}`;
     appTree = createTreeWithEmptyWorkspace(
-      standalone ? undefined : { layout: 'apps-libs' }
+      standalone ? undefined : { layout: 'apps-libs' },
     );
     addProjectConfiguration(appTree, options.project, {
       root: projectRoot,
@@ -88,7 +88,7 @@ describe('capacitor-project', () => {
         .toString();
 
       expect(capacitorConfigJson).toContain(
-        `../../dist/apps/${options.project}`
+        `../../dist/apps/${options.project}`,
       );
     });
 
@@ -102,12 +102,12 @@ describe('capacitor-project', () => {
       await generator(appTree, options);
       const projectConfiguration = readProjectConfiguration(
         appTree,
-        options.project
+        options.project,
       );
 
       expect(projectConfiguration.targets.test).toBeTruthy();
       expect(projectConfiguration.targets.test.executor).toEqual(
-        '@nx/jest:jest'
+        '@nx/jest:jest',
       );
     });
   });
@@ -118,10 +118,10 @@ describe('capacitor-project', () => {
       await generator(appTree, options);
       const packageJson = readJson(appTree, 'package.json');
       expect(packageJson.dependencies['@capacitor/android']).toEqual(
-        capacitorVersion
+        capacitorVersion,
       );
       expect(packageJson.dependencies['@capacitor/ios']).toEqual(
-        capacitorVersion
+        capacitorVersion,
       );
     });
   });
@@ -160,18 +160,16 @@ describe('capacitor-project', () => {
       await generator(tsSolutionTree, options);
 
       expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`)
+        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`),
       ).toBeTruthy();
-      expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/.gitignore`)
-      ).toBeTruthy();
+      expect(tsSolutionTree.exists(`${tsProjectRoot}/.gitignore`)).toBeTruthy();
 
       // updateProjectPackageJson merges capacitor deps into the project's
       // EXISTING package.json (there is no separate project.json in this
       // mode) - the pre-existing `nx.targets` must survive untouched.
       const packageJson = readJson(
         tsSolutionTree,
-        `${tsProjectRoot}/package.json`
+        `${tsProjectRoot}/package.json`,
       );
       expect(packageJson.nx.targets.build).toBeDefined();
       expect(packageJson.dependencies['@capacitor/android']).toBeDefined();

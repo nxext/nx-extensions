@@ -9,7 +9,7 @@ import { ensurePackage, GeneratorCallback, NX_VERSION, Tree } from '@nx/devkit';
  */
 export async function addJestInitPlugin(
   tree: Tree,
-  shouldRun: () => boolean
+  shouldRun: () => boolean,
 ): Promise<GeneratorCallback> {
   if (!shouldRun()) {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
@@ -17,7 +17,7 @@ export async function addJestInitPlugin(
 
   const { jestInitGenerator } = ensurePackage<typeof import('@nx/jest')>(
     '@nx/jest',
-    NX_VERSION
+    NX_VERSION,
   );
 
   return await jestInitGenerator(tree, {});

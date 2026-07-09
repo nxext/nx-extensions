@@ -27,7 +27,7 @@ describe('page schematic', () => {
     await routeGenerator(tree, options);
     const name = names(pageName);
     expect(
-      tree.exists(`${projectName}/src/routes/${name.fileName}/+error.svelte`)
+      tree.exists(`${projectName}/src/routes/${name.fileName}/+error.svelte`),
     ).toBeTruthy();
   });
 
@@ -36,7 +36,11 @@ describe('page schematic', () => {
     // explicit sourceRoot - the generator has to fall back to `<root>/src`
     // via getProjectSourceRoot instead of reading projectConfig.sourceRoot.
     beforeEach(async () => {
-      tree = await createTestProject(projectName, 'none', createTsSolutionTree());
+      tree = await createTestProject(
+        projectName,
+        'none',
+        createTsSolutionTree(),
+      );
     });
 
     it('should run successfully', async () => {
@@ -48,7 +52,7 @@ describe('page schematic', () => {
       const name = names(pageName);
       expect(tree.exists(`${projectName}/project.json`)).toBeFalsy();
       expect(
-        tree.exists(`${projectName}/src/routes/${name.fileName}/+error.svelte`)
+        tree.exists(`${projectName}/src/routes/${name.fileName}/+error.svelte`),
       ).toBeTruthy();
     });
   });

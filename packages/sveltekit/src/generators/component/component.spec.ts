@@ -27,8 +27,8 @@ describe('component schematic', () => {
     const name = names(componentName);
     expect(
       tree.exists(
-        `${projectName}/src/lib/${name.fileName}/${name.className}.svelte`
-      )
+        `${projectName}/src/lib/${name.fileName}/${name.className}.svelte`,
+      ),
     ).toBeTruthy();
   });
 
@@ -37,12 +37,16 @@ describe('component schematic', () => {
     // explicit sourceRoot - the generator has to fall back to `<root>/src`
     // via getProjectSourceRoot instead of reading projectConfig.sourceRoot.
     beforeEach(async () => {
-      tree = await createTestProject(projectName, 'none', createTsSolutionTree());
+      tree = await createTestProject(
+        projectName,
+        'none',
+        createTsSolutionTree(),
+      );
     });
 
     it('should run successfully', async () => {
       await expect(
-        componentGenerator(tree, options)
+        componentGenerator(tree, options),
       ).resolves.not.toThrowError();
     });
 
@@ -52,8 +56,8 @@ describe('component schematic', () => {
       expect(tree.exists(`${projectName}/project.json`)).toBeFalsy();
       expect(
         tree.exists(
-          `${projectName}/src/lib/${name.fileName}/${name.className}.svelte`
-        )
+          `${projectName}/src/lib/${name.fileName}/${name.className}.svelte`,
+        ),
       ).toBeTruthy();
     });
   });

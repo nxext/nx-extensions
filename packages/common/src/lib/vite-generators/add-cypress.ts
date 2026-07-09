@@ -24,7 +24,7 @@ export async function addCypressApplication(
     e2eWebServerAddress: string;
     e2eWebServerTarget: string;
     rootProject?: boolean;
-  }
+  },
 ): Promise<GeneratorCallback> {
   if (options.e2eTestRunner !== 'cypress') {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
@@ -32,7 +32,7 @@ export async function addCypressApplication(
 
   const { webStaticServeGenerator } = ensurePackage<typeof import('@nx/web')>(
     '@nx/web',
-    NX_VERSION
+    NX_VERSION,
   );
 
   await webStaticServeGenerator(host, {

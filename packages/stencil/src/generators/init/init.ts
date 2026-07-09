@@ -10,7 +10,7 @@ import { addPluginToNxJson } from '@nxext/common';
 
 export async function initGenerator<T extends InitSchema>(
   host: Tree,
-  options: T
+  options: T,
 ) {
   const dependenciesTask = addDependenciesByApptype(host, options.appType);
   const styleDependenciesTask = addStyledDependencies(host, options);
@@ -29,7 +29,7 @@ export async function initGenerator<T extends InitSchema>(
     styleDependenciesTask,
     addPuppeteerTask,
     addCypressTask,
-    jestInitTask
+    jestInitTask,
   );
 }
 

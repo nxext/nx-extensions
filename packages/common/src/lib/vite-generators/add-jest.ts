@@ -12,7 +12,7 @@ export async function addJestConfiguration(
   options: {
     projectName: string;
     unitTestRunner: 'vitest' | 'jest' | 'none';
-  }
+  },
 ): Promise<GeneratorCallback> {
   if (options.unitTestRunner !== 'jest') {
     return () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
@@ -20,7 +20,7 @@ export async function addJestConfiguration(
 
   const { configurationGenerator } = ensurePackage<typeof import('@nx/jest')>(
     '@nx/jest',
-    NX_VERSION
+    NX_VERSION,
   );
 
   return await configurationGenerator(host, {

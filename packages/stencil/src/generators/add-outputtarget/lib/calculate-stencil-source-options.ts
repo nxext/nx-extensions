@@ -9,7 +9,7 @@ export function calculateStencilSourceOptions(host: Tree, projectName: string) {
   const stencilConfigPath = `${stencilProjectConfig.root}/stencil.config.ts`;
   const stencilConfigSource: ts.SourceFile = readTsSourceFile(
     host,
-    stencilConfigPath
+    stencilConfigPath,
   );
 
   // Same derivation as `getProjectTsImportPath` (Design 2.5): prefer the

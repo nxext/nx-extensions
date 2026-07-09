@@ -8,7 +8,7 @@ import { joinPathFragments, TargetConfiguration } from '@nx/devkit';
  */
 export function createEslintLintTarget(
   projectRoot: string,
-  tsConfigFileName: 'tsconfig.app.json' | 'tsconfig.lib.json'
+  tsConfigFileName: 'tsconfig.app.json' | 'tsconfig.lib.json',
 ): TargetConfiguration {
   return {
     executor: '@nx/eslint:lint',

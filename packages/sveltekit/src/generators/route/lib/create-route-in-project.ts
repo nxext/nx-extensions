@@ -38,7 +38,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/api'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 
@@ -47,7 +47,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/page/page'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 
@@ -56,7 +56,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/layout/page'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 
@@ -65,7 +65,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/error'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 
@@ -74,7 +74,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/page/client'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 
@@ -83,7 +83,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/page/server'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 
@@ -92,7 +92,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/layout/client'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 
@@ -101,7 +101,7 @@ export function createRouteInProject(tree: Tree, options: SvelteRouteSchema) {
       tree,
       joinPathFragments(__dirname, '../files/src/layout/server'),
       joinPathFragments(destinationFolder),
-      names(options.name)
+      names(options.name),
     );
   }
 }

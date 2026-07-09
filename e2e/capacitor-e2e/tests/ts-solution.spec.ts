@@ -54,11 +54,11 @@ describe('@nxext/capacitor (TS-solution)', () => {
 
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nx/web:application ${appRoot} --name=${app} --style=css --bundler=vite --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`
+      `generate @nx/web:application ${appRoot} --name=${app} --style=css --bundler=vite --e2eTestRunner=none --linter=none --skipFormat=true --no-interactive`,
     );
     await runNxCommandAsync(
       projectDirectory,
-      `generate @nxext/capacitor:configuration --project=${app} --appName=test --appId=test.example.app --skipFormat=true --no-interactive`
+      `generate @nxext/capacitor:configuration --project=${app} --appName=test --appId=test.example.app --skipFormat=true --no-interactive`,
     );
 
     // Same defensive tsconfig patch as the legacy suite (see
@@ -72,7 +72,7 @@ describe('@nxext/capacitor (TS-solution)', () => {
     // chain, not the filename.
     const tsconfigAppPath = join(
       projectDirectory,
-      `${appRoot}/tsconfig.app.json`
+      `${appRoot}/tsconfig.app.json`,
     );
     const tsconfigApp = JSON.parse(readFileSync(tsconfigAppPath, 'utf-8'));
     tsconfigApp.compilerOptions.types ??= [];
@@ -90,14 +90,14 @@ describe('@nxext/capacitor (TS-solution)', () => {
     checkFilesExist(
       projectDirectory,
       `${appRoot}/capacitor.config.ts`,
-      `${appRoot}/.gitignore`
+      `${appRoot}/.gitignore`,
     );
   });
 
   it('registers the project in pnpm-workspace.yaml (TS-solution registration untouched by capacitor)', () => {
     const workspaceYaml = readFileSync(
       join(projectDirectory, 'pnpm-workspace.yaml'),
-      'utf-8'
+      'utf-8',
     );
     expect(workspaceYaml).toContain('packages');
   });
@@ -105,7 +105,7 @@ describe('@nxext/capacitor (TS-solution)', () => {
   it('builds the capacitor-configured app', async () => {
     const result = await runNxCommandAsync(projectDirectory, `build ${app}`);
     expect(stripAnsi(`${result.stdout}${result.stderr}`)).toContain(
-      `Successfully ran target build for project ${app}`
+      `Successfully ran target build for project ${app}`,
     );
   });
 
@@ -115,7 +115,7 @@ describe('@nxext/capacitor (TS-solution)', () => {
 
     const help = await runNxCommandAsync(
       projectDirectory,
-      `run ${app}:cap --cmd="--help"`
+      `run ${app}:cap --cmd="--help"`,
     );
     expect(help.stdout).toContain('Usage: cap');
   });
@@ -123,10 +123,10 @@ describe('@nxext/capacitor (TS-solution)', () => {
   it('adds the android platform', async () => {
     const result = await runNxCommandAsync(
       projectDirectory,
-      `run ${app}:add:android`
+      `run ${app}:add:android`,
     );
     expect(stripAnsi(result.stdout)).toContain(
-      '[success] android platform added!'
+      '[success] android platform added!',
     );
   });
 });

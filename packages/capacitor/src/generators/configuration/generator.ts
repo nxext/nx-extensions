@@ -9,7 +9,7 @@ import { addPluginToNxJson } from '@nxext/common';
 
 export async function capacitorConfigurationGenerator(
   host: Tree,
-  options: CapacitorConfigurationSchema
+  options: CapacitorConfigurationSchema,
 ) {
   const normalizedOptions = normalizeOptions(host, options);
   const installTask = addDependencies(host);
@@ -27,5 +27,5 @@ export async function capacitorConfigurationGenerator(
 
 export default capacitorConfigurationGenerator;
 export const capacitorProjectSchematic = convertNxGenerator(
-  capacitorConfigurationGenerator
+  capacitorConfigurationGenerator,
 );

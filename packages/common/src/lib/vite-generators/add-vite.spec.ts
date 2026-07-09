@@ -102,7 +102,7 @@ describe('configureViteFrameworkPlugin', () => {
     configureViteFrameworkPlugin(
       tree,
       { project: 'my-app', includeLib: false, includeVitest: false },
-      preactLikeConfig
+      preactLikeConfig,
     );
 
     const viteConfig = tree.read('apps/my-app/vite.config.ts', 'utf-8');
@@ -114,7 +114,7 @@ describe('configureViteFrameworkPlugin', () => {
     configureViteFrameworkPlugin(
       tree,
       { project: 'my-app', includeLib: false, includeVitest: false },
-      svelteLikeConfig
+      svelteLikeConfig,
     );
 
     const viteConfig = tree.read('apps/my-app/vite.config.ts', 'utf-8');
@@ -126,14 +126,14 @@ describe('configureViteFrameworkPlugin', () => {
     configureViteFrameworkPlugin(
       tree,
       { project: 'my-app', includeLib: false, includeVitest: true },
-      svelteLikeConfig
+      svelteLikeConfig,
     );
 
     const viteConfig = tree.read('apps/my-app/vite.config.ts', 'utf-8');
     expect(viteConfig).toContain('svelte()');
     expect(viteConfig).toContain('svelteTesting()');
     expect(viteConfig).toContain(
-      `import { svelteTesting } from '@testing-library/svelte/vite'`
+      `import { svelteTesting } from '@testing-library/svelte/vite'`,
     );
   });
 });

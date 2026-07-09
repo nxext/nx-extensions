@@ -1,4 +1,9 @@
-import { readJson, readProjectConfiguration, Tree, writeJson } from '@nx/devkit';
+import {
+  readJson,
+  readProjectConfiguration,
+  Tree,
+  writeJson,
+} from '@nx/devkit';
 // `@nx/angular`'s Node-only `/generators` and `/internal` subpaths have no
 // top-level .d.ts stub for classic `moduleResolution: "node"` to resolve.
 // @ts-expect-error -- see comment above; resolves fine at runtime
@@ -23,7 +28,7 @@ describe('application', () => {
 
   function testGeneratedFiles(
     tree: Tree,
-    options: ConfigurationGeneratorSchema
+    options: ConfigurationGeneratorSchema,
   ) {
     // Common files
     expect(tree.exists(`${projectRoot}/src/index.html`)).toBeTruthy();
@@ -35,10 +40,10 @@ describe('application', () => {
     expect(tree.exists(`${projectRoot}/src/pages/Tab1.tsx`)).toBeTruthy();
     expect(tree.exists(`${projectRoot}/src/pages/Tab1.css`)).toBeTruthy();
     expect(
-      tree.exists(`${projectRoot}/src/components/ExploreContainer.css`)
+      tree.exists(`${projectRoot}/src/components/ExploreContainer.css`),
     ).toBeTruthy();
     expect(
-      tree.exists(`${projectRoot}/src/components/ExploreContainer.tsx`)
+      tree.exists(`${projectRoot}/src/components/ExploreContainer.tsx`),
     ).toBeTruthy();
 
     // Capacitor files
@@ -83,10 +88,10 @@ describe('application', () => {
     const project = readProjectConfiguration(host, options.project);
 
     expect(project.targets.build.options.assets).not.toContain(
-      `${projectRoot}/src/favicon.ico`
+      `${projectRoot}/src/favicon.ico`,
     );
     expect(project.targets.build.options.assets).toContain(
-      `${projectRoot}/src/manifest.json`
+      `${projectRoot}/src/manifest.json`,
     );
   });
 
@@ -136,10 +141,10 @@ describe('application', () => {
       await configurationGenerator(tsSolutionTree, options);
 
       expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/src/App.tsx`)
+        tsSolutionTree.exists(`${tsProjectRoot}/src/App.tsx`),
       ).toBeTruthy();
       expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/ionic.config.json`)
+        tsSolutionTree.exists(`${tsProjectRoot}/ionic.config.json`),
       ).toBeTruthy();
 
       // updateWorkspace patches targets via updateProjectConfiguration,
@@ -147,12 +152,9 @@ describe('application', () => {
       // `package.json`'s `nx` field (Nx core dispatches on which of
       // project.json/package.json exists; see
       // `nx/src/generators/utils/project-configuration.js`).
-      const project = readProjectConfiguration(
-        tsSolutionTree,
-        options.project
-      );
+      const project = readProjectConfiguration(tsSolutionTree, options.project);
       expect(project.targets.build.options.assets).toContain(
-        `${tsProjectRoot}/src/manifest.json`
+        `${tsProjectRoot}/src/manifest.json`,
       );
     });
 
@@ -163,7 +165,7 @@ describe('application', () => {
       });
 
       expect(
-        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`)
+        tsSolutionTree.exists(`${tsProjectRoot}/capacitor.config.ts`),
       ).toBeTruthy();
     });
   });
