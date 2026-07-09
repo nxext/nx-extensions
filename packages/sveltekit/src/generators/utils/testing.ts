@@ -10,17 +10,21 @@ export async function createTestProject(
   // project into a TS-solution workspace instead of the default legacy one.
   tree: Tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' }),
 ): Promise<Tree> {
+  // Merge instead of overwrite: createTsSolutionTree seeds a `workspaces`
+  // field that package-manager detection needs when the tests run without a
+  // pnpm user agent (e.g. on CI agents).
+  const rootPkg = JSON.parse(tree.read('package.json', 'utf-8') ?? '{}');
   tree.write(
     'package.json',
-    `
-      {
-        "name": "test-name",
-        "dependencies": {},
-        "devDependencies": {
-          "@nx/workspace": "0.0.0"
-        }
-      }
-    `,
+    JSON.stringify({
+      ...rootPkg,
+      name: 'test-name',
+      dependencies: { ...(rootPkg.dependencies ?? {}) },
+      devDependencies: {
+        ...(rootPkg.devDependencies ?? {}),
+        '@nx/workspace': '0.0.0',
+      },
+    }),
   );
 
   await applicationGenerator(tree, {
