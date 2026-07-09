@@ -36,6 +36,15 @@ export function createTsSolutionTree(): Tree {
   // `{ packages: [...] }` zurückgibt.
   tree.write('pnpm-workspace.yaml', "packages:\n  - 'packages/*'\n");
 
+  // `detectPackageManager('/virtual')` hängt vom Aufrufkontext ab
+  // (npm_config_user_agent): unter `pnpm nx test` ist es pnpm, auf CI-Agents
+  // kann es npm sein — dann prüft `isUsingPackageManagerWorkspaces` das
+  // `workspaces`-Feld der Root-package.json statt der pnpm-workspace.yaml.
+  // Beides setzen macht den Helper Package-Manager-agnostisch.
+  const rootPackageJson = JSON.parse(tree.read('package.json', 'utf-8'));
+  rootPackageJson.workspaces = ['packages/*'];
+  writeJson(tree, 'package.json', rootPackageJson);
+
   writeJson(tree, 'tsconfig.json', {
     extends: './tsconfig.base.json',
     compileOnSave: false,

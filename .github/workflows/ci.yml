@@ -37,13 +37,21 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Start Nx Cloud CI run and distribute tasks to Nx Agents
-        run: pnpm exec nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e"
+        run: pnpm exec nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="test"
 
       - name: Check formatting
         run: pnpm exec nx-cloud record -- pnpm exec nx format:check
 
-      - name: Run build, lint, test and e2e for affected projects
-        run: pnpm exec nx affected --target build lint test e2e
+      - name: Run build, lint and test for affected projects
+        run: pnpm exec nx affected --target build lint test
+
+      # e2e spins up a Verdaccio registry, publishes every package, and
+      # scaffolds real workspaces — stateful work that runs on this runner
+      # (with readable logs) instead of being distributed to agents.
+      - name: Run e2e for affected projects
+        run: pnpm exec nx affected --target e2e --parallel=1
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: 'false'
 
   release:
     runs-on: ubuntu-latest
