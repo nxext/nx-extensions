@@ -325,6 +325,58 @@ export function readFile(
 }
 
 /**
+ * Reads the workspace package globs of a TS-solution test workspace -
+ * `pnpm-workspace.yaml` when present, otherwise `package.json#workspaces` -
+ * mirroring the exact precedence Nx's own `addProjectToTsSolutionWorkspace`
+ * (`@nx/workspace/src/utilities/typescript/ts-solution-setup.js`) uses when
+ * registering a newly generated project: pnpm-workspace.yaml if the
+ * workspace has one, `package.json#workspaces` otherwise.
+ *
+ * `create-nx-workspace --packageManager=pnpm` emits the former on most
+ * platforms, but has been observed to emit the latter instead for the exact
+ * same flag on some CI runners - reading through this helper (instead of
+ * hardcoding `pnpm-workspace.yaml`) keeps e2e assertions correct either way.
+ *
+ * The YAML parsing is intentionally minimal - it only understands the shape
+ * `addProjectToTsSolutionWorkspace` actually produces via `@zkochan/js-yaml`'s
+ * `dump(..., { quotingType: '"', forceQuotes: true })`: a top-level
+ * `packages:` key followed by `- "glob"` (or `- 'glob'` / unquoted) list
+ * items. That's enough for these e2e suites - no YAML package dependency
+ * needed.
+ */
+export function readWorkspaceGlobs(projectDirectory: string): string[] {
+  const workspaceYamlPath = join(projectDirectory, 'pnpm-workspace.yaml');
+  if (existsSync(workspaceYamlPath)) {
+    const contents = readFileSync(workspaceYamlPath, 'utf-8');
+    const globs: string[] = [];
+    let inPackages = false;
+    for (const line of contents.split(/\r?\n/)) {
+      if (/^packages:\s*$/.test(line)) {
+        inPackages = true;
+        continue;
+      }
+      if (!inPackages) continue;
+      const item = line.match(/^\s+-\s*(?:"([^"]*)"|'([^']*)'|(.+?))\s*$/);
+      if (item) {
+        globs.push((item[1] ?? item[2] ?? item[3]) as string);
+        continue;
+      }
+      if (line.trim() !== '') {
+        // A non-list-item, non-blank line ends the `packages:` block.
+        inPackages = false;
+      }
+    }
+    return globs;
+  }
+
+  const packageJson = readJson<{ workspaces?: string[] }>(
+    projectDirectory,
+    'package.json',
+  );
+  return packageJson.workspaces ?? [];
+}
+
+/**
  * Writes `contents` to a file in the test project, creating parent dirs if
  * needed. `contents` may be a string or a callback that receives the current
  * contents and returns the updated string — matching the

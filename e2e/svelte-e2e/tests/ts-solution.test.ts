@@ -20,8 +20,8 @@ import {
   cleanupTestProject,
   createTestProject,
   installPlugin,
-  readFile,
   readJson,
+  readWorkspaceGlobs,
   runCommand,
   runNxCommandAsync,
   stripAnsi,
@@ -97,15 +97,15 @@ describe('@nxext/svelte: TS-solution mode', () => {
     );
   });
 
-  it('registers the project in pnpm-workspace.yaml and the root tsconfig.json references', async () => {
+  it('registers the project in the package manager workspaces and the root tsconfig.json references', async () => {
     const app = uniq('ts-solution-registration');
     await runNxCommandAsync(
       projectDirectory,
       `generate @nxext/svelte:app apps/${app} --unitTestRunner=none --e2eTestRunner=none --no-interactive`,
     );
 
-    const workspaceYaml = readFile(projectDirectory, 'pnpm-workspace.yaml');
-    expect(workspaceYaml).toContain('apps');
+    const workspaceGlobs = readWorkspaceGlobs(projectDirectory);
+    expect(workspaceGlobs.some((glob) => glob.includes('apps'))).toBe(true);
 
     const rootTsconfig = readJson<{ references: { path: string }[] }>(
       projectDirectory,

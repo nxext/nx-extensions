@@ -36,8 +36,8 @@ import {
   cleanupTestProject,
   createTestProject,
   installPlugin,
-  readFile,
   readJson,
+  readWorkspaceGlobs,
   runNxCommandAsync,
   uniq,
 } from '@nxext/e2e-utils';
@@ -127,15 +127,15 @@ describe('@nxext/sveltekit: TS-solution mode', () => {
     expect(appTsconfig.extends).toBe('../tsconfig.base.json');
   });
 
-  it('registers the project in pnpm-workspace.yaml and the root tsconfig.json references', async () => {
+  it('registers the project in the package manager workspaces and the root tsconfig.json references', async () => {
     const app = uniq('sveltekit-ts-registration');
     await runNxCommandAsync(
       projectDirectory,
       `generate @nxext/sveltekit:app ${app} --no-interactive`,
     );
 
-    const workspaceYaml = readFile(projectDirectory, 'pnpm-workspace.yaml');
-    expect(workspaceYaml).toContain(app);
+    const workspaceGlobs = readWorkspaceGlobs(projectDirectory);
+    expect(workspaceGlobs.some((glob) => glob.includes(app))).toBe(true);
 
     const rootTsconfig = readJson<{ references: { path: string }[] }>(
       projectDirectory,

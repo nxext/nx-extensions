@@ -22,14 +22,13 @@
  * to the workspace's derived import path in TS-solution mode, making
  * `--project=` depend on the workspace's npm scope.
  */
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import {
   checkFilesExist,
   cleanupTestProject,
   createTestProject,
   installNxPlugins,
   installPlugin,
+  readWorkspaceGlobs,
   runNxCommandAsync,
   stripAnsi,
   uniq,
@@ -69,12 +68,9 @@ describe('@nxext/ionic-react (TS-solution)', () => {
     );
   });
 
-  it('registers the project in pnpm-workspace.yaml (TS-solution registration untouched by ionic-react)', () => {
-    const workspaceYaml = readFileSync(
-      join(projectDirectory, 'pnpm-workspace.yaml'),
-      'utf-8',
-    );
-    expect(workspaceYaml).toContain('packages');
+  it('registers the project in the package manager workspaces (TS-solution registration untouched by ionic-react)', () => {
+    const workspaceGlobs = readWorkspaceGlobs(projectDirectory);
+    expect(workspaceGlobs.some((glob) => glob.includes('packages'))).toBe(true);
   });
 
   it('builds the ionic-react-configured app', async () => {

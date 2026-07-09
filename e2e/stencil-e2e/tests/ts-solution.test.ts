@@ -40,8 +40,8 @@ import {
   cleanupTestProject,
   createTestProject,
   installPlugin,
-  readFile,
   readJson,
+  readWorkspaceGlobs,
   runNxCommandAsync,
   stripAnsi,
   uniq,
@@ -113,15 +113,15 @@ describe('@nxext/stencil: TS-solution mode', () => {
     );
   });
 
-  it('registers the project in pnpm-workspace.yaml but NOT in the root tsconfig.json references', async () => {
+  it('registers the project in the package manager workspaces but NOT in the root tsconfig.json references', async () => {
     const app = uniq('ts-solution-registration');
     await runNxCommandAsync(
       projectDirectory,
       `generate @nxext/stencil:app apps/${app} --style=css --e2eTestRunner=none --no-interactive`,
     );
 
-    const workspaceYaml = readFile(projectDirectory, 'pnpm-workspace.yaml');
-    expect(workspaceYaml).toContain('apps');
+    const workspaceGlobs = readWorkspaceGlobs(projectDirectory);
+    expect(workspaceGlobs.some((glob) => glob.includes('apps'))).toBe(true);
 
     // Non-composite Stencil projects must not be referenced by the root
     // solution tsconfig (see file header) - and the generated project

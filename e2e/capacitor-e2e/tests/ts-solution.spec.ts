@@ -35,6 +35,7 @@ import {
   createTestProject,
   installNxPlugins,
   installPlugin,
+  readWorkspaceGlobs,
   runNxCommandAsync,
   stripAnsi,
   uniq,
@@ -94,12 +95,9 @@ describe('@nxext/capacitor (TS-solution)', () => {
     );
   });
 
-  it('registers the project in pnpm-workspace.yaml (TS-solution registration untouched by capacitor)', () => {
-    const workspaceYaml = readFileSync(
-      join(projectDirectory, 'pnpm-workspace.yaml'),
-      'utf-8',
-    );
-    expect(workspaceYaml).toContain('packages');
+  it('registers the project in the package manager workspaces (TS-solution registration untouched by capacitor)', () => {
+    const workspaceGlobs = readWorkspaceGlobs(projectDirectory);
+    expect(workspaceGlobs.some((glob) => glob.includes('packages'))).toBe(true);
   });
 
   it('builds the capacitor-configured app', async () => {

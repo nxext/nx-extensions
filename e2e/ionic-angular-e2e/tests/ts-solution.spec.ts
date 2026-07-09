@@ -42,14 +42,13 @@
  * below for exactly that reason - revisit once `@nx/angular:application`
  * itself supports the TS-solution setup.
  */
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import {
   checkFilesExist,
   cleanupTestProject,
   createTestProject,
   installNxPlugins,
   installPlugin,
+  readWorkspaceGlobs,
   runNxCommandAsync,
   stripAnsi,
   uniq,
@@ -97,13 +96,9 @@ describe('@nxext/ionic-angular (TS-solution)', () => {
     checkFilesExist(projectDirectory, `${appRoot}/ionic.config.json`);
   });
 
-  it('registers the workspace as TS-solution (pnpm-workspace.yaml present, untouched by ionic-angular)', () => {
-    const workspaceYaml = readFileSync(
-      join(projectDirectory, 'pnpm-workspace.yaml'),
-      'utf-8',
-    );
-    expect(workspaceYaml).toBeDefined();
-    expect(workspaceYaml.length).toBeGreaterThan(0);
+  it('registers the project in the package manager workspaces (untouched by ionic-angular)', () => {
+    const workspaceGlobs = readWorkspaceGlobs(projectDirectory);
+    expect(workspaceGlobs.length).toBeGreaterThan(0);
   });
 
   it('exposes the cap executor', async () => {
