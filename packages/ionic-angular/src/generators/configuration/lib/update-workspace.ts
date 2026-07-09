@@ -8,16 +8,24 @@ import { ConfigurationGeneratorSchema } from '../schema';
 
 export function updateWorkspace(
   host: Tree,
-  options: ConfigurationGeneratorSchema
+  options: ConfigurationGeneratorSchema,
 ) {
   const projectConfig = readProjectConfiguration(host, options.project);
   const projectRoot = projectConfig.root;
+
+  // Package.json-based projects with inferred targets (TS solution setups)
+  // may not carry any explicit targets at all.
+  projectConfig.targets ??= {};
+  projectConfig.targets.build ??= {};
+  projectConfig.targets.build.options ??= {};
+  projectConfig.targets.build.options.assets ??= [];
+  projectConfig.targets.build.options.styles ??= [];
 
   projectConfig.targets.build.options.assets = [
     ...projectConfig.targets.build.options.assets.filter(
       (asset: string | Record<string, string>) =>
         asset.toString().includes('src/favicon.ico') ||
-        asset.toString().includes(`public/favicon.ico`)
+        asset.toString().includes(`public/favicon.ico`),
     ),
     {
       glob: '**/*.svg',

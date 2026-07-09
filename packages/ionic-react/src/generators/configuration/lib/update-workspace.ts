@@ -8,6 +8,9 @@ import { NormalizedSchema } from '../schema';
 
 export function updateWorkspace(host: Tree, options: NormalizedSchema) {
   const project = readProjectConfiguration(host, options.project);
+  // Package.json-based projects with inferred targets (TS solution setups)
+  // may not carry any explicit targets at all.
+  project.targets ??= {};
   project.targets.build ??= {};
   project.targets.build.options ??= {};
   const existingAssets = project.targets.build.options.assets ?? [];
@@ -17,7 +20,7 @@ export function updateWorkspace(host: Tree, options: NormalizedSchema) {
     ...existingAssets.filter(
       (asset: string | Record<string, string>) =>
         asset.toString().includes('src/favicon.ico') ||
-        asset.toString().includes(`public/favicon.ico`)
+        asset.toString().includes(`public/favicon.ico`),
     ),
     options.projectRoot + '/src/manifest.json',
     {
