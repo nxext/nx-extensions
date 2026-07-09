@@ -20,6 +20,8 @@ const E2E_ENV: NodeJS.ProcessEnv = {
   NX_NO_CLOUD: 'true',
   NX_DAEMON: 'false',
   CI: 'true',
+  // Pin create-nx-workspace's A/B flow variant for deterministic scaffolds.
+  NX_CNW_FLOW_VARIANT: '0',
   NPM_CONFIG_IGNORE_WORKSPACE_ROOT_CHECK: 'true',
 };
 
@@ -96,12 +98,16 @@ export function createTestProject(
   // TS-solution shape since Nx 21/22. The TS-solution path below needs the
   // plain defaults instead (package-manager workspaces + package.json
   // projects), so these two flags are legacy-only.
+  // `--preset=apps` output is machine-dependent (create-nx-workspace rolls
+  // an A/B flow variant per machine and detects installed AI tooling), so
+  // the TS-solution path pins the canonical `ts` preset instead.
+  const preset = opts.tsSolution ? 'ts' : 'apps';
   const createWorkspaceFlags = opts.tsSolution
     ? ''
     : ' --workspaceType=integrated --useProjectJson=true';
 
   execSync(
-    `npx --yes create-nx-workspace@latest ${projectName} --preset=apps --nxCloud=skip --no-interactive --packageManager=pnpm${createWorkspaceFlags}`,
+    `npx --yes create-nx-workspace@latest ${projectName} --preset=${preset} --nxCloud=skip --no-interactive --packageManager=pnpm${createWorkspaceFlags}`,
     {
       cwd: root,
       stdio: 'inherit',
