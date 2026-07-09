@@ -1,3 +1,23 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **stencil:** support the TS solution setup ([bbcafedf](https://github.com/nxext/nx-extensions/commit/bbcafedf))
+
+### 🩹 Fixes
+
+- **stencil:** point the compiler at the runtime tsconfig in TS solution mode ([6c879cf2](https://github.com/nxext/nx-extensions/commit/6c879cf2))
+- **stencil:** type inference plugin as CreateNodesV2 ([3ff9bc58](https://github.com/nxext/nx-extensions/commit/3ff9bc58))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 23.1.0
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

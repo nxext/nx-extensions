@@ -1,3 +1,24 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **solid:** support the TS solution setup ([0d8762ce](https://github.com/nxext/nx-extensions/commit/0d8762ce))
+- **solid:** refresh framework pins, adopt @solidjs/testing-library ([919a2376](https://github.com/nxext/nx-extensions/commit/919a2376))
+
+### 🩹 Fixes
+
+- merge instead of overwrite the seed package.json in test helpers ([fe96f4d0](https://github.com/nxext/nx-extensions/commit/fe96f4d0))
+- **solid:** register migrations under nx-migrations key ([bf4b4f48](https://github.com/nxext/nx-extensions/commit/bf4b4f48))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 23.1.0
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

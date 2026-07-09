@@ -1,3 +1,25 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **ionic-angular:** support the TS solution setup ([5a5f5a17](https://github.com/nxext/nx-extensions/commit/5a5f5a17))
+- **ionic-angular:** bump ionicons and Capacitor plugins to v8 ([f995d831](https://github.com/nxext/nx-extensions/commit/f995d831))
+
+### 🩹 Fixes
+
+- **ionic-react:** tolerate projects without explicit targets ([b115c7ca](https://github.com/nxext/nx-extensions/commit/b115c7ca))
+- **ionic-angular:** add missing migrations.json ([28c252f1](https://github.com/nxext/nx-extensions/commit/28c252f1))
+
+### 🧱 Updated Dependencies
+
+- Updated capacitor to 23.1.0
+- Updated common to 23.1.0
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

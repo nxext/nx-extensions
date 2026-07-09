@@ -1,6 +1,6 @@
 {
   "name": "@nxext/sveltekit",
-  "version": "23.0.0",
+  "version": "23.1.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for Sveltekit",
@@ -29,7 +29,7 @@
     "@nx/js": "^23.0.1",
     "@nx/eslint": "^23.0.1",
     "typescript": "^5.7.3",
-    "@nxext/common": "23.0.0"
+    "@nxext/common": "23.1.0"
   },
   "peerDependencies": {}
 }

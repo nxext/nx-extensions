@@ -1,3 +1,23 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **capacitor:** support the TS solution setup ([7b2fb0a2](https://github.com/nxext/nx-extensions/commit/7b2fb0a2))
+- **capacitor:** default new projects to Capacitor 8 ([af857324](https://github.com/nxext/nx-extensions/commit/af857324))
+
+### 🩹 Fixes
+
+- **capacitor:** correct createNodesV2 signature and pathing ([2b35bd2e](https://github.com/nxext/nx-extensions/commit/2b35bd2e))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 23.1.0
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.2.0 (2025-06-11)
 
 ### 🚀 Features

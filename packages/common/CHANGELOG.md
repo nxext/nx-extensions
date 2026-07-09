@@ -1,3 +1,19 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **common:** add TS solution setup utilities ([cfe585f4](https://github.com/nxext/nx-extensions/commit/cfe585f4))
+- **common:** add shared vite generator core ([8c155943](https://github.com/nxext/nx-extensions/commit/8c155943))
+
+### 🩹 Fixes
+
+- **common:** make createTsSolutionTree package-manager-agnostic ([810c2655](https://github.com/nxext/nx-extensions/commit/810c2655))
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

@@ -1,3 +1,23 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **preact:** support the TS solution setup ([a1154a89](https://github.com/nxext/nx-extensions/commit/a1154a89))
+- **preact:** refresh framework pins, add migrations manifest ([a4ebc060](https://github.com/nxext/nx-extensions/commit/a4ebc060))
+
+### 🩹 Fixes
+
+- **preact:** install @testing-library/jest-dom used by the spec template ([056c7409](https://github.com/nxext/nx-extensions/commit/056c7409))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 23.1.0
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

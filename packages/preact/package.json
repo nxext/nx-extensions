@@ -1,6 +1,6 @@
 {
   "name": "@nxext/preact",
-  "version": "23.0.0",
+  "version": "23.1.0",
   "license": "MIT",
   "author": "Jordan Hall",
   "description": "Nx plugin for preact",
@@ -37,6 +37,6 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nxext/common": "23.0.0"
+    "@nxext/common": "23.1.0"
   }
 }

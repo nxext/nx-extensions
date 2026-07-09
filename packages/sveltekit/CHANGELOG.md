@@ -1,3 +1,26 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **sveltekit:** support the TS solution setup ([57105206](https://github.com/nxext/nx-extensions/commit/57105206))
+- **sveltekit:** generate Svelte 5 apps ([e7222b55](https://github.com/nxext/nx-extensions/commit/e7222b55))
+- **sveltekit:** resolve app directory as provided ([7ffd66aa](https://github.com/nxext/nx-extensions/commit/7ffd66aa))
+
+### 🩹 Fixes
+
+- merge instead of overwrite the seed package.json in test helpers ([fe96f4d0](https://github.com/nxext/nx-extensions/commit/fe96f4d0))
+- **sveltekit:** drop angle brackets from the directory description ([fb8ec47f](https://github.com/nxext/nx-extensions/commit/fb8ec47f))
+- **sveltekit:** resolve() the layout nav link ([5ad83f7e](https://github.com/nxext/nx-extensions/commit/5ad83f7e))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 23.1.0
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

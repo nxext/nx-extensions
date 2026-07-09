@@ -1,3 +1,24 @@
+## 23.1.0 (2026-07-09)
+
+### 🚀 Features
+
+- **svelte:** support the TS solution setup ([12194ab6](https://github.com/nxext/nx-extensions/commit/12194ab6))
+- **svelte:** generate Svelte 5 projects ([1dfcd5d2](https://github.com/nxext/nx-extensions/commit/1dfcd5d2))
+- **svelte:** replace processProjectGraph with createDependencies ([3ff60ad5](https://github.com/nxext/nx-extensions/commit/3ff60ad5))
+
+### 🩹 Fixes
+
+- merge instead of overwrite the seed package.json in test helpers ([fe96f4d0](https://github.com/nxext/nx-extensions/commit/fe96f4d0))
+
+### 🧱 Updated Dependencies
+
+- Updated common to 23.1.0
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Dominik Pieper @DominikPieper
+
 ## 20.1.0 (2025-06-11)
 
 ### 🚀 Features

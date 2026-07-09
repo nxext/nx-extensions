@@ -1,6 +1,6 @@
 {
   "name": "@nxext/solid",
-  "version": "23.0.0",
+  "version": "23.1.0",
   "license": "MIT",
   "author": "Dominik Pieper",
   "description": "Nx plugin for solid",
@@ -24,7 +24,7 @@
   "generators": "./generators.json",
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nxext/common": "23.0.0",
+    "@nxext/common": "23.1.0",
     "@nx/devkit": "^23.0.1",
     "@nx/vite": "^23.0.1",
     "@nx/js": "^23.0.1",
