@@ -44,7 +44,7 @@ Alias(es): d
 
 Type: `string`
 
-A directory where the project is placed (relative path from the workspace root, e.g. apps/<my-app-name>). If omitted, the project is generated at the workspace root using the provided name.
+A directory where the project is placed (relative path from the workspace root, e.g. apps/my-app). If omitted, the project is generated at the workspace root using the provided name.
 
 #### linter
 
