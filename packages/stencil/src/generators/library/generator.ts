@@ -20,32 +20,11 @@ import {
   logShowProjectCommand,
 } from '@nx/devkit/internal';
 import { initGenerator as jsInitGenerator } from '@nx/js';
-import {
-  isUsingTsSolutionSetup,
-  maybeAddTsConfigPath,
-  wireTsSolutionProject,
-} from '@nxext/common';
-
-// Stencil-specific compilerOptions Stencil's own JSX pragma (`h`) needs -
-// identical to the application generator's (Design 3.3: apps and libs share
-// the exact same tsconfig.json compilerOptions block today). Applied
-// directly onto tsconfig.lib.json in TS-solution mode by
-// `wireTsSolutionProject` since the outer `tsconfig.json` becomes a thin
-// references-only wrapper there (see files/ts-solution).
-const STENCIL_LIB_TSCONFIG_COMPILER_OPTIONS = {
-  allowSyntheticDefaultImports: true,
-  allowUnreachableCode: false,
-  declaration: false,
-  experimentalDecorators: true,
-  lib: ['dom', 'es2015'],
-  moduleResolution: 'node',
-  module: 'esnext',
-  target: 'es2017',
-  noUnusedLocals: true,
-  noUnusedParameters: true,
-  jsx: 'react',
-  jsxFactory: 'h',
-};
+import { isUsingTsSolutionSetup, maybeAddTsConfigPath } from '@nxext/common';
+// Not re-exported by @nxext/common's ts-solution module (which only wraps
+// the full wireTsSolutionProject combo) - imported directly. @nx/js is
+// already a runtime dependency of this package.
+import { addProjectToTsSolutionWorkspace } from '@nx/js/internal';
 
 async function normalizeOptions(
   host: Tree,
@@ -169,20 +148,24 @@ export async function libraryGenerator(host: Tree, schema: RawLibrarySchema) {
   addProject(host, options);
 
   if (options.isUsingTsSolutionConfig) {
-    // The runtime tsconfig.lib.json must already exist on disk (written by
-    // createFiles above) before `updateTsconfigFiles` can patch it - see
-    // Design 1.3/`@nxext/common`'s `wireTsSolutionProject`. Must also run
-    // AFTER `addProject`: this project is package.json-backed (no
-    // project.json) in TS-solution mode, and `make-lib-buildable` below
+    // Register in pnpm-workspace.yaml/package.json.workspaces ONLY (Design
+    // 1.2). Must run AFTER `addProject`: this project is package.json-backed
+    // (no project.json) in TS-solution mode, and `make-lib-buildable` below
     // (when buildable/publishable) resolves the project via
-    // `readProjectConfiguration`, which depends on the pnpm-workspace.yaml
-    // registration `wireTsSolutionProject` performs.
-    await wireTsSolutionProject(
-      host,
-      options.projectRoot,
-      'tsconfig.lib.json',
-      STENCIL_LIB_TSCONFIG_COMPILER_OPTIONS
-    );
+    // `readProjectConfiguration`, which depends on this registration.
+    //
+    // Deliberately NOT `wireTsSolutionProject`/`updateTsconfigFiles` and NO
+    // root tsconfig.json `references` entry - same rationale as the
+    // application generator (see the detailed comment there): Stencil
+    // reads the project's own `./tsconfig.json`, force-overrides
+    // declaration emit per output target, and only preserves
+    // `moduleResolution: bundler`; the workspace TS-solution base
+    // (`composite`, `emitDeclarationOnly`, `customConditions`,
+    // `module: nodenext`, `strict`) is unbuildable for it. The generated
+    // `tsconfig.json` (files/ts-solution) is a standalone, non-composite
+    // Stencil config - and non-composite projects must not appear in the
+    // root tsconfig.json `references`.
+    await addProjectToTsSolutionWorkspace(host, options.projectRoot);
   }
 
   // TS-solution mode never writes a `paths` entry (Design 1.6): cross-project

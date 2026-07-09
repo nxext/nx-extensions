@@ -22,30 +22,11 @@ import {
   ensureRootProjectName,
   logShowProjectCommand,
 } from '@nx/devkit/internal';
-import { isUsingTsSolutionSetup, wireTsSolutionProject } from '@nxext/common';
-
-// Stencil-specific compilerOptions Stencil's own JSX pragma (`h`) needs -
-// unrelated to React/Solid's `jsx`/`jsxImportSource` runtime conventions
-// (Design 3.3: "stencil nutzt eigene JSX-Typen via @stencil/core"). Applied
-// identically in both modes: in legacy mode they're baked into the
-// project's outer `tsconfig.json` (see `files/non-ts-solution`), in
-// TS-solution mode they're applied directly onto `tsconfig.app.json` by
-// `wireTsSolutionProject` since the outer `tsconfig.json` becomes a thin
-// references-only wrapper (Design 3.2, mirrors `files/ts-solution`).
-const STENCIL_APP_TSCONFIG_COMPILER_OPTIONS = {
-  allowSyntheticDefaultImports: true,
-  allowUnreachableCode: false,
-  declaration: false,
-  experimentalDecorators: true,
-  lib: ['dom', 'es2015'],
-  moduleResolution: 'node',
-  module: 'esnext',
-  target: 'es2017',
-  noUnusedLocals: true,
-  noUnusedParameters: true,
-  jsx: 'react',
-  jsxFactory: 'h',
-};
+import { isUsingTsSolutionSetup } from '@nxext/common';
+// Not re-exported by @nxext/common's ts-solution module (which only wraps
+// the full wireTsSolutionProject combo) - imported directly. @nx/js is
+// already a runtime dependency of this package.
+import { addProjectToTsSolutionWorkspace } from '@nx/js/internal';
 
 async function normalizeOptions(
   host: Tree,
@@ -196,19 +177,25 @@ export async function applicationGenerator(
   addProject(host, options);
 
   if (options.isUsingTsSolutionConfig) {
-    // The runtime tsconfig.app.json must already exist on disk (written by
-    // createFiles above) before `updateTsconfigFiles` can patch it - see
-    // Design 1.3/`@nxext/common`'s `wireTsSolutionProject`. Must also run
-    // AFTER `addProject`: this project is package.json-backed (no
-    // project.json) in TS-solution mode, and `addLinting` below resolves
-    // the project via the project graph, which depends on the
-    // pnpm-workspace.yaml registration `wireTsSolutionProject` performs.
-    await wireTsSolutionProject(
-      host,
-      options.projectRoot,
-      'tsconfig.app.json',
-      STENCIL_APP_TSCONFIG_COMPILER_OPTIONS,
-    );
+    // Register in pnpm-workspace.yaml/package.json.workspaces ONLY (Design
+    // 1.2). Must run AFTER `addProject`: this project is package.json-backed
+    // (no project.json) in TS-solution mode, and `addLinting` below resolves
+    // the project via the project graph, which depends on this registration.
+    //
+    // Deliberately NOT `wireTsSolutionProject`/`updateTsconfigFiles` and NO
+    // root tsconfig.json `references` entry: Stencil reads the project's
+    // own `./tsconfig.json` and force-overrides `declaration: false` for
+    // www builds (no dist-types output target) while only preserving
+    // `moduleResolution` when it is `bundler` (see Stencil's
+    // `getTsOptionsToExtend`). A tsconfig chain inheriting the workspace's
+    // TS-solution base (`composite: true`, `emitDeclarationOnly: true`,
+    // `customConditions`, `module: nodenext`, `strict`) is therefore
+    // unbuildable for Stencil ("Composite projects may not disable
+    // declaration emit", TS5098 customConditions/moduleResolution). The
+    // generated `tsconfig.json` (files/ts-solution) is a standalone,
+    // non-composite Stencil config instead - and non-composite projects
+    // must not appear in the root tsconfig.json `references`.
+    await addProjectToTsSolutionWorkspace(host, options.projectRoot);
   }
 
   const lintTask = await addLinting(host, options);

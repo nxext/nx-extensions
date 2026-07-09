@@ -22,8 +22,18 @@
  * `stencil.config.ts` are identical in both modes (see
  * `packages/stencil/src/generators/application/files/common/stencil.config.ts.template`),
  * so a TS-solution app still builds into the legacy-shaped
- * `dist/apps/<app>/www` - only the tsconfig chain and project.json/package.json
+ * `dist/apps/<app>/www` - only the tsconfig shape and project.json/package.json
  * registration differ between modes.
+ *
+ * Also unlike svelte, Stencil projects do NOT participate in TS project
+ * references: Stencil force-overrides `declaration: false` for www builds
+ * (incompatible with `composite`) and only preserves `moduleResolution:
+ * bundler`, so the generated per-project tsconfig.json is a standalone,
+ * non-composite Stencil config that does not extend the workspace's
+ * TS-solution base - and non-composite projects must not be referenced by
+ * the root solution tsconfig.json (TS6306). Workspace (pnpm-workspace.yaml)
+ * registration still happens - that's what backs project-graph discovery
+ * and the cross-project package-manager symlinks.
  */
 import {
   checkFilesExist,
@@ -103,7 +113,7 @@ describe('@nxext/stencil: TS-solution mode', () => {
     );
   });
 
-  it('registers the project in pnpm-workspace.yaml and the root tsconfig.json references', async () => {
+  it('registers the project in pnpm-workspace.yaml but NOT in the root tsconfig.json references', async () => {
     const app = uniq('ts-solution-registration');
     await runNxCommandAsync(
       projectDirectory,
@@ -113,13 +123,23 @@ describe('@nxext/stencil: TS-solution mode', () => {
     const workspaceYaml = readFile(projectDirectory, 'pnpm-workspace.yaml');
     expect(workspaceYaml).toContain('apps');
 
-    const rootTsconfig = readJson<{ references: { path: string }[] }>(
+    // Non-composite Stencil projects must not be referenced by the root
+    // solution tsconfig (see file header) - and the generated project
+    // tsconfig.json is standalone (no extends of the TS-solution base).
+    const rootTsconfig = readJson<{ references?: { path: string }[] }>(
       projectDirectory,
       'tsconfig.json',
     );
-    expect(rootTsconfig.references).toEqual(
+    expect(rootTsconfig.references ?? []).not.toEqual(
       expect.arrayContaining([{ path: `./apps/${app}` }]),
     );
+
+    const projectTsconfig = readJson<{
+      extends?: string;
+      compilerOptions: Record<string, unknown>;
+    }>(projectDirectory, `apps/${app}/tsconfig.json`);
+    expect(projectTsconfig.extends).toBeUndefined();
+    expect(projectTsconfig.compilerOptions.moduleResolution).toBe('bundler');
   });
 
   it('generates a non-buildable package.json-based library with no tsconfig.base.json paths entry', async () => {

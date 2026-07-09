@@ -22,23 +22,9 @@ import { createTsSolutionTree } from '@nxext/common';
 const devkit = require('@nx/devkit');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const readNxVersionModule = require('../../utils/utillities');
-// `@nx/js`'s TS-solution tsconfig wiring (`getNeededCompilerOptionOverrides`,
-// invoked via `wireTsSolutionProject`) resolves the TypeScript compiler
-// through this SAME `ensurePackage` export, synchronously, and dereferences
-// the result immediately (`ts.readConfigFile(...)`) - unlike every other
-// caller in this spec, which only awaits/discards the return value. Keep the
-// broad `Promise.resolve()` stub for everything else, but let `'typescript'`
-// through to the real implementation so that path keeps working.
-const actualEnsurePackage = jest.requireActual('@nx/devkit').ensurePackage;
 
 describe('schematic:application', () => {
-  jest
-    .spyOn(devkit, 'ensurePackage')
-    .mockImplementation((pkg: string, ...rest: unknown[]) =>
-      pkg === 'typescript'
-        ? actualEnsurePackage(pkg, ...rest)
-        : Promise.resolve(),
-    );
+  jest.spyOn(devkit, 'ensurePackage').mockReturnValue(Promise.resolve());
   jest.spyOn(readNxVersionModule, 'readNxVersion').mockReturnValue('17.0.0');
 
   let host: Tree;
@@ -278,41 +264,70 @@ describe('schematic:application', () => {
       expect(packageJson.nx?.name).toBeUndefined();
     });
 
-    it('registers the project in pnpm-workspace.yaml and adds a root tsconfig.json reference', async () => {
+    it('registers the project in pnpm-workspace.yaml but NOT in the root tsconfig.json references (non-composite Stencil project)', async () => {
       await applicationGenerator(tsSolutionTree, tsOptions);
 
       const workspaceYaml = tsSolutionTree.read('pnpm-workspace.yaml', 'utf-8');
       expect(workspaceYaml).toContain('apps');
 
+      // Stencil force-overrides `declaration: false` for www builds, which
+      // is incompatible with a `composite` project - the generated
+      // tsconfig.json is therefore non-composite and must not be
+      // referenced by the root solution tsconfig (TS6306).
       const rootTsconfig = readJson(tsSolutionTree, 'tsconfig.json');
-      expect(rootTsconfig.references).toEqual(
+      expect(rootTsconfig.references ?? []).not.toEqual(
         expect.arrayContaining([{ path: './apps/test' }]),
       );
     });
 
-    it('wires the runtime tsconfig.app.json to extend tsconfig.base.json directly, keeping Stencil-specific JSX compilerOptions', async () => {
+    it('generates a standalone Stencil tsconfig.json that does NOT inherit the TS-solution base (composite/customConditions/nodenext are unbuildable for Stencil)', async () => {
+      await applicationGenerator(tsSolutionTree, tsOptions);
+
+      const tsconfigJson = readJson(tsSolutionTree, 'apps/test/tsconfig.json');
+      expect(tsconfigJson.extends).toBeUndefined();
+      // Stencil's own JSX pragma (`h`), not React/Solid's JSX runtime
+      // conventions (Design 3.3).
+      expect(tsconfigJson.compilerOptions.jsx).toBe('react');
+      expect(tsconfigJson.compilerOptions.jsxFactory).toBe('h');
+      expect(tsconfigJson.compilerOptions.module).toBe('esnext');
+      // `bundler` is the only moduleResolution Stencil's own
+      // getTsOptionsToExtend preserves (everything else is forced to the
+      // legacy node10 resolution); it's also the only TS6-safe value that
+      // honors sibling workspace libs' package.json `exports`.
+      expect(tsconfigJson.compilerOptions.moduleResolution).toBe('bundler');
+      expect(tsconfigJson.compilerOptions.declaration).toBe(false);
+      expect(tsconfigJson.compilerOptions.composite).toBeUndefined();
+      // Silences Stencil's `tsconfig.json "include" required` warning.
+      expect(tsconfigJson.include).toEqual(['src']);
+      // include ['src'] (unlike legacy's include: []) makes the generated
+      // jest-global-using test files config-level program members, so they
+      // must be excluded like legacy's tsconfig.app.json does - otherwise
+      // `stencil build` fails with "Cannot find name 'describe'" (verified
+      // in the ts-solution e2e). Stencil's own build scan excludes test
+      // files anyway; these are never built.
+      expect(tsconfigJson.exclude).toEqual([
+        '**/*.spec.ts',
+        '**/*.spec.tsx',
+        '**/*.e2e.ts',
+      ]);
+      // No project references: unlike the legacy wrapper (include: [] -
+      // Stencil injects source files itself, so config-level project
+      // references stay inert), a non-empty `include` makes TS enforce
+      // reference semantics at program creation - TS6306 ("Referenced
+      // project ... must have setting composite: true") for the
+      // non-composite tsconfig.app.json, verified against a real Stencil
+      // build in the ts-solution e2e.
+      expect(tsconfigJson.references).toBeUndefined();
+    });
+
+    it('keeps the runtime tsconfig.app.json extending the project tsconfig.json (same chain as legacy)', async () => {
       await applicationGenerator(tsSolutionTree, tsOptions);
 
       const tsconfigApp = readJson(
         tsSolutionTree,
         'apps/test/tsconfig.app.json',
       );
-      expect(tsconfigApp.extends).toBe('../../tsconfig.base.json');
-      // Stencil's own JSX pragma (`h`), not React/Solid's JSX runtime
-      // conventions (Design 3.3).
-      expect(tsconfigApp.compilerOptions.jsx).toBe('react');
-      expect(tsconfigApp.compilerOptions.jsxFactory).toBe('h');
-      // `moduleResolution` differs from the base's `bundler` default, so it
-      // must be kept explicitly rather than stripped as redundant.
-      expect(tsconfigApp.compilerOptions.moduleResolution).toBe('node');
-    });
-
-    it('keeps the outer tsconfig.json a thin references-only wrapper (no baked-in compilerOptions)', async () => {
-      await applicationGenerator(tsSolutionTree, tsOptions);
-
-      const tsconfigJson = readJson(tsSolutionTree, 'apps/test/tsconfig.json');
-      expect(tsconfigJson.compilerOptions).toBeUndefined();
-      expect(tsconfigJson.references).toEqual([{ path: './tsconfig.app.json' }]);
+      expect(tsconfigApp.extends).toBe('./tsconfig.json');
     });
 
     it("uses the plain, scope-free project name for Stencil's own generated values", async () => {
