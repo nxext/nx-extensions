@@ -23,6 +23,27 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
+  # Temporary diagnostic: reproduce the e2e scaffold that behaves
+  # differently on this runner than on macOS. Remove after root-causing.
+  debug-scaffold:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Scaffold probe workspace
+        run: |
+          cd "$(mktemp -d)"
+          env | grep -E '^(NX_|npm_config_|CI=)' | sort || true
+          npx --yes create-nx-workspace@latest probe --preset=apps --nxCloud=skip --no-interactive --packageManager=pnpm || true
+          echo '--- files ---'
+          ls -la probe/ || true
+          echo '--- error.log ---'
+          cat probe/error.log 2>/dev/null || true
+          echo '--- pnpm-workspace.yaml ---'
+          cat probe/pnpm-workspace.yaml 2>/dev/null || echo MISSING
+          echo '--- package.json ---'
+          cat probe/package.json 2>/dev/null || true
+
   main:
     name: Nx Cloud - Main Job
     runs-on: ubuntu-latest
