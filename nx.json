@@ -121,5 +121,8 @@
       "exclude": ["e2e/**"]
     }
   ],
-  "analytics": true
+  "analytics": true,
+  "affected": {
+    "legacy": true
+  }
 }
