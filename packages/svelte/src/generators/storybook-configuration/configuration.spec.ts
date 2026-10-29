@@ -13,7 +13,10 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
   let tree: Tree;
 
   beforeEach(async () => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
 
     await libraryGenerator(tree, {
       directory: 'libs/test-ui-lib',
@@ -31,27 +34,27 @@ xdescribe('@nxext/svelte:storybook-configuration', () => {
 
     // Local
     expect(
-      tree.exists('libs/test-ui-lib/.storybook/tsconfig.json')
+      tree.exists('libs/test-ui-lib/.storybook/tsconfig.json'),
     ).toBeTruthy();
     expect(tree.exists('libs/test-ui-lib/.storybook/main.js')).toBeTruthy();
     expect(tree.exists('libs/test-ui-lib/.storybook/preview.js')).toBeTruthy();
 
     const storybookTsconfigJson = readJson<{ exclude: string[] }>(
       tree,
-      'libs/test-ui-lib/.storybook/tsconfig.json'
+      'libs/test-ui-lib/.storybook/tsconfig.json',
     );
 
     expect(
-      storybookTsconfigJson.exclude.includes('../**/*.spec.ts')
+      storybookTsconfigJson.exclude.includes('../**/*.spec.ts'),
     ).toBeTruthy();
     expect(
-      storybookTsconfigJson.exclude.includes('../**/*.spec.tsx')
+      storybookTsconfigJson.exclude.includes('../**/*.spec.tsx'),
     ).toBeFalsy();
     expect(
-      storybookTsconfigJson.exclude.includes('../**/*.spec.js')
+      storybookTsconfigJson.exclude.includes('../**/*.spec.js'),
     ).toBeFalsy();
     expect(
-      storybookTsconfigJson.exclude.includes('../**/*.spec.jsx')
+      storybookTsconfigJson.exclude.includes('../**/*.spec.jsx'),
     ).toBeFalsy();
   });
 

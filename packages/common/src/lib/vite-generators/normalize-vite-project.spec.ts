@@ -10,7 +10,10 @@ describe('normalizeViteAppCore', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   it('resolves projectName/projectRoot/parsedTags and non-root e2e fields with a directory (preact-style: rootProject undefined)', async () => {
@@ -140,7 +143,10 @@ describe('normalizeViteLibCore', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   it('resolves projectName/projectRoot/parsedTags/importPath for a library with a directory', async () => {

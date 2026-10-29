@@ -18,7 +18,10 @@ describe('make-lib-buildable schematic', () => {
   };
 
   beforeEach(async () => {
-    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    host = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
         '@nx/workspace': '17.0.0',
@@ -112,7 +115,10 @@ describe('make-lib-buildable schematic using defaults', () => {
   };
 
   beforeEach(async () => {
-    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    host = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
 
     await libraryGenerator(host, {
       directory: projectLibDirectory,

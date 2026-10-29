@@ -35,7 +35,10 @@ describe('schematic:application', () => {
   const projectName = options.directory.replace('apps/', '');
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    host = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
         '@nx/workspace': '^20.0.0',

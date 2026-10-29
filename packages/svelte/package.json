@@ -28,17 +28,17 @@
   "schematics": "./generators.json",
   "generators": "./generators.json",
   "peerDependencies": {
-    "@nx/devkit": "^23.0.1",
-    "@nx/vite": "^23.0.1",
-    "@nx/vitest": "^23.0.1",
-    "@nx/js": "^23.0.1",
+    "@nx/devkit": "^24.0.2",
+    "@nx/vite": "^24.0.2",
+    "@nx/vitest": "^24.0.2",
+    "@nx/js": "^24.0.2",
     "@nx/web": "^23.0.1",
     "@nx/cypress": "^23.0.1",
-    "@nx/jest": "^23.0.1",
-    "@nx/eslint": "^23.0.1",
-    "typescript": "^5.7.3",
-    "@nx/storybook": "^23.0.1",
-    "nx": "^23.0.1"
+    "@nx/jest": "^24.0.2",
+    "@nx/eslint": "^24.0.2",
+    "typescript": "^6.0.3",
+    "@nx/storybook": "^24.0.2",
+    "nx": "^24.0.2"
   },
   "dependencies": {
     "tslib": "^2.3.0",

@@ -7,7 +7,10 @@ describe('init', () => {
   let host: Tree;
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    host = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     updateJson(host, '/package.json', (json) => {
       json.devDependencies = {
         '@nx/workspace': '15.7.0',
@@ -35,7 +38,8 @@ describe('init', () => {
 
     const nxJson = readJson(host, 'nx.json');
     const pluginNames = (nxJson.plugins ?? []).map(
-      (p: string | { plugin: string }) => (typeof p === 'string' ? p : p.plugin)
+      (p: string | { plugin: string }) =>
+        typeof p === 'string' ? p : p.plugin,
     );
     expect(pluginNames).toContain('@nxext/stencil/plugin');
   });

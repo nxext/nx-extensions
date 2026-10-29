@@ -17,16 +17,16 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "^23.0.1",
-    "typescript": "^5.7.3",
-    "@nx/js": "^23.0.1"
+    "@nx/devkit": "^24.0.2",
+    "typescript": "^6.0.3",
+    "@nx/js": "^24.0.2"
   },
   "peerDependencies": {
-    "@nx/vite": "^23.0.1",
-    "@nx/eslint": "^23.0.1",
-    "@nx/jest": "^23.0.1",
-    "@nx/cypress": "^23.0.1",
-    "@nx/web": "^23.0.1"
+    "@nx/vite": "^24.0.2",
+    "@nx/eslint": "^24.0.2",
+    "@nx/jest": "^24.0.2",
+    "@nx/cypress": "^24.0.2",
+    "@nx/web": "^24.0.2"
   },
   "peerDependenciesMeta": {
     "@nx/vite": {

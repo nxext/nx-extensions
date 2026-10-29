@@ -9,7 +9,10 @@ describe('updateLibPackageNpmScope', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     writeJson(tree, 'libs/my-lib/package.json', {
       name: 'my-lib',
       version: '0.0.1',

@@ -16,7 +16,10 @@ describe('preact library schematic', () => {
   };
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    host = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   it('should add preact project files', async () => {

@@ -6,7 +6,10 @@ describe('addJestConfiguration', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     addProjectConfiguration(tree, 'my-app', {
       root: 'apps/my-app',
       sourceRoot: 'apps/my-app/src',

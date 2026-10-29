@@ -21,6 +21,7 @@ import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
   logShowProjectCommand,
+  readTargetDefaultsForTarget,
 } from '@nx/devkit/internal';
 import { isUsingTsSolutionSetup } from '@nxext/common';
 // Not re-exported by @nxext/common's ts-solution module (which only wraps
@@ -60,11 +61,12 @@ async function normalizeOptions(
 
   const e2eWebServerTarget = 'serve';
   let e2ePort = 4200;
-  if (
-    nxJson.targetDefaults?.[e2eWebServerTarget] &&
-    nxJson.targetDefaults?.[e2eWebServerTarget].options?.port
-  ) {
-    e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
+  const serveTargetDefaults = readTargetDefaultsForTarget(
+    e2eWebServerTarget,
+    nxJson.targetDefaults,
+  );
+  if (serveTargetDefaults?.options?.port) {
+    e2ePort = serveTargetDefaults.options.port;
   }
 
   const e2eProjectName = `${projectName}-e2e`;
