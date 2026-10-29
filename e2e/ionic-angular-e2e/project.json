@@ -5,16 +5,6 @@
   "sourceRoot": "e2e/ionic-angular-e2e/tests",
   "tags": ["e2e"],
   "implicitDependencies": ["ionic-angular"],
-  "targets": {
-    "e2e": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "parallelism": false,
-      "cache": false,
-      "options": {
-        "jestConfig": "e2e/ionic-angular-e2e/jest.config.ts",
-        "runInBand": true
-      }
-    }
-  }
+  "// targets": "to see all targets run: nx show project ionic-angular-e2e --web",
+  "targets": {}
 }
