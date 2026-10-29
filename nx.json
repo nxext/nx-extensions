@@ -22,15 +22,6 @@
         }
       }
     },
-    "@nx/eslint:lint": {
-      "inputs": [
-        "default",
-        "^default",
-        "{workspaceRoot}/eslint.config.js",
-        "{workspaceRoot}/tools/eslint-rules/**/*"
-      ],
-      "cache": true
-    },
     "nx-release-publish": {
       "dependsOn": ["build"],
       "options": {
