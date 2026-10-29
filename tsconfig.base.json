@@ -26,7 +26,12 @@
       "@nxext/stencil": ["packages/stencil/src/index.ts"],
       "@nxext/svelte": ["packages/svelte/src/index.ts"],
       "@nxext/sveltekit": ["packages/sveltekit/src/index.ts"]
-    }
+    },
+    "strict": false,
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false,
+    "ignoreDeprecations": "6.0"
   },
   "exclude": ["node_modules", "tmp"]
 }
