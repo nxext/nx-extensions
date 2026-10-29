@@ -15,7 +15,10 @@ describe('svelte app generator', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   describe('Vite bundle', () => {

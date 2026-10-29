@@ -9,7 +9,10 @@ export async function createTestProject(
   unitTestrunner: 'none' | 'jest' = 'none',
   e2eTestrunner: 'none' | 'cypress' = 'none',
 ): Promise<Tree> {
-  const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+  const tree = createTreeWithEmptyWorkspace({
+    layout: 'apps-libs',
+    formatter: 'prettier',
+  });
   // Merge instead of overwrite: createTsSolutionTree seeds a `workspaces`
   // field that package-manager detection needs when the tests run without a
   // pnpm user agent (e.g. on CI agents).

@@ -10,7 +10,10 @@ describe('createTsSolutionTree', () => {
   });
 
   it('does NOT make a plain createTreeWithEmptyWorkspace tree look like TS-solution', () => {
-    const legacyTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    const legacyTree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
 
     expect(isUsingTsSolutionSetup(legacyTree)).toBe(false);
   });

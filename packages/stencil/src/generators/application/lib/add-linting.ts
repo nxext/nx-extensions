@@ -34,8 +34,7 @@ export async function addLinting(host: Tree, options: ApplicationSchema) {
         eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,tsx}`],
         unitTestRunner: options.unitTestRunner,
         skipFormat: true,
-        setParserOptionsProject: void 0, // this sets the default value,
-        addPlugin: void 0, // this sets the default value,
+        enableTypedLinting: void 0, // this sets the default value,
       }),
     );
 

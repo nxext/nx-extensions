@@ -29,7 +29,7 @@ import { Tree, writeJson } from '@nx/devkit';
  * was der Guard verlangt.
  */
 export function createTsSolutionTree(): Tree {
-  const tree = createTreeWithEmptyWorkspace();
+  const tree = createTreeWithEmptyWorkspace({ formatter: 'prettier' });
 
   // `pnpm-workspace.yaml` ist YAML, kein JSON — direkt als Text schreiben,
   // exakt in der Form, die `@zkochan/js-yaml` beim Lesen (`load`) wieder als

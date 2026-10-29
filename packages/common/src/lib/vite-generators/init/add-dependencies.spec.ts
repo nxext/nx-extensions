@@ -6,7 +6,10 @@ describe('addFrameworkDependencies', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   it('writes dependencies and devDependencies into the root package.json (preact/solid/svelte add-dependencies.ts shape)', () => {

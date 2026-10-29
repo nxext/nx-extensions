@@ -26,7 +26,10 @@ describe('configuration schematic', () => {
   };
 
   beforeEach(async () => {
-    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    host = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     await applicationGenerator(host, {
       directory: projectRoot,
       prefix: 'app',

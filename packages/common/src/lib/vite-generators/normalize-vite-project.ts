@@ -2,6 +2,7 @@ import { readNxJson, Tree } from '@nx/devkit';
 import {
   determineProjectNameAndRootOptions,
   ensureRootProjectName,
+  readTargetDefaultsForTarget,
 } from '@nx/devkit/internal';
 import { isUsingTsSolutionSetup } from './ts-solution';
 
@@ -93,11 +94,12 @@ export async function normalizeViteAppCore(
 
   const e2eWebServerTarget = 'serve';
   let e2ePort = 4200;
-  if (
-    nxJson.targetDefaults?.[e2eWebServerTarget] &&
-    nxJson.targetDefaults?.[e2eWebServerTarget].options?.port
-  ) {
-    e2ePort = nxJson.targetDefaults?.[e2eWebServerTarget].options?.port;
+  const serveTargetDefaults = readTargetDefaultsForTarget(
+    e2eWebServerTarget,
+    nxJson.targetDefaults,
+  );
+  if (serveTargetDefaults?.options?.port) {
+    e2ePort = serveTargetDefaults.options.port;
   }
 
   const e2eProjectName = isRootProject ? 'e2e' : `${projectName}-e2e`;

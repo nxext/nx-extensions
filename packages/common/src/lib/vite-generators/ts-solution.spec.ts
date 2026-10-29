@@ -11,7 +11,10 @@ import { createTsSolutionTree } from './testing';
 
 describe('isUsingTsSolutionSetup (re-export)', () => {
   it('is false for a plain legacy tree and true for createTsSolutionTree()', () => {
-    const legacyTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    const legacyTree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     expect(isUsingTsSolutionSetup(legacyTree)).toBe(false);
     expect(isUsingTsSolutionSetup(createTsSolutionTree())).toBe(true);
   });
@@ -19,12 +22,18 @@ describe('isUsingTsSolutionSetup (re-export)', () => {
 
 describe('isUsingTypeScriptPlugin', () => {
   it('is false when nx.json has no plugins entry', () => {
-    const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    const tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     expect(isUsingTypeScriptPlugin(tree)).toBe(false);
   });
 
   it('is true when nx.json.plugins contains the "@nx/js/typescript" string form', () => {
-    const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    const tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     updateJson(tree, 'nx.json', (json) => {
       json.plugins = ['@nx/js/typescript'];
       return json;
@@ -33,7 +42,10 @@ describe('isUsingTypeScriptPlugin', () => {
   });
 
   it('is true when nx.json.plugins contains the object form { plugin: "@nx/js/typescript" }', () => {
-    const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    const tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     updateJson(tree, 'nx.json', (json) => {
       json.plugins = [{ plugin: '@nx/js/typescript', options: {} }];
       return json;
@@ -42,7 +54,10 @@ describe('isUsingTypeScriptPlugin', () => {
   });
 
   it('is false when plugins are set but do not include "@nx/js/typescript"', () => {
-    const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    const tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     updateJson(tree, 'nx.json', (json) => {
       json.plugins = ['@nx/eslint/plugin'];
       return json;
@@ -55,7 +70,10 @@ describe('wireTsSolutionProject', () => {
   let legacyTree: Tree;
 
   beforeEach(() => {
-    legacyTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    legacyTree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   it('is a no-op in legacy mode (updateTsconfigFiles self-guards; addProjectToTsSolutionWorkspace is guarded by us)', async () => {
@@ -113,7 +131,10 @@ describe('addProjectPackageJson', () => {
   let legacyTree: Tree;
 
   beforeEach(() => {
-    legacyTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    legacyTree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   it('legacy + useProjectJson: writes project.json via addProjectConfiguration, no package.json', () => {
@@ -214,7 +235,10 @@ describe('addProjectPackageJson', () => {
 
 describe('maybeAddTsConfigPath', () => {
   it('adds a tsconfig.base.json paths entry in legacy mode', () => {
-    const tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    const tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
 
     maybeAddTsConfigPath(
       tree,

@@ -9,7 +9,10 @@ export async function createTestProject(
   unitTestrunner: 'none' | 'jest' = 'none',
   e2eTestrunner: 'none' | 'cypress' = 'none',
 ): Promise<Tree> {
-  const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+  const host = createTreeWithEmptyWorkspace({
+    layout: 'apps-libs',
+    formatter: 'prettier',
+  });
 
   if (type === 'application') {
     await applicationGenerator(host, {

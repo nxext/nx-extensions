@@ -5,16 +5,6 @@
   "sourceRoot": "e2e/solid-e2e/tests",
   "tags": ["e2e"],
   "implicitDependencies": ["solid"],
-  "targets": {
-    "e2e": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "parallelism": false,
-      "cache": false,
-      "options": {
-        "jestConfig": "e2e/solid-e2e/jest.config.ts",
-        "runInBand": true
-      }
-    }
-  }
+  "// targets": "to see all targets run: nx show project solid-e2e --web",
+  "targets": {}
 }

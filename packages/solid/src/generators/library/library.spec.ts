@@ -15,7 +15,10 @@ describe('solid library schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     tree.write(
       'package.json',
       `

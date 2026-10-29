@@ -8,7 +8,10 @@ export async function createTestProject(
   // Same pattern as @nxext/svelte's utils/testing.ts: pass
   // `createTsSolutionTree()` (from @nxext/common) here to scaffold the test
   // project into a TS-solution workspace instead of the default legacy one.
-  tree: Tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' }),
+  tree: Tree = createTreeWithEmptyWorkspace({
+    layout: 'apps-libs',
+    formatter: 'prettier',
+  }),
 ): Promise<Tree> {
   // Merge instead of overwrite: createTsSolutionTree seeds a `workspaces`
   // field that package-manager detection needs when the tests run without a

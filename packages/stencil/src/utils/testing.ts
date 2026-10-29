@@ -11,9 +11,12 @@ import { ProjectType } from './typings';
 export async function createTestUILib(
   libDirectory: string,
   style: SupportedStyles = SupportedStyles.css,
-  buildable = true
+  buildable = true,
 ): Promise<Tree> {
-  const host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+  const host = createTreeWithEmptyWorkspace({
+    layout: 'apps-libs',
+    formatter: 'prettier',
+  });
   updateJson(host, '/package.json', (json) => {
     json.devDependencies = {
       '@nx/workspace': '17.0.0',
@@ -34,7 +37,7 @@ export async function createTestUILib(
 export function fileListForAppType(
   projectDir: string,
   style: string,
-  projectType: ProjectType
+  projectType: ProjectType,
 ): string[] {
   if (projectType == 'application') {
     return [

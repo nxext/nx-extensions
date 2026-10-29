@@ -29,7 +29,9 @@ describe('capacitor-project', () => {
   }: { standalone?: boolean } = {}) {
     projectRoot = standalone ? '' : `apps/${options.project}`;
     appTree = createTreeWithEmptyWorkspace(
-      standalone ? undefined : { layout: 'apps-libs' },
+      standalone
+        ? { formatter: 'prettier' }
+        : { layout: 'apps-libs', formatter: 'prettier' },
     );
     addProjectConfiguration(appTree, options.project, {
       root: projectRoot,

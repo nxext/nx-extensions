@@ -12,7 +12,10 @@ describe('init schematic', () => {
   };
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
     tree.write(
       'package.json',
       `
@@ -23,7 +26,7 @@ describe('init schematic', () => {
           "@nx/workspace": "0.0.0"
         }
       }
-    `
+    `,
     );
   });
 

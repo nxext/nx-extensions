@@ -14,7 +14,10 @@ describe('Preact app schematic', () => {
   };
 
   beforeEach(() => {
-    host = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    host = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   describe('Vite bundle', () => {

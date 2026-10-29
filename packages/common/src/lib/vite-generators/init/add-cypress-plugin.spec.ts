@@ -6,7 +6,10 @@ describe('addCypressInitPlugin', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
+    tree = createTreeWithEmptyWorkspace({
+      layout: 'apps-libs',
+      formatter: 'prettier',
+    });
   });
 
   it('is a no-op when shouldRun() returns false', async () => {
